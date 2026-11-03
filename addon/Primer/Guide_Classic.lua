@@ -7,7 +7,9 @@
 --                   rank (it reaches), why }
 --   stages[n]   = { from, to (levels), about, opening, rows }
 --   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),
---                   stance (stances it is pressed in: from play, not in the tables), when (a situation), say }
+--                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }
+--   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks) }, every talent the builds name
+--   stances[key]   = the spell that is the form (its name is the game's, by id)
 local _, ns = ...
 ns.data = {
   game = "classic",
@@ -46,7 +48,7 @@ ns.data = {
             { spell = 772, level = 4, stance = { "battle" }, say = "warrior-arms.s1.r2" },
             { spell = 78, level = 1, say = "warrior-arms.s1.r3" },
             { spell = 6343, level = 6, stance = { "battle" }, when = { "group" }, say = "warrior-arms.s1.r4" },
-            { spell = 1715, level = 8, say = "warrior-arms.s1.r5" },
+            { spell = 1715, level = 8, stance = { "battle", "berserker" }, say = "warrior-arms.s1.r5" },
             { spell = 2687, level = 10, say = "warrior-arms.s1.r6" },
             { spell = 7384, level = 12, stance = { "battle" }, when = { "dodge" }, say = "warrior-arms.s1.r7" },
           },
@@ -62,7 +64,7 @@ ns.data = {
             { spell = 1464, level = 30, say = "warrior-arms.s2.r6" },
             { spell = 2458, level = 30, talents = { 12295 }, say = "warrior-arms.s2.r7" },
             { spell = 1680, level = 36, stance = { "berserker" }, say = "warrior-arms.s2.r8" },
-            { spell = 12292, level = 30, talent = 12292, when = { "group" }, say = "warrior-arms.s2.r9" },
+            { spell = 12292, level = 30, talent = 12292, stance = { "battle" }, when = { "group" }, say = "warrior-arms.s2.r9" },
           },
         },
         { from = 40, to = 60, about = "warrior-arms.s3",
@@ -76,7 +78,7 @@ ns.data = {
             { spell = 5308, level = 24, stance = { "battle", "berserker" }, when = { "execute" }, say = "warrior-arms.s3.r6" },
             { spell = 78, level = 1, when = { "spare" }, say = "warrior-arms.s3.r7" },
             { spell = 772, level = 4, stance = { "battle" }, when = { "long" }, say = "warrior-arms.s3.r8" },
-            { spell = 12292, level = 30, talent = 12292, when = { "group" }, say = "warrior-arms.s3.r9" },
+            { spell = 12292, level = 30, talent = 12292, stance = { "battle" }, when = { "group" }, say = "warrior-arms.s3.r9" },
           },
         },
       },
@@ -109,7 +111,7 @@ ns.data = {
           rows = {
             { spell = 100, level = 4, stance = { "battle" }, when = { "ooc" }, say = "warrior-fury.s1.r1" },
             { spell = 78, level = 1, say = "warrior-fury.s1.r2" },
-            { spell = 772, level = 4, when = { "long" }, say = "warrior-fury.s1.r3" },
+            { spell = 772, level = 4, stance = { "battle", "defensive" }, when = { "long" }, say = "warrior-fury.s1.r3" },
             { spell = 2687, level = 10, say = "warrior-fury.s1.r4" },
           },
         },
@@ -195,5 +197,44 @@ ns.data = {
         },
       },
     },
+  },
+  talents = {
+    [12163] = { id = 136, tab = 161, max = 5 },
+    [12165] = { id = 134, tab = 161, max = 5 },
+    [12281] = { id = 123, tab = 161, max = 5 },
+    [12282] = { id = 124, tab = 161, max = 3 },
+    [12284] = { id = 125, tab = 161, max = 5 },
+    [12286] = { id = 127, tab = 161, max = 3 },
+    [12290] = { id = 131, tab = 161, max = 2 },
+    [12292] = { id = 133, tab = 161, max = 1 },
+    [12294] = { id = 135, tab = 161, max = 1 },
+    [12295] = { id = 641, tab = 161, max = 5 },
+    [12296] = { id = 137, tab = 161, max = 1 },
+    [12297] = { id = 138, tab = 163, max = 5 },
+    [12298] = { id = 1601, tab = 163, max = 5 },
+    [12299] = { id = 140, tab = 163, max = 5 },
+    [12303] = { id = 144, tab = 163, max = 5 },
+    [12308] = { id = 146, tab = 163, max = 3 },
+    [12317] = { id = 155, tab = 164, max = 5 },
+    [12318] = { id = 154, tab = 164, max = 5 },
+    [12319] = { id = 156, tab = 164, max = 5 },
+    [12320] = { id = 157, tab = 164, max = 5 },
+    [12322] = { id = 159, tab = 164, max = 5 },
+    [12328] = { id = 165, tab = 164, max = 1 },
+    [12700] = { id = 132, tab = 161, max = 5 },
+    [12797] = { id = 147, tab = 163, max = 3 },
+    [12809] = { id = 152, tab = 163, max = 1 },
+    [12834] = { id = 121, tab = 161, max = 3 },
+    [12945] = { id = 145, tab = 163, max = 3 },
+    [16462] = { id = 130, tab = 161, max = 5 },
+    [16493] = { id = 662, tab = 161, max = 2 },
+    [23584] = { id = 1581, tab = 164, max = 5 },
+    [23881] = { id = 167, tab = 164, max = 1 },
+    [23922] = { id = 148, tab = 163, max = 1 },
+  },
+  stances = {
+    battle = 2457,
+    defensive = 71,
+    berserker = 2458,
   },
 }

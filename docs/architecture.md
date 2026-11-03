@@ -1,8 +1,8 @@
 # Primer's architecture
 
 The addon file by file (the map is CLAUDE.md). The guide's data and its checks:
-`docs/data.md`. Milestone M2 of `../ideas/class-guide.md`: the repository, the
-window empty, the Warrior's rules in data. The window's content is M3.
+`docs/data.md`. Milestone M2 of `../ideas/class-guide.md`: the repository and the
+Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
 
 ## The package
 
@@ -12,7 +12,8 @@ window empty, the Warrior's rules in data. The window's content is M3.
   (`Guide_Classic.lua`, `Guide_Forever.lua`). Loads that, `GuideText.lua` (the
   words by key), `Kit.lua` (the kit's copy, `bun run kit:sync`; never edit it),
   `Locale.lua`, `Text_[TextLocale].lua`, `Core.lua`, `Settings.lua`,
-  `Window.lua`, `Minimap.lua` (the test game loads them from the TOC).
+  `Reader.lua`, `Guide.lua`, `Window.lua`, `Minimap.lua` (the test game loads
+  them from the TOC).
 
 ## The files
 
@@ -25,12 +26,45 @@ window empty, the Warrior's rules in data. The window's content is M3.
 - **Settings.lua**: the kit's profiles (a character's settings, takable by a
   code "PR1:h0:a90"): the minimap button's place and whether it shows. No
   Options page and no welcome yet.
-- **Window.lua**: `K.gameWindow` ("PrimerFrame", the game's window with a
-  portrait) or `K.dialog` where the client has no such template, `K.movable`
-  (its place kept in `PrimerSettings.places.window`, Escape closes it),
-  `K.tabs` for **Play**, **Talents**, **Role**. Each tab is a page in one
-  panel, today one sentence on what it will hold. `ns.toggle()`, `ns.open(tab)`
-  (Keyring and the minimap button open it, never a hook on a Blizzard frame).
+- **Reader.lua**: everything the guide reads of the game, out of combat: the
+  class and level, `C_Seasons.GetActiveSeason`, `C_SpellBook` (a spell in the
+  book), `C_Spell.GetSpellInfo` (a name and a picture, by id) and the talents
+  (`C_SpecializationInfo.GetTalentInfo` over each tree's cells, found by the
+  talent's id from the data: its spell is 0 at rank 0). `snapshot()` answers
+  nil in combat. No old global (`GetTalentInfo`, `IsSpellKnown`) is used.
+- **Guide.lua**: the rules, no frame and no game call, played over a snapshot:
+  `page` (season, game, class or guide), `role` and `build` (the player's
+  choice if the class has it, else the tree with the most points, else the
+  first), `stage` (the level's), `rows` (a row shows if its level is reached,
+  its talents taken and its spell in the book: the level-12 page is shorter,
+  never wrong; a spell only waiting for the trainer is counted), `steps` (the
+  path as the character stands: done, partly, later, and the next pick) and
+  `unspent` (a point a level from 10).
+- **Window.lua**: `K.gameWindow` ("PrimerFrame") or `K.dialog`, the kit's book
+  geometry (`K.BOOK_W` x `K.BOOK_H`, the builds on the left, the page on the
+  right, no search), `K.movable` (place in `PrimerSettings.places.window`,
+  Escape closes), `K.tabs` for **Play** (the stage's opening and priority: the
+  game's slot for each spell, its name by id, the form and the moment, the
+  reason, then the footer with the date it was checked), **Talents** (the
+  build's talents in order with their real pictures, `rank/target`, the next
+  pick and the points to spend) and **Role** (the player's switch, damage,
+  tank or heal, for the roles the class has a build for, and what the build is
+  for). Each page for the character as it is when it draws: on show, a click,
+  a level up, a spell learned, a point spent or a change of talent group
+  (`PLAYER_ENTERING_WORLD`, `PLAYER_LEVEL_UP`, `SPELLS_CHANGED`,
+  `LEARNED_SPELL_IN_SKILL_LINE`, `TRAINER_UPDATE`, `CHARACTER_POINTS_CHANGED`,
+  `PLAYER_TALENT_UPDATE`, `TRAIT_CONFIG_UPDATED`, `ACTIVE_TALENT_GROUP_CHANGED`:
+  each only asks the window to look again, a burst as one draw 0.3 seconds
+  later, an event a client lacks skipped and never raised). In a fight it reads
+  nothing and says it waits, then draws. **Talent groups**: Era has one in
+  practice, Forever two, asked of the game (`GetNumSpecGroups`,
+  `GetActiveSpecGroup`: a client without them has one). What a character chose
+  is kept per group (`PrimerChar.groups[n] = { build, role }`, `ns.choice(n)`).
+  Play and Role follow the group in use (`ACTIVE_TALENT_GROUP_CHANGED` makes
+  the window follow it), the Talents tab has a switch to look at the other
+  group's talents and choose its build, absent with one group. The empty pages (Season of Discovery,
+  no guide for the game, no guide for the class) are the house voice and never
+  another game's or class's text. `ns.toggle()`, `ns.open(tab)`.
 - **Minimap.lua**: the kit's `K.minimapButton`, named `PrimerMinimapButton`
   (Keyring finds the family's buttons by name), at `K.MINIMAP_ANGLES.Primer`
   (90 degrees, the top: at least 25 from every other place and clear of Classic
@@ -62,8 +96,11 @@ French, German or Spanish work. What that does to the family's lists:
 ## The tests
 
 `addon/test/game.lua` is the kit's game (`wowmock.lua`, a copy) plus the
-registered events; `sim.lua` plays a login, the slash command, the tabs, the
-button, the data (every key has its word, every row its facts) on Classic Era
-and with `FOREVER=1`. A game test (`wow-game-test`) shows what these cannot: the
+registered events and what the guide reads (a spell book, the talent call as
+the Era probe answered it, the season, names and pictures by id); `sim.lua`
+plays a login, the slash command, the tabs, the button, the data (every key
+has its word, every row its facts), the rules over characters (filters, stage,
+role, build, steps, the per-game and season pages) and the three pages as the
+window draws them, on Classic Era and with `FOREVER=1`. A game test (`wow-game-test`) shows what these cannot: the
 look of the window, the portrait, the tabs under the frame, the button on the
 real minimap.

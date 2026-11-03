@@ -8,3 +8,9 @@ globals:
     any: true
   PrimerSettings:
     any: true
+  C_SpellBook:
+    any: true
+  GetNumSpecGroups:
+    any: true
+  GetNumTalents:
+    any: true

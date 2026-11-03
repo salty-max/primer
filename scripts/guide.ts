@@ -48,6 +48,29 @@ const STANCES = ["battle", "defensive", "berserker"];
 // What a row's `when` may say: a situation the player reads off the screen
 // (a state the page cannot see, shown as advice), never a rule it enforces.
 const WHEN = ["ooc", "spare", "group", "dodge", "execute", "long", "shield", "hurt", "loose", "wrong", "brute", "lit"];
+// The window's words for them (what the lines say, short: GuideText's `when.<key>`)
+const WHEN_WORDS: Record<string, string> = {
+  ooc: "before the pull",
+  spare: "with rage to spare",
+  group: "with a group",
+  dodge: "after a dodge",
+  execute: "when it is nearly dead",
+  long: "in a long fight",
+  shield: "with a shield",
+  hurt: "when you are being hit",
+  loose: "when a monster turns away",
+  wrong: "when the pull goes wrong",
+  brute: "against a hard hitter",
+  lit: "when it lights up",
+};
+// The client's form numbers less one (SpellShapeshiftForm 17, 18, 19: bits of the stance mask)
+const STANCE_FORMS: Record<string, number> = { battle: 16, defensive: 17, berserker: 18 };
+// The forms a row may be pressed in, by the spell that is the form (checked against the game's own names)
+const STANCE_SPELLS: Record<string, [number, string]> = {
+  battle: [2457, "Battle Stance"],
+  defensive: [71, "Defensive Stance"],
+  berserker: [2458, "Berserker Stance"],
+};
 
 type Row = {
   spell: number;
@@ -83,6 +106,8 @@ const content: Content[] = readdirSync(join(ROOT, "content"))
   .sort()
   .map((f) => JSON.parse(readFileSync(join(ROOT, "content", f), "utf8")));
 
+const filled = new Map<Row, string[]>(); // the stances the table gave a row, per run of a game (never written back to the content)
+const unchecked = new Set<string>(); // stances written that the table cannot confirm
 const problems: string[] = [];
 const bad = (msg: string) => problems.push(msg);
 
@@ -128,6 +153,13 @@ class Facts {
   level(spell: number): number | null | undefined {
     const r = this.db.query("SELECT level FROM class_spell WHERE class_id = ? AND spell_id = ?").get(this.classId, spell) as { level: number | null } | null;
     return r ? r.level : undefined;
+  }
+  /** The forms a spell can be pressed in, from the client's own table (SpellShapeshift): null when it asks for none. */
+  stances(spell: number): string[] | null {
+    const r = this.db.query("SELECT stance_mask, stance_exclude FROM spell_info WHERE spell_id = ?").get(spell) as { stance_mask: number | null; stance_exclude: number | null } | null;
+    if (!r || !r.stance_mask) return null;
+    const mine = Object.entries(STANCE_FORMS).filter(([, bit]) => (r.stance_mask! & (1 << bit)) !== 0 && ((r.stance_exclude ?? 0) & (1 << bit)) === 0);
+    return mine.length ? mine.map(([k]) => k) : null;
   }
   pins(): string {
     const m = this.db.query("SELECT value FROM meta WHERE key = 'pins'").get() as { value: string };
@@ -213,13 +245,29 @@ function checkBuild(b: Build, f: Facts) {
       if (level > st.to) bad(`${where}: learned at level ${level}, above the stage's ${st.to}`);
       if (r.need.level !== undefined && r.need.level !== level) bad(`${where}: the content says level ${r.need.level}, the data ${level}`);
       for (const s of r.need.stance ?? []) if (!STANCES.includes(s)) bad(`${where}: stance ${s}`);
+      // The stance, against the client's own table: a form the spell cannot be pressed in is a
+      // contradiction, and a spell the table limits to forms the writer left unsaid takes the table's
+      // (the writer may narrow a spell that several forms allow, never widen it)
+      filled.delete(r); // (this game's own)
+      const allowed = f.stances(r.spell);
+      if (allowed) {
+        for (const s of r.need.stance ?? []) if (!allowed.includes(s)) bad(`${where}: the content presses it in ${s}, the data allows ${allowed.join(" or ")}`);
+        if (!r.need.stance?.length) filled.set(r, allowed);
+      } else if (r.need.stance?.length) {
+        // (the table limits no form: the stance is the writer's alone, told, never failed)
+        const once = `${f.game}:${r.spell}`;
+        if (!unchecked.has(once)) {
+          unchecked.add(once);
+          console.log(`note: ${r.name} (${r.spell}) is pressed in ${r.need.stance.join(" or ")} by the content, the client's table limits no form`);
+        }
+      }
       for (const w of r.need.when ?? []) if (!WHEN.includes(w)) bad(`${where}: when ${w} is no condition of the vocabulary`);
       for (const tid of [...(r.need.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]) {
         if (!f.tal.has(tid)) bad(`${where}: needs talent spell ${tid}, no talent of this class`);
         else if (!taken.has(tid)) bad(`${where}: needs talent ${f.name(tid)}, the path never takes it`);
         else if (taken.get(tid)! > st.to) bad(`${where}: needs talent ${f.name(tid)}, the path takes it at level ${taken.get(tid)}, after the stage's ${st.to}`);
       }
-      const want = JSON.stringify(r.need.stance ?? []);
+      const want = JSON.stringify(r.need.stance?.length ? r.need.stance : (filled.get(r) ?? []));
       const had = stances.get(r.spell);
       if (had !== undefined && had !== want) bad(`${where}: stance ${want}, another row of the build says ${had}: one list for a spell`);
       stances.set(r.spell, want);
@@ -236,7 +284,8 @@ function rowLua(r: Row & { learned: number }, key: string): string {
   const f = [`spell = ${r.spell}`, `level = ${r.learned}`];
   if (r.talentSpell !== undefined) f.push(`talent = ${r.talentSpell}`);
   if (r.need.talents?.length) f.push(`talents = ${list(r.need.talents)}`);
-  if (r.need.stance?.length) f.push(`stance = ${list(r.need.stance.map(q))}`);
+  const stance = r.need.stance?.length ? r.need.stance : filled.get(r);
+  if (stance?.length) f.push(`stance = ${list(stance.map(q))}`);
   if (r.need.when?.length) f.push(`when = ${list(r.need.when.map(q))}`);
   f.push(`say = ${q(key)}`);
   return `{ ${f.join(", ")} }`;
@@ -246,17 +295,24 @@ function luaFor(game: Game): { lua: string; builds: number } {
   const lines: string[] = [];
   const classes: string[] = [];
   const builds: string[] = [];
+  const used = new Map<number, Tal>(); // the talents the builds name, by rank 1's spell
   let version = "";
   for (const c of content) {
     const mine = c.builds.filter((b) => b.games.includes(game));
     if (!mine.length) continue;
     const f = new Facts(game, c.class.id);
     version = f.pins();
+    for (const [key, [id, name]] of Object.entries(STANCE_SPELLS)) {
+      const n = f.name(id);
+      if (n !== name) bad(`${c.class.key} (${game}): the ${key} stance is spell ${id}, ${n ?? "not in the data"}, not ${name}`);
+    }
     const card = Object.entries(c.class.card).map(([k, v]) => `${k} = ${q(v)}`);
     classes.push(`    [${c.class.id}] = { token = ${q(c.class.token)}, key = ${q(c.class.key)}, text = ${q(word(`${c.class.key}`, c.class.text)!)}, builds = ${list(mine.map((b) => b.id))}, card = { ${card.join(", ")} } },`);
     for (const b of mine) {
       checkBuild(b, f);
       const k = b.key;
+      const names = [...b.path.flatMap((s) => s.any ?? (s.talent === undefined ? [] : [s.talent])), ...b.stages.flatMap((st) => st.rows.flatMap((r) => [...(r.need.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]))];
+      for (const n of names) if (f.tal.has(n)) used.set(n, f.tal.get(n)!);
       const out: string[] = [];
       out.push(`    [${b.id}] = {`);
       out.push(`      key = ${q(k)}, class = ${c.class.id}, role = ${q(b.role)}, tree = ${b.tree}, name = ${q(b.name)},`);
@@ -295,7 +351,9 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "--                   rank (it reaches), why }",
     "--   stages[n]   = { from, to (levels), about, opening, rows }",
     "--   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),",
-    "--                   stance (stances it is pressed in: from play, not in the tables), when (a situation), say }",
+    "--                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }",
+    "--   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks) }, every talent the builds name",
+    "--   stances[key]   = the spell that is the form (its name is the game's, by id)",
     "local _, ns = ...",
     "ns.data = {",
     `  game = ${q(game)},`,
@@ -305,11 +363,18 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "  builds = {",
     ...builds,
     "  },",
+    "  talents = {",
+    ...[...used.keys()].sort((a, b) => a - b).map((sp) => `    [${sp}] = { id = ${used.get(sp)!.id}, tab = ${used.get(sp)!.tab_id}, max = ${used.get(sp)!.max_rank} },`),
+    "  },",
+    "  stances = {",
+    ...(builds.length ? Object.entries(STANCE_SPELLS).map(([k, [id]]) => `    ${k} = ${id},`) : []),
+    "  },",
     "}",
   );
   return { lua: lines.join("\n") + "\n", builds: builds.length };
 }
 
+for (const k of WHEN) word(`when.${k}`, WHEN_WORDS[k]);
 const outputs: [string, string][] = [];
 for (const g of GAMES) outputs.push([join(ADDON, FILE[g]), luaFor(g).lua]);
 const sorted = Object.keys(text).sort();

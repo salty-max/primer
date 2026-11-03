@@ -61,7 +61,17 @@ in Arms when only 3 were spent. The second one was changed to Deflection 2/5
 (it opens the same row, and a tank wants the parry), the rest of the path as it
 was: a prose change for the writer to confirm.
 
-## The rules' shape for the window (M3)
+## What the generator adds for the window
+
+The stances are checked against the client's own `spell_info` (its shapeshift mask): a form the spell cannot be pressed in fails the check, and a spell the table limits to forms the writer left unsaid takes the table's (Hamstring, Sweeping Strikes). The writer may narrow a spell several forms allow, never widen it. A stance the writer gives a spell the table limits to no form is the writer's alone: the generator prints a `note:` line for it and keeps it (Death Wish says Berserker, the table says any form).
+
+Per game: `talents[spell] = { id, tab, max }` for every talent a build names (the
+window finds a talent through the game's talent call by its id), `stances[key]`
+(the spell that is the form, its name checked against the game's) and the
+(both in `Guide_<game>.lua`) and the words `when.<key>` (the situation each tag
+stands for, in `GuideText.lua`).
+
+## The rules' shape for the window (M3, built in Guide.lua)
 
 A row shows if its facts are true now: the character's level is at least
 `level`, `talent` and `talents` are taken (`C_SpecializationInfo` on Era, the

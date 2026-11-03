@@ -20,5 +20,7 @@ Locale.lua
 Text_[TextLocale].lua
 Core.lua
 Settings.lua
+Reader.lua
+Guide.lua
 Window.lua
 Minimap.lua

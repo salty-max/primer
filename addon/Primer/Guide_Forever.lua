@@ -7,12 +7,18 @@
 --                   rank (it reaches), why }
 --   stages[n]   = { from, to (levels), about, opening, rows }
 --   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),
---                   stance (stances it is pressed in: from play, not in the tables), when (a situation), say }
+--                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }
+--   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks) }, every talent the builds name
+--   stances[key]   = the spell that is the form (its name is the game's, by id)
 local _, ns = ...
 ns.data = {
   game = "forever",
   classes = {
   },
   builds = {
+  },
+  talents = {
+  },
+  stances = {
   },
 }

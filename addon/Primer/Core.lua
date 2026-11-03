@@ -3,13 +3,14 @@
 -- what the build is for; the rules are generated (Guide_<game>.lua, its words
 -- GuideText.lua) and the character keeps only its choices. /primer.
 --
--- It reads nothing in combat: no combat event is listened to, no unit is asked
--- (the player's GUID at login aside) and no frame of the game is touched, the window is our own and opens on a
--- command or a click.
+-- It reads nothing in combat: no combat event is listened to, the game is read
+-- only when the window draws and never in combat (Reader.lua), and no frame of
+-- the game is touched, the window is our own and opens on a command or a click.
 --
 --   PrimerChar (SavedVariablesPerCharacter), whose guide: guid
---     build   the build's id the character chose (D.builds): none yet (M3)
---     role    the role switch the player set: none yet (M3)
+--     groups[n]  what the character chose for talent group n (Era has one,
+--                Forever two): build (an id of D.builds) and role (damage, tank,
+--                heal), each none: the default
 --   PrimerSettings (SavedVariables): each character's settings, the kit's
 --     profiles (Settings.lua: the minimap button), and the window's place
 --
@@ -41,7 +42,14 @@ local events = K.events({
 })
 ns.on = events.on
 
-local function newBook(guid) return { guid = guid } end
+local function newBook(guid) return { guid = guid, groups = {} } end
+
+-- The choices for a talent group, made when first asked.
+function ns.choice(group)
+  char.groups = char.groups or {}
+  char.groups[group] = char.groups[group] or {}
+  return char.groups[group]
+end
 
 function ns.login()
   local guid = UnitGUID("player")
@@ -51,6 +59,31 @@ function ns.login()
   if ns.createMinimapButton then ns.createMinimapButton() end
   ns.loggedIn = true
 end
+
+-- What changes while the window is open shows a moment later, bursts as one
+-- (ns.changed): a level, a spell learned (a trainer, a quest, the level), a
+-- talent point or a change of talent group. Whether each fires on the live
+-- client is for the game to say: an event a client lacks is skipped, never
+-- raised (K.events), and Forever's trait engine has its own. The window reads
+-- the game only when it draws, and never in combat (Reader.lua).
+for _, event in ipairs({
+  "PLAYER_ENTERING_WORLD",
+  "PLAYER_LEVEL_UP",
+  "SPELLS_CHANGED",
+  "LEARNED_SPELL_IN_SKILL_LINE",
+  "TRAINER_UPDATE",
+  "CHARACTER_POINTS_CHANGED",
+  "PLAYER_TALENT_UPDATE",
+  "TRAIT_CONFIG_UPDATED",
+}) do
+  events.on(event, function()
+    if ns.changed then ns.changed() end
+  end)
+end
+-- (the other group is now the one in use: the window follows it)
+events.on("ACTIVE_TALENT_GROUP_CHANGED", function()
+  if ns.groupChanged then ns.groupChanged() end
+end)
 
 -- ── /primer ──────────────────────────────────────────────────────────────────
 -- The kit's command (K.commands): alone it opens the window, an unknown word
