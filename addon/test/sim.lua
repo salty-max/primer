@@ -32,7 +32,7 @@ for id, b in pairs(D.builds) do
   for _, step in ipairs(b.path) do
     check(text[step.why], "a reason for " .. b.key)
   end
-  check(#b.stages == 3 or id == 3, "its stages: " .. b.key)
+  check(#b.stages >= 3 and #b.stages <= 4, "its stages: " .. b.key)
   for _, stage in ipairs(b.stages) do
     check(stage.from <= stage.to and #stage.rows > 0, "a stage with rows: " .. b.key)
     for _, row in ipairs(stage.rows) do
@@ -45,7 +45,12 @@ end
 if G.FOREVER then
   check(builds == 0, "Forever: no build written yet")
 else
-  check(builds == 3 and D.builds[1] and D.builds[2] and D.builds[3], "Classic Era: the Warrior's three builds")
+  check(
+    builds == 9 and D.builds[1] and D.builds[2] and D.builds[3],
+    "Classic Era: the Warrior's, Paladin's and Mage's nine builds"
+  )
+  check(D.classes[2].token == "PALADIN" and #D.classes[2].builds == 3, "the Paladin's class")
+  check(D.classes[8].token == "MAGE" and #D.classes[8].builds == 3, "the Mage's class")
   check(D.classes[1].token == "WARRIOR", "the Warrior's class")
 end
 check(ns.say("no such key") == "no such key", "a missing word shows as itself")
@@ -976,21 +981,21 @@ do
     s.level = 12
   end
 
-  -- a Paladin, no guide written, every call raising: the class page, never a blank
+  -- a Hunter, no guide written, every call raising: the class page, never a blank
   local all = {}
   for _, call in ipairs(calls) do
     all[#all + 1] = call[1][call[2]]
     if call[2] ~= "UnitClass" then call[1][call[2]] = unsupported end
   end
   local unitClass = UnitClass
-  UnitClass = function() return "Paladin", "PALADIN", 2 end
+  UnitClass = function() return "Hunter", "HUNTER", 3 end
   ns.reader.reset()
   ns.faults = {}
-  opens("a Paladin with every call raising")
+  opens("a Hunter with every call raising")
   ns.open(ns.TAB.play)
   check(
-    PrimerPage.title.text == (G.FOREVER and "No guide for Forever yet" or "No guide for Paladin yet"),
-    "a Paladin: the page says no guide, never a blank"
+    PrimerPage.title.text == (G.FOREVER and "No guide for Forever yet" or "No guide for Hunter yet"),
+    "a Hunter: the page says no guide, never a blank"
   )
   check(shownRows() == 0 and #PrimerList.rows > 0 and PrimerList.rows[1].shown, "(the list says nothing here yet)")
   for i, call in ipairs(calls) do

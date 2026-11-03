@@ -49,7 +49,7 @@ const ROLES = ["damage", "tank", "heal"];
 const STANCES = ["battle", "defensive", "berserker"];
 // What a row's `when` may say: a situation the player reads off the screen
 // (a state the page cannot see, shown as advice), never a rule it enforces.
-const WHEN = ["ooc", "spare", "group", "dodge", "execute", "long", "shield", "hurt", "loose", "wrong", "brute", "lit"];
+const WHEN = ["ooc", "spare", "group", "dodge", "execute", "long", "shield", "hurt", "loose", "wrong", "brute", "lit", "rest", "lowmana", "undead", "pack", "flee", "humanoid", "caster"];
 // The window's words for them (what the lines say, short: GuideText's `when.<key>`)
 const WHEN_WORDS: Record<string, string> = {
   ooc: "before the pull",
@@ -64,6 +64,13 @@ const WHEN_WORDS: Record<string, string> = {
   wrong: "when the pull goes wrong",
   brute: "against a hard hitter",
   lit: "when it lights up",
+  rest: "between fights",
+  lowmana: "when your mana is low",
+  undead: "against undead and demons",
+  pack: "against two or more",
+  flee: "when a monster runs",
+  humanoid: "against a humanoid",
+  caster: "when a monster is casting",
 };
 // The client's form numbers less one (SpellShapeshiftForm 17, 18, 19: bits of the stance mask)
 const STANCE_FORMS: Record<string, number> = { battle: 16, defensive: 17, berserker: 18 };
@@ -244,6 +251,7 @@ function checkBuild(b: Build, f: Facts) {
         if (level === undefined) return bad(`${where}: spell ${r.spell} is not in the class's book`);
         if (level === null) return bad(`${where}: spell ${r.spell} has no level in the data`);
       }
+      if (r.talentSpell === undefined && f.tal.has(r.spell)) bad(`${where}: spell ${r.spell} is a talent's rank 1, the row needs talentSpell`);
       if (level > st.to) bad(`${where}: learned at level ${level}, above the stage's ${st.to}`);
       if (r.need.level !== undefined && r.need.level !== level) bad(`${where}: the content says level ${r.need.level}, the data ${level}`);
       for (const s of r.need.stance ?? []) if (!STANCES.includes(s)) bad(`${where}: stance ${s}`);

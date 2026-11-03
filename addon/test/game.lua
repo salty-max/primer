@@ -56,7 +56,7 @@ C_Seasons = {
 local function tabs()
   local seen, out = {}, {}
   for _, t in pairs(G.ns.data.talents) do
-    if not seen[t.tab] then
+    if state.treeNames[t.tab] and not seen[t.tab] then
       seen[t.tab] = true
       table.insert(out, t.tab)
     end

@@ -24,8 +24,8 @@ row    = { spell (rank 1), name, talentSpell (the row is a talent),
 
 A build's `games` says where it is written: a Forever build is its own text,
 checked against Forever's tables (the plan: never inherited from Era). Only
-`classic` is written so far: the Warrior's three builds, Arms (1), Fury (2) and
-Protection (3). A build id never changes and is never reused: a character keeps
+`classic` is written so far: the Warrior's, Paladin's and Mage's nine builds (Warrior
+Arms 1, Fury 2, Protection 3). A build id never changes and is never reused: a character keeps
 it (`saved-ids.json`, `bun run ids` in the check).
 
 `when` is a closed list (`WHEN` in `scripts/guide.ts`): a situation the player
@@ -71,6 +71,12 @@ class token. No per-class code anywhere. In the file:
   `STANCES`, `STANCE_FORMS` (the client's form number less one) and
   `STANCE_SPELLS` (the spell that is the form), so the check and the window
   know it. Facts are checked per game on every run (`bun run guide`).
+
+Paladin (6, 7, 8) and Mage (9, 10, 11) are written (4 November 2026, from
+`../ideas/class-guide-paladin-mage.md`, which is the paper the content is read
+from). Each build opens with a stage 1 to 9 with `phase: "untalented"`, the
+class's kit, the same in its three builds. A wand's Shoot is no spell of the
+class's book, so no row carries it. The Mage has one `advice` line, for damage.
 
 ## The facts check (every run of scripts/guide.ts)
 

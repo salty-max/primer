@@ -1,0 +1,1741 @@
+{
+  "class": {
+    "id": 8,
+    "key": "mage",
+    "token": "MAGE",
+    "name": "Mage",
+    "text": "A mage does damage with a cast bar and a mana bar, and the craft is in what to cast and when to stand still. Frost slows and freezes, Fire hits hardest, Arcane saves mana. Every line below presses a button.",
+    "card": {
+      "caresAbout": "mana left, the cast bar, distance, and what is slowed or frozen",
+      "vocabulary": "cast, bolt, mana, range, slow, freeze, sheep, cooldown",
+      "soundsLike": "dry and numerate, quick to give a count (30 yards, 8 seconds) and short on adjectives. A mage line says when to stand still and when to move",
+      "neverSays": "rage, swing as the main action, anything mystical (\"the weave\", \"arcane secrets\", \"power of\")",
+      "test": "could it be read between two casts?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Frost. The safest way to level alone. A frozen or slowed monster hits you less. The price: Frost hits a little softer than Fire. Fire. The hardest hit. Fire has no slow, so Frostbolt and Frost Nova stay on the bar. The price: a monster that reaches you stays on you. Arcane. Mana and free spells. The price: most of the tree's damage arrives with Arcane Power at 40, so before then you level slower than the other two."
+      }
+    ]
+  },
+  "builds": [
+    {
+      "id": 9,
+      "key": "mage-frost",
+      "name": "Frost",
+      "role": "damage",
+      "tree": 61,
+      "games": [
+        "classic"
+      ],
+      "checked": "2026-11-04",
+      "intro": "Frost keeps the monster slow or frozen so it hits you less, and kills with Frostbolt. It is the mage that survives being alone.",
+      "pathNote": "(31 points in Frost for Ice Barrier, then 20 in Arcane).",
+      "split": "the last 20 points. A second road puts them in Fire (Improved Fireball, Impact, Ignite) for a mage who wants a harder hit. It gives you a bigger opening and gives up the free spells and the spell resistance. This page takes Arcane for the mana.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 11070,
+          "rank": 5,
+          "why": "Frostbolt casts 0.5 seconds faster, and it is your main button.",
+          "of": 5
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 29438,
+          "rank": 3,
+          "why": "A Frost or Fire spell is 6% less likely to be resisted.",
+          "of": 3
+        },
+        {
+          "points": [
+            9,
+            11
+          ],
+          "level": [
+            18,
+            20
+          ],
+          "talent": 11071,
+          "rank": 3,
+          "why": "A chilled monster has a 15% chance to freeze for 5 seconds at 3/3.",
+          "of": 3
+        },
+        {
+          "points": [
+            12,
+            14
+          ],
+          "level": [
+            21,
+            23
+          ],
+          "talent": 11151,
+          "rank": 3,
+          "why": "6% more Frost damage.",
+          "of": 3
+        },
+        {
+          "points": [
+            15,
+            16
+          ],
+          "level": [
+            24,
+            25
+          ],
+          "talent": 11165,
+          "rank": 2,
+          "why": "Frost Nova comes back 4 seconds sooner, and it opens Shatter.",
+          "of": 2
+        },
+        {
+          "points": [
+            17,
+            21
+          ],
+          "level": [
+            26,
+            30
+          ],
+          "talent": 11170,
+          "rank": 5,
+          "why": "Spells are 50% more likely to be critical against a frozen monster.",
+          "of": 5
+        },
+        {
+          "points": [
+            22,
+            22
+          ],
+          "level": [
+            31,
+            31
+          ],
+          "talent": 11958,
+          "rank": 1,
+          "why": "You are safe from everything for 10 seconds, but cannot do anything, and it takes 5 minutes to come back. It opens Ice Barrier.",
+          "of": 1
+        },
+        {
+          "points": [
+            23,
+            25
+          ],
+          "level": [
+            32,
+            34
+          ],
+          "talent": 11190,
+          "rank": 3,
+          "why": "Cone of Cold hits 35% harder.",
+          "of": 3
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 11180,
+          "rank": 5,
+          "why": "Each Frost hit raises the chance of a Frost critical on that target by 2%, up to 5 times.",
+          "of": 5
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 11426,
+          "rank": 1,
+          "why": "A shield on you that absorbs damage for a minute, and spells are not interrupted while it holds.",
+          "of": 1
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 11222,
+          "rank": 5,
+          "why": "Arcane spells are resisted 10% less. Mostly the way to the next row.",
+          "of": 5
+        },
+        {
+          "points": [
+            37,
+            38
+          ],
+          "level": [
+            46,
+            47
+          ],
+          "talent": 11210,
+          "rank": 2,
+          "why": "The target resists your spells less, and Arcane spells draw 40% less threat.",
+          "of": 2
+        },
+        {
+          "points": [
+            39,
+            43
+          ],
+          "level": [
+            48,
+            52
+          ],
+          "talent": 11213,
+          "rank": 5,
+          "why": "Any damage spell has a 10% chance to make the next one cost nothing.",
+          "of": 5
+        },
+        {
+          "points": [
+            44,
+            45
+          ],
+          "level": [
+            53,
+            54
+          ],
+          "talent": 6057,
+          "rank": 2,
+          "why": "25% more damage with a wand, and a wand costs no mana.",
+          "of": 2
+        },
+        {
+          "points": [
+            46,
+            50
+          ],
+          "level": [
+            55,
+            59
+          ],
+          "talent": 29441,
+          "rank": 5,
+          "why": "All resistances up 10, and a fully resisted spell gives back 5% of your mana.",
+          "of": 5
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 28574,
+          "rank": 1,
+          "why": "Armour equal to half your Intellect. The last point. Any talent you can reach would do as well.",
+          "of": 1
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "",
+          "opening": "Frost Armor on, Arcane Intellect, Frostbolt from range, step back as it slows, Fire Blast to finish. Wand when mana runs low.",
+          "rows": [
+            {
+              "spell": 168,
+              "say": "Put it on yourself. It adds armour for 30 minutes, so renew it between fights and not in them.",
+              "need": {
+                "level": 1,
+                "when": [
+                  "ooc"
+                ]
+              },
+              "name": "Frost Armor"
+            },
+            {
+              "spell": 1459,
+              "say": "Cast it on yourself. 30 minutes of extra Intellect means more mana to spend.",
+              "need": {
+                "level": 1,
+                "when": [
+                  "ooc"
+                ]
+              },
+              "name": "Arcane Intellect"
+            },
+            {
+              "spell": 133,
+              "say": "Your opener at 35 yards. The cast takes longer with each rank, so you want the monster far away when it starts.",
+              "need": {
+                "level": 1
+              },
+              "name": "Fireball"
+            },
+            {
+              "spell": 116,
+              "say": "Opens at 30 yards and slows the monster by 40% for 5 seconds. It arrives later and you cast again before it does.",
+              "need": {
+                "level": 4
+              },
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 2136,
+              "say": "Press it as the monster arrives or runs. It has no cast bar, so it fills the gap between casts.",
+              "need": {
+                "level": 6
+              },
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 5143,
+              "say": "Hits once a second for 3 seconds, and you cannot move for any of it. Use it only when nothing will reach you while it lasts.",
+              "need": {
+                "level": 8
+              },
+              "name": "Arcane Missiles"
+            },
+            {
+              "spell": 118,
+              "say": "A sheep for up to 20 seconds. It works on Beasts, Humanoids and Critters, and any damage wakes it, so leave it alone.",
+              "need": {
+                "level": 8
+              },
+              "name": "Polymorph"
+            },
+            {
+              "spell": 5504,
+              "say": "Make drinks before you need them. Sitting with one brings mana back and saves a vendor trip.",
+              "need": {
+                "level": 4
+              },
+              "name": "Conjure Water"
+            },
+            {
+              "spell": 587,
+              "say": "Makes food. Eat between fights to get health back without spending any mana.",
+              "need": {
+                "level": 6,
+                "when": [
+                  "rest"
+                ]
+              },
+              "name": "Conjure Food"
+            }
+          ]
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "One monster, levelling.",
+          "opening": "Frost Armor on, Frostbolt from 30 yards, Frostbolt again, Frost Nova when it arrives, walk back and cast, Fire Blast or wand to finish.",
+          "rows": [
+            {
+              "spell": 116,
+              "say": "Your main button, and it slows the monster by 40%. Cast it from as far as 30 yards.",
+              "need": {
+                "level": 4
+              },
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 122,
+              "say": "Freezes everything near you for up to 8 seconds. Walk back, because damage breaks the freeze and the point is distance.",
+              "need": {
+                "level": 10
+              },
+              "name": "Frost Nova"
+            },
+            {
+              "spell": 2136,
+              "say": "No cast bar, ready every 8 seconds. It finishes a fight a Frostbolt would not.",
+              "need": {
+                "level": 6,
+                "when": [
+                  "execute"
+                ]
+              },
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 1449,
+              "say": "Hits everything around you at once. It is your answer when a second monster joins.",
+              "need": {
+                "level": 14,
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Arcane Explosion"
+            },
+            {
+              "spell": 118,
+              "say": "Turn one into a sheep for up to 20 seconds and deal with the other first.",
+              "need": {
+                "level": 8
+              },
+              "name": "Polymorph"
+            },
+            {
+              "spell": 168,
+              "say": "Renew it when it ends.",
+              "need": {
+                "when": [
+                  "rest"
+                ]
+              },
+              "name": "Frost Armor"
+            }
+          ]
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "One monster, or two, and the first dungeons.",
+          "opening": "Frostbolt, Frostbolt, Frost Nova if it reaches you, Fire Blast. Ice Armor from 30.",
+          "rows": [
+            {
+              "spell": 116,
+              "say": "Still your main button. Its cast reaches 3 seconds at rank 5, so start it while the monster is far.",
+              "need": {},
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 122,
+              "say": "Freeze, step back, cast. It comes back in 25 seconds, or 21 with Improved Frost Nova.",
+              "need": {},
+              "name": "Frost Nova"
+            },
+            {
+              "spell": 120,
+              "say": "Hits everything in front of you and slows it 50% for 8 seconds, ready every 10.",
+              "need": {
+                "level": 26,
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Cone of Cold"
+            },
+            {
+              "spell": 10,
+              "say": "Stand still and it rains ice for 8 seconds on the ground you chose. Pull a pack into it.",
+              "need": {
+                "level": 20,
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Blizzard"
+            },
+            {
+              "spell": 2139,
+              "say": "Stops a spell and its whole school for 10 seconds. It takes 30 seconds to come back.",
+              "need": {
+                "level": 24,
+                "when": [
+                  "caster"
+                ]
+              },
+              "name": "Counterspell"
+            },
+            {
+              "spell": 1953,
+              "say": "Moves you 20 yards and frees you from stuns and roots. It takes 15 seconds to come back.",
+              "need": {
+                "level": 20
+              },
+              "name": "Blink"
+            },
+            {
+              "spell": 12051,
+              "say": "8 seconds of standing still that brings back mana much faster. It takes 8 minutes to come back, so use it once per long outing.",
+              "need": {
+                "level": 20,
+                "when": [
+                  "rest",
+                  "lowmana"
+                ]
+              },
+              "name": "Evocation"
+            },
+            {
+              "spell": 7302,
+              "say": "Replaces Frost Armor, with more armour and a slow on melee attackers.",
+              "need": {
+                "level": 30
+              },
+              "name": "Ice Armor"
+            },
+            {
+              "spell": 1463,
+              "say": "Absorbs damage by draining mana instead. Press it when you would die before you ran dry.",
+              "need": {
+                "level": 20
+              },
+              "name": "Mana Shield"
+            },
+            {
+              "spell": 11958,
+              "say": "Safe from everything for 10 seconds, but you cannot act, and it takes 5 minutes to come back.",
+              "need": {
+                "when": [
+                  "wrong"
+                ]
+              },
+              "name": "Ice Block",
+              "talentSpell": 11958
+            }
+          ]
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Dungeons, hard monsters and the first raid.",
+          "opening": "Ice Barrier, Frostbolt from 30 yards, Frost Nova, Cone of Cold.",
+          "rows": [
+            {
+              "spell": 11426,
+              "say": "A shield on you that absorbs damage, and spells are not interrupted while it holds. It takes 30 seconds to come back.",
+              "need": {},
+              "name": "Ice Barrier",
+              "talentSpell": 11426
+            },
+            {
+              "spell": 116,
+              "say": "Your main button. Each hit adds a Winter's Chill stack, up to 5, and each stack raises your Frost critical chance on that monster by 2%.",
+              "need": {},
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 122,
+              "say": "Freeze, step back, cast. Shatter raises your critical chance against a frozen monster by 50%.",
+              "need": {},
+              "name": "Frost Nova"
+            },
+            {
+              "spell": 120,
+              "say": "Hits harder with Improved Cone of Cold and slows 50% for 8 seconds.",
+              "need": {},
+              "name": "Cone of Cold"
+            },
+            {
+              "spell": 10,
+              "say": "8 seconds of ice on the ground. Use it with a Frost Nova between you and them.",
+              "need": {
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Blizzard"
+            },
+            {
+              "spell": 2139,
+              "say": "Stops the school for 10 seconds, ready every 30.",
+              "need": {
+                "when": [
+                  "caster"
+                ]
+              },
+              "name": "Counterspell"
+            },
+            {
+              "spell": 6117,
+              "say": "Keeps 30% of mana regeneration going while you cast. Use it when mana, not health, runs out first.",
+              "need": {
+                "level": 34,
+                "when": [
+                  "lowmana"
+                ]
+              },
+              "name": "Mage Armor"
+            },
+            {
+              "spell": 11958,
+              "say": "Safe for 10 seconds, but you cannot act, and it takes 5 minutes to come back.",
+              "need": {
+                "when": [
+                  "wrong"
+                ]
+              },
+              "name": "Ice Block",
+              "talentSpell": 11958
+            },
+            {
+              "spell": 12051,
+              "say": "8 seconds of standing still for a lot of mana back. 8 minutes to come back.",
+              "need": {
+                "when": [
+                  "rest",
+                  "lowmana"
+                ]
+              },
+              "name": "Evocation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "key": "mage-fire",
+      "name": "Fire",
+      "role": "damage",
+      "tree": 41,
+      "games": [
+        "classic"
+      ],
+      "checked": "2026-11-04",
+      "intro": "Fire hits hardest and sets the monster burning. It has no slow of its own, so the page gives you Frostbolt and Frost Nova for distance.",
+      "pathNote": "(31 points in Fire for Combustion, then 20 in Frost).",
+      "split": "the last 20 points. A second road puts them in Arcane (Arcane Focus, Arcane Concentration, Arcane Subtlety) for a mage who wants free spells and a bigger mana bar. It gives up the slow and the freeze, which are what keeps a Fire mage alive when the monster arrives. This page takes Frost for that reason.",
+      "dry": "Combustion held back is a lot of critical hits not dealt.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 11069,
+          "rank": 5,
+          "why": "Fireball casts 0.5 seconds faster, and it is your main button.",
+          "of": 5
+        },
+        {
+          "points": [
+            6,
+            10
+          ],
+          "level": [
+            15,
+            19
+          ],
+          "talent": 11119,
+          "rank": 5,
+          "why": "A critical Fire hit sets the target burning for another 40% of the damage over 4 seconds.",
+          "of": 5
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 11366,
+          "rank": 1,
+          "why": "A big hit with a 6 second cast, and a burn after it. Open with it from 35 yards.",
+          "of": 1
+        },
+        {
+          "points": [
+            12,
+            13
+          ],
+          "level": [
+            21,
+            22
+          ],
+          "talent": 11100,
+          "rank": 2,
+          "why": "Fire spells reach 6 yards further, so you open from further away.",
+          "of": 2
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 18459,
+          "rank": 2,
+          "why": "Fire Blast and Scorch are 4% more likely to be critical.",
+          "of": 2
+        },
+        {
+          "points": [
+            16,
+            18
+          ],
+          "level": [
+            25,
+            27
+          ],
+          "talent": 29074,
+          "rank": 3,
+          "why": "A critical Fire or Frost spell gives back 30% of its mana.",
+          "of": 3
+        },
+        {
+          "points": [
+            19,
+            21
+          ],
+          "level": [
+            28,
+            30
+          ],
+          "talent": 11095,
+          "rank": 3,
+          "why": "A Scorch makes the target take 3% more Fire damage, stacking to 5 times.",
+          "of": 3
+        },
+        {
+          "points": [
+            22,
+            24
+          ],
+          "level": [
+            31,
+            33
+          ],
+          "talent": 11115,
+          "rank": 3,
+          "why": "6% more critical chance on Fire spells.",
+          "of": 3
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 11113,
+          "rank": 1,
+          "why": "Damages and dazes all enemies near you, every 45 seconds.",
+          "of": 1
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 11124,
+          "rank": 5,
+          "why": "10% more Fire damage.",
+          "of": 5
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 11129,
+          "rank": 1,
+          "why": "Each Fire hit raises your critical chance by 10% until you have had 3 criticals. Every 3 minutes.",
+          "of": 1
+        },
+        {
+          "points": [
+            32,
+            34
+          ],
+          "level": [
+            41,
+            43
+          ],
+          "talent": 29438,
+          "rank": 3,
+          "why": "A Fire or Frost spell is 6% less likely to be resisted.",
+          "of": 3
+        },
+        {
+          "points": [
+            35,
+            39
+          ],
+          "level": [
+            44,
+            48
+          ],
+          "talent": 11070,
+          "rank": 5,
+          "why": "Frostbolt casts 0.5 seconds faster, so the slow you rely on comes sooner.",
+          "of": 5
+        },
+        {
+          "points": [
+            40,
+            42
+          ],
+          "level": [
+            49,
+            51
+          ],
+          "talent": 11071,
+          "rank": 3,
+          "why": "A chilled monster has a 15% chance to freeze for 5 seconds.",
+          "of": 3
+        },
+        {
+          "points": [
+            43,
+            44
+          ],
+          "level": [
+            52,
+            53
+          ],
+          "talent": 11165,
+          "rank": 2,
+          "why": "Frost Nova comes back 4 seconds sooner.",
+          "of": 2
+        },
+        {
+          "points": [
+            45,
+            47
+          ],
+          "level": [
+            54,
+            56
+          ],
+          "talent": 11175,
+          "rank": 3,
+          "why": "A chill lasts 3 seconds longer and slows 10% more.",
+          "of": 3
+        },
+        {
+          "points": [
+            48,
+            48
+          ],
+          "level": [
+            57,
+            57
+          ],
+          "talent": 12472,
+          "rank": 1,
+          "why": "Finishes the cooldown on all your Frost spells. Every 10 minutes.",
+          "of": 1
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 11160,
+          "rank": 3,
+          "why": "Frost spells cost 15% less mana and draw 30% less threat.",
+          "of": 3
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "",
+          "opening": "Frost Armor on, Arcane Intellect, Frostbolt from range, step back as it slows, Fire Blast to finish. Wand when mana runs low.",
+          "rows": [
+            {
+              "spell": 168,
+              "say": "Put it on yourself. It adds armour for 30 minutes, so renew it between fights and not in them.",
+              "need": {
+                "level": 1,
+                "when": [
+                  "ooc"
+                ]
+              },
+              "name": "Frost Armor"
+            },
+            {
+              "spell": 1459,
+              "say": "Cast it on yourself. 30 minutes of extra Intellect means more mana to spend.",
+              "need": {
+                "level": 1,
+                "when": [
+                  "ooc"
+                ]
+              },
+              "name": "Arcane Intellect"
+            },
+            {
+              "spell": 133,
+              "say": "Your opener at 35 yards. The cast takes longer with each rank, so you want the monster far away when it starts.",
+              "need": {
+                "level": 1
+              },
+              "name": "Fireball"
+            },
+            {
+              "spell": 116,
+              "say": "Opens at 30 yards and slows the monster by 40% for 5 seconds. It arrives later and you cast again before it does.",
+              "need": {
+                "level": 4
+              },
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 2136,
+              "say": "Press it as the monster arrives or runs. It has no cast bar, so it fills the gap between casts.",
+              "need": {
+                "level": 6
+              },
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 5143,
+              "say": "Hits once a second for 3 seconds, and you cannot move for any of it. Use it only when nothing will reach you while it lasts.",
+              "need": {
+                "level": 8
+              },
+              "name": "Arcane Missiles"
+            },
+            {
+              "spell": 118,
+              "say": "A sheep for up to 20 seconds. It works on Beasts, Humanoids and Critters, and any damage wakes it, so leave it alone.",
+              "need": {
+                "level": 8
+              },
+              "name": "Polymorph"
+            },
+            {
+              "spell": 5504,
+              "say": "Make drinks before you need them. Sitting with one brings mana back and saves a vendor trip.",
+              "need": {
+                "level": 4
+              },
+              "name": "Conjure Water"
+            },
+            {
+              "spell": 587,
+              "say": "Makes food. Eat between fights to get health back without spending any mana.",
+              "need": {
+                "level": 6,
+                "when": [
+                  "rest"
+                ]
+              },
+              "name": "Conjure Food"
+            }
+          ]
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "One monster, levelling.",
+          "opening": "Frost Armor, Fireball from 35 yards, Fireball, Frost Nova when it arrives, walk back, cast, Fire Blast.",
+          "rows": [
+            {
+              "spell": 133,
+              "say": "Your main button, from 35 yards. A critical one sets the monster burning.",
+              "need": {},
+              "name": "Fireball"
+            },
+            {
+              "spell": 116,
+              "say": "When you need it slowed. It costs less than Fireball at the same rank, so it is also the cheaper hit.",
+              "need": {
+                "level": 4
+              },
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 122,
+              "say": "Freezes it for up to 8 seconds. Walk back, because damage breaks the freeze and the point is distance.",
+              "need": {
+                "level": 10
+              },
+              "name": "Frost Nova"
+            },
+            {
+              "spell": 2136,
+              "say": "Ready every 8 seconds with no cast bar. It finishes a fight, and a critical one starts Ignite.",
+              "need": {
+                "level": 6
+              },
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 1449,
+              "say": "Hits everything around you at once, so use it when a second monster joins.",
+              "need": {
+                "level": 14,
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Arcane Explosion"
+            },
+            {
+              "spell": 118,
+              "say": "Turn one into a sheep for up to 20 seconds, so you fight one at a time.",
+              "need": {
+                "level": 8
+              },
+              "name": "Polymorph"
+            }
+          ]
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "One monster, or two, and the first dungeons.",
+          "opening": "Pyroblast from 35 yards, Fireball, Frost Nova if it reaches you, Fire Blast.",
+          "rows": [
+            {
+              "spell": 11366,
+              "say": "A 6 second cast and a burn after it. Open with it from 35 yards, because it lands before the monster can reach you.",
+              "need": {},
+              "name": "Pyroblast",
+              "talentSpell": 11366
+            },
+            {
+              "spell": 133,
+              "say": "The main button. Its cast time grows with rank, so open with your highest rank and finish with lower ones.",
+              "need": {},
+              "name": "Fireball"
+            },
+            {
+              "spell": 2948,
+              "say": "A 1.5 second cast that costs far less than a Fireball of the same level. Use it to finish a monster when mana is short.",
+              "need": {
+                "level": 22,
+                "when": [
+                  "lowmana"
+                ]
+              },
+              "name": "Scorch"
+            },
+            {
+              "spell": 2136,
+              "say": "Instant. Press it when it reaches you or runs.",
+              "need": {},
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 122,
+              "say": "Freezes it for up to 8 seconds. Step back and keep casting, because it cannot hit you.",
+              "need": {},
+              "name": "Frost Nova"
+            },
+            {
+              "spell": 2120,
+              "say": "A 3 second cast on the ground, burning for 8 seconds. It is how you open on a group at range.",
+              "need": {
+                "level": 16,
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Flamestrike"
+            },
+            {
+              "spell": 11113,
+              "say": "Damages and dazes all near you, every 45 seconds. Use it when a pack arrives.",
+              "need": {},
+              "name": "Blast Wave",
+              "talentSpell": 11113
+            },
+            {
+              "spell": 543,
+              "say": "Absorbs Fire damage for 30 seconds. Only press it for a monster that casts fire.",
+              "need": {
+                "level": 20,
+                "when": [
+                  "caster"
+                ]
+              },
+              "name": "Fire Ward"
+            },
+            {
+              "spell": 2139,
+              "say": "Stops that spell and all of the same kind (Fire, Frost) for 10 seconds.",
+              "need": {
+                "level": 24,
+                "when": [
+                  "caster"
+                ]
+              },
+              "name": "Counterspell"
+            },
+            {
+              "spell": 12051,
+              "say": "8 seconds of standing still for mana. 8 minutes to come back.",
+              "need": {
+                "level": 20,
+                "when": [
+                  "rest",
+                  "lowmana"
+                ]
+              },
+              "name": "Evocation"
+            }
+          ]
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Dungeons, hard monsters and the first raid.",
+          "opening": "Scorch for the stacks (when the target is worth it), Fireball, Pyroblast, Combustion for the fight that matters.",
+          "rows": [
+            {
+              "spell": 133,
+              "say": "The main button. It casts for 3.5 seconds from rank 5, or 3 with Improved Fireball, so start it early.",
+              "need": {},
+              "name": "Fireball"
+            },
+            {
+              "spell": 2948,
+              "say": "Use it early, up to 5 times. Each stack adds Fire damage taken, and it is only worth it if the monster lives long enough.",
+              "need": {},
+              "name": "Scorch"
+            },
+            {
+              "spell": 11366,
+              "say": "A 6 second cast and a burn after it. Open with it.",
+              "need": {},
+              "name": "Pyroblast",
+              "talentSpell": 11366
+            },
+            {
+              "spell": 11129,
+              "say": "Each Fire hit raises your critical chance until you have had 3 criticals. It takes 3 minutes to come back, so choose the fight.",
+              "need": {},
+              "name": "Combustion",
+              "talentSpell": 11129
+            },
+            {
+              "spell": 2136,
+              "say": "Instant, every 8 seconds.",
+              "need": {},
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 11113,
+              "say": "Damages and dazes everything near, every 45 seconds.",
+              "need": {},
+              "name": "Blast Wave",
+              "talentSpell": 11113
+            },
+            {
+              "spell": 2120,
+              "say": "A 3 second cast on the ground and a burn.",
+              "need": {
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Flamestrike"
+            },
+            {
+              "spell": 122,
+              "say": "Freeze it, step back and keep casting, because a frozen monster cannot hit you.",
+              "need": {},
+              "name": "Frost Nova"
+            },
+            {
+              "spell": 543,
+              "say": "Absorbs Fire damage for 30 seconds.",
+              "need": {
+                "when": [
+                  "caster"
+                ]
+              },
+              "name": "Fire Ward"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "key": "mage-arcane",
+      "name": "Arcane",
+      "role": "damage",
+      "tree": 81,
+      "games": [
+        "classic"
+      ],
+      "checked": "2026-11-04",
+      "intro": "Arcane runs on mana and on spells that cost nothing. It is slow before 40 and good after, for a mage who would rather cast than flee.",
+      "pathNote": "(31 points in Arcane for Arcane Power, then 20 in Fire).",
+      "split": "the last 20 points. A second road puts them in Frost (Improved Frostbolt, Frostbite, Permafrost) for a mage who needs the slow. This page takes Fire for the harder hit, and the price is the slow that keeps you alive.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 11222,
+          "rank": 5,
+          "why": "Arcane spells are resisted 10% less.",
+          "of": 5
+        },
+        {
+          "points": [
+            6,
+            10
+          ],
+          "level": [
+            15,
+            19
+          ],
+          "talent": 11213,
+          "rank": 5,
+          "why": "Any damage spell has a 10% chance to make the next one cost nothing.",
+          "of": 5
+        },
+        {
+          "points": [
+            11,
+            15
+          ],
+          "level": [
+            20,
+            24
+          ],
+          "talent": 11237,
+          "rank": 5,
+          "why": "Arcane Missiles is not broken when you are hit.",
+          "of": 5
+        },
+        {
+          "points": [
+            16,
+            18
+          ],
+          "level": [
+            25,
+            27
+          ],
+          "talent": 18462,
+          "rank": 3,
+          "why": "15% of your mana regeneration continues while you cast.",
+          "of": 3
+        },
+        {
+          "points": [
+            19,
+            19
+          ],
+          "level": [
+            28,
+            28
+          ],
+          "talent": 28574,
+          "rank": 1,
+          "why": "Armour equal to half your Intellect. It opens Arcane Mind.",
+          "of": 1
+        },
+        {
+          "points": [
+            20,
+            21
+          ],
+          "level": [
+            29,
+            30
+          ],
+          "talent": 11255,
+          "rank": 2,
+          "why": "Counterspell silences the target for 4 seconds, every time.",
+          "of": 2
+        },
+        {
+          "points": [
+            22,
+            22
+          ],
+          "level": [
+            31,
+            31
+          ],
+          "talent": 12043,
+          "rank": 1,
+          "why": "Your next spell with a cast under 10 seconds becomes instant. Every 3 minutes.",
+          "of": 1
+        },
+        {
+          "points": [
+            23,
+            27
+          ],
+          "level": [
+            32,
+            36
+          ],
+          "talent": 11232,
+          "rank": 5,
+          "why": "10% more mana.",
+          "of": 5
+        },
+        {
+          "points": [
+            28,
+            30
+          ],
+          "level": [
+            37,
+            39
+          ],
+          "talent": 15058,
+          "rank": 3,
+          "why": "3% more spell damage and critical chance.",
+          "of": 3
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 12042,
+          "rank": 1,
+          "why": "Spells deal 30% more damage and cost 30% more mana for 15 seconds. Every 3 minutes.",
+          "of": 1
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 11069,
+          "rank": 5,
+          "why": "Fireball casts 0.5 seconds faster.",
+          "of": 5
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 11103,
+          "rank": 5,
+          "why": "Fire spells have a 10% chance to stun for 2 seconds.",
+          "of": 5
+        },
+        {
+          "points": [
+            42,
+            46
+          ],
+          "level": [
+            51,
+            55
+          ],
+          "talent": 11119,
+          "rank": 5,
+          "why": "A critical Fire hit sets the target burning for 40% more.",
+          "of": 5
+        },
+        {
+          "points": [
+            47,
+            48
+          ],
+          "level": [
+            56,
+            57
+          ],
+          "talent": 11100,
+          "rank": 2,
+          "why": "Fire spells reach 6 yards further.",
+          "of": 2
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 11078,
+          "rank": 3,
+          "why": "Fire Blast comes back 1.5 seconds sooner.",
+          "of": 3
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "",
+          "opening": "Frost Armor on, Arcane Intellect, Frostbolt from range, step back as it slows, Fire Blast to finish. Wand when mana runs low.",
+          "rows": [
+            {
+              "spell": 168,
+              "say": "Put it on yourself. It adds armour for 30 minutes, so renew it between fights and not in them.",
+              "need": {
+                "level": 1,
+                "when": [
+                  "ooc"
+                ]
+              },
+              "name": "Frost Armor"
+            },
+            {
+              "spell": 1459,
+              "say": "Cast it on yourself. 30 minutes of extra Intellect means more mana to spend.",
+              "need": {
+                "level": 1,
+                "when": [
+                  "ooc"
+                ]
+              },
+              "name": "Arcane Intellect"
+            },
+            {
+              "spell": 133,
+              "say": "Your opener at 35 yards. The cast takes longer with each rank, so you want the monster far away when it starts.",
+              "need": {
+                "level": 1
+              },
+              "name": "Fireball"
+            },
+            {
+              "spell": 116,
+              "say": "Opens at 30 yards and slows the monster by 40% for 5 seconds. It arrives later and you cast again before it does.",
+              "need": {
+                "level": 4
+              },
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 2136,
+              "say": "Press it as the monster arrives or runs. It has no cast bar, so it fills the gap between casts.",
+              "need": {
+                "level": 6
+              },
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 5143,
+              "say": "Hits once a second for 3 seconds, and you cannot move for any of it. Use it only when nothing will reach you while it lasts.",
+              "need": {
+                "level": 8
+              },
+              "name": "Arcane Missiles"
+            },
+            {
+              "spell": 118,
+              "say": "A sheep for up to 20 seconds. It works on Beasts, Humanoids and Critters, and any damage wakes it, so leave it alone.",
+              "need": {
+                "level": 8
+              },
+              "name": "Polymorph"
+            },
+            {
+              "spell": 5504,
+              "say": "Make drinks before you need them. Sitting with one brings mana back and saves a vendor trip.",
+              "need": {
+                "level": 4
+              },
+              "name": "Conjure Water"
+            },
+            {
+              "spell": 587,
+              "say": "Makes food. Eat between fights to get health back without spending any mana.",
+              "need": {
+                "level": 6,
+                "when": [
+                  "rest"
+                ]
+              },
+              "name": "Conjure Food"
+            }
+          ]
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "One monster, levelling. The page is the untalented kit's until the tree helps.",
+          "rows": [
+            {
+              "spell": 116,
+              "say": "Your opener at 30 yards. It slows the monster by 40%.",
+              "need": {
+                "level": 4
+              },
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 133,
+              "say": "Your hit when the monster is held or you have mana to spare.",
+              "need": {},
+              "name": "Fireball"
+            },
+            {
+              "spell": 5143,
+              "say": "Hits once a second for 3 seconds. When Arcane Concentration makes your next spell free, cast it, because it costs nothing.",
+              "need": {
+                "level": 8
+              },
+              "name": "Arcane Missiles"
+            },
+            {
+              "spell": 122,
+              "say": "Freeze it, step back and keep casting, because a frozen monster cannot hit you.",
+              "need": {
+                "level": 10
+              },
+              "name": "Frost Nova"
+            },
+            {
+              "spell": 2136,
+              "say": "No cast bar, ready every 8 seconds.",
+              "need": {
+                "level": 6,
+                "when": [
+                  "execute"
+                ]
+              },
+              "name": "Fire Blast"
+            },
+            {
+              "spell": 1449,
+              "say": "Hits everything around you at once, so use it when a second monster joins.",
+              "need": {
+                "level": 14,
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Arcane Explosion"
+            },
+            {
+              "spell": 118,
+              "say": "Turn one into a sheep for up to 20 seconds, so you fight one at a time.",
+              "need": {
+                "level": 8
+              },
+              "name": "Polymorph"
+            }
+          ]
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "One monster, or two, and the first dungeons.",
+          "opening": "Arcane Missiles when it is free, else Frostbolt, Frost Nova if it reaches you.",
+          "rows": [
+            {
+              "spell": 5143,
+              "say": "A free cast is the best moment for it. It hits once a second for 4 to 5 seconds.",
+              "need": {
+                "talents": [
+                  11237
+                ],
+                "when": [
+                  "lit"
+                ]
+              },
+              "name": "Arcane Missiles"
+            },
+            {
+              "spell": 116,
+              "say": "Your slow and your main hit while Arcane Concentration has not made a spell free.",
+              "need": {},
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 2139,
+              "say": "Stops that spell and all of the same kind (Fire, Frost) for 10 seconds, and silences for 4 with the talent.",
+              "need": {
+                "level": 24,
+                "when": [
+                  "caster"
+                ]
+              },
+              "name": "Counterspell"
+            },
+            {
+              "spell": 12051,
+              "say": "8 seconds of standing still for mana. 8 minutes to come back.",
+              "need": {
+                "level": 20,
+                "when": [
+                  "rest",
+                  "lowmana"
+                ]
+              },
+              "name": "Evocation"
+            },
+            {
+              "spell": 1463,
+              "say": "Absorbs damage by draining mana instead.",
+              "need": {
+                "level": 20,
+                "when": [
+                  "hurt"
+                ]
+              },
+              "name": "Mana Shield"
+            },
+            {
+              "spell": 1953,
+              "say": "Moves you 20 yards and frees you from stuns.",
+              "need": {
+                "level": 20
+              },
+              "name": "Blink"
+            },
+            {
+              "spell": 12043,
+              "say": "Your next spell is instant. Use it on the biggest cast you have.",
+              "need": {},
+              "name": "Presence of Mind",
+              "talentSpell": 12043
+            },
+            {
+              "spell": 122,
+              "say": "Freeze it, step back and keep casting, because a frozen monster cannot hit you.",
+              "need": {},
+              "name": "Frost Nova"
+            }
+          ]
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Dungeons, hard monsters and the first raid.",
+          "opening": "Arcane Power on the fight that matters, Presence of Mind on the biggest cast, Arcane Missiles on every free spell.",
+          "rows": [
+            {
+              "spell": 12042,
+              "say": "Spells deal 30% more for 15 seconds and cost 30% more mana. Every 3 minutes, so spend it on the one that counts.",
+              "need": {},
+              "name": "Arcane Power",
+              "talentSpell": 12042
+            },
+            {
+              "spell": 12043,
+              "say": "An instant cast, every 3 minutes. Use it on the biggest cast.",
+              "need": {},
+              "name": "Presence of Mind",
+              "talentSpell": 12043
+            },
+            {
+              "spell": 5143,
+              "say": "Cast it whenever Arcane Concentration makes a spell free, because 5 seconds of damage costs nothing.",
+              "need": {
+                "when": [
+                  "lit"
+                ]
+              },
+              "name": "Arcane Missiles"
+            },
+            {
+              "spell": 116,
+              "say": "The cheap hit that slows. Use it between free casts.",
+              "need": {},
+              "name": "Frostbolt"
+            },
+            {
+              "spell": 1449,
+              "say": "Hits everything around you at once, so use it when a second monster joins.",
+              "need": {
+                "level": 14,
+                "when": [
+                  "pack"
+                ]
+              },
+              "name": "Arcane Explosion"
+            },
+            {
+              "spell": 2139,
+              "say": "Stops the spell, and Improved Counterspell silences the monster for 4 seconds.",
+              "need": {
+                "when": [
+                  "caster"
+                ]
+              },
+              "name": "Counterspell"
+            },
+            {
+              "spell": 12051,
+              "say": "8 seconds of standing still. 8 minutes to come back.",
+              "need": {
+                "when": [
+                  "rest",
+                  "lowmana"
+                ]
+              },
+              "name": "Evocation"
+            },
+            {
+              "spell": 6117,
+              "say": "Keeps 30% of mana regeneration going while you cast.",
+              "need": {
+                "level": 34,
+                "when": [
+                  "lowmana"
+                ]
+              },
+              "name": "Mage Armor"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
