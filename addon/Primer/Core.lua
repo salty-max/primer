@@ -44,6 +44,14 @@ ns.on = events.on
 
 local function newBook(guid) return { guid = guid, groups = {} } end
 
+-- A call or a page that failed, the first time of each this session, kept for
+-- `/primer debug` (ns.faults[what] = the error): the next failure is a note,
+-- not a red box. Not saved: a week-old error would mislead.
+ns.faults = {}
+function ns.fault(what, err)
+  if ns.faults[what] == nil then ns.faults[what] = tostring(err) end
+end
+
 -- The choices for a talent group, made when first asked.
 function ns.choice(group)
   char.groups = char.groups or {}
@@ -97,7 +105,17 @@ K.commands({
   open = function()
     if ns.toggle then ns.toggle() end
   end,
-  usage = L["/primer opens the guide. /primer minimap shows or hides its button on the minimap."],
+  usage = L["/primer opens the guide. /primer minimap shows or hides its button on the minimap. /primer debug says what went wrong, if anything did."],
+  commands = {
+    debug = function()
+      local any = false
+      for what, err in pairs(ns.faults) do
+        any = true
+        print(ns.PREFIX .. what .. ": " .. err)
+      end
+      if not any then print(ns.PREFIX .. L["Nothing has gone wrong."]) end
+    end,
+  },
   -- (looked up when used: Settings.lua makes them, after this file)
   minimap = {
     get = function(k) return ns.option(k) end,

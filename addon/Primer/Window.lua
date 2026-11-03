@@ -81,9 +81,13 @@ local function line(i)
   r.say:SetSpacing(3)
   r.slot:SetScript("OnEnter", function(self)
     if not (GameTooltip and self.spell) then return end
-    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-    GameTooltip:SetSpellByID(self.spell)
-    GameTooltip:Show()
+    -- (a tooltip the client refuses is no error out of a mouse-over)
+    local ok, err = pcall(function()
+      GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+      GameTooltip:SetSpellByID(self.spell)
+      GameTooltip:Show()
+    end)
+    if not ok then ns.fault("tooltip", err) end
   end)
   r.slot:SetScript("OnLeave", function()
     if GameTooltip then GameTooltip:Hide() end
@@ -323,8 +327,29 @@ end
 
 -- ── drawing ──────────────────────────────────────────────────────────────────
 local waiting = false
+local refresh
 
-local function refresh()
+-- The guide could not draw this page: said plainly, no stack, and kept for
+-- /primer debug (ns.fault). Even this is guarded: a window never raises.
+local function broken(title, text)
+  pcall(function()
+    for _, r in ipairs(rows) do
+      r:Hide()
+    end
+    list:begin()
+    list:add("note", L["Nothing here yet."])
+    list:finish()
+    page:start(title or L["Something went wrong"], "", K.icon(ns.ICON))
+    page:paragraph(
+      text
+        or L["This page would not draw. Close the window and open it again. If it keeps happening, /primer debug says what it was."],
+      T.text
+    )
+    page:finish()
+  end)
+end
+
+local function draw()
   if not (frame and frame:IsShown()) then return end
   -- (the Talents tab may look at the other talent group, the rest follow the one in use)
   local snap = ns.reader.snapshot(frame.selectedTab == TABS.talents and view.group or nil)
@@ -340,6 +365,7 @@ local function refresh()
     end
     return
   end
+  snap.className = snap.className or L["Unknown class"]
   frame.count:SetText(L["%s, level %d"]:format(snap.className, snap.level))
   -- (the Play page's lines are ours: the page hides only its own blocks)
   for _, r in ipairs(rows) do
@@ -358,6 +384,23 @@ local function refresh()
     drawRole(snap, class, role, id)
   else
     drawPlay(snap, class, role, id)
+  end
+  -- What a page cannot do without is what the game would not say (the talents
+  -- taken, the spells in the book): no advice drawn from defaults, a page that
+  -- says so in its place.
+  if ns.reader.blind() then
+    broken(
+      L["The guide cannot read your character"],
+      L["This version of the game would not tell the guide your spells or talents, so it shows nothing rather than guess. /primer debug says which."]
+    )
+  end
+end
+
+function refresh()
+  local ok, err = pcall(draw)
+  if not ok then
+    ns.fault("window", err)
+    broken()
   end
 end
 ns.refresh = refresh
@@ -408,7 +451,10 @@ local function build()
   list:SetPoint("BOTTOMRIGHT", left, "BOTTOMRIGHT", -18, 12)
   page = K.page(sheet, "PrimerPage", { labelWidth = 110, pairs = {} })
   frame.selectedTab = TABS.play
-  frame:SetScript("OnShow", function() show(frame.selectedTab) end)
+  frame:SetScript("OnShow", function()
+    ns.reader.reset() -- (a call that failed is tried again when the window is opened again)
+    show(frame.selectedTab)
+  end)
   K.tabs(frame, { L["Play"], L["Talents"], L["Role"] }, show)
 end
 

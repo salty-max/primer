@@ -430,6 +430,7 @@ else
     "a client without the group calls has one group, and nothing breaks"
   )
   GetNumSpecGroups = calls
+  ns.reader.reset()
   C_SpecializationInfo.GetActiveSpecGroup = function() return s.group end
   -- two groups (the Forever way): the switch, a build for each, the other group's talents read
   s.groups = 2
@@ -506,6 +507,128 @@ else
     "and shows nothing of another class"
   )
   UnitClass = classToken
+end
+
+-- ── an API that raises ───────────────────────────────────────────────────────
+-- The client documents calls it then refuses ("API unsupported in this version
+-- of World of Warcraft": GetNumSpecGroups on Classic Era, found in the game).
+-- Every call the guide makes is one that may, and the window opens all the
+-- same: the safe default (one group, no season, no talents, nothing in the
+-- book), the error kept once for /primer debug, never a Lua error.
+do
+  local function unsupported() error("Script_Call: API unsupported in this version of World of Warcraft.") end
+  local calls = {
+    { _G, "GetNumSpecGroups" },
+    { _G, "GetNumTalentTabs" },
+    { _G, "GetNumTalents" },
+    { _G, "UnitClass" },
+    { _G, "UnitLevel" },
+    { C_SpecializationInfo, "GetActiveSpecGroup" },
+    { C_SpecializationInfo, "GetTalentInfo" },
+    { C_SpecializationInfo, "GetSpecializationInfo" },
+    { C_Seasons, "GetActiveSeason" },
+    { C_SpellBook, "IsSpellInSpellBook" },
+    { C_SpellBook, "IsSpellKnown" },
+    { C_Spell, "GetSpellInfo" },
+  }
+  local function opens(why)
+    for tab = 1, 3 do
+      local ok, err = pcall(ns.open, tab)
+      check(ok, why .. ", tab " .. tab .. ": " .. tostring(err))
+      check(PrimerPage.title.text and PrimerPage.title.text ~= "Something went wrong", why .. ": a page, tab " .. tab)
+    end
+  end
+  s.spells = set(100, 772, 78)
+  for _, call in ipairs(calls) do
+    local owner, name = call[1], call[2]
+    local was = owner[name]
+    owner[name] = unsupported
+    ns.reader.reset()
+    ns.faults = {}
+    opens(name .. " raises")
+    -- (a call no page needs on a game is never made: Forever's page says there is no guide)
+    local made = { GetNumSpecGroups = 1, UnitClass = 1, UnitLevel = 1, GetActiveSpecGroup = 1, GetActiveSeason = 1 }
+    check((G.FOREVER and not made[name]) or next(ns.faults) ~= nil, name .. ": the error is kept for /primer debug")
+    owner[name] = was
+  end
+  -- the game would not say the talents or the book: no advice from defaults, and a reopened window tries again
+  if not G.FOREVER then
+    local talentCall = C_SpecializationInfo.GetTalentInfo
+    s.level = 40
+    C_SpecializationInfo.GetTalentInfo = unsupported
+    ns.reader.reset()
+    ns.open(ns.TAB.talents)
+    check(
+      PrimerPage.title.text == "The guide cannot read your character",
+      "talents unreadable: the page says so, not '31 points to spend'"
+    )
+    check(not pageTexts():find("talent points to spend", 1, true), "and gives no advice drawn from none taken")
+    C_SpecializationInfo.GetTalentInfo = talentCall
+    PrimerFrame:Hide()
+    ns.open(ns.TAB.talents)
+    check(
+      PrimerPage.title.text ~= "The guide cannot read your character",
+      "closed and opened again, the guide tries again"
+    )
+    local book, known = C_SpellBook.IsSpellInSpellBook, C_SpellBook.IsSpellKnown
+    C_SpellBook.IsSpellInSpellBook, C_SpellBook.IsSpellKnown = unsupported, unsupported
+    PrimerFrame:Hide()
+    ns.open(ns.TAB.play)
+    check(
+      PrimerPage.title.text == "The guide cannot read your character" and shownRows() == 0,
+      "the book unreadable: the same plain page, no lines"
+    )
+    C_SpellBook.IsSpellInSpellBook, C_SpellBook.IsSpellKnown = book, known
+    PrimerFrame:Hide()
+    ns.open(ns.TAB.play)
+    s.level = 12
+  end
+
+  -- a Paladin, no guide written, every call raising: the class page, never a blank
+  local all = {}
+  for _, call in ipairs(calls) do
+    all[#all + 1] = call[1][call[2]]
+    if call[2] ~= "UnitClass" then call[1][call[2]] = unsupported end
+  end
+  local unitClass = UnitClass
+  UnitClass = function() return "Paladin", "PALADIN", 2 end
+  ns.reader.reset()
+  ns.faults = {}
+  opens("a Paladin with every call raising")
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == (G.FOREVER and "No guide for Forever yet" or "No guide for Paladin yet"),
+    "a Paladin: the page says no guide, never a blank"
+  )
+  check(shownRows() == 0 and #PrimerList.rows > 0 and PrimerList.rows[1].shown, "(the list says nothing here yet)")
+  for i, call in ipairs(calls) do
+    call[1][call[2]] = all[i]
+  end
+  UnitClass = unitClass
+  ns.reader.reset()
+
+  -- a page that fails is a note, the window a calm page, the error kept once
+  local page = ns.rules.page
+  ns.rules.page = function() error("boom") end
+  ns.faults = {}
+  local ok = pcall(ns.open, ns.TAB.play)
+  check(ok and PrimerPage.title.text == "Something went wrong", "a page that fails says so plainly")
+  check(
+    not pageTexts():find("boom", 1, true) and not pageTexts():find("stack", 1, true),
+    "and shows the player no stack"
+  )
+  check(ns.faults.window and ns.faults.window:find("boom", 1, true), "the error is kept")
+  s.printed = {}
+  SlashCmdList.PRIMER("debug")
+  check(said("window: ") and said("boom"), "/primer debug says what went wrong")
+  ns.faults = {}
+  s.printed = {}
+  SlashCmdList.PRIMER("debug")
+  check(said("Nothing has gone wrong."), "/primer debug says so when nothing did")
+  ns.rules.page = page
+  ns.open(ns.TAB.play)
+  check(PrimerPage.title.text ~= "Something went wrong", "and the window draws again once it can")
+  s.spells = {}
 end
 
 -- ── the minimap command ──────────────────────────────────────────────────────

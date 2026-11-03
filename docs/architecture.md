@@ -26,7 +26,15 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
 - **Settings.lua**: the kit's profiles (a character's settings, takable by a
   code "PR1:h0:a90"): the minimap button's place and whether it shows. No
   Options page and no welcome yet.
-- **Reader.lua**: everything the guide reads of the game, out of combat: the
+- **Reader.lua**: every call goes through `try()`: a function the client
+  documents can still raise ("API unsupported", `GetNumSpecGroups` on Classic
+  Era, found in the first game test, 4 November 2026), so an error is kept once
+  (`ns.faults`, this session only, `/primer debug` prints it), the call is
+  skipped until the window is opened again, and the answer is the safe default
+  (one group, no season). When the talents or the book are the calls that
+  failed (`R.blind()`) the page says it cannot read the character and gives no
+  advice from defaults. The whole draw is a `pcall`: a failing page is a calm
+  "Something went wrong" page, never a Lua error. What it reads, out of combat: the
   class and level, `C_Seasons.GetActiveSeason`, `C_SpellBook` (a spell in the
   book), `C_Spell.GetSpellInfo` (a name and a picture, by id) and the talents
   (`C_SpecializationInfo.GetTalentInfo` over each tree's cells, found by the
