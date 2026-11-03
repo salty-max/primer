@@ -48,6 +48,24 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   never wrong; a spell only waiting for the trainer is counted), `steps` (the
   path as the character stands: done, partly, later, and the next pick) and
   `unspent` (a point a level from 10).
+- **The phase flow (M3b)**, in Guide.lua and the top of the Play, Talents
+  and Role pages: a character's phase is its state (`untalented` before level
+  10, `choose` with points to spend and none spent, `spent`), kept apart from
+  the builds, which are content. At `choose` with no role stored the Play tab
+  asks once what to play (Damage, Tank, Heal, whichever the class has, or Not
+  yet) in a quiet block and the minimap button glows, never a pop-up; a role
+  chosen shows the builds that fit and the first three picks. From `spent` the
+  build is the player's pick while the points fit it (a build's path says
+  where its points are by now, tree by tree: within 3 points still fits), else
+  the nearest build of the role. Points split (top tree under 60 percent, or
+  two trees within 5, from 5 points) are said plainly. A pick the points left
+  is said once with three ways on (keep, follow, my own way); points that look
+  like another role offer a switch, never silent; a dismissed note stays
+  dismissed until the drift changes (`driftSeen`). Your own way (`freestyle`)
+  has no picks and no notes. A role change on the Role tab re-filters at once
+  and counts the points off the nearest build of the new role, and says a
+  respec costs gold. Saved per talent group: `role`, `pickedBuild`,
+  `freestyle`, `driftSeen`, `driftWay`, `notYet`.
 - **Window.lua**: `K.gameWindow` ("PrimerFrame") or `K.dialog`, the kit's book
   geometry (`K.BOOK_W` x `K.BOOK_H`, the builds on the left, the page on the
   right, no search), `K.movable` (place in `PrimerSettings.places.window`,

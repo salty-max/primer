@@ -136,6 +136,114 @@ if not G.FOREVER then
     return t
   end
 
+  -- the phases, the build the points follow, the drift, the split, a role change
+  local function at(level, ranks) return snap({ level = level, talents = taken(ranks) }) end
+  local ARMS15 = { [12282] = 3, [12286] = 3, [12295] = 5, [12290] = 2, [12296] = 1, [12834] = 1 }
+  local FURY15 = { [12320] = 5, [12322] = 5, [12318] = 5 }
+  local PROT15 = { [12298] = 5, [12297] = 5, [12299] = 5 }
+  check(
+    R.phase(at(5, {})) == "untalented" and R.phase(at(12, {})) == "choose" and R.phase(at(24, ARMS15)) == "spent",
+    "the phases: untalented, choose, spent"
+  )
+  check(
+    R.asking(at(12, {}), {}, 1) and not R.asking(at(12, {}), { role = "tank" }, 1),
+    "level 10, none spent, no role: the question; a role chosen: not asked again"
+  )
+  check(
+    not R.asking(at(5, {}), {}, 1) and not R.asking(at(24, ARMS15), {}, 1),
+    "not asked before level 10 nor once points are spent"
+  )
+  check(
+    not R.asking(at(12, {}), { notYet = 12 }, 1) and R.asking(at(13, {}), { notYet = 12 }, 1),
+    "'not yet' holds for the level and asks again after the next"
+  )
+  local r = R.resolve(at(12, {}), 1, {})
+  check(
+    r.phase == "choose" and r.build == 1 and r.followed == "default" and not r.roleChosen,
+    "nothing spent: the default build, no role chosen"
+  )
+  r = R.resolve(at(12, {}), 1, { role = "tank" })
+  check(
+    r.build == 3 and r.roleChosen and r.followed == "default",
+    "a respec to zero keeps the stored role: its build, advice not a question"
+  )
+  r = R.resolve(at(24, ARMS15), 1, {})
+  check(
+    r.build == 1 and r.followed == "inferred" and r.far == 0 and not r.drift and not (r.splitTrees and r.splitTrees[1]),
+    "points on Arms: the page follows Arms, nothing to say"
+  )
+  r = R.resolve(at(24, ARMS15), 1, { pickedBuild = 1 })
+  check(r.followed == "picked" and r.build == 1, "a picked build is followed while the points fit it")
+  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1 })
+  check(
+    r.followed == "inferred"
+      and r.build == 2
+      and r.drift
+      and r.drift.kind == "build"
+      and r.drift.from == 1
+      and r.drift.to == 2,
+    "points on Fury, Arms picked: the page follows Fury and says so"
+  )
+  local mark = r.drift.mark
+  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1, driftSeen = mark, driftWay = "keep" })
+  check(r.followed == "kept" and r.build == 1 and r.drift.seen, "kept: the pick is followed, the note stays dismissed")
+  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1, driftSeen = mark })
+  check(r.followed == "inferred" and r.build == 2 and r.drift.seen, "a note dismissed otherwise is not said again")
+  r = R.resolve(at(24, PROT15), 1, { role = "damage", pickedBuild = 1, driftSeen = mark })
+  check(
+    r.drift and r.drift.kind == "role" and r.drift.role == "tank" and not r.drift.seen and r.role == "damage",
+    "points toward a tank while on damage: a switch offered, the role not changed, a new drift said"
+  )
+  local roleMark = r.drift.mark
+  r = R.resolve(at(24, PROT15), 1, { role = "damage", pickedBuild = 1, driftSeen = roleMark })
+  check(r.drift.seen and r.role == "damage", "a dismissed role switch stays dismissed")
+  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1, freestyle = true })
+  check(r.drift == nil and r.splitTrees == nil and r.freestyle, "your own way: no drift and no split")
+  r = R.resolve(at(24, { [12282] = 3, [12286] = 3, [12295] = 2, [12320] = 5, [12322] = 2 }), 1, {})
+  check(
+    r.splitTrees and r.splitTrees[1] == 1 and r.splitTrees[2] == 3 and r.build == 1,
+    "points split between Arms and Fury: said, the page follows the one with more"
+  )
+  r = R.resolve(at(29, { [12282] = 3, [12286] = 3, [12295] = 5, [12320] = 5, [12298] = 4 }), 1, {})
+  check(r.splitTrees and r.splitTrees[1] == 1, "the top tree under 60 percent is split too")
+  local t1, t2 = R.split(at(24, ARMS15))
+  check(t1 == nil and t2 == nil, "one tree is not a split")
+  check(R.split(at(12, { [12282] = 2, [12320] = 1 })) == nil, "a few points are not called a split")
+  -- a hybrid: a build whose path crosses trees is the nearest to points that cross them
+  r = R.resolve(
+    at(40, {
+      [12282] = 3,
+      [12286] = 3,
+      [12295] = 5,
+      [12290] = 2,
+      [12296] = 1,
+      [12834] = 3,
+      [12163] = 5,
+      [16493] = 2,
+      [12292] = 1,
+      [12700] = 5,
+      [12294] = 1,
+      [12320] = 5,
+    }),
+    1,
+    {}
+  )
+  check(
+    r.build == 1 and r.far <= R.TOLERANCE and not (r.splitTrees and r.splitTrees[1]) and not r.drift,
+    "a hybrid the build's path declares fits: no split note"
+  )
+  -- a role change: the points off the nearest build of the new role
+  r = R.resolve(at(20, { [12282] = 3, [12286] = 3, [12295] = 5 }), 1, { role = "tank" })
+  check(
+    r.role == "tank" and r.nearest == 3 and r.far == 11,
+    "a role change counts the points that differ from the new role's nearest build"
+  )
+  local advice = R.advice(1, "tank")
+  check(
+    #advice.builds == 1 and advice.builds[1] == 3 and #advice.picks == 3 and advice.picks[1] == prot.path[1],
+    "the advice: the role's builds and the first three picks of the first"
+  )
+
   -- the roles and builds
   check(table.concat(R.roles(1), ",") == "damage,tank", "the warrior's roles: damage and tank (no healer written)")
   check(#R.builds(1) == 3 and #R.builds(1, "damage") == 2 and R.builds(1, "tank")[1] == 3, "the builds of a role")
@@ -156,6 +264,14 @@ if not G.FOREVER then
   check(
     R.stage(arms, 1) == 1 and R.stage(arms, 19) == 1 and R.stage(arms, 20) == 2 and R.stage(arms, 60) == 3,
     "the stage for the level"
+  )
+  check(
+    R.stage({ stages = { { from = 1, to = 60, phase = "choose" } } }, 30, "spent") == 1,
+    "a stage that names another phase is still the level's, never the last"
+  )
+  check(
+    R.stage({ stages = { { from = 1, to = 60, phase = "choose" }, { from = 1, to = 60 } } }, 30, "choose") == 1,
+    "a stage for the phase comes first"
   )
   local none, starts = R.stage(prot, 4)
   check(none == nil and starts == 10, "Protection starts at 10: before it, no stage")
@@ -236,6 +352,9 @@ local function pageTexts()
         if x.value then table.insert(out, x.label.text or "") end
       end
     end
+  end
+  for _, h in ipairs(PrimerPage.headings) do
+    if h.shown ~= false and h.text then table.insert(out, h.text.text or "") end
   end
   if PrimerPage.note.shown then table.insert(out, PrimerPage.note.text or "") end
   return table.concat(out, "\n")
@@ -323,7 +442,10 @@ else
     if r.shown and r.text.text == "Fury" then fury = r end
   end
   fury:GetScript("OnClick")(fury)
-  check(PrimerChar.groups[1].build == 2 and PrimerPage.title.text == "Fury", "choosing a build keeps it and shows it")
+  check(
+    PrimerChar.groups[1].pickedBuild == 2 and PrimerPage.title.text == "Fury",
+    "choosing a build keeps it and shows it"
+  )
 
   -- the Talents tab: names and pictures are the game's, what is taken is read
   s.ranks[ns.data.talents[12320].id] = 3
@@ -357,7 +479,7 @@ else
   end
   tank:GetScript("OnClick")(tank)
   check(
-    PrimerChar.groups[1].role == "tank" and PrimerChar.groups[1].build == nil,
+    PrimerChar.groups[1].role == "tank" and PrimerChar.groups[1].pickedBuild == nil,
     "Role: the switch is kept and the other role's build let go"
   )
   check(PrimerPage.title.text == "Protection", "Role: the role's build shows")
@@ -450,7 +572,7 @@ else
     PrimerPage.title.text == "Talent " .. ns.data.talents[12298].id or listTexts():find("Protection", 1, true),
     "Talents: the other group's talents are read (the points in Protection make it the tank)"
   )
-  check(PrimerChar.groups[2] == nil or PrimerChar.groups[2].build == nil, "(looking at it chooses nothing)")
+  check(PrimerChar.groups[2] == nil or PrimerChar.groups[2].pickedBuild == nil, "(looking at it chooses nothing)")
   local prot
   for _, r in ipairs(PrimerList.rows) do
     if r.shown and r.text.text == "Protection" then prot = r end
@@ -458,7 +580,7 @@ else
   check(prot, "the other group's build, from its own points")
   prot:GetScript("OnClick")(prot)
   check(
-    PrimerChar.groups[2].build == 3 and (PrimerChar.groups[1].build == nil),
+    PrimerChar.groups[2].pickedBuild == 3 and (PrimerChar.groups[1].pickedBuild == nil),
     "a build is chosen for the group looked at, the first group's untouched"
   )
   ns.open(ns.TAB.play)
@@ -507,6 +629,276 @@ else
     "and shows nothing of another class"
   )
   UnitClass = classToken
+end
+
+-- ── the phase flow as the window draws it ────────────────────────────────────
+if not G.FOREVER then
+  local function points(map)
+    s.ranks = {}
+    for spell, rank in pairs(map) do
+      s.ranks[ns.data.talents[spell].id] = rank
+    end
+  end
+  local function button(text)
+    for _, b in ipairs(PrimerPage.buttonPool) do
+      if b.shown and b.text == text then return b end
+    end
+  end
+  local function click(text)
+    local b = button(text)
+    check(b, "a button: " .. text)
+    b:GetScript("OnClick")(b)
+  end
+  local function fresh(level, map)
+    PrimerChar.groups = {}
+    s.level = level
+    s.spells = set(100, 772, 78, 6343, 1715, 2687)
+    points(map or {})
+  end
+  local ARMS15 = { [12282] = 3, [12286] = 3, [12295] = 5, [12290] = 2, [12296] = 1, [12834] = 1 }
+  local FURY15 = { [12320] = 5, [12322] = 5, [12318] = 5 }
+  local PROT15 = { [12298] = 5, [12297] = 5, [12299] = 5 }
+
+  -- level 10 or more, nothing spent: asked once, quietly, with a glow
+  fresh(12)
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find("You have talent points to spend.", 1, true)
+      and pageTexts():find("What do you want to play?", 1, true),
+    "level 12, nothing spent: Play asks what you want to play"
+  )
+  check(
+    button("Damage") and button("Tank") and button("Not yet") and not button("Heal"),
+    "the roles the class has, and 'not yet'"
+  )
+  check(ns.glowing, "the minimap button glows while the question waits")
+  check(shownRows() > 0, "(the page below it is still the page)")
+  click("Tank")
+  check(PrimerChar.groups[1].role == "tank" and not ns.glowing, "a role chosen is kept and the glow goes")
+  check(
+    PrimerPage.title.text == "Protection"
+      and pageTexts():find("Then these first.", 1, true)
+      and pageTexts():find("Builds that fit: Protection.", 1, true),
+    "then the builds that fit and the advice"
+  )
+  check(not pageTexts():find("What do you want to play?", 1, true), "and the question is not asked again")
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    not pageTexts():find("What do you want to play?", 1, true) and pageTexts():find("Then these first.", 1, true),
+    "reopened (a respec to zero looks the same): the role is kept, the advice shows"
+  )
+  -- not yet
+  fresh(12)
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  click("Not yet")
+  check(
+    PrimerChar.groups[1].notYet == 12
+      and not ns.glowing
+      and pageTexts():find("Fine. The page stays on the untalented kit until you pick.", 1, true),
+    "'not yet': the page stays, the glow goes"
+  )
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(not pageTexts():find("What do you want to play?", 1, true), "not asked twice at the same level")
+  s.level = 13
+  G.fire("PLAYER_LEVEL_UP", 13)
+  G.advance(0.4)
+  check(
+    not ns.glowing and not pageTexts():find("What do you want to play?", 1, true),
+    "not asked twice in one session, whatever the level"
+  )
+  ns.view.putOff = nil -- (the game reloaded)
+  G.fire("PLAYER_LEVEL_UP", 13)
+  G.advance(0.4)
+  check(
+    ns.glowing and pageTexts():find("What do you want to play?", 1, true),
+    "asked again at the next level, in the next session"
+  )
+  -- a level 5 warrior: nothing to ask
+  fresh(5)
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    not pageTexts():find("talent points to spend", 1, true) and not ns.glowing,
+    "before level 10: no question, no glow"
+  )
+  -- the glow is read with the window closed
+  fresh(12)
+  PrimerFrame:Hide()
+  G.fire("PLAYER_LEVEL_UP", 12)
+  G.advance(0.4)
+  check(ns.glowing, "the glow follows the game with the window closed")
+  PrimerChar.groups[1].role = "damage"
+  G.fire("PLAYER_TALENT_UPDATE")
+  G.advance(0.4)
+  check(not ns.glowing, "and goes when a role is chosen")
+
+  -- points spent: the build follows them, drift is said once with three ways on
+  fresh(24, ARMS15)
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Arms" and not pageTexts():find("no longer match", 1, true),
+    "points that fit the pick: no note"
+  )
+  points(FURY15)
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(
+    PrimerPage.title.text == "Fury"
+      and pageTexts():find(
+        "Your points no longer match the build you chose. The page follows where they are now. These points follow Fury more than the Arms build you picked.",
+        1,
+        true
+      ),
+    "drift: said once, the page follows where the points are"
+  )
+  check(button("Keep Arms") and button("Follow Fury") and button("My own way"), "three ways on")
+  click("Keep Arms")
+  check(
+    PrimerPage.title.text == "Arms" and not pageTexts():find("no longer match", 1, true) and not button("Keep Arms"),
+    "kept: the pick stands and the note is gone"
+  )
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    not pageTexts():find("no longer match", 1, true) and PrimerPage.title.text == "Arms",
+    "a dismissed note stays dismissed"
+  )
+  points(PROT15)
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(
+    pageTexts():find("These points look more like a tank than a damage build. Switch your role to Tank?", 1, true)
+      and PrimerChar.groups[1].role == "damage",
+    "drift toward another role: a switch offered, never made silently"
+  )
+  check(button("Switch") and button("Stay on Damage"), "switch or stay")
+  click("Stay on Damage")
+  check(not pageTexts():find("Switch your role", 1, true), "stay: dismissed")
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(not pageTexts():find("Switch your role", 1, true), "and still dismissed when opened again")
+  points(FURY15)
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(
+    pageTexts():find("These points follow Fury more than the Arms build you picked", 1, true),
+    "the drift changed: said again"
+  )
+  click("Follow Fury")
+  check(
+    PrimerChar.groups[1].pickedBuild == 2
+      and PrimerPage.title.text == "Fury"
+      and not pageTexts():find("no longer match", 1, true),
+    "follow: the build the points resemble is the pick now"
+  )
+  points(PROT15)
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  click("Switch")
+  check(
+    PrimerChar.groups[1].role == "tank" and PrimerPage.title.text == "Protection",
+    "switch: the role changes, the page follows"
+  )
+
+  -- your own way
+  fresh(24, FURY15)
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  click("My own way")
+  check(
+    PrimerChar.groups[1].freestyle and not pageTexts():find("no longer match", 1, true) and shownRows() > 0,
+    "own way: no notes, the spells and priorities stay"
+  )
+  ns.open(ns.TAB.talents)
+  check(
+    pageTexts():find(
+      "Your own way, then. The spells, openings and priorities stay. The picks and the notes don't.",
+      1,
+      true
+    ) and not listTexts():find("Talents in order", 1, true),
+    "own way: no picks on Talents"
+  )
+  click("Use the guide's picks again")
+  check(
+    not PrimerChar.groups[1].freestyle and listTexts():find("Talents in order", 1, true),
+    "and the way back is one button"
+  )
+
+  -- a role change on the Role tab: counts, the cost, kept per group
+  fresh(20, { [12282] = 3, [12286] = 3, [12295] = 5 })
+  PrimerChar.groups[1] = { role = "damage" }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.role)
+  check(
+    pageTexts():find("Your points already follow the Arms build.", 1, true),
+    "Role: points that follow the build say so"
+  )
+  local tank
+  for _, row in ipairs(PrimerList.rows) do
+    if row.shown and row.text.text == "Tank" then tank = row end
+  end
+  tank:GetScript("OnClick")(tank)
+  check(
+    PrimerChar.groups[1].role == "tank" and pageTexts():find("Tank it is.", 1, true),
+    "Role: the role changes at once"
+  )
+  check(
+    pageTexts():find(
+      "11 points differ from the Protection build for level 20. A respec would move them, and a respec costs gold.",
+      1,
+      true
+    ),
+    "Role: the points that differ and the cost, no figure"
+  )
+  check(PrimerPage.title.text == "Protection", "Role: builds re-filtered")
+  -- the picked build is still the nearest: no note that names it twice
+  fresh(24, { [12282] = 3, [12286] = 3, [12295] = 2, [12298] = 5, [12297] = 2 })
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Arms"
+      and not pageTexts():find("more than the Arms build you picked", 1, true)
+      and not button("Follow Arms"),
+    "the picked build still the nearest: no note that follows what is picked"
+  )
+  -- a split note names the build the page follows, not the tree with most points
+  PrimerChar.groups[1] = { role = "tank" }
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Protection"
+      and pageTexts():find("This page follows the Protection build, the one for your role.", 1, true),
+    "a split note names the build the page follows"
+  )
+  -- a stored role the class has no build for is not a role chosen
+  fresh(12)
+  PrimerChar.groups[1] = { role = "heal" }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(pageTexts():find("What do you want to play?", 1, true), "a role the class cannot play is asked again")
+  -- split points
+  fresh(24, { [12282] = 3, [12286] = 3, [12295] = 2, [12320] = 5, [12322] = 2 })
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find(
+      "Your points are split between Arms and Fury. This page follows Arms, which has more. Pick one on the left to follow the other.",
+      1,
+      true
+    ),
+    "split points are said plainly"
+  )
+  fresh(12)
+  s.spells = {}
+  s.ranks = {}
+  PrimerFrame:Hide()
 end
 
 -- ── an API that raises ───────────────────────────────────────────────────────

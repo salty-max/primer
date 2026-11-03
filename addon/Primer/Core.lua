@@ -4,13 +4,17 @@
 -- GuideText.lua) and the character keeps only its choices. /primer.
 --
 -- It reads nothing in combat: no combat event is listened to, the game is read
--- only when the window draws and never in combat (Reader.lua), and no frame of
--- the game is touched, the window is our own and opens on a command or a click.
+-- only by Reader.lua (when the window draws, and after a burst of events to
+-- know whether the level-10 question waits, for the minimap glow) and never in
+-- combat, and no frame of the game is touched, the window is our own and opens
+-- on a command or a click.
 --
 --   PrimerChar (SavedVariablesPerCharacter), whose guide: guid
 --     groups[n]  what the character chose for talent group n (Era has one,
---                Forever two): build (an id of D.builds) and role (damage, tank,
---                heal), each none: the default
+--                Forever two), each none: the default. role (damage, tank,
+--                heal), pickedBuild (an id of D.builds), freestyle (their own
+--                way), notYet (the level the question was put off at),
+--                driftSeen and driftWay ("keep": the note dismissed, and how)
 --   PrimerSettings (SavedVariables): each character's settings, the kit's
 --     profiles (Settings.lua: the minimap button), and the window's place
 --

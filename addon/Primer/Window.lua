@@ -17,7 +17,8 @@ local TABS = { play = 1, talents = 2, role = 3 }
 ns.TAB = TABS
 
 local frame, left, list, page
-local view = {} -- what this session picked on the Talents tab: step
+local view = {} -- what this session picked on the Talents tab: step, group; putOff: the question put off
+ns.view = view -- (for the tests)
 local rows = {} -- the Play page's lines, pooled
 ns.playRows = rows -- (for the tests)
 
@@ -141,7 +142,9 @@ end
 
 -- ── the list on the left ─────────────────────────────────────────────────────
 local function pickBuild(id, group)
-  ns.choice(group).build = id
+  local choice = ns.choice(group)
+  -- (picking a build is taking the guide again: its way, its notes)
+  choice.pickedBuild, choice.freestyle, choice.driftSeen, choice.driftWay = id, nil, nil, nil
   view.step = nil
   ns.refresh()
 end
@@ -157,15 +160,154 @@ local function buildList(snap, class, role, chosen, heading, group)
   end
 end
 
+-- ── what the points say ─────────────────────────────────────────────────────
+-- The quiet block at the top of a page: the level-10 question (asked once, never
+-- a pop-up), the advice once a role is chosen, the points split between trees,
+-- the points no longer fitting the pick (said once, three ways on) and a drift
+-- toward another role (a switch offered, never made silently). The voice never
+-- scolds: a drift is a fact about points. Nothing here for a freestyle
+-- character, and nothing but the spells' pages.
+local function treeName(snap, tree) return snap.talents.names[tree] or L["Tree %d"]:format(tree) end
+local function roleLike(role)
+  if role == "tank" then return L["a tank"] end
+  if role == "heal" then return L["a healer"] end
+  return L["a damage build"]
+end
+local function choose(choice, field, value)
+  return function()
+    choice[field] = value
+    ns.refresh()
+  end
+end
+
+-- (the question is asked once in a session: "not yet" holds until the game is reloaded, and for the level)
+local function asking(snap, choice, class) return not view.putOff and G.asking(snap, choice, class) end
+
+local function notes(snap, class, r, choice, tab)
+  if r.freestyle then return end
+  if tab == TABS.play and asking(snap, choice, class) then
+    page:section(L["You have talent points to spend."])
+    page:paragraph(L["What do you want to play?"], T.text)
+    local buttons = {}
+    for _, role in ipairs(G.roles(class)) do
+      table.insert(buttons, {
+        roleName(role),
+        function()
+          choice.role, choice.pickedBuild, choice.notYet = role, nil, nil
+          view.roleSaid = nil
+          ns.refresh()
+        end,
+      })
+    end
+    table.insert(buttons, {
+      L["Not yet"],
+      function()
+        choice.notYet = snap.level
+        view.putOff = true
+        ns.refresh()
+      end,
+    })
+    page:buttons(buttons)
+  elseif tab == TABS.play and r.phase == "choose" and r.roleChosen then
+    -- (a role chosen, no points spent: the advice shows, the question does not)
+    local advice = G.advice(class, r.role)
+    page:section(L["Then these first."])
+    local names = {}
+    for _, id in ipairs(advice.builds) do
+      table.insert(names, G.name(snap, ns.data.builds[id]))
+    end
+    page:paragraph(L["Builds that fit: %s."]:format(table.concat(names, ", ")), T.text)
+    if advice.say then page:paragraph(ns.say(advice.say), T.text) end
+    for _, step in ipairs(advice.picks) do
+      local spell = step.talent or step.any[1]
+      local info = G.talent(snap, spell)
+      page:paragraph(("%s. %s"):format(info and info.name or spellName(spell), ns.say(step.why)), T.text)
+    end
+  elseif tab == TABS.play and view.putOff and r.phase == "choose" then
+    page:paragraph(L["Fine. The page stays on the untalented kit until you pick."], T.soft)
+  end
+  if r.phase ~= "spent" then return end
+  if r.followed == "inferred" and r.splitTrees and r.splitTrees[1] then
+    local top, second = r.splitTrees[1], r.splitTrees[2]
+    if G.treeIndex(snap, ns.data.builds[r.build].tree) == top then
+      page:paragraph(
+        L["Your points are split between %s and %s. This page follows %s, which has more. Pick one on the left to follow the other."]:format(
+          treeName(snap, top),
+          treeName(snap, second),
+          treeName(snap, top)
+        ),
+        T.soft
+      )
+    else
+      -- (the build of the role chosen is in another tree than the one with most points)
+      page:paragraph(
+        L["Your points are split between %s and %s. This page follows the %s build, the one for your role. Pick one on the left to follow another."]:format(
+          treeName(snap, top),
+          treeName(snap, second),
+          G.name(snap, ns.data.builds[r.build])
+        ),
+        T.soft
+      )
+    end
+  end
+  local drift = r.drift
+  if not drift or drift.seen then return end
+  if drift.kind == "build" then
+    local from, to = G.name(snap, ns.data.builds[drift.from]), G.name(snap, ns.data.builds[drift.to])
+    page:paragraph(
+      L["Your points no longer match the build you chose. The page follows where they are now."]
+        .. " "
+        .. L["These points follow %s more than the %s build you picked."]:format(to, from),
+      T.soft
+    )
+    page:buttons({
+      {
+        L["Keep %s"]:format(from),
+        function()
+          choice.driftSeen, choice.driftWay = drift.mark, "keep"
+          ns.refresh()
+        end,
+      },
+      {
+        L["Follow %s"]:format(to),
+        function() pickBuild(drift.to, snap.group) end,
+      },
+      { L["My own way"], choose(choice, "freestyle", true) },
+    })
+  else
+    page:paragraph(
+      L["These points look more like %s than %s. Switch your role to %s?"]:format(
+        roleLike(drift.role),
+        roleLike(r.role),
+        roleName(drift.role)
+      ),
+      T.soft
+    )
+    page:buttons({
+      {
+        L["Switch"],
+        function()
+          choice.role, choice.pickedBuild, choice.driftSeen = drift.role, nil, nil
+          view.step = nil
+          ns.refresh()
+        end,
+      },
+      { L["Stay on %s"]:format(roleName(r.role)), choose(choice, "driftSeen", drift.mark) },
+    })
+  end
+end
+
 -- ── Play ─────────────────────────────────────────────────────────────────────
-local function drawPlay(snap, class, role, id)
+local function drawPlay(snap, class, r, choice)
+  local role, id = r.role, r.build
   local b = ns.data.builds[id]
   list:begin()
   buildList(snap, class, role, id, L["Build"], snap.group)
   list:finish()
-  local idx, starts = G.stage(b, snap.level)
+  local idx, starts = G.stage(b, snap.level, r.phase)
   local stage = idx and b.stages[idx]
   page:start(G.name(snap, b), stage and levels(stage.from, stage.to) or roleName(b.role), crest(snap))
+  notes(snap, class, r, choice, TABS.play)
   if not stage then
     page:paragraph(L["This build starts at level %d. Come back then."]:format(starts), T.text)
     page:finish()
@@ -217,7 +359,8 @@ local function stepFace(s)
   return L["One of %d talents"]:format(#s.options), K.QUESTION
 end
 
-local function drawTalents(snap, class, role, id)
+local function drawTalents(snap, class, r, choice)
+  local role, id = r.role, r.build
   local b = ns.data.builds[id]
   local steps, nextStep = G.steps(b, snap)
   local picked = math.min(view.step or nextStep or #steps, #steps)
@@ -236,23 +379,35 @@ local function drawTalents(snap, class, role, id)
     list:gap(6)
   end
   buildList(snap, class, role, id, L["Build"], snap.group)
+  if r.freestyle then
+    -- (their own way: no picks, no notes; the way back is one button)
+    list:finish()
+    page:start(G.name(snap, b), roleName(b.role), crest(snap))
+    page:paragraph(
+      L["Your own way, then. The spells, openings and priorities stay. The picks and the notes don't."],
+      T.text
+    )
+    page:buttons({ { L["Use the guide's picks again"], choose(choice, "freestyle", nil) } })
+    page:finish()
+    return
+  end
   list:gap(6)
   list:add("section", L["Talents in order"])
   for i, s in ipairs(steps) do
     local name, icon = stepFace(s)
-    local r = list:add(
+    local row = list:add(
       "entry",
       ("|T%s:16:16:0:0|t %s"):format(icon, name),
       ("%d/%d"):format(s.rank, s.step.rank),
       levels(s.step.level[1], s.step.level[2])
     )
-    r:SetScript("OnClick", function()
+    row:SetScript("OnClick", function()
       view.step = i
       ns.refresh()
     end)
-    if s.state == "done" then r.text:SetTextColor(unpack(T.soft)) end
-    if i == nextStep then r.text:SetTextColor(unpack(T.accent)) end
-    if i == picked then list:pick(r) end
+    if s.state == "done" then row.text:SetTextColor(unpack(T.soft)) end
+    if i == nextStep then row.text:SetTextColor(unpack(T.accent)) end
+    if i == picked then list:pick(row) end
   end
   list:finish()
 
@@ -266,6 +421,7 @@ local function drawTalents(snap, class, role, id)
     ),
     K.icon(icon)
   )
+  notes(snap, class, r, choice, TABS.talents)
   local unspent = G.unspent(snap)
   local summary
   if not nextStep then
@@ -299,24 +455,50 @@ end
 local function pickRole(role, current, group)
   local choice = ns.choice(group)
   choice.role = role
-  view.step = nil
-  if current ~= role then choice.build = nil end
+  view.step, view.roleSaid = nil, role
+  if current ~= role then
+    choice.pickedBuild, choice.driftSeen, choice.driftWay = nil, nil, nil
+  end
   ns.refresh()
 end
 
-local function drawRole(snap, class, role, id)
+local function drawRole(snap, class, r, choice)
+  local role, id = r.role, r.build
   local b = ns.data.builds[id]
   list:begin()
   list:add("section", L["Role"])
-  for _, r in ipairs(G.roles(class)) do
-    local row = list:add("row", roleName(r), #G.builds(class, r))
-    row:SetScript("OnClick", function() pickRole(r, role, snap.group) end)
-    if r == role then list:pick(row) end
+  for _, each in ipairs(G.roles(class)) do
+    local row = list:add("row", roleName(each), #G.builds(class, each))
+    row:SetScript("OnClick", function() pickRole(each, role, snap.group) end)
+    if each == role then list:pick(row) end
   end
   list:gap(6)
   buildList(snap, class, role, id, L["Build"], snap.group)
   list:finish()
   page:start(G.name(snap, b), roleName(b.role), crest(snap))
+  if view.roleSaid == role then page:paragraph(L["%s it is."]:format(roleName(role)), T.text) end
+  notes(snap, class, r, choice, TABS.role)
+  if r.freestyle then
+    page:paragraph(L["You are on your own way: no picks, no notes."], T.soft)
+    page:buttons({ { L["Use the guide's picks again"], choose(choice, "freestyle", nil) } })
+  elseif r.phase == "spent" and r.nearest then
+    -- (what a role change would move: a count off the nearest build, and the fact of the cost)
+    local near = G.name(snap, ns.data.builds[r.nearest])
+    if r.far == 0 then
+      page:paragraph(L["Your points already follow the %s build."]:format(near), T.soft)
+    else
+      -- (the cost of a respec is said only where it is known: Classic Era's gold, Forever's untried)
+      local one, many =
+        "%d point differs from the %s build for level %d. A respec would move it, and a respec costs gold.",
+        "%d points differ from the %s build for level %d. A respec would move them, and a respec costs gold."
+      if ns.forever then
+        one, many =
+          "%d point differs from the %s build for level %d. A respec would move it.",
+          "%d points differ from the %s build for level %d. A respec would move them."
+      end
+      page:paragraph(K.plural(r.far, one, many):format(r.far, near, snap.level), T.soft)
+    end
+  end
   local words = { ns.say(b.intro) }
   if b.dry then table.insert(words, ns.say(b.dry)) end
   page:text(words)
@@ -372,18 +554,22 @@ local function draw()
     r:Hide()
   end
   local kind, class = G.page(snap)
-  if kind ~= "guide" then return empty(kind, snap) end
+  if kind ~= "guide" then
+    ns.setGlow(false)
+    return empty(kind, snap)
+  end
   local choice = ns.choice(snap.group)
-  local role = G.role(snap, class, choice.role)
-  local id = G.build(snap, class, role, choice.build)
+  local r = G.resolve(snap, class, choice)
+  -- (the minimap button glows while the level-10 question waits to be asked)
+  if snap.group == snap.active then ns.setGlow(asking(snap, choice, class)) end
   ns.draws = (ns.draws or 0) + 1 -- (for the tests: one draw for a burst of events)
   local n = frame.selectedTab
   if n == TABS.talents then
-    drawTalents(snap, class, role, id)
+    drawTalents(snap, class, r, choice)
   elseif n == TABS.role then
-    drawRole(snap, class, role, id)
+    drawRole(snap, class, r, choice)
   else
-    drawPlay(snap, class, role, id)
+    drawPlay(snap, class, r, choice)
   end
   -- What a page cannot do without is what the game would not say (the talents
   -- taken, the spells in the book): no advice drawn from defaults, a page that
@@ -405,14 +591,23 @@ function refresh()
 end
 ns.refresh = refresh
 
--- What the game tells while the window is open shows a moment later, a burst
--- of events as one draw.
+-- What the game tells shows a moment later, a burst of events as one look:
+-- the glow on the minimap button (whether the level-10 question waits, read
+-- out of combat even with the window closed) and the open window's page.
 local pending = false
+local function glow()
+  local snap = ns.reader.snapshot()
+  if not snap then return end -- (a fight: nothing is read)
+  local kind, class = G.page(snap)
+  ns.setGlow(kind == "guide" and asking(snap, ns.choice(snap.group), class))
+end
 function ns.changed()
-  if not (frame and frame:IsShown()) or pending then return end
+  if pending then return end
   pending = true
   C_Timer.After(0.3, function()
     pending = false
+    local ok, err = pcall(glow)
+    if not ok then ns.fault("glow", err) end
     refresh()
   end)
 end

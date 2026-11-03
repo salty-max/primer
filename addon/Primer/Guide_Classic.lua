@@ -5,7 +5,8 @@
 --                   intro, note, split, dry (word keys), path, stages }
 --   path[n]     = { points = { from, to }, level = { from, to }, talent (rank 1's spell) or any (a choice),
 --                   rank (it reaches), why }
---   stages[n]   = { from, to (levels), about, opening, rows }
+--   stages[n]   = { from, to (levels), phase (untalented, choose or spent: the character's phase it serves, none: any), about, opening, rows }
+--   advice[class][role] = { say (a word key, or false): the writer's line for the level-10 advice, after the builds that fit and the first three picks of the first)
 --   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),
 --                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }
 --   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks) }, every talent the builds name
@@ -231,6 +232,8 @@ ns.data = {
     [23584] = { id = 1581, tab = 164, max = 5 },
     [23881] = { id = 167, tab = 164, max = 1 },
     [23922] = { id = 148, tab = 163, max = 1 },
+  },
+  advice = {
   },
   stances = {
     battle = 2457,

@@ -1,5 +1,5 @@
 {
-  "//": "The tables naming the ids a character saves (PrimerChar.groups[n].build: a build's id): a regeneration never drops one (bun run ids, in check). An id leaves on purpose only with the user's go: under removed, with why and approved.",
+  "//": "The tables naming the ids a character saves (PrimerChar.groups[n].pickedBuild: a build's id): a regeneration never drops one (bun run ids, in check). An id leaves on purpose only with the user's go: under removed, with why and approved.",
   "tables": {
     "builds": { "lua": "addon/Primer/Guide_*.lua", "at": "data.builds" }
   },

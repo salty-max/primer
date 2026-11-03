@@ -44,6 +44,8 @@ type Game = "classic" | "forever";
 const GAMES: Game[] = ["classic", "forever"];
 const FILE: Record<Game, string> = { classic: "Guide_Classic.lua", forever: "Guide_Forever.lua" };
 
+const PHASES = ["untalented", "choose", "spent"];
+const ROLES = ["damage", "tank", "heal"];
 const STANCES = ["battle", "defensive", "berserker"];
 // What a row's `when` may say: a situation the player reads off the screen
 // (a state the page cannot see, shown as advice), never a rule it enforces.
@@ -79,7 +81,7 @@ type Row = {
   talentSpell?: number;
   need: { level?: number; stance?: string[]; talents?: number[]; when?: string[] };
 };
-type Stage = { from: number; to: number; about?: string; opening?: string; rows: Row[] };
+type Stage = { from: number; to: number; phase?: string; about?: string; opening?: string; rows: Row[] };
 type Step = { points: [number, number]; level: [number, number]; talent?: number; any?: number[]; rank: number; of?: number; why: string };
 type Build = {
   id: number;
@@ -97,7 +99,7 @@ type Build = {
   stages: Stage[];
 };
 type Content = {
-  class: { id: number; key: string; token: string; name: string; text: string; card: Record<string, string> };
+  class: { id: number; key: string; token: string; name: string; text: string; card: Record<string, string>; advice?: { role: string; say?: string }[] };
   builds: Build[];
 };
 
@@ -296,6 +298,7 @@ function luaFor(game: Game): { lua: string; builds: number } {
   const classes: string[] = [];
   const builds: string[] = [];
   const used = new Map<number, Tal>(); // the talents the builds name, by rank 1's spell
+  const advice: string[] = []; // the level-10 advice a class's content adds, by class and role
   let version = "";
   for (const c of content) {
     const mine = c.builds.filter((b) => b.games.includes(game));
@@ -308,6 +311,13 @@ function luaFor(game: Game): { lua: string; builds: number } {
     }
     const card = Object.entries(c.class.card).map(([k, v]) => `${k} = ${q(v)}`);
     classes.push(`    [${c.class.id}] = { token = ${q(c.class.token)}, key = ${q(c.class.key)}, text = ${q(word(`${c.class.key}`, c.class.text)!)}, builds = ${list(mine.map((b) => b.id))}, card = { ${card.join(", ")} } },`);
+    const mineAdvice: string[] = [];
+    for (const a of c.class.advice ?? []) {
+      if (!ROLES.includes(a.role)) bad(`${c.class.key} advice: role ${a.role} is none of ${ROLES.join(", ")}`);
+      else if (!mine.some((b) => b.role === a.role)) bad(`${c.class.key} advice: no ${a.role} build is written for ${game}`);
+      else mineAdvice.push(`${a.role} = { say = ${a.say ? q(word(`${c.class.key}.advice.${a.role}`, a.say)!) : "false"} }`);
+    }
+    if (mineAdvice.length) advice.push(`    [${c.class.id}] = { ${mineAdvice.join(", ")} },`);
     for (const b of mine) {
       checkBuild(b, f);
       const k = b.key;
@@ -328,8 +338,10 @@ function luaFor(game: Game): { lua: string; builds: number } {
       out.push("      },");
       out.push("      stages = {");
       b.stages.forEach((st, si) => {
+        if (st.phase !== undefined && !PHASES.includes(st.phase)) bad(`${b.key} stage ${st.from}-${st.to}: phase ${st.phase} is none of ${PHASES.join(", ")}`);
+        const phase = st.phase ? `, phase = ${q(st.phase)}` : "";
         const about = st.about ? `, about = ${q(word(`${k}.s${si + 1}`, st.about)!)}` : "";
-        out.push(`        { from = ${st.from}, to = ${st.to}${about},`);
+        out.push(`        { from = ${st.from}, to = ${st.to}${phase}${about},`);
         if (st.opening) out.push(`          opening = ${q(word(`${k}.s${si + 1}.opening`, st.opening)!)},`);
         out.push("          rows = {");
         st.rows.forEach((r, ri) => out.push(`            ${rowLua(r as Row & { learned: number }, word(`${k}.s${si + 1}.r${ri + 1}`, r.say)!)},`));
@@ -349,7 +361,8 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "--                   intro, note, split, dry (word keys), path, stages }",
     "--   path[n]     = { points = { from, to }, level = { from, to }, talent (rank 1's spell) or any (a choice),",
     "--                   rank (it reaches), why }",
-    "--   stages[n]   = { from, to (levels), about, opening, rows }",
+    "--   stages[n]   = { from, to (levels), phase (untalented, choose or spent: the character's phase it serves, none: any), about, opening, rows }",
+    "--   advice[class][role] = { say (a word key, or false): the writer's line for the level-10 advice, after the builds that fit and the first three picks of the first)",
     "--   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),",
     "--                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }",
     "--   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks) }, every talent the builds name",
@@ -365,6 +378,9 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "  },",
     "  talents = {",
     ...[...used.keys()].sort((a, b) => a - b).map((sp) => `    [${sp}] = { id = ${used.get(sp)!.id}, tab = ${used.get(sp)!.tab_id}, max = ${used.get(sp)!.max_rank} },`),
+    "  },",
+    "  advice = {",
+    ...advice,
     "  },",
     "  stances = {",
     ...(builds.length ? Object.entries(STANCE_SPELLS).map(([k, [id]]) => `    ${k} = ${id},`) : []),

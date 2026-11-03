@@ -8,13 +8,15 @@ The guide's rules and words, and the facts check. Written by hand:
 ## content/<class>.json
 
 ```
-class  = { id (ChrClasses), key, token, name, text (the class's page), card }
+class  = { id (ChrClasses), key, token, name, text (the class's page), card,
+           advice (optional) = [ { role, say } ] }
 build  = { id, key, name, role (damage, tank, heal), tree (a TalentTab id),
            games (["classic"]), checked (a date), intro, pathNote, split, dry,
            path = [step], stages = [stage] }
 step   = { points [from, to], level [from, to], talent (rank 1's spell) or
            any ([spells], a choice), rank (it reaches), of (its ranks), why }
-stage  = { from, to (levels), about, opening, rows = [row] }
+stage  = { from, to (levels), phase (untalented, choose, spent: optional), about,
+           opening, rows = [row] }
 row    = { spell (rank 1), name, talentSpell (the row is a talent),
            need = { level, stance [..], talents [spell ids taken first],
                     when [..] }, say }
@@ -29,6 +31,46 @@ it (`saved-ids.json`, `bun run ids` in the check).
 `when` is a closed list (`WHEN` in `scripts/guide.ts`): a situation the player
 reads off the screen, shown as advice and never enforced. `stance` is written
 from play: the tables do not carry it.
+
+## Adding a class (what a new class's content is)
+
+One file, `content/<key>.json` (lower-case class key: `paladin.json`, `mage.json`),
+the same shape as `content/warrior.json`, which is the model to copy. Nothing
+else is edited: the generator reads every file in `content/`, writes the class
+into `Guide_Classic.lua` (and `Guide_Forever.lua` for a build whose `games`
+names it), its words into `GuideText.lua`, and the window picks it up by the
+class token. No per-class code anywhere. In the file:
+
+- `class`: `id` (ChrClasses: Warrior 1, Paladin 2, Hunter 3, Rogue 4, Priest 5,
+  Shaman 7, Mage 8, Warlock 9, Druid 11), `key`, `token` (`PALADIN`, as
+  `UnitClass` returns it), `name`, `text` (the class's page), `card` (the five
+  voice lines), and optionally `advice`: `[ { "role": "damage", "say": "..." } ]`,
+  one line a role added to the level-10 advice (without it the advice is the
+  role's builds and the first three picks of its first build, each with the
+  writer's own reason).
+- `builds`: each `id` (never changed or reused, `saved-ids.json`), `key`
+  (`paladin-retribution`), `name` (the tree's English name, checked against the
+  game's), `role`, `tree` (the TalentTab id), `games` (`["classic"]`),
+  `checked`, `intro`, `pathNote`, optional `split` (the rest of a sentence that
+  follows "Where players split:") and `dry`, `path` and `stages`.
+- `path`: steps covering points 1 to 51 in order (point N at level N + 9, so
+  `level` is `points` plus 9), each `talent` (rank 1's spell id) or `any` (a
+  choice among spells of the same tree, one rank count), `rank` it reaches,
+  `why`. The build's own tree holds at least 31 of the 51. A path that crosses
+  trees is a hybrid and is recognised from the path itself: the window reads
+  the points a build would have in each tree from it, so nothing is declared
+  twice.
+- `stages`: level brackets one after the other to level 60 (a build may start
+  late), each `about`, `opening`, optional `phase`, `rows`. A row is `spell`
+  (rank 1's id), `name` (the game's name, checked), `say` (instruction then
+  reason, under 30 words) and `need`: `level` (the data's, checked), optional
+  `stance` (from `STANCES`, narrowing what the client's table allows),
+  `talents` (talent spell ids taken first) and `when` (from `WHEN`).
+- A closed list grows in `scripts/guide.ts` with its words: a new `when` key is
+  added to `WHEN` and to `WHEN_WORDS` (its plain phrase), a new form to
+  `STANCES`, `STANCE_FORMS` (the client's form number less one) and
+  `STANCE_SPELLS` (the spell that is the form), so the check and the window
+  know it. Facts are checked per game on every run (`bun run guide`).
 
 ## The facts check (every run of scripts/guide.ts)
 
