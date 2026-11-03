@@ -1,0 +1,18 @@
+{
+  "name": "primer",
+  "private": true,
+  "description": "Primer, a World of Warcraft addon: a class guide to read out of combat, with the talents to pick, what to press and what your build is for",
+  "license": "MIT",
+  "scripts": {
+    "kit:sync": "bun scripts/root.ts --run addon-kit/sync.ts addon/Primer",
+    "ids": "bun scripts/root.ts --run addon-kit/ids.ts check",
+    "kit:check": "bun scripts/root.ts --run addon-kit/sync.ts --check addon/Primer",
+    "guide": "bun scripts/guide.ts",
+    "locales": "bun scripts/locales.ts",
+    "lint:lua": "stylua --check addon && selene addon/Primer",
+    "format:lua": "stylua addon",
+    "check:ci": "bun scripts/locales.ts --check && bun run lint:lua && luajit addon/test/sim.lua && FOREVER=1 luajit addon/test/sim.lua && bun scripts/package.ts --check",
+    "check": "bun run kit:check && bun run ids && bun scripts/guide.ts --check && bun run check:ci",
+    "package": "bun scripts/package.ts"
+  }
+}

@@ -1,0 +1,1422 @@
+{
+ "class": {
+  "id": 1,
+  "key": "warrior",
+  "token": "WARRIOR",
+  "name": "Warrior",
+  "text": "Stances change what you can press. Battle Stance is yours at level 1, Defensive Stance at 10 and Berserker Stance at 30, both from quests. Rage comes from hitting and from being hit, and it drains when you stop. Every line below presses a button.",
+  "card": {
+   "caresAbout": "rage, stance, the next swing, who the monster is hitting",
+   "vocabulary": "rage, stance, swing, pull, hold, hit, spend",
+   "soundsLike": "a sergeant who is not unkind. Short sentences, concrete nouns, little tolerance for waiting",
+   "neverSays": "mana, cast, spell, channel, anything soft (gentle, flow)",
+   "test": "could it be said in the time it takes to press the button?"
+  }
+ },
+ "builds": [
+  {
+   "id": 1,
+   "key": "warrior-arms",
+   "name": "Arms",
+   "role": "damage",
+   "tree": 161,
+   "games": [
+    "classic"
+   ],
+   "path": [
+    {
+     "points": [
+      1,
+      3
+     ],
+     "level": [
+      10,
+      12
+     ],
+     "talent": 12282,
+     "rank": 3,
+     "why": "Heroic Strike is the button you press most while levelling. Each rank makes it cheaper in rage.",
+     "of": 3
+    },
+    {
+     "points": [
+      4,
+      6
+     ],
+     "level": [
+      13,
+      15
+     ],
+     "talent": 12286,
+     "rank": 3,
+     "why": "Your bleed does 15% more at rank 1 and 35% more at 3/3, and Deep Wounds needs it later.",
+     "of": 3
+    },
+    {
+     "points": [
+      7,
+      11
+     ],
+     "level": [
+      16,
+      20
+     ],
+     "talent": 12295,
+     "rank": 5,
+     "why": "You keep some of your rage when you change stance. Without it, every change empties you.",
+     "of": 5
+    },
+    {
+     "points": [
+      12,
+      13
+     ],
+     "level": [
+      21,
+      22
+     ],
+     "talent": 12290,
+     "rank": 2,
+     "why": "Overpower is the hit you get for a dodge, and this makes it critical more often.",
+     "of": 2
+    },
+    {
+     "points": [
+      14,
+      14
+     ],
+     "level": [
+      23,
+      23
+     ],
+     "talent": 12296,
+     "rank": 1,
+     "why": "Rage drains more slowly while you are out of a fight, so the next pull starts with some.",
+     "of": 1
+    },
+    {
+     "points": [
+      15,
+      17
+     ],
+     "level": [
+      24,
+      26
+     ],
+     "talent": 12834,
+     "rank": 3,
+     "why": "Your criticals leave a bleed. It needs Improved Rend maxed.",
+     "of": 3
+    },
+    {
+     "points": [
+      18,
+      22
+     ],
+     "level": [
+      27,
+      31
+     ],
+     "talent": 12163,
+     "rank": 5,
+     "why": "1% more damage per rank with two hands. This is the reason for the weapon.",
+     "of": 5
+    },
+    {
+     "points": [
+      23,
+      24
+     ],
+     "level": [
+      32,
+      33
+     ],
+     "talent": 16493,
+     "rank": 2,
+     "why": "Your critical hits do more damage. Needs Deep Wounds maxed.",
+     "of": 2
+    },
+    {
+     "points": [
+      25,
+      25
+     ],
+     "level": [
+      34,
+      34
+     ],
+     "talent": 12292,
+     "rank": 1,
+     "why": "The next hits strike a second enemy nearby. Mortal Strike needs it.",
+     "of": 1
+    },
+    {
+     "points": [
+      26,
+      30
+     ],
+     "level": [
+      35,
+      39
+     ],
+     "any": [
+      12700,
+      12284,
+      12281,
+      12165
+     ],
+     "rank": 5,
+     "why": "Pick the one that matches your weapon. Axe and Polearm add critical chance, Mace may stun, Sword may give an extra attack. Say what you wield and the page follows."
+    },
+    {
+     "points": [
+      31,
+      31
+     ],
+     "level": [
+      40,
+      40
+     ],
+     "talent": 12294,
+     "rank": 1,
+     "why": "The hardest hit you have, and it halves the healing on its target.",
+     "of": 1
+    },
+    {
+     "points": [
+      32,
+      36
+     ],
+     "level": [
+      41,
+      45
+     ],
+     "talent": 12320,
+     "rank": 5,
+     "why": "1% critical chance per rank.",
+     "of": 5
+    },
+    {
+     "points": [
+      37,
+      41
+     ],
+     "level": [
+      46,
+      50
+     ],
+     "talent": 12322,
+     "rank": 5,
+     "why": "Each hit can give you an extra point of rage, which keeps the next ability coming.",
+     "of": 5
+    },
+    {
+     "points": [
+      42,
+      46
+     ],
+     "level": [
+      51,
+      55
+     ],
+     "talent": 12318,
+     "rank": 5,
+     "why": "5% more of the attack power Battle Shout gives, per rank, to you and the group.",
+     "of": 5
+    },
+    {
+     "points": [
+      47,
+      51
+     ],
+     "level": [
+      56,
+      60
+     ],
+     "talent": 12317,
+     "rank": 5,
+     "why": "After you are critically hit, your damage rises for a few swings.",
+     "of": 5
+    }
+   ],
+   "stages": [
+    {
+     "to": 19,
+     "about": "One monster, levelling. Battle Stance only until 10.",
+     "rows": [
+      {
+       "spell": 100,
+       "say": "Start every pull with it. It stuns the monster and hands you rage for the first hit.",
+       "need": {
+        "level": 4,
+        "when": [
+         "ooc"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Charge"
+      },
+      {
+       "spell": 772,
+       "say": "On a monster that will live long enough to pay it back. It keeps hurting while you hit.",
+       "need": {
+        "level": 4,
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Rend"
+      },
+      {
+       "spell": 78,
+       "say": "Spend spare rage here. It lands on your next swing, and rage you keep only drains.",
+       "need": {},
+       "name": "Heroic Strike"
+      },
+      {
+       "spell": 6343,
+       "say": "Slows their attacks and hits them all. Skip it on a single weak monster.",
+       "need": {
+        "level": 6,
+        "when": [
+         "group"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Thunder Clap"
+      },
+      {
+       "spell": 1715,
+       "say": "When a monster runs, so you can keep hitting it. Its slow is half speed.",
+       "need": {
+        "level": 8
+       },
+       "name": "Hamstring"
+      },
+      {
+       "spell": 2687,
+       "say": "Press it at the start of a pull while your health is full. It pays rage for health.",
+       "need": {
+        "level": 10
+       },
+       "name": "Bloodrage"
+      },
+      {
+       "spell": 7384,
+       "say": "The hit you get for a dodge. The monster cannot block, dodge or parry it, so press it when the dodge shows.",
+       "need": {
+        "level": 12,
+        "when": [
+         "dodge"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Overpower"
+      }
+     ],
+     "opening": "Charge from range (4), Rend (4), then Heroic Strike with whatever rage you have.",
+     "from": 1
+    },
+    {
+     "to": 39,
+     "about": "One monster or two, levelling and the first dungeons.",
+     "rows": [
+      {
+       "spell": 6673,
+       "say": "Before the pull. More attack power for you and the group, and it is one button.",
+       "need": {
+        "level": 1
+       },
+       "name": "Battle Shout"
+      },
+      {
+       "spell": 100,
+       "say": "Still the best first move, because it hands you rage before the first swing.",
+       "need": {
+        "when": [
+         "ooc"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Charge"
+      },
+      {
+       "spell": 845,
+       "say": "Hits the monster and the one beside it. Use it instead of Heroic Strike when two are on you.",
+       "need": {
+        "level": 20,
+        "when": [
+         "group"
+        ]
+       },
+       "name": "Cleave"
+      },
+      {
+       "spell": 5308,
+       "say": "Everything else waits, because Execute turns every spare point of rage into damage.",
+       "need": {
+        "level": 24,
+        "when": [
+         "execute"
+        ],
+        "stance": [
+         "battle",
+         "berserker"
+        ]
+       },
+       "name": "Execute"
+      },
+      {
+       "spell": 7384,
+       "say": "The hit you get for a dodge, and it cannot be blocked, dodged or parried.",
+       "need": {
+        "when": [
+         "dodge"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Overpower"
+      },
+      {
+       "spell": 1464,
+       "say": "It is a hit with weapon damage plus a bit more. Use it when rage is high and nothing better is ready, because it slows your next swing.",
+       "need": {
+        "level": 30
+       },
+       "name": "Slam"
+      },
+      {
+       "spell": 2458,
+       "say": "Worth it only if you keep rage across the change. Otherwise stay in Battle Stance.",
+       "need": {
+        "level": 30,
+        "talents": [
+         12295
+        ]
+       },
+       "name": "Berserker Stance"
+      },
+      {
+       "spell": 1680,
+       "say": "One hit on up to 4 enemies. It is your best button on a group, and on one monster it is still cheap damage.",
+       "need": {
+        "level": 36,
+        "stance": [
+         "berserker"
+        ]
+       },
+       "name": "Whirlwind"
+      },
+      {
+       "spell": 12292,
+       "say": "Your next hits strike a second enemy nearby. Press it before a pull of two or more.",
+       "talentSpell": 12292,
+       "need": {
+        "when": [
+         "group"
+        ]
+       },
+       "name": "Sweeping Strikes"
+      }
+     ],
+     "opening": "Battle Shout, Charge, Rend if it will live, then your best free hit.",
+     "from": 20
+    },
+    {
+     "to": 60,
+     "about": "Dungeons, hard monsters and the first raid.",
+     "rows": [
+      {
+       "spell": 6673,
+       "say": "Renew it when it ends, because the bonus goes with it.",
+       "need": {
+        "level": 1
+       },
+       "name": "Battle Shout"
+      },
+      {
+       "spell": 100,
+       "say": "The opening, because it stuns the monster and gives you rage.",
+       "need": {
+        "when": [
+         "ooc"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Charge"
+      },
+      {
+       "spell": 12294,
+       "say": "On its cooldown. It is your hardest hit, and it halves the healing on its target.",
+       "talentSpell": 12294,
+       "need": {},
+       "name": "Mortal Strike"
+      },
+      {
+       "spell": 1680,
+       "say": "Press it between Mortal Strikes, because it is cheap damage while you wait.",
+       "need": {
+        "stance": [
+         "berserker"
+        ],
+        "talents": [
+         12295
+        ]
+       },
+       "name": "Whirlwind"
+      },
+      {
+       "spell": 7384,
+       "say": "A hit that cannot be blocked, dodged or parried. Press it before the window closes.",
+       "need": {
+        "when": [
+         "dodge"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Overpower"
+      },
+      {
+       "spell": 5308,
+       "say": "Put everything else down. Spend all your rage on it.",
+       "need": {
+        "when": [
+         "execute"
+        ],
+        "stance": [
+         "battle",
+         "berserker"
+        ]
+       },
+       "name": "Execute"
+      },
+      {
+       "spell": 78,
+       "say": "Last, and only with rage you would otherwise waste, because it takes rage from your better buttons.",
+       "need": {
+        "when": [
+         "spare"
+        ]
+       },
+       "name": "Heroic Strike"
+      },
+      {
+       "spell": 772,
+       "say": "Early in a long fight, because it pays back over time.",
+       "need": {
+        "when": [
+         "long"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Rend"
+      },
+      {
+       "spell": 12292,
+       "say": "Before the pull. Then Whirlwind, for groups.",
+       "need": {
+        "when": [
+         "group"
+        ]
+       },
+       "name": "Sweeping Strikes",
+       "talentSpell": 12292
+      }
+     ],
+     "opening": "Battle Shout, Charge, Mortal Strike, then Whirlwind or Overpower as the game offers them.",
+     "from": 40
+    }
+   ],
+   "intro": "Arms hits slowly and hard with one big weapon. If you carry a two-hander, this is your tree. The rest of the page is about spending the rage you did not use.",
+   "pathNote": "(31 points in Arms for Mortal Strike, then 20 in Fury).",
+   "split": "the last 20 points. A second road puts them into Deflection and the other Arms rows, for a warrior who cares more about surviving a solo grind than about damage. The damage road is the one on this page. The other buys some parry and gives up critical chance and a bigger shout.",
+   "dry": "Rage spent on Heroic Strike is rage Mortal Strike will not have when it comes off its cooldown.",
+   "checked": "2026-11-03"
+  },
+  {
+   "id": 2,
+   "key": "warrior-fury",
+   "name": "Fury",
+   "role": "damage",
+   "tree": 164,
+   "games": [
+    "classic"
+   ],
+   "path": [
+    {
+     "points": [
+      1,
+      5
+     ],
+     "level": [
+      10,
+      14
+     ],
+     "talent": 12320,
+     "rank": 5,
+     "why": "1% critical chance per rank. Critical hits feed the rest of the tree.",
+     "of": 5
+    },
+    {
+     "points": [
+      6,
+      10
+     ],
+     "level": [
+      15,
+      19
+     ],
+     "talent": 12322,
+     "rank": 5,
+     "why": "Each hit may give an extra point of rage. The cheapest rage you will ever get.",
+     "of": 5
+    },
+    {
+     "points": [
+      11,
+      15
+     ],
+     "level": [
+      20,
+      24
+     ],
+     "talent": 12318,
+     "rank": 5,
+     "why": "5% more of the attack power Battle Shout gives per rank, to you and the group. It is also the fifteenth point Dual Wield Specialization needs before it opens.",
+     "of": 5
+    },
+    {
+     "points": [
+      16,
+      20
+     ],
+     "level": [
+      25,
+      29
+     ],
+     "talent": 23584,
+     "rank": 5,
+     "why": "5% more damage from your off hand per rank. It is why you carry two weapons.",
+     "of": 5
+    },
+    {
+     "points": [
+      21,
+      25
+     ],
+     "level": [
+      30,
+      34
+     ],
+     "talent": 12317,
+     "rank": 5,
+     "why": "After you are critically hit, your damage rises for a few swings.",
+     "of": 5
+    },
+    {
+     "points": [
+      26,
+      26
+     ],
+     "level": [
+      35,
+      35
+     ],
+     "talent": 12328,
+     "rank": 1,
+     "why": "Opens the way to Bloodthirst. A big boost to your damage for a short time, and it also lowers your armour.",
+     "of": 1
+    },
+    {
+     "points": [
+      27,
+      30
+     ],
+     "level": [
+      36,
+      39
+     ],
+     "talent": 12319,
+     "rank": 4,
+     "why": "Your attack speed rises for a few swings after a critical hit. Needs Enrage maxed.",
+     "of": 5
+    },
+    {
+     "points": [
+      31,
+      31
+     ],
+     "level": [
+      40,
+      40
+     ],
+     "talent": 23881,
+     "rank": 1,
+     "why": "Hits with attack power and heals you a little.",
+     "of": 1
+    },
+    {
+     "points": [
+      32,
+      34
+     ],
+     "level": [
+      41,
+      43
+     ],
+     "talent": 12282,
+     "rank": 3,
+     "why": "A cheaper Heroic Strike, which you will press all the time.",
+     "of": 3
+    },
+    {
+     "points": [
+      35,
+      37
+     ],
+     "level": [
+      44,
+      46
+     ],
+     "talent": 12286,
+     "rank": 3,
+     "why": "A stronger bleed, and the row Deep Wounds needs.",
+     "of": 3
+    },
+    {
+     "points": [
+      38,
+      42
+     ],
+     "level": [
+      47,
+      51
+     ],
+     "talent": 12295,
+     "rank": 5,
+     "why": "You keep some of your rage when you change stance.",
+     "of": 5
+    },
+    {
+     "points": [
+      43,
+      43
+     ],
+     "level": [
+      52,
+      52
+     ],
+     "talent": 12319,
+     "rank": 5,
+     "why": "The point that Bloodthirst's gate had no room for.",
+     "of": 5
+    },
+    {
+     "points": [
+      44,
+      45
+     ],
+     "level": [
+      53,
+      54
+     ],
+     "talent": 12290,
+     "rank": 2,
+     "why": "Your free hit lands critically more often.",
+     "of": 2
+    },
+    {
+     "points": [
+      46,
+      46
+     ],
+     "level": [
+      55,
+      55
+     ],
+     "talent": 12296,
+     "rank": 1,
+     "why": "Rage drains more slowly out of a fight.",
+     "of": 1
+    },
+    {
+     "points": [
+      47,
+      49
+     ],
+     "level": [
+      56,
+      58
+     ],
+     "talent": 12834,
+     "rank": 3,
+     "why": "Your criticals leave a bleed.",
+     "of": 3
+    },
+    {
+     "points": [
+      50,
+      51
+     ],
+     "level": [
+      59,
+      60
+     ],
+     "talent": 16493,
+     "rank": 2,
+     "why": "Your critical hits do more.",
+     "of": 2
+    }
+   ],
+   "stages": [
+    {
+     "to": 19,
+     "about": "One monster, levelling. The tree opens at 10 and its best buttons come later, so this stage is short.",
+     "rows": [
+      {
+       "spell": 100,
+       "say": "Start every pull with it. It stuns and gives rage.",
+       "need": {
+        "level": 4,
+        "when": [
+         "ooc"
+        ],
+        "stance": [
+         "battle"
+        ]
+       },
+       "name": "Charge"
+      },
+      {
+       "spell": 78,
+       "say": "Spend spare rage here. It lands on your next swing.",
+       "need": {},
+       "name": "Heroic Strike"
+      },
+      {
+       "spell": 772,
+       "say": "A bleed that works while you hit.",
+       "need": {
+        "level": 4,
+        "when": [
+         "long"
+        ]
+       },
+       "name": "Rend"
+      },
+      {
+       "spell": 2687,
+       "say": "At the start of a pull with your health full, because it pays rage for health.",
+       "need": {
+        "level": 10
+       },
+       "name": "Bloodrage"
+      }
+     ],
+     "from": 1
+    },
+    {
+     "to": 39,
+     "about": "",
+     "rows": [
+      {
+       "spell": 6673,
+       "say": "Before the pull, and renew it, because the bonus goes when it ends.",
+       "need": {},
+       "name": "Battle Shout"
+      },
+      {
+       "spell": 5308,
+       "say": "Spend everything else on this first.",
+       "need": {
+        "when": [
+         "execute"
+        ],
+        "stance": [
+         "battle",
+         "berserker"
+        ]
+       },
+       "name": "Execute"
+      },
+      {
+       "spell": 18499,
+       "say": "Immune to fear while it lasts, and you gain rage from damage you take. Use it when fear is coming, or when you are being hit and want rage.",
+       "need": {
+        "level": 32,
+        "stance": [
+         "berserker"
+        ]
+       },
+       "name": "Berserker Rage"
+      },
+      {
+       "spell": 1680,
+       "say": "One hit on up to 4 enemies. Press it on a group.",
+       "need": {
+        "level": 36,
+        "stance": [
+         "berserker"
+        ]
+       },
+       "name": "Whirlwind"
+      },
+      {
+       "spell": 12328,
+       "say": "20% more physical damage, and fear cannot touch you. It lowers your armour, so use it when the fight is short or you are not the target.",
+       "talentSpell": 12328,
+       "need": {
+        "stance": [
+         "berserker"
+        ]
+       },
+       "name": "Death Wish"
+      },
+      {
+       "spell": 78,
+       "say": "Spend what is left here, because rage kept is rage drained.",
+       "need": {
+        "when": [
+         "spare"
+        ]
+       },
+       "name": "Heroic Strike"
+      }
+     ],
+     "opening": "Battle Shout, Charge, then hit. Berserker Stance comes at 30, and until you have Tactical Mastery a change of stance empties your rage, so change it when you have none to lose.",
+     "from": 20
+    },
+    {
+     "to": 60,
+     "about": "",
+     "rows": [
+      {
+       "spell": 23881,
+       "say": "On its cooldown. It is your main button and it heals a little.",
+       "talentSpell": 23881,
+       "need": {},
+       "name": "Bloodthirst"
+      },
+      {
+       "spell": 1680,
+       "say": "Between Bloodthirsts, because it is damage while Bloodthirst waits.",
+       "need": {
+        "stance": [
+         "berserker"
+        ]
+       },
+       "name": "Whirlwind"
+      },
+      {
+       "spell": 5308,
+       "say": "Put everything else down, because it turns spare rage into damage.",
+       "need": {
+        "when": [
+         "execute"
+        ],
+        "stance": [
+         "battle",
+         "berserker"
+        ]
+       },
+       "name": "Execute"
+      },
+      {
+       "spell": 12328,
+       "say": "Save it for a fight you will finish, because the armour it costs lasts as long as it does.",
+       "talentSpell": 12328,
+       "need": {
+        "stance": [
+         "berserker"
+        ]
+       },
+       "name": "Death Wish"
+      },
+      {
+       "spell": 18499,
+       "say": "When you need rage or when fear is coming.",
+       "need": {
+        "stance": [
+         "berserker"
+        ]
+       },
+       "name": "Berserker Rage"
+      },
+      {
+       "spell": 78,
+       "say": "Spend what is left here, because rage kept is rage drained.",
+       "need": {
+        "when": [
+         "spare"
+        ]
+       },
+       "name": "Heroic Strike"
+      }
+     ],
+     "opening": "Battle Shout, Charge, then change to Berserker Stance, Death Wish, Bloodthirst. Tactical Mastery keeps some of your rage across the change.",
+     "from": 40
+    }
+   ],
+   "intro": "Fury is the warrior who hits often with two weapons and lives on the rage that comes from being hit and from critical strikes. It rewards wearing two real weapons, and a pull that keeps going.",
+   "pathNote": "(31 points in Fury for Bloodthirst, then 20 in Arms).",
+   "split": "the filler before Dual Wield Specialization opens. This page takes Improved Battle Shout, because the group feels it. Booming Voice or Improved Cleave fill the same gap for a warrior who pulls alone.",
+   "checked": "2026-11-03"
+  },
+  {
+   "id": 3,
+   "key": "warrior-protection",
+   "name": "Protection",
+   "role": "tank",
+   "tree": 163,
+   "games": [
+    "classic"
+   ],
+   "path": [
+    {
+     "points": [
+      1,
+      5
+     ],
+     "level": [
+      10,
+      14
+     ],
+     "talent": 12298,
+     "rank": 5,
+     "why": "1% more block per rank, and sometimes a point of rage when you block.",
+     "of": 5
+    },
+    {
+     "points": [
+      6,
+      10
+     ],
+     "level": [
+      15,
+      19
+     ],
+     "talent": 12297,
+     "rank": 5,
+     "why": "Defense skill. Fewer critical hits against you.",
+     "of": 5
+    },
+    {
+     "points": [
+      11,
+      15
+     ],
+     "level": [
+      20,
+      24
+     ],
+     "talent": 12299,
+     "rank": 5,
+     "why": "2% more armour from your gear per rank.",
+     "of": 5
+    },
+    {
+     "points": [
+      16,
+      20
+     ],
+     "level": [
+      25,
+      29
+     ],
+     "talent": 12303,
+     "rank": 5,
+     "why": "3% more threat per rank while in Defensive Stance. This is the tank's talent.",
+     "of": 5
+    },
+    {
+     "points": [
+      21,
+      23
+     ],
+     "level": [
+      30,
+      32
+     ],
+     "talent": 12945,
+     "rank": 3,
+     "why": "Shield Block covers one more attack. Needs Shield Specialization maxed.",
+     "of": 3
+    },
+    {
+     "points": [
+      24,
+      24
+     ],
+     "level": [
+      33,
+      33
+     ],
+     "talent": 12809,
+     "rank": 1,
+     "why": "A stun, and the door to Shield Slam.",
+     "of": 1
+    },
+    {
+     "points": [
+      25,
+      27
+     ],
+     "level": [
+      34,
+      36
+     ],
+     "talent": 12797,
+     "rank": 3,
+     "why": "Revenge may stun.",
+     "of": 3
+    },
+    {
+     "points": [
+      28,
+      30
+     ],
+     "level": [
+      37,
+      39
+     ],
+     "talent": 12308,
+     "rank": 3,
+     "why": "Sunder costs less, and you press it a lot.",
+     "of": 3
+    },
+    {
+     "points": [
+      31,
+      31
+     ],
+     "level": [
+      40,
+      40
+     ],
+     "talent": 23922,
+     "rank": 1,
+     "why": "High damage, high threat, and it dispels a magic effect from the target half the time.",
+     "of": 1
+    },
+    {
+     "points": [
+      32,
+      34
+     ],
+     "level": [
+      41,
+      43
+     ],
+     "talent": 12282,
+     "rank": 3,
+     "why": "Cheaper Heroic Strike.",
+     "of": 3
+    },
+    {
+     "points": [
+      35,
+      36
+     ],
+     "level": [
+      44,
+      45
+     ],
+     "talent": 16462,
+     "rank": 2,
+     "why": "1% more parry per rank. It also opens the row Tactical Mastery stands in, and a tank uses every point of parry.",
+     "of": 5
+    },
+    {
+     "points": [
+      37,
+      41
+     ],
+     "level": [
+      46,
+      50
+     ],
+     "talent": 12295,
+     "rank": 5,
+     "why": "Keep rage when you move between stances.",
+     "of": 5
+    },
+    {
+     "points": [
+      42,
+      46
+     ],
+     "level": [
+      51,
+      55
+     ],
+     "talent": 12320,
+     "rank": 5,
+     "why": "More critical hits, more threat.",
+     "of": 5
+    },
+    {
+     "points": [
+      47,
+      51
+     ],
+     "level": [
+      56,
+      60
+     ],
+     "talent": 12322,
+     "rank": 5,
+     "why": "Rage from your swings.",
+     "of": 5
+    }
+   ],
+   "stages": [
+    {
+     "to": 19,
+     "about": "A shield, a group, Defensive Stance.",
+     "rows": [
+      {
+       "spell": 71,
+       "say": "The stance that adds threat. Stay in it while you tank.",
+       "need": {
+        "level": 10
+       },
+       "name": "Defensive Stance"
+      },
+      {
+       "spell": 7386,
+       "say": "Up to 5 times. Each stack lowers the monster's armour and adds a lot of threat.",
+       "need": {
+        "level": 10
+       },
+       "name": "Sunder Armor"
+      },
+      {
+       "spell": 355,
+       "say": "It does nothing if the monster already hits you. Use it the moment a monster turns away.",
+       "need": {
+        "when": [
+         "loose"
+        ],
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Taunt"
+      },
+      {
+       "spell": 6572,
+       "say": "Instant, with a lot of threat. Press it the moment it is lit.",
+       "need": {
+        "level": 14,
+        "when": [
+         "lit"
+        ],
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Revenge"
+      },
+      {
+       "spell": 2565,
+       "say": "More block for a short time. A block lights Revenge, so this also makes more of them.",
+       "need": {
+        "level": 16,
+        "when": [
+         "shield"
+        ],
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Shield Block"
+      },
+      {
+       "spell": 2687,
+       "say": "Rage for health. At the start of a pull.",
+       "need": {
+        "level": 10
+       },
+       "name": "Bloodrage"
+      }
+     ],
+     "opening": "Defensive Stance, Bloodrage, Sunder Armor, then Revenge when the game offers it.",
+     "from": 10
+    },
+    {
+     "to": 39,
+     "about": "Dungeons, groups of monsters.",
+     "rows": [
+      {
+       "spell": 7386,
+       "say": "Stack 5 on the monster you want held, because each stack lowers its armour and adds a lot of threat.",
+       "need": {
+        "level": 10
+       },
+       "name": "Sunder Armor"
+      },
+      {
+       "spell": 6572,
+       "say": "The best threat per rage you have.",
+       "need": {
+        "when": [
+         "lit"
+        ],
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Revenge"
+      },
+      {
+       "spell": 1160,
+       "say": "Lowers the attack power of everything near you, so the healer takes less.",
+       "need": {
+        "level": 14,
+        "when": [
+         "group"
+        ]
+       },
+       "name": "Demoralizing Shout"
+      },
+      {
+       "spell": 2565,
+       "say": "When the monster is hurting you and Revenge is not lit.",
+       "need": {
+        "when": [
+         "shield",
+         "hurt"
+        ],
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Shield Block"
+      },
+      {
+       "spell": 1161,
+       "say": "Every monster nearby turns to you. Use it when the group is losing the pull.",
+       "need": {
+        "level": 26,
+        "when": [
+         "wrong"
+        ]
+       },
+       "name": "Challenging Shout"
+      },
+      {
+       "spell": 871,
+       "say": "75% less damage from everything for a short time. Hold it for the worst moment.",
+       "need": {
+        "level": 28,
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Shield Wall"
+      },
+      {
+       "spell": 676,
+       "say": "Takes its weapon for a few seconds. Worth it on a monster that hits much harder than the rest.",
+       "need": {
+        "level": 18,
+        "when": [
+         "brute"
+        ],
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Disarm"
+      }
+     ],
+     "opening": "Defensive Stance, Bloodrage, Sunder Armor, then Demoralizing Shout on a group.",
+     "from": 20
+    },
+    {
+     "to": 60,
+     "about": "Dungeons and raids.",
+     "rows": [
+      {
+       "spell": 23922,
+       "say": "On its cooldown. High damage, and a lot of threat.",
+       "talentSpell": 23922,
+       "need": {},
+       "name": "Shield Slam"
+      },
+      {
+       "spell": 6572,
+       "say": "Instant, high threat.",
+       "need": {
+        "when": [
+         "lit"
+        ],
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Revenge"
+      },
+      {
+       "spell": 7386,
+       "say": "Keep 5 stacks on, because each one adds threat and lowers the monster's armour.",
+       "need": {
+        "level": 10
+       },
+       "name": "Sunder Armor"
+      },
+      {
+       "spell": 1160,
+       "say": "Lower their attack power.",
+       "need": {
+        "when": [
+         "group"
+        ]
+       },
+       "name": "Demoralizing Shout"
+      },
+      {
+       "spell": 12809,
+       "say": "A stun, for the moment a monster must stop.",
+       "talentSpell": 12809,
+       "need": {},
+       "name": "Concussion Blow"
+      },
+      {
+       "spell": 871,
+       "say": "Hold it for the worst moment, because it takes 75% off the damage you take.",
+       "need": {
+        "stance": [
+         "defensive"
+        ]
+       },
+       "name": "Shield Wall"
+      }
+     ],
+     "opening": "Defensive Stance, Sunder Armor, Shield Slam, Revenge when it is lit.",
+     "from": 40
+    }
+   ],
+   "intro": "Protection is the warrior who makes monsters hit you, and stays up while they do. Threat decides this job. Threat is the list a monster keeps of who to hit next. Protection starts at level 10, when Defensive Stance arrives.",
+   "pathNote": "(31 points in Protection for Shield Slam, then 20 in Arms and Fury).",
+   "dry": "5 Sunders on the monster are 5 reasons for it to stay on you.",
+   "checked": "2026-11-03"
+  }
+ ]
+}

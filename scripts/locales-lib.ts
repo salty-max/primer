@@ -1,0 +1,244 @@
+// addon-kit ce93e01: a copy (kit:sync); edit the addon-kit repository's locales-lib.ts instead
+/**
+ * The family's languages, one core: each addon's scripts/locales.ts (its own
+ * names, pages, chapters, letters) is built on it. A copy of addon-kit's in
+ * the addon's scripts/ (kit:sync), so CI, which has no family folder, runs it
+ * as it is.
+ *
+ *   i18n/<locale>/meta.json    { "plural": "one" | "fr" | "ru" | "none",
+ *                              "decimal": ",", "flagged": true }
+ *   i18n/<locale>/words.json   { "English": "translation" }: the addon's own
+ *                              words, every L["..."] and plural(n, "one",
+ *                              "many") of its files; i18n/words.json lists them
+ *   i18n/kit/<locale>.json     the kit's own words (its welcome, its board,
+ *                              its days), translated once for every addon in
+ *                              addon-kit/i18n/ and copied here by kit:sync:
+ *                              one reading in every addon, the kit's winning
+ *                              (the lines the addons share among them, in
+ *                              Kit.lua's K.SHARED_WORDS: an addon drops its
+ *                              own copy)
+ *
+ * A language without its own folder may borrow another's (esMX: esES), its
+ * own meta.json over the borrowed one's (esMX's decimal point).
+ *
+ * The checks, every addon's: a word without its translation, a sentence's
+ * blanks dropped, changed or doubled (numbered ones, %1$s, may move), a
+ * stray %, the game's escapes not carried over (|c…|r, \n or |n, |T…|t), a
+ * gender token half written, a semicolon in what players read (the gender
+ * token's own aside), a word no longer used (said), i18n/words.json not the
+ * addon's words, a Text file out of date, a kit word the kit's translations
+ * lack. Said, never a failure: a short label grown 1.8 times (grown).
+ */
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { join, relative } from "node:path";
+
+export const LOCALES = ["enUS", "enGB", "deDE", "frFR", "esES", "esMX", "ruRU", "ptBR", "koKR", "zhCN", "zhTW"];
+export const ENGLISH = new Set(["enUS", "enGB"]);
+/**
+ * The languages held back from players (1 November 2026, until English and
+ * French are final): their Text_<locale>.lua is written as a names-only stub
+ * (the game's own names by id, no translated words), their TOC Notes are out
+ * (package-lib.ts and preflight.ts check). Their i18n/ stays, checked as ever.
+ * Bringing them back: empty this list, bun scripts/locales.ts in each addon,
+ * the Notes lines back in the TOCs, the store pages' words.
+ */
+export const HIDDEN_LOCALES: string[] = ["deDE", "esES", "esMX"];
+/** The line a held-back language's generated file carries (package-lib.ts refuses a shipped file of such a language without it). */
+export const HELD_BACK = "-- (held back: HIDDEN_LOCALES, the words are English)";
+/** A generated file's Lua with the held-back mark under its first line. */
+export const holdBack = (lua: string): string => lua.replace(/^(.*\n)/, `$1${HELD_BACK}\n`);
+export const BORROWS: Record<string, string> = { esMX: "esES" };
+export const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+export const PLURALS = ["one", "fr", "ru", "none"];
+
+/** A string as Lua writes it. */
+export const q = (s: string) => `"${s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n")}"`;
+/** A JSON file, or what stands for it when there is none. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- (a file's JSON is whatever it holds)
+export const json = <T = Record<string, any>>(file: string, empty = {} as T): T => (existsSync(file) ? JSON.parse(readFileSync(file, "utf8")) : empty);
+const unq = (s: string) => s.replace(/\\(["\\n])/g, (_, c) => (c === "n" ? "\n" : c));
+
+/** The words of Lua source: every L["..."] (spaces inside the brackets too), both forms of a plural(n, "one", "many") (n a call too). */
+export function wordsIn(src: string, into = new Set<string>()): Set<string> {
+  for (const m of src.matchAll(/\bL\[\s*"((?:[^"\\]|\\.)*)"\s*\]/g)) into.add(unq(m[1]));
+  for (const m of src.matchAll(/plural\([^,()]+(?:\([^()]*\))?,\s*"((?:[^"\\]|\\.)*)",\s*"((?:[^"\\]|\\.)*)"\s*\)/g)) {
+    into.add(unq(m[1]));
+    into.add(unq(m[2]));
+  }
+  return into;
+}
+/** The addon's own words: its Lua files' (the kit's copy and the generated files aside: skip). */
+export function ownKeys(addon: string, skip = /^Text_/, more: string[] = []): string[] {
+  const found = new Set<string>(more);
+  for (const f of readdirSync(addon).sort()) {
+    if (!f.endsWith(".lua") || f === "Kit.lua" || skip.test(f) || /^Text_/.test(f)) continue;
+    wordsIn(readFileSync(join(addon, f), "utf8"), found);
+  }
+  return [...found].sort();
+}
+/**
+ * The kit's own words: its copy's beside the addon's files, the months (K.day),
+ * its sounds' names (K.SOUNDS), and the lines the addons share (K.SHARED_WORDS:
+ * "Minimap button", the welcome's settings line), translated once in the kit.
+ */
+export function kitKeys(addon: string): string[] {
+  const file = join(addon, "Kit.lua");
+  if (!existsSync(file)) return [];
+  const src = readFileSync(file, "utf8");
+  const found = wordsIn(src, new Set(MONTHS));
+  for (const m of src.matchAll(/\{ (?:-?\d+|[A-Z_]+), "([^"]+)" \}/g)) found.add(m[1]);
+  for (const w of sharedWords(src)) found.add(w);
+  return [...found].sort();
+}
+/** The lines the addons share, as Kit.lua lists them (K.SHARED_WORDS). */
+export function sharedWords(kitLua: string): string[] {
+  const list = kitLua.match(/^K\.SHARED_WORDS = \{\n([\s\S]*?)\n\}/m);
+  return [...(list?.[1].matchAll(/"((?:[^"\\]|\\.)*)"/g) ?? [])].map((m) => unq(m[1]));
+}
+/** The kit's translations a language has (i18n/kit/<locale>.json; a borrowing language its lender's). */
+export function kitWords(i18n: string, locale: string, borrows = BORROWS): Record<string, string> {
+  const own = join(i18n, "kit", `${locale}.json`);
+  if (existsSync(own)) return json(own);
+  return borrows[locale] ? json(join(i18n, "kit", `${borrows[locale]}.json`)) : {};
+}
+
+/** A sentence's blanks, as each argument's place and kind: numbered blanks may move, never change or go. */
+export function formatArgs(s: string): string[] {
+  let next = 0;
+  return [...s.matchAll(/%%|%(?:(\d+)\$)?(0?\d*(?:\.\d+)?[sdfi])/g)]
+    .filter(([token]) => token !== "%%")
+    .map(([, index, spec]) => `${index ? Number(index) : ++next}:${spec.slice(-1)}`)
+    .sort();
+}
+const semicolon = (s: string) => s.replace(/\$g[^:;]*:[^;]*;/g, "").includes(";");
+
+/** The game's escapes a line carries, counted: a colour's start and end (|c, |r), a line break (\n or |n), a picture (|T…|t). */
+export function tokens(s: string): string {
+  const count = (re: RegExp) => (s.match(re) ?? []).length;
+  return `|c${count(/\|c[0-9a-fA-F]{8}/g)} |r${count(/\|r/g)} \\n${count(/\n|\|n/g)} |T${count(/\|T[^|]*\|t/g)}`;
+}
+/** A gender token left open or half written: $g without its "masc:fem;". */
+const badGender = (s: string) => s.replace(/\$g[^:;$]*:[^;$]*;/g, "").includes("$g");
+
+/** A short label (14 letters or less) whose translation grew to 1.8 times its length: a pointer for the game test, never a failure. */
+export function grown(words: Record<string, string>): string[] {
+  return Object.entries(words)
+    .filter(([english, word]) => word && english.length <= 14 && word.length >= english.length * 1.8)
+    .map(([english, word]) => `${JSON.stringify(english)} → ${JSON.stringify(word)}`);
+}
+
+/** What is wrong with a language's words against the English: missing ones, blanks, stray %, the game's escapes, gender tokens, semicolons; and the unused. */
+export function problems(words: Record<string, string>, keys: string[]): { missing: string[]; unused: string[]; errors: string[] } {
+  const known = new Set(keys);
+  const errors: string[] = [];
+  for (const [english, word] of Object.entries(words)) {
+    if (!word) continue;
+    // (a sentence with blanks is formatted: its translation keeps them, and a
+    // lone % there would break it; one without is shown as written, "under 1%")
+    const want = formatArgs(english);
+    const got = formatArgs(word);
+    const stray = want.length > 0 && word.replace(/%%|%(?:\d+\$)?0?\d*(?:\.\d+)?[sdfi]/g, "").includes("%");
+    if (want.join() !== got.join() || stray) errors.push(`the blanks differ: ${JSON.stringify(english)} → ${JSON.stringify(word)}`);
+    if (tokens(english) !== tokens(word)) errors.push(`the colours, line breaks or pictures differ (${tokens(english)} against ${tokens(word)}): ${JSON.stringify(english)} → ${JSON.stringify(word)}`);
+    if (badGender(word)) errors.push(`a gender token not written $gmasc:fem;: ${JSON.stringify(word)}`);
+    if (semicolon(word)) errors.push(`a semicolon in what players read: ${JSON.stringify(word)}`);
+  }
+  return { missing: keys.filter((k) => !words[k]), unused: Object.keys(words).filter((k) => !known.has(k)), errors };
+}
+
+/** The language's words handed to the addon: ns.translate({ locale, plural, decimal, words }), the kit's and the addon's. */
+export function translateLua(locale: string, meta: { plural?: string; decimal?: string }, words: Record<string, string>, more: string[] = []): string[] {
+  const lines = ["ns.translate({", `  locale = ${q(locale)},`, `  plural = ${q(meta.plural ?? "one")},`];
+  if (meta.decimal) lines.push(`  decimal = ${q(meta.decimal)},`);
+  lines.push("  words = {");
+  for (const [k, v] of Object.entries(words)
+    .filter(([, v]) => v)
+    .sort(([a], [b]) => a.localeCompare(b)))
+    lines.push(`    [${q(k)}] = ${q(v)},`);
+  lines.push("  },", ...more, "})");
+  return lines;
+}
+
+export type Options = {
+  /** the repository (scripts/..) */
+  root: string;
+  /** the addon's folder, from the root ("addon/Goodwill") */
+  addon: string;
+  /** Lua files read for no words beside Text_ (generated tables: /^(Text|Creatures)_/) */
+  skip?: RegExp;
+  /** words the files name another way (a shelf's short name read through L by its id) */
+  extraKeys?: string[];
+  /** the Lua after the words (the game's names in the language) */
+  names?: (locale: string) => string[];
+  borrows?: Record<string, string>;
+};
+
+/** A simple addon's languages whole: bun scripts/locales.ts [--check | --keys]. Exits 1 on a problem. */
+export function run(o: Options, args = process.argv.slice(2)): void {
+  const i18n = join(o.root, "i18n");
+  const addon = join(o.root, o.addon);
+  const borrows = o.borrows ?? BORROWS;
+  const own = ownKeys(addon, o.skip, o.extraKeys);
+  const kit = kitKeys(addon);
+  const kitSet = new Set(kit);
+  const mine = own.filter((k) => !kitSet.has(k));
+  if (args.includes("--keys")) {
+    writeFileSync(join(i18n, "words.json"), `${JSON.stringify(Object.fromEntries(mine.map((k) => [k, ""])), null, 2)}\n`);
+    console.log(`✓ i18n/words.json: ${mine.length} words to translate (the kit's ${kit.length} its own)`);
+    return;
+  }
+  const check = args.includes("--check");
+  let bad = false;
+  const fail = (msg: string) => {
+    console.error(`✗ ${msg}`);
+    bad = true;
+  };
+  if (Object.keys(json(join(i18n, "words.json"))).join("\n") !== mine.join("\n")) fail("i18n/words.json is not the addon's words: bun scripts/locales.ts --keys");
+  const translated = (l: string) => existsSync(join(i18n, l, "words.json"));
+  for (const locale of LOCALES) {
+    const held = HIDDEN_LOCALES.includes(locale);
+    const from = held ? null : translated(locale) ? locale : borrows[locale] && translated(borrows[locale]) ? borrows[locale] : null;
+    const lines = ["-- Generated by scripts/locales.ts from i18n/: edit those, not this file.", "local _, ns = ..."];
+    if (ENGLISH.has(locale) || !from) {
+      lines.push(`-- (${ENGLISH.has(locale) ? "English: the words as the addon writes them" : held ? HELD_BACK.slice(4, -1) : "no translation yet: English words"})`);
+    } else {
+      const meta = { ...json(join(i18n, from, "meta.json")), ...json(join(i18n, locale, "meta.json")) };
+      if (meta.plural && !PLURALS.includes(meta.plural)) fail(`i18n/${from}/meta.json: plural is one of ${PLURALS.join(", ")}`);
+      const words: Record<string, string> = json(join(i18n, from, "words.json"));
+      const kw = kitWords(i18n, from, borrows);
+      const ours = Object.fromEntries(Object.entries(words).filter(([k]) => !kitSet.has(k)));
+      lines.push(...translateLua(locale, meta, { ...ours, ...Object.fromEntries(kit.map((k) => [k, kw[k]])) }));
+    }
+    if (held && translated(locale)) {
+      const plural = json(join(i18n, locale, "meta.json")).plural;
+      if (plural && !PLURALS.includes(plural)) fail(`i18n/${locale}/meta.json: plural is one of ${PLURALS.join(", ")}`);
+    }
+    lines.push(...(o.names ? o.names(locale) : []));
+    const lua = `${lines.join("\n")}\n`;
+    const out = join(addon, `Text_${locale}.lua`);
+    if ((existsSync(out) ? readFileSync(out, "utf8") : "") !== lua) {
+      if (check) fail(`${relative(o.root, out)} is out of date: bun scripts/locales.ts`);
+      else writeFileSync(out, lua);
+    }
+    if (!translated(locale)) continue;
+    const words: Record<string, string> = json(join(i18n, locale, "words.json"));
+    const meta = json(join(i18n, locale, "meta.json"));
+    const { missing, unused, errors } = problems(words, mine);
+    const kw = kitWords(i18n, locale, borrows);
+    const kitMissing = kit.filter((k) => !kw[k]);
+    const { errors: kitErrors } = problems(kw, kit);
+    console.log(`${locale}: ${mine.length - missing.length}/${mine.length} words, the kit's ${kit.length - kitMissing.length}/${kit.length}${meta.flagged ? ", flagged" : ""}`);
+    if (missing.length) fail(`${locale}: no translation for ${missing.map((m) => JSON.stringify(m)).join(", ")}`);
+    if (kitMissing.length) fail(`${locale}: the kit's i18n/kit/${locale}.json lacks ${kitMissing.map((m) => JSON.stringify(m)).join(", ")} (translate them in addon-kit/i18n, then kit:sync)`);
+    for (const e of [...errors, ...kitErrors]) fail(`${locale}: ${e}`);
+    const kitInMine = unused.filter((k) => kitSet.has(k));
+    if (kitInMine.length) console.log(`  the kit's own, its translation used: ${kitInMine.join(" | ")} (bun scripts/locales.ts --keys, and out of words.json)`);
+    const gone = unused.filter((k) => !kitSet.has(k));
+    if (gone.length) console.log(`  words no longer used: ${gone.join(" | ")}`);
+    const long = grown(words);
+    if (long.length) console.log(`  ${long.length} short label${long.length > 1 ? "s" : ""} grown 1.8 times or more (a look in the game, never a failure): ${long.slice(0, 3).join(" | ")}${long.length > 3 ? " …" : ""}`);
+  }
+  for (const k of own) if (semicolon(k)) fail(`a semicolon in what players read: ${JSON.stringify(k)}`);
+  if (bad) process.exit(1);
+  console.log(`✓ ${mine.length} words and the kit's ${kit.length}, ${LOCALES.length} language files`);
+}

@@ -1,0 +1,10 @@
+# The addon's own globals: its saved variables and its slash command
+# (selene.toml: std = "wow+primer"; the game's are the kit's wow.yml).
+name: primer
+globals:
+  SLASH_PRIMER1:
+    any: true
+  PrimerChar:
+    any: true
+  PrimerSettings:
+    any: true

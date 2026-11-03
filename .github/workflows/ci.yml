@@ -1,0 +1,41 @@
+# Every push and pull request: the addon's Lua is formatted and linted, the
+# addon passes its simulation on every game, its TOCs
+# agree, and the release's package (the BigWigs packager, as release.yml
+# makes it) is the addon's folder. By hand too: the daily Game data job asks
+# for it on its pull request's branch and merges only once it passes.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      - run: sudo apt-get install -y -qq luajit
+      - name: Lua tools (StyLua, selene)
+        run: |
+          mkdir -p "$HOME/bin" && cd "$HOME/bin"
+          curl -sSLo stylua.zip https://github.com/JohnnyMorganz/StyLua/releases/download/v2.5.2/stylua-linux-x86_64.zip
+          curl -sSLo selene.zip https://github.com/Kampfkarren/selene/releases/download/0.32.0/selene-0.32.0-linux.zip
+          printf '%s  %s\n' bcb0d855e91f102f28a370e850f8566b3b44b79e6274d806ea5246837c0fd5ab stylua.zip d3773393578580074386e69337d35b7acddfbaa9fc38964c07fa3e28436ade9b selene.zip | sha256sum -c --quiet -
+          unzip -qo stylua.zip && unzip -qo selene.zip && chmod +x stylua selene
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+      - name: The checks (bun run check:ci, the same as the release gate)
+        run: bun run check:ci
+      # The release's package (release.yml), made without publishing: the
+      # addon's folder, nothing more or less.
+      - run: echo "(CI)" > .release-notes.md
+      - uses: BigWigsMods/packager@e50a250f8705041e40f2fa1ddcb280a686d65aa0 # v2.6.1
+        with:
+          args: -d -u
+          pandoc: false
+      - run: diff -r addon/Primer .release/Primer

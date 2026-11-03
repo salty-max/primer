@@ -1,0 +1,33 @@
+# Every day, and by hand: Primer's guide built again from wow-data's pins
+# (salty-max/wow-data's addon-data.yml: wow-data beside it, the databases
+# downloaded; addon-kit beside it, for the check): the facts of every build
+# (each spell and talent against the game's tables) and the files they write.
+# When one changes, a pull request with the checks run, then merged by itself
+# and told to the owner's phone. A fact that no longer holds (a spell the
+# patch dropped, a talent it moved) fails the run before its pull request.
+name: Game data
+
+on:
+  schedule:
+    - cron: "52 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  # (ci.yml asked for on the pull request's branch, the gate before the merge)
+  actions: write
+
+jobs:
+  data:
+    uses: salty-max/wow-data/.github/workflows/addon-data.yml@main
+    secrets:
+      INBOX_EVENTS_TOKEN: ${{ secrets.INBOX_EVENTS_TOKEN }}
+    with:
+      kit: true
+      generate: |
+        bun scripts/guide.ts
+        bun scripts/locales.ts
+      paths: |
+        i18n
+        addon/Primer

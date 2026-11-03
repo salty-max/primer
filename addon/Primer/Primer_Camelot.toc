@@ -1,0 +1,24 @@
+## Interface: 16001
+## Title: Primer
+## Notes: A class guide to read out of combat: the talents to pick, what to press and what your build is for.
+## Category: Combat
+## Author: salty-max
+## Version: 0.1.0
+## SavedVariablesPerCharacter: PrimerChar
+## SavedVariables: PrimerSettings
+## IconTexture: Interface\Icons\INV_Misc_Book_09
+## X-Website: https://github.com/salty-max/primer
+## X-License: MIT
+
+# Each game loads its own TOC (_Vanilla: Classic Era, _Camelot: Forever), the
+# same but for the interface and its guide, Guide_<game>.lua
+# (scripts/package.ts checks).
+Guide_Forever.lua
+GuideText.lua
+Kit.lua
+Locale.lua
+Text_[TextLocale].lua
+Core.lua
+Settings.lua
+Window.lua
+Minimap.lua

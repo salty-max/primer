@@ -1,0 +1,10 @@
+# The addon's Lua, linted by selene (bun run lint:lua): Lua 5.1 and the game's
+# globals the addon uses (wow.yml).
+std = "wow+primer"
+exclude = ["addon/Primer/Text_*.lua", "addon/Primer/GuideText.lua"]
+
+[lints]
+# layout is StyLua's: a guard or a callback on one line is as it writes them
+multiple_statements = "allow"
+# the kit's page takes a note as { text, aside = true, sign = ... } (Kit.lua, Page:text)
+mixed_table = "allow"
