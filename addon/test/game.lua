@@ -65,7 +65,8 @@ local function tabs()
   return out
 end
 -- (the trees as the game names them, by their place in the window; the three
--- tabs of the data's own talents, 161 Arms, 163 Protection, 164 Fury)
+-- tabs of the data's own talents, 161 Arms, 163 Protection, 164 Fury; a test that
+-- plays another class sets state.treeNames to that class's trees)
 state.treeNames = { [161] = "Arms", [163] = "Protection", [164] = "Fury" }
 function GetNumTalents(tab)
   read()

@@ -1028,6 +1028,159 @@ do
   s.spells = {}
 end
 
+-- ── the Paladin and the Mage as the window draws them ────────────────────────
+if not G.FOREVER then
+  local function points(map)
+    s.ranks = {}
+    for spell, rank in pairs(map) do
+      s.ranks[ns.data.talents[spell].id] = rank
+    end
+  end
+  local function button(text)
+    for _, b in ipairs(PrimerPage.buttonPool) do
+      if b.shown and b.text == text then return b end
+    end
+  end
+  local function click(text)
+    local b = button(text)
+    check(b, "a button: " .. text)
+    b:GetScript("OnClick")(b)
+  end
+  local function play(token, name, id, trees)
+    UnitClass = function() return name, token, id end
+    s.treeNames = trees
+    s.ranks, s.spells, s.level = {}, {}, 9
+    PrimerChar.groups = {}
+    ns.reader.reset()
+    PrimerFrame:Hide()
+  end
+  local warriorClass, warriorTrees = UnitClass, s.treeNames
+
+  -- the Retribution Paladin
+  play("PALADIN", "Paladin", 2, { [381] = "Retribution", [382] = "Holy", [383] = "Protection" })
+  s.spells = set(20154, 635, 465)
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Retribution" and PrimerPage.sub.text == "Level 1 to 9" and shownRows() == 3,
+    "Paladin at 9: the untalented kit, the three spells in the book"
+  )
+  check(
+    pageTexts():find("Devotion Aura on, Blessing of Might, Seal of Righteousness", 1, true)
+      and pageTexts():find("6 spells for this stage are not in your book yet.", 1, true)
+      and not pageTexts():find("What do you want to play?", 1, true),
+    "Paladin at 9: the opening, the spells to learn, and no question yet"
+  )
+  ns.open(ns.TAB.talents)
+  check(
+    pageTexts():find("Level 10 to 14, points 1 to 5", 1, true)
+      and pageTexts():find("No talent points to spend. Your next pick is", 1, true)
+      and pageTexts():find("Judgement and your seals cost 15% less mana", 1, true),
+    "Paladin at 9, Talents: the first pick, at level 10, and why"
+  )
+  s.level, s.spells = 12, set(20154, 635, 465, 20271, 19740, 21082, 498, 853, 1152, 633, 1022)
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find("You have talent points to spend.", 1, true)
+      and pageTexts():find("What do you want to play?", 1, true)
+      and button("Damage")
+      and button("Tank")
+      and button("Heal")
+      and button("Not yet"),
+    "Paladin at 10 or more, nothing spent: the question, with all three roles"
+  )
+  check(
+    shownRows() == 6 and PrimerPage.sub.text == "Level 10 to 19",
+    "Paladin at 12: the stage and the lines for the book"
+  )
+  click("Damage")
+  check(
+    PrimerPage.title.text == "Retribution"
+      and pageTexts():find("Builds that fit: Retribution.", 1, true)
+      and pageTexts():find("A damage paladin works with a seal and Judgement", 1, true)
+      and pageTexts():find("Judgement is ready 2 seconds sooner", 1, true),
+    "Paladin picks Damage: Retribution, the advice and the first three picks"
+  )
+  s.level = 19
+  PrimerChar.groups = {}
+  points({ [20101] = 5, [25956] = 2, [20060] = 3 })
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Retribution" and not pageTexts():find("What do you want to play?", 1, true),
+    "Paladin with points spent: Retribution, no question"
+  )
+  ns.open(ns.TAB.talents)
+  check(
+    pageTexts():find("Level 20, points 11 to 11", 1, true)
+      and pageTexts():find("Your next pick is Talent 1481", 1, true)
+      and pageTexts():find("A seal that sometimes adds Holy damage worth 70%", 1, true)
+      and listTexts():find("5/5", 1, true)
+      and listTexts():find("2/2", 1, true)
+      and listTexts():find("3/5", 1, true),
+    "Paladin with 10 points: the next pick is Seal of Command at 20, the taken ones counted"
+  )
+
+  -- the Frost Mage
+  play("MAGE", "Mage", 8, { [41] = "Fire", [61] = "Frost", [81] = "Arcane" })
+  s.spells = set(133, 168, 1459)
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Frost" and PrimerPage.sub.text == "Level 1 to 9" and shownRows() == 3,
+    "Mage at 9: the untalented kit, the three spells in the book"
+  )
+  check(
+    pageTexts():find("Frost Armor on, Arcane Intellect, Frostbolt from range", 1, true)
+      and listTexts():find("Fire|Damage", 1, true)
+      and listTexts():find("Arcane|Damage", 1, true),
+    "Mage at 9: the opening, and the three damage builds offered"
+  )
+  s.level, s.spells = 12, set(133, 168, 1459, 116, 5504, 2136, 587, 118, 5143, 122)
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find("What do you want to play?", 1, true)
+      and button("Damage")
+      and not button("Tank")
+      and not button("Heal"),
+    "Mage at 10 or more, nothing spent: the question, damage only"
+  )
+  click("Damage")
+  check(
+    pageTexts():find("Builds that fit: Frost, Fire, Arcane.", 1, true)
+      and pageTexts():find("The safest way to level alone.", 1, true)
+      and pageTexts():find("Frostbolt casts 0.5 seconds faster", 1, true),
+    "Mage picks Damage: all three builds, the advice and the first three picks"
+  )
+  s.level = 19
+  PrimerChar.groups = {}
+  points({ [11070] = 5, [29438] = 3, [11071] = 2 })
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Frost" and not pageTexts():find("What do you want to play?", 1, true),
+    "Mage with points spent: Frost follows the points, no question"
+  )
+  ns.open(ns.TAB.talents)
+  check(
+    pageTexts():find("Level 18 to 20, points 9 to 11", 1, true)
+      and pageTexts():find("2 of 3", 1, true)
+      and pageTexts():find("A chilled monster has a 15% chance to freeze", 1, true),
+    "Mage with 10 points: Frostbite is the next pick, 2 of 3 taken"
+  )
+  -- the points decide, not the default: ten in Fire make it a Fire mage
+  PrimerChar.groups = {}
+  points({ [11069] = 5, [11119] = 5 })
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(PrimerPage.title.text == "Fire", "Mage with ten points in Fire: the page follows Fire, not the first build")
+
+  UnitClass, s.treeNames = warriorClass, warriorTrees
+  s.ranks, s.spells, s.level = {}, {}, 12
+  PrimerChar.groups = {}
+  ns.reader.reset()
+end
+
 -- ── the minimap command ──────────────────────────────────────────────────────
 SlashCmdList.PRIMER("minimap")
 check(ns.option("minimapHidden") == true, "/primer minimap hides the button")
