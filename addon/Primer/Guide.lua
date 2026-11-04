@@ -270,8 +270,9 @@ function G.nextPick(snap, build, road)
     spell = o.spell,
     info = o.info,
     level = s.step.level[1] + taken,
-    number = taken + 1,
-    of = count,
+    -- (the talent's own rank this point reaches, of its ranks: a talent a road takes in two steps counts on)
+    number = s.step.rank - count + taken + 1,
+    of = data().talents[o.spell].max,
     step = s,
   }
 end
@@ -286,8 +287,8 @@ function G.pickAt(snap, build, road, level)
         spell = spell,
         info = G.talent(snap, spell),
         level = level,
-        number = level - step.level[1] + 1,
-        of = step.level[2] - step.level[1] + 1,
+        number = step.rank - (step.level[2] - step.level[1] + 1) + (level - step.level[1]) + 1,
+        of = data().talents[spell].max,
         step = step,
       }
     end

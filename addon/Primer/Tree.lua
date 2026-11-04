@@ -11,13 +11,15 @@ local K, L = ns.kit, ns.kit.L
 local T = K.T
 local G = ns.rules
 
-local CELL, GAP, COLS, ROWS = 28, 6, 4, 7 -- (three trees side by side in the book's page: 28 pixels a cell, the game's own are 40)
-local PITCH = CELL + GAP
-local MARGIN = 12 -- (the gate's numbers, left of each tree)
-local BETWEEN = 10 -- (between two trees)
+local CELL, GAP, COLS, ROWS = 38, 12, 4, 7 -- (the whole width of the book: 38 pixels a cell, the game's own are 37)
+local VGAP = 8
+local HP, VP = CELL + GAP, CELL + VGAP
+local MARGIN = 28 -- (each tree's own gutter for the gates' numbers, two digits wide with room to spare)
+local BETWEEN = 30 -- (between two trees)
 local TREE_W = MARGIN + COLS * CELL + (COLS - 1) * GAP
 local HEAD = 20 -- (the tree's name)
-ns.TREE_W, ns.TREE_H = TREE_W, HEAD + ROWS * PITCH
+ns.TREE_W, ns.TREE_H = TREE_W, HEAD + ROWS * VP - VGAP
+ns.TREE_GUTTER = MARGIN
 ns.TREES_W = 3 * TREE_W + 2 * BETWEEN
 
 local GOLD = { 1, 0.82, 0.2 }
@@ -71,11 +73,11 @@ local function cell(tree, row, col)
   s.edge:SetBlendMode("ADD")
   s.edge:SetPoint("CENTER")
   s.edge:SetSize(CELL * 1.8, CELL * 1.8)
-  s.mark = K.label(s, K.BODY_FONT, 11, GOLD)
+  s.mark = K.label(s, K.BODY_FONT, 10, GOLD)
   s.mark:SetPoint("TOPLEFT", 2, -2)
   s.rankText = K.label(s, K.BODY_FONT, 10, T.text)
   s.rankText:SetPoint("BOTTOMRIGHT", -2, 2)
-  s:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", MARGIN + col * PITCH, -(HEAD + row * PITCH))
+  s:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", MARGIN + col * HP, -(HEAD + row * VP))
   s:SetScript("OnEnter", tooltip)
   s:SetScript("OnLeave", function()
     if GameTooltip then GameTooltip:Hide() end
@@ -188,7 +190,11 @@ function Tree.draw(t, snap, class, build, road, level, quiet)
             local _, ic = ns.reader.spell(c.spell)
             icon = ic
           end
-          K.setSlot(s, icon or K.QUESTION, nil, nil, state == "off" or (state == "road" and not level) and rank == 0)
+          K.setSlot(s, icon or K.QUESTION)
+          -- (the game's look for a talent that cannot be had, Vanilla/TalentFrameBase.lua:131 SetItemButtonDesaturated(button, 1, 0.65, 0.65, 0.65), here for a talent off the road; the road's in full colour)
+          s.icon:SetDesaturated(state == "off")
+          local v = state == "off" and 0.65 or 1
+          s.icon:SetVertexColor(v, v, v)
           s.rankText:SetText(rank > 0 and ("%d/%d"):format(rank, c.max) or (c.max > 1 and ("0/%d"):format(c.max) or ""))
           s.mark:SetText(mark and tostring(mark) or "")
           local edge = state == "next" and GOLD or state == "taken" and GOLD or state == "road" and BLUE or nil
@@ -225,10 +231,13 @@ function Tree.draw(t, snap, class, build, road, level, quiet)
           local g = tree.gates[row]
           if not g then
             g = K.label(tree.frame, K.BODY_FONT, 10, T.soft)
+            g:SetWidth(MARGIN - 4)
+            g:SetJustifyH("RIGHT")
+            g:SetWordWrap(false)
             tree.gates[row] = g
           end
           g:ClearAllPoints()
-          g:SetPoint("TOPLEFT", 0, -(HEAD + row * PITCH + CELL / 2 - 5))
+          g:SetPoint("TOPLEFT", 0, -(HEAD + row * VP + CELL / 2 - 5))
           g:SetText(tostring(need))
           g:Show()
         end
@@ -244,16 +253,16 @@ function Tree.draw(t, snap, class, build, road, level, quiet)
               n = n + 1
               local l = bar(tree, n)
               l:ClearAllPoints()
-              local x = MARGIN + from.col * PITCH
-              local y = HEAD + from.row * PITCH
+              local x = MARGIN + from.col * HP
+              local y = HEAD + from.row * VP
               if from.col == to.col then
                 local top, bottom = math.min(from.row, to.row), math.max(from.row, to.row)
-                l:SetSize(4, (bottom - top) * PITCH - CELL + 2 * GAP)
-                l:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", x + CELL / 2 - 2, -(HEAD + top * PITCH + CELL - GAP))
+                l:SetSize(4, (bottom - top) * VP - CELL + 2 * VGAP)
+                l:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", x + CELL / 2 - 2, -(HEAD + top * VP + CELL - VGAP))
               else
                 local left, right = math.min(from.col, to.col), math.max(from.col, to.col)
-                l:SetSize((right - left) * PITCH - CELL + 2 * GAP, 4)
-                l:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", MARGIN + left * PITCH + CELL - GAP, -(y + CELL / 2 - 2))
+                l:SetSize((right - left) * HP - CELL + 2 * GAP, 4)
+                l:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", MARGIN + left * HP + CELL - GAP, -(y + CELL / 2 - 2))
               end
               local taken = not level and snap.talents.byId[p.id] and snap.talents.byId[p.id].rank > 0
               local c1 = taken and GOLD or T.rule

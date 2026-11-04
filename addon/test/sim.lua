@@ -603,6 +603,7 @@ if not G.FOREVER then
   fresh(10)
   ns.open(TAB.talents)
   check(ns.screen.asked and not ns.screen.tree, "the Talents tab with a question pending: answer it on the Level tab")
+  check(not PrimerFrame.left.shown and not PrimerFrame.sheet.shown, "the Talents tab takes both panels: no list on it")
   ns.open(TAB.level)
 
   -- a page is not swapped under the player: a point, a level, looking at another level
@@ -693,6 +694,36 @@ if not G.FOREVER then
     "and ends on what applies when nothing does"
   )
   budget("Retribution at 24")
+  -- the pick's rank is the talent's own: the rank the road holds once the point at that level is spent
+  do
+    local snap0, n = ns.reader.snapshot(), 0
+    for road = 1, #ns.rules.roads(ret) do
+      for level = 10, 40 do
+        local pick = ns.rules.pickAt(snap0, ret, road, level)
+        if pick then
+          n = n + 1
+          check(
+            pick.number == ns.rules.ranksAt(ret, road, level)[pick.spell],
+            "level " .. level .. ": the pick's rank is the road's"
+          )
+        end
+      end
+    end
+    check(n > 30, "the ranks of the picks were compared (" .. n .. ")")
+  end
+  -- a point not spent yet is neither on the road nor off it: 14 spent at level 24, one to spend, all 14 on the road
+  points(ns.rules.ranksAt(ret, 1, 23))
+  ns.reader.reset()
+  ns.open(TAB.level)
+  check(
+    ns.screen.sub:find("14 of 14 points are on it", 1, true),
+    "the sentence counts the points spent: " .. ns.screen.sub
+  )
+  check(ns.screen.pick.text:find("rank %d+ of %d+"), "the pick says which rank it takes next")
+  points(ns.rules.ranksAt(ret, 1, 24))
+  ns.reader.reset()
+  PrimerFrame:Hide()
+  ns.open(TAB.level)
   for level = 24, 40 do
     look(level)
     check(ns.screen.title == "Level " .. level, "looking at " .. level)
@@ -720,15 +751,60 @@ if not G.FOREVER then
   end
   check(windows[1] and windows[2] and windows[3], "all three trees")
   check(states.taken > 0 and states.next > 0 and states.road > 0, "taken cells lit and the next pick ringed")
-  check(ns.TREES_W <= 480, "three trees fit the book's page (" .. ns.TREES_W .. " pixels)")
-  local here, picked = 0, 0
-  for _, r in ipairs(sc.road) do
-    if r.here then here = here + 1 end
-    if r.selected then picked = picked + 1 end
-  end
-  check(#sc.road >= 8 and here == 1 and picked == 1, "the road's order beside, one next pick, the level picked out")
+  check(ns.TREES_W <= 720, "three trees fit the whole width of the book (" .. ns.TREES_W .. " pixels)")
+  local levelTab = (function()
+    ns.open(TAB.level)
+    local text = ns.screen.pick.text
+    ns.open(TAB.talents)
+    return text
+  end)()
+  check(
+    ns.screen.pick.text == levelTab and ns.screen.pick.text:find("^Next pick: "),
+    "the Talents tab says the next pick as the Level tab does: " .. ns.screen.pick.text
+  )
+  check(ns.talentsTab.pick.text == ns.screen.pick.text, "and shows it")
   check(sc.slider == 24 and not sc.looking and not sc.back, "the slider rests on the character's level")
   check(sc.road_sentence and sc.road_sentence ~= "", "one line says which road this is")
+  -- gates: every label fits its own gutter (the next tree starts clear of it); marks and ranks keep to their corners
+  local gates = 0
+  for _, tree in ipairs(ns.talentsTab.tree.trees) do
+    for _, g in pairs(tree.gates) do
+      if g.shown then
+        gates = gates + 1
+        check(
+          g:GetStringWidth() <= ns.TREE_GUTTER - 4 and g.w == ns.TREE_GUTTER - 4,
+          "a gate label (" .. g.text .. ") fits its gutter"
+        )
+      end
+    end
+    for _, c in pairs(tree.cells) do
+      if c.shown then
+        check(
+          c.mark:GetStringWidth() + c.rankText:GetStringWidth() + 4 <= c.w,
+          "a cell's mark and its rank fit side by side in it"
+        )
+        check(
+          #(c.mark.text or "") <= 2 and c.mark:GetStringWidth() + c.rankText:GetStringWidth() <= c.w + 4,
+          "a two-digit mark and the rank stay inside the cell"
+        )
+      end
+    end
+  end
+  check(gates >= 6, "the gates are labelled (" .. gates .. ")")
+  -- the game's own look: what cannot be had is dimmed, what can is in full colour
+  for _, c in ipairs(sc.tree) do
+    local v = c.frame.icon.color and c.frame.icon.color[1]
+    check(
+      v == (c.state == "off" and 0.65 or 1),
+      "a cell is " .. (c.state == "off" and "dimmed" or "in full colour") .. " (" .. c.state .. ")"
+    )
+  end
+  -- the caption is one line
+  check(ns.talentsTab.sliderText:GetStringWidth() <= ns.talentsTab.sliderText.w, "the caption fits one line")
+  check(
+    ns.talentsTab.panel.shown and not PrimerFrame.left.shown and not PrimerFrame.sheet.shown,
+    "the Talents tab takes both panels"
+  )
   local taken24 = states.taken
   local slider = ns.talentsTab.slider
   slider.scripts.OnValueChanged(slider, 38)
@@ -762,18 +838,6 @@ if not G.FOREVER then
   ns.open(TAB.talents)
   ns.screen.back()
   check(ns.screen.slider == 24 and not ns.screen.looking, "and back to my own")
-  -- the road's rows: a click looks at its level
-  local rows = {}
-  for _, r in ipairs(ns.roadRows) do
-    if r.shown then rows[#rows + 1] = r end
-  end
-  check(#rows == #ns.screen.road, "a row for each step of the road")
-  rows[#rows].scripts.OnClick(rows[#rows])
-  check(
-    ns.screen.looking and ns.screen.slider == ns.screen.road[#rows].from,
-    "a click on the road's last step looks at its level"
-  )
-  ns.screen.back()
   PrimerFrame:Hide()
   ns.open(TAB.level)
 
