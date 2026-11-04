@@ -163,7 +163,28 @@ end
 -- A row set for a step: [n] [icon] Name  clause, grey in its place with what it needs when it cannot be pressed.
 -- Returns the model the tests read.
 local STEP_ICON = "Interface\\Icons\\INV_Misc_Note_01"
+-- A row that stands for the best of a few spells (an armour that gets better): the spell itself, the best one the
+-- character has now (at another level, the best that level has), else the one every character has.
+local function resolve(step, snap, level)
+  if not step.best then return step end
+  local pick = step.best[#step.best]
+  for _, b in ipairs(step.best) do
+    local known = level == snap.level and snap.knows(b.spell, b.family) or (level ~= snap.level and level >= b.level)
+    if known then
+      pick = b
+      break
+    end
+  end
+  local copy = {}
+  for k, v in pairs(step) do
+    copy[k] = v
+  end
+  copy.spell, copy.level, copy.family = pick.spell, pick.level, pick.family
+  return copy
+end
+
 local function setStep(r, snap, step, n, level, last)
+  step = resolve(step, snap, level)
   local name, icon
   if step.spell then
     name, icon = ns.reader.spell(step.spell)
@@ -180,7 +201,11 @@ local function setStep(r, snap, step, n, level, last)
   if stance then clause = clause ~= "" and (clause .. ", " .. stance:lower()) or stance end
   local why = step.why and ns.stop(capital(ns.say(step.why))) or nil
   r.slot.spell = step.spell
-  K.setSlot(r.slot, icon or K.QUESTION, nil, nil, not ready)
+  K.setSlot(r.slot, icon or K.QUESTION)
+  -- (a spell not pressable yet: its own picture, desaturated and dimmed as the game dims a talent, not black)
+  r.slot.icon:SetDesaturated(not ready)
+  local v = ready and 1 or 0.65
+  r.slot.icon:SetVertexColor(v, v, v)
   r.num:SetText(n and tostring(n) or "")
   local line = K.hex(ready and T.text or T.soft) .. name .. "|r"
   if clause ~= "" then line = line .. "  " .. K.hex(ready and T.soft or T.gold) .. clause .. "|r" end
@@ -192,6 +217,7 @@ local function setStep(r, snap, step, n, level, last)
     name = name,
     clause = clause,
     state = state,
+    icon = icon,
     why = why,
     line = name .. (clause ~= "" and ("  " .. clause) or ""),
   }
@@ -472,6 +498,13 @@ local function arrivals(snap, b, road)
     local p = planOf(stage)
     for _, part in ipairs({ p.opening, p.loop, p.rarely, p.between, p.low }) do
       for _, step in ipairs(part or {}) do
+        for _, alt in ipairs(step.best or {}) do
+          if not seen[alt.spell] and alt.level > 1 then
+            seen[alt.spell] = true
+            spells[alt.level] = spells[alt.level] or {}
+            table.insert(spells[alt.level], ns.reader.spell(alt.spell) or L["Unknown spell"])
+          end
+        end
         if
           step.spell
           and not step.common
@@ -647,7 +680,7 @@ local function drawLevel(snap, class, r, choice)
     screen[key] = {}
     for i, step in ipairs(group) do
       local x = nextRow()
-      local out = setStep(x, snap, step, i, shown, closing and i == #group)
+      local out = setStep(x, snap, step, key ~= "rarely" and i or nil, shown, closing and i == #group)
       page.y = page.y + out.h
       table.insert(screen[key], out)
       table.insert(screen.text, out.line)
@@ -656,24 +689,7 @@ local function drawLevel(snap, class, r, choice)
   end
   steps(L["Opening"], plan.opening, "opening")
   steps(L["Then repeat, top to bottom"], plan.loop, "loop", true)
-  if plan.rarely and #plan.rarely > 0 then
-    local parts = {}
-    for _, step in ipairs(plan.rarely) do
-      local name = step.spell and (ns.reader.spell(step.spell) or L["Unknown spell"]) or ns.say(step.text)
-      local state, extra = stateAt(step, snap, shown)
-      local clause = state == "ready" and whenOf(step) or needs(snap, state, extra)
-      local why = step.why and ns.say(step.why)
-      table.insert(
-        parts,
-        ns.stop(("%s, %s%s"):format(name, (clause:gsub("^%u", string.lower)), why and (": " .. why) or ""))
-      )
-    end
-    local text = L["Rarely: %s"]:format(table.concat(parts, " "))
-    page.y = page.y + 4
-    page:paragraph(text, T.soft)
-    screen.rarely = text
-    table.insert(screen.text, text)
-  end
+  steps(L["Rarely"], plan.rarely, "rarely")
   if #G.roles(class) > 1 and r.phase ~= "untalented" and not q then
     screen.change = function()
       view.changing = true
@@ -847,7 +863,7 @@ local function drawClass(snap, class, r)
   local ov = c.overview
   local b = ns.data.builds[r.build]
   local hasBuild = hasBuildOf(class, r)
-  classPage:start(snap.className, "", function(p) p.tex:SetTexture(ns.ICON) end)
+  classPage:start(snap.className, "", K.crest(snap.token, ns.ICON))
   screen.title, screen.blocks, screen.roles = snap.className, {}, {}
   local function block(heading, key)
     if not key then return end

@@ -536,9 +536,10 @@
                 "why": "it adds attack power, so it pays back over many fights"
               },
               {
-                "text": "A seal",
-                "if": "Command with a slow weapon, else Righteousness",
-                "why": "a slow weapon gets more out of Command"
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "just before the pull",
+                "why": "Seal of Command is better with a slow weapon"
               },
               {
                 "spell": 20271,
@@ -669,9 +670,10 @@
                 "why": "it adds attack power, so it pays back over many fights"
               },
               {
-                "text": "A seal",
-                "if": "Command with a slow weapon, else Righteousness",
-                "why": "a slow weapon gets more out of Command"
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "just before the pull",
+                "why": "Seal of Command is better with a slow weapon"
               },
               {
                 "spell": 20271,

@@ -71,7 +71,7 @@ ns.data = {
               { spell = 2136, level = 6, family = { 2136, 2137, 2138, 8412, 8413, 10197, 10199 }, cond = "mage-frost.s1.loop2.if", why = "mage-frost.s1.loop2.why" },
               { spell = 5143, level = 8, family = { 5143, 5144, 5145, 8416, 8417, 10211, 10212, 25345 }, cond = "mage-frost.s1.loop3.if", why = "mage-frost.s1.loop3.why" },
               { spell = 118, level = 8, family = { 118, 12824, 12825, 12826, 28271, 28272 }, cond = "mage-frost.s1.loop4.if", why = "mage-frost.s1.loop4.why" },
-              { text = "mage-frost.s1.loop5.text", why = "mage-frost.s1.loop5.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", why = "mage-frost.s1.loop5.why" },
             },
             between = {
               { spell = 168, level = 1, family = { 168, 7300, 7301 }, cond = "mage-frost.s1.between1.if", why = "mage-frost.s1.between1.why" },
@@ -79,7 +79,7 @@ ns.data = {
               { spell = 587, level = 6, family = { 587, 597, 990, 6129, 10144, 10145, 28612 }, cond = "mage-frost.s1.between3.if", why = "mage-frost.s1.between3.why" },
             },
             low = {
-              { text = "mage-frost.s1.low1.text", cond = "mage-frost.s1.low1.if", why = "mage-frost.s1.low1.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", cond = "mage-frost.s1.low1.if", why = "mage-frost.s1.low1.why" },
               { text = "mage-frost.s1.low2.text", cond = "mage-frost.s1.low2.if", why = "mage-frost.s1.low2.why" },
             },
           },
@@ -97,7 +97,7 @@ ns.data = {
               { spell = 2136, level = 6, family = { 2136, 2137, 2138, 8412, 8413, 10197, 10199 }, cond = "mage-frost.s2.loop2.if", why = "mage-frost.s2.loop2.why" },
               { spell = 118, level = 8, family = { 118, 12824, 12825, 12826, 28271, 28272 }, cond = "mage-frost.s2.loop3.if", why = "mage-frost.s2.loop3.why" },
               { spell = 1449, level = 14, family = { 1449, 8437, 8438, 8439, 10201, 10202 }, cond = "mage-frost.s2.loop4.if", why = "mage-frost.s2.loop4.why" },
-              { text = "mage-frost.s2.loop5.text", cond = "mage-frost.s2.loop5.if", why = "mage-frost.s2.loop5.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", cond = "mage-frost.s2.loop5.if", why = "mage-frost.s2.loop5.why" },
               { spell = 116, level = 4, family = { 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, why = "mage-frost.s2.loop6.why" },
             },
             between = {
@@ -106,7 +106,7 @@ ns.data = {
               { spell = 587, level = 6, family = { 587, 597, 990, 6129, 10144, 10145, 28612 }, cond = "mage-frost.s2.between3.if", why = "mage-frost.s2.between3.why" },
             },
             low = {
-              { text = "mage-frost.s2.low1.text", cond = "mage-frost.s2.low1.if", why = "mage-frost.s2.low1.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", cond = "mage-frost.s2.low1.if", why = "mage-frost.s2.low1.why" },
               { text = "mage-frost.s2.low2.text", cond = "mage-frost.s2.low2.if", why = "mage-frost.s2.low2.why" },
             },
             alt = { name = "mage-frost.s2.alt.name", say = "mage-frost.s2.alt.say",
@@ -121,7 +121,7 @@ ns.data = {
         { from = 20, to = 39, about = "mage-frost.s3",
           plan = {
             opening = {
-              { text = "mage-frost.s3.opening1.text", cond = "mage-frost.s3.opening1.if", why = "mage-frost.s3.opening1.why" },
+              { spell = 168, level = 1, family = { 168, 7300, 7301 }, best = { { spell = 7302, level = 30, family = { 7302, 7320, 10219, 10220 } }, { spell = 168, level = 1, family = { 168, 7300, 7301 } } }, cond = "mage-frost.s3.opening1.if", why = "mage-frost.s3.opening1.why" },
               { spell = 1459, level = 1, family = { 1459, 1460, 1461, 10156, 10157 }, cond = "mage-frost.s3.opening2.if", why = "mage-frost.s3.opening2.why" },
               { spell = 116, level = 4, family = { 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, cond = "mage-frost.s3.opening3.if", why = "mage-frost.s3.opening3.why" },
             },
@@ -130,7 +130,7 @@ ns.data = {
               { spell = 122, level = 10, family = { 122, 865, 6131, 10230 }, cond = "mage-frost.s3.loop2.if", why = "mage-frost.s3.loop2.why" },
               { spell = 116, level = 4, family = { 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, talents = { 11170 }, cond = "mage-frost.s3.loop3.if", why = "mage-frost.s3.loop3.why" },
               { spell = 120, level = 26, family = { 120, 8492, 10159, 10160, 10161 }, cond = "mage-frost.s3.loop4.if", why = "mage-frost.s3.loop4.why" },
-              { text = "mage-frost.s3.loop5.text", cond = "mage-frost.s3.loop5.if", why = "mage-frost.s3.loop5.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", cond = "mage-frost.s3.loop5.if", why = "mage-frost.s3.loop5.why" },
               { spell = 116, level = 4, family = { 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, why = "mage-frost.s3.loop6.why" },
             },
             rarely = {
@@ -142,7 +142,7 @@ ns.data = {
               { spell = 587, level = 6, family = { 587, 597, 990, 6129, 10144, 10145, 28612 }, cond = "mage-frost.s3.between3.if", why = "mage-frost.s3.between3.why" },
             },
             low = {
-              { text = "mage-frost.s3.low1.text", cond = "mage-frost.s3.low1.if", why = "mage-frost.s3.low1.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", cond = "mage-frost.s3.low1.if", why = "mage-frost.s3.low1.why" },
               { spell = 12051, level = 20, cond = "mage-frost.s3.low2.if", why = "mage-frost.s3.low2.why" },
               { text = "mage-frost.s3.low3.text", cond = "mage-frost.s3.low3.if", why = "mage-frost.s3.low3.why" },
             },
@@ -178,7 +178,7 @@ ns.data = {
               { spell = 11426, level = 40, family = { 11426, 13031, 13032, 13033 }, talent = 11426, cond = "mage-frost.s4.loop2.if", why = "mage-frost.s4.loop2.why" },
               { spell = 122, level = 10, family = { 122, 865, 6131, 10230 }, cond = "mage-frost.s4.loop3.if", why = "mage-frost.s4.loop3.why" },
               { spell = 116, level = 4, family = { 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, talents = { 11170 }, cond = "mage-frost.s4.loop4.if", why = "mage-frost.s4.loop4.why" },
-              { text = "mage-frost.s4.loop5.text", cond = "mage-frost.s4.loop5.if", why = "mage-frost.s4.loop5.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", cond = "mage-frost.s4.loop5.if", why = "mage-frost.s4.loop5.why" },
               { spell = 116, level = 4, family = { 116, 205, 837, 7322, 8406, 8407, 8408, 10179, 10180, 10181, 25304 }, why = "mage-frost.s4.loop6.why" },
             },
             rarely = {
@@ -191,7 +191,7 @@ ns.data = {
             },
             low = {
               { spell = 6117, level = 34, family = { 6117, 22782, 22783 }, cond = "mage-frost.s4.low1.if", why = "mage-frost.s4.low1.why" },
-              { text = "mage-frost.s4.low2.text", cond = "mage-frost.s4.low2.if", why = "mage-frost.s4.low2.why" },
+              { spell = 5019, level = 1, common = true, icon = "Interface\\Icons\\Ability_ShootWand", cond = "mage-frost.s4.low2.if", why = "mage-frost.s4.low2.why" },
               { spell = 12051, level = 20, cond = "mage-frost.s4.low3.if", why = "mage-frost.s4.low3.why" },
               { text = "mage-frost.s4.low4.text", cond = "mage-frost.s4.low4.if", why = "mage-frost.s4.low4.why" },
             },
@@ -493,7 +493,7 @@ ns.data = {
           plan = {
             opening = {
               { spell = 19740, level = 4, family = { 19740, 19834, 19835, 19836, 19837, 19838, 25291 }, cond = "paladin-retribution.s3.opening1.if", why = "paladin-retribution.s3.opening1.why" },
-              { text = "paladin-retribution.s3.opening2.text", cond = "paladin-retribution.s3.opening2.if", why = "paladin-retribution.s3.opening2.why" },
+              { spell = 20154, level = 1, family = { 20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293, 21084 }, cond = "paladin-retribution.s3.opening2.if", why = "paladin-retribution.s3.opening2.why" },
               { spell = 20271, level = 4, cond = "paladin-retribution.s3.opening3.if", why = "paladin-retribution.s3.opening3.why" },
               { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s3.opening4.why" },
             },
@@ -529,7 +529,7 @@ ns.data = {
           plan = {
             opening = {
               { spell = 19740, level = 4, family = { 19740, 19834, 19835, 19836, 19837, 19838, 25291 }, cond = "paladin-retribution.s4.opening1.if", why = "paladin-retribution.s4.opening1.why" },
-              { text = "paladin-retribution.s4.opening2.text", cond = "paladin-retribution.s4.opening2.if", why = "paladin-retribution.s4.opening2.why" },
+              { spell = 20154, level = 1, family = { 20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293, 21084 }, cond = "paladin-retribution.s4.opening2.if", why = "paladin-retribution.s4.opening2.why" },
               { spell = 20271, level = 4, cond = "paladin-retribution.s4.opening3.if", why = "paladin-retribution.s4.opening3.why" },
               { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s4.opening4.why" },
             },

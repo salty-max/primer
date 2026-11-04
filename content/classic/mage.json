@@ -56,7 +56,7 @@
           ],
           "talent": 29438,
           "rank": 3,
-          "why": "Your Frost and Fire spells are resisted less. Every guide takes it first, and two points do most of the work."
+          "why": "Your Frost and Fire spells are resisted less, and every guide takes it first."
         },
         {
           "points": [
@@ -391,8 +391,9 @@
                 "why": "a sheep does not attack"
               },
               {
-                "text": "Use your wand",
-                "why": "it costs no mana, and your bar starts to refill"
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "with a wand equipped, it costs no mana and your bar refills"
               }
             ],
             "between": [
@@ -417,9 +418,10 @@
             ],
             "low": [
               {
-                "text": "Use your wand",
+                "spell": 5019,
+                "name": "Shoot",
                 "if": "when the bar is nearly empty",
-                "why": "it costs no mana"
+                "why": "with a wand equipped, it costs no mana"
               },
               {
                 "text": "Sit and drink",
@@ -486,9 +488,10 @@
                 "why": "it hits everything around you"
               },
               {
-                "text": "Use your wand",
+                "spell": 5019,
+                "name": "Shoot",
                 "if": "if the monster is nearly dead",
-                "why": "it costs no mana, and your bar starts to refill"
+                "why": "with a wand equipped, it costs no mana and your bar refills"
               },
               {
                 "spell": 116,
@@ -518,9 +521,10 @@
             ],
             "low": [
               {
-                "text": "Use your wand",
+                "spell": 5019,
+                "name": "Shoot",
                 "if": "when the bar is nearly empty",
-                "why": "it costs no mana"
+                "why": "with a wand equipped, it costs no mana"
               },
               {
                 "text": "Sit and drink",
@@ -560,9 +564,14 @@
           "plan": {
             "opening": [
               {
-                "text": "An armour",
-                "if": "Frost, Ice from 30, or Mage from 34 for mana",
-                "why": "armour keeps you alive, and Mage Armor gives mana"
+                "spell": 168,
+                "name": "Frost Armor",
+                "best": [
+                  7302,
+                  168
+                ],
+                "if": "once, before the pull",
+                "why": "Ice Armor from 30. Mage Armor from 34 gives mana instead"
               },
               {
                 "spell": 1459,
@@ -608,9 +617,10 @@
                 "why": "it costs a lot of mana, so only for a crowd"
               },
               {
-                "text": "Use your wand",
+                "spell": 5019,
+                "name": "Shoot",
                 "if": "if the monster is nearly dead",
-                "why": "it costs no mana, and your bar starts to refill"
+                "why": "with a wand equipped, it costs no mana and your bar refills"
               },
               {
                 "spell": 116,
@@ -640,9 +650,10 @@
             ],
             "low": [
               {
-                "text": "Use your wand",
+                "spell": 5019,
+                "name": "Shoot",
                 "if": "when the bar is nearly empty",
-                "why": "it costs no mana"
+                "why": "with a wand equipped, it costs no mana"
               },
               {
                 "spell": 12051,
@@ -791,9 +802,10 @@
                 }
               },
               {
-                "text": "Use your wand",
+                "spell": 5019,
+                "name": "Shoot",
                 "if": "if the monster is nearly dead",
-                "why": "it costs no mana, and your bar starts to refill"
+                "why": "with a wand equipped, it costs no mana and your bar refills"
               },
               {
                 "spell": 116,
@@ -829,9 +841,10 @@
                 "why": "it keeps part of your mana regeneration while you cast"
               },
               {
-                "text": "Use your wand",
+                "spell": 5019,
+                "name": "Shoot",
                 "if": "when the bar is nearly empty",
-                "why": "it costs no mana"
+                "why": "with a wand equipped, it costs no mana"
               },
               {
                 "spell": 12051,

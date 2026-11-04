@@ -48,7 +48,7 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
   reason, printed under it, wrapped and never truncated (changed 4 November
   2026 after the second game test, which reversed "one toggle away"), so a plan
   reads as a plan and not a wall: few steps, an opening of at most 5 and a loop
-  of at most 6, the loop's rarest lines in a `rarely` note. A build is
+  of at most 6, the loop's rarest lines in a Rarely section of rows. A build is
   a way and not the way, yet each role has one recommended road, the other
   roads are kept as "also works", and the Overview says the price of the
   other. A stage is a level bracket and a job and never an optimum, and **the

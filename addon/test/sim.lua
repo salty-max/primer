@@ -496,7 +496,7 @@ local function budget(why)
     sc.legacy or (#(sc.opening or {}) <= ns.BUDGET.opening and #(sc.loop or {}) <= ns.BUDGET.loop),
     why .. ": the steps stay few"
   )
-  for _, list in ipairs({ sc.opening or {}, sc.loop or {} }) do
+  for _, list in ipairs({ sc.opening or {}, sc.loop or {}, sc.rarely or {} }) do
     for _, r in ipairs(list) do
       if r.state == "ready" and not sc.legacy then
         check(#r.name + 1 + #r.clause <= 56, why .. ": a line fits: " .. r.line)
@@ -510,7 +510,7 @@ local function budget(why)
   -- (the rows in order: the pick, the opening, the loop; each reason on screen is the model's)
   local expected = {}
   if sc.pick then expected[#expected + 1] = sc.pick.why or false end
-  for _, list in ipairs({ sc.opening or {}, sc.loop or {} }) do
+  for _, list in ipairs({ sc.opening or {}, sc.loop or {}, sc.rarely or {} }) do
     for _, r in ipairs(list) do
       expected[#expected + 1] = r.why or false
     end
@@ -533,7 +533,10 @@ local function budget(why)
       end
     end
   end
-  check(onScreen == #(sc.opening or {}) + #(sc.loop or {}) + (sc.pick and 1 or 0), why .. ": a row for each step")
+  check(
+    onScreen == #(sc.opening or {}) + #(sc.loop or {}) + #(sc.rarely or {}) + (sc.pick and 1 or 0),
+    why .. ": a row for each step"
+  )
   check(not pageTexts():find("...", 1, true), why .. ": no ellipsis")
   check(
     not pageTexts():find("..", 1, true) and not pageTexts():find(" %.") and not pageTexts():find(" ,"),
@@ -689,8 +692,8 @@ if not G.FOREVER then
   )
   check(ns.screen.pick.why and ns.screen.opening[1].why, "the reasons are printed, not asked for")
   check(
-    ns.screen.rarely and ns.screen.rarely:find("Rarely: ", 1, true) and ns.screen.rarely:find(":", 9, true),
-    "the rarest lines in a note, each with its reason"
+    ns.screen.rarely and #ns.screen.rarely >= 1 and ns.screen.rarely[1].why and ns.screen.rarely[1].icon,
+    "the rarest lines as rows like the others: a picture, a condition, the reason printed"
   )
   for i, r in ipairs(ns.screen.loop) do
     check(r.n == i, "the loop is numbered")
@@ -762,6 +765,18 @@ if not G.FOREVER then
   ns.reader.reset()
   PrimerFrame:Hide()
   ns.open(TAB.level)
+  -- every row of the page has its picture, and a spell not learned yet is dimmed, never black
+  for _, list in ipairs({ ns.screen.opening or {}, ns.screen.loop or {}, ns.screen.rarely or {} }) do
+    for _, r in ipairs(list) do
+      check(r.icon, "a row has a picture: " .. r.name)
+    end
+  end
+  for _, row in ipairs(ns.stepRows) do
+    if row.shown and row.slot.icon.color and row.slot.icon.color[1] < 1 then
+      check(row.slot.icon.color[1] == 0.65, "a row not pressable yet is dimmed to 0.65, not black")
+    end
+  end
+
   -- the pick's rank is the talent's own: the rank the road holds once the point at that level is spent
   do
     local snap0, n = ns.reader.snapshot(), 0
@@ -1064,6 +1079,49 @@ if not G.FOREVER then
     "the Mage has one role: nothing to ask, no Change role"
   )
   budget("Frost at 24")
+  -- a spell not learned yet (Counterspell at 24, the character is 22) is dimmed, not black
+  s.level = 22
+  PrimerFrame:Hide()
+  ns.reader.reset()
+  ns.open(TAB.level)
+  local dimmed = 0
+  for _, row in ipairs(ns.stepRows) do
+    if row.shown and row.slot.icon.color and row.slot.icon.color[1] == 0.65 then dimmed = dimmed + 1 end
+  end
+  check(dimmed > 0, "a row not pressable yet is dimmed to 0.65 with its own picture (" .. dimmed .. " rows)")
+  s.level = 24
+  PrimerFrame:Hide()
+  ns.reader.reset()
+  ns.open(TAB.level)
+  -- a row that stands for the best of a few spells shows the real one the character knows
+  check(
+    ns.screen.opening[1].spell == 168 and ns.screen.opening[1].state == "ready",
+    "the armour row shows Frost Armor at 24"
+  )
+  s.level, s.spells[7302] = 32, true
+  PrimerFrame:Hide()
+  ns.reader.reset()
+  ns.open(TAB.level)
+  check(ns.screen.opening[1].spell == 7302, "and Ice Armor once the character has it")
+  check(ns.screen.opening[1].why:find("Mage Armor", 1, true), "with the alternative in the reason")
+  -- looking at a later level: the best that level has
+  s.spells[7302] = nil
+  s.level = 24
+  PrimerFrame:Hide()
+  ns.reader.reset()
+  ns.open(TAB.level)
+  ns.view.looking = 33
+  ns.page()
+  check(
+    ns.screen.opening[1].spell == 7302 and ns.screen.opening[1].state == "ready",
+    "looking at level 33: Ice Armor, which that level has"
+  )
+  ns.view.looking = nil
+  s.level, s.spells[7302] = 32, true
+  s.level, s.spells[7302] = 24, nil
+  PrimerFrame:Hide()
+  ns.reader.reset()
+  ns.open(TAB.level)
   ns.open(TAB.talents)
   check(ns.screen.tree and #ns.screen.tree > 20 and not ns.screen.asked, "the Mage's trees")
   ns.open(TAB.level)

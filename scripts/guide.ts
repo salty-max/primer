@@ -64,7 +64,11 @@ const PHASES = ["untalented", "choose", "spent"];
 const OVERVIEW = ["who", "good", "bad", "resource", "levelling", "ten"];
 // Spells every character has that no class book lists (the plan's "Attack"), by id and the game's name
 // (and the picture the game's action bar gives it: the client's own icon for the spell is a developer's photo)
-const COMMON_SPELLS: Record<number, [string, string]> = { 6603: ["Attack", "Interface\\Icons\\Ability_MeleeDamage"] };
+const COMMON_SPELLS: Record<number, [string, string]> = {
+  6603: ["Attack", "Interface\\Icons\\Ability_MeleeDamage"],
+  // Shoot (the wand): every wand-user has it from level 1 and no class book lists it, so the facts check takes it as granted
+  5019: ["Shoot", "Interface\\Icons\\Ability_ShootWand"],
+};
 const PLAN_LISTS = ["opening", "loop", "rarely", "between", "low"] as const;
 const CLAUSE_WORDS = 14;
 const ROLES = ["damage", "tank", "heal"];
@@ -113,7 +117,7 @@ type Row = {
 // A step of a rotation plan: a spell (its name checked against the game's, level and stance as a row's)
 // or a line of text alone, when it applies (`if`, a clause: none on the last line of the loop), what to do
 // (`say`, only when the spell's name is not enough) and why (one short clause).
-type PlanStep = { spell?: number; name?: string; text?: string; if?: string; say?: string; why: string; talentSpell?: number; need?: Row["need"] };
+type PlanStep = { spell?: number; best?: number[]; name?: string; text?: string; if?: string; say?: string; why: string; talentSpell?: number; need?: Row["need"] };
 type Plan = {
   opening: PlanStep[];
   loop: PlanStep[];
@@ -240,6 +244,12 @@ class Facts {
     const ids = [spell, ...rows.map((r) => r.id).filter((id) => id !== spell)];
     this.seen.set(`spell ${spell} family`, ids.join(","));
     return ids;
+  }
+  /** A spell's picture in the data (null: none, the row would show a blank). */
+  icon(spell: number): string | null {
+    const r = this.db.query("SELECT icon_path FROM spell_info WHERE spell_id = ?").get(spell) as { icon_path: string | null } | null;
+    this.seen.set(`spell ${spell} icon`, r?.icon_path ?? "none");
+    return r?.icon_path ?? null;
   }
   /** The forms a spell can be pressed in, from the client's own table (SpellShapeshift): null when it asks for none. */
   stances(spell: number): string[] | null {
@@ -401,7 +411,26 @@ function checkBuild(b: Build, f: Facts) {
         } else {
           checkRow(x as Row, at, st);
         }
+        // a picture for every spell: a row never shows a blank
+        if (COMMON_SPELLS[x.spell] === undefined && f.icon(x.spell) === null) bad(`${at}: spell ${x.spell} has no picture in the data`);
+        // a row that stands for the best of a few spells (an armour, a seal): the best first, the baseline the row's own spell
+        if (x.best) {
+          const infos: { spell: number; level: number; family: number[] }[] = [];
+          for (const id of x.best) {
+            const lv = f.level(id);
+            if (f.name(id) === null || lv === undefined || lv === null) bad(`${at}: best spell ${id} is not in the class's book`);
+            else infos.push({ spell: id, level: lv, family: f.family(id) });
+            if (f.icon(id) === null) bad(`${at}: best spell ${id} has no picture in the data`);
+          }
+          if (infos.some((b, i) => i > 0 && b.level > infos[i - 1].level)) bad(`${at}: best runs best first, a later spell is learned at a higher level than an earlier one`);
+          if (x.best[x.best.length - 1] !== x.spell) bad(`${at}: the last of best is the row's own spell (the one every character has)`);
+          (x as { bestInfo?: typeof infos }).bestInfo = infos;
+        }
       } else if (!x.text) bad(`${at}: neither a spell nor a text`);
+      else {
+        const k = `${b.key} (${f.game})`;
+        noSpell.set(k, [...(noSpell.get(k) ?? []), x.text]);
+      }
       if (needWhy && !x.why) bad(`${at}: no reason`);
       const over = (x.name ?? x.text ?? "").length + (x.if ? 1 + x.if.length : 0) > BUDGET_LINE || (x.why?.length ?? 0) > BUDGET_WHY;
       if (over) bad(`${at}: over the line budget (name and condition ${BUDGET_LINE} characters, reason ${BUDGET_WHY})`);
@@ -472,6 +501,8 @@ function stepLua(x: PlanStep & { learned?: number }, key: string, bare = false):
     f.push(`spell = ${x.spell}`, `level = ${x.learned}`);
     const fam = (x as { family?: number[] }).family;
     if (fam && fam.length > 1) f.push(`family = ${list(fam)}`);
+    const bi = (x as { bestInfo?: { spell: number; level: number; family: number[] }[] }).bestInfo;
+    if (bi) f.push(`best = { ${bi.map((b) => `{ spell = ${b.spell}, level = ${b.level}${b.family.length > 1 ? `, family = ${list(b.family)}` : ""} }`).join(", ")} }`);
     if (COMMON_SPELLS[x.spell] !== undefined) f.push("common = true", `icon = ${q(COMMON_SPELLS[x.spell][1])}`);
     if (x.talentSpell !== undefined) f.push(`talent = ${x.talentSpell}`);
     if (x.need?.talents?.length) f.push(`talents = ${list(x.need.talents)}`);
@@ -486,6 +517,7 @@ function stepLua(x: PlanStep & { learned?: number }, key: string, bare = false):
   return `{ ${f.join(", ")} }`;
 }
 
+const noSpell = new Map<string, string[]>(); // build (game): the plan lines that name no spell, so show no picture
 const lockNow: Lock = { classic: {}, forever: {} }; // what each build read this run, for the lock
 
 function luaFor(game: Game): { lua: string; builds: number } {
@@ -762,4 +794,5 @@ for (const [file, lua] of outputs) {
   } else writeFileSync(file, lua);
 }
 if (stale) process.exit(1);
+for (const [k, texts] of noSpell) console.log(`note: ${k}: plan lines that name no spell and show no picture (${[...new Set(texts)].join(", ")})`);
 console.log(`✓ the guide: ${GAMES.reduce((n, g) => n + content[g].reduce((m, c) => m + c.builds.length, 0), 0)} builds, ${sorted.length} words, the facts checked and locked in ${GAMES.filter((g) => content[g].length).join(" and ")}`);
