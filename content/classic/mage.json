@@ -355,7 +355,7 @@
               {
                 "spell": 133,
                 "name": "Fireball",
-                "if": "as your opener, until Frostbolt comes at level 4",
+                "if": "as your opener, until Frostbolt at level 4",
                 "why": "it reaches the monster from far away"
               },
               {
@@ -381,13 +381,13 @@
               {
                 "spell": 5143,
                 "name": "Arcane Missiles",
-                "if": "if nothing can reach you while you channel",
+                "if": "if nothing can reach you as you channel",
                 "why": "you cannot move for any of it"
               },
               {
                 "spell": 118,
                 "name": "Polymorph",
-                "if": "if a second monster joins and you cannot kill it first",
+                "if": "if another monster joins and you cannot cope",
                 "why": "a sheep does not attack"
               },
               {
@@ -476,7 +476,7 @@
               {
                 "spell": 118,
                 "name": "Polymorph",
-                "if": "if a second monster joins and you can deal with one first",
+                "if": "if another monster joins and you cannot cope",
                 "why": "a sheep does not attack"
               },
               {
@@ -560,22 +560,9 @@
           "plan": {
             "opening": [
               {
-                "spell": 168,
-                "name": "Frost Armor",
-                "if": "once, before the pull",
-                "why": "it adds armour"
-              },
-              {
-                "spell": 7302,
-                "name": "Ice Armor",
-                "if": "from level 30, instead of Frost Armor",
-                "why": "more armour, and a slow on melee attackers"
-              },
-              {
-                "spell": 6117,
-                "name": "Mage Armor",
-                "if": "from level 34, when mana is what ends your day",
-                "why": "it keeps part of your mana regeneration while you cast"
+                "text": "An armour",
+                "if": "Frost, Ice from 30, or Mage from 34 for mana",
+                "why": "armour keeps you alive, and Mage Armor gives mana"
               },
               {
                 "spell": 1459,
@@ -587,12 +574,6 @@
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "from as far as you can reach",
-                "why": "it is your main bolt, and it slows the monster"
-              },
-              {
-                "spell": 116,
-                "name": "Frostbolt",
-                "if": "again, before it arrives",
                 "why": "it is your main bolt, and it slows the monster"
               }
             ],
@@ -629,7 +610,7 @@
               {
                 "spell": 118,
                 "name": "Polymorph",
-                "if": "if a second monster joins and you can deal with one first",
+                "if": "if another monster joins and you cannot cope",
                 "why": "a sheep does not attack"
               },
               {
@@ -766,7 +747,7 @@
                 "spell": 11426,
                 "name": "Ice Barrier",
                 "if": "just before a hard pull",
-                "why": "it shields you, and spells are not interrupted while it holds",
+                "why": "it shields you, and hits do not interrupt spells",
                 "talentSpell": 11426
               },
               {
@@ -786,8 +767,8 @@
               {
                 "spell": 11426,
                 "name": "Ice Barrier",
-                "if": "if it has gone and the monster is hitting you",
-                "why": "it shields you, and spells are not interrupted while it holds",
+                "if": "if it has gone and the monster hits you",
+                "why": "it shields you, and hits do not interrupt spells",
                 "talentSpell": 11426
               },
               {

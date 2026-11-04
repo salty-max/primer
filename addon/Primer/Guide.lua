@@ -276,6 +276,24 @@ function G.nextPick(snap, build, road)
   }
 end
 
+-- The pick the road makes at a level (nil: no point comes at that level, or the road has run out), as nextPick
+-- gives it: the talent (a choice: the first option), which of the step's points it is, and how many the step has.
+function G.pickAt(snap, build, road, level)
+  for _, step in ipairs(G.roads(build)[road or 1].path) do
+    if level >= step.level[1] and level <= step.level[2] then
+      local spell = (step.any or { step.talent })[1]
+      return {
+        spell = spell,
+        info = G.talent(snap, spell),
+        level = level,
+        number = level - step.level[1] + 1,
+        of = step.level[2] - step.level[1] + 1,
+        step = step,
+      }
+    end
+  end
+end
+
 -- The points the character can spend now: one a level from 10, less what it
 -- has put in.
 function G.unspent(snap)

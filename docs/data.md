@@ -7,7 +7,7 @@ The guide's rules and words, and the facts check. Written by hand:
 
 ## content/<game>/<class>.json
 
-A game's own file: Era's advice and Forever's never share a line, so a build has no `games` list, the folder is the game. `class.roles` gives the one build the page advises for each role the class has (`{ "damage": { "build": "paladin-retribution", "reason": "..." } }`, a reason of 30 words at most, a role with several builds names the one, the others are "also works"). A build may carry `"lineBudget": true`: its plan lines hold to the budget (name and condition together at most 56 characters, a reason at most 60, what one line of the window holds). Until a build has had its pass the check only counts the lines over (a `note:` line), then the build is flagged and the check fails on the first one.
+A game's own file: Era's advice and Forever's never share a line, so a build has no `games` list, the folder is the game. `class.roles` gives the one build the page advises for each role the class has (`{ "damage": { "build": "paladin-retribution", "reason": "..." } }`, a reason of 30 words at most, a role with several builds names the one, the others are "also works"). Every plan line holds to the line budget (4 November 2026 rework, enforced for every build): name and condition together at most 56 characters, a reason at most 60, what one line of the window holds and the client never cuts. A stage's opening has at most 6 steps (the window draws it as a chain) and its loop at most 8 lines, so the Level page stays about ten lines.
 
 ```
 class  = { id (ChrClasses), key, token, name, text (the class's page), card,
@@ -241,3 +241,5 @@ A row shows if its facts are true now: the character's level is at least
 `level`, `talent` and `talents` are taken (`C_SpecializationInfo` on Era, the
 probe's open question), `stance` is the form it is pressed in. `when` is only
 text. The page for a level 12 warrior is shorter, never wrong.
+
+A step may be a line of text alone where one line stands for several spells (the opening's "A seal": Command with a slow weapon, else Righteousness). It has no icon of its own and no grey state, so use it only where the loop below names the spells by id.

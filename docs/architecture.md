@@ -48,11 +48,10 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   never wrong; a spell only waiting for the trainer is counted), `steps` (the
   path as the character stands: done, partly, later, and the next pick) and
   `unspent` (a point a level from 10).
-- **The phase flow (M3b)**, in Guide.lua and the strip of the window (rebuilt in M-B): a character's phase is its state (`untalented` before level
+- **The phase flow (M3b)**, in Guide.lua and the Level page: a character's phase is its state (`untalented` before level
   10, `choose` with points to spend and none spent, `spent`), kept apart from
-  the builds, which are content. At `choose` with no role stored the Play tab
-  asks once what to play (a card a role, the build we advise, Use this, or Not
-  yet) and says it once in chat, never a pop-up and no glow; a role chosen sets
+  the builds, which are content. At `choose` with no role stored the Level page
+  asks once what to play (a line a role and a button each, or Not yet) and says it once in chat, never a pop-up and no glow; a role chosen sets
   that role's recommended build. From `spent` the
   build is the player's pick, else the build the points leave open: a build is
   reachable while the points outside its tree are no more than 20 of the 51
@@ -62,64 +61,59 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   follow, my own way); points that fit only another role's builds offer a
   switch, never silent; a dismissed note stays dismissed until the drift
   changes (`driftSeen`). Your own way (`freestyle`)
-  has no picks and no notes. Change role in the header opens the strip with the other
+  has no picks and no notes. Change role, at the foot of the page, offers the other
   roles and says a respec costs gold. Saved per talent group: `role`, `pickedBuild`,
   `freestyle`, `driftSeen`, `driftWay`, `notYet`.
-- **What the page is for (4 November 2026, after the first game test)**: a
-  header on every tab says it in one line ("Retribution Paladin. Damage. Level
-  12. A build you picked." and how it was chosen: a build you picked, following
-  your points, your own way, not chosen yet). What the page is for (the role
-  and build, `view.subject`) is fixed while the window is open and changes only
-  on the player's own click or when the window is opened: a point spent, a
-  level or a spell learned update the facts, the ticks and the notes in place,
-  never the build or role. A picked build is never swapped for the nearest one:
-  the drift is said and Follow is a button. A click on another build or role
-  only looks (`view.look`): the page says so loudly with Use this build and
-  Back, and nothing is chosen until Use. A refresh from an event keeps the
-  scroll and the talent in view; a tab or a click starts at the top.
-- **The Overview tab** (4 November 2026, the first tab): the class in
-  general in the narrator's voice, from the class's `overview` in the data, the
-  builds in a line each with their roles, and what to do at level 10 (`drawOverview`).
-  (M-B: the card names the other builds as what also works.) **Roads** (`G.roads`,
-  `G.pickRoad`): a build may have several orders for its points; the player never
-  chooses one: the page advises the recommended road (the Hardcore road on a
-  Hardcore realm), says why in a line, and recognises quietly a documented road
-  the points follow, with no drift (`docs/inference.md`). A stage's plan may carry `alt`, another way to play it
-  (a crowd, against one monster), under its own heading. `build.hardcore` lines
-  show only on a Hardcore realm (`G.HARDCORE`).
-- **The rotation plan** (`drawPlan`, `G.stepState`): a stage's `plan` shown as
-  Opening, Loop, Between fights, Low mana and Big cooldowns (`docs/data.md`).
-- **Window.lua** (rebuilt 4 November 2026 from `../ideas/primer-design.md`, direction A):
-  `K.gameWindow` ("PrimerFrame") or `K.dialog`, `K.movable` (place in
-  `PrimerSettings.places.window`, Escape closes), three `K.tabs`: **Overview**
-  (the class in the narrator's voice, then a card: your road with the role's
-  recommendation and its price, the other roles, what also works, the Hardcore
-  lines), **Plan** (the stage's opening, the loop read from the top, between
-  fights, low mana, big cooldowns: one line a row, `[n] icon name when`, the
-  reason one toggle away ("Show the reasons", kept for the account) and in each
-  row's tooltip; a row the character cannot press yet stays in its place, grey,
-  with what it needs; at level 10 with no role, one card a role) and **Talents**
-  (`Tree.lua`, the order beside the trees, a level slider, the next pick's reason).
-  Over the tabs, on every one: a **header** (the build and class, role, level,
-  Hardcore realm, talent group, one sentence on how the page was chosen, the
-  next-pick chip) and a **strip** of fixed height for the one thing that needs the
-  player (the level-10 question, Change role, a drift, a new stage), so nothing
-  below it moves. What the page is for (`view.subjects`, per talent group) is
-  frozen while the window is open: an event greys and lights the rows in place
-  (the stage gives the list, never the character), moves a ring and a count, and
-  swaps nothing. A role chosen sets its recommended build (`G.recommend`): the
-  player is never asked which build. Scroll and tab survive an event. The
-  events are the same as before (`PLAYER_ENTERING_WORLD`, `PLAYER_LEVEL_UP`,
-  `SPELLS_CHANGED`, `LEARNED_SPELL_IN_SKILL_LINE`, `TRAINER_UPDATE`,
-  `CHARACTER_POINTS_CHANGED`, `PLAYER_TALENT_UPDATE`, `TRAIT_CONFIG_UPDATED`,
-  `ACTIVE_TALENT_GROUP_CHANGED`), each only asking for a look, a burst as one
-  draw 0.3 seconds later. In a fight it reads nothing and says it waits. A
-  draw is `pcall`-guarded (`broken`). One chat line at level 10, once a
-  character (`PrimerChar.welcomed`), replaces the minimap glow. What each draw
-  left is `ns.screen` (header, strip, plan lists, tree cells, overview): the
-  sim reads that and presses the strip's buttons through it. `ns.toggle()`,
-  `ns.open(tab)`.
-- **Tree.lua**: the class's three trees from the data's `cells` (row 0 to 6,
+- **What the page is for (4 November 2026, after the first game test)**: the role
+  and build (`view.subjects`) are fixed while the window is open and change only
+  on the player's own click or when the window is opened: a point spent, a level or
+  a spell learned update the page in place, never the build or role. A picked
+  build is never swapped for the nearest one: the drift is said and Follow is a
+  button. Looking at another level only looks (`view.looking`). **Roads**
+  (`G.roads`, `G.pickRoad`): a build may have several orders for its points; the
+  player never chooses one: the page advises the recommended road (the Hardcore
+  road on a Hardcore realm) and recognises quietly a documented road the points
+  follow (`docs/inference.md`). A stage's plan may carry `alt` and a build
+  `hardcore` lines: neither is on the Level page yet.
+- **The rotation plan** (`G.stepState`): a stage's `plan`, its opening and loop
+  on the Level page (`docs/data.md`).
+- **Window.lua** (rebuilt twice on 4 November 2026: direction A failed the user's
+  game test, "no family vibe, the window does not use the kit", so it is direction B
+  of `../ideas/primer-design.md` on the kit's book, the way Goodwill and Yours
+  Truly are built): `K.book` ("PrimerFrame": the game's window, `K.list` on the
+  left, `K.page` on the right, `K.tabs`), no frame of its own but the rows of the
+  page. Three tabs: **Level** (written), **Talents** and **Class** (placeholders
+  that say their name). The left list is the spine: the levels from the
+  character's to 40 at which something arrives (a pick, or a spell the build's
+  plans use), "You are here" at the character's own, the level shown picked
+  out. The page is the selected level's, with at most about ten lines of text
+  (`ns.BUDGET.lines`): the **pick** (next pick, or that level's, a "Why?" that opens
+  its reason), the **opening** as one chain of names, the **loop** as numbered
+  rows (`[n] icon name clause`, wrapping rather than clipping, the reason in the
+  icon's tooltip, a row the character cannot press yet grey in its place with what
+  it needs). The facts are the count beside the portrait (the build, the level and
+  the realm or the group: three at most) and the page's subtitle is how the road
+  was chosen. Selecting a level is **looking**: "Looking at level 38." and "Back to
+  my level", and nothing the page is for changes (`view.looking`); the level-10
+  question, a drift or a role change is one block that replaces the page ("one idea
+  a screen"), asked once (`view.putOff`). What the page is for (`view.subjects`, per
+  talent group) is frozen while the window is open. A role chosen sets its
+  recommended build (`G.recommend`). **Nothing is cut with an ellipsis**: a line
+  that does not fit is shortened in the content (the check holds every plan line
+  to 56 characters, a reason to 60, an opening to 6 steps and a loop to 8), rows
+  wrap, and `/primer fit` (`ns.fit`) walks the open window and names any text the
+  client cut (`IsTruncated`). The events are the same as before
+  (`PLAYER_ENTERING_WORLD`, `PLAYER_LEVEL_UP`, `SPELLS_CHANGED`,
+  `LEARNED_SPELL_IN_SKILL_LINE`, `TRAINER_UPDATE`, `CHARACTER_POINTS_CHANGED`,
+  `PLAYER_TALENT_UPDATE`, `TRAIT_CONFIG_UPDATED`, `ACTIVE_TALENT_GROUP_CHANGED`), each
+  only asking for a look, a burst as one draw 0.3 seconds later. In a fight it
+  reads nothing and says it waits. A draw is `pcall`-guarded (`broken`). One chat
+  line at level 10, once a character (`PrimerChar.welcomed`). What each draw left
+  is `ns.screen` (title, facts, spine, pick, opening, loop, question): the sim reads
+  that and presses the buttons through it. `ns.toggle()`, `ns.open(tab)`. Between
+  fights, low mana, the big cooldowns, the Hardcore notes and the Overview are
+  not on the page yet (the Class tab and a later pass).
+- **Tree.lua** (kept for the Talents tab, which is a placeholder: nothing calls it yet): the class's three trees from the data's `cells` (row 0 to 6,
   column 0 to 3 as the game numbers them), `K.slot` cells of 34 pixels, the road's
   numbers (the order it first takes each talent: they belong to the road), taken
   lit gold, on the road not yet blue, the next pick ringed, row gates at the

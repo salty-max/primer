@@ -322,12 +322,12 @@
                 "spell": 465,
                 "name": "Devotion Aura",
                 "if": "once, before anything",
-                "why": "every hit on you hurts less, and it stays until you change it"
+                "why": "every hit on you hurts less, until you change it"
               },
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
-                "if": "before the first pull, and again when it ends",
+                "if": "before pulling, and when it ends",
                 "why": "it adds attack power, so it pays back over many fights"
               },
               {
@@ -358,13 +358,13 @@
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
-                "if": "when the seal is gone, which is after every Judgement",
+                "if": "when your seal ends",
                 "why": "swings add nothing without it"
               },
               {
                 "spell": 853,
                 "name": "Hammer of Justice",
-                "if": "if the monster runs, or you need a quiet moment to heal",
+                "if": "if the monster runs, or you must heal",
                 "why": "a stunned monster hits nothing"
               },
               {
@@ -401,7 +401,7 @@
               },
               {
                 "text": "Sit and drink",
-                "if": "after every three or four pulls, when mana is under 40 percent",
+                "if": "when mana is under 40 percent",
                 "why": "mana, not health, is what stops you"
               }
             ],
@@ -425,7 +425,7 @@
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
-                "if": "before the first pull, and again when it ends",
+                "if": "before pulling, and when it ends",
                 "why": "it adds attack power, so it pays back over many fights"
               },
               {
@@ -456,13 +456,13 @@
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
-                "if": "when the seal is gone, which is after every Judgement",
+                "if": "when your seal ends",
                 "why": "swings add nothing without it"
               },
               {
                 "spell": 853,
                 "name": "Hammer of Justice",
-                "if": "if the monster runs, or you need a quiet moment to heal",
+                "if": "if the monster runs, or you must heal",
                 "why": "a stunned monster hits nothing"
               },
               {
@@ -489,12 +489,12 @@
               {
                 "spell": 19742,
                 "name": "Blessing of Wisdom",
-                "if": "when mana, not health, is what you run out of",
+                "if": "when mana runs out before health",
                 "why": "it gives mana back while you fight"
               },
               {
                 "text": "Stop casting for five seconds",
-                "if": "after Judgement, when mana is low",
+                "if": "after Judgement, mana low",
                 "why": "mana comes back faster while you do not cast"
               },
               {
@@ -504,7 +504,7 @@
               },
               {
                 "text": "Sit and drink",
-                "if": "after every three or four pulls, when mana is under 40 percent",
+                "if": "when mana is under 40 percent",
                 "why": "mana, not health, is what stops you"
               }
             ],
@@ -532,21 +532,13 @@
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
-                "if": "before the first pull, and again when it ends",
+                "if": "before pulling, and when it ends",
                 "why": "it adds attack power, so it pays back over many fights"
               },
               {
-                "spell": 20375,
-                "name": "Seal of Command",
-                "if": "just before the pull, if your weapon is slower than 3.5 seconds",
-                "why": "each swing may add Holy damage, and a slow weapon adds more",
-                "talentSpell": 20375
-              },
-              {
-                "spell": 20154,
-                "name": "Seal of Righteousness",
-                "if": "just before the pull, with a fast weapon or until Seal of Command",
-                "why": "a fast weapon gets more out of it"
+                "text": "A seal",
+                "if": "Command with a slow weapon, else Righteousness",
+                "why": "a slow weapon gets more out of Command"
               },
               {
                 "spell": 20271,
@@ -570,7 +562,7 @@
               {
                 "spell": 879,
                 "name": "Exorcism",
-                "if": "if the monster is undead or a demon, and it is ready",
+                "if": "if the monster is undead or a demon",
                 "why": "an instant Holy hit that works on nothing else"
               },
               {
@@ -582,20 +574,20 @@
               {
                 "spell": 20375,
                 "name": "Seal of Command",
-                "if": "when the seal is gone and your weapon is slower than 3.5 seconds",
+                "if": "when your seal ends, slow weapon",
                 "why": "each swing may add Holy damage, and a slow weapon adds more",
                 "talentSpell": 20375
               },
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
-                "if": "when the seal is gone, with a fast weapon or until Seal of Command",
+                "if": "otherwise, when your seal ends",
                 "why": "a fast weapon gets more out of it"
               },
               {
                 "spell": 853,
                 "name": "Hammer of Justice",
-                "if": "if the monster runs, or you need to stop it",
+                "if": "if the monster runs or must be stopped",
                 "why": "a stunned monster hits nothing"
               },
               {
@@ -628,12 +620,12 @@
               {
                 "spell": 19742,
                 "name": "Blessing of Wisdom",
-                "if": "when mana, not health, is what you run out of",
+                "if": "when mana runs out before health",
                 "why": "it gives mana back while you fight"
               },
               {
                 "text": "Stop casting for five seconds",
-                "if": "after Judgement, when mana is low",
+                "if": "after Judgement, mana low",
                 "why": "mana comes back faster while you do not cast"
               },
               {
@@ -643,7 +635,7 @@
               },
               {
                 "text": "Sit and drink",
-                "if": "after every three or four pulls, when mana is under 40 percent",
+                "if": "when mana is under 40 percent",
                 "why": "mana, not health, is what stops you"
               }
             ],
@@ -671,21 +663,13 @@
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
-                "if": "before the first pull, and again when it ends",
+                "if": "before pulling, and when it ends",
                 "why": "it adds attack power, so it pays back over many fights"
               },
               {
-                "spell": 20375,
-                "name": "Seal of Command",
-                "if": "just before the pull, if your weapon is slower than 3.5 seconds",
-                "why": "each swing may add Holy damage, and a slow weapon adds more",
-                "talentSpell": 20375
-              },
-              {
-                "spell": 20154,
-                "name": "Seal of Righteousness",
-                "if": "just before the pull, with a fast weapon or until Seal of Command",
-                "why": "a fast weapon gets more out of it"
+                "text": "A seal",
+                "if": "Command with a slow weapon, else Righteousness",
+                "why": "a slow weapon gets more out of Command"
               },
               {
                 "spell": 20271,
@@ -715,7 +699,7 @@
               {
                 "spell": 879,
                 "name": "Exorcism",
-                "if": "if the monster is undead or a demon, and it is ready",
+                "if": "if the monster is undead or a demon",
                 "why": "an instant Holy hit that works on nothing else"
               },
               {
@@ -728,14 +712,14 @@
               {
                 "spell": 20375,
                 "name": "Seal of Command",
-                "if": "when the seal is gone and your weapon is slower than 3.5 seconds",
+                "if": "when your seal ends, slow weapon",
                 "why": "each swing may add Holy damage, and a slow weapon adds more",
                 "talentSpell": 20375
               },
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
-                "if": "when the seal is gone, with a fast weapon or until Seal of Command",
+                "if": "otherwise, when your seal ends",
                 "why": "a fast weapon gets more out of it"
               },
               {
@@ -774,12 +758,12 @@
               {
                 "spell": 19742,
                 "name": "Blessing of Wisdom",
-                "if": "when mana, not health, is what you run out of",
+                "if": "when mana runs out before health",
                 "why": "it gives mana back while you fight"
               },
               {
                 "text": "Stop casting for five seconds",
-                "if": "after Judgement, when mana is low",
+                "if": "after Judgement, mana low",
                 "why": "mana comes back faster while you do not cast"
               },
               {
@@ -789,7 +773,7 @@
               },
               {
                 "text": "Sit and drink",
-                "if": "after every three or four pulls, when mana is under 40 percent",
+                "if": "when mana is under 40 percent",
                 "why": "mana, not health, is what stops you"
               }
             ],

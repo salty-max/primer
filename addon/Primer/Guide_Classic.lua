@@ -121,12 +121,9 @@ ns.data = {
         { from = 20, to = 39, about = "mage-frost.s3",
           plan = {
             opening = {
-              { spell = 168, level = 1, cond = "mage-frost.s3.opening1.if", why = "mage-frost.s3.opening1.why" },
-              { spell = 7302, level = 30, cond = "mage-frost.s3.opening2.if", why = "mage-frost.s3.opening2.why" },
-              { spell = 6117, level = 34, cond = "mage-frost.s3.opening3.if", why = "mage-frost.s3.opening3.why" },
-              { spell = 1459, level = 1, cond = "mage-frost.s3.opening4.if", why = "mage-frost.s3.opening4.why" },
-              { spell = 116, level = 4, cond = "mage-frost.s3.opening5.if", why = "mage-frost.s3.opening5.why" },
-              { spell = 116, level = 4, cond = "mage-frost.s3.opening6.if", why = "mage-frost.s3.opening6.why" },
+              { text = "mage-frost.s3.opening1.text", cond = "mage-frost.s3.opening1.if", why = "mage-frost.s3.opening1.why" },
+              { spell = 1459, level = 1, cond = "mage-frost.s3.opening2.if", why = "mage-frost.s3.opening2.why" },
+              { spell = 116, level = 4, cond = "mage-frost.s3.opening3.if", why = "mage-frost.s3.opening3.why" },
             },
             loop = {
               { spell = 2139, level = 24, cond = "mage-frost.s3.loop1.if", why = "mage-frost.s3.loop1.why" },
@@ -492,10 +489,9 @@ ns.data = {
           plan = {
             opening = {
               { spell = 19740, level = 4, cond = "paladin-retribution.s3.opening1.if", why = "paladin-retribution.s3.opening1.why" },
-              { spell = 20375, level = 20, talent = 20375, cond = "paladin-retribution.s3.opening2.if", why = "paladin-retribution.s3.opening2.why" },
-              { spell = 20154, level = 1, cond = "paladin-retribution.s3.opening3.if", why = "paladin-retribution.s3.opening3.why" },
-              { spell = 20271, level = 4, cond = "paladin-retribution.s3.opening4.if", why = "paladin-retribution.s3.opening4.why" },
-              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s3.opening5.why" },
+              { text = "paladin-retribution.s3.opening2.text", cond = "paladin-retribution.s3.opening2.if", why = "paladin-retribution.s3.opening2.why" },
+              { spell = 20271, level = 4, cond = "paladin-retribution.s3.opening3.if", why = "paladin-retribution.s3.opening3.why" },
+              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s3.opening4.why" },
             },
             loop = {
               { spell = 20271, level = 4, cond = "paladin-retribution.s3.loop1.if", why = "paladin-retribution.s3.loop1.why" },
@@ -527,10 +523,9 @@ ns.data = {
           plan = {
             opening = {
               { spell = 19740, level = 4, cond = "paladin-retribution.s4.opening1.if", why = "paladin-retribution.s4.opening1.why" },
-              { spell = 20375, level = 20, talent = 20375, cond = "paladin-retribution.s4.opening2.if", why = "paladin-retribution.s4.opening2.why" },
-              { spell = 20154, level = 1, cond = "paladin-retribution.s4.opening3.if", why = "paladin-retribution.s4.opening3.why" },
-              { spell = 20271, level = 4, cond = "paladin-retribution.s4.opening4.if", why = "paladin-retribution.s4.opening4.why" },
-              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s4.opening5.why" },
+              { text = "paladin-retribution.s4.opening2.text", cond = "paladin-retribution.s4.opening2.if", why = "paladin-retribution.s4.opening2.why" },
+              { spell = 20271, level = 4, cond = "paladin-retribution.s4.opening3.if", why = "paladin-retribution.s4.opening3.why" },
+              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s4.opening4.why" },
             },
             loop = {
               { spell = 20271, level = 4, cond = "paladin-retribution.s4.loop1.if", why = "paladin-retribution.s4.loop1.why" },

@@ -109,8 +109,20 @@ K.commands({
   open = function()
     if ns.toggle then ns.toggle() end
   end,
-  usage = L["/primer opens the guide. /primer minimap shows or hides its button on the minimap. /primer debug says what went wrong, if anything did."],
+  usage = L["/primer opens the guide. /primer minimap shows or hides its button on the minimap. /primer debug says what went wrong, if anything did. /primer fit says what the window cut short."],
   commands = {
+    fit = function()
+      local cut, open = ns.fit()
+      if not open then
+        print(ns.PREFIX .. L["Open the window first."])
+      elseif #cut == 0 then
+        print(ns.PREFIX .. L["Nothing is cut short."])
+      else
+        for _, text in ipairs(cut) do
+          print(ns.PREFIX .. L["Cut short: %s"]:format(text))
+        end
+      end
+    end,
     debug = function()
       local any = false
       for what, err in pairs(ns.faults) do

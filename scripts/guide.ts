@@ -50,7 +50,9 @@ const CHECK = process.argv.includes("--check");
 const STAMP = process.argv.includes("--stamp") ? process.argv.slice(process.argv.indexOf("--stamp") + 1) : null;
 const LOCK_FILE = process.env.PRIMER_LOCK ?? join(ROOT, "facts.lock.json"); // (the test points it at a copy)
 const BUDGET_LINE = 56; // a plan row's name and condition together, in characters (one line of the window)
-const BUDGET_WHY = 60; // a reason, which the tooltip and the toggle show
+const BUDGET_WHY = 60; // a reason, which a tooltip or a tap shows
+const BUDGET_OPENING = 6; // a stage's opening, a chain of one or two lines
+const BUDGET_LOOP = 8; // a stage's loop, a numbered line each: the Level page holds about ten lines in all
 type Game = "classic" | "forever";
 const GAMES: Game[] = ["classic", "forever"];
 const FILE: Record<Game, string> = { classic: "Guide_Classic.lua", forever: "Guide_Forever.lua" };
@@ -130,7 +132,6 @@ type Build = {
   role: string;
   tree: number;
   checked: string;
-  lineBudget?: boolean; // the plan's lines hold to the line budget (docs/data.md): enforced once a build has had its pass, counted until then
   intro: string;
   line?: string; // one line for the class's overview (none: the first sentence of the intro)
   pathNote: string;
@@ -174,7 +175,6 @@ for (const g of GAMES) {
     .sort()
     .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")));
 }
-const budgetOver = new Map<string, [number, number]>(); // build key (game): plan lines over the budget, plan lines
 
 const filled = new Map<Row, string[]>(); // the stances the table gave a row, per run of a game (never written back to the content)
 const unchecked = new Set<string>(); // stances written that the table cannot confirm
@@ -384,13 +384,13 @@ function checkBuild(b: Build, f: Facts) {
       } else if (!x.text) bad(`${at}: neither a spell nor a text`);
       if (needWhy && !x.why) bad(`${at}: no reason`);
       const over = (x.name ?? x.text ?? "").length + (x.if ? 1 + x.if.length : 0) > BUDGET_LINE || (x.why?.length ?? 0) > BUDGET_WHY;
-      const tally = budgetOver.get(`${b.key} (${f.game})`) ?? [0, 0];
-      budgetOver.set(`${b.key} (${f.game})`, [tally[0] + (over ? 1 : 0), tally[1] + 1]);
-      if (over && b.lineBudget) bad(`${at}: over the line budget (name and condition ${BUDGET_LINE} characters, reason ${BUDGET_WHY})`);
+      if (over) bad(`${at}: over the line budget (name and condition ${BUDGET_LINE} characters, reason ${BUDGET_WHY})`);
       clause(x.if, at, "its condition");
       clause(x.why, at, "its reason");
       clause(x.say, at, "its instruction");
     };
+    if ((plan.opening?.length ?? 0) > BUDGET_OPENING) bad(`${where}: an opening of more than ${BUDGET_OPENING} steps`);
+    if ((plan.loop?.length ?? 0) > BUDGET_LOOP) bad(`${where}: a loop of more than ${BUDGET_LOOP} lines`);
     for (const name of PLAN_LISTS) {
       const steps = plan[name] ?? [];
       if ((name === "loop" || (name === "opening" && !alt)) && !steps.length) bad(`${where}: a plan has ${name === "loop" ? "a" : "an"} ${name}`);
@@ -708,7 +708,6 @@ if (STAMP) {
     for (const key of Object.keys(lock[g] ?? {})) if (!lockNow[g][key]) bad(`${g} ${key}: in facts.lock.json, but no such build is written any more (bun scripts/guide.ts --stamp ${g} ${key} drops it)`);
   }
 }
-for (const [k, [n, of]] of budgetOver) if (n) console.log(`note: ${k}: ${n} of ${of} plan lines over the line budget (docs/data.md)`);
 const sorted = Object.keys(text).sort();
 outputs.push([
   join(ADDON, "GuideText.lua"),
