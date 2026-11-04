@@ -599,6 +599,12 @@ if not G.FOREVER then
   check(ns.screen.change, "and a way to change it")
   budget("level 10 tank")
 
+  -- the Talents tab leaves the question to the Level tab
+  fresh(10)
+  ns.open(TAB.talents)
+  check(ns.screen.asked and not ns.screen.tree, "the Talents tab with a question pending: answer it on the Level tab")
+  ns.open(TAB.level)
+
   -- a page is not swapped under the player: a point, a level, looking at another level
   fresh(24, ARMS15)
   ns.open(TAB.level)
@@ -631,8 +637,6 @@ if not G.FOREVER then
   check(ns.screen.title == "Level 35" and not ns.screen.back, "and back to the character's own")
 
   -- the placeholders say their name and nothing else
-  ns.open(TAB.talents)
-  check(ns.screen.placeholder == "Talents", "the Talents tab says its name")
   ns.open(TAB.class)
   check(ns.screen.placeholder == "Class", "and the Class tab")
   ns.open(TAB.level)
@@ -701,6 +705,78 @@ if not G.FOREVER then
   -- the whole spine is one list
   local seen = spineLevels()
   check(seen[1] == 24 and seen[#seen] >= 40, "the spine for the Paladin")
+  -- the Talents tab: the trees with the road on them, the road's order beside, a slider that only looks
+  PrimerFrame:Hide()
+  s.level = 24
+  points(ns.rules.ranksAt(ret, 1, 24))
+  ns.open(TAB.talents)
+  local sc = ns.screen
+  check(sc.tab == TAB.talents and sc.tree and #sc.tree > 20, "the Talents tab draws the cells of the trees")
+  local windows, states = {}, { taken = 0, road = 0, next = 0, off = 0 }
+  for _, c in ipairs(sc.tree) do
+    windows[c.window] = true
+    states[c.state] = states[c.state] + 1
+    check(c.frame.shown, "a cell is on screen")
+  end
+  check(windows[1] and windows[2] and windows[3], "all three trees")
+  check(states.taken > 0 and states.next > 0 and states.road > 0, "taken cells lit and the next pick ringed")
+  check(ns.TREES_W <= 480, "three trees fit the book's page (" .. ns.TREES_W .. " pixels)")
+  local here, picked = 0, 0
+  for _, r in ipairs(sc.road) do
+    if r.here then here = here + 1 end
+    if r.selected then picked = picked + 1 end
+  end
+  check(#sc.road >= 8 and here == 1 and picked == 1, "the road's order beside, one next pick, the level picked out")
+  check(sc.slider == 24 and not sc.looking and not sc.back, "the slider rests on the character's level")
+  check(sc.road_sentence and sc.road_sentence ~= "", "one line says which road this is")
+  local taken24 = states.taken
+  local slider = ns.talentsTab.slider
+  slider.scripts.OnValueChanged(slider, 38)
+  sc = ns.screen
+  check(sc.looking and sc.slider == 38 and sc.back, "the slider looks at level 38, and says so with the way back")
+  check(ns.talentsTab.looking.text == "Looking at level 38.", "plainly")
+  local taken38 = 0
+  for _, c in ipairs(sc.tree) do
+    if c.state == "taken" then taken38 = taken38 + 1 end
+  end
+  check(taken38 > taken24, "the trees show the road at 38")
+  check(
+    ns.view.subjects[1].build == ret.id or ns.data.builds[ns.view.subjects[1].build].key == "paladin-retribution",
+    "looking changes no more than the level"
+  )
+  check(#ns.fit() == 0, "the Talents tab: nothing cut short")
+  -- a page that fails on the Talents tab is a plain note there, not a half-drawn tree
+  local pagefn = ns.rules.page
+  ns.rules.page = function() error("boom") end
+  ns.faults = {}
+  slider.scripts.OnValueChanged(slider, 30)
+  check(
+    ns.screen.broken == "Something went wrong" and ns.talentsTab.ask.shown and not ns.talentsTab.tree.frame.shown,
+    "the Talents tab says plainly when it cannot draw"
+  )
+  ns.rules.page = pagefn
+  slider.scripts.OnValueChanged(slider, 38)
+  -- (the Level tab looks at the same level)
+  ns.open(TAB.level)
+  check(ns.screen.title == "Level 38" and ns.screen.back, "the Level tab keeps the level looked at")
+  ns.open(TAB.talents)
+  ns.screen.back()
+  check(ns.screen.slider == 24 and not ns.screen.looking, "and back to my own")
+  -- the road's rows: a click looks at its level
+  local rows = {}
+  for _, r in ipairs(ns.roadRows) do
+    if r.shown then rows[#rows + 1] = r end
+  end
+  check(#rows == #ns.screen.road, "a row for each step of the road")
+  rows[#rows].scripts.OnClick(rows[#rows])
+  check(
+    ns.screen.looking and ns.screen.slider == ns.screen.road[#rows].from,
+    "a click on the road's last step looks at its level"
+  )
+  ns.screen.back()
+  PrimerFrame:Hide()
+  ns.open(TAB.level)
+
   -- a character that knows only a higher rank of a spell still has it (the game gives each rank its own id)
   do
     local seal
@@ -824,6 +900,9 @@ if not G.FOREVER then
     "the Mage has one role: nothing to ask, no Change role"
   )
   budget("Frost at 24")
+  ns.open(TAB.talents)
+  check(ns.screen.tree and #ns.screen.tree > 20 and not ns.screen.asked, "the Mage's trees")
+  ns.open(TAB.level)
   for _, b in pairs(ns.data.builds) do
     if b.key:find("^mage") then
       for _, st in ipairs(b.stages) do

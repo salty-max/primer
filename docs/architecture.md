@@ -82,8 +82,8 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   of `../ideas/primer-design.md` on the kit's book, the way Goodwill and Yours
   Truly are built): `K.book` ("PrimerFrame": the game's window, `K.list` on the
   left, `K.page` on the right, `K.tabs`), no frame of its own but the rows of the
-  page. Three tabs: **Level** (written), **Talents** and **Class** (placeholders
-  that say their name). The left list is the spine: the levels from the
+  page. Three tabs: **Level** and **Talents** (written), **Class** (a placeholder
+  that says its name). The left list is the spine: the levels from the
   character's to 40 at which something arrives (a pick, or a spell the build's
   plans use), "You are here" at the character's own, the level shown picked
   out. The page is the selected level's: the **pick**, the **opening** (at most 5 steps), the **loop** (at most 6) and a quiet `rarely` note of the loop's rarest lines. Every step is a numbered row, its icon, its name and condition on one line and **its reason printed under it** in the dimmer body text, wrapped to the page, the row as tall as both, with room between rows and sections (`fillRow`). The page scrolls when they are longer than the window; nothing is cut. A row the character cannot press yet is grey in its place with what it needs. The facts are the count beside the portrait (the build, the level and
@@ -108,8 +108,9 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   that and presses the buttons through it. `ns.toggle()`, `ns.open(tab)`. Between
   fights, low mana, the big cooldowns, the Hardcore notes and the Overview are
   not on the page yet (the Class tab and a later pass).
-- **Tree.lua** (kept for the Talents tab, which is a placeholder: nothing calls it yet): the class's three trees from the data's `cells` (row 0 to 6,
-  column 0 to 3 as the game numbers them), `K.slot` cells of 34 pixels, the road's
+- **The Talents tab** (4 November 2026): the road's order on the left (a `K.list`: levels, the talent and its rank, "Next pick" on the next one, a click looks at that level), the three trees of `Tree.lua` on the right, a slider under them, one line on which road this is. The slider and the list only look (`view.looking`, shared with the Level tab: "Looking at level 38." and "Back to my level"), they change nothing the page is for. A question pending (the level-10 role) is answered on the Level tab, the Talents tab says so. No talent-group switch yet (Era has one group).
+- **Tree.lua**: the class's three trees from the data's `cells` (row 0 to 6,
+  column 0 to 3 as the game numbers them), `K.slot` cells of 28 pixels (three trees are 446 pixels wide, the book's page holds about 484; the game's own cells are 40), the road's
   numbers (the order it first takes each talent: they belong to the road), taken
   lit gold, on the road not yet blue, the next pick ringed, row gates at the
   left, straight prerequisite lines (the two diagonal ones are left out), the

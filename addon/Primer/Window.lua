@@ -24,12 +24,13 @@ ns.TAB = TAB
 -- note, `rarely`). The page scrolls when they are longer than the window; nothing is cut.
 ns.BUDGET = { opening = 5, loop = 6, spine = 40 }
 
-local book, list, page
+local book, list, page, talents, roadList
 local view = {} -- this session's: subjects (what each talent group's page is for), looking, putOff, changing, why
 ns.view = view -- (for the tests)
 ns.screen = {} -- what the last draw put on screen, as tables (for the tests)
 local spine = {} -- the list's rows (a pool, made at the tab's load, for the tests)
 ns.spineRows = spine
+ns.roadRows = {} -- the Talents tab's list (a pool, for the tests)
 ns.stepRows = {} -- the page's rows (a pool, for the tests)
 
 -- ── words ────────────────────────────────────────────────────────────────────
@@ -677,7 +678,7 @@ local function drawLevel(snap, class, r, choice)
   end
 end
 
--- ── the other tabs: not written yet, they say their name ─────────────────────
+-- ── the other tab: not written yet, it says its name ─────────────────────
 local function placeholder(n, name)
   local label
   return {
@@ -695,7 +696,7 @@ end
 -- ── drawing ──────────────────────────────────────────────────────────────────
 local waiting = false
 
-local function empty(kind, snap)
+local function emptyWords(kind, snap)
   local title, text
   if kind == "season" then
     title = L["Season of Discovery"]
@@ -713,6 +714,11 @@ local function empty(kind, snap)
       gameName()
     )
   end
+  return title, text
+end
+
+local function empty(kind, snap)
+  local title, text = emptyWords(kind, snap)
   ns.screen.empty = { title = title, text = text }
   book.frame.count:SetText(gameName())
   list:begin()
@@ -723,16 +729,125 @@ local function empty(kind, snap)
   page:finish()
 end
 
+-- ── the Talents tab: the three trees with the road drawn on them ─────────────
+-- The road's order on the left (a click looks at that level), the trees on the right, a slider under them to look
+-- at the road at another level: looking, as on the Level tab, and nothing the page is for changes.
+local function emptyTalents(kind, snap)
+  local title, text = emptyWords(kind, snap)
+  ns.screen.empty = { title = title, text = text }
+  book.frame.count:SetText(gameName())
+  roadList:begin()
+  roadList:finish()
+  talents.tree.frame:Hide()
+  talents.slider:Hide()
+  talents.sliderText:SetText("")
+  talents.looking:Hide()
+  talents.back:Hide()
+  talents.road:SetText("")
+  talents.ask:SetText(title .. "\n\n" .. text)
+  talents.ask:Show()
+end
+
+local function drawTalents(snap, class, r, choice)
+  local screen = ns.screen
+  local b = ns.data.builds[r.build]
+  local own = snap.level
+  local shown = view.looking or own
+  if shown == own then view.looking = nil end
+  local looking = shown ~= own
+  screen.level = shown
+  local q = questionFor(snap, class, r, choice)
+  screen.question = q and { text = q.text, buttons = q.buttons, replaces = q.replaces } or nil
+  roadList:begin()
+  if q and q.replaces then
+    -- (a question comes first, and is answered on the Level tab, one place)
+    talents.tree.frame:Hide()
+    talents.slider:Hide()
+    talents.looking:Hide()
+    talents.back:Hide()
+    talents.road:SetText("")
+    talents.sliderText:SetText("")
+    talents.ask:SetText(L["Answer the question on the Level tab first."])
+    talents.ask:Show()
+    screen.asked = true
+    roadList:finish()
+    return
+  end
+  talents.ask:Hide()
+  talents.tree.frame:Show()
+  talents.slider:Show()
+  ns.tree.draw(talents.tree, snap, class, b, r.road, looking and shown or nil, r.mode == "own")
+  screen.tree = talents.tree.model
+  -- the road's order on the left
+  local steps, nextStep = G.steps(b, snap, r.road)
+  screen.road = {}
+  for i, st in ipairs(steps) do
+    local o = st.options[1]
+    local name = o.info and o.info.name or spellName(o.spell)
+    if #st.options > 1 then name = L["One of %d talents"]:format(#st.options) end
+    local from, to = st.step.level[1], st.step.level[2]
+    local when = from == to and tostring(from) or ("%d-%d"):format(from, to)
+    local under = ("%s %d/%d"):format(name, st.rank, st.step.rank)
+    local here = i == nextStep and not looking and r.mode ~= "own"
+    local entry = roadList:add("level", L["Level %s"]:format(when), here and L["Next pick"] or nil, under)
+    entry:SetScript("OnClick", function()
+      view.looking = from ~= own and from or nil
+      ns.page()
+    end)
+    if st.state == "done" then entry.text:SetTextColor(unpack(T.soft)) end
+    if shown >= from and shown <= to then roadList:pick(entry) end
+    table.insert(
+      screen.road,
+      { from = from, to = to, under = under, state = st.state, here = here, selected = shown >= from and shown <= to }
+    )
+  end
+  roadList:finish()
+  -- the slider is a view, never a state
+  talents.slider.syncing = true
+  talents.slider:SetMinMaxValues(G.FIRST_POINT_LEVEL, math.max(G.MAX_LEVEL, own))
+  talents.slider:SetValue(math.max(shown, G.FIRST_POINT_LEVEL))
+  talents.slider.syncing = false
+  local points = math.max(0, math.min(shown, G.MAX_LEVEL) - G.FIRST_POINT_LEVEL + 1)
+  talents.sliderText:SetText(
+    looking and L["The road at level %d: %d points."]:format(shown, points)
+      or L["Level %d: the points you have."]:format(own)
+  )
+  talents.looking:SetShown(looking)
+  talents.back:SetShown(looking)
+  if looking then talents.looking:SetText(L["Looking at level %d."]:format(shown)) end
+  screen.back = looking and function()
+    view.looking = nil
+    ns.page()
+  end or nil
+  talents.back.click = screen.back
+  local sentence = sentenceFor(snap, r)
+  talents.road:SetText(sentence)
+  screen.road_sentence, screen.looking, screen.slider = sentence, looking, shown
+end
+
 -- The guide could not draw this page: said plainly, no stack, kept for /primer debug.
 local function broken(title, text)
   pcall(function()
     local say = text
       or L["This page would not draw. Close the window and open it again. If it keeps happening, /primer debug says what it was."]
-    page:start(title or L["Something went wrong"], "")
-    hideRows()
-    page:paragraph(say)
-    page:finish()
-    ns.screen = { tab = TAB.level, broken = title or L["Something went wrong"], brokenText = say, text = {} }
+    if book.frame.selectedTab == TAB.talents and talents then
+      -- (the Talents tab says it in its own words, with nothing of the trees left on screen)
+      talents.tree.frame:Hide()
+      talents.slider:Hide()
+      talents.looking:Hide()
+      talents.back:Hide()
+      talents.sliderText:SetText("")
+      talents.road:SetText("")
+      talents.ask:SetText((title or L["Something went wrong"]) .. "\n\n" .. say)
+      talents.ask:Show()
+    elseif page then
+      page:start(title or L["Something went wrong"], "")
+      hideRows()
+      page:paragraph(say)
+      page:finish()
+    end
+    ns.screen =
+      { tab = book.frame.selectedTab, broken = title or L["Something went wrong"], brokenText = say, text = {} }
   end)
 end
 
@@ -764,7 +879,7 @@ end
 
 local function draw()
   local f = book.frame
-  if not (f and f:IsShown() and f.selectedTab == TAB.level) then return end
+  if not (f and f:IsShown() and (f.selectedTab == TAB.level or f.selectedTab == TAB.talents)) then return end
   local snap = ns.reader.snapshot()
   if not snap then
     -- (a fight: nothing is read, the window looks again in a moment)
@@ -779,15 +894,20 @@ local function draw()
     return
   end
   snap.className = snap.className or L["Unknown class"]
-  ns.screen = { tab = TAB.level, text = {} }
+  local tab = f.selectedTab
+  ns.screen = { tab = tab, text = {} }
   local kind, class = G.page(snap)
-  if kind ~= "guide" then return empty(kind, snap) end
+  if kind ~= "guide" then return (tab == TAB.talents and emptyTalents or empty)(kind, snap) end
   local choice = ns.choice(snap.group)
   local r = model(snap, class, G.resolve(snap, class, choice))
   ns.draws = (ns.draws or 0) + 1 -- (for the tests: one draw for a burst of events)
   setFacts(snap, class, r)
-  drawLevel(snap, class, r, choice)
-  page:finish(view.keep)
+  if tab == TAB.talents then
+    drawTalents(snap, class, r, choice)
+  else
+    drawLevel(snap, class, r, choice)
+    page:finish(view.keep)
+  end
   -- What a page cannot do without is what the game would not say (the talents
   -- taken, the spells in the book): no advice drawn from defaults.
   if ns.reader.blind() then
@@ -871,7 +991,69 @@ book:add(TAB.level, {
   end,
   refresh = function() refresh("page") end,
 })
-book:add(TAB.talents, placeholder(TAB.talents, L["Talents"]))
+book:add(TAB.talents, {
+  build = function(f)
+    roadList = K.list(f.left, spineStyle, ns.roadRows, false, "PrimerRoad")
+    local t = CreateFrame("Frame", nil, f.sheet)
+    t:SetPoint("TOPLEFT", f.sheet, "TOPLEFT", 16, -16)
+    t:SetPoint("BOTTOMRIGHT", f.sheet, "BOTTOMRIGHT", -16, 12)
+    talents = t
+    ns.talentsTab = t -- (for the tests)
+    t.tree = ns.tree.new(t)
+    t.tree.frame:SetPoint("TOPLEFT", 0, 0)
+    local below = ns.TREE_H + 20
+    t.slider = CreateFrame("Slider", nil, t)
+    t.slider:SetOrientation("HORIZONTAL")
+    t.slider:EnableMouse(true) -- (a bare slider takes no mouse: the game's template turns it on)
+    t.slider:SetHitRectInsets(0, 0, -10, -10)
+    t.slider:SetSize(260, 16)
+    t.slider:SetPoint("TOPLEFT", t, "TOPLEFT", 10, -below)
+    local track = t.slider:CreateTexture(nil, "BACKGROUND")
+    track:SetColorTexture(T.rule[1], T.rule[2], T.rule[3], 1)
+    track:SetPoint("LEFT", 0, 0)
+    track:SetPoint("RIGHT", 0, 0)
+    track:SetHeight(3)
+    t.slider:SetThumbTexture("Interface\\Buttons\\UI-SliderBar-Button-Horizontal")
+    t.slider:SetMinMaxValues(G.FIRST_POINT_LEVEL, G.MAX_LEVEL)
+    t.slider:SetValueStep(1)
+    t.slider:SetObeyStepOnDrag(true)
+    local thumb = t.slider:GetThumbTexture()
+    if thumb then thumb:SetSize(32, 32) end
+    t.slider:SetScript("OnValueChanged", function(self, value)
+      if self.syncing then return end
+      local level = math.floor(value + 0.5)
+      local snap = ns.reader.snapshot()
+      view.looking = (snap and level == snap.level) and nil or level
+      ns.page()
+    end)
+    t.sliderText = K.label(t, K.BODY_FONT, 12, T.soft)
+    t.sliderText:SetPoint("LEFT", t.slider, "RIGHT", 14, 0)
+    t.sliderText:SetWidth(ns.TREES_W - 284)
+    t.looking = K.label(t, K.BODY_FONT, 13, T.gold)
+    t.looking:SetPoint("TOPLEFT", t, "TOPLEFT", 0, -(below + 34))
+    t.back = K.button(t, L["Back to my level"], 130)
+    t.back:SetPoint("TOPRIGHT", t, "TOPLEFT", ns.TREES_W, -(below + 28))
+    t.back:SetScript("OnClick", function(self)
+      if self.click then self.click() end
+    end)
+    t.road = K.label(t, K.BODY_FONT, 12, T.soft)
+    t.road:SetPoint("TOPLEFT", t, "TOPLEFT", 0, -(below + 66))
+    t.road:SetWidth(ns.TREES_W)
+    t.road:SetSpacing(2)
+    t.ask = K.label(t, K.BODY_FONT, 13, T.text)
+    t.ask:SetPoint("TOPLEFT", t, "TOPLEFT", 0, 0)
+    t.ask:SetWidth(ns.TREES_W)
+    t.ask:SetSpacing(3)
+    t.ask:Hide()
+  end,
+  show = function(n)
+    local here = n == TAB.talents
+    roadList:SetShown(here)
+    talents:SetShown(here)
+    if here then book.frame.search:Hide() end
+  end,
+  refresh = function() refresh("page") end,
+})
 book:add(TAB.class, placeholder(TAB.class, L["Class"]))
 
 function ns.window()

@@ -11,12 +11,14 @@ local K, L = ns.kit, ns.kit.L
 local T = K.T
 local G = ns.rules
 
-local CELL, GAP, COLS, ROWS = 34, 9, 4, 7
+local CELL, GAP, COLS, ROWS = 28, 6, 4, 7 -- (three trees side by side in the book's page: 28 pixels a cell, the game's own are 40)
 local PITCH = CELL + GAP
-local MARGIN = 14 -- (the gate's numbers, left of each tree)
+local MARGIN = 12 -- (the gate's numbers, left of each tree)
+local BETWEEN = 10 -- (between two trees)
 local TREE_W = MARGIN + COLS * CELL + (COLS - 1) * GAP
 local HEAD = 20 -- (the tree's name)
 ns.TREE_W, ns.TREE_H = TREE_W, HEAD + ROWS * PITCH
+ns.TREES_W = 3 * TREE_W + 2 * BETWEEN
 
 local GOLD = { 1, 0.82, 0.2 }
 local BLUE = { 0.45, 0.7, 0.95 }
@@ -93,11 +95,11 @@ end
 
 function Tree.new(parent)
   local t = { frame = CreateFrame("Frame", nil, parent), trees = {}, model = {} }
-  t.frame:SetSize(3 * TREE_W + 2 * 12, ns.TREE_H)
+  t.frame:SetSize(3 * TREE_W + 2 * BETWEEN, ns.TREE_H)
   for i = 1, 3 do
     local f = CreateFrame("Frame", nil, t.frame)
     f:SetSize(TREE_W, ns.TREE_H)
-    f:SetPoint("TOPLEFT", t.frame, "TOPLEFT", (i - 1) * (TREE_W + 12), 0)
+    f:SetPoint("TOPLEFT", t.frame, "TOPLEFT", (i - 1) * (TREE_W + BETWEEN), 0)
     local tree = { frame = f, cells = {}, lines = {}, gates = {} }
     tree.name = K.label(f, K.TITLE_FONT, 14, T.gold)
     tree.name:SetPoint("TOPLEFT", MARGIN, 0)
@@ -109,11 +111,11 @@ end
 -- Set the trees for a class: snap (the character, or nil: no talents read), build and road (the road drawn), level
 -- (nil: what the character has taken; a number: what the road has by then), who (the pick to ring).
 -- t.model lists every cell as drawn, for the tests: { spell, window, row, col, rank, max, mark, state }.
-function Tree.draw(t, snap, class, build, road, level)
+function Tree.draw(t, snap, class, build, road, level, quiet)
   local cells, _, tabs = cellsOf(class)
   local marks = G.marks(build, road)
   local at = level and G.ranksAt(build, road, level)
-  local pick = not level and G.nextPick(snap, build, road)
+  local pick = not level and not quiet and G.nextPick(snap, build, road)
   local why = {}
   for _, step in ipairs(G.roads(build)[road or 1].path) do
     for _, spell in ipairs(step.any or { step.talent }) do
