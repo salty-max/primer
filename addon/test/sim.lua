@@ -736,7 +736,7 @@ if not G.FOREVER then
   -- the whole spine is one list
   local seen = spineLevels()
   check(seen[1] == 24 and seen[#seen] >= 40, "the spine for the Paladin")
-  -- the Talents tab: the trees with the road on them, the road's order beside, a slider that only looks
+  -- the Talents tab: the trees with the road on them, a stepper that only looks, the pick and its reason
   PrimerFrame:Hide()
   s.level = 24
   points(ns.rules.ranksAt(ret, 1, 24))
@@ -763,8 +763,13 @@ if not G.FOREVER then
     "the Talents tab says the next pick as the Level tab does: " .. ns.screen.pick.text
   )
   check(ns.talentsTab.pick.text == ns.screen.pick.text, "and shows it")
-  check(sc.slider == 24 and not sc.looking and not sc.back, "the slider rests on the character's level")
-  check(sc.road_sentence and sc.road_sentence ~= "", "one line says which road this is")
+  check(sc.stepper == 24 and not sc.looking and not sc.back, "the stepper rests on the character's level")
+  check(
+    sc.pick.why and ns.talentsTab.why.text == sc.pick.why,
+    "the next pick's own reason is printed under it: " .. tostring(sc.pick.why)
+  )
+  check(ns.talentsTab.level.text == "Level 24", "the stepper says the level")
+  local function press(w) w.scripts.OnClick(w) end
   -- gates: every label fits its own gutter (the next tree starts clear of it); marks and ranks keep to their corners
   local gates = 0
   for _, tree in ipairs(ns.talentsTab.tree.trees) do
@@ -800,17 +805,40 @@ if not G.FOREVER then
     )
   end
   -- the caption is one line
-  check(ns.talentsTab.sliderText:GetStringWidth() <= ns.talentsTab.sliderText.w, "the caption fits one line")
+  check(ns.talentsTab.level:GetStringWidth() <= ns.talentsTab.level.w, "the stepper's label fits")
   check(
     ns.talentsTab.panel.shown and not PrimerFrame.left.shown and not PrimerFrame.sheet.shown,
     "the Talents tab takes both panels"
   )
   local taken24 = states.taken
-  local slider = ns.talentsTab.slider
-  slider.scripts.OnValueChanged(slider, 38)
+  -- the stepper: forward is the next level something arrives, back returns, the ends hold
+  press(ns.talentsTab.next)
+  check(ns.screen.looking and ns.screen.stepper == 25 and ns.screen.back, "forward looks at the next level")
+  check(ns.talentsTab.level.text == "Looking at level 25.", "and says so in the same place")
+  press(ns.talentsTab.prev)
+  check(not ns.screen.looking and ns.screen.stepper == 24, "back steps back to the character's own")
+  press(ns.talentsTab.prev)
+  check(ns.screen.looking and ns.screen.stepper == 23, "and on below it: why a talent was taken")
+  press(ns.talentsTab.next)
+  for _ = 1, #ns.screen.levels + 3 do
+    press(ns.talentsTab.next)
+  end
+  check(ns.screen.stepper == ns.screen.levels[#ns.screen.levels], "the last level holds")
+  check(
+    ns.screen.stepper == ns.rules.MAX_LEVEL,
+    "the stepper runs to the last level the road has (" .. ns.screen.stepper .. ")"
+  )
+  local function lookAt(level)
+    ns.view.looking = level
+    ns.page()
+  end
+  lookAt(38)
   sc = ns.screen
-  check(sc.looking and sc.slider == 38 and sc.back, "the slider looks at level 38, and says so with the way back")
-  check(ns.talentsTab.looking.text == "Looking at level 38.", "plainly")
+  check(sc.looking and sc.stepper == 38 and sc.back, "looking at level 38, said with the way back")
+  check(
+    sc.pick.text:find("^Pick: ") and ns.talentsTab.why.text == sc.pick.why and sc.pick.why,
+    "the pick and its reason follow the level looked at"
+  )
   local taken38 = 0
   for _, c in ipairs(sc.tree) do
     if c.state == "taken" then taken38 = taken38 + 1 end
@@ -825,19 +853,19 @@ if not G.FOREVER then
   local pagefn = ns.rules.page
   ns.rules.page = function() error("boom") end
   ns.faults = {}
-  slider.scripts.OnValueChanged(slider, 30)
+  lookAt(30)
   check(
     ns.screen.broken == "Something went wrong" and ns.talentsTab.ask.shown and not ns.talentsTab.tree.frame.shown,
     "the Talents tab says plainly when it cannot draw"
   )
   ns.rules.page = pagefn
-  slider.scripts.OnValueChanged(slider, 38)
+  lookAt(38)
   -- (the Level tab looks at the same level)
   ns.open(TAB.level)
   check(ns.screen.title == "Level 38" and ns.screen.back, "the Level tab keeps the level looked at")
   ns.open(TAB.talents)
   ns.screen.back()
-  check(ns.screen.slider == 24 and not ns.screen.looking, "and back to my own")
+  check(ns.screen.stepper == 24 and not ns.screen.looking, "and back to my own")
   PrimerFrame:Hide()
   ns.open(TAB.level)
 
@@ -1106,6 +1134,18 @@ do
   ns.open(ns.TAB.level)
   check(pageTitle() ~= "Something went wrong", "and the window draws again once it can")
   s.spells = {}
+end
+
+-- ── every pick has a reason of its own (the Talents tab prints it, never the road's generic line)
+for _, b in pairs(ns.data.builds) do
+  for road, r in ipairs(ns.rules.roads(b)) do
+    for i, step in ipairs(r.path) do
+      check(
+        step.why and ns.say(step.why) ~= step.why and ns.say(step.why) ~= "",
+        b.key .. " road " .. road .. " pick " .. i .. " has its own reason"
+      )
+    end
+  end
 end
 
 -- ── the data layout (M-A): roles and the trees' cells ───────────────────────
