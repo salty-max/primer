@@ -22,10 +22,10 @@ ns.TAB = TAB
 -- One idea a screen, held in steps: a page has a pick, an opening of at most 5 steps and a loop of at most 6, each
 -- with its reason printed under it (the check holds the content to it, the lowest-priority lines of a loop go to a
 -- note, `rarely`). The page scrolls when they are longer than the window; nothing is cut.
-ns.FOOTER_H = 112 -- (the Talents tab's block under the trees)
+ns.FOOTER_H = 116 -- (the Talents tab's block under the trees)
 ns.BUDGET = { opening = 5, loop = 6, spine = 40 }
 
-local book, list, page, talents
+local book, list, page, talents, classPage
 local view = {} -- this session's: subjects (what each talent group's page is for), looking, putOff, changing, why
 ns.view = view -- (for the tests)
 ns.screen = {} -- what the last draw put on screen, as tables (for the tests)
@@ -443,9 +443,13 @@ local function sentenceFor(snap, r)
 end
 
 -- The count beside the portrait: at most three facts (the build, the level, and the realm or the group when it matters).
+-- (the page is a build's once the player has a role, a pick or points: before that it is the class's)
+local function hasBuildOf(class, r)
+  return r.phase == "spent" or r.roleChosen or r.mode == "picked" or r.mode == "own" or #G.roles(class) == 1
+end
 local function setFacts(snap, class, r)
   local b = ns.data.builds[r.build]
-  local hasBuild = r.phase == "spent" or r.roleChosen or r.mode == "picked" or r.mode == "own" or #G.roles(class) == 1
+  local hasBuild = hasBuildOf(class, r)
   local facts = { hasBuild and G.name(snap, b) or snap.className, L["level %d"]:format(snap.level) }
   if snap.season == G.HARDCORE then
     table.insert(facts, L["Hardcore"])
@@ -679,21 +683,6 @@ local function drawLevel(snap, class, r, choice)
   end
 end
 
--- ── the other tab: not written yet, it says its name ─────────────────────
-local function placeholder(n, name)
-  local label
-  return {
-    whole = true,
-    build = function(f)
-      label = K.label(f, K.TITLE_FONT, 24, T.gold)
-      label:SetPoint("CENTER", f, "CENTER", 0, 0)
-      label:SetText(name)
-    end,
-    show = function(shown) label:SetShown(shown == n) end,
-    refresh = function() ns.screen = { tab = n, placeholder = name } end,
-  }
-end
-
 -- ── drawing ──────────────────────────────────────────────────────────────────
 local waiting = false
 
@@ -839,6 +828,78 @@ local function drawTalents(snap, class, r, choice)
   screen.looking, screen.stepper, screen.levels = looking, shown, levels
 end
 
+-- ── the Class tab: the class in the narrator's voice ─────────────────────────
+-- One calm page from the content's overview (a class without one: its text and its builds): who it is, what it is good
+-- and bad at, its resource, how levelling goes, then a row a role with the build advised for it and why, and on a
+-- Hardcore realm its short lines. It reads the page's subject (the frozen role and build) and never changes on an event.
+local function emptyClass(kind, snap)
+  local title, text = emptyWords(kind, snap)
+  ns.screen.empty = { title = title, text = text }
+  book.frame.count:SetText(gameName())
+  classPage:start(title, "")
+  classPage:paragraph(text)
+  classPage:finish()
+end
+
+local function drawClass(snap, class, r)
+  local screen = ns.screen
+  local c = ns.data.classes[class]
+  local ov = c.overview
+  local b = ns.data.builds[r.build]
+  local hasBuild = hasBuildOf(class, r)
+  classPage:start(snap.className, "", function(p) p.tex:SetTexture(ns.ICON) end)
+  screen.title, screen.blocks, screen.roles = snap.className, {}, {}
+  local function block(heading, key)
+    if not key then return end
+    local text = ns.say(key)
+    if heading then classPage:section(heading) end
+    classPage:paragraph(text)
+    table.insert(screen.blocks, { heading = heading, text = text })
+    table.insert(screen.text, text)
+  end
+  block(nil, ov and ov.who or c.text)
+  if ov then
+    block(L["Good at"], ov.good)
+    block(L["Bad at"], ov.bad)
+    block(L["Your resource"], ov.resource)
+    block(L["Levelling"], ov.levelling)
+  end
+  -- a row a role: the build advised for it, why, and what also works in dim text
+  classPage:section(L["Builds"])
+  for _, role in ipairs(G.roles(class)) do
+    local id = G.recommend(class, role)
+    local rb = ns.data.builds[id]
+    local cr = c.roles and c.roles[role]
+    local reason = ns.stop(ns.say(cr and cr.why or rb.line))
+    local mine = id == r.build and hasBuild
+    local value = ("%s%s. %s"):format(G.name(snap, rb), mine and L[" (yours)"] or "", reason)
+    classPage:row(roleName(role), value)
+    local also = {}
+    for _, other in ipairs(G.builds(class, role)) do
+      if other ~= id then
+        table.insert(
+          also,
+          ("%s. %s"):format(G.name(snap, ns.data.builds[other]), ns.stop(ns.say(ns.data.builds[other].line)))
+        )
+      end
+    end
+    local alsoText = #also > 0 and (L["Also works: %s"]:format(table.concat(also, " "))) or nil
+    if alsoText then classPage:paragraph(alsoText, T.soft) end
+    table.insert(screen.roles, { role = role, build = id, mine = mine, reason = reason, also = alsoText })
+    table.insert(screen.text, value)
+  end
+  if snap.season == G.HARDCORE and hasBuild and b.hardcore then
+    classPage:section(L["Hardcore"])
+    screen.hardcore = {}
+    for _, key in ipairs(b.hardcore) do
+      classPage:paragraph(ns.say(key))
+      table.insert(screen.hardcore, ns.say(key))
+      table.insert(screen.text, ns.say(key))
+    end
+  end
+  classPage:finish(view.keep)
+end
+
 -- The guide could not draw this page: said plainly, no stack, kept for /primer debug.
 local function broken(title, text)
   pcall(function()
@@ -849,6 +910,10 @@ local function broken(title, text)
       putAway()
       talents.ask:SetText((title or L["Something went wrong"]) .. "\n\n" .. say)
       talents.ask:Show()
+    elseif book.frame.selectedTab == TAB.class and classPage then
+      classPage:start(title or L["Something went wrong"], "")
+      classPage:paragraph(say)
+      classPage:finish()
     elseif page then
       page:start(title or L["Something went wrong"], "")
       hideRows()
@@ -888,7 +953,15 @@ end
 
 local function draw()
   local f = book.frame
-  if not (f and f:IsShown() and (f.selectedTab == TAB.level or f.selectedTab == TAB.talents)) then return end
+  if
+    not (
+      f
+      and f:IsShown()
+      and (f.selectedTab == TAB.level or f.selectedTab == TAB.talents or f.selectedTab == TAB.class)
+    )
+  then
+    return
+  end
   local snap = ns.reader.snapshot()
   if not snap then
     -- (a fight: nothing is read, the window looks again in a moment)
@@ -906,13 +979,17 @@ local function draw()
   local tab = f.selectedTab
   ns.screen = { tab = tab, text = {} }
   local kind, class = G.page(snap)
-  if kind ~= "guide" then return (tab == TAB.talents and emptyTalents or empty)(kind, snap) end
+  if kind ~= "guide" then
+    return (tab == TAB.talents and emptyTalents or tab == TAB.class and emptyClass or empty)(kind, snap)
+  end
   local choice = ns.choice(snap.group)
   local r = model(snap, class, G.resolve(snap, class, choice))
   ns.draws = (ns.draws or 0) + 1 -- (for the tests: one draw for a burst of events)
   setFacts(snap, class, r)
   if tab == TAB.talents then
     drawTalents(snap, class, r, choice)
+  elseif tab == TAB.class then
+    drawClass(snap, class, r)
   else
     drawLevel(snap, class, r, choice)
     page:finish(view.keep)
@@ -1024,7 +1101,7 @@ book:add(TAB.talents, {
     F.prev:SetPoint("LEFT", F, "LEFT", 18, 0)
     F.level = K.label(F, K.TITLE_FONT, 14, T.text)
     F.level:SetPoint("LEFT", F.prev, "RIGHT", 4, 0)
-    F.level:SetWidth(120)
+    F.level:SetWidth(80)
     F.level:SetJustifyH("CENTER")
     F.level:SetWordWrap(false)
     F.next = K.button(F, ">", 34)
@@ -1032,10 +1109,10 @@ book:add(TAB.talents, {
     local rule = F:CreateTexture(nil, "ARTWORK")
     rule:SetColorTexture(unpack(T.rule))
     rule:SetWidth(1)
-    rule:SetPoint("TOPLEFT", F, "TOPLEFT", 236, -14)
-    rule:SetPoint("BOTTOMLEFT", F, "BOTTOMLEFT", 236, 14)
+    rule:SetPoint("TOPLEFT", F, "TOPLEFT", 196, -14)
+    rule:SetPoint("BOTTOMLEFT", F, "BOTTOMLEFT", 196, 14)
     F.slot = K.slot(F, 36)
-    F.slot:SetPoint("TOPLEFT", F, "TOPLEFT", 256, -16)
+    F.slot:SetPoint("TOPLEFT", F, "TOPLEFT", 216, -16)
     F.slot:SetScript("OnEnter", function(self)
       if not (GameTooltip and self.spell) then return end
       local ok, err = pcall(function()
@@ -1053,16 +1130,16 @@ book:add(TAB.talents, {
       if GameTooltip then GameTooltip:Hide() end
     end)
     F.caption = K.label(F, K.BODY_FONT, 11, T.soft)
-    F.caption:SetPoint("TOPLEFT", F, "TOPLEFT", 304, -14)
-    F.caption:SetWidth(ns.TREES_W - 304 - 150)
+    F.caption:SetPoint("TOPLEFT", F, "TOPLEFT", 264, -14)
+    F.caption:SetWidth(ns.TREES_W - 264 - 150)
     F.caption:SetWordWrap(false)
     F.line = K.label(F, K.TITLE_FONT, 14, T.gold)
-    F.line:SetPoint("TOPLEFT", F, "TOPLEFT", 304, -34)
-    F.line:SetWidth(ns.TREES_W - 304 - 16)
+    F.line:SetPoint("TOPLEFT", F, "TOPLEFT", 264, -34)
+    F.line:SetWidth(ns.TREES_W - 264 - 16)
     F.line:SetWordWrap(false)
     F.why = K.label(F, K.BODY_FONT, 12, T.soft)
-    F.why:SetPoint("TOPLEFT", F, "TOPLEFT", 304, -56)
-    F.why:SetWidth(ns.TREES_W - 304 - 16)
+    F.why:SetPoint("TOPLEFT", F, "TOPLEFT", 264, -56)
+    F.why:SetWidth(ns.TREES_W - 264 - 16)
     F.why:SetSpacing(2)
     F.back = K.button(F, L["Back to my level"], 130)
     F.back:SetPoint("TOPRIGHT", F, "TOPRIGHT", -12, -10)
@@ -1084,7 +1161,19 @@ book:add(TAB.talents, {
   end,
   refresh = function() refresh("page") end,
 })
-book:add(TAB.class, placeholder(TAB.class, L["Class"]))
+book:add(TAB.class, {
+  whole = true, -- (over both panels, like the Talents tab: one page)
+  build = function(f)
+    local panel = K.panel(f)
+    panel:SetPoint("TOPLEFT", f.left, "TOPLEFT")
+    panel:SetPoint("BOTTOMRIGHT", f.sheet, "BOTTOMRIGHT")
+    classPage = K.page(panel, "PrimerClassPage", { width = 692, labelWidth = 120, pairs = {} })
+    classPage.panel = panel
+    ns.classTab = classPage -- (for the tests)
+  end,
+  show = function(n) classPage.panel:SetShown(n == TAB.class) end,
+  refresh = function() refresh("page") end,
+})
 
 function ns.window()
   local f = book:window()

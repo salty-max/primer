@@ -638,9 +638,14 @@ if not G.FOREVER then
   ns.screen.back()
   check(ns.screen.title == "Level 35" and not ns.screen.back, "and back to the character's own")
 
-  -- the placeholders say their name and nothing else
+  -- the Class tab of a class with no overview written (the Warrior): its text and its builds
   ns.open(TAB.class)
-  check(ns.screen.placeholder == "Class", "and the Class tab")
+  check(ns.screen.tab == TAB.class and ns.screen.title == "Warrior", "the Class tab says the class")
+  check(
+    #ns.screen.blocks == 1 and ns.screen.blocks[1].heading == nil and ns.screen.blocks[1].text:find("Stance", 1, true),
+    "a class with no overview: its text alone"
+  )
+  check(#ns.screen.roles == 2, "and a row for each of its two roles")
   ns.open(TAB.level)
 
   -- the Retribution Paladin: the pick, the opening, the loop
@@ -695,6 +700,68 @@ if not G.FOREVER then
     "and ends on what applies when nothing does"
   )
   budget("Retribution at 24")
+  -- the Class tab of the Retribution Paladin: the overview, a row a role, the Hardcore lines on a Hardcore realm
+  ns.open(TAB.class)
+  sc = ns.screen
+  local heads = {}
+  for _, bl in ipairs(sc.blocks) do
+    heads[bl.heading or "who"] = bl.text
+  end
+  check(
+    heads.who and heads["Good at"] and heads["Bad at"] and heads["Your resource"] and heads["Levelling"],
+    "the Class tab: who, good at, bad at, the resource, levelling"
+  )
+  check(heads.who:find("You fight in melee with a seal on you", 1, true), "in the narrator's voice, from the content")
+  check(
+    #sc.roles == 3 and sc.roles[1].mine and not sc.roles[2].mine and not sc.roles[3].mine,
+    "a row a role, the build you are on marked"
+  )
+  for _, row in ipairs(sc.roles) do
+    check(
+      row.reason ~= "" and not row.reason:find("..", 1, true) and not row.reason:find(" %."),
+      "a role's reason is a sentence: " .. row.role
+    )
+  end
+  check(sc.hardcore == nil, "no Hardcore lines on a normal realm")
+  for _, text in ipairs(sc.text) do
+    check(not text:find("...", 1, true) and not text:find("..", 1, true), "the Class tab's text is plain")
+  end
+  check(#ns.fit() == 0, "the Class tab: nothing cut short")
+  -- an event while it is open changes nothing it shows
+  s.level = s.level + 1
+  tell()
+  check(ns.screen.roles[1].mine and #ns.screen.blocks == #sc.blocks, "an event does not change the Class tab")
+  s.season = ns.rules.HARDCORE
+  ns.reader.reset()
+  PrimerFrame:Hide()
+  ns.open(TAB.class)
+  check(ns.screen.hardcore and #ns.screen.hardcore == 4, "on a Hardcore realm, its lines")
+  s.season = 0
+  ns.reader.reset()
+  s.level = s.level - 1
+  PrimerFrame:Hide()
+  ns.open(TAB.level)
+  -- before a role or a pick: the class's page, no build of its own, no Hardcore lines for the default
+  PrimerChar.groups = {}
+  ns.view.putOff = nil
+  PrimerFrame:Hide()
+  s.level, s.ranks, s.season = 5, {}, ns.rules.HARDCORE
+  ns.reader.reset()
+  ns.open(TAB.class)
+  local anyMine = false
+  for _, row in ipairs(ns.screen.roles) do
+    anyMine = anyMine or row.mine
+  end
+  check(
+    not anyMine and ns.screen.hardcore == nil,
+    "level 5, no build chosen: nothing marked yours, no Hardcore lines for a default"
+  )
+  s.season, s.level = 0, 24
+  points(ns.rules.ranksAt(ret, 1, 24))
+  ns.choice(1).role, ns.choice(1).pickedBuild = "damage", ret.id
+  ns.reader.reset()
+  PrimerFrame:Hide()
+  ns.open(TAB.level)
   -- the pick's rank is the talent's own: the rank the road holds once the point at that level is spent
   do
     local snap0, n = ns.reader.snapshot(), 0
