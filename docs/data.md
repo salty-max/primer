@@ -1,7 +1,7 @@
 # Primer's data
 
 The guide's rules and words, and the facts check. Written by hand:
-`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, and `content/forever/` for Forever, empty until M-E). Generated, never edited:
+`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, and `content/forever/` for Forever, empty and the next work: F0 to F3 of `../ideas/class-guide.md`). Generated, never edited:
 `addon/Primer/Guide_Classic.lua`, `Guide_Forever.lua`, `GuideText.lua`
 (`bun scripts/guide.ts`, `--check` in `bun run check`).
 

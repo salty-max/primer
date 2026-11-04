@@ -115,7 +115,7 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   left, straight prerequisite lines (the two diagonal ones are left out), the
   game's own tooltip (`GameTooltip:SetTalent(talentID, false, false, group)`,
   as Era's own talent window calls it) plus one line of ours. Forever has no
-  tree yet (M-E).
+  tree yet (F2 of the plan, the Forever-first order in `../ideas/class-guide.md`).
 - **Minimap.lua**: the kit's `K.minimapButton`, named `PrimerMinimapButton`
   (Keyring finds the family's buttons by name), at `K.MINIMAP_ANGLES.Primer`
   (90 degrees, the top: at least 25 from every other place and clear of Classic
