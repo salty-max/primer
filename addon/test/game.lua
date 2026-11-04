@@ -38,6 +38,7 @@ function CreateFrame(kind, name, parent, template)
   end
   return f
 end
+G.methods.SetDesaturated = function(self, on) self.desat = on and true or false end
 G.methods.GetRegions = function(self) return unpack(self.regions or {}) end
 G.methods.GetChildren = function(self) return unpack(self.kids or {}) end
 G.methods.GetObjectType = function(self) return self.kind end

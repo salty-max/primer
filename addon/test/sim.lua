@@ -773,7 +773,12 @@ if not G.FOREVER then
   end
   for _, row in ipairs(ns.stepRows) do
     if row.shown and row.slot.icon.color and row.slot.icon.color[1] < 1 then
-      check(row.slot.icon.color[1] == 0.65, "a row not pressable yet is dimmed to 0.65, not black")
+      check(
+        row.slot.icon.desat and row.slot.icon.color[1] >= 0.8 and row.slot.icon.color[1] == ns.DIM,
+        "a row not pressable yet is grey at the one dimming, never below 0.8"
+      )
+    elseif row.shown and row.slot.icon.color then
+      check(not row.slot.icon.desat, "a row that can be pressed keeps its colour")
     end
   end
 
@@ -1086,9 +1091,11 @@ if not G.FOREVER then
   ns.open(TAB.level)
   local dimmed = 0
   for _, row in ipairs(ns.stepRows) do
-    if row.shown and row.slot.icon.color and row.slot.icon.color[1] == 0.65 then dimmed = dimmed + 1 end
+    if row.shown and row.slot.icon.color and row.slot.icon.color[1] == ns.DIM and row.slot.icon.desat then
+      dimmed = dimmed + 1
+    end
   end
-  check(dimmed > 0, "a row not pressable yet is dimmed to 0.65 with its own picture (" .. dimmed .. " rows)")
+  check(dimmed > 0, "a row not pressable yet is grey with its own picture (" .. dimmed .. " rows)")
   s.level = 24
   PrimerFrame:Hide()
   ns.reader.reset()

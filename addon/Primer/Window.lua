@@ -76,6 +76,15 @@ local function needs(snap, state, extra)
   return L["Learn it at your trainer"]
 end
 
+-- A spell not pressable yet: its own picture in grey, the colour gone and the shape kept at 0.85 of its brightness (a dark
+-- icon, Counterspell, multiplied down to 0.65 was a smudge). The one place that says how.
+ns.DIM = 0.85
+local function dimIcon(slot, on)
+  slot.icon:SetDesaturated(on)
+  local v = on and ns.DIM or 1
+  slot.icon:SetVertexColor(v, v, v)
+end
+
 -- A step's state at the level looked at: the character's own, as it stands; another level, by the spell's level alone.
 local function stateAt(step, snap, level)
   if level == snap.level then return G.stepState(step, snap) end
@@ -202,10 +211,7 @@ local function setStep(r, snap, step, n, level, last)
   local why = step.why and ns.stop(capital(ns.say(step.why))) or nil
   r.slot.spell = step.spell
   K.setSlot(r.slot, icon or K.QUESTION)
-  -- (a spell not pressable yet: its own picture, desaturated and dimmed as the game dims a talent, not black)
-  r.slot.icon:SetDesaturated(not ready)
-  local v = ready and 1 or 0.65
-  r.slot.icon:SetVertexColor(v, v, v)
+  dimIcon(r.slot, not ready)
   r.num:SetText(n and tostring(n) or "")
   local line = K.hex(ready and T.text or T.soft) .. name .. "|r"
   if clause ~= "" then line = line .. "  " .. K.hex(ready and T.soft or T.gold) .. clause .. "|r" end
