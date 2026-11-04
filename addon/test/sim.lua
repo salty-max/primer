@@ -130,11 +130,23 @@ end
 if not G.FOREVER then
   local arms, fury, prot = D.builds[1], D.builds[2], D.builds[3]
   local function taken(ranks)
-    local t = { byId = {}, points = {}, total = 0 }
+    -- (the game lists all three trees, a tree with no points as 0)
+    local t = { byId = {}, points = { 0, 0, 0 }, total = 0 }
     for spell, rank in pairs(ranks) do
       local d = D.talents[spell]
-      t.byId[d.id] =
-        { name = "T", icon = 1, rank = rank, max = d.max, tab = d.tab == 161 and 1 or d.tab == 163 and 2 or 3 }
+      -- (a tree's place in the window: its place among its class's three trees)
+      local place
+      for _, c in pairs(D.classes) do
+        local trees = {}
+        for _, id in ipairs(c.builds) do
+          trees[#trees + 1] = D.builds[id].tree
+        end
+        table.sort(trees)
+        for i, tree in ipairs(trees) do
+          if tree == d.tab then place = i end
+        end
+      end
+      t.byId[d.id] = { name = "T", icon = 1, rank = rank, max = d.max, tab = place }
       t.points[t.byId[d.id].tab] = (t.points[t.byId[d.id].tab] or 0) + rank
       t.total = t.total + rank
     end
@@ -172,80 +184,125 @@ if not G.FOREVER then
     r.build == 3 and r.roleChosen and r.followed == "default",
     "a respec to zero keeps the stored role: its build, advice not a question"
   )
-  r = R.resolve(at(24, ARMS15), 1, {})
+  -- the points of the first n steps of a build's path (a level n + 9 character who followed it)
+  local function along(id, n)
+    local ranks = {}
+    for _, step in ipairs(D.builds[id].path) do
+      local count = math.min(n, step.points[2] - step.points[1] + 1)
+      if count <= 0 then break end
+      local spell = step.talent or step.any[1]
+      ranks[spell] = (ranks[spell] or 0) + count
+      n = n - count
+    end
+    return ranks
+  end
+  local HOLY5 = { [20257] = 5 }
+
+  -- the user's case: a Paladin with 5 Holy points, nothing elsewhere
+  r = R.resolve(at(14, HOLY5), 2, { role = "damage" })
   check(
-    r.build == 1
-      and r.followed == "points"
-      and r.mode == "points"
-      and r.far == 0
-      and not r.drift
-      and not (r.splitTrees and r.splitTrees[1]),
-    "points on Arms, nothing picked: the page follows the points, nothing to say"
+    r.build == 6 and r.role == "damage" and r.mode == "points" and not r.open,
+    "role Damage, 5 points in Holy: Retribution, whatever the points (a Damage paladin can only be Retribution)"
   )
-  r = R.resolve(at(24, ARMS15), 1, { pickedBuild = 1 })
-  check(r.followed == "picked" and r.build == 1, "a picked build is followed while the points fit it")
-  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1 })
+  r = R.resolve(at(14, HOLY5), 2, { role = "heal" })
+  check(r.build == 7 and r.mode == "points", "role Heal, the same points: Holy")
+  r = R.resolve(at(14, HOLY5), 2, {})
   check(
-    r.followed == "picked"
-      and r.build == 1
+    r.mode == "open"
+      and #r.open == 3
+      and r.open[1] == 6
+      and r.build == 6
+      and not r.roleChosen
+      and r.followed == "points",
+    "no role chosen: the points leave all three builds open, the page does not guess Holy from the tree with most points"
+  )
+  r = R.resolve(at(14, HOLY5), 2, { pickedBuild = 6 })
+  check(
+    r.mode == "picked" and r.build == 6 and r.drift == nil and not r.unreachable,
+    "a picked Retribution with 5 early points in Holy: kept, no drift, the path's tolerance never fires for harmless off-tree points"
+  )
+  -- feasibility: 20 points outside a build's tree keep it open, 21 close it
+  check(R.reachable(at(29, along(7, 20)), D.builds[6]), "20 points in Holy: Retribution is still reachable")
+  check(not R.reachable(at(30, along(7, 21)), D.builds[6]), "21 points in Holy: Retribution is out of reach")
+  r = R.resolve(at(30, along(7, 21)), 2, {})
+  check(
+    r.mode == "points" and r.build == 7 and not r.open,
+    "21 points in Holy and no role: only Holy is open, so the points do tell"
+  )
+  r = R.resolve(at(30, along(7, 21)), 2, { role = "damage" })
+  check(
+    r.build == 6
+      and r.role == "damage"
+      and not r.unreachable
       and r.drift
-      and r.drift.kind == "build"
-      and r.drift.from == 1
-      and r.drift.to == 2,
-    "points on Fury, Arms picked: the page stays on Arms and the drift is said"
+      and r.drift.kind == "role"
+      and r.drift.role == "heal"
+      and r.drift.unpicked,
+    "a Damage paladin with 21 points in Holy: Retribution is out of reach, only Holy is open, a switch is offered and nothing is switched"
+  )
+  check(R.split(at(30, along(7, 21))) == nil, "21 points in one tree are no split")
+  check(
+    R.required(D.builds[2]) == 31 and R.required(D.builds[1]) == 31 and R.required(D.builds[6]) == 31,
+    "a build needs 31 in its own tree (its deepest talent's 30 and the point itself), not what its path happens to put there"
+  )
+  check(
+    R.reachable(at(29, along(1, 20)), D.builds[2]),
+    "20 points in Arms: Fury (whose path has 32 in Fury) is still reachable"
+  )
+  -- a picked build whose points can no longer reach it: said once, the nearest open build offered
+  r = R.resolve(at(34, along(7, 25)), 2, { role = "damage", pickedBuild = 6 })
+  check(
+    r.drift
+      and r.drift.kind == "role"
+      and r.drift.role == "heal"
+      and r.drift.build == 7
+      and r.build == 6
+      and r.role == "damage",
+    "a picked Retribution with 25 Holy points: unreachable, another role's build is open, a switch is offered and nothing is switched"
+  )
+  r = R.resolve(at(34, along(2, 25)), 1, { role = "damage", pickedBuild = 1 })
+  check(
+    r.drift and r.drift.kind == "build" and r.drift.from == 1 and r.drift.to == 2 and r.build == 1,
+    "a picked Arms with 25 Fury points: unreachable, Fury is open in the role, the page stays on Arms and says so"
   )
   local mark = r.drift.mark
-  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1, driftSeen = mark })
-  check(r.followed == "picked" and r.build == 1 and r.drift.seen, "kept: the pick stands, the note stays dismissed")
-  r = R.resolve(at(24, PROT15), 1, { role = "damage", pickedBuild = 1, driftSeen = mark })
+  r = R.resolve(at(34, along(2, 25)), 1, { role = "damage", pickedBuild = 1, driftSeen = mark })
+  check(r.build == 1 and r.drift.seen, "kept: the pick stands, the note stays dismissed")
+  r = R.resolve(at(34, along(7, 25)), 2, { role = "damage", pickedBuild = 6, driftSeen = "other" })
+  check(r.drift and not r.drift.seen, "a dismissal of another drift does not hide this one")
+  -- nothing is reachable: the points fit no build (21 in Holy, 21 in Protection)
+  local spread = along(7, 21)
+  for spell, rank in pairs(along(8, 21)) do
+    spread[spell] = (spread[spell] or 0) + rank
+  end
+  r = R.resolve(at(51, spread), 2, {})
   check(
-    r.drift and r.drift.kind == "role" and r.drift.role == "tank" and not r.drift.seen and r.role == "damage",
-    "points toward a tank while on damage: a switch offered, the role not changed, a new drift said"
+    r.unreachable and r.mode == "points" and not r.open,
+    "21 points in Holy and 21 in Protection: no build fits, the page says so and shows the nearest"
   )
-  local roleMark = r.drift.mark
-  r = R.resolve(at(24, PROT15), 1, { role = "damage", pickedBuild = 1, driftSeen = roleMark })
-  check(r.drift.seen and r.role == "damage", "a dismissed role switch stays dismissed")
-  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1, freestyle = true })
-  check(r.drift == nil and r.splitTrees == nil and r.freestyle, "your own way: no drift and no split")
-  r = R.resolve(at(24, { [12282] = 3, [12286] = 3, [12295] = 2, [12320] = 5, [12322] = 2 }), 1, {})
+  -- a picked build with nothing at all open: the page stays on the pick and says so
+  r = R.resolve(at(51, spread), 2, { role = "damage", pickedBuild = 6 })
   check(
-    r.splitTrees and r.splitTrees[1] == 1 and r.splitTrees[2] == 3 and r.build == 1,
-    "points split between Arms and Fury: said, the page follows the one with more"
+    r.unreachable and r.build == 6 and r.followed == "picked",
+    "a pick when no build fits the points: the page stays on it"
   )
-  r = R.resolve(at(29, { [12282] = 3, [12286] = 3, [12295] = 5, [12320] = 5, [12298] = 4 }), 1, {})
-  check(r.splitTrees and r.splitTrees[1] == 1, "the top tree under 60 percent is split too")
-  local t1, t2 = R.split(at(24, ARMS15))
-  check(t1 == nil and t2 == nil, "one tree is not a split")
-  check(R.split(at(12, { [12282] = 2, [12320] = 1 })) == nil, "a few points are not called a split")
-  -- a hybrid: a build whose path crosses trees is the nearest to points that cross them
-  r = R.resolve(
-    at(40, {
-      [12282] = 3,
-      [12286] = 3,
-      [12295] = 5,
-      [12290] = 2,
-      [12296] = 1,
-      [12834] = 3,
-      [12163] = 5,
-      [16493] = 2,
-      [12292] = 1,
-      [12700] = 5,
-      [12294] = 1,
-      [12320] = 5,
-    }),
-    1,
-    {}
-  )
+  -- an open role with two builds: the page shows the first and asks which
+  r = R.resolve(at(14, { [12298] = 5 }), 1, { role = "damage" })
   check(
-    r.build == 1 and r.far <= R.TOLERANCE and not (r.splitTrees and r.splitTrees[1]) and not r.drift,
-    "a hybrid the build's path declares fits: no split note"
+    r.mode == "open" and #r.open == 2 and r.open[1] == 1 and r.roleChosen,
+    "role Damage, 5 points in Protection: Arms and Fury are both open, the page asks which"
   )
+  -- a respec to zero: the stored role stays, nothing is asked
+  r = R.resolve(at(14, {}), 2, { role = "damage" })
+  check(
+    r.phase == "choose" and r.build == 6 and r.roleChosen and r.mode == "none",
+    "a respec to zero keeps the role, no question"
+  )
+  r = R.resolve(at(24, ARMS15), 1, { role = "damage", freestyle = true })
+  check(r.mode == "own" and r.drift == nil and not r.open, "your own way: no drift, no question")
   -- a role change: the points off the nearest build of the new role
-  r = R.resolve(at(20, { [12282] = 3, [12286] = 3, [12295] = 5 }), 1, { role = "tank" })
-  check(
-    r.role == "tank" and r.nearest == 3 and r.far == 11,
-    "a role change counts the points that differ from the new role's nearest build"
-  )
+  local near, far = R.nearest(at(20, { [12282] = 3, [12286] = 3, [12295] = 5 }), 1, "tank")
+  check(near == 3 and far == 11, "a role change counts the points that differ from the new role's nearest build")
   local advice = R.advice(1, "tank")
   check(
     #advice.builds == 1 and advice.builds[1] == 3 and #advice.picks == 3 and advice.picks[1] == prot.path[1],
@@ -498,7 +555,7 @@ else
   check(
     PrimerChar.groups[1].pickedBuild == 2
       and PrimerPage.title.text == "Fury"
-      and PrimerFrame.state.text == "Fury Warrior. Damage. Level 12. A build you picked.",
+      and PrimerFrame.state.text == "Fury Warrior. Damage. Level 12. Following your pick.",
     "using a build chooses it, the page and its header follow"
   )
 
@@ -630,22 +687,13 @@ else
   end
   secondary:GetScript("OnClick")(secondary)
   check(
-    PrimerPage.title.text == "Talent " .. ns.data.talents[12298].id or listTexts():find("Protection", 1, true),
-    "Talents: the other group's talents are read (the points in Protection make it the tank)"
+    PrimerFrame.state.text:find("Talent group 2.", 1, true)
+      and PrimerFrame.state.text:find("Guessing from your points.", 1, true),
+    "Talents: the other group's talents are read, 10 points in Protection leave the builds open, the header says it guesses"
   )
   check(PrimerChar.groups[2] == nil or PrimerChar.groups[2].pickedBuild == nil, "(looking at it chooses nothing)")
-  local prot
-  for _, r in ipairs(PrimerList.rows) do
-    if r.shown and r.text.text == "Protection" then prot = r end
-  end
-  check(prot, "the other group's build, from its own points")
-  check(
-    PrimerFrame.state.text:find("Talent group 2.", 1, true)
-      and PrimerFrame.state.text:find("Following your points.", 1, true),
-    "the header names the talent group and how the build was chosen"
-  )
-  prot:GetScript("OnClick")(prot) -- (it is the build the points follow: nothing to look at)
   ns.choice(2).pickedBuild = 3
+  ns.refresh() -- (a choice: what the page is for is worked out again)
   check(
     PrimerChar.groups[2].pickedBuild == 3 and (PrimerChar.groups[1].pickedBuild == nil),
     "a build is chosen for the group looked at, the first group's untouched"
@@ -725,6 +773,8 @@ if not G.FOREVER then
     s.spells = set(100, 772, 78, 6343, 1715, 2687)
     points(map or {})
   end
+  local FURY25 = { [12320] = 5, [12322] = 5, [12318] = 5, [23584] = 5, [12317] = 5 }
+  local PROT25 = { [12298] = 5, [12297] = 5, [12299] = 5, [12303] = 5, [12945] = 3, [12809] = 1, [12797] = 1 }
   local ARMS15 = { [12282] = 3, [12286] = 3, [12295] = 5, [12290] = 2, [12296] = 1, [12834] = 1 }
   local FURY15 = { [12320] = 5, [12322] = 5, [12318] = 5 }
   local PROT15 = { [12298] = 5, [12297] = 5, [12299] = 5 }
@@ -807,24 +857,24 @@ if not G.FOREVER then
   check(not ns.glowing, "and goes when a role is chosen")
 
   -- points spent: a picked build stays, drift is said once with three ways on
-  fresh(24, ARMS15)
+  fresh(34, ARMS15)
   PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(
-    PrimerPage.title.text == "Arms" and not pageTexts():find("no longer match", 1, true),
+    PrimerPage.title.text == "Arms" and not pageTexts():find("no longer reach", 1, true),
     "points that fit the pick: no note"
   )
-  points(FURY15)
+  points(FURY25)
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
   check(
-    PrimerPage.title.text == "Arms" and PrimerFrame.state.text == "Arms Warrior. Damage. Level 24. A build you picked.",
+    PrimerPage.title.text == "Arms" and PrimerFrame.state.text == "Arms Warrior. Damage. Level 34. Following your pick.",
     "drift: a point spent never swaps the page, the build and the header stay the pick"
   )
   check(
     pageTexts():find(
-      "Your points no longer match the build you chose. This page stays on it. These points follow Fury more than the Arms build you picked.",
+      "Your points can no longer reach the build you chose. This page stays on it. These points follow Fury more than the Arms build you picked.",
       1,
       true
     ),
@@ -833,16 +883,16 @@ if not G.FOREVER then
   check(button("Keep Arms") and button("Follow Fury") and button("My own way"), "three ways on")
   press("Keep Arms")
   check(
-    PrimerPage.title.text == "Arms" and not pageTexts():find("no longer match", 1, true) and not button("Keep Arms"),
+    PrimerPage.title.text == "Arms" and not pageTexts():find("no longer reach", 1, true) and not button("Keep Arms"),
     "kept: the pick stands and the note is gone"
   )
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(
-    not pageTexts():find("no longer match", 1, true) and PrimerPage.title.text == "Arms",
+    not pageTexts():find("no longer reach", 1, true) and PrimerPage.title.text == "Arms",
     "a dismissed note stays dismissed"
   )
-  points(PROT15)
+  points(PROT25)
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
   check(
@@ -857,7 +907,7 @@ if not G.FOREVER then
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(not pageTexts():find("Switch your role", 1, true), "and still dismissed when opened again")
-  points(FURY15)
+  points(FURY25)
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
   check(
@@ -868,10 +918,10 @@ if not G.FOREVER then
   check(
     PrimerChar.groups[1].pickedBuild == 2
       and PrimerPage.title.text == "Fury"
-      and not pageTexts():find("no longer match", 1, true),
+      and not pageTexts():find("no longer reach", 1, true),
     "follow: the build the points resemble is the pick now, by the player's click"
   )
-  points(PROT15)
+  points(PROT25)
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
   press("Switch")
@@ -888,10 +938,15 @@ if not G.FOREVER then
   ns.open(ns.TAB.play)
   local before = PrimerFrame.state.text
   check(
-    before == "Arms Warrior. Damage. Level 20. Following your points.",
-    "no pick: the header says the points led here"
+    before == "Arms Warrior. Damage. Level 20. Guessing from your points.",
+    "no pick, 3 points: three builds are open, the header says it is guessing"
   )
-  points({ [12298] = 5, [12297] = 5 })
+  check(
+    pageTexts():find("Your points leave Arms, Fury and Protection open. Which are you going for?", 1, true),
+    "and the page asks which"
+  )
+  check(button("Damage") and button("Tank") and not button("Heal"), "with the roles the open builds have")
+  points(PROT25)
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
   check(
@@ -900,17 +955,21 @@ if not G.FOREVER then
   )
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
+  s.level = 34
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
   check(
-    PrimerFrame.state.text == "Protection Warrior. Tank. Level 20. Following your points.",
-    "and the next time it is opened the points are read again"
+    PrimerFrame.state.text == "Protection Warrior. Tank. Level 34. Following your points.",
+    "and the next time it is opened the points are read again: 25 in Protection leave only that build open"
   )
+  s.level = 20
   -- (b) a role chosen, two builds in it, points move between them: no flip
-  fresh(24, ARMS15)
+  fresh(34, ARMS15)
   PrimerChar.groups[1] = { role = "damage" }
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(PrimerPage.title.text == "Arms", "(b) a role chosen, nothing picked: the nearest build to the points")
-  points(FURY15)
+  points(FURY25)
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
   check(PrimerPage.title.text == "Arms", "(b) and it does not flip to Fury while the window is open")
@@ -929,7 +988,7 @@ if not G.FOREVER then
   check(scrolls == 1, "(d) a tab starts the page at the top")
   PrimerPage.ScrollTo = scrollTo
   -- (e) the talent in view stays when a point is spent
-  fresh(24, { [12282] = 3 })
+  fresh(34, { [12282] = 3 })
   PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
   PrimerFrame:Hide()
   ns.open(ns.TAB.talents)
@@ -959,13 +1018,13 @@ if not G.FOREVER then
   check(PrimerFrame.state.text:find("Arms Warrior", 1, true), "(f) and back is one click")
 
   -- your own way
-  fresh(24, FURY15)
+  fresh(34, FURY25)
   PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   click("My own way")
   check(
-    PrimerChar.groups[1].freestyle and not pageTexts():find("no longer match", 1, true) and shownRows() > 0,
+    PrimerChar.groups[1].freestyle and not pageTexts():find("no longer reach", 1, true) and shownRows() > 0,
     "own way: no notes, the spells and priorities stay"
   )
   ns.open(ns.TAB.talents)
@@ -984,7 +1043,7 @@ if not G.FOREVER then
   )
 
   -- a build looked at from another role is used with its role (no click lost)
-  fresh(24, ARMS15)
+  fresh(34, ARMS15)
   PrimerChar.groups[1] = {}
   PrimerFrame:Hide()
   ns.open(ns.TAB.role)
@@ -1013,20 +1072,23 @@ if not G.FOREVER then
     "and the pick holds when the window is opened again, whatever the points say"
   )
   -- the header's word follows the character: a respec leaves no points to follow
-  fresh(24, ARMS15)
+  fresh(34, PROT25)
   PrimerChar.groups[1] = {}
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
-  check(PrimerFrame.state.text:find("Following your points.", 1, true), "points to follow: the header says so")
+  check(
+    PrimerFrame.state.text:find("Following your points.", 1, true),
+    "points that leave one build open: the header says it follows them"
+  )
   points({})
   G.fire("PLAYER_TALENT_UPDATE")
   G.advance(0.4)
   check(
-    PrimerPage.title.text == "Arms" and not PrimerFrame.state.text:find("Following your points.", 1, true),
+    PrimerPage.title.text == "Protection" and not PrimerFrame.state.text:find("Following your points.", 1, true),
     "a respec to zero: the build stays, the header no longer says it follows points"
   )
   -- in your own way, looking at another build still says so
-  fresh(24, FURY15)
+  fresh(34, FURY25)
   PrimerChar.groups[1] = { role = "damage", pickedBuild = 1, freestyle = true }
   PrimerFrame:Hide()
   ns.open(ns.TAB.talents)
@@ -1073,44 +1135,73 @@ if not G.FOREVER then
     "Role: the points that differ and the cost, no figure"
   )
   check(PrimerPage.title.text == "Protection", "Role: builds re-filtered")
-  -- the picked build is still the nearest: no note that names it twice
+  -- early points off the build's tree harm nothing: a picked build keeps its page and says nothing
   fresh(24, { [12282] = 3, [12286] = 3, [12295] = 2, [12298] = 5, [12297] = 2 })
   PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(
     PrimerPage.title.text == "Arms"
-      and not pageTexts():find("more than the Arms build you picked", 1, true)
-      and not button("Follow Arms"),
-    "the picked build still the nearest: no note that follows what is picked"
+      and not pageTexts():find("can no longer reach", 1, true)
+      and not button("Follow Fury"),
+    "7 points in Protection under a picked Arms: reachable, no note"
   )
-  -- a split note names the build the page follows, not the tree with most points
+  -- a role with one build left open: the points tell, no question
   PrimerChar.groups[1] = { role = "tank" }
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(
     PrimerPage.title.text == "Protection"
-      and pageTexts():find("This page follows the Protection build, the one for your role.", 1, true),
-    "a split note names the build the page follows"
+      and PrimerFrame.state.text:find("Following your points.", 1, true)
+      and not pageTexts():find("Which are you going for?", 1, true),
+    "role Tank: one build, the points follow it"
   )
+  -- the points fit no build: said plainly, the nearest shown
+  fresh(51, {
+    [12282] = 3,
+    [12286] = 3,
+    [12295] = 5,
+    [12290] = 2,
+    [12296] = 1,
+    [12834] = 3,
+    [12163] = 4,
+    [12298] = 5,
+    [12297] = 5,
+    [12299] = 5,
+    [12303] = 5,
+    [12945] = 1,
+  })
+  PrimerChar.groups[1] = { role = "damage" }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find(
+      "Your points are split between Arms and Protection, so none of the builds fits them. This page shows the nearest, Arms.",
+      1,
+      true
+    ),
+    "21 points in each of two trees: no build fits, said plainly, the nearest shown"
+  )
+  -- a role chosen with two builds open: the page asks which build
+  fresh(14, { [12298] = 5 })
+  PrimerChar.groups[1] = { role = "damage" }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find("Your points leave Arms and Fury open. Which are you going for?", 1, true)
+      and button("Use Arms")
+      and button("Use Fury"),
+    "role Damage, 5 points in Protection: Arms and Fury are open, the page asks which build"
+  )
+  press("Use Fury")
+  check(PrimerChar.groups[1].pickedBuild == 2 and PrimerPage.title.text == "Fury", "using one picks it")
+  -- the user's case: a Paladin with 5 Holy points, role Damage stored, is Retribution
   -- a stored role the class has no build for is not a role chosen
   fresh(12)
   PrimerChar.groups[1] = { role = "heal" }
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(pageTexts():find("What do you want to play?", 1, true), "a role the class cannot play is asked again")
-  -- split points
-  fresh(24, { [12282] = 3, [12286] = 3, [12295] = 2, [12320] = 5, [12322] = 2 })
-  PrimerFrame:Hide()
-  ns.open(ns.TAB.play)
-  check(
-    pageTexts():find(
-      "Your points are split between Arms and Fury. This page follows Arms, which has more. Pick one on the left to follow the other.",
-      1,
-      true
-    ),
-    "split points are said plainly"
-  )
   fresh(12)
   s.spells = {}
   s.ranks = {}
@@ -1393,6 +1484,28 @@ if not G.FOREVER then
     "Paladin with 10 points: the next pick is Seal of Command at 20, the taken ones counted"
   )
 
+  -- the player's case: the guide they followed starts with 5 points in Holy
+  s.level = 14
+  PrimerChar.groups = {}
+  points({ [20257] = 5 })
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    PrimerFrame.state.text:find("Guessing from your points.", 1, true)
+      and pageTexts():find("Your points leave Retribution, Holy and Protection open. Which are you going for?", 1, true)
+      and button("Damage")
+      and button("Heal")
+      and button("Tank"),
+    "Paladin with 5 points in Holy, no role chosen: the page does not say Holy, it asks which role"
+  )
+  click("Damage")
+  check(
+    PrimerPage.title.text == "Retribution"
+      and PrimerFrame.state.text == "Retribution Paladin. Damage. Level 14. Following your points.",
+    "and with Damage chosen it is Retribution, whatever the points"
+  )
+  PrimerChar.groups = {}
+
   -- the Frost Mage
   play("MAGE", "Mage", 8, { [41] = "Fire", [61] = "Frost", [81] = "Arcane" })
   s.spells = set(133, 168, 1459)
@@ -1445,12 +1558,34 @@ if not G.FOREVER then
       and pageTexts():find("A chilled monster has a 15% chance to freeze", 1, true),
     "Mage with 10 points: Frostbite is the next pick, 2 of 3 taken"
   )
-  -- the points decide, not the default: ten in Fire make it a Fire mage
+  -- ten points in Fire leave every build open: the page asks, it does not guess a Fire mage
   PrimerChar.groups = {}
   points({ [11069] = 5, [11119] = 5 })
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
-  check(PrimerPage.title.text == "Fire", "Mage with ten points in Fire: the page follows Fire, not the first build")
+  check(
+    pageTexts():find("Your points leave Frost, Fire and Arcane open. Which are you going for?", 1, true)
+      and PrimerFrame.state.text:find("Guessing from your points.", 1, true),
+    "Mage with ten points in Fire: every build is open, the page asks and says it is guessing"
+  )
+  -- twenty-one points in Fire close the others: then the points tell
+  local fire = {}
+  local left = 21
+  for _, step in ipairs(ns.data.builds[10].path) do
+    local count = math.min(left, step.points[2] - step.points[1] + 1)
+    if count <= 0 then break end
+    local spell = step.talent or step.any[1]
+    fire[spell] = (fire[spell] or 0) + count
+    left = left - count
+  end
+  points(fire)
+  s.level = 30
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Fire" and PrimerFrame.state.text:find("Following your points.", 1, true),
+    "Mage with 21 points in Fire: only Fire is open, the page follows it"
+  )
 
   UnitClass, s.treeNames = warriorClass, warriorTrees
   s.ranks, s.spells, s.level = {}, {}, 12

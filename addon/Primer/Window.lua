@@ -299,6 +299,11 @@ end
 -- scolds: a drift is a fact about points. Nothing here for a freestyle
 -- character, and nothing but the spells' pages.
 local function treeName(snap, tree) return snap.talents.names[tree] or L["Tree %d"]:format(tree) end
+-- "Holy", "Holy and Retribution", "Fury, Arms and Protection"
+local function listNames(names)
+  if #names < 2 then return names[1] or "" end
+  return table.concat(names, ", ", 1, #names - 1) .. L[" and "] .. names[#names]
+end
 local function roleLike(role)
   if role == "tank" then return L["a tank"] end
   if role == "heal" then return L["a healer"] end
@@ -381,36 +386,59 @@ local function notes(snap, class, r, choice, tab)
     page:paragraph(L["Fine. The page stays on the untalented kit until you pick."], T.soft)
   end
   if r.phase ~= "spent" then return end
-  if r.splitTrees and r.splitTrees[1] then
-    local top, second = r.splitTrees[1], r.splitTrees[2]
+  if r.open then
+    -- (the points leave several builds open and nothing says which: the page says so
+    -- and asks, never guessing from the tree with most points)
+    local names = {}
+    for _, id in ipairs(r.open) do
+      table.insert(names, G.name(snap, ns.data.builds[id]))
+    end
+    page:paragraph(L["Your points leave %s open. Which are you going for?"]:format(listNames(names)), T.text)
+    local buttons = {}
+    if not r.roleChosen then
+      local seen = {}
+      for _, id in ipairs(r.open) do
+        local role = ns.data.builds[id].role
+        if not seen[role] then
+          seen[role] = true
+          table.insert(buttons, {
+            roleName(role),
+            function()
+              choice.role, choice.pickedBuild = role, nil
+              view.step = nil
+              ns.refresh()
+            end,
+          })
+        end
+      end
+    else
+      for _, id in ipairs(r.open) do
+        table.insert(buttons, {
+          L["Use %s"]:format(G.name(snap, ns.data.builds[id])),
+          function() pickBuild(id, snap.group) end,
+        })
+      end
+    end
+    page:buttons(buttons)
+  elseif r.unreachable then
+    local near = G.name(snap, ns.data.builds[r.build])
+    local top, second = G.split(snap)
     if r.followed == "picked" then
       page:paragraph(
-        L["Your points are split between %s and %s. This page stays on %s, the build you picked."]:format(
-          treeName(snap, top),
-          treeName(snap, second),
-          G.name(snap, ns.data.builds[r.build])
-        ),
+        L["Your points fit none of the builds. This page stays on %s, the build you picked."]:format(near),
         T.soft
       )
-    elseif G.treeIndex(snap, ns.data.builds[r.build].tree) == top then
+    elseif top and second then
       page:paragraph(
-        L["Your points are split between %s and %s. This page follows %s, which has more. Pick one on the left to follow the other."]:format(
+        L["Your points are split between %s and %s, so none of the builds fits them. This page shows the nearest, %s."]:format(
           treeName(snap, top),
           treeName(snap, second),
-          treeName(snap, top)
+          near
         ),
         T.soft
       )
     else
-      -- (the build of the role chosen is in another tree than the one with most points)
-      page:paragraph(
-        L["Your points are split between %s and %s. This page follows the %s build, the one for your role. Pick one on the left to follow another."]:format(
-          treeName(snap, top),
-          treeName(snap, second),
-          G.name(snap, ns.data.builds[r.build])
-        ),
-        T.soft
-      )
+      page:paragraph(L["Your points fit none of the builds. This page shows the nearest, %s."]:format(near), T.soft)
     end
   end
   local drift = r.drift
@@ -418,7 +446,7 @@ local function notes(snap, class, r, choice, tab)
   if drift.kind == "build" then
     local from, to = G.name(snap, ns.data.builds[drift.from]), G.name(snap, ns.data.builds[drift.to])
     page:paragraph(
-      L["Your points no longer match the build you chose. This page stays on it."]
+      L["Your points can no longer reach the build you chose. This page stays on it."]
         .. " "
         .. L["These points follow %s more than the %s build you picked."]:format(to, from),
       T.soft
@@ -439,11 +467,12 @@ local function notes(snap, class, r, choice, tab)
     })
   else
     page:paragraph(
-      L["These points look more like %s than %s. Switch your role to %s?"]:format(
-        roleLike(drift.role),
-        roleLike(r.role),
-        roleName(drift.role)
-      ),
+      (drift.unpicked and (L["None of your role's builds can be reached by your points."] .. " ") or "")
+        .. L["These points look more like %s than %s. Switch your role to %s?"]:format(
+          roleLike(drift.role),
+          roleLike(r.role),
+          roleName(drift.role)
+        ),
       T.soft
     )
     page:buttons({
@@ -736,7 +765,8 @@ local function model(snap, class, r)
   if look and look.build and look.build ~= r.mine and ns.data.builds[look.build] then
     r.build, r.role, r.looking = look.build, ns.data.builds[look.build].role, "build"
   elseif look and look.role and look.role ~= r.mineRole then
-    r.role, r.build, r.looking = look.role, G.build(snap, class, look.role, nil), "role"
+    -- (the first build of that role its points leave open, never the tree with most points)
+    r.role, r.build, r.looking = look.role, G.open(snap, class, look.role)[1] or G.builds(class, look.role)[1], "role"
   else
     view.look = nil
   end
@@ -755,7 +785,8 @@ local function header(snap, r)
   if snap.groups > 1 then table.insert(parts, L["Talent group %d."]:format(snap.group)) end
   table.insert(parts, L["%s."]:format(L["Level %d"]:format(snap.level)))
   -- (the build stays what it was, the word follows the character: no points to follow after a respec)
-  local mode = r.mode == "picked" and L["A build you picked."]
+  local mode = r.mode == "picked" and L["Following your pick."]
+    or r.mode == "open" and r.phase == "spent" and L["Guessing from your points."]
     or r.mode == "points" and r.phase == "spent" and L["Following your points."]
     or r.mode == "own" and L["Your own way."]
     or L["Not chosen yet."]

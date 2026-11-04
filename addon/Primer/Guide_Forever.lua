@@ -9,7 +9,7 @@
 --   advice[class][role] = { say (a word key, or false): the writer's line for the level-10 advice, after the builds that fit and the first three picks of the first)
 --   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),
 --                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }
---   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks) }, every talent the builds name
+--   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks), req (points in its tree it asks) }, every talent the builds name
 --   stances[key]   = the spell that is the form (its name is the game's, by id)
 local _, ns = ...
 ns.data = {

@@ -55,13 +55,14 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   asks once what to play (Damage, Tank, Heal, whichever the class has, or Not
   yet) in a quiet block and the minimap button glows, never a pop-up; a role
   chosen shows the builds that fit and the first three picks. From `spent` the
-  build is the player's pick while the points fit it (a build's path says
-  where its points are by now, tree by tree: within 3 points still fits), else
-  the nearest build of the role. Points split (top tree under 60 percent, or
-  two trees within 5, from 5 points) are said plainly. A pick the points left
-  is said once with three ways on (keep, follow, my own way); points that look
-  like another role offer a switch, never silent; a dismissed note stays
-  dismissed until the drift changes (`driftSeen`). Your own way (`freestyle`)
+  build is the player's pick, else the build the points leave open: a build is
+  reachable while the points outside its tree are no more than 20 of the 51
+  (feasibility, not the tree with most points, `docs/inference.md`). Several
+  open and no role chosen: the page asks which role, and says it is guessing.
+  A pick the points can no longer reach is said once with three ways on (keep,
+  follow, my own way); points that fit only another role's builds offer a
+  switch, never silent; a dismissed note stays dismissed until the drift
+  changes (`driftSeen`). Your own way (`freestyle`)
   has no picks and no notes. A role change on the Role tab re-filters at once
   and counts the points off the nearest build of the new role, and says a
   respec costs gold. Saved per talent group: `role`, `pickedBuild`,

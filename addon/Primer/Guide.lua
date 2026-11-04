@@ -222,10 +222,6 @@ end
 -- now, tree by tree, are read off the path and nothing is declared twice (a
 -- hybrid is a build whose path crosses trees).
 
--- (a few points off a build still fit it: a choice of weapon, a talent taken
--- early. The split note waits for 5 points, so one or two do not shout it.)
-G.TOLERANCE, G.SPLIT_SHARE, G.SPLIT_GAP, G.SPLIT_FROM = 3, 0.6, 5, 5
-
 function G.phase(snap)
   if snap.level < G.FIRST_POINT_LEVEL then return "untalented" end
   if snap.talents.total == 0 then return "choose" end
@@ -286,71 +282,143 @@ function G.nearest(snap, class, role)
   return best, far
 end
 
--- The two trees the points are split between, when they are: the top tree under
--- 60 percent of what is spent, or two trees within 5 points (from 5 spent).
+-- The two trees holding most of the points (for the page that says none of
+-- the builds fits them).
 function G.split(snap)
-  local total = snap.talents.total
-  if total < G.SPLIT_FROM then return nil end
   local trees = {}
   for tree, have in pairs(snap.talents.points) do
-    table.insert(trees, { tree = tree, have = have })
+    if have > 0 then table.insert(trees, { tree = tree, have = have }) end
   end
-  table.sort(trees, function(a, b)
-    if a.have ~= b.have then return a.have > b.have end
-    return a.tree < b.tree
+  table.sort(trees, function(x, y)
+    if x.have ~= y.have then return x.have > y.have end
+    return x.tree < y.tree
   end)
-  local top, second = trees[1], trees[2]
-  if second and (top.have < G.SPLIT_SHARE * total or top.have - second.have <= G.SPLIT_GAP) then
-    return top.tree, second.tree
-  end
+  if trees[2] then return trees[1].tree, trees[2].tree end
 end
 
--- What the character is on: its phase, role (the one it chose, else the points'),
--- the build the page is for and why (mode "picked": the build it picked, kept
--- whatever its points do, a pick is never swapped under it; "points": nothing
--- picked, the nearest build to the points; "none": nothing spent yet; "own":
--- their own way), a drift to say once (kind "build" or "role", with the marker
--- the player's dismissal is kept by), the split trees. A freestyle character
--- has no drift and no split. choice is the group's own: role, pickedBuild,
--- freestyle, driftSeen. The window freezes the role and build it shows (it
--- changes only on the player's own click), so a point spent updates the facts
--- and never what the page is for.
+-- Whether a build can still be reached by the points the character has. A build
+-- needs its own tree to hold `required` of the 51 points (31 for the builds
+-- written so far, read off the path) and may spend the rest anywhere, so a
+-- build stays open while the points spent OUTSIDE its tree are no more than
+-- the rest (20 of 51): five early points in Holy rule out nothing. This is
+-- feasibility, never dominance: the tree with most points is not the build.
+-- It is what the deepest talent of the build's own tree asks of that tree (the
+-- points before it) and the point it takes itself: not what the path happens to
+-- put there (Fury's path puts 32 in Fury, the build needs 31).
+function G.required(build)
+  local need = 0
+  for _, step in ipairs(build.path) do
+    for _, spell in ipairs(step.any or { step.talent }) do
+      local t = data().talents[spell]
+      if t and t.tab == build.tree then need = math.max(need, t.req + 1) end
+    end
+  end
+  return need > 0 and need or 31
+end
+function G.reachable(snap, build)
+  local tree = G.treeIndex(snap, build.tree)
+  local off = snap.talents.total - (tree and snap.talents.points[tree] or 0)
+  return off <= G.POINTS - G.required(build)
+end
+
+-- The class's builds (of a role, or all) the points still leave open, in the
+-- writer's order.
+function G.open(snap, class, role)
+  local out = {}
+  for _, id in ipairs(G.builds(class, role)) do
+    if G.reachable(snap, data().builds[id]) then table.insert(out, id) end
+  end
+  return out
+end
+
+-- What the character is on: its phase, role (the one it chose or its build's),
+-- the build the page is for and how ("picked": the build it picked, kept
+-- whatever its points do, a pick is never swapped under it; "points": its
+-- points leave exactly one build open; "open": they leave several open and
+-- nothing says which, so the page shows the first and asks, never guessing
+-- from the tree with most points; "none": nothing spent yet; "own": their own
+-- way). Candidates are the chosen role's builds (a Damage paladin can only be
+-- Retribution, whatever the points), else every build of the class. A drift
+-- is said only when the picked build can no longer be reached (kind "build",
+-- to the nearest build still open in its role, or kind "role" when only
+-- another role's builds are open), with the marker the player's dismissal is
+-- kept by. choice is the group's own: role, pickedBuild, freestyle, driftSeen.
+-- The window freezes the role and build it shows (it changes only on the
+-- player's own click), so a point spent updates the facts, never what the
+-- page is for.
 function G.resolve(snap, class, choice)
   local r = { phase = G.phase(snap), freestyle = choice.freestyle and true or false }
-  r.roleChosen = false
-  r.role = G.role(snap, class, choice.role)
+  local chosen
   for _, role in ipairs(G.roles(class)) do
-    if role == choice.role then r.roleChosen = true end
+    if role == choice.role then chosen = role end
   end
+  r.roleChosen = chosen ~= nil
   local picked
-  for _, id in ipairs(G.builds(class, r.role)) do
+  for _, id in ipairs(G.builds(class, chosen)) do
     if id == choice.pickedBuild then picked = id end
   end
-  local spent = r.phase == "spent"
-  local role, far
-  if spent then
-    role, far = G.nearest(snap, class, r.role)
+  r.role = chosen or (picked and data().builds[picked].role) or G.role(snap, class, nil)
+  if r.phase ~= "spent" then
+    r.build = picked or G.build(snap, class, r.role, nil)
+    r.followed = picked and "picked" or "default"
+    r.mode = r.freestyle and "own" or picked and "picked" or "none"
+    return r
   end
-  r.build = picked or role or G.build(snap, class, r.role, nil)
-  r.followed = picked and "picked" or spent and "points" or "default"
-  r.mode = r.freestyle and "own" or picked and "picked" or spent and "points" or "none"
-  if not spent then return r end
+  local candidates = chosen or picked and data().builds[picked].role or nil
+  local open = G.open(snap, class, candidates)
   local n = G.earned(snap)
-  local any, anyFar = G.nearest(snap, class, nil)
-  r.nearest, r.far = role, far
-  local fits = picked and G.differ(snap, data().builds[picked], n) <= G.TOLERANCE
-  if not fits then
-    if far > G.TOLERANCE then r.splitTrees = { G.split(snap) } end
-    local mark = role .. ":" .. r.role .. ":" .. (any or "")
-    if anyFar <= G.TOLERANCE and far > G.TOLERANCE and data().builds[any].role ~= r.role then
-      r.drift = { kind = "role", role = data().builds[any].role, build = any, mark = mark }
-    elseif picked and picked ~= role then
-      r.drift = { kind = "build", from = picked, to = role, mark = mark }
+  local function nearest(list)
+    local best, far
+    for _, id in ipairs(list) do
+      local off = G.differ(snap, data().builds[id], n)
+      if not far or off < far then
+        best, far = id, off
+      end
     end
-    if r.drift and choice.driftSeen == r.drift.mark then r.drift.seen = true end
+    return best
   end
-  if r.freestyle then
-    r.drift, r.splitTrees = nil, nil
+  if picked then
+    r.build, r.followed, r.mode = picked, "picked", "picked"
+    if not G.reachable(snap, data().builds[picked]) then
+      -- (the pick can no longer be reached: say so once, offer the nearest that can)
+      local to = nearest(G.open(snap, class, r.role))
+      local mark = picked .. ":" .. (to or "") .. ":" .. r.role
+      if to then
+        r.drift = { kind = "build", from = picked, to = to, mark = mark }
+      else
+        local build = nearest(G.open(snap, class, nil))
+        if build and data().builds[build].role ~= r.role then
+          r.drift = { kind = "role", role = data().builds[build].role, build = build, mark = mark .. ":" .. build }
+        else
+          r.unreachable = true
+        end
+      end
+      if r.drift and choice.driftSeen == r.drift.mark then r.drift.seen = true end
+    end
+  elseif #open == 1 then
+    r.build, r.followed, r.mode = open[1], "points", "points"
+  elseif #open > 1 then
+    r.build, r.followed, r.mode, r.open = open[1], "points", "open", open
+  else
+    -- (none of the role's builds can be reached: another role's may be, then a switch is offered)
+    r.build, r.followed, r.mode = nearest(G.builds(class, candidates)), "points", "points"
+    local other = nearest(G.open(snap, class, nil))
+    if candidates and other then
+      r.drift = {
+        kind = "role",
+        role = data().builds[other].role,
+        build = other,
+        mark = r.build .. ":" .. other .. ":" .. r.role,
+        unpicked = true,
+      }
+      if choice.driftSeen == r.drift.mark then r.drift.seen = true end
+    else
+      r.unreachable = true
+    end
+  end
+  if not chosen and not picked then r.role = data().builds[r.build].role end
+  if r.mode == "own" or r.freestyle then
+    r.mode, r.drift, r.open, r.unreachable = "own", nil, nil, nil
   end
   return r
 end

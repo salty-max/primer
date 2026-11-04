@@ -17,6 +17,7 @@ package, English only for now. Read the family's CLAUDE.md (`../CLAUDE.md`) firs
 |---|---|
 | The addon file by file: the package, Core, Window, Settings, Minimap, the tests, the languages | `docs/architecture.md` |
 | The guide's data, `content/<class>.json`, its shape and the facts check (`scripts/guide.ts`) | `docs/data.md` |
+| Which build a character is (feasibility, never the tree with most points) | `docs/inference.md` |
 | The voice's rules: the narrator, the class cards, what is the game's and what is ours | `docs/voices.md` |
 | The plan, the milestones, what is open | `../ideas/class-guide.md`, `../ideas/class-guide-warrior.md` |
 | The game's tables the facts come from | `../wow-data/docs/class-guide.md` |
