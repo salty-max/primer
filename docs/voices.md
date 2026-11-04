@@ -16,8 +16,8 @@ you to stop**. Never named, never "I" and never "we", always speaking to "you".
 - **The voice never changes the instruction.** The same spell, the same order,
   the same reason, in every voice. If a joke needs the instruction bent, the
   joke goes.
-- **Every line has its reason**, and says when it stops being true. A line
-  without a reason is cut.
+- **Every line has its reason**, one toggle or tooltip away, and says when it
+  stops being true. A line without a reason is cut.
 - **Dry and kind, not clever.** One dry remark per build at most. No praise
   and no blame: a pull that went wrong was a pull.
 - **Short.** A priority line is one sentence of instruction and one of reason,
@@ -32,8 +32,9 @@ you to stop**. Never named, never "I" and never "we", always speaking to "you".
 - **The family's used-up devices stay out:** "Not X. Y." fragments, "Here is",
   "plainly", announced confessions ("to be honest"), a trailing ", which ..."
   quip on every line, endings that all land on a quip.
-- **A build is a way, not the way.** Where players split, the page names both
-  roads, picks one and prices the other. The footer on every build says it is a
+- **A build is a way, not the way.** Where players split, each role has one
+  recommended road, the other roads are kept as "also works", and the
+  Overview says the price of the other. The footer on every build says it is a
   sensible way to play, that cooldowns and procs in a real fight change the
   order, and which client and day it was checked against (`checked`, `build`).
 

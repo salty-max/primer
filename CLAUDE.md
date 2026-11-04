@@ -39,10 +39,15 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
 
 ## Hard rules
 
-- The rules come from the plan: a row shows only when it is true for the
-  character now, every line has its reason, a build is a way and not the way,
-  a stage is a level bracket and a job and never an optimum, and **the voice
-  never changes the instruction** (`docs/voices.md`).
+- The rules come from the plan, as the design changed four of them (4 November
+  2026, the user's go, `../ideas/primer-design.md` section 9): a row the
+  character cannot press yet is shown grey in its place, with what it needs,
+  so the plan never changes under the player's eyes. Every line has its
+  reason, one toggle or tooltip away, so a plan reads at a glance. A build is
+  a way and not the way, yet each role has one recommended road, the other
+  roads are kept as "also works", and the Overview says the price of the
+  other. A stage is a level bracket and a job and never an optimum, and **the
+  voice never changes the instruction** (`docs/voices.md`).
 - The game's facts come from wow-data's databases only (`scripts/guide.ts`
   through `scripts/root.ts`, the kit's copy). Names of spells and talents are
   the game's, by id, never typed. Generated files (`Guide_*.lua`,
@@ -54,7 +59,10 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
   user's go, under `removed`.
 - **Nothing in combat.** No combat event, no unit query in combat, no hook on a Blizzard
   frame. The window is our own, opened by `/primer`, the minimap button or
-  Keyring's (a call to `ns.toggle`, never a hook).
+  Keyring's (a call to `ns.toggle`, never a hook). One exception: the
+  optional Era talent-window overlay (`hooksecurefunc` only, every step in
+  `pcall`, off in combat, built last, failing silently, and never on Forever
+  until a probe has been read).
 - English only for now (3 November 2026): French, German and Spanish are not
   worked on. Every word still goes through `L` (`i18n/words.json`) or `ns.say`
   (the guide), so a language can be added later. `HIDDEN_LOCALES` changes
