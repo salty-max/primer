@@ -15,3 +15,8 @@ function ns.translate(t) K.translate(t) end
 -- A guide's word by its key (GuideText.lua), else the key itself: a missing
 -- word shows as what it is, never as nothing.
 function ns.say(key) return (ns.guideText and ns.guideText[key]) or key end
+-- A sentence with its full stop, added only when it has none (the writers' texts end one way or the other).
+function ns.stop(text)
+  if text:find("[%.%!%?]$") then return text end
+  return text .. "."
+end

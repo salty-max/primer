@@ -61,10 +61,18 @@ end
 
 function R.season() return try("C_Seasons.GetActiveSeason", C_Seasons and C_Seasons.GetActiveSeason) end
 
--- Whether a spell is in the character's book: rank 1's id is the family's.
-function R.known(spell)
+-- Whether a spell is in the character's book. The game gives each rank its own id and may report only the highest
+-- rank learned, so a spell counts as known when any rank of its family (the data lists them) is.
+local function knownOne(spell)
   if try("C_SpellBook.IsSpellInSpellBook", C_SpellBook and C_SpellBook.IsSpellInSpellBook, spell) then return true end
   return try("C_SpellBook.IsSpellKnown", C_SpellBook and C_SpellBook.IsSpellKnown, spell) and true or false
+end
+function R.known(spell, family)
+  if knownOne(spell) then return true end
+  for _, id in ipairs(family or {}) do
+    if id ~= spell and knownOne(id) then return true end
+  end
+  return false
 end
 
 -- A spell's name and picture, the game's, by id (nothing typed here).

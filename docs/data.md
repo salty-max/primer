@@ -190,7 +190,7 @@ a spell or a talent.
 
 ## The facts lock (facts.lock.json)
 
-Per game and build, every fact the build read: a spell's name, level and forms, a talent's
+Per game and build, every fact the build read: a spell's name, level, forms and family, a talent's
 cell (tree, row, column), ranks, points asked, first level and prerequisites, a tree's
 name. The run compares what it reads with the lock and **fails naming the build and the
 fact** ("classic mage-frost: spell 116 (Frostbolt) level: 6 became 4"), in `--check` and in
@@ -245,3 +245,5 @@ text. The page for a level 12 warrior is shorter, never wrong.
 A step may be a line of text alone where one line stands for several spells (the opening's "A seal": Command with a slow weapon, else Righteousness). It has no icon of its own and no grey state, so use it only where the loop below names the spells by id.
 
 A stage still written as rows (the older form: Warrior, and the stages of other builds not yet re-authored as a plan) is drawn as a loop with its reasons under it but is not held to the step budget or the 56 characters: it is exempt until its pass (M-C), and the sim says so (`screen.legacy`).
+
+Every spell of a step or row carries `family = { ids }` when the class's book holds more than one id under its name (the game gives each rank its own id and may report only the highest learned): the window counts the spell known when any of them is in the book (`Reader.known`). Season of Discovery runes are left out.

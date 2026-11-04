@@ -228,6 +228,18 @@ class Facts {
     this.seen.set(`spell ${spell} level`, r ? String(r.level) : "none");
     return r ? r.level : undefined;
   }
+  /** Every rank of a spell in the class's book: the spells that share its name (the game gives each rank its own id,
+   * and a character with a higher rank may no longer report the lower one). The spell's own id first. */
+  family(spell: number): number[] {
+    const rows = this.db
+      .query(
+        "SELECT cs.spell_id AS id FROM class_spell cs JOIN name n ON n.kind = 'spell' AND n.id = cs.spell_id AND n.locale = 'enUS' WHERE cs.class_id = ? AND cs.kind <> 'rune' AND n.name = (SELECT name FROM name WHERE kind = 'spell' AND id = ? AND locale = 'enUS') ORDER BY cs.spell_id",
+      )
+      .all(this.classId, spell) as { id: number }[];
+    const ids = [spell, ...rows.map((r) => r.id).filter((id) => id !== spell)];
+    this.seen.set(`spell ${spell} family`, ids.join(","));
+    return ids;
+  }
   /** The forms a spell can be pressed in, from the client's own table (SpellShapeshift): null when it asks for none. */
   stances(spell: number): string[] | null {
     const r = this.db.query("SELECT stance_mask, stance_exclude FROM spell_info WHERE spell_id = ?").get(spell) as { stance_mask: number | null; stance_exclude: number | null } | null;
@@ -359,6 +371,7 @@ function checkBuild(b: Build, f: Facts) {
       if (had !== undefined && had !== want) bad(`${where}: stance ${want}, another row of the build says ${had}: one list for a spell`);
       stances.set(r.spell, want);
       (r as Row & { learned: number }).learned = level;
+      (r as Row & { family?: number[] }).family = f.family(r.spell);
     }
   };
   // A rotation plan (the stage's opening, loop, between fights, low resource and big cooldowns): every
@@ -428,6 +441,8 @@ const list = (a: (string | number)[]) => `{ ${a.join(", ")} }`;
 
 function rowLua(r: Row & { learned: number }, key: string): string {
   const f = [`spell = ${r.spell}`, `level = ${r.learned}`];
+  const fam = (r as Row & { family?: number[] }).family;
+  if (fam && fam.length > 1) f.push(`family = ${list(fam)}`);
   if (r.talentSpell !== undefined) f.push(`talent = ${r.talentSpell}`);
   if (r.need.talents?.length) f.push(`talents = ${list(r.need.talents)}`);
   const stance = r.need.stance?.length ? r.need.stance : filled.get(r);
@@ -449,6 +464,8 @@ function stepLua(x: PlanStep & { learned?: number }, key: string, bare = false):
   const f: string[] = [];
   if (x.spell !== undefined) {
     f.push(`spell = ${x.spell}`, `level = ${x.learned}`);
+    const fam = (x as { family?: number[] }).family;
+    if (fam && fam.length > 1) f.push(`family = ${list(fam)}`);
     if (COMMON_SPELLS[x.spell] !== undefined) f.push("common = true", `icon = ${q(COMMON_SPELLS[x.spell][1])}`);
     if (x.talentSpell !== undefined) f.push(`talent = ${x.talentSpell}`);
     if (x.need?.talents?.length) f.push(`talents = ${list(x.need.talents)}`);

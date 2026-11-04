@@ -177,7 +177,7 @@ local function setStep(r, snap, step, n, level, last)
   if ready and clause == "" and last then clause = L["If nothing above applies"] end
   local stance = ready and stanceOf(step)
   if stance then clause = clause ~= "" and (clause .. ", " .. stance:lower()) or stance end
-  local why = step.why and (capital(ns.say(step.why)) .. ".") or nil
+  local why = step.why and ns.stop(capital(ns.say(step.why))) or nil
   r.slot.spell = step.spell
   K.setSlot(r.slot, icon or K.QUESTION, nil, nil, not ready)
   r.num:SetText(n and tostring(n) or "")
@@ -514,11 +514,12 @@ local function drawSpine(snap, b, r, shown)
   list:begin()
   local model = {}
   for _, a in ipairs(arrivals(snap, b, r.road)) do
+    -- (one form: the pick first, then "New:" and the spells on a line of their own)
     local parts = {}
     if snap.level < G.FIRST_POINT_LEVEL and a.level == snap.level then parts[1] = L["Talents start at level 10"] end
     if a.pick then parts[#parts + 1] = ("%s %d/%d"):format(pickName(a.pick), a.pick.number, a.pick.of) end
-    if #a.spells > 0 then parts[#parts + 1] = table.concat(a.spells, ", ") end
-    local under = #parts > 0 and table.concat(parts, ". ") or L["Nothing new"]
+    if #a.spells > 0 then parts[#parts + 1] = L["New: %s"]:format(table.concat(a.spells, ", ")) end
+    local under = #parts > 0 and table.concat(parts, "\n") or L["Nothing new"]
     local here = a.level == snap.level
     local entry = list:add("level", L["Level %d"]:format(a.level), here and L["You are here"] or nil, under)
     entry.level = a.level
@@ -575,7 +576,8 @@ local function drawLevel(snap, class, r, choice)
         local id = G.recommend(class, role)
         local rb = ns.data.builds[id]
         local cr = ns.data.classes[class].roles[role]
-        local line = ("%s: %s."):format(roleName(role), G.name(snap, rb)) .. (cr and (" " .. ns.say(cr.why)) or "")
+        local line = ("%s: %s."):format(roleName(role), G.name(snap, rb))
+          .. (cr and (" " .. ns.stop(ns.say(cr.why))) or "")
         table.insert(screen.roles, { role = role, build = id, line = line })
         paragraph(line, T.text)
       end
@@ -618,7 +620,7 @@ local function drawLevel(snap, class, r, choice)
         pick.of
       )
       why = pick.step.step and pick.step.step.why or pick.step.why
-      why = why and (capital(ns.say(why)) .. ".") or nil
+      why = why and ns.stop(capital(ns.say(why))) or nil
     elseif shown < G.FIRST_POINT_LEVEL then
       text = L["Talents start at level 10"]
     else
@@ -655,7 +657,10 @@ local function drawLevel(snap, class, r, choice)
       local state, extra = stateAt(step, snap, shown)
       local clause = state == "ready" and whenOf(step) or needs(snap, state, extra)
       local why = step.why and ns.say(step.why)
-      table.insert(parts, ("%s, %s%s."):format(name, (clause:gsub("^%u", string.lower)), why and (": " .. why) or ""))
+      table.insert(
+        parts,
+        ns.stop(("%s, %s%s"):format(name, (clause:gsub("^%u", string.lower)), why and (": " .. why) or ""))
+      )
     end
     local text = L["Rarely: %s"]:format(table.concat(parts, " "))
     page.y = page.y + 4

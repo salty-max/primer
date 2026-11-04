@@ -169,7 +169,7 @@ function G.rows(stage, snap)
       if rankOf(snap, spell) == 0 then ok = false end
     end
     if ok then
-      if snap.knows(row.spell) then
+      if snap.knows(row.spell, row.family) then
         table.insert(out, row)
       else
         unlearned = unlearned + 1
@@ -190,7 +190,7 @@ function G.stepState(step, snap)
   for _, spell in ipairs(step.talents or {}) do
     if rankOf(snap, spell) == 0 then return "talent", spell end
   end
-  if not snap.knows(step.spell) then return "book" end
+  if not snap.knows(step.spell, step.family) then return "book" end
   return "ready"
 end
 

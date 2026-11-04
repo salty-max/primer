@@ -534,6 +534,10 @@ local function budget(why)
   end
   check(onScreen == #(sc.opening or {}) + #(sc.loop or {}) + (sc.pick and 1 or 0), why .. ": a row for each step")
   check(not pageTexts():find("...", 1, true), why .. ": no ellipsis")
+  check(
+    not pageTexts():find("..", 1, true) and not pageTexts():find(" %.") and not pageTexts():find(" ,"),
+    why .. ": no doubled full stop, no space before one"
+  )
   local cut = ns.fit()
   check(#cut == 0, why .. ": nothing cut short (" .. (cut[1] or "") .. ")")
 end
@@ -697,6 +701,60 @@ if not G.FOREVER then
   -- the whole spine is one list
   local seen = spineLevels()
   check(seen[1] == 24 and seen[#seen] >= 40, "the spine for the Paladin")
+  -- a character that knows only a higher rank of a spell still has it (the game gives each rank its own id)
+  do
+    local seal
+    for _, st in ipairs(ret.stages) do
+      for _, x in ipairs(st.plan.loop) do
+        if x.spell == 20154 then seal = x end
+      end
+    end
+    check(seal and #seal.family > 1, "a spell with ranks carries its family")
+    local before = s.spells
+    s.spells = {}
+    for id in pairs(before) do
+      s.spells[id] = id ~= 20154 and id ~= 21084 or nil
+    end
+    s.spells[20287] = true -- (rank 2 alone)
+    ns.reader.reset()
+    ns.open(TAB.level)
+    local row
+    for _, r in ipairs(ns.screen.loop) do
+      if r.spell == 20154 then row = r end
+    end
+    check(row and row.state == "ready", "knowing only Seal of Righteousness rank 2, the spell is known")
+    s.spells[20287] = nil
+    ns.reader.reset()
+    ns.open(TAB.level)
+    for _, r in ipairs(ns.screen.loop) do
+      if r.spell == 20154 then row = r end
+    end
+    check(row.state == "book", "and knowing no rank, it waits for the trainer")
+    s.spells = before
+    ns.reader.reset()
+    ns.open(TAB.level)
+  end
+
+  -- every text the guide has: no doubled full stop, no space before one
+  for key, text in pairs(ns.guideText) do
+    check(
+      not text:find("..", 1, true) and not text:find(" %.") and not text:find(" ,"),
+      "the guide's text " .. key .. " is punctuated"
+    )
+  end
+  check(
+    ns.stop("A reason.") == "A reason." and ns.stop("A reason") == "A reason.",
+    "a full stop is added only when missing"
+  )
+
+  -- the spine: the pick first, then New: and the spells on a line of their own
+  for _, r in ipairs(ns.screen.spine) do
+    check(not r.under:find("%.\n") and not r.under:find("%. New"), "the spine does not mix its parts with full stops")
+    if r.under:find("New: ", 1, true) then
+      check(r.under:find("^New: ") or r.under:find("\nNew: "), "the new spells are on a line of their own")
+    end
+  end
+
   -- /primer fit: nothing cut short, then one text that is
   s.printed = {}
   SlashCmdList.PRIMER("fit")

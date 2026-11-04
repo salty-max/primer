@@ -198,8 +198,8 @@ function Tree.draw(t, snap, class, build, road, level)
           local w = why[c.spell]
           s.line = state == "next"
               and pick
-              and L["Primer: next pick, level %d."]:format(pick.level) .. (w and (" " .. w.text .. ".") or "")
-            or w and L["Primer: pick %d on this road, from level %d."]:format(mark, w.level) .. " " .. w.text .. "."
+              and L["Primer: next pick, level %d."]:format(pick.level) .. (w and (" " .. ns.stop(w.text)) or "")
+            or w and L["Primer: pick %d on this road, from level %d."]:format(mark, w.level) .. " " .. ns.stop(w.text)
             or L["Primer: not on this road."]
           s:Show()
           at2[c.id] = { row = c.row, col = c.col }
