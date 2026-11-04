@@ -14,6 +14,8 @@ ns.rules = G
 -- are Era with the same classes: the guide stays on.)
 G.SEASON_OF_DISCOVERY = 2
 G.ROLES = { "damage", "tank", "heal" }
+-- (Enum.SeasonID.Hardcore: Hardcore realms are Era with the same classes, and their advice is the build's own `hardcore` lines)
+G.HARDCORE = (Enum and Enum.SeasonID and Enum.SeasonID.Hardcore) or 3
 -- (a talent point is spent at level N + 9, the 51 of a full tree by 60)
 G.FIRST_POINT_LEVEL, G.MAX_LEVEL, G.POINTS = 10, 60, 51
 
@@ -188,9 +190,9 @@ end
 -- state ("done", "partly", "later"), the rank it has and the talents it names
 -- ({ spell, info (the game's: name, icon, rank, max) }), and the index of the
 -- next pick (nil: all taken).
-function G.steps(build, snap)
+function G.steps(build, snap, road)
   local out, nextStep = {}, nil
-  for i, step in ipairs(build.path) do
+  for i, step in ipairs(G.roads(build)[road or 1].path) do
     local options = {}
     for _, spell in ipairs(step.any or { step.talent }) do
       table.insert(options, { spell = spell, info = G.talent(snap, spell) })
@@ -243,10 +245,23 @@ function G.earned(snap)
   return math.max(math.min(earned, G.POINTS), snap.talents.total)
 end
 
--- The points a build would have in each tree (by place) after n points of its path.
-function G.expected(snap, build, n)
+-- A build's roads: another order of the same points for the same build (the
+-- same role and tree), each with a plain name, none of them a drift. The first
+-- is the build's own path, which has no name unless there are others.
+function G.roads(build)
+  if not build.roads then return { { path = build.path } } end
   local out = {}
-  for _, step in ipairs(build.path) do
+  for i, road in ipairs(build.roads) do
+    out[i] = { name = road.name, path = road.path or build.path }
+  end
+  return out
+end
+
+-- The points a build would have in each tree (by place) after n points of a road
+-- of it (the first by default).
+function G.expected(snap, build, n, path)
+  local out = {}
+  for _, step in ipairs(path or build.path) do
     if n <= 0 then break end
     local count = math.min(n, step.points[2] - step.points[1] + 1)
     local at = G.treeIndex(snap, data().talents[step.talent or step.any[1]].tab)
@@ -256,13 +271,40 @@ function G.expected(snap, build, n)
   return out
 end
 
--- How many of the character's points the build would not have put where they are.
+-- How many of the character's points the build would not have put where they
+-- are (by its nearest road, and which road that is).
 function G.differ(snap, build, n)
-  local want, off = G.expected(snap, build, n), 0
-  for tree, have in pairs(snap.talents.points) do
-    off = off + math.max(0, have - (want[tree] or 0))
+  local best, which
+  for i, road in ipairs(G.roads(build)) do
+    local want, off = G.expected(snap, build, n, road.path), 0
+    for tree, have in pairs(snap.talents.points) do
+      off = off + math.max(0, have - (want[tree] or 0))
+    end
+    if not best or off < best then
+      best, which = off, i
+    end
   end
-  return off
+  return best, which
+end
+
+-- The road of a build the points follow: the nearest, and whether more than one
+-- is as near (both fit: no points yet, or points the roads share).
+function G.road(snap, build)
+  local roads = G.roads(build)
+  if #roads < 2 then return 1, false end
+  local n, best, which, ties = G.earned(snap), nil, 1, 0
+  for i, road in ipairs(roads) do
+    local want, off = G.expected(snap, build, n, road.path), 0
+    for tree, have in pairs(snap.talents.points) do
+      off = off + math.max(0, have - (want[tree] or 0))
+    end
+    if not best or off < best then
+      best, which, ties = off, i, 1
+    elseif off == best then
+      ties = ties + 1
+    end
+  end
+  return which, ties > 1
 end
 
 -- The nearest build (of a role, or any) to the points: its id and how far off.
@@ -307,10 +349,12 @@ end
 -- put there (Fury's path puts 32 in Fury, the build needs 31).
 function G.required(build)
   local need = 0
-  for _, step in ipairs(build.path) do
-    for _, spell in ipairs(step.any or { step.talent }) do
-      local t = data().talents[spell]
-      if t and t.tab == build.tree then need = math.max(need, t.req + 1) end
+  for _, road in ipairs(G.roads(build)) do
+    for _, step in ipairs(road.path) do
+      for _, spell in ipairs(step.any or { step.talent }) do
+        local t = data().talents[spell]
+        if t and t.tab == build.tree then need = math.max(need, t.req + 1) end
+      end
     end
   end
   return need > 0 and need or 31

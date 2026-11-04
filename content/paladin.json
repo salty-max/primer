@@ -25,7 +25,15 @@
         "role": "tank",
         "say": "Take it if you will hold monsters for a group. The price: the book has no taunt, so a monster that goes for someone else stays on them until you hit it again. Protection also levels slowly alone and has no threat on a pack until Consecration, which this path takes at 51."
       }
-    ]
+    ],
+    "overview": {
+      "who": "You fight in melee with a seal on you and heal yourself between pulls. It is slow work and hard to kill, and it runs on mana, not rage.",
+      "good": "Staying alive while you hit things. A group wants your auras and blessings, and you can always heal yourself when the fight is over.",
+      "bad": "Speed. You kill one monster at a time and wait for mana between pulls. A pack of three is a problem you solve with patience.",
+      "resource": "Mana. Seals, Judgement and heals spend it, and a swing costs none. When the bar is empty, keep swinging and sit down afterwards.",
+      "levelling": "Seal on, Judgement when it is ready, swing the rest of the time. Heal when the fight is over and drink when the bar is low. Aura and blessing go on before the first pull and stay on.",
+      "ten": "You get your first talent point. Pick damage, tank or heal and Primer shows the build and your first three picks. A respec costs gold, so choose what you will do most."
+    }
   },
   "builds": [
     {
@@ -39,8 +47,8 @@
       ],
       "checked": "2026-11-04",
       "intro": "Retribution fights in melee with one big weapon and a seal that adds to every swing. It is the paladin that kills alone. The rest of the page is about which seal, and when to spend it with Judgement.",
-      "pathNote": "(31 points in Retribution for Repentance, then 20 in Holy).",
-      "split": "the last 20 points. A second road puts them in Protection (Precision, Toughness, Anticipation) for a paladin who wants more hit and more armour in dungeons, and gives up the extra Strength and mana. This page takes Holy, because both stats are in every fight and a solo paladin is always short of mana.",
+      "pathNote": "(31 points or more in Retribution for Repentance. The rest are Holy, and Protection on the Holy-first road.)",
+      "split": "the first 20 points. One road takes Retribution at once, for damage. The other takes 10 Holy points first, for mana and heals a hit does not spoil, and has no Seal of Command until level 30. Both end with about 30 points in Retribution. Neither is wrong.",
       "dry": "Most of this page waits on Judgement. If it is not ready, hit the monster.",
       "path": [
         {
@@ -54,8 +62,7 @@
           ],
           "talent": 20101,
           "rank": 5,
-          "why": "Judgement and your seals cost 15% less mana, and they are what you press most.",
-          "of": 5
+          "why": "Judgement and your seals cost less mana, and mana is what stops a paladin."
         },
         {
           "points": [
@@ -68,8 +75,7 @@
           ],
           "talent": 25956,
           "rank": 2,
-          "why": "Judgement is ready 2 seconds sooner, so a seal pays out more often.",
-          "of": 2
+          "why": "Judgement comes back sooner, so you press it more often."
         },
         {
           "points": [
@@ -82,50 +88,46 @@
           ],
           "talent": 20060,
           "rank": 3,
-          "why": "3% more parry. The 10th point in the tree opens the row that holds Seal of Command.",
-          "of": 5
+          "why": "More of the attacks on you are parried."
         },
         {
           "points": [
             11,
-            11
+            12
           ],
           "level": [
             20,
-            20
+            21
+          ],
+          "talent": 26022,
+          "rank": 2,
+          "why": "You run faster, and the points cost you nothing you needed."
+        },
+        {
+          "points": [
+            13,
+            13
+          ],
+          "level": [
+            22,
+            22
           ],
           "talent": 20375,
           "rank": 1,
-          "why": "A seal that sometimes adds Holy damage worth 70% of a normal hit. Its Judgement hits harder on a stunned monster.",
-          "of": 1
+          "why": "Your seal if your weapon is slow: each swing may add Holy damage. It is a talent, not a trainer spell."
         },
         {
           "points": [
-            12,
-            16
-          ],
-          "level": [
-            21,
-            25
-          ],
-          "talent": 20117,
-          "rank": 5,
-          "why": "5% more critical chance with melee weapons. It opens Vengeance later.",
-          "of": 5
-        },
-        {
-          "points": [
-            17,
+            14,
             18
           ],
           "level": [
-            26,
+            23,
             27
           ],
-          "talent": 20060,
+          "talent": 20117,
           "rank": 5,
-          "why": "The last two ranks, for 5% more parry in all.",
-          "of": 5
+          "why": "More critical hits, and Vengeance needs all five."
         },
         {
           "points": [
@@ -136,38 +138,48 @@
             28,
             29
           ],
-          "talent": 26022,
-          "rank": 2,
-          "why": "8% faster on foot and on a mount, and you travel at every level.",
-          "of": 2
+          "talent": 20060,
+          "rank": 5,
+          "why": "Back to Deflection while the next row opens."
         },
         {
           "points": [
             21,
-            23
+            21
           ],
           "level": [
             30,
-            32
+            30
           ],
-          "talent": 20111,
-          "rank": 3,
-          "why": "6% more damage with a two-hander. This is the reason for the weapon.",
-          "of": 3
+          "talent": 20218,
+          "rank": 1,
+          "why": "An aura that makes your party's Holy damage hit harder. One point, for a group."
         },
         {
           "points": [
-            24,
+            22,
+            24
+          ],
+          "level": [
+            31,
+            33
+          ],
+          "talent": 20111,
+          "rank": 3,
+          "why": "More damage with a two-handed weapon, which is the reason for the weapon."
+        },
+        {
+          "points": [
+            25,
             25
           ],
           "level": [
-            33,
+            34,
             34
           ],
-          "talent": 20091,
-          "rank": 2,
-          "why": "Nothing here helps you much. It is the cheapest way to the next row.",
-          "of": 2
+          "talent": 20042,
+          "rank": 1,
+          "why": "Blessing of Might gives a little more attack power. A spare point until the next row opens."
         },
         {
           "points": [
@@ -180,8 +192,7 @@
           ],
           "talent": 20049,
           "rank": 5,
-          "why": "After a critical hit you deal 15% more physical and Holy damage for 8 seconds.",
-          "of": 5
+          "why": "After a critical hit you deal more Physical and Holy damage for a few seconds."
         },
         {
           "points": [
@@ -194,8 +205,7 @@
           ],
           "talent": 20066,
           "rank": 1,
-          "why": "Puts a humanoid out of the fight for up to 6 seconds, until you or someone else hurts it.",
-          "of": 1
+          "why": "A stun for a humanoid that heals itself. It is the last talent of the tree."
         },
         {
           "points": [
@@ -208,78 +218,85 @@
           ],
           "talent": 20262,
           "rank": 5,
-          "why": "10% more Strength, which is attack power.",
-          "of": 5
+          "why": "More Strength. The Holy block is where the last points go."
         },
         {
           "points": [
             37,
-            41
+            40
           ],
           "level": [
             46,
+            49
+          ],
+          "talent": 20224,
+          "rank": 4,
+          "why": "Seal of Righteousness and its Judgement do more damage."
+        },
+        {
+          "points": [
+            41,
+            41
+          ],
+          "level": [
+            50,
             50
           ],
-          "talent": 20257,
+          "talent": 20224,
           "rank": 5,
-          "why": "10% more Intellect, which is mana.",
-          "of": 5
+          "why": "The last point of Improved Seal of Righteousness."
         },
         {
           "points": [
             42,
-            46
+            42
           ],
           "level": [
-            51,
-            55
-          ],
-          "talent": 20205,
-          "rank": 5,
-          "why": "A heal keeps casting when you are hit (70% of the time), which you need to heal mid-pull.",
-          "of": 5
-        },
-        {
-          "points": [
-            47,
-            47
-          ],
-          "level": [
-            56,
-            56
-          ],
-          "talent": 26573,
-          "rank": 1,
-          "why": "Holy damage on the ground around you for 8 seconds. It is how a damage paladin handles a pack.",
-          "of": 1
-        },
-        {
-          "points": [
-            48,
-            50
-          ],
-          "level": [
-            57,
-            59
-          ],
-          "talent": 20237,
-          "rank": 3,
-          "why": "12% more from Holy Light and Flash of Light, so you heal between pulls faster.",
-          "of": 3
-        },
-        {
-          "points": [
             51,
             51
           ],
+          "talent": 26573,
+          "rank": 1,
+          "why": "Holy damage on the ground beneath you, for packs. It costs a lot of mana."
+        },
+        {
+          "points": [
+            43,
+            45
+          ],
           "level": [
-            60,
+            52,
+            54
+          ],
+          "talent": 20237,
+          "rank": 3,
+          "why": "Holy Light and Flash of Light heal for more."
+        },
+        {
+          "points": [
+            46,
+            49
+          ],
+          "level": [
+            55,
+            58
+          ],
+          "talent": 20042,
+          "rank": 5,
+          "why": "The rest of Improved Blessing of Might."
+        },
+        {
+          "points": [
+            50,
+            51
+          ],
+          "level": [
+            59,
             60
           ],
-          "talent": 9453,
-          "rank": 1,
-          "why": "The last point. Any talent you can reach would do as well.",
-          "of": 2
+          "talent": 20234,
+          "rank": 2,
+          "why": "Lay on Hands comes back much sooner. The last two points are a matter of taste."
         }
       ],
       "stages": [
@@ -288,116 +305,31 @@
           "to": 9,
           "phase": "untalented",
           "about": "",
-          "opening": "Devotion Aura on, Blessing of Might, Seal of Righteousness, then hit. Judgement when it is ready, the seal again after it, Holy Light once the fight is over.",
-          "rows": [
-            {
-              "spell": 465,
-              "say": "Put it on first. You and your party within 30 yards take less damage from every hit, until you change it.",
-              "need": {
-                "level": 1
-              },
-              "name": "Devotion Aura"
-            },
-            {
-              "spell": 20154,
-              "say": "Press it at the start of every pull. It lasts 30 seconds and adds Holy damage to each swing, and a slower weapon gets more out of it.",
-              "need": {
-                "level": 1
-              },
-              "name": "Seal of Righteousness"
-            },
-            {
-              "spell": 20271,
-              "say": "Whenever it is ready, every 10 seconds. It sets off the seal you wear, so put the seal back on after it.",
-              "need": {
-                "level": 4
-              },
-              "name": "Judgement"
-            },
-            {
-              "spell": 19740,
-              "say": "Before the first pull and again when it ends. It adds attack power for 5 minutes, so it pays back over many fights.",
-              "need": {
-                "level": 4,
-                "when": [
-                  "ooc"
-                ]
-              },
-              "name": "Blessing of Might"
-            },
-            {
-              "spell": 635,
-              "say": "Heal when nothing is hitting you. The cast takes 2.5 seconds and a hit can ruin it, so it belongs after the pull.",
-              "need": {
-                "level": 1,
-                "when": [
-                  "rest"
-                ]
-              },
-              "name": "Holy Light"
-            },
-            {
-              "spell": 21082,
-              "say": "You swing 40% faster but each hit is weaker. Stay on Seal of Righteousness with a slow weapon, since the slower the weapon the more it adds.",
-              "need": {
-                "level": 6
-              },
-              "name": "Seal of the Crusader"
-            },
-            {
-              "spell": 498,
-              "say": "You take nothing for 6 seconds but cannot attack, and it takes 5 minutes to come back. Keep it for the fight that would otherwise kill you.",
-              "need": {
-                "level": 6,
-                "when": [
-                  "wrong"
-                ]
-              },
-              "name": "Divine Protection"
-            },
-            {
-              "spell": 853,
-              "say": "A 3 second stun on a 1 minute cooldown. Press it to stop a monster running, or to buy the 2.5 seconds a Holy Light needs.",
-              "need": {
-                "level": 8
-              },
-              "name": "Hammer of Justice"
-            },
-            {
-              "spell": 1152,
-              "say": "Removes 1 disease and 1 poison. Press it when a monster's sting is the thing wearing you down.",
-              "need": {
-                "level": 8
-              },
-              "name": "Purify"
-            }
-          ],
           "plan": {
             "opening": [
               {
                 "spell": 465,
                 "name": "Devotion Aura",
                 "if": "once, before anything",
-                "why": "every hit on you and your party hurts less"
+                "why": "every hit on you hurts less, and it stays until you change it"
               },
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "before the first pull, and again when it ends",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               },
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
                 "if": "just before the pull",
-                "why": "it adds Holy damage to every swing"
+                "why": "every swing adds Holy damage"
               },
               {
                 "spell": 20271,
                 "name": "Judgement",
                 "if": "as soon as the monster is in range",
-                "why": "it sets off the seal you wear",
-                "need": {}
+                "why": "it spends the seal on you"
               },
               {
                 "spell": 6603,
@@ -409,20 +341,20 @@
               {
                 "spell": 20271,
                 "name": "Judgement",
-                "if": "whenever it is ready",
-                "why": "it is most of your damage"
+                "if": "the moment it is ready",
+                "why": "it is most of your damage, so do not sit on it"
               },
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
-                "if": "when the seal is gone, which it is after every Judgement",
+                "if": "when the seal is gone, which is after every Judgement",
                 "why": "swings add nothing without it"
               },
               {
                 "spell": 853,
                 "name": "Hammer of Justice",
                 "if": "if the monster runs, or you need a quiet moment to heal",
-                "why": "a stunned monster cannot hit you"
+                "why": "a stunned monster hits nothing"
               },
               {
                 "spell": 6603,
@@ -434,14 +366,14 @@
               {
                 "spell": 635,
                 "name": "Holy Light",
-                "if": "when you are missing more than a third of your health",
-                "why": "the cast is slow and a hit would spoil it"
+                "if": "when nothing is hitting you and you are hurt",
+                "why": "the cast is slow, and about 80 percent is enough"
               },
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "when it has run out",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               },
               {
                 "spell": 1152,
@@ -457,9 +389,9 @@
                 "why": "a swing costs no mana"
               },
               {
-                "text": "Sit and drink, or eat",
-                "if": "between fights, when the bar is low",
-                "why": "a full bar buys the next pulls"
+                "text": "Sit and drink",
+                "if": "after every three or four pulls, when mana is under 40 percent",
+                "why": "mana, not health, is what stops you"
               }
             ],
             "big": {
@@ -477,105 +409,25 @@
           "from": 10,
           "to": 19,
           "about": "One monster, levelling. Few points are spent yet, so the untalented kit's advice still holds.",
-          "opening": "Blessing of Might, Seal of Righteousness, hit, Judgement when it is ready.",
-          "rows": [
-            {
-              "spell": 20154,
-              "say": "Press it at the start of every pull, because it lasts 30 seconds and adds to every swing.",
-              "need": {},
-              "name": "Seal of Righteousness"
-            },
-            {
-              "spell": 20271,
-              "say": "Every 10 seconds, or 8 with Improved Judgement. It sets off the seal, so put the seal back on after.",
-              "need": {
-                "level": 4
-              },
-              "name": "Judgement"
-            },
-            {
-              "spell": 19740,
-              "say": "Keep it up. It adds attack power for 5 minutes.",
-              "need": {
-                "level": 4,
-                "when": [
-                  "ooc"
-                ]
-              },
-              "name": "Blessing of Might"
-            },
-            {
-              "spell": 19742,
-              "say": "Swap Might for it when you run out of mana before monsters. It gives 10 mana every 5 seconds for 5 minutes.",
-              "need": {
-                "level": 14,
-                "when": [
-                  "lowmana"
-                ]
-              },
-              "name": "Blessing of Wisdom"
-            },
-            {
-              "spell": 25780,
-              "say": "Leave it off. It makes your Holy attacks draw 60% more attention, and in a group you want the tank to have it.",
-              "need": {
-                "level": 16
-              },
-              "name": "Righteous Fury"
-            },
-            {
-              "spell": 635,
-              "say": "Heal when nothing is hitting you, because the cast takes 2.5 seconds.",
-              "need": {
-                "when": [
-                  "rest"
-                ]
-              },
-              "name": "Holy Light"
-            },
-            {
-              "spell": 853,
-              "say": "A 3 second stun. It stops a runner and gives a Holy Light time to land.",
-              "need": {
-                "level": 8,
-                "when": [
-                  "flee",
-                  "wrong"
-                ]
-              },
-              "name": "Hammer of Justice"
-            },
-            {
-              "spell": 633,
-              "say": "Heals you for your full health and empties your mana. It takes 1 hour to come back.",
-              "need": {
-                "level": 10,
-                "when": [
-                  "wrong"
-                ]
-              },
-              "name": "Lay on Hands"
-            }
-          ],
           "plan": {
             "opening": [
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "before the first pull, and again when it ends",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               },
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
                 "if": "just before the pull",
-                "why": "it adds Holy damage to every swing"
+                "why": "every swing adds Holy damage"
               },
               {
                 "spell": 20271,
                 "name": "Judgement",
                 "if": "as soon as the monster is in range",
-                "why": "it sets off the seal you wear"
+                "why": "it spends the seal on you"
               },
               {
                 "spell": 6603,
@@ -587,20 +439,20 @@
               {
                 "spell": 20271,
                 "name": "Judgement",
-                "if": "whenever it is ready",
-                "why": "it is most of your damage"
+                "if": "the moment it is ready",
+                "why": "it is most of your damage, so do not sit on it"
               },
               {
                 "spell": 20154,
                 "name": "Seal of Righteousness",
-                "if": "when the seal is gone, which it is after every Judgement",
+                "if": "when the seal is gone, which is after every Judgement",
                 "why": "swings add nothing without it"
               },
               {
                 "spell": 853,
                 "name": "Hammer of Justice",
                 "if": "if the monster runs, or you need a quiet moment to heal",
-                "why": "a stunned monster cannot hit you"
+                "why": "a stunned monster hits nothing"
               },
               {
                 "spell": 6603,
@@ -612,22 +464,27 @@
               {
                 "spell": 635,
                 "name": "Holy Light",
-                "if": "when you are missing more than a third of your health",
-                "why": "the cast is slow and a hit would spoil it"
+                "if": "when nothing is hitting you and you are hurt",
+                "why": "the cast is slow, and about 80 percent is enough"
               },
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "when it has run out",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               }
             ],
             "low": [
               {
                 "spell": 19742,
                 "name": "Blessing of Wisdom",
-                "if": "when you run out of mana before the monsters do",
+                "if": "when mana, not health, is what you run out of",
                 "why": "it gives mana back while you fight"
+              },
+              {
+                "text": "Stop casting for five seconds",
+                "if": "after Judgement, when mana is low",
+                "why": "mana comes back faster while you do not cast"
               },
               {
                 "text": "Keep swinging",
@@ -635,9 +492,9 @@
                 "why": "a swing costs no mana"
               },
               {
-                "text": "Sit and drink, or eat",
-                "if": "between fights, when the bar is low",
-                "why": "a full bar buys the next pulls"
+                "text": "Sit and drink",
+                "if": "after every three or four pulls, when mana is under 40 percent",
+                "why": "mana, not health, is what stops you"
               }
             ],
             "big": {
@@ -659,120 +516,32 @@
           "from": 20,
           "to": 39,
           "about": "One monster, or two, and the first dungeons.",
-          "opening": "Blessing of Might, Seal of Command, hit, Judgement. Exorcism first on anything undead.",
-          "rows": [
-            {
-              "spell": 20375,
-              "say": "Your seal from 20. Each swing may add Holy damage worth 70% of a normal hit.",
-              "need": {},
-              "name": "Seal of Command",
-              "talentSpell": 20375
-            },
-            {
-              "spell": 20271,
-              "say": "Every 10 seconds, as before. With Seal of Command it is a bigger hit.",
-              "need": {},
-              "name": "Judgement"
-            },
-            {
-              "spell": 853,
-              "say": "Stun, then Judgement. Judgement of Command hits harder on a stunned monster, and Hammer of Justice stuns for 4 seconds at rank 2.",
-              "need": {},
-              "name": "Hammer of Justice"
-            },
-            {
-              "spell": 879,
-              "say": "An instant Holy hit on a 15 second cooldown that works only on undead and demons. Use it every time one is in front of you.",
-              "need": {
-                "level": 20,
-                "when": [
-                  "undead"
-                ]
-              },
-              "name": "Exorcism"
-            },
-            {
-              "spell": 19750,
-              "say": "A 1.5 second heal that costs far less than Holy Light. Use it when you are missing only a little.",
-              "need": {
-                "level": 20,
-                "when": [
-                  "rest"
-                ]
-              },
-              "name": "Flash of Light"
-            },
-            {
-              "spell": 20164,
-              "say": "The seal gives swings a chance to stun for 2 seconds, and its Judgement stops the monster fleeing for 10. Swap to it only for a runner.",
-              "need": {
-                "level": 22,
-                "when": [
-                  "flee"
-                ]
-              },
-              "name": "Seal of Justice"
-            },
-            {
-              "spell": 19742,
-              "say": "Swap Might for it when mana is the limit. 15 mana every 5 seconds at rank 2.",
-              "need": {
-                "when": [
-                  "lowmana"
-                ]
-              },
-              "name": "Blessing of Wisdom"
-            },
-            {
-              "spell": 498,
-              "say": "8 seconds of nothing hurting you at rank 2, but you cannot attack. It comes back in 5 minutes.",
-              "need": {
-                "when": [
-                  "wrong"
-                ]
-              },
-              "name": "Divine Protection"
-            },
-            {
-              "spell": 20165,
-              "say": "Each swing may heal you, so it buys time in a fight you are losing slowly. It does less damage than Seal of Command.",
-              "need": {
-                "level": 30
-              },
-              "name": "Seal of Light"
-            },
-            {
-              "spell": 642,
-              "say": "Nothing hurts you for 10 seconds, but your attacks come half as often. It shares a 5 minute wait with Divine Protection. Using either, or Blessing of Protection, blocks all three for 1 minute.",
-              "need": {
-                "level": 34,
-                "when": [
-                  "wrong"
-                ]
-              },
-              "name": "Divine Shield"
-            }
-          ],
           "plan": {
             "opening": [
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "before the first pull, and again when it ends",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               },
               {
                 "spell": 20375,
                 "name": "Seal of Command",
-                "if": "just before the pull",
-                "why": "each swing may add Holy damage",
+                "if": "just before the pull, if your weapon is slower than 3.5 seconds",
+                "why": "each swing may add Holy damage, and a slow weapon adds more",
                 "talentSpell": 20375
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "just before the pull, with a fast weapon or until Seal of Command",
+                "why": "a fast weapon gets more out of it"
               },
               {
                 "spell": 20271,
                 "name": "Judgement",
                 "if": "as soon as the monster is in range",
-                "why": "it sets off the seal you wear"
+                "why": "it spends the seal on you"
               },
               {
                 "spell": 6603,
@@ -784,32 +553,38 @@
               {
                 "spell": 20271,
                 "name": "Judgement",
-                "if": "whenever it is ready",
-                "why": "with this seal it is a bigger hit"
+                "if": "the moment it is ready",
+                "why": "it is most of your damage, so do not sit on it"
               },
               {
                 "spell": 879,
                 "name": "Exorcism",
-                "if": "when the monster is undead or a demon and it is ready",
+                "if": "if the monster is undead or a demon, and it is ready",
                 "why": "an instant Holy hit that works on nothing else"
               },
               {
                 "spell": 20164,
                 "name": "Seal of Justice",
-                "if": "when the monster keeps running",
-                "why": "its Judgement stops it fleeing"
+                "if": "if the monster keeps running",
+                "why": "its Judgement keeps it from fleeing"
               },
               {
                 "spell": 20375,
                 "name": "Seal of Command",
-                "if": "when the seal is gone, which it is after every Judgement",
-                "why": "swings add nothing without it",
+                "if": "when the seal is gone and your weapon is slower than 3.5 seconds",
+                "why": "each swing may add Holy damage, and a slow weapon adds more",
                 "talentSpell": 20375
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "when the seal is gone, with a fast weapon or until Seal of Command",
+                "why": "a fast weapon gets more out of it"
               },
               {
                 "spell": 853,
                 "name": "Hammer of Justice",
-                "if": "when the monster runs, or you need to stop it",
+                "if": "if the monster runs, or you need to stop it",
                 "why": "a stunned monster hits nothing"
               },
               {
@@ -828,14 +603,14 @@
               {
                 "spell": 635,
                 "name": "Holy Light",
-                "if": "when you are missing more than a third of your health",
-                "why": "the cast is slow and a hit would spoil it"
+                "if": "when nothing is hitting you and you are hurt",
+                "why": "the cast is slow, and about 80 percent is enough"
               },
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "when it has run out",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               }
             ],
             "low": [
@@ -846,14 +621,19 @@
                 "why": "it gives mana back while you fight"
               },
               {
+                "text": "Stop casting for five seconds",
+                "if": "after Judgement, when mana is low",
+                "why": "mana comes back faster while you do not cast"
+              },
+              {
                 "text": "Keep swinging",
                 "if": "when the bar is nearly empty",
                 "why": "a swing costs no mana"
               },
               {
-                "text": "Sit and drink, or eat",
-                "if": "between fights, when the bar is low",
-                "why": "a full bar buys the next pulls"
+                "text": "Sit and drink",
+                "if": "after every three or four pulls, when mana is under 40 percent",
+                "why": "mana, not health, is what stops you"
               }
             ],
             "big": {
@@ -875,115 +655,32 @@
           "from": 40,
           "to": 60,
           "about": "Dungeons, hard monsters and the first raid.",
-          "opening": "Blessing of Might (or its group version at 52), Seal of Command, hit, Judgement. Repentance on a humanoid that heals.",
-          "rows": [
-            {
-              "spell": 20375,
-              "say": "Keep it on, because it is your main damage between Judgements.",
-              "need": {},
-              "name": "Seal of Command",
-              "talentSpell": 20375
-            },
-            {
-              "spell": 20271,
-              "say": "Every 10 seconds. The seal is gone after it, so press it again.",
-              "need": {},
-              "name": "Judgement"
-            },
-            {
-              "spell": 24275,
-              "say": "Hurls a hammer from 30 yards on a 6 second cooldown, but only at a monster nearly dead. Press it before melee ends the fight.",
-              "need": {
-                "level": 44,
-                "when": [
-                  "execute"
-                ]
-              },
-              "name": "Hammer of Wrath"
-            },
-            {
-              "spell": 879,
-              "say": "Every 15 seconds. It works on nothing else.",
-              "need": {
-                "when": [
-                  "undead"
-                ]
-              },
-              "name": "Exorcism"
-            },
-            {
-              "spell": 20066,
-              "say": "Up to 6 seconds out of the fight, until it is hurt. It takes 1 minute to come back. Use it on a humanoid that heals itself.",
-              "need": {
-                "when": [
-                  "flee",
-                  "humanoid"
-                ]
-              },
-              "name": "Repentance",
-              "talentSpell": 20066
-            },
-            {
-              "spell": 26573,
-              "say": "Holy damage on the ground for 8 seconds. Stand in it with the pack and it does the work between Judgements.",
-              "need": {
-                "when": [
-                  "pack"
-                ]
-              },
-              "name": "Consecration",
-              "talentSpell": 26573
-            },
-            {
-              "spell": 25782,
-              "say": "One blessing for everyone of a class in the group, 15 minutes. It saves buffing each player one by one.",
-              "need": {
-                "level": 52,
-                "when": [
-                  "group"
-                ]
-              },
-              "name": "Greater Blessing of Might"
-            },
-            {
-              "spell": 4987,
-              "say": "Removes one of each. Press it when the fight is being lost to something on you.",
-              "need": {
-                "level": 42
-              },
-              "name": "Cleanse"
-            },
-            {
-              "spell": 642,
-              "say": "10 seconds of no damage, 12 at rank 2. It comes back in 5 minutes.",
-              "need": {
-                "when": [
-                  "wrong"
-                ]
-              },
-              "name": "Divine Shield"
-            }
-          ],
           "plan": {
             "opening": [
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "before the first pull, and again when it ends",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               },
               {
                 "spell": 20375,
                 "name": "Seal of Command",
-                "if": "just before the pull",
-                "why": "each swing may add Holy damage",
+                "if": "just before the pull, if your weapon is slower than 3.5 seconds",
+                "why": "each swing may add Holy damage, and a slow weapon adds more",
                 "talentSpell": 20375
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "just before the pull, with a fast weapon or until Seal of Command",
+                "why": "a fast weapon gets more out of it"
               },
               {
                 "spell": 20271,
                 "name": "Judgement",
                 "if": "as soon as the monster is in range",
-                "why": "it sets off the seal you wear"
+                "why": "it spends the seal on you"
               },
               {
                 "spell": 6603,
@@ -995,41 +692,40 @@
               {
                 "spell": 20271,
                 "name": "Judgement",
-                "if": "whenever it is ready",
-                "why": "it is most of your damage"
+                "if": "the moment it is ready",
+                "why": "it is most of your damage, so do not sit on it"
               },
               {
                 "spell": 24275,
                 "name": "Hammer of Wrath",
-                "if": "when the monster is nearly dead",
-                "why": "it hits from range before melee ends the fight"
+                "if": "if the monster is nearly dead or running",
+                "why": "it hits from range, before it pulls more"
               },
               {
                 "spell": 879,
                 "name": "Exorcism",
-                "if": "when the monster is undead or a demon and it is ready",
+                "if": "if the monster is undead or a demon, and it is ready",
                 "why": "an instant Holy hit that works on nothing else"
-              },
-              {
-                "spell": 26573,
-                "name": "Consecration",
-                "if": "when two or more monsters are on you",
-                "why": "it hits everything on the ground you stand on",
-                "talentSpell": 26573
               },
               {
                 "spell": 20066,
                 "name": "Repentance",
-                "if": "when a humanoid is healing itself",
+                "if": "if a humanoid is healing itself",
                 "why": "it takes the healer out of the fight",
                 "talentSpell": 20066
               },
               {
                 "spell": 20375,
                 "name": "Seal of Command",
-                "if": "when the seal is gone, which it is after every Judgement",
-                "why": "swings add nothing without it",
+                "if": "when the seal is gone and your weapon is slower than 3.5 seconds",
+                "why": "each swing may add Holy damage, and a slow weapon adds more",
                 "talentSpell": 20375
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "when the seal is gone, with a fast weapon or until Seal of Command",
+                "why": "a fast weapon gets more out of it"
               },
               {
                 "spell": 6603,
@@ -1047,20 +743,20 @@
               {
                 "spell": 635,
                 "name": "Holy Light",
-                "if": "when you are missing more than a third of your health",
-                "why": "the cast is slow and a hit would spoil it"
+                "if": "when nothing is hitting you and you are hurt",
+                "why": "the cast is slow, and about 80 percent is enough"
               },
               {
                 "spell": 19740,
                 "name": "Blessing of Might",
                 "if": "when it has run out",
-                "why": "it adds attack power for a long while"
+                "why": "it adds attack power, so it pays back over many fights"
               },
               {
                 "spell": 4987,
                 "name": "Cleanse",
                 "if": "when something on you is wearing you down",
-                "why": "it takes off one poison, disease and magic"
+                "why": "it takes off one poison, one disease and one spell"
               }
             ],
             "low": [
@@ -1071,14 +767,19 @@
                 "why": "it gives mana back while you fight"
               },
               {
+                "text": "Stop casting for five seconds",
+                "if": "after Judgement, when mana is low",
+                "why": "mana comes back faster while you do not cast"
+              },
+              {
                 "text": "Keep swinging",
                 "if": "when the bar is nearly empty",
                 "why": "a swing costs no mana"
               },
               {
-                "text": "Sit and drink, or eat",
-                "if": "between fights, when the bar is low",
-                "why": "a full bar buys the next pulls"
+                "text": "Sit and drink",
+                "if": "after every three or four pulls, when mana is under 40 percent",
+                "why": "mana, not health, is what stops you"
               }
             ],
             "big": {
@@ -1095,6 +796,271 @@
               "say": "keep both for the fight that would otherwise kill you"
             }
           }
+        }
+      ],
+      "line": "One big weapon, a seal and Judgement. It kills alone, and most players level this way.",
+      "roadName": "Retribution first, the usual road",
+      "roads": [
+        {
+          "name": "Holy first, the Hardcore road",
+          "path": [
+            {
+              "points": [
+                1,
+                5
+              ],
+              "level": [
+                10,
+                14
+              ],
+              "talent": 20257,
+              "rank": 5,
+              "why": "More Intellect, so more mana. This road starts with the mana."
+            },
+            {
+              "points": [
+                6,
+                10
+              ],
+              "level": [
+                15,
+                19
+              ],
+              "talent": 20205,
+              "rank": 5,
+              "why": "A hit is less likely to spoil a heal, which is why this road is the safe one."
+            },
+            {
+              "points": [
+                11,
+                15
+              ],
+              "level": [
+                20,
+                24
+              ],
+              "talent": 20042,
+              "rank": 5,
+              "why": "Blessing of Might gives more attack power, and you wear it every fight."
+            },
+            {
+              "points": [
+                16,
+                20
+              ],
+              "level": [
+                25,
+                29
+              ],
+              "talent": 20060,
+              "rank": 5,
+              "why": "More of the attacks on you are parried."
+            },
+            {
+              "points": [
+                21,
+                21
+              ],
+              "level": [
+                30,
+                30
+              ],
+              "talent": 20375,
+              "rank": 1,
+              "why": "Seal of Command arrives here, ten levels after the other road."
+            },
+            {
+              "points": [
+                22,
+                23
+              ],
+              "level": [
+                31,
+                32
+              ],
+              "talent": 26022,
+              "rank": 2,
+              "why": "You run faster, and the points open the next row."
+            },
+            {
+              "points": [
+                24,
+                25
+              ],
+              "level": [
+                33,
+                34
+              ],
+              "talent": 20117,
+              "rank": 2,
+              "why": "More critical hits."
+            },
+            {
+              "points": [
+                26,
+                27
+              ],
+              "level": [
+                35,
+                36
+              ],
+              "talent": 20091,
+              "rank": 2,
+              "why": "The aura that hurts monsters hitting you hurts them more."
+            },
+            {
+              "points": [
+                28,
+                30
+              ],
+              "level": [
+                37,
+                39
+              ],
+              "talent": 20117,
+              "rank": 5,
+              "why": "The rest of Conviction, which Vengeance needs."
+            },
+            {
+              "points": [
+                31,
+                33
+              ],
+              "level": [
+                40,
+                42
+              ],
+              "talent": 20111,
+              "rank": 3,
+              "why": "More damage with a two-handed weapon."
+            },
+            {
+              "points": [
+                34,
+                35
+              ],
+              "level": [
+                43,
+                44
+              ],
+              "talent": 20101,
+              "rank": 2,
+              "why": "A small mana discount, two of its five points."
+            },
+            {
+              "points": [
+                36,
+                40
+              ],
+              "level": [
+                45,
+                49
+              ],
+              "talent": 20049,
+              "rank": 5,
+              "why": "After a critical hit you deal more Physical and Holy damage for a few seconds."
+            },
+            {
+              "points": [
+                41,
+                45
+              ],
+              "level": [
+                50,
+                54
+              ],
+              "talent": 20127,
+              "rank": 5,
+              "why": "You block more after being critically hit. The armour talents come last on this road."
+            },
+            {
+              "points": [
+                46,
+                48
+              ],
+              "level": [
+                55,
+                57
+              ],
+              "talent": 20189,
+              "rank": 3,
+              "why": "More chance to hit with melee weapons."
+            },
+            {
+              "points": [
+                49,
+                50
+              ],
+              "level": [
+                58,
+                59
+              ],
+              "talent": 20174,
+              "rank": 2,
+              "why": "Blessing of Protection comes back sooner, and Blessing of Freedom lasts longer."
+            },
+            {
+              "points": [
+                51,
+                51
+              ],
+              "level": [
+                60,
+                60
+              ],
+              "talent": 20066,
+              "rank": 1,
+              "why": "The last point is yours to place. Repentance takes the tree's deepest talent."
+            }
+          ]
+        }
+      ],
+      "hardcore": [
+        "Judgement, seal, swing. Do not pull five monsters at once without your cooldowns ready.",
+        "Divine Shield is your escape from level 34. When a fight has gone wrong, press it, then heal or walk away.",
+        "Keep a shield in your bags and put it on when you run from a hard hitter.",
+        "Never run out of mana in a fight. Without it you have no heal and no Judgement."
+      ],
+      "sources": [
+        {
+          "label": "Icy Veins, Retribution Paladin levelling talents (Abide, updated 2026-07-18)",
+          "url": "https://www.icy-veins.com/wow-classic/retribution-paladin-leveling-talent-build-from-1-to-60",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Wowhead, Retribution Paladin levelling tips (Impakt, updated 2024-11-20)",
+          "url": "https://www.wowhead.com/classic/guide/classes/paladin/retribution/leveling-tips",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Wowhead, Hardcore Paladin (Calamityhc, updated 2024-11-20): the Holy-first road is its New Player build",
+          "url": "https://www.wowhead.com/classic/guide/classes/paladin/hardcore-leveling-tips",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Paladin levelling",
+          "url": "https://www.warcrafttavern.com/wow-classic/guides/paladin-leveling-guide/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "NoobToBoss, Paladin Retribution levelling",
+          "url": "https://noobtoboss.com/wow-classic-paladin-retribution-leveling-guide/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Hardcore Paladin overview (Sellin, 2023-05-21)",
+          "url": "https://www.icy-veins.com/wow-classic/hardcore-paladin-class-overview",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Hardcore Helper, Paladin (updated 2026-07-27)",
+          "url": "https://www.hardcorehelper.com/guides/paladin-wow-classic-hardcore",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard forum, Paladin weapon speed (2019-09-28)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/paladin-weapon-speed/315363",
+          "read": "2026-11-04"
         }
       ]
     },
@@ -1614,7 +1580,8 @@
             }
           ]
         }
-      ]
+      ],
+      "line": "Heals the group. It levels slowly alone, and a dungeon wants it."
     },
     {
       "id": 8,
@@ -2124,7 +2091,8 @@
             }
           ]
         }
-      ]
+      ],
+      "line": "Holds the monsters on you. The safest way to level, and the slowest."
     }
   ]
 }

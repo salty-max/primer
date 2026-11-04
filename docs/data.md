@@ -131,6 +131,29 @@ the condition first and the reason last, one short clause each, no semicolons,
 digits for numbers, never lore, never a figure the tables cannot back. The
 instruction is the spell's name, so `say` is for what the name does not tell.
 
+## The class overview, roads, the other way to play, Hardcore, sources
+
+- `class.overview = { who, good, bad, resource, levelling, ten }`: the Overview
+  tab, the class in general in the narrator's voice (who it is and how it plays,
+  what it is good and bad at, its resource in plain words, levelling in two or
+  three sentences, what to do at level 10). One screen, short. Optional: a class
+  without one shows its `text` and its builds. Each build adds `line`, one line
+  for the overview (none: the first sentence of its `intro`).
+- `build.roads`: another order of the same points for the same build (the same
+  role and tree). `path` is the first road and `roadName` names it; `roads` holds
+  the others, each `{ name, path }` with its own whys. Each path is checked whole
+  (51 points, point N at level N + 9, the tree's rows, prerequisites, the own tree's
+  31). Neither road is a drift: the Talents tab names them, says which the points
+  follow (or that they fit every road), and the player may choose one. A row's
+  talents must be taken by every road by the stage's top.
+- `stage.plan.alt = { name, say, opening?, loop, between?, low? }`: another way to
+  play the same stage with its own lists, shown under its name ("A crowd of
+  monsters"), `say` one clause on when it is for.
+- `build.hardcore = [line]`: lines for a Hardcore realm (Enum.SeasonID.Hardcore,
+  `C_Seasons`), shown under "Hardcore" after the plan and nowhere else.
+- `build.sources = [{ label, url, read }]`: where its facts were read, never
+  shown, listed in `docs/sources.md`.
+
 ## The facts check (every run of scripts/guide.ts)
 
 Against each game's own database (wow-data's `classic.db` / `forever.db`, the

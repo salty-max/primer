@@ -45,6 +45,9 @@ const GAMES: Game[] = ["classic", "forever"];
 const FILE: Record<Game, string> = { classic: "Guide_Classic.lua", forever: "Guide_Forever.lua" };
 
 const PHASES = ["untalented", "choose", "spent"];
+// What a class's overview says, in the order the page reads it (who the class is, what it is good and bad at,
+// its resource, levelling, and what to do at level 10)
+const OVERVIEW = ["who", "good", "bad", "resource", "levelling", "ten"];
 // Spells every character has that no class book lists (the plan's "Attack"), by id and the game's name
 // (and the picture the game's action bar gives it: the client's own icon for the spell is a developer's photo)
 const COMMON_SPELLS: Record<number, [string, string]> = { 6603: ["Attack", "Interface\\Icons\\Ability_MeleeDamage"] };
@@ -97,7 +100,16 @@ type Row = {
 // or a line of text alone, when it applies (`if`, a clause: none on the last line of the loop), what to do
 // (`say`, only when the spell's name is not enough) and why (one short clause).
 type PlanStep = { spell?: number; name?: string; text?: string; if?: string; say?: string; why: string; talentSpell?: number; need?: Row["need"] };
-type Plan = { opening: PlanStep[]; loop: PlanStep[]; between?: PlanStep[]; low?: PlanStep[]; big?: { spells: PlanStep[]; say: string } };
+type Plan = {
+  opening: PlanStep[];
+  loop: PlanStep[];
+  between?: PlanStep[];
+  low?: PlanStep[];
+  big?: { spells: PlanStep[]; say: string };
+  // another way to play the same stage with its own lists (a style: single target or a crowd): a name, one line on when
+  // it is for, and its own opening and loop
+  alt?: { name: string; say: string; opening?: PlanStep[]; loop: PlanStep[]; between?: PlanStep[]; low?: PlanStep[] };
+};
 type Stage = { from: number; to: number; phase?: string; about?: string; opening?: string; rows?: Row[]; plan?: Plan };
 type Step = { points: [number, number]; level: [number, number]; talent?: number; any?: number[]; rank: number; of?: number; why: string };
 type Build = {
@@ -109,14 +121,19 @@ type Build = {
   games: Game[];
   checked: string;
   intro: string;
+  line?: string; // one line for the class's overview (none: the first sentence of the intro)
   pathNote: string;
+  hardcore?: string[]; // lines for a Hardcore realm, after the plan (the season check in the window)
+  sources?: { label: string; url: string; read: string }[]; // where the facts of the build were read (docs/sources.md): never shown
   split?: string;
   dry?: string;
   path: Step[];
+  roadName?: string; // the first road's plain name, when the build has several ("Retribution first")
+  roads?: { name: string; path: Step[] }[]; // the other roads of the same build: the same role and tree, another order of the points
   stages: Stage[];
 };
 type Content = {
-  class: { id: number; key: string; token: string; name: string; text: string; card: Record<string, string>; advice?: { role: string; say?: string }[] };
+  class: { id: number; key: string; token: string; name: string; text: string; card: Record<string, string>; advice?: { role: string; say?: string }[]; overview?: Record<string, string> };
   builds: Build[];
 };
 
@@ -192,49 +209,54 @@ class Facts {
 
 function checkBuild(b: Build, f: Facts) {
   const at = `${b.key} (${f.game})`;
-  // the talent path: simulate the points
-  const spent = new Map<number, number>(); // tab -> points
-  const rank = new Map<number, number>(); // talent id -> rank
-  const taken = new Map<number, number>(); // talent spell -> the level the path first takes it
-  let point = 0;
-  b.path.forEach((s, i) => {
-    const where = `${at} path step ${i + 1}`;
-    const n = s.points[1] - s.points[0] + 1;
-    if (s.points[0] !== point + 1) bad(`${where}: starts at point ${s.points[0]}, the one after ${point}`);
-    point = s.points[1];
-    if (s.level[0] !== s.points[0] + 9 || s.level[1] !== s.points[1] + 9) bad(`${where}: point N is taken at level N + 9 (points ${s.points.join("-")}, levels ${s.level.join("-")})`);
-    const ids = s.any ?? (s.talent === undefined ? [] : [s.talent]);
-    if (!ids.length) return bad(`${where}: no talent`);
-    const found = ids.map((id) => f.tal.get(id));
-    ids.forEach((id, k) => !found[k] && bad(`${where}: spell ${id} is no talent of this class in ${f.game}'s data`));
-    if (found.some((t) => !t)) return;
-    const t = found[0]!;
-    if (s.any) {
-      if (n !== s.rank) bad(`${where}: a choice of ${n} points, rank ${s.rank}`);
-      for (const o of found) if (o!.max_rank !== s.rank) bad(`${where}: ${f.name(o!.spell_id)} has ${o!.max_rank} ranks, the step reaches ${s.rank}`);
-    }
-    if (s.of !== undefined && s.of !== t.max_rank) bad(`${where}: ${f.name(t.spell_id)} is ${s.rank}/${s.of} in the content, ${t.max_rank} ranks in the data`);
-    if (!s.any) {
-      if (s.rank > t.max_rank) bad(`${where}: rank ${s.rank} of ${t.max_rank}`);
-      const was = rank.get(t.id) ?? 0;
-      if (s.rank - was !== n) bad(`${where}: ${f.name(t.spell_id)} goes ${was} to ${s.rank} with ${n} points`);
-    }
-    const before = spent.get(t.tab_id) ?? 0;
-    for (const o of found as Tal[]) {
-      if ((spent.get(o.tab_id) ?? 0) < o.req_points) bad(`${where}: ${f.name(o.spell_id)} asks ${o.req_points} points in its tree, ${spent.get(o.tab_id) ?? 0} are spent`);
-      if (s.level[0] < o.min_level) bad(`${where}: ${f.name(o.spell_id)} is open from level ${o.min_level}, taken at ${s.level[0]}`);
-      for (const p of f.prereq.get(o.id) ?? []) {
-        if ((rank.get(p.requires) ?? 0) < p.rank) bad(`${where}: ${f.name(o.spell_id)} needs talent ${p.requires} at rank ${p.rank} first`);
+  // the talent path (and each road's): simulate the points
+  const simulate = (steps: Step[], label: string) => {
+    const spent = new Map<number, number>(); // tab -> points
+    const rank = new Map<number, number>(); // talent id -> rank
+    const taken = new Map<number, number>(); // talent spell -> the level the path first takes it
+    let point = 0;
+    steps.forEach((s, i) => {
+      const where = `${at} ${label} ${i + 1}`;
+      const n = s.points[1] - s.points[0] + 1;
+      if (s.points[0] !== point + 1) bad(`${where}: starts at point ${s.points[0]}, the one after ${point}`);
+      point = s.points[1];
+      if (s.level[0] !== s.points[0] + 9 || s.level[1] !== s.points[1] + 9) bad(`${where}: point N is taken at level N + 9 (points ${s.points.join("-")}, levels ${s.level.join("-")})`);
+      const ids = s.any ?? (s.talent === undefined ? [] : [s.talent]);
+      if (!ids.length) return bad(`${where}: no talent`);
+      const found = ids.map((id) => f.tal.get(id));
+      ids.forEach((id, k) => !found[k] && bad(`${where}: spell ${id} is no talent of this class in ${f.game}'s data`));
+      if (found.some((t) => !t)) return;
+      const t = found[0]!;
+      if (s.any) {
+        if (n !== s.rank) bad(`${where}: a choice of ${n} points, rank ${s.rank}`);
+        for (const o of found) if (o!.max_rank !== s.rank) bad(`${where}: ${f.name(o!.spell_id)} has ${o!.max_rank} ranks, the step reaches ${s.rank}`);
       }
-      taken.set(o.spell_id, s.level[0]);
-    }
-    rank.set(t.id, s.rank);
-    spent.set(t.tab_id, before + n);
-  });
-  if (point > 51) bad(`${at}: ${point} points, 51 is the most`);
-  if (point !== 51) bad(`${at}: the path spends ${point} points, a full one 51`);
-  // the build's own tree reaches its deepest talent
-  if ((spent.get(b.tree) ?? 0) < 31) bad(`${at}: the path puts ${spent.get(b.tree) ?? 0} points in tree ${b.tree}, its own tree takes at least 31`);
+      if (s.of !== undefined && s.of !== t.max_rank) bad(`${where}: ${f.name(t.spell_id)} is ${s.rank}/${s.of} in the content, ${t.max_rank} ranks in the data`);
+      if (!s.any) {
+        if (s.rank > t.max_rank) bad(`${where}: rank ${s.rank} of ${t.max_rank}`);
+        const was = rank.get(t.id) ?? 0;
+        if (s.rank - was !== n) bad(`${where}: ${f.name(t.spell_id)} goes ${was} to ${s.rank} with ${n} points`);
+      }
+      const before = spent.get(t.tab_id) ?? 0;
+      for (const o of found as Tal[]) {
+        if ((spent.get(o.tab_id) ?? 0) < o.req_points) bad(`${where}: ${f.name(o.spell_id)} asks ${o.req_points} points in its tree, ${spent.get(o.tab_id) ?? 0} are spent`);
+        if (s.level[0] < o.min_level) bad(`${where}: ${f.name(o.spell_id)} is open from level ${o.min_level}, taken at ${s.level[0]}`);
+        for (const p of f.prereq.get(o.id) ?? []) {
+          if ((rank.get(p.requires) ?? 0) < p.rank) bad(`${where}: ${f.name(o.spell_id)} needs talent ${p.requires} at rank ${p.rank} first`);
+        }
+        taken.set(o.spell_id, s.level[0]);
+      }
+      rank.set(t.id, s.rank);
+      spent.set(t.tab_id, before + n);
+    });
+    if (point > 51) bad(`${at} ${label}s: ${point} points, 51 is the most`);
+    if (point !== 51) bad(`${at} ${label}s: spend ${point} points, a full path 51`);
+    // the build's own tree reaches its deepest talent
+    if ((spent.get(b.tree) ?? 0) < 31) bad(`${at} ${label}s: put ${spent.get(b.tree) ?? 0} points in tree ${b.tree}, its own tree takes at least 31`);
+    return { taken, spent };
+  };
+  const takens = [simulate(b.path, "path step").taken];
+  for (const [i, road] of (b.roads ?? []).entries()) takens.push(simulate(road.path, `road ${i + 2} step`).taken);
   const tab = f.db.query("SELECT name FROM name WHERE kind = 'talent_tab' AND id = ? AND locale = 'enUS'").get(b.tree) as { name: string } | null;
   if (!tab || tab.name !== b.name) bad(`${at}: the build is named ${b.name}, its tree ${b.tree} ${tab ? tab.name : "is no tree"}`);
   // the stages follow each other
@@ -285,8 +307,12 @@ function checkBuild(b: Build, f: Facts) {
       for (const w of r.need.when ?? []) if (!WHEN.includes(w)) bad(`${where}: when ${w} is no condition of the vocabulary`);
       for (const tid of [...(r.need.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]) {
         if (!f.tal.has(tid)) bad(`${where}: needs talent spell ${tid}, no talent of this class`);
-        else if (!taken.has(tid)) bad(`${where}: needs talent ${f.name(tid)}, the path never takes it`);
-        else if (taken.get(tid)! > st.to) bad(`${where}: needs talent ${f.name(tid)}, the path takes it at level ${taken.get(tid)}, after the stage's ${st.to}`);
+        else
+          takens.forEach((taken, road) => {
+            const via = road === 0 ? "the path" : `road ${road + 1}`;
+            if (!taken.has(tid)) bad(`${where}: needs talent ${f.name(tid)}, ${via} never takes it`);
+            else if (taken.get(tid)! > st.to) bad(`${where}: needs talent ${f.name(tid)}, ${via} takes it at level ${taken.get(tid)}, after the stage's ${st.to}`);
+          });
       }
       const want = JSON.stringify(r.need.stance?.length ? r.need.stance : (filled.get(r) ?? []));
       const had = stances.get(r.spell);
@@ -298,7 +324,7 @@ function checkBuild(b: Build, f: Facts) {
   // A rotation plan (the stage's opening, loop, between fights, low resource and big cooldowns): every
   // spell checked as a row is, every line a clause with its reason, the loop's last line the one that applies
   // when nothing above does (so it has no condition and every other line of the loop has one)
-  const checkPlan = (plan: Plan, where: string, st: Stage) => {
+  const checkPlan = (plan: Plan, where: string, st: Stage, alt = false) => {
     const clause = (text: string | undefined, at: string, what: string) => {
       if (text === undefined) return;
       if (/[.!?;:]$/.test(text.trim())) bad(`${at}: ${what} is a clause, with no full stop at its end`);
@@ -324,7 +350,7 @@ function checkBuild(b: Build, f: Facts) {
     };
     for (const name of PLAN_LISTS) {
       const steps = plan[name] ?? [];
-      if ((name === "opening" || name === "loop") && !steps.length) bad(`${where}: a plan has an ${name}`);
+      if ((name === "loop" || (name === "opening" && !alt)) && !steps.length) bad(`${where}: a plan has ${name === "loop" ? "a" : "an"} ${name}`);
       steps.forEach((x, i) => {
         const at = `${where} plan ${name} ${i + 1}${x.name ? ` (${x.name})` : ""}`;
         step(x, at);
@@ -332,6 +358,11 @@ function checkBuild(b: Build, f: Facts) {
         if (last && x.if) bad(`${at}: the last line of the loop is the one that applies when nothing above does, it has no condition`);
         if (!last && (name === "loop" || name === "between" || name === "low") && !x.if) bad(`${at}: a line of the ${name} says when it applies`);
       });
+    }
+    if (plan.alt) {
+      if (!plan.alt.name || !plan.alt.say) bad(`${where} plan alt: a name and a line on when it is for`);
+      clause(plan.alt.say, `${where} plan alt`, "its line");
+      checkPlan({ ...plan.alt, opening: plan.alt.opening ?? [] } as Plan, `${where} alt`, st, true);
     }
     if (plan.big) {
       if (!plan.big.say) bad(`${where} plan big: a line that says when`);
@@ -364,7 +395,7 @@ function rowLua(r: Row & { learned: number }, key: string): string {
 
 // Every spell line of a stage, its priority rows and its plan's steps
 function stepsOf(st: Stage): (Row | PlanStep)[] {
-  const plan = st.plan ? [...PLAN_LISTS.flatMap((n) => st.plan![n] ?? []), ...(st.plan.big?.spells ?? [])] : [];
+  const plan = st.plan ? [...PLAN_LISTS.flatMap((n) => [...(st.plan![n] ?? []), ...(st.plan!.alt?.[n] ?? [])]), ...(st.plan.big?.spells ?? [])] : [];
   return [...(st.rows ?? []), ...plan];
 }
 
@@ -405,7 +436,10 @@ function luaFor(game: Game): { lua: string; builds: number } {
       if (n !== name) bad(`${c.class.key} (${game}): the ${key} stance is spell ${id}, ${n ?? "not in the data"}, not ${name}`);
     }
     const card = Object.entries(c.class.card).map(([k, v]) => `${k} = ${q(v)}`);
-    classes.push(`    [${c.class.id}] = { token = ${q(c.class.token)}, key = ${q(c.class.key)}, text = ${q(word(`${c.class.key}`, c.class.text)!)}, builds = ${list(mine.map((b) => b.id))}, card = { ${card.join(", ")} } },`);
+    const ov = c.class.overview;
+    if (ov) for (const k of Object.keys(ov)) if (!OVERVIEW.includes(k)) bad(`${c.class.key} overview: ${k} is none of ${OVERVIEW.join(", ")}`);
+    const overview = ov ? `, overview = { ${OVERVIEW.filter((k) => ov[k] !== undefined).map((k) => `${k} = ${q(word(`${c.class.key}.ov.${k}`, ov[k])!)}`).join(", ")} }` : "";
+    classes.push(`    [${c.class.id}] = { token = ${q(c.class.token)}, key = ${q(c.class.key)}, text = ${q(word(`${c.class.key}`, c.class.text)!)}, builds = ${list(mine.map((b) => b.id))}, card = { ${card.join(", ")} }${overview} },`);
     const mineAdvice: string[] = [];
     for (const a of c.class.advice ?? []) {
       if (!ROLES.includes(a.role)) bad(`${c.class.key} advice: role ${a.role} is none of ${ROLES.join(", ")}`);
@@ -416,21 +450,37 @@ function luaFor(game: Game): { lua: string; builds: number } {
     for (const b of mine) {
       checkBuild(b, f);
       const k = b.key;
-      const names = [...b.path.flatMap((s) => s.any ?? (s.talent === undefined ? [] : [s.talent])), ...b.stages.flatMap((st) => stepsOf(st).flatMap((r) => [...(r.need?.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]))];
+      const names = [...[b.path, ...(b.roads ?? []).map((r) => r.path)].flat().flatMap((s) => s.any ?? (s.talent === undefined ? [] : [s.talent])), ...b.stages.flatMap((st) => stepsOf(st).flatMap((r) => [...(r.need?.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]))];
       for (const n of names) if (f.tal.has(n)) used.set(n, f.tal.get(n)!);
       const out: string[] = [];
       out.push(`    [${b.id}] = {`);
       out.push(`      key = ${q(k)}, class = ${c.class.id}, role = ${q(b.role)}, tree = ${b.tree}, name = ${q(b.name)},`);
       out.push(`      checked = ${q(b.checked)}, build = ${q(f.build())},`);
       out.push(`      intro = ${q(word(`${k}.intro`, b.intro)!)}, note = ${q(word(`${k}.note`, b.pathNote)!)},`);
+      out.push(`      line = ${q(word(`${k}.line`, b.line ?? b.intro.split(/(?<=\.)\s/)[0])!)},`);
+      if (b.hardcore?.length) out.push(`      hardcore = ${list(b.hardcore.map((t, i) => q(word(`${k}.hc${i + 1}`, t)!)))},`);
+      for (const src of b.sources ?? []) if (!src.label || !/^https?:\/\//.test(src.url) || !/^\d{4}-\d{2}-\d{2}$/.test(src.read)) bad(`${k}: a source is a label, a url and the day it was read (YYYY-MM-DD)`);
       if (b.split) out.push(`      split = ${q(word(`${k}.split`, b.split)!)},`);
       if (b.dry) out.push(`      dry = ${q(word(`${k}.dry`, b.dry)!)},`);
+      const pathLua = (steps: Step[], key: string, pad: string) =>
+        steps.map((s, i) => {
+          const t = s.any ? `any = ${list(s.any)}` : `talent = ${s.talent}`;
+          return `${pad}{ points = ${list(s.points)}, level = ${list(s.level)}, ${t}, rank = ${s.rank}, why = ${q(word(`${key}.p${i + 1}`, s.why)!)} },`;
+        });
       out.push("      path = {");
-      b.path.forEach((s, i) => {
-        const t = s.any ? `any = ${list(s.any)}` : `talent = ${s.talent}`;
-        out.push(`        { points = ${list(s.points)}, level = ${list(s.level)}, ${t}, rank = ${s.rank}, why = ${q(word(`${k}.p${i + 1}`, s.why)!)} },`);
-      });
+      out.push(...pathLua(b.path, k, "        "));
       out.push("      },");
+      if (b.roads?.length) {
+        if (!b.roadName) bad(`${k}: a build with roads names its first road (roadName)`);
+        out.push("      roads = {");
+        out.push(`        { name = ${q(word(`${k}.road1`, b.roadName ?? "")!)} },`);
+        b.roads.forEach((road, ri) => {
+          out.push(`        { name = ${q(word(`${k}.road${ri + 2}`, road.name)!)}, path = {`);
+          out.push(...pathLua(road.path, `${k}.r${ri + 2}`, "          "));
+          out.push("        } },");
+        });
+        out.push("      },");
+      }
       out.push("      stages = {");
       b.stages.forEach((st, si) => {
         if (st.phase !== undefined && !PHASES.includes(st.phase)) bad(`${b.key} stage ${st.from}-${st.to}: phase ${st.phase} is none of ${PHASES.join(", ")}`);
@@ -445,11 +495,20 @@ function luaFor(game: Game): { lua: string; builds: number } {
         }
         if (st.plan) {
           out.push("          plan = {");
-          for (const name of PLAN_LISTS) {
-            const steps = st.plan[name] ?? [];
-            if (!steps.length) continue;
-            out.push(`            ${name} = {`);
-            steps.forEach((x, i) => out.push(`              ${stepLua(x as PlanStep & { learned?: number }, `${k}.s${si + 1}.${name}${i + 1}`)},`));
+          const lists = (plan: Plan | NonNullable<Plan["alt"]>, key: string, pad: string) => {
+            for (const name of PLAN_LISTS) {
+              const steps = (plan as Plan)[name] ?? [];
+              if (!steps.length) continue;
+              out.push(`${pad}${name} = {`);
+              steps.forEach((x, i) => out.push(`${pad}  ${stepLua(x as PlanStep & { learned?: number }, `${key}.${name}${i + 1}`)},`));
+              out.push(`${pad}},`);
+            }
+          };
+          lists(st.plan, `${k}.s${si + 1}`, "            ");
+          if (st.plan.alt) {
+            const alt = st.plan.alt;
+            out.push(`            alt = { name = ${q(word(`${k}.s${si + 1}.alt.name`, alt.name)!)}, say = ${q(word(`${k}.s${si + 1}.alt.say`, alt.say)!)},`);
+            lists(alt, `${k}.s${si + 1}.alt`, "              ");
             out.push("            },");
           }
           if (st.plan.big) {
@@ -471,8 +530,10 @@ function luaFor(game: Game): { lua: string; builds: number } {
     `-- Generated by scripts/guide.ts from content/ and wow-data's ${game}.db (client ${version || "none: no build written for this game yet"}):`,
     "-- edit those, never this file. The words are GuideText.lua's, by key.",
     "--   classes[id] = { token, key, text, builds (ids), card (the voice's vocabulary: not shown) }",
-    "--   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client),",
+    "--   classes[id].overview = { who, good, bad, resource, levelling, ten (word keys): the class in general, optional }",
+    "--   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview),",
     "--                   intro, note, split, dry (word keys), path, stages }",
+    "--   roads[n]    = { name (a word key), path (the others; the first is `path`) }: another order of the points for the same build",
     "--   path[n]     = { points = { from, to }, level = { from, to }, talent (rank 1's spell) or any (a choice),",
     "--                   rank (it reaches), why }",
     "--   stages[n]   = { from, to (levels), phase (untalented, choose or spent: the character's phase it serves, none: any), about, opening, rows }",

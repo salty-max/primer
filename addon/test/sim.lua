@@ -34,12 +34,29 @@ for id, b in pairs(D.builds) do
   end
   check(#b.stages >= 3 and #b.stages <= 4, "its stages: " .. b.key)
   for _, stage in ipairs(b.stages) do
-    check(stage.from <= stage.to and #stage.rows > 0, "a stage with rows: " .. b.key)
-    for _, row in ipairs(stage.rows) do
+    check(stage.from <= stage.to and (stage.rows or stage.plan), "a stage with rows or a plan: " .. b.key)
+    for _, row in ipairs(stage.rows or {}) do
       check(text[row.say] and row.spell and row.level, "a row's word and facts: " .. b.key .. " " .. row.spell)
       check(row.level <= stage.to, "a row's level within its stage: " .. row.spell)
     end
+    if stage.plan then
+      -- (every line of a plan has its words, every spell its level, the loop ends on the line with no condition)
+      local plan = stage.plan
+      for _, name in ipairs({ "opening", "loop", "between", "low" }) do
+        for i, st in ipairs(plan[name] or {}) do
+          check(st.spell or st.text, "a plan step is a spell or a text: " .. b.key)
+          check(text[st.why] and (not st.cond or text[st.cond]), "a plan step's words: " .. b.key .. " " .. name .. i)
+          check(not st.spell or (st.level and st.level <= stage.to), "a plan step's level within its stage: " .. b.key)
+          check(
+            name ~= "loop" or (i == #plan.loop) == (st.cond == nil),
+            "only the loop's last line has no condition: " .. b.key
+          )
+        end
+      end
+      check(#plan.opening > 0 and #plan.loop > 0, "a plan has an opening and a loop: " .. b.key)
+    end
   end
+  check(b.line and text[b.line], "a build's line for the overview: " .. b.key)
   check(ns.say(b.intro) == text[b.intro], "ns.say gives a word by its key")
 end
 if G.FOREVER then
@@ -74,10 +91,11 @@ end
 check(SlashCmdList.PRIMER and SLASH_PRIMER1 == "/primer", "the slash command")
 SlashCmdList.PRIMER("")
 check(PrimerFrame and PrimerFrame:IsShown(), "/primer opens the window")
-for n = 1, 3 do
+for n = 1, 4 do
   check(_G["PrimerFrameTab" .. n], "tab " .. n)
 end
-check(not _G["PrimerFrameTab4"], "three tabs")
+check(not _G["PrimerFrameTab5"], "four tabs: Overview, Play, Talents, Role")
+check(ns.TAB.overview == 1 and ns.TAB.play == 2, "the Overview is the first tab")
 check(PrimerFrame.selectedTab == ns.TAB.play, "the Play tab first")
 SlashCmdList.PRIMER("")
 check(not PrimerFrame:IsShown(), "/primer again closes it")
@@ -86,9 +104,9 @@ check(said("/primer opens the guide"), "an unknown word prints the usage")
 ns.open(ns.TAB.role)
 check(PrimerFrame:IsShown() and PrimerFrame.selectedTab == ns.TAB.role, "opened at the Role tab")
 -- (the mock keeps no ids: the tab says its own)
-local tab2 = _G.PrimerFrameTab2
-tab2.GetID = function() return 2 end
-tab2:GetScript("OnClick")(tab2)
+local tab3 = _G.PrimerFrameTab3
+tab3.GetID = function() return 3 end
+tab3:GetScript("OnClick")(tab3)
 check(PrimerFrame.selectedTab == ns.TAB.talents, "a click on a tab chooses it")
 
 -- ── the rules over a character ───────────────────────────────────────────────
@@ -559,6 +577,17 @@ else
     "using a build chooses it, the page and its header follow"
   )
 
+  -- a class with no overview written: its page and its builds
+  ns.open(ns.TAB.overview)
+  check(
+    PrimerPage.title.text == "Warrior"
+      and pageTexts():find("Stances change what you can press.", 1, true)
+      and pageTexts():find("Arms", 1, true)
+      and not pageTexts():find("Good at", 1, true),
+    "Warrior, Overview: no overview written, the class's page and the builds"
+  )
+  ns.open(ns.TAB.play)
+
   -- the Talents tab: names and pictures are the game's, what is taken is read
   s.ranks[ns.data.talents[12320].id] = 3
   ns.open(ns.TAB.talents)
@@ -874,7 +903,7 @@ if not G.FOREVER then
   )
   check(
     pageTexts():find(
-      "Your points can no longer reach the build you chose. This page stays on it. These points follow Fury more than the Arms build you picked.",
+      "Your points can no longer reach the build you chose. This page stays on it until you say otherwise. These points follow Fury more than the Arms build you picked.",
       1,
       true
     ),
@@ -1373,11 +1402,37 @@ if not G.FOREVER then
       and not pageTexts():find("What do you want to play?", 1, true),
     "Paladin at 9: the plan, the spells in the book plain, the ones to learn grey, and no question yet"
   )
+  ns.open(ns.TAB.overview)
+  check(
+    PrimerPage.title.text == "Paladin"
+      and PrimerPage.sub.text == "Classic Era"
+      and pageTexts():find("You fight in melee with a seal on you", 1, true)
+      and pageTexts():find("Good at", 1, true)
+      and pageTexts():find("Bad at", 1, true)
+      and pageTexts():find("Your resource", 1, true)
+      and pageTexts():find("Levelling", 1, true)
+      and pageTexts():find("At level 10", 1, true)
+      and pageTexts():find("Damage. One big weapon, a seal and Judgement.", 1, true)
+      and pageTexts():find("Heal. Heals the group.", 1, true)
+      and pageTexts():find("Tank. Holds the monsters on you.", 1, true),
+    "Paladin, Overview: the class in general, the builds in a line each with their roles, what to do at level 10"
+  )
+  check(not pageTexts():find("What do you want to play?", 1, true), "the Overview never asks the level-10 question")
+  local holy
+  for _, row in ipairs(PrimerList.rows) do
+    if row.shown and row.text.text == "Holy" then holy = row end
+  end
+  holy:GetScript("OnClick")(holy)
+  check(
+    PrimerFrame.selectedTab == ns.TAB.role and pageTexts():find("Looking at Holy, not your build.", 1, true),
+    "a build clicked on the Overview is looked at on the Role tab, nothing chosen"
+  )
+  press("Back to Retribution")
   ns.open(ns.TAB.talents)
   check(
     pageTexts():find("Level 10 to 14, points 1 to 5", 1, true)
       and pageTexts():find("No talent points to spend. Your next pick is", 1, true)
-      and pageTexts():find("Judgement and your seals cost 15% less mana", 1, true),
+      and pageTexts():find("Judgement and your seals cost less mana, and mana is what stops a paladin.", 1, true),
     "Paladin at 9, Talents: the first pick, at level 10, and why"
   )
   s.level, s.spells = 12, set(20154, 635, 465, 20271, 19740, 21082, 498, 853, 1152, 633, 1022)
@@ -1414,12 +1469,17 @@ if not G.FOREVER then
       and pageTexts():find("Big cooldowns", 1, true),
     "the plan: the opening, the loop, between fights, low mana and the big cooldowns"
   )
+  check(
+    pageTexts():find("Pick what you will do most. You can change it later, and a respec costs gold.", 1, true)
+      and pageTexts():find("Most of this page waits on Judgement. If it is not ready, hit the monster.", 1, true),
+    "the voice: the level-10 prompt says what to weigh and what a change costs, and the loop carries the build's one dry remark"
+  )
   local judgement = stepsOf("Spell 20271")
   check(
     judgement[1].name.text == "3. Spell 20271"
-      and judgement[1].say.text == "As soon as the monster is in range. It sets off the seal you wear."
+      and judgement[1].say.text == "As soon as the monster is in range. It spends the seal on you."
       and judgement[2].name.text == "1. Spell 20271"
-      and judgement[2].say.text == "Whenever it is ready. It is most of your damage.",
+      and judgement[2].say.text == "The moment it is ready. It is most of your damage, so do not sit on it.",
     "a step: its number in its list, the game's name by id, when it applies and why, in that order"
   )
   local attack = stepsOf("Spell 6603")
@@ -1447,6 +1507,16 @@ if not G.FOREVER then
     command.state == "talent" and command.say.text:find("^Needs Talent " .. ns.data.talents[20375].id .. "%. "),
     "a step that needs a talent not taken is grey and names it"
   )
+  local righteous = false
+  for _, r in ipairs(ns.planRows) do
+    if r.shown and r.spell == 20154 and r.state == "ready" and r.say.text:find("until Seal of Command", 1, true) then
+      righteous = true
+    end
+  end
+  check(
+    righteous,
+    "level 25 without Seal of Command: Seal of Righteousness is pressable whatever the weapon, so there is always a seal"
+  )
   points({ [20375] = 1 })
   s.spells[20375] = true
   G.fire("CHARACTER_POINTS_CHANGED")
@@ -1461,7 +1531,7 @@ if not G.FOREVER then
     PrimerPage.title.text == "Retribution"
       and pageTexts():find("Builds that fit: Retribution.", 1, true)
       and pageTexts():find("A damage paladin works with a seal and Judgement", 1, true)
-      and pageTexts():find("Judgement is ready 2 seconds sooner", 1, true),
+      and pageTexts():find("Judgement comes back sooner, so you press it more often.", 1, true),
     "Paladin picks Damage: Retribution, the advice and the first three picks"
   )
   s.level = 19
@@ -1475,14 +1545,74 @@ if not G.FOREVER then
   )
   ns.open(ns.TAB.talents)
   check(
-    pageTexts():find("Level 20, points 11 to 11", 1, true)
-      and pageTexts():find("Your next pick is Talent 1481", 1, true)
-      and pageTexts():find("A seal that sometimes adds Holy damage worth 70%", 1, true)
+    pageTexts():find("Level 20 to 21, points 11 to 12", 1, true)
+      and pageTexts():find("Your next pick is Talent " .. ns.data.talents[26022].id, 1, true)
+      and pageTexts():find("You run faster, and the points cost you nothing you needed.", 1, true)
       and listTexts():find("5/5", 1, true)
       and listTexts():find("2/2", 1, true)
       and listTexts():find("3/5", 1, true),
-    "Paladin with 10 points: the next pick is Seal of Command at 20, the taken ones counted"
+    "Paladin with 10 points: the next pick is Pursuit of Justice at 20, the taken ones counted"
   )
+
+  -- two roads of one build (Retribution first, or Holy first as Wowhead's Hardcore guide has it)
+  s.level, s.season = 19, 0
+  PrimerChar.groups = {}
+  points({ [20257] = 5, [20205] = 5 })
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6 }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.talents)
+  check(
+    listTexts():find("Retribution first, the usual road", 1, true)
+      and listTexts():find("Holy first, the Hardcore road", 1, true)
+      and pageTexts():find("This build has more than one road for its first points, and none is wrong:", 1, true),
+    "Retribution: both roads are named on the Talents tab, neither is a drift"
+  )
+  check(
+    pageTexts():find("Your points follow Holy first, the Hardcore road.", 1, true)
+      and not pageTexts():find("can no longer reach", 1, true)
+      and listTexts():find("5/5", 1, true),
+    "10 points in Holy at level 19 on a picked Retribution: the page says the points follow the Holy-first road, and it is no drift"
+  )
+  check(
+    pageTexts():find("Level 10 to 14", 1, true) == nil or listTexts():find("Level 10 to 14", 1, true),
+    "(the first steps of the Holy-first road are listed)"
+  )
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6, roads = { [6] = 1 } }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.talents)
+  check(listTexts():find("0/5", 1, true), "a road the player chose: its steps are listed, the other road's are not")
+  check(
+    pageTexts():find("Your points follow Holy first, the Hardcore road.", 1, true),
+    "and what the points follow is still said as it is, not as the player chose"
+  )
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6 }
+  points({})
+  s.level = 12
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.talents)
+  check(pageTexts():find("Your points follow", 1, true) == nil, "no points yet: no road is claimed")
+  points({ [20101] = 5 })
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.talents)
+  check(
+    pageTexts():find("Your points follow Retribution first, the usual road.", 1, true),
+    "5 points in Benediction: the Retribution-first road"
+  )
+  s.level = 12
+  -- Hardcore lines only on a Hardcore realm
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6 }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(not pageTexts():find("Hardcore", 1, true), "Retribution on a normal realm: no Hardcore lines")
+  s.season = 3
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find("Hardcore", 1, true) and pageTexts():find("Never run out of mana in a fight.", 1, true),
+    "Retribution on a Hardcore realm: the Hardcore lines"
+  )
+  s.season = 0
+  points({})
 
   -- the player's case: the guide they followed starts with 5 points in Holy
   s.level = 14
@@ -1539,12 +1669,12 @@ if not G.FOREVER then
   check(
     pageTexts():find("Builds that fit: Frost, Fire, Arcane.", 1, true)
       and pageTexts():find("The safest way to level alone.", 1, true)
-      and pageTexts():find("Frostbolt casts 0.5 seconds faster", 1, true),
+      and pageTexts():find("Your Frost and Fire spells are resisted less.", 1, true),
     "Mage picks Damage: all three builds, the advice and the first three picks"
   )
   s.level = 19
   PrimerChar.groups = {}
-  points({ [11070] = 5, [29438] = 3, [11071] = 2 })
+  points({ [29438] = 3, [11070] = 2, [11071] = 3, [11207] = 2 })
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(
@@ -1553,11 +1683,45 @@ if not G.FOREVER then
   )
   ns.open(ns.TAB.talents)
   check(
-    pageTexts():find("Level 18 to 20, points 9 to 11", 1, true)
-      and pageTexts():find("2 of 3", 1, true)
-      and pageTexts():find("A chilled monster has a 15% chance to freeze", 1, true),
-    "Mage with 10 points: Frostbite is the next pick, 2 of 3 taken"
+    pageTexts():find("Level 20 to 22, points 11 to 13", 1, true)
+      and pageTexts():find("2 of 5", 1, true)
+      and pageTexts():find("The rest of Ice Shards: it is in every build that fights one monster.", 1, true),
+    "Mage with 10 points: Ice Shards is the next pick, 2 of 5 taken"
   )
+  -- the other way to play a stage: the crowd, with its own lists
+  s.level = 25
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 9 }
+  s.spells = set(168, 1459, 116, 122, 2136, 10, 120, 1449, 6603)
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    pageTexts():find("A crowd of monsters", 1, true)
+      and pageTexts():find("For a pack you can root with Frost Nova.", 1, true),
+    "Frost: the crowd style has its own heading and its line on when it is for"
+  )
+  local blizzard = {}
+  for _, r in ipairs(ns.planRows) do
+    if r.shown and r.name.text:find("Spell 10", 1, true) and r.spell == 10 then blizzard[#blizzard + 1] = r end
+  end
+  check(
+    #blizzard == 1 and blizzard[1].state == "ready",
+    "Blizzard is in the crowd's list only, and plain when it is learned"
+  )
+  local shatter
+  for _, r in ipairs(ns.planRows) do
+    if r.shown and r.spell == 116 and r.say.text:find("frozen", 1, true) then shatter = r end
+  end
+  check(shatter and shatter.state == "talent", "Frostbolt on a frozen monster waits for Shatter, and says so")
+  points({ [11170] = 5 })
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  shatter = nil
+  for _, r in ipairs(ns.planRows) do
+    if r.shown and r.spell == 116 and r.say.text:find("frozen", 1, true) then shatter = r end
+  end
+  check(shatter and shatter.state == "ready", "Shatter taken: the line is plain, in place")
+  points({})
+  s.level = 19
   -- ten points in Fire leave every build open: the page asks, it does not guess a Fire mage
   PrimerChar.groups = {}
   points({ [11069] = 5, [11119] = 5 })

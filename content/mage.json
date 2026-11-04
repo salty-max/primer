@@ -17,7 +17,15 @@
         "role": "damage",
         "say": "Frost. The safest way to level alone. A frozen or slowed monster hits you less. The price: Frost hits a little softer than Fire. Fire. The hardest hit. Fire has no slow, so Frostbolt and Frost Nova stay on the bar. The price: a monster that reaches you stays on you. Arcane. Mana and free spells. The price: most of the tree's damage arrives with Arcane Power at 40, so before then you level slower than the other two."
       }
-    ]
+    ],
+    "overview": {
+      "who": "You hurt things from a distance with a cast bar and a mana bar. The craft is what to cast and when to stand still, and a monster that reaches you has won a round.",
+      "good": "Damage at range, and keeping monsters away: slows, freezes and a sheep. You make food and water for yourself and the group.",
+      "bad": "Being hit. You have little health and a cast that is interrupted is mana gone. Two monsters at once is the usual way a mage dies.",
+      "resource": "Mana, and it is the whole game. Every cast spends it, so you cast, wait and drink. The wand costs nothing and finishes a fight while the bar refills.",
+      "levelling": "Frostbolt from as far as you can reach, Frost Nova when it gets close, step back and cast again. Drink between pulls. Pull one monster at a time until you are sure.",
+      "ten": "You get your first talent point. Pick a build and Primer shows your first three picks. Frost is the safest way to level alone, and a respec costs gold."
+    }
   },
   "builds": [
     {
@@ -31,22 +39,34 @@
       ],
       "checked": "2026-11-04",
       "intro": "Frost keeps the monster slow or frozen so it hits you less, and kills with Frostbolt. It is the mage that survives being alone.",
-      "pathNote": "(31 points in Frost for Ice Barrier, then 20 in Arcane).",
-      "split": "the last 20 points. A second road puts them in Fire (Improved Fireball, Impact, Ignite) for a mage who wants a harder hit. It gives you a bigger opening and gives up the free spells and the spell resistance. This page takes Arcane for the mana.",
+      "pathNote": "(34 points in Frost for Ice Barrier, then 17 in Arcane for mana.)",
+      "split": "the last 17 points. This page takes Arcane for mana: Arcane Concentration gives free casts and Arcane Meditation lets mana come back while you cast. Some guides put them into Winter's Chill instead, for more Frost damage and less mana.",
       "path": [
         {
           "points": [
             1,
-            5
+            3
           ],
           "level": [
             10,
+            12
+          ],
+          "talent": 29438,
+          "rank": 3,
+          "why": "Your Frost and Fire spells are resisted less. Every guide takes it first, and two points do most of the work."
+        },
+        {
+          "points": [
+            4,
+            5
+          ],
+          "level": [
+            13,
             14
           ],
           "talent": 11070,
-          "rank": 5,
-          "why": "Frostbolt casts 0.5 seconds faster, and it is your main button.",
-          "of": 5
+          "rank": 2,
+          "why": "Frostbolt casts faster, and it is your main button."
         },
         {
           "points": [
@@ -57,66 +77,74 @@
             15,
             17
           ],
-          "talent": 29438,
+          "talent": 11071,
           "rank": 3,
-          "why": "A Frost or Fire spell is 6% less likely to be resisted.",
-          "of": 3
+          "why": "A chilled monster can freeze for a moment. Take it for one monster at a time."
         },
         {
           "points": [
             9,
-            11
+            10
           ],
           "level": [
             18,
-            20
+            19
           ],
-          "talent": 11071,
-          "rank": 3,
-          "why": "A chilled monster has a 15% chance to freeze for 5 seconds at 3/3.",
-          "of": 3
+          "talent": 11207,
+          "rank": 2,
+          "why": "Your Frost critical hits do more damage."
         },
         {
           "points": [
-            12,
-            14
+            11,
+            13
           ],
           "level": [
-            21,
-            23
+            20,
+            22
           ],
-          "talent": 11151,
-          "rank": 3,
-          "why": "6% more Frost damage.",
-          "of": 3
+          "talent": 11207,
+          "rank": 5,
+          "why": "The rest of Ice Shards: it is in every build that fights one monster."
         },
         {
           "points": [
-            15,
-            16
+            14,
+            15
           ],
           "level": [
-            24,
-            25
+            23,
+            24
           ],
           "talent": 11165,
           "rank": 2,
-          "why": "Frost Nova comes back 4 seconds sooner, and it opens Shatter.",
-          "of": 2
+          "why": "Frost Nova comes back sooner, and Shatter needs it."
         },
         {
           "points": [
-            17,
-            21
+            16,
+            20
           ],
           "level": [
-            26,
-            30
+            25,
+            29
           ],
           "talent": 11170,
           "rank": 5,
-          "why": "Spells are 50% more likely to be critical against a frozen monster.",
-          "of": 5
+          "why": "Spells crit more often against a frozen monster. Frost Nova, then Frostbolt on what it froze, is the heart of this build."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 11958,
+          "rank": 1,
+          "why": "Safe from everything for 10 seconds, and you cannot act. It is a talent, not a trainer spell."
         },
         {
           "points": [
@@ -127,10 +155,9 @@
             31,
             31
           ],
-          "talent": 11958,
+          "talent": 12472,
           "rank": 1,
-          "why": "You are safe from everything for 10 seconds, but cannot do anything, and it takes 5 minutes to come back. It opens Ice Barrier.",
-          "of": 1
+          "why": "It brings back all your Frost cooldowns at once, so Ice Block can be used twice."
         },
         {
           "points": [
@@ -141,24 +168,35 @@
             32,
             34
           ],
-          "talent": 11190,
-          "rank": 3,
-          "why": "Cone of Cold hits 35% harder.",
-          "of": 3
+          "talent": 11070,
+          "rank": 5,
+          "why": "The rest of Improved Frostbolt: faster casts on your main button."
         },
         {
           "points": [
             26,
-            30
+            28
           ],
           "level": [
             35,
+            37
+          ],
+          "talent": 11160,
+          "rank": 3,
+          "why": "Frost spells cost less mana, and mana is what ends a mage's day."
+        },
+        {
+          "points": [
+            29,
+            30
+          ],
+          "level": [
+            38,
             39
           ],
-          "talent": 11180,
-          "rank": 5,
-          "why": "Each Frost hit raises the chance of a Frost critical on that target by 2%, up to 5 times.",
-          "of": 5
+          "talent": 11151,
+          "rank": 2,
+          "why": "Frost spells do more damage."
         },
         {
           "points": [
@@ -171,92 +209,124 @@
           ],
           "talent": 11426,
           "rank": 1,
-          "why": "A shield on you that absorbs damage for a minute, and spells are not interrupted while it holds.",
-          "of": 1
+          "why": "A shield on you that absorbs damage for a minute, and spells are not interrupted while it holds."
         },
         {
           "points": [
             32,
-            36
+            32
           ],
           "level": [
             41,
+            41
+          ],
+          "talent": 11151,
+          "rank": 3,
+          "why": "The last point of Piercing Ice."
+        },
+        {
+          "points": [
+            33,
+            34
+          ],
+          "level": [
+            42,
+            43
+          ],
+          "talent": 16757,
+          "rank": 2,
+          "why": "Frostbolt and Blizzard reach further, so you start the pull from further away."
+        },
+        {
+          "points": [
+            35,
+            36
+          ],
+          "level": [
+            44,
             45
           ],
-          "talent": 11222,
-          "rank": 5,
-          "why": "Arcane spells are resisted 10% less. Mostly the way to the next row.",
-          "of": 5
+          "talent": 11210,
+          "rank": 2,
+          "why": "The target resists your spells less. Mostly the way to the next row."
         },
         {
           "points": [
             37,
-            38
+            39
           ],
           "level": [
             46,
-            47
+            48
           ],
-          "talent": 11210,
-          "rank": 2,
-          "why": "The target resists your spells less, and Arcane spells draw 40% less threat.",
-          "of": 2
+          "talent": 11222,
+          "rank": 3,
+          "why": "Arcane spells are resisted less. Mostly the way to Arcane Concentration."
         },
         {
           "points": [
-            39,
-            43
+            40,
+            44
           ],
           "level": [
-            48,
-            52
+            49,
+            53
           ],
           "talent": 11213,
           "rank": 5,
-          "why": "Any damage spell has a 10% chance to make the next one cost nothing.",
-          "of": 5
+          "why": "A damage spell can make your next cast cost nothing."
         },
         {
           "points": [
-            44,
+            45,
             45
           ],
           "level": [
-            53,
+            54,
             54
           ],
-          "talent": 6057,
-          "rank": 2,
-          "why": "25% more damage with a wand, and a wand costs no mana.",
-          "of": 2
+          "talent": 28574,
+          "rank": 1,
+          "why": "Armour equal to half your Intellect."
         },
         {
           "points": [
             46,
-            50
+            47
           ],
           "level": [
             55,
-            59
+            56
           ],
-          "talent": 29441,
-          "rank": 5,
-          "why": "All resistances up 10, and a fully resisted spell gives back 5% of your mana.",
-          "of": 5
+          "talent": 6057,
+          "rank": 2,
+          "why": "More damage with a wand, and a wand costs no mana."
         },
         {
           "points": [
-            51,
+            48,
+            49
+          ],
+          "level": [
+            57,
+            58
+          ],
+          "talent": 11242,
+          "rank": 2,
+          "why": "Arcane Explosion crits more often. These points open the next row."
+        },
+        {
+          "points": [
+            50,
             51
           ],
           "level": [
-            60,
+            59,
             60
           ],
-          "talent": 28574,
-          "rank": 1,
-          "why": "Armour equal to half your Intellect. The last point. Any talent you can reach would do as well.",
-          "of": 1
+          "talent": 18462,
+          "rank": 2,
+          "why": "Part of your mana regeneration continues while you cast."
         }
       ],
       "stages": [
@@ -265,90 +335,6 @@
           "to": 9,
           "phase": "untalented",
           "about": "",
-          "opening": "Frost Armor on, Arcane Intellect, Frostbolt from range, step back as it slows, Fire Blast to finish. Wand when mana runs low.",
-          "rows": [
-            {
-              "spell": 168,
-              "say": "Put it on yourself. It adds armour for 30 minutes, so renew it between fights and not in them.",
-              "need": {
-                "level": 1,
-                "when": [
-                  "ooc"
-                ]
-              },
-              "name": "Frost Armor"
-            },
-            {
-              "spell": 1459,
-              "say": "Cast it on yourself. 30 minutes of extra Intellect means more mana to spend.",
-              "need": {
-                "level": 1,
-                "when": [
-                  "ooc"
-                ]
-              },
-              "name": "Arcane Intellect"
-            },
-            {
-              "spell": 133,
-              "say": "Your opener at 35 yards. The cast takes longer with each rank, so you want the monster far away when it starts.",
-              "need": {
-                "level": 1
-              },
-              "name": "Fireball"
-            },
-            {
-              "spell": 116,
-              "say": "Opens at 30 yards and slows the monster by 40% for 5 seconds. It arrives later and you cast again before it does.",
-              "need": {
-                "level": 4
-              },
-              "name": "Frostbolt"
-            },
-            {
-              "spell": 2136,
-              "say": "Press it as the monster arrives or runs. It has no cast bar, so it fills the gap between casts.",
-              "need": {
-                "level": 6
-              },
-              "name": "Fire Blast"
-            },
-            {
-              "spell": 5143,
-              "say": "Hits once a second for 3 seconds, and you cannot move for any of it. Use it only when nothing will reach you while it lasts.",
-              "need": {
-                "level": 8
-              },
-              "name": "Arcane Missiles"
-            },
-            {
-              "spell": 118,
-              "say": "A sheep for up to 20 seconds. It works on Beasts, Humanoids and Critters, and any damage wakes it, so leave it alone.",
-              "need": {
-                "level": 8
-              },
-              "name": "Polymorph"
-            },
-            {
-              "spell": 5504,
-              "say": "Make drinks before you need them. Sitting with one brings mana back and saves a vendor trip.",
-              "need": {
-                "level": 4
-              },
-              "name": "Conjure Water"
-            },
-            {
-              "spell": 587,
-              "say": "Makes food. Eat between fights to get health back without spending any mana.",
-              "need": {
-                "level": 6,
-                "when": [
-                  "rest"
-                ]
-              },
-              "name": "Conjure Food"
-            }
-          ],
           "plan": {
             "opening": [
               {
@@ -361,19 +347,19 @@
                 "spell": 1459,
                 "name": "Arcane Intellect",
                 "if": "once, before the first pull",
-                "why": "more Intellect means more mana to spend"
+                "why": "more Intellect means more mana to cast with"
               },
               {
                 "spell": 133,
                 "name": "Fireball",
-                "if": "as the opener, until Frostbolt comes at level 4",
+                "if": "as your opener, until Frostbolt comes at level 4",
                 "why": "it reaches the monster from far away"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "from as far as you can reach, once you have it",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               }
             ],
             "loop": [
@@ -381,29 +367,29 @@
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "whenever you can cast",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               },
               {
                 "spell": 2136,
                 "name": "Fire Blast",
-                "if": "when the monster is on you or running",
+                "if": "if the monster is on you or running",
                 "why": "it has no cast bar, so it fills the gap"
               },
               {
                 "spell": 5143,
                 "name": "Arcane Missiles",
-                "if": "when nothing can reach you while you cast",
+                "if": "if nothing can reach you while you channel",
                 "why": "you cannot move for any of it"
               },
               {
                 "spell": 118,
                 "name": "Polymorph",
-                "if": "when a second monster joins and you cannot kill it first",
+                "if": "if a second monster joins and you cannot kill it first",
                 "why": "a sheep does not attack"
               },
               {
                 "text": "Use your wand",
-                "why": "it costs no mana"
+                "why": "it costs no mana, and your bar starts to refill"
               }
             ],
             "between": [
@@ -444,65 +430,6 @@
           "from": 10,
           "to": 19,
           "about": "One monster, levelling.",
-          "opening": "Frost Armor on, Frostbolt from 30 yards, Frostbolt again, Frost Nova when it arrives, walk back and cast, Fire Blast or wand to finish.",
-          "rows": [
-            {
-              "spell": 116,
-              "say": "Your main button, and it slows the monster by 40%. Cast it from as far as 30 yards.",
-              "need": {
-                "level": 4
-              },
-              "name": "Frostbolt"
-            },
-            {
-              "spell": 122,
-              "say": "Freezes everything near you for up to 8 seconds. Walk back, because damage breaks the freeze and the point is distance.",
-              "need": {
-                "level": 10
-              },
-              "name": "Frost Nova"
-            },
-            {
-              "spell": 2136,
-              "say": "No cast bar, ready every 8 seconds. It finishes a fight a Frostbolt would not.",
-              "need": {
-                "level": 6,
-                "when": [
-                  "execute"
-                ]
-              },
-              "name": "Fire Blast"
-            },
-            {
-              "spell": 1449,
-              "say": "Hits everything around you at once. It is your answer when a second monster joins.",
-              "need": {
-                "level": 14,
-                "when": [
-                  "pack"
-                ]
-              },
-              "name": "Arcane Explosion"
-            },
-            {
-              "spell": 118,
-              "say": "Turn one into a sheep for up to 20 seconds and deal with the other first.",
-              "need": {
-                "level": 8
-              },
-              "name": "Polymorph"
-            },
-            {
-              "spell": 168,
-              "say": "Renew it when it ends.",
-              "need": {
-                "when": [
-                  "rest"
-                ]
-              },
-              "name": "Frost Armor"
-            }
-          ],
           "plan": {
             "opening": [
               {
@@ -515,50 +442,55 @@
                 "spell": 1459,
                 "name": "Arcane Intellect",
                 "if": "once, before the first pull",
-                "why": "more Intellect means more mana to spend"
+                "why": "more Intellect means more mana to cast with"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "from as far as you can reach",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "again, before it arrives",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               }
             ],
             "loop": [
               {
                 "spell": 122,
                 "name": "Frost Nova",
-                "if": "when the monster reaches you",
-                "why": "it freezes it, and the point is the distance"
+                "if": "if the monster reaches you",
+                "why": "it freezes it, and you step back to cast"
               },
               {
                 "spell": 2136,
                 "name": "Fire Blast",
-                "if": "when the monster is nearly dead or running",
+                "if": "if the monster is nearly dead or running",
                 "why": "it has no cast bar"
               },
               {
                 "spell": 118,
                 "name": "Polymorph",
-                "if": "when a second monster joins and you can deal with one first",
+                "if": "if a second monster joins and you can deal with one first",
                 "why": "a sheep does not attack"
               },
               {
                 "spell": 1449,
                 "name": "Arcane Explosion",
-                "if": "when two or more are on you",
+                "if": "if two or more are on you",
                 "why": "it hits everything around you"
+              },
+              {
+                "text": "Use your wand",
+                "if": "if the monster is nearly dead",
+                "why": "it costs no mana, and your bar starts to refill"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               }
             ],
             "between": [
@@ -592,108 +524,36 @@
                 "if": "between fights, when the bar is low",
                 "why": "a full bar buys the next pulls"
               }
-            ]
+            ],
+            "alt": {
+              "name": "A crowd of monsters",
+              "say": "for a pack you can root with Frost Nova",
+              "loop": [
+                {
+                  "spell": 122,
+                  "name": "Frost Nova",
+                  "if": "if the pack reaches you",
+                  "why": "it freezes them while you walk away"
+                },
+                {
+                  "spell": 1449,
+                  "name": "Arcane Explosion",
+                  "if": "if the last monster is close",
+                  "why": "it hits everything around you"
+                },
+                {
+                  "spell": 116,
+                  "name": "Frostbolt",
+                  "why": "it deals with a straggler"
+                }
+              ]
+            }
           }
         },
         {
           "from": 20,
           "to": 39,
           "about": "One monster, or two, and the first dungeons.",
-          "opening": "Frostbolt, Frostbolt, Frost Nova if it reaches you, Fire Blast. Ice Armor from 30.",
-          "rows": [
-            {
-              "spell": 116,
-              "say": "Still your main button. Its cast reaches 3 seconds at rank 5, so start it while the monster is far.",
-              "need": {},
-              "name": "Frostbolt"
-            },
-            {
-              "spell": 122,
-              "say": "Freeze, step back, cast. It comes back in 25 seconds, or 21 with Improved Frost Nova.",
-              "need": {},
-              "name": "Frost Nova"
-            },
-            {
-              "spell": 120,
-              "say": "Hits everything in front of you and slows it 50% for 8 seconds, ready every 10.",
-              "need": {
-                "level": 26,
-                "when": [
-                  "pack"
-                ]
-              },
-              "name": "Cone of Cold"
-            },
-            {
-              "spell": 10,
-              "say": "Stand still and it rains ice for 8 seconds on the ground you chose. Pull a pack into it.",
-              "need": {
-                "level": 20,
-                "when": [
-                  "pack"
-                ]
-              },
-              "name": "Blizzard"
-            },
-            {
-              "spell": 2139,
-              "say": "Stops a spell and its whole school for 10 seconds. It takes 30 seconds to come back.",
-              "need": {
-                "level": 24,
-                "when": [
-                  "caster"
-                ]
-              },
-              "name": "Counterspell"
-            },
-            {
-              "spell": 1953,
-              "say": "Moves you 20 yards and frees you from stuns and roots. It takes 15 seconds to come back.",
-              "need": {
-                "level": 20
-              },
-              "name": "Blink"
-            },
-            {
-              "spell": 12051,
-              "say": "8 seconds of standing still that brings back mana much faster. It takes 8 minutes to come back, so use it once per long outing.",
-              "need": {
-                "level": 20,
-                "when": [
-                  "rest",
-                  "lowmana"
-                ]
-              },
-              "name": "Evocation"
-            },
-            {
-              "spell": 7302,
-              "say": "Replaces Frost Armor, with more armour and a slow on melee attackers.",
-              "need": {
-                "level": 30
-              },
-              "name": "Ice Armor"
-            },
-            {
-              "spell": 1463,
-              "say": "Absorbs damage by draining mana instead. Press it when you would die before you ran dry.",
-              "need": {
-                "level": 20
-              },
-              "name": "Mana Shield"
-            },
-            {
-              "spell": 11958,
-              "say": "Safe from everything for 10 seconds, but you cannot act, and it takes 5 minutes to come back.",
-              "need": {
-                "when": [
-                  "wrong"
-                ]
-              },
-              "name": "Ice Block",
-              "talentSpell": 11958
-            }
-          ],
           "plan": {
             "opening": [
               {
@@ -706,56 +566,78 @@
                 "spell": 7302,
                 "name": "Ice Armor",
                 "if": "from level 30, instead of Frost Armor",
-                "why": "more armour and a slow on melee attackers"
+                "why": "more armour, and a slow on melee attackers"
+              },
+              {
+                "spell": 6117,
+                "name": "Mage Armor",
+                "if": "from level 34, when mana is what ends your day",
+                "why": "it keeps part of your mana regeneration while you cast"
               },
               {
                 "spell": 1459,
                 "name": "Arcane Intellect",
                 "if": "once, before the first pull",
-                "why": "more Intellect means more mana to spend"
+                "why": "more Intellect means more mana to cast with"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "from as far as you can reach",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "again, before it arrives",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               }
             ],
             "loop": [
               {
                 "spell": 2139,
                 "name": "Counterspell",
-                "if": "when a monster is casting a spell",
-                "why": "it stops the whole school for a while"
+                "if": "if a monster is casting a spell",
+                "why": "it stops that school of spells for a while"
               },
               {
                 "spell": 122,
                 "name": "Frost Nova",
-                "if": "when the monster reaches you",
-                "why": "it freezes it, and the point is the distance"
-              },
-              {
-                "spell": 120,
-                "name": "Cone of Cold",
-                "if": "when two or more are on you",
-                "why": "it hits everything in front of you and slows it"
-              },
-              {
-                "spell": 10,
-                "name": "Blizzard",
-                "if": "when a pack is coming and you can stand still",
-                "why": "it rains ice on the ground you chose"
+                "if": "if the monster reaches you",
+                "why": "it freezes it, and you step back to cast"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
-                "why": "it is your main damage and it slows the monster"
+                "if": "if the monster is frozen",
+                "why": "spells crit far more often against a frozen monster",
+                "need": {
+                  "talents": [
+                    11170
+                  ]
+                }
+              },
+              {
+                "spell": 120,
+                "name": "Cone of Cold",
+                "if": "if three or more monsters are on you",
+                "why": "it costs a lot of mana, so only for a crowd"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "if a second monster joins and you can deal with one first",
+                "why": "a sheep does not attack"
+              },
+              {
+                "text": "Use your wand",
+                "if": "if the monster is nearly dead",
+                "why": "it costs no mana, and your bar starts to refill"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it is your main bolt, and it slows the monster"
               }
             ],
             "between": [
@@ -804,8 +686,9 @@
                   "talentSpell": 11958
                 },
                 {
-                  "spell": 1463,
-                  "name": "Mana Shield"
+                  "spell": 12472,
+                  "name": "Cold Snap",
+                  "talentSpell": 12472
                 },
                 {
                   "spell": 1953,
@@ -813,6 +696,48 @@
                 }
               ],
               "say": "keep them for the fight that would otherwise kill you"
+            },
+            "alt": {
+              "name": "A crowd of monsters",
+              "say": "for a pack you can root with Frost Nova",
+              "opening": [
+                {
+                  "text": "Pull a few at a time",
+                  "if": "before the pull",
+                  "why": "you cannot freeze what you cannot control"
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 122,
+                  "name": "Frost Nova",
+                  "if": "if the pack reaches you",
+                  "why": "it freezes them while you walk away"
+                },
+                {
+                  "spell": 10,
+                  "name": "Blizzard",
+                  "if": "if the pack is rooted and you can stand still",
+                  "why": "it rains ice on the ground you chose"
+                },
+                {
+                  "spell": 120,
+                  "name": "Cone of Cold",
+                  "if": "if they are close enough to all be hit",
+                  "why": "it hits everything in front of you and slows it"
+                },
+                {
+                  "spell": 1449,
+                  "name": "Arcane Explosion",
+                  "if": "if the last monster is close",
+                  "why": "it hits everything around you"
+                },
+                {
+                  "spell": 116,
+                  "name": "Frostbolt",
+                  "why": "it deals with a straggler"
+                }
+              ]
             }
           }
         },
@@ -820,100 +745,19 @@
           "from": 40,
           "to": 60,
           "about": "Dungeons, hard monsters and the first raid.",
-          "opening": "Ice Barrier, Frostbolt from 30 yards, Frost Nova, Cone of Cold.",
-          "rows": [
-            {
-              "spell": 11426,
-              "say": "A shield on you that absorbs damage, and spells are not interrupted while it holds. It takes 30 seconds to come back.",
-              "need": {},
-              "name": "Ice Barrier",
-              "talentSpell": 11426
-            },
-            {
-              "spell": 116,
-              "say": "Your main button. Each hit adds a Winter's Chill stack, up to 5, and each stack raises your Frost critical chance on that monster by 2%.",
-              "need": {},
-              "name": "Frostbolt"
-            },
-            {
-              "spell": 122,
-              "say": "Freeze, step back, cast. Shatter raises your critical chance against a frozen monster by 50%.",
-              "need": {},
-              "name": "Frost Nova"
-            },
-            {
-              "spell": 120,
-              "say": "Hits harder with Improved Cone of Cold and slows 50% for 8 seconds.",
-              "need": {},
-              "name": "Cone of Cold"
-            },
-            {
-              "spell": 10,
-              "say": "8 seconds of ice on the ground. Use it with a Frost Nova between you and them.",
-              "need": {
-                "when": [
-                  "pack"
-                ]
-              },
-              "name": "Blizzard"
-            },
-            {
-              "spell": 2139,
-              "say": "Stops the school for 10 seconds, ready every 30.",
-              "need": {
-                "when": [
-                  "caster"
-                ]
-              },
-              "name": "Counterspell"
-            },
-            {
-              "spell": 6117,
-              "say": "Keeps 30% of mana regeneration going while you cast. Use it when mana, not health, runs out first.",
-              "need": {
-                "level": 34,
-                "when": [
-                  "lowmana"
-                ]
-              },
-              "name": "Mage Armor"
-            },
-            {
-              "spell": 11958,
-              "say": "Safe for 10 seconds, but you cannot act, and it takes 5 minutes to come back.",
-              "need": {
-                "when": [
-                  "wrong"
-                ]
-              },
-              "name": "Ice Block",
-              "talentSpell": 11958
-            },
-            {
-              "spell": 12051,
-              "say": "8 seconds of standing still for a lot of mana back. 8 minutes to come back.",
-              "need": {
-                "when": [
-                  "rest",
-                  "lowmana"
-                ]
-              },
-              "name": "Evocation"
-            }
-          ],
           "plan": {
             "opening": [
               {
                 "spell": 7302,
                 "name": "Ice Armor",
                 "if": "once, before the pull",
-                "why": "more armour and a slow on melee attackers"
+                "why": "more armour, and a slow on melee attackers"
               },
               {
                 "spell": 1459,
                 "name": "Arcane Intellect",
                 "if": "once, before the first pull",
-                "why": "more Intellect means more mana to spend"
+                "why": "more Intellect means more mana to cast with"
               },
               {
                 "spell": 11426,
@@ -926,45 +770,55 @@
                 "spell": 116,
                 "name": "Frostbolt",
                 "if": "from as far as you can reach",
-                "why": "it is your main damage and it slows the monster"
+                "why": "it is your main bolt, and it slows the monster"
               }
             ],
             "loop": [
               {
                 "spell": 2139,
                 "name": "Counterspell",
-                "if": "when a monster is casting a spell",
-                "why": "it stops the whole school for a while"
+                "if": "if a monster is casting a spell",
+                "why": "it stops that school of spells for a while"
               },
               {
                 "spell": 11426,
                 "name": "Ice Barrier",
-                "if": "when it has gone and the monster is hitting you",
+                "if": "if it has gone and the monster is hitting you",
                 "why": "it shields you, and spells are not interrupted while it holds",
                 "talentSpell": 11426
               },
               {
                 "spell": 122,
                 "name": "Frost Nova",
-                "if": "when the monster reaches you",
-                "why": "it freezes it, and the point is the distance"
-              },
-              {
-                "spell": 120,
-                "name": "Cone of Cold",
-                "if": "when two or more are on you",
-                "why": "it hits everything in front of you and slows it"
-              },
-              {
-                "spell": 10,
-                "name": "Blizzard",
-                "if": "when a pack is coming and you can stand still",
-                "why": "it rains ice on the ground you chose"
+                "if": "if the monster reaches you",
+                "why": "it freezes it, and you step back to cast"
               },
               {
                 "spell": 116,
                 "name": "Frostbolt",
-                "why": "it is your main damage and it slows the monster"
+                "if": "if the monster is frozen",
+                "why": "spells crit far more often against a frozen monster",
+                "need": {
+                  "talents": [
+                    11170
+                  ]
+                }
+              },
+              {
+                "spell": 120,
+                "name": "Cone of Cold",
+                "if": "if three or more monsters are on you",
+                "why": "it costs a lot of mana, so only for a crowd"
+              },
+              {
+                "text": "Use your wand",
+                "if": "if the monster is nearly dead",
+                "why": "it costs no mana, and your bar starts to refill"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it is your main bolt, and it slows the monster"
               }
             ],
             "between": [
@@ -972,7 +826,7 @@
                 "spell": 7302,
                 "name": "Ice Armor",
                 "if": "when it has run out",
-                "why": "more armour and a slow on melee attackers"
+                "why": "more armour, and a slow on melee attackers"
               },
               {
                 "spell": 5504,
@@ -991,8 +845,8 @@
               {
                 "spell": 6117,
                 "name": "Mage Armor",
-                "if": "when mana, not health, runs out first",
-                "why": "it keeps more of your mana regeneration while you cast"
+                "if": "if mana, not health, runs out first",
+                "why": "it keeps part of your mana regeneration while you cast"
               },
               {
                 "text": "Use your wand",
@@ -1019,13 +873,116 @@
                   "talentSpell": 11958
                 },
                 {
+                  "spell": 12472,
+                  "name": "Cold Snap",
+                  "talentSpell": 12472
+                },
+                {
                   "spell": 12051,
                   "name": "Evocation"
                 }
               ],
-              "say": "Ice Block for the fight that would kill you, Evocation for an empty bar"
+              "say": "Ice Block for the worst fight, Cold Snap for a second one"
+            },
+            "alt": {
+              "name": "A crowd of monsters",
+              "say": "for a pack you can root with Frost Nova",
+              "opening": [
+                {
+                  "spell": 11426,
+                  "name": "Ice Barrier",
+                  "if": "before the pull",
+                  "why": "it shields you while the pack closes in",
+                  "talentSpell": 11426
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 122,
+                  "name": "Frost Nova",
+                  "if": "if the pack reaches you",
+                  "why": "it freezes them while you walk away"
+                },
+                {
+                  "spell": 10,
+                  "name": "Blizzard",
+                  "if": "if the pack is rooted and you can stand still",
+                  "why": "it rains ice on the ground you chose"
+                },
+                {
+                  "spell": 120,
+                  "name": "Cone of Cold",
+                  "if": "if they are close enough to all be hit",
+                  "why": "it hits everything in front of you and slows it"
+                },
+                {
+                  "spell": 1449,
+                  "name": "Arcane Explosion",
+                  "if": "if the last monster is close",
+                  "why": "it hits everything around you"
+                },
+                {
+                  "spell": 116,
+                  "name": "Frostbolt",
+                  "why": "it deals with a straggler"
+                }
+              ]
             }
           }
+        }
+      ],
+      "line": "Slows and freezes so the monster hits you less, and kills with Frostbolt. The mage that survives being alone.",
+      "hardcore": [
+        "Cast from as far as you can reach, and keep moving back. One monster at a time.",
+        "Frost Nova when a monster reaches you, then Blink or walk away before you bandage.",
+        "Polymorph the second monster at once, and let a runner go.",
+        "Ice Block is a last resort: decide your next move before you press it."
+      ],
+      "sources": [
+        {
+          "label": "Icy Veins, single-target Frost Mage levelling talents (Farmerfarms, updated 2026-07-18)",
+          "url": "https://www.icy-veins.com/wow-classic/single-target-frost-mage-leveling-talent-build-from-1-to-60",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, AoE grinding Frost Mage (same author and date)",
+          "url": "https://www.icy-veins.com/wow-classic/aoe-grinding-frost-mage-leveling-talent-build-from-1-to-60",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Wowhead, Frost Mage levelling tips (Woah, updated 2024-11-18)",
+          "url": "https://www.wowhead.com/classic/guide/classes/mage/frost/leveling-tips",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Wowhead, Hardcore Mage (durtyrandy24, updated 2024-11-20)",
+          "url": "https://www.wowhead.com/classic/guide/classes/mage/hardcore-leveling-tips",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard forum, Frost single target against AoE (2024-11-28)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/frost-mage-single-target-vs-aoe-for-leveling/2019340",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "NoobToBoss, Frost Mage levelling",
+          "url": "https://noobtoboss.com/wow-classic-mage-frost-leveling-guide/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Mage levelling",
+          "url": "https://www.warcrafttavern.com/wow-classic/guides/mage-leveling-guide/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Hardcore Mage overview (Abide, 2023-06-09)",
+          "url": "https://www.icy-veins.com/wow-classic/hardcore-mage-class-overview",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Hardcore Helper, Mage (updated 2026-07-27)",
+          "url": "https://www.hardcorehelper.com/guides/mage-wow-classic-hardcore",
+          "read": "2026-11-04"
         }
       ]
     },

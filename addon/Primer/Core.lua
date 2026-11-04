@@ -12,7 +12,8 @@
 --   PrimerChar (SavedVariablesPerCharacter), whose guide: guid
 --     groups[n]  what the character chose for talent group n (Era has one,
 --                Forever two), each none: the default. role (damage, tank,
---                heal), pickedBuild (an id of D.builds), freestyle (their own
+--                heal), pickedBuild (an id of D.builds), roads (the road of a
+--                build the player chose: roads[build] = n), freestyle (their own
 --                way), notYet (the level the question was put off at),
 --                driftSeen (the drift the player dismissed)
 --   PrimerSettings (SavedVariables): each character's settings, the kit's

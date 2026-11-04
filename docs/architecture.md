@@ -79,6 +79,15 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   only looks (`view.look`): the page says so loudly with Use this build and
   Back, and nothing is chosen until Use. A refresh from an event keeps the
   scroll and the talent in view; a tab or a click starts at the top.
+- **The Overview tab** (4 November 2026, the first tab): the class in
+  general in the narrator's voice, from the class's `overview` in the data, the
+  builds in a line each with their roles, and what to do at level 10 (`drawOverview`).
+  A click on a build there looks at it on the Role tab. **Roads** (`G.roads`,
+  `G.road`): a build may have several orders for its points; the Talents tab names
+  them, says which the points follow and lets the player choose (`choice.roads`),
+  and none is a drift. A stage's plan may carry `alt`, another way to play it
+  (a crowd, against one monster), under its own heading. `build.hardcore` lines
+  show only on a Hardcore realm (`G.HARDCORE`).
 - **The rotation plan** (`drawPlan`, `G.stepState`): a stage's `plan` shown as
   Opening, Loop, Between fights, Low mana and Big cooldowns (`docs/data.md`).
 - **Window.lua**: `K.gameWindow` ("PrimerFrame") or `K.dialog`, the kit's book

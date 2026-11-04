@@ -80,3 +80,15 @@ is most of your damage." is the model. The loop's last line has no condition:
 it is what you do when nothing above applies. A line never states a figure the
 game's tables cannot back, and never changes what the spell is for to make a
 joke. The voice is in the choice of words, never in a changed instruction.
+
+## Where the voice is heard in the window (4 November 2026)
+
+After the first game test ("the voice is not really present"): the voice is the
+narrator's register and the class card's words in every line a player reads,
+never at the cost of the instruction. It is in the Overview (`class.overview`),
+in each plan line (the card's vocabulary: a paladin line says what is on you
+before what to press, a mage line says when to stand still and uses cast, bolt,
+range, slow, freeze, sheep), in the build's one dry remark under the loop, in the
+level-10 prompt ("Pick what you will do most. You can change it later, and a
+respec costs gold."), and in the notes (drift, open builds, looking). The
+window's own labels (tab names, headings, the header line) stay plain.

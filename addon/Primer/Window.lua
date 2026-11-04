@@ -13,7 +13,7 @@ local K, L = ns.kit, ns.kit.L
 local T = K.T
 local G = ns.rules
 
-local TABS = { play = 1, talents = 2, role = 3 }
+local TABS = { overview = 1, play = 2, talents = 3, role = 4 }
 ns.TAB = TABS
 
 local frame, left, list, page
@@ -209,7 +209,7 @@ local function placeStep(snap, step, number, last)
   page:place(r, h)
 end
 
-local function drawPlan(snap, plan)
+local function drawPlan(snap, plan, dry)
   used = 0
   local function block(heading, hint, lines)
     if not (lines and #lines > 0) then return end
@@ -220,9 +220,23 @@ local function drawPlan(snap, plan)
     end
   end
   block(L["Opening"], nil, plan.opening)
-  block(L["Loop"], L["Read from the top and press the first line that applies, then start again."], plan.loop)
+  block(
+    L["Loop"],
+    L["Read from the top and press the first line that applies, then start again."]
+      .. (dry and (" " .. ns.say(dry)) or ""),
+    plan.loop
+  )
   block(L["Between fights"], nil, plan.between)
   block(L["Low mana"], nil, plan.low)
+  if plan.alt then
+    -- (another way to play this stage, with its own lists)
+    page:section(ns.say(plan.alt.name))
+    page:paragraph(capital(ns.say(plan.alt.say)) .. ".", T.soft)
+    block(L["Opening"], nil, plan.alt.opening)
+    block(L["Loop"], nil, plan.alt.loop)
+    block(L["Between fights"], nil, plan.alt.between)
+    block(L["Low mana"], nil, plan.alt.low)
+  end
   if plan.big and #plan.big.spells > 0 then
     page:section(L["Big cooldowns"])
     for _, step in ipairs(plan.big.spells) do
@@ -347,6 +361,12 @@ local function notes(snap, class, r, choice, tab)
   if tab == TABS.play and asking(snap, choice, class) then
     page:section(L["You have talent points to spend."])
     page:paragraph(L["What do you want to play?"], T.text)
+    -- (the narrator: what to weigh, and what a change costs where the cost is known)
+    page:paragraph(
+      ns.forever and L["Pick what you will do most. You can change it later."]
+        or L["Pick what you will do most. You can change it later, and a respec costs gold."],
+      T.soft
+    )
     local buttons = {}
     for _, role in ipairs(G.roles(class)) do
       table.insert(buttons, {
@@ -446,7 +466,7 @@ local function notes(snap, class, r, choice, tab)
   if drift.kind == "build" then
     local from, to = G.name(snap, ns.data.builds[drift.from]), G.name(snap, ns.data.builds[drift.to])
     page:paragraph(
-      L["Your points can no longer reach the build you chose. This page stays on it."]
+      L["Your points can no longer reach the build you chose. This page stays on it until you say otherwise."]
         .. " "
         .. L["These points follow %s more than the %s build you picked."]:format(to, from),
       T.soft
@@ -514,7 +534,7 @@ local function drawPlay(snap, class, r, choice)
   if stage.about then page:text({ ns.say(stage.about) }) end
   local shown, unlearned = {}, 0
   if stage.plan then
-    drawPlan(snap, stage.plan)
+    drawPlan(snap, stage.plan, b.dry)
   else
     if stage.opening then
       page:section(L["Opening"])
@@ -525,7 +545,15 @@ local function drawPlay(snap, class, r, choice)
     for i, row in ipairs(shown) do
       place(i, row)
     end
-    if #shown == 0 then page:paragraph(L["Nothing in your book for this stage yet."], T.soft) end
+    if #shown == 0 then
+      page:paragraph(L["Nothing in your book fits this stage yet. Your trainer has more."], T.soft)
+    end
+  end
+  if b.hardcore and snap.season == G.HARDCORE then
+    page:section(L["Hardcore"])
+    for _, key in ipairs(b.hardcore) do
+      page:paragraph(ns.say(key), T.text)
+    end
   end
   if unlearned > 0 then
     page:paragraph(
@@ -565,7 +593,7 @@ end
 local function drawTalents(snap, class, r, choice)
   local role, id = r.role, r.build
   local b = ns.data.builds[id]
-  local steps, nextStep = G.steps(b, snap)
+  local steps, nextStep = G.steps(b, snap, r.road)
   local picked = math.min(view.step or nextStep or #steps, #steps)
   view.step = picked -- (the talent in view stays: a point spent updates it, it does not move on)
   list:begin()
@@ -595,6 +623,22 @@ local function drawTalents(snap, class, r, choice)
     page:buttons({ { L["Use the guide's picks again"], choose(choice, "freestyle", nil) } })
     page:finish(view.keep)
     return
+  end
+  local roads = G.roads(b)
+  if #roads > 1 then
+    -- (another order of the same points for the same build: neither is a drift)
+    list:gap(6)
+    list:add("section", L["Road"])
+    for i, road in ipairs(roads) do
+      local row = list:add("row", ns.say(road.name), i == r.road and L["yours"] or nil)
+      row:SetScript("OnClick", function()
+        choice.roads = choice.roads or {}
+        choice.roads[id] = i
+        view.step = nil
+        ns.refresh()
+      end)
+      if i == r.road then list:pick(row) end
+    end
   end
   list:gap(6)
   list:add("section", L["Talents in order"])
@@ -627,10 +671,26 @@ local function drawTalents(snap, class, r, choice)
     K.icon(icon)
   )
   notes(snap, class, r, choice, TABS.talents)
+  if #roads > 1 then
+    local names = {}
+    for i, road in ipairs(roads) do
+      names[i] = ns.say(road.name)
+    end
+    page:paragraph(
+      L["This build has more than one road for its first points, and none is wrong: %s."]:format(listNames(names)),
+      T.soft
+    )
+    if r.phase == "spent" then
+      page:paragraph(
+        r.fitBoth and L["Your points fit every road."] or L["Your points follow %s."]:format(ns.say(roads[r.fit].name)),
+        T.soft
+      )
+    end
+  end
   local unspent = G.unspent(snap)
   local summary
   if not nextStep then
-    summary = L["Every talent of this build is taken."]
+    summary = L["Every talent of this build is taken. Nothing left to decide."]
   elseif unspent > 0 then
     summary = K.plural(unspent, "You have %d talent point to spend.", "You have %d talent points to spend.")
       :format(unspent) .. " " .. L["Your next pick is %s."]:format((stepFace(steps[nextStep])))
@@ -717,6 +777,50 @@ local function drawRole(snap, class, r, choice)
   page:finish(view.keep)
 end
 
+-- ── Overview ─────────────────────────────────────────────────────────────────
+-- The class in general, in the narrator's voice: who it is, what it is good and
+-- bad at, its resource, how levelling goes, the builds in a line each and what
+-- to do at level 10 (the class's `overview` in the data; a class without one
+-- shows its page and the builds).
+local function drawOverview(snap, class)
+  local c = ns.data.classes[class]
+  list:begin()
+  list:add("section", L["Builds"])
+  for _, id in ipairs(G.builds(class)) do
+    local b = ns.data.builds[id]
+    local row = list:add("entry", G.name(snap, b), nil, roleName(b.role))
+    row:SetScript("OnClick", function()
+      view.look, view.step = { build = id }, nil
+      ns.open(TABS.role) -- (the Role tab is where a build is read about)
+    end)
+  end
+  list:finish()
+  page:start(snap.className, gameName(), crest(snap))
+  local ov = c.overview
+  local function part(heading, key)
+    if ov and ov[key] then
+      page:section(heading)
+      page:paragraph(ns.say(ov[key]), T.text)
+    end
+  end
+  if ov and ov.who then
+    page:text({ ns.say(ov.who) })
+  else
+    page:text({ ns.say(c.text) })
+  end
+  part(L["Good at"], "good")
+  part(L["Bad at"], "bad")
+  part(L["Your resource"], "resource")
+  part(L["Levelling"], "levelling")
+  page:section(L["Builds"])
+  for _, id in ipairs(G.builds(class)) do
+    local b = ns.data.builds[id]
+    page:row(G.name(snap, b), roleName(b.role) .. ". " .. ns.say(b.line))
+  end
+  part(L["At level 10"], "ten")
+  page:finish(view.keep)
+end
+
 -- ── drawing ──────────────────────────────────────────────────────────────────
 local waiting = false
 local refresh
@@ -751,12 +855,13 @@ end
 -- the facts, the ticks and the notes in place. A click on another build or role
 -- only LOOKS (view.look): the page is that build's, says so, and the player's
 -- own stays named until they press Use.
-local function model(snap, class, r)
+local function model(snap, class, r, choice)
   -- (one for each talent group: looking at the other group and back never works the first one out again)
   view.subjects = view.subjects or {}
   local sub = view.subjects[snap.group]
   if not (sub and ns.data.builds[sub.build] and ns.data.builds[sub.build].class == class) then
     sub = { role = r.role, build = r.build, mode = r.mode }
+    sub.road, sub.roadBoth = G.road(snap, ns.data.builds[r.build])
     view.subjects[snap.group] = sub
   end
   r.role, r.build, r.mode = sub.role, sub.build, sub.mode
@@ -770,6 +875,17 @@ local function model(snap, class, r)
   else
     view.look = nil
   end
+  -- the road of the build shown (another order of the same points): the player's choice for it, else the one the points follow
+  local roads = G.roads(ns.data.builds[r.build])
+  local chosen = choice.roads and choice.roads[r.build]
+  if r.build == r.mine then
+    r.road, r.roadBoth = sub.road, sub.roadBoth
+  else
+    r.road, r.roadBoth = G.road(snap, ns.data.builds[r.build])
+  end
+  if chosen and roads[chosen] then r.road = chosen end
+  -- (what the points follow is worked out fresh each draw, apart from the road the page lists)
+  r.fit, r.fitBoth = G.road(snap, ns.data.builds[r.build])
   return r
 end
 
@@ -827,13 +943,15 @@ local function draw()
     return empty(kind, snap)
   end
   local choice = ns.choice(snap.group)
-  local r = model(snap, class, G.resolve(snap, class, choice))
+  local r = model(snap, class, G.resolve(snap, class, choice), choice)
   frame.state:SetText(header(snap, r))
   -- (the minimap button glows while the level-10 question waits to be asked)
   if snap.group == snap.active then ns.setGlow(asking(snap, choice, class)) end
   ns.draws = (ns.draws or 0) + 1 -- (for the tests: one draw for a burst of events)
   local n = frame.selectedTab
-  if n == TABS.talents then
+  if n == TABS.overview then
+    drawOverview(snap, class)
+  elseif n == TABS.talents then
     drawTalents(snap, class, r, choice)
   elseif n == TABS.role then
     drawRole(snap, class, r, choice)
@@ -937,7 +1055,7 @@ local function build()
     view.subjects, view.look = nil, nil -- (what the page is for is worked out again when it is opened)
     show(frame.selectedTab)
   end)
-  K.tabs(frame, { L["Play"], L["Talents"], L["Role"] }, show)
+  K.tabs(frame, { L["Overview"], L["Play"], L["Talents"], L["Role"] }, show)
 end
 
 function ns.window()
