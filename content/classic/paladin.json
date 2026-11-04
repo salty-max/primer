@@ -812,7 +812,7 @@
               ],
               "talent": 20257,
               "rank": 5,
-              "why": "More Intellect, so more mana. This road starts with the mana."
+              "why": "More Intellect is a bigger mana pool, and a paladin who runs dry stops fighting."
             },
             {
               "points": [
@@ -825,7 +825,7 @@
               ],
               "talent": 20205,
               "rank": 5,
-              "why": "A hit is less likely to spoil a heal, which is why this road is the safe one."
+              "why": "Your heals are less likely to be spoiled when something hits you mid-cast. You will heal yourself in the middle of fights, so this keeps them landing."
             },
             {
               "points": [
@@ -838,7 +838,7 @@
               ],
               "talent": 20042,
               "rank": 5,
-              "why": "Blessing of Might gives more attack power, and you wear it every fight."
+              "why": "Blessing of Might gives more attack power, and you wear it every fight, so every swing gets the bonus."
             },
             {
               "points": [
@@ -851,7 +851,7 @@
               ],
               "talent": 20060,
               "rank": 5,
-              "why": "More of the attacks on you are parried."
+              "why": "More of the blows aimed at you are parried and never land, which is a cheap way to take less damage."
             },
             {
               "points": [
@@ -864,7 +864,7 @@
               ],
               "talent": 20375,
               "rank": 1,
-              "why": "Seal of Command arrives here, ten levels after the other road."
+              "why": "Your Seal of Command at last: its first rank is a talent, not something a trainer sells. Each swing may add Holy damage, and a slow weapon adds the most."
             },
             {
               "points": [
@@ -877,7 +877,7 @@
               ],
               "talent": 26022,
               "rank": 2,
-              "why": "You run faster, and the points open the next row."
+              "why": "You run faster, which a levelling paladin uses all day. The points also open the row of talents below."
             },
             {
               "points": [
@@ -890,7 +890,7 @@
               ],
               "talent": 20117,
               "rank": 2,
-              "why": "More critical hits."
+              "why": "More chance to land a critical hit, which is where a two-hander's big numbers come from."
             },
             {
               "points": [
@@ -903,7 +903,7 @@
               ],
               "talent": 20091,
               "rank": 2,
-              "why": "The aura that hurts monsters hitting you hurts them more."
+              "why": "The aura that hurts monsters hitting you hurts them more. They hit you all fight, so it pays back each time."
             },
             {
               "points": [
@@ -916,7 +916,7 @@
               ],
               "talent": 20117,
               "rank": 5,
-              "why": "The rest of Conviction, which Vengeance needs."
+              "why": "The rest of Conviction: more critical hits, and Vengeance further down will not open without all five."
             },
             {
               "points": [
@@ -929,7 +929,7 @@
               ],
               "talent": 20111,
               "rank": 3,
-              "why": "More damage with a two-handed weapon."
+              "why": "More damage with a two-handed weapon, which is the weapon this build is for."
             },
             {
               "points": [
@@ -942,7 +942,7 @@
               ],
               "talent": 20101,
               "rank": 2,
-              "why": "A small mana discount, two of its five points."
+              "why": "Judgement and your seals cost less mana, so you press them more often before you need to drink."
             },
             {
               "points": [
@@ -955,7 +955,7 @@
               ],
               "talent": 20049,
               "rank": 5,
-              "why": "After a critical hit you deal more Physical and Holy damage for a few seconds."
+              "why": "After a critical hit you deal more Physical and Holy damage for a few seconds. With Conviction behind it, it comes up often."
             },
             {
               "points": [
@@ -968,7 +968,7 @@
               ],
               "talent": 20127,
               "rank": 5,
-              "why": "You block more after being critically hit. The armour talents come last on this road."
+              "why": "It does nothing without a shield, but its five points open Precision on the next row."
             },
             {
               "points": [
@@ -981,7 +981,7 @@
               ],
               "talent": 20189,
               "rank": 3,
-              "why": "More chance to hit with melee weapons."
+              "why": "More chance to hit with melee weapons, so fewer swings are wasted."
             },
             {
               "points": [
@@ -994,7 +994,7 @@
               ],
               "talent": 20174,
               "rank": 2,
-              "why": "Blessing of Protection comes back sooner, and Blessing of Freedom lasts longer."
+              "why": "Blessing of Protection comes back sooner and Blessing of Freedom lasts longer: two escapes you will want in a hard pull."
             },
             {
               "points": [
@@ -1007,7 +1007,7 @@
               ],
               "talent": 20066,
               "rank": 1,
-              "why": "The last point is yours to place. Repentance takes the tree's deepest talent."
+              "why": "The last point goes to Repentance, the tree's deepest talent: it puts a humanoid out of the fight for up to six seconds, until something hits it."
             }
           ],
           "id": "holy-first"

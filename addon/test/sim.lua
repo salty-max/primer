@@ -18,6 +18,7 @@ local function said(text)
   return false
 end
 local D = ns.data
+local K_BOOK_H = ns.kit.BOOK_H
 
 -- ── the guide's rules ────────────────────────────────────────────────────────
 check(D.game == (G.FOREVER and "forever" or "classic"), "this game's rules")
@@ -752,6 +753,7 @@ if not G.FOREVER then
   check(windows[1] and windows[2] and windows[3], "all three trees")
   check(states.taken > 0 and states.next > 0 and states.road > 0, "taken cells lit and the next pick ringed")
   check(ns.TREES_W <= 720, "three trees fit the whole width of the book (" .. ns.TREES_W .. " pixels)")
+  check(ns.TREE_H + ns.FOOTER_H + 16 <= K_BOOK_H - 58 - 8 - 12 - 8, "the trees and the footer fit the page with a gap")
   local levelTab = (function()
     ns.open(TAB.level)
     local text = ns.screen.pick.text
@@ -759,7 +761,7 @@ if not G.FOREVER then
     return text
   end)()
   check(
-    ns.screen.pick.text == levelTab and ns.screen.pick.text:find("^Next pick: "),
+    levelTab == "Next pick: " .. ns.screen.pick.text and ns.screen.pick.caption == "Next pick",
     "the Talents tab says the next pick as the Level tab does: " .. ns.screen.pick.text
   )
   check(ns.talentsTab.pick.text == ns.screen.pick.text, "and shows it")
@@ -814,7 +816,10 @@ if not G.FOREVER then
   -- the stepper: forward is the next level something arrives, back returns, the ends hold
   press(ns.talentsTab.next)
   check(ns.screen.looking and ns.screen.stepper == 25 and ns.screen.back, "forward looks at the next level")
-  check(ns.talentsTab.level.text == "Looking at level 25.", "and says so in the same place")
+  check(
+    ns.screen.pick.caption == "Looking at level 25." and ns.talentsTab.level.text == "Level 25",
+    "and says so in the block, over the pick"
+  )
   press(ns.talentsTab.prev)
   check(not ns.screen.looking and ns.screen.stepper == 24, "back steps back to the character's own")
   press(ns.talentsTab.prev)
@@ -836,7 +841,7 @@ if not G.FOREVER then
   sc = ns.screen
   check(sc.looking and sc.stepper == 38 and sc.back, "looking at level 38, said with the way back")
   check(
-    sc.pick.text:find("^Pick: ") and ns.talentsTab.why.text == sc.pick.why and sc.pick.why,
+    sc.pick.caption == "Looking at level 38." and ns.talentsTab.why.text == sc.pick.why and sc.pick.why,
     "the pick and its reason follow the level looked at"
   )
   local taken38 = 0
@@ -1143,6 +1148,10 @@ for _, b in pairs(ns.data.builds) do
       check(
         step.why and ns.say(step.why) ~= step.why and ns.say(step.why) ~= "",
         b.key .. " road " .. road .. " pick " .. i .. " has its own reason"
+      )
+      check(
+        step.why and not ns.say(step.why):lower():find("%f[%a]road%f[%A]") and #ns.say(step.why) <= 170,
+        b.key .. " road " .. road .. " pick " .. i .. ": a reason about the talent, short"
       )
     end
   end

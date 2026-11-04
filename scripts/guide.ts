@@ -51,6 +51,7 @@ const STAMP = process.argv.includes("--stamp") ? process.argv.slice(process.argv
 const LOCK_FILE = process.env.PRIMER_LOCK ?? join(ROOT, "facts.lock.json"); // (the test points it at a copy)
 const BUDGET_LINE = 56; // a plan row's name and condition together, in characters (one line of the window)
 const BUDGET_WHY = 60; // a reason, printed under its step
+const BUDGET_PICK_WHY = 170; // a pick's reason: three lines of the Talents tab's card
 const BUDGET_OPENING = 5; // a stage's opening, a numbered step each with its reason under it
 const BUDGET_LOOP = 6; // a stage's loop, a numbered step each with its reason under it: the rest of the loop goes to `rarely`
 type Game = "classic" | "forever";
@@ -269,6 +270,11 @@ function checkBuild(b: Build, f: Facts) {
     steps.forEach((s, i) => {
       const where = `${at} ${label} ${i + 1}`;
       const n = s.points[1] - s.points[0] + 1;
+      // every pick has a reason of its own, what this talent does for this build: never empty, never about "this road",
+      // and short enough for the three lines the Talents tab gives it
+      if (!s.why?.trim()) bad(`${where}: a pick has its own reason`);
+      else if (/\broad\b/i.test(s.why)) bad(`${where}: the reason is about the road, not what the talent does ("${s.why}")`);
+      else if (s.why.length > BUDGET_PICK_WHY) bad(`${where}: the reason is over ${BUDGET_PICK_WHY} characters`);
       if (s.points[0] !== point + 1) bad(`${where}: starts at point ${s.points[0]}, the one after ${point}`);
       point = s.points[1];
       if (s.level[0] !== s.points[0] + 9 || s.level[1] !== s.points[1] + 9) bad(`${where}: point N is taken at level N + 9 (points ${s.points.join("-")}, levels ${s.level.join("-")})`);

@@ -247,3 +247,5 @@ A step may be a line of text alone where one line stands for several spells (the
 A stage still written as rows (the older form: Warrior, and the stages of other builds not yet re-authored as a plan) is drawn as a loop with its reasons under it but is not held to the step budget or the 56 characters: it is exempt until its pass (M-C), and the sim says so (`screen.legacy`).
 
 Every spell of a step or row carries `family = { ids }` when the class's book holds more than one id under its name (the game gives each rank its own id and may report only the highest learned): the window counts the spell known when any of them is in the book (`Reader.known`). Season of Discovery runes are left out.
+
+Every step of a talent path (a build's `path` and each of its `roads`) has a `why` of its own: what this talent does for this build, one or two sentences in the narrator's voice, at most 170 characters (three lines of the Talents tab's card), never empty and never about "this road". `scripts/guide.ts` fails on any that is, and the sim reads every road.

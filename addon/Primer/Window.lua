@@ -22,6 +22,7 @@ ns.TAB = TAB
 -- One idea a screen, held in steps: a page has a pick, an opening of at most 5 steps and a loop of at most 6, each
 -- with its reason printed under it (the check holds the content to it, the lowest-priority lines of a loop go to a
 -- note, `rarely`). The page scrolls when they are longer than the window; nothing is cut.
+ns.FOOTER_H = 112 -- (the Talents tab's block under the trees)
 ns.BUDGET = { opening = 5, loop = 6, spine = 40 }
 
 local book, list, page, talents
@@ -736,11 +737,7 @@ end
 -- Everything under the trees put away (a question, an error, an empty page).
 local function putAway()
   talents.tree.frame:Hide()
-  for _, w in ipairs({ talents.prev, talents.next, talents.back, talents.level }) do
-    w:Hide()
-  end
-  talents.pick:SetText("")
-  talents.why:SetText("")
+  talents.footer:Hide()
 end
 
 local function emptyTalents(kind, snap)
@@ -783,25 +780,34 @@ local function drawTalents(snap, class, r, choice)
     if shown < G.FIRST_POINT_LEVEL then
       text = L["Talents start at level 10"]
     elseif pick then
-      text = (looking and L["Pick: %s, rank %d of %d"] or L["Next pick: %s, rank %d of %d"]):format(
-        pickName(pick),
-        pick.number,
-        pick.of
-      )
+      text = L["%s, rank %d of %d"]:format(pickName(pick), pick.number, pick.of)
     elseif not looking then
       text = L["Every point of this road is spent"]
     end
   end
   -- (its own reason, in the dimmer body text: the road's step the pick belongs to)
-  local why
+  local why, icon
   if pick then
     local key = pick.step.step and pick.step.step.why or pick.step.why
     why = key and ns.stop(capital(ns.say(key))) or nil
+    icon = pick.info and pick.info.icon or select(2, ns.reader.spell(pick.spell))
   end
-  talents.pick:SetText(text)
-  talents.why:SetText(why or "")
-  screen.pick = { text = text, why = why }
-  -- the stepper: back and forward through the levels the Level tab lists, looking and nothing else
+  local F = talents.footer
+  F:Show()
+  -- (the small caption over the pick: what it is, or that it is looked at; the line: the talent and its rank)
+  local caption = looking and L["Looking at level %d."]:format(shown) or (pick and L["Next pick"] or "")
+  F.caption:SetTextColor(unpack(looking and T.gold or T.soft))
+  F.caption:SetText(caption)
+  F.line:SetText(text)
+  F.why:SetText(why or "")
+  F.slot:SetShown(pick and true or false)
+  if pick then
+    F.slot.spell = pick.spell
+    F.slot.talent = ns.data.talents[pick.spell] and ns.data.talents[pick.spell].id
+    F.slot.group = snap.group
+    K.setSlot(F.slot, icon or K.QUESTION)
+  end
+  screen.pick = { text = text, why = why, caption = caption }
   -- (every level the road has a point at, from the first to the last, the character's own among them: back to see
   -- why a talent was taken, forward to see where the road goes)
   local levels = {}
@@ -822,17 +828,14 @@ local function drawTalents(snap, class, r, choice)
   talents.prev.click, talents.next.click = before and go(before), after and go(after)
   talents.prev:SetEnabled(before ~= nil)
   talents.next:SetEnabled(after ~= nil)
-  for _, w in ipairs({ talents.prev, talents.next, talents.level }) do
-    w:Show()
-  end
-  talents.level:SetTextColor(unpack(looking and T.gold or T.text))
-  talents.level:SetText(looking and L["Looking at level %d."]:format(shown) or L["Level %d"]:format(own))
-  talents.back:SetShown(looking)
+  F.level:SetTextColor(unpack(looking and T.gold or T.text))
+  F.level:SetText(L["Level %d"]:format(shown))
+  F.back:SetShown(looking)
   screen.back = looking and function()
     view.looking = nil
     ns.page()
   end or nil
-  talents.back.click = screen.back
+  F.back.click = screen.back
   screen.looking, screen.stepper, screen.levels = looking, shown, levels
 end
 
@@ -1011,33 +1014,64 @@ book:add(TAB.talents, {
     ns.talentsTab = t -- (for the tests)
     t.tree = ns.tree.new(t)
     t.tree.frame:SetPoint("TOPLEFT", 0, 0)
-    -- (under the trees: the stepper, centred, then the next pick and, under it, its reason in the Level tab's dim
-    -- body text, all from the bottom up)
-    t.why = K.label(t, K.BODY_FONT, 12, T.soft)
-    t.why:SetPoint("BOTTOMLEFT", t, "BOTTOMLEFT", 0, 0)
-    t.why:SetWidth(ns.TREES_W)
-    t.why:SetSpacing(2)
-    t.why:SetJustifyV("BOTTOM")
-    t.pick = K.label(t, K.BODY_FONT, 13, T.gold)
-    t.pick:SetPoint("BOTTOMLEFT", t, "BOTTOMLEFT", 0, 56)
-    t.prev = K.button(t, "<", 34)
-    t.next = K.button(t, ">", 34)
-    t.level = K.label(t, K.TITLE_FONT, 14, T.text)
-    t.level:SetWidth(220)
-    t.level:SetJustifyH("CENTER")
-    t.level:SetWordWrap(false)
-    t.back = K.button(t, L["Back to my level"], 130)
-    -- (centred under the trees: < Level 17 >, the way back at the right of the row)
-    local rowY = 84
-    t.prev:SetPoint("BOTTOMLEFT", t, "BOTTOMLEFT", (ns.TREES_W - 220) / 2 - 40, rowY)
-    t.level:SetPoint("BOTTOM", t, "BOTTOMLEFT", ns.TREES_W / 2, rowY + 6)
-    t.next:SetPoint("BOTTOMLEFT", t, "BOTTOMLEFT", (ns.TREES_W + 220) / 2 + 6, rowY)
-    t.back:SetPoint("BOTTOMRIGHT", t, "BOTTOMLEFT", ns.TREES_W, rowY)
-    for _, b in ipairs({ t.prev, t.next, t.back }) do
+    -- (under the trees, one block the width of the trees: the stepper as one group on the left, the next pick as a
+    -- small card on the right: its icon, a caption, the talent and its rank, and its own reason, wrapped)
+    local F = K.panel(t)
+    t.footer = F
+    F:SetPoint("BOTTOMLEFT", t, "BOTTOMLEFT", 0, 0)
+    F:SetSize(ns.TREES_W, ns.FOOTER_H)
+    F.prev = K.button(F, "<", 34)
+    F.prev:SetPoint("LEFT", F, "LEFT", 18, 0)
+    F.level = K.label(F, K.TITLE_FONT, 14, T.text)
+    F.level:SetPoint("LEFT", F.prev, "RIGHT", 4, 0)
+    F.level:SetWidth(120)
+    F.level:SetJustifyH("CENTER")
+    F.level:SetWordWrap(false)
+    F.next = K.button(F, ">", 34)
+    F.next:SetPoint("LEFT", F.level, "RIGHT", 4, 0)
+    local rule = F:CreateTexture(nil, "ARTWORK")
+    rule:SetColorTexture(unpack(T.rule))
+    rule:SetWidth(1)
+    rule:SetPoint("TOPLEFT", F, "TOPLEFT", 236, -14)
+    rule:SetPoint("BOTTOMLEFT", F, "BOTTOMLEFT", 236, 14)
+    F.slot = K.slot(F, 36)
+    F.slot:SetPoint("TOPLEFT", F, "TOPLEFT", 256, -16)
+    F.slot:SetScript("OnEnter", function(self)
+      if not (GameTooltip and self.spell) then return end
+      local ok, err = pcall(function()
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        -- (the game's own talent tooltip, which knows the rank, as the trees' cells; the spell's when it is refused)
+        local shown = self.talent
+          and GameTooltip.SetTalent
+          and pcall(GameTooltip.SetTalent, GameTooltip, self.talent, false, false, self.group)
+        if not shown then GameTooltip:SetSpellByID(self.spell) end
+        GameTooltip:Show()
+      end)
+      if not ok then ns.fault("tooltip", err) end
+    end)
+    F.slot:SetScript("OnLeave", function()
+      if GameTooltip then GameTooltip:Hide() end
+    end)
+    F.caption = K.label(F, K.BODY_FONT, 11, T.soft)
+    F.caption:SetPoint("TOPLEFT", F, "TOPLEFT", 304, -14)
+    F.caption:SetWidth(ns.TREES_W - 304 - 150)
+    F.caption:SetWordWrap(false)
+    F.line = K.label(F, K.TITLE_FONT, 14, T.gold)
+    F.line:SetPoint("TOPLEFT", F, "TOPLEFT", 304, -34)
+    F.line:SetWidth(ns.TREES_W - 304 - 16)
+    F.line:SetWordWrap(false)
+    F.why = K.label(F, K.BODY_FONT, 12, T.soft)
+    F.why:SetPoint("TOPLEFT", F, "TOPLEFT", 304, -56)
+    F.why:SetWidth(ns.TREES_W - 304 - 16)
+    F.why:SetSpacing(2)
+    F.back = K.button(F, L["Back to my level"], 130)
+    F.back:SetPoint("TOPRIGHT", F, "TOPRIGHT", -12, -10)
+    for _, b in ipairs({ F.prev, F.next, F.back }) do
       b:SetScript("OnClick", function(self)
         if self.click then self.click() end
       end)
     end
+    t.prev, t.next, t.level, t.pick, t.why, t.back = F.prev, F.next, F.level, F.line, F.why, F.back
     t.ask = K.label(t, K.BODY_FONT, 13, T.text)
     t.ask:SetPoint("TOPLEFT", t, "TOPLEFT", 0, 0)
     t.ask:SetWidth(ns.TREES_W)

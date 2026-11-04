@@ -1,6 +1,7 @@
 {
   " or ": "",
   "%d of %d points are on it.": "",
+  "%s, rank %d of %d": "",
   "/primer opens the guide. /primer minimap shows or hides its button on the minimap. /primer debug says what went wrong, if anything did. /primer fit says what the window cut short.": "",
   "A build you picked.": "",
   "A class guide to read out of combat.": "",
@@ -28,6 +29,7 @@
   "My own way": "",
   "Needs %s": "",
   "New: %s": "",
+  "Next pick": "",
   "Next pick: %s, rank %d of %d": "",
   "No guide for %s yet": "",
   "No guide is written for %s on %s yet. The page stays empty rather than guess.": "",
