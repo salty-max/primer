@@ -60,6 +60,14 @@ function G.roles(class)
   return out
 end
 
+-- The build the page advises for a role: the data's (class.roles, with its reason), else the role's first.
+function G.recommend(class, role)
+  local c = data().classes[class]
+  local r = c.roles and c.roles[role]
+  if r and data().builds[r.build] then return r.build end
+  return G.builds(class, role)[1]
+end
+
 -- The talent a spell (rank 1's) is, as the character has it: { rank, max,
 -- name, icon }, or nil when the game does not list it.
 function G.talent(snap, spell)
@@ -113,13 +121,13 @@ function G.role(snap, class, saved)
 end
 
 -- The build: the one the player chose, if it is the class's and the role's,
--- else the role's build with the most points, else its first.
+-- else the role's build with the most points, else the one we advise for the role.
 function G.build(snap, class, role, saved)
   local mine = G.builds(class, role)
   for _, id in ipairs(mine) do
     if id == saved then return id end
   end
-  local best, most = mine[1], 0
+  local best, most = G.recommend(class, role) or mine[1], 0
   for _, id in ipairs(mine) do
     local n = G.points(snap, data().builds[id])
     if n > most then
@@ -206,6 +214,66 @@ function G.steps(build, snap, road)
     table.insert(out, { step = step, options = options, rank = rank, state = state })
   end
   return out, nextStep
+end
+
+-- The ranks a road would have put in each talent by a level (point N at level N + 9): by rank 1's spell.
+-- A choice gives the rank to each of its options.
+function G.ranksAt(build, road, level)
+  local out = {}
+  local points = math.max(0, math.min(level, G.MAX_LEVEL) - G.FIRST_POINT_LEVEL + 1)
+  for _, step in ipairs(G.roads(build)[road or 1].path) do
+    if points <= 0 then break end
+    local count = step.points[2] - step.points[1] + 1
+    local n = math.min(points, count)
+    for _, spell in ipairs(step.any or { step.talent }) do
+      out[spell] = math.max(out[spell] or 0, step.rank - count + n)
+    end
+    points = points - n
+  end
+  return out
+end
+
+-- The numbers the road gives its talents, in the order it first takes them (a choice's options share one),
+-- and how many there are: they belong to the road, not to the character.
+function G.marks(build, road)
+  local out, n = {}, 0
+  for _, step in ipairs(G.roads(build)[road or 1].path) do
+    local options = step.any or { step.talent }
+    local fresh = false
+    for _, spell in ipairs(options) do
+      if not out[spell] then fresh = true end
+    end
+    if fresh then
+      n = n + 1
+      for _, spell in ipairs(options) do
+        out[spell] = out[spell] or n
+      end
+    end
+  end
+  return out, n
+end
+
+-- The next pick of a road as the character stands: its step, the talent (a choice: the one taken, else the first),
+-- the level the point comes at and which of the step's points it is. nil: every point of the road is taken.
+function G.nextPick(snap, build, road)
+  local steps, index = G.steps(build, snap, road)
+  if not index then return nil end
+  local s = steps[index]
+  local count = s.step.points[2] - s.step.points[1] + 1
+  local taken = math.max(0, s.rank - (s.step.rank - count))
+  local o = s.options[1]
+  for _, x in ipairs(s.options) do
+    if x.info and x.info.rank > 0 then o = x end
+  end
+  return {
+    index = index,
+    spell = o.spell,
+    info = o.info,
+    level = s.step.level[1] + taken,
+    number = taken + 1,
+    of = count,
+    step = s,
+  }
 end
 
 -- The points the character can spend now: one a level from 10, less what it
@@ -401,8 +469,8 @@ end
 -- the build the page is for and how ("picked": the build it picked, kept
 -- whatever its points do, a pick is never swapped under it; "points": its
 -- points leave exactly one build open; "open": they leave several open and
--- nothing says which, so the page shows the first and asks, never guessing
--- from the tree with most points; "none": nothing spent yet; "own": their own
+-- nothing says which, so the page shows the build we advise for the role (the window asks the
+-- role when the open builds span several), never guessing from the tree with most points; "none": nothing spent yet; "own": their own
 -- way). Candidates are the chosen role's builds (a Damage paladin can only be
 -- Retribution, whatever the points), else every build of the class. A drift
 -- is said only when the picked build can no longer be reached (kind "build",
@@ -464,7 +532,12 @@ function G.resolve(snap, class, choice)
   elseif #open == 1 then
     r.build, r.followed, r.mode = open[1], "points", "points"
   elseif #open > 1 then
+    -- (never asked which build: the page shows the one we advise for the role if it is open, else the first open; the window asks the role)
+    local rec = G.recommend(class, data().builds[open[1]].role)
     r.build, r.followed, r.mode, r.open = open[1], "points", "open", open
+    for _, id in ipairs(open) do
+      if id == rec then r.build = rec end
+    end
   else
     -- (none of the role's builds can be reached: another role's may be, then a switch is offered)
     r.build, r.followed, r.mode = nearest(G.builds(class, candidates)), "points", "points"
@@ -511,5 +584,7 @@ function G.asking(snap, choice, class)
     if role == choice.role then return false end
   end
   if G.phase(snap) ~= "choose" then return false end
+  -- (a class with one role has nothing to ask: its page is that role's)
+  if #G.roles(class) < 2 then return false end
   return choice.notYet == nil or snap.level > choice.notYet
 end

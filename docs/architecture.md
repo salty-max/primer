@@ -48,24 +48,22 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   never wrong; a spell only waiting for the trainer is counted), `steps` (the
   path as the character stands: done, partly, later, and the next pick) and
   `unspent` (a point a level from 10).
-- **The phase flow (M3b)**, in Guide.lua and the top of the Play, Talents
-  and Role pages: a character's phase is its state (`untalented` before level
+- **The phase flow (M3b)**, in Guide.lua and the strip of the window (rebuilt in M-B): a character's phase is its state (`untalented` before level
   10, `choose` with points to spend and none spent, `spent`), kept apart from
   the builds, which are content. At `choose` with no role stored the Play tab
-  asks once what to play (Damage, Tank, Heal, whichever the class has, or Not
-  yet) in a quiet block and the minimap button glows, never a pop-up; a role
-  chosen shows the builds that fit and the first three picks. From `spent` the
+  asks once what to play (a card a role, the build we advise, Use this, or Not
+  yet) and says it once in chat, never a pop-up and no glow; a role chosen sets
+  that role's recommended build. From `spent` the
   build is the player's pick, else the build the points leave open: a build is
   reachable while the points outside its tree are no more than 20 of the 51
   (feasibility, not the tree with most points, `docs/inference.md`). Several
-  open and no role chosen: the page asks which role, and says it is guessing.
+  open: the page shows the build we advise for the role, and says so (it never asks which build).
   A pick the points can no longer reach is said once with three ways on (keep,
   follow, my own way); points that fit only another role's builds offer a
   switch, never silent; a dismissed note stays dismissed until the drift
   changes (`driftSeen`). Your own way (`freestyle`)
-  has no picks and no notes. A role change on the Role tab re-filters at once
-  and counts the points off the nearest build of the new role, and says a
-  respec costs gold. Saved per talent group: `role`, `pickedBuild`,
+  has no picks and no notes. Change role in the header opens the strip with the other
+  roles and says a respec costs gold. Saved per talent group: `role`, `pickedBuild`,
   `freestyle`, `driftSeen`, `driftWay`, `notYet`.
 - **What the page is for (4 November 2026, after the first game test)**: a
   header on every tab says it in one line ("Retribution Paladin. Damage. Level
@@ -82,7 +80,7 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
 - **The Overview tab** (4 November 2026, the first tab): the class in
   general in the narrator's voice, from the class's `overview` in the data, the
   builds in a line each with their roles, and what to do at level 10 (`drawOverview`).
-  A click on a build there looks at it on the Role tab. **Roads** (`G.roads`,
+  (M-B: the card names the other builds as what also works.) **Roads** (`G.roads`,
   `G.pickRoad`): a build may have several orders for its points; the player never
   chooses one: the page advises the recommended road (the Hardcore road on a
   Hardcore realm), says why in a line, and recognises quietly a documented road
@@ -91,31 +89,44 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   show only on a Hardcore realm (`G.HARDCORE`).
 - **The rotation plan** (`drawPlan`, `G.stepState`): a stage's `plan` shown as
   Opening, Loop, Between fights, Low mana and Big cooldowns (`docs/data.md`).
-- **Window.lua**: `K.gameWindow` ("PrimerFrame") or `K.dialog`, the kit's book
-  geometry (`K.BOOK_W` x `K.BOOK_H`, the builds on the left, the page on the
-  right, no search), `K.movable` (place in `PrimerSettings.places.window`,
-  Escape closes), `K.tabs` for **Play** (the stage's opening and priority: the
-  game's slot for each spell, its name by id, the form and the moment, the
-  reason, then the footer with the date it was checked), **Talents** (the
-  build's talents in order with their real pictures, `rank/target`, the next
-  pick and the points to spend) and **Role** (the player's switch, damage,
-  tank or heal, for the roles the class has a build for, and what the build is
-  for). Each page for the character as it is when it draws: on show, a click,
-  a level up, a spell learned, a point spent or a change of talent group
-  (`PLAYER_ENTERING_WORLD`, `PLAYER_LEVEL_UP`, `SPELLS_CHANGED`,
-  `LEARNED_SPELL_IN_SKILL_LINE`, `TRAINER_UPDATE`, `CHARACTER_POINTS_CHANGED`,
-  `PLAYER_TALENT_UPDATE`, `TRAIT_CONFIG_UPDATED`, `ACTIVE_TALENT_GROUP_CHANGED`:
-  each only asks the window to look again, a burst as one draw 0.3 seconds
-  later, an event a client lacks skipped and never raised). In a fight it reads
-  nothing and says it waits, then draws. **Talent groups**: Era has one in
-  practice, Forever two, asked of the game (`GetNumSpecGroups`,
-  `GetActiveSpecGroup`: a client without them has one). What a character chose
-  is kept per group (`PrimerChar.groups[n] = { build, role }`, `ns.choice(n)`).
-  Play and Role follow the group in use (`ACTIVE_TALENT_GROUP_CHANGED` makes
-  the window follow it), the Talents tab has a switch to look at the other
-  group's talents and choose its build, absent with one group. The empty pages (Season of Discovery,
-  no guide for the game, no guide for the class) are the house voice and never
-  another game's or class's text. `ns.toggle()`, `ns.open(tab)`.
+- **Window.lua** (rebuilt 4 November 2026 from `../ideas/primer-design.md`, direction A):
+  `K.gameWindow` ("PrimerFrame") or `K.dialog`, `K.movable` (place in
+  `PrimerSettings.places.window`, Escape closes), three `K.tabs`: **Overview**
+  (the class in the narrator's voice, then a card: your road with the role's
+  recommendation and its price, the other roles, what also works, the Hardcore
+  lines), **Plan** (the stage's opening, the loop read from the top, between
+  fights, low mana, big cooldowns: one line a row, `[n] icon name when`, the
+  reason one toggle away ("Show the reasons", kept for the account) and in each
+  row's tooltip; a row the character cannot press yet stays in its place, grey,
+  with what it needs; at level 10 with no role, one card a role) and **Talents**
+  (`Tree.lua`, the order beside the trees, a level slider, the next pick's reason).
+  Over the tabs, on every one: a **header** (the build and class, role, level,
+  Hardcore realm, talent group, one sentence on how the page was chosen, the
+  next-pick chip) and a **strip** of fixed height for the one thing that needs the
+  player (the level-10 question, Change role, a drift, a new stage), so nothing
+  below it moves. What the page is for (`view.subjects`, per talent group) is
+  frozen while the window is open: an event greys and lights the rows in place
+  (the stage gives the list, never the character), moves a ring and a count, and
+  swaps nothing. A role chosen sets its recommended build (`G.recommend`): the
+  player is never asked which build. Scroll and tab survive an event. The
+  events are the same as before (`PLAYER_ENTERING_WORLD`, `PLAYER_LEVEL_UP`,
+  `SPELLS_CHANGED`, `LEARNED_SPELL_IN_SKILL_LINE`, `TRAINER_UPDATE`,
+  `CHARACTER_POINTS_CHANGED`, `PLAYER_TALENT_UPDATE`, `TRAIT_CONFIG_UPDATED`,
+  `ACTIVE_TALENT_GROUP_CHANGED`), each only asking for a look, a burst as one
+  draw 0.3 seconds later. In a fight it reads nothing and says it waits. A
+  draw is `pcall`-guarded (`broken`). One chat line at level 10, once a
+  character (`PrimerChar.welcomed`), replaces the minimap glow. What each draw
+  left is `ns.screen` (header, strip, plan lists, tree cells, overview): the
+  sim reads that and presses the strip's buttons through it. `ns.toggle()`,
+  `ns.open(tab)`.
+- **Tree.lua**: the class's three trees from the data's `cells` (row 0 to 6,
+  column 0 to 3 as the game numbers them), `K.slot` cells of 34 pixels, the road's
+  numbers (the order it first takes each talent: they belong to the road), taken
+  lit gold, on the road not yet blue, the next pick ringed, row gates at the
+  left, straight prerequisite lines (the two diagonal ones are left out), the
+  game's own tooltip (`GameTooltip:SetTalent(talentID, false, false, group)`,
+  as Era's own talent window calls it) plus one line of ours. Forever has no
+  tree yet (M-E).
 - **Minimap.lua**: the kit's `K.minimapButton`, named `PrimerMinimapButton`
   (Keyring finds the family's buttons by name), at `K.MINIMAP_ANGLES.Primer`
   (90 degrees, the top: at least 25 from every other place and clear of Classic

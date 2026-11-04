@@ -51,11 +51,11 @@ C_Seasons = {
     return state.season
   end,
 }
--- (the talent trees as the game lists them: three tabs, the cells in talent id
--- order; the data's own talents stand in for the whole window)
+-- (the talent trees as the game lists them: three tabs, a tree's cells in the game's order, row then
+-- column; the data's own cells stand in for the window: those of the trees state.treeNames names)
 local function tabs()
   local seen, out = {}, {}
-  for _, t in pairs(G.ns.data.talents) do
+  for _, t in ipairs(G.ns.data.cells) do
     if state.treeNames[t.tab] and not seen[t.tab] then
       seen[t.tab] = true
       table.insert(out, t.tab)
@@ -64,17 +64,23 @@ local function tabs()
   table.sort(out)
   return out
 end
--- (the trees as the game names them, by their place in the window; the three
--- tabs of the data's own talents, 161 Arms, 163 Protection, 164 Fury; a test that
--- plays another class sets state.treeNames to that class's trees)
+local function cellsOf(tab)
+  local cells = {}
+  for _, t in ipairs(G.ns.data.cells) do
+    if t.tab == tab then table.insert(cells, t) end
+  end
+  table.sort(cells, function(a, b)
+    if a.row ~= b.row then return a.row < b.row end
+    return a.col < b.col
+  end)
+  return cells
+end
+-- (the trees as the game names them, by their id; a test that plays another class sets
+-- state.treeNames to that class's trees)
 state.treeNames = { [161] = "Arms", [163] = "Protection", [164] = "Fury" }
 function GetNumTalents(tab)
   read()
-  local n, id = 0, tabs()[tab]
-  for _, t in pairs(G.ns.data.talents) do
-    if t.tab == id then n = n + 1 end
-  end
-  return n
+  return #cellsOf(tabs()[tab])
 end
 function GetNumTalentTabs()
   read()
@@ -96,12 +102,7 @@ C_SpecializationInfo = {
   end,
   GetTalentInfo = function(q)
     read()
-    local tab = tabs()[q.specializationIndex]
-    local cells = {}
-    for _, t in pairs(G.ns.data.talents) do
-      if t.tab == tab then table.insert(cells, t) end
-    end
-    table.sort(cells, function(a, b) return a.id < b.id end)
+    local cells = cellsOf(tabs()[q.specializationIndex])
     local t = cells[q.talentIndex]
     if not t then return nil end
     -- (the talents of group 1 are state.ranks, of group 2 state.otherRanks, the group in use when none is named)

@@ -14,30 +14,11 @@ function ns.createMinimapButton()
     icon = ns.ICON,
     crop = true,
     title = "Primer",
-    lines = function()
-      local lines = { L["A class guide to read out of combat."] }
-      if ns.glowing then table.insert(lines, L["You have talent points to spend."]) end
-      return lines
-    end,
+    lines = function() return { L["A class guide to read out of combat."] } end,
     click = function() ns.toggle() end,
     get = ns.option,
     set = ns.setOption,
   })
-end
-
--- A soft glow on the button while the level-10 question waits (the game's own
--- highlight of its minimap buttons, always on): never a pop-up.
-local glow
-function ns.setGlow(on)
-  ns.glowing = on and true or false
-  if not (M and M.button) then return end
-  if not glow then
-    glow = M.button:CreateTexture(nil, "OVERLAY")
-    glow:SetTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight")
-    glow:SetBlendMode("ADD")
-    glow:SetAllPoints()
-  end
-  glow:SetShown(ns.glowing)
 end
 
 function ns.updateMinimapButton()

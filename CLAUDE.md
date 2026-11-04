@@ -15,7 +15,7 @@ package, English only for now. Read the family's CLAUDE.md (`../CLAUDE.md`) firs
 
 | What | Where |
 |---|---|
-| The addon file by file: the package, Core, Window, Settings, Minimap, the tests, the languages | `docs/architecture.md` |
+| The addon file by file: the package, Core, Window, Tree, Settings, Minimap, the tests, the languages | `docs/architecture.md` |
 | The guide's data, `content/<game>/<class>.json`, its shape and the facts check (`scripts/guide.ts`) | `docs/data.md` |
 | Which build a character is (feasibility, never the tree with most points) | `docs/inference.md` |
 | Where each build's facts were read, and what the research changed | `docs/sources.md` |
