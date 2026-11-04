@@ -608,12 +608,6 @@
                 "why": "it costs a lot of mana, so only for a crowd"
               },
               {
-                "spell": 118,
-                "name": "Polymorph",
-                "if": "if another monster joins and you cannot cope",
-                "why": "a sheep does not attack"
-              },
-              {
                 "text": "Use your wand",
                 "if": "if the monster is nearly dead",
                 "why": "it costs no mana, and your bar starts to refill"
@@ -722,7 +716,15 @@
                   "why": "it deals with a straggler"
                 }
               ]
-            }
+            },
+            "rarely": [
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "if another monster joins and you cannot cope",
+                "why": "a sheep does not attack"
+              }
+            ]
           }
         },
         {
@@ -787,12 +789,6 @@
                     11170
                   ]
                 }
-              },
-              {
-                "spell": 120,
-                "name": "Cone of Cold",
-                "if": "if three or more monsters are on you",
-                "why": "it costs a lot of mana, so only for a crowd"
               },
               {
                 "text": "Use your wand",
@@ -911,7 +907,15 @@
                   "why": "it deals with a straggler"
                 }
               ]
-            }
+            },
+            "rarely": [
+              {
+                "spell": 120,
+                "name": "Cone of Cold",
+                "if": "if three or more monsters are on you",
+                "why": "it costs a lot of mana, so only for a crowd"
+              }
+            ]
           }
         }
       ],

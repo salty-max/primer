@@ -566,12 +566,6 @@
                 "why": "an instant Holy hit that works on nothing else"
               },
               {
-                "spell": 20164,
-                "name": "Seal of Justice",
-                "if": "if the monster keeps running",
-                "why": "its Judgement keeps it from fleeing"
-              },
-              {
                 "spell": 20375,
                 "name": "Seal of Command",
                 "if": "when your seal ends, slow weapon",
@@ -651,7 +645,15 @@
                 }
               ],
               "say": "keep them for the fight that would otherwise kill you"
-            }
+            },
+            "rarely": [
+              {
+                "spell": 20164,
+                "name": "Seal of Justice",
+                "if": "if the monster keeps running",
+                "why": "its Judgement keeps it from fleeing"
+              }
+            ]
           }
         },
         {
@@ -701,13 +703,6 @@
                 "name": "Exorcism",
                 "if": "if the monster is undead or a demon",
                 "why": "an instant Holy hit that works on nothing else"
-              },
-              {
-                "spell": 20066,
-                "name": "Repentance",
-                "if": "if a humanoid is healing itself",
-                "why": "it takes the healer out of the fight",
-                "talentSpell": 20066
               },
               {
                 "spell": 20375,
@@ -789,7 +784,16 @@
                 }
               ],
               "say": "keep both for the fight that would otherwise kill you"
-            }
+            },
+            "rarely": [
+              {
+                "spell": 20066,
+                "name": "Repentance",
+                "if": "if a humanoid is healing itself",
+                "why": "it takes the healer out of the fight",
+                "talentSpell": 20066
+              }
+            ]
           }
         }
       ],

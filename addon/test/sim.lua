@@ -485,19 +485,55 @@ local function spineLevels()
   end
   return out
 end
--- The information budget, held by every page the tests draw: about ten lines of text, three facts, a reason never
--- printed, a line of the loop that fits, and nothing cut with an ellipsis.
+-- The information budget, held by every page the tests draw: a pick, an opening of at most 5 steps and a loop of at
+-- most 6, every reason printed under its step and wrapped to the page (the row as tall as both), three facts at
+-- most, a line of the loop that fits, and nothing cut with an ellipsis.
 local function budget(why)
   local sc = ns.screen
-  check(sc.lines <= ns.BUDGET.lines, why .. ": at most " .. ns.BUDGET.lines .. " lines of text, not " .. sc.lines)
   check(#sc.facts <= 3, why .. ": at most three facts in the header")
-  for _, r in ipairs(sc.loop or {}) do
-    if r.state == "ready" then check(#r.name + 1 + #r.clause <= 56, why .. ": a line of the loop fits: " .. r.line) end
+  check(
+    sc.legacy or (#(sc.opening or {}) <= ns.BUDGET.opening and #(sc.loop or {}) <= ns.BUDGET.loop),
+    why .. ": the steps stay few"
+  )
+  for _, list in ipairs({ sc.opening or {}, sc.loop or {} }) do
+    for _, r in ipairs(list) do
+      if r.state == "ready" and not sc.legacy then
+        check(#r.name + 1 + #r.clause <= 56, why .. ": a line fits: " .. r.line)
+      end
+      check(sc.legacy or r.why, why .. ": every step has its reason printed: " .. r.name)
+    end
   end
+  if sc.pick and sc.pick.why then
+    check(pageTexts():find(sc.pick.why, 1, true), why .. ": the pick's reason is printed")
+  end
+  -- (the rows in order: the pick, the opening, the loop; each reason on screen is the model's)
+  local expected = {}
+  if sc.pick then expected[#expected + 1] = sc.pick.why or false end
+  for _, list in ipairs({ sc.opening or {}, sc.loop or {} }) do
+    for _, r in ipairs(list) do
+      expected[#expected + 1] = r.why or false
+    end
+  end
+  for i, want in ipairs(expected) do
+    local row = ns.stepRows[i]
+    check(row and row.shown, why .. ": row " .. i .. " is on screen")
+    check(want == false or (row.reason.shown and row.reason.text == want), why .. ": row " .. i .. " prints its reason")
+  end
+  local onScreen = 0
+  for _, row in ipairs(ns.stepRows) do
+    if row.shown then
+      onScreen = onScreen + 1
+      if row.reason.shown then
+        check(not row.reason.nowrap and row.reason.w > 0, why .. ": a reason wraps to the page")
+        check(
+          row.h >= row.text:GetStringHeight() + row.reason:GetStringHeight(),
+          why .. ": the row grows to fit its reason"
+        )
+      end
+    end
+  end
+  check(onScreen == #(sc.opening or {}) + #(sc.loop or {}) + (sc.pick and 1 or 0), why .. ": a row for each step")
   check(not pageTexts():find("...", 1, true), why .. ": no ellipsis")
-  if sc.pick and sc.pick.why and not sc.pick.open then
-    check(not pageTexts():find(sc.pick.why, 1, true), why .. ": the reason is not printed unasked")
-  end
   local cut = ns.fit()
   check(#cut == 0, why .. ": nothing cut short (" .. (cut[1] or "") .. ")")
 end
@@ -636,6 +672,11 @@ if not G.FOREVER then
     ns.screen.opening and #ns.screen.opening >= 3 and ns.screen.loop and #ns.screen.loop >= 4,
     "the opening and the loop"
   )
+  check(ns.screen.pick.why and ns.screen.opening[1].why, "the reasons are printed, not asked for")
+  check(
+    ns.screen.rarely and ns.screen.rarely:find("Rarely: ", 1, true) and ns.screen.rarely:find(":", 9, true),
+    "the rarest lines in a note, each with its reason"
+  )
   for i, r in ipairs(ns.screen.loop) do
     check(r.n == i, "the loop is numbered")
   end
@@ -644,12 +685,6 @@ if not G.FOREVER then
     "and ends on what applies when nothing does"
   )
   budget("Retribution at 24")
-  if ns.screen.pick.toggle then
-    ns.screen.pick.toggle()
-    check(ns.screen.pick.open and pageTexts():find(ns.screen.pick.why, 1, true), "a reason on a tap")
-    ns.screen.pick.toggle()
-    check(not ns.screen.pick.open, "and put away on another")
-  end
   for level = 24, 40 do
     look(level)
     check(ns.screen.title == "Level " .. level, "looking at " .. level)

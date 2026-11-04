@@ -130,9 +130,11 @@ ns.data = {
               { spell = 122, level = 10, cond = "mage-frost.s3.loop2.if", why = "mage-frost.s3.loop2.why" },
               { spell = 116, level = 4, talents = { 11170 }, cond = "mage-frost.s3.loop3.if", why = "mage-frost.s3.loop3.why" },
               { spell = 120, level = 26, cond = "mage-frost.s3.loop4.if", why = "mage-frost.s3.loop4.why" },
-              { spell = 118, level = 8, cond = "mage-frost.s3.loop5.if", why = "mage-frost.s3.loop5.why" },
-              { text = "mage-frost.s3.loop6.text", cond = "mage-frost.s3.loop6.if", why = "mage-frost.s3.loop6.why" },
-              { spell = 116, level = 4, why = "mage-frost.s3.loop7.why" },
+              { text = "mage-frost.s3.loop5.text", cond = "mage-frost.s3.loop5.if", why = "mage-frost.s3.loop5.why" },
+              { spell = 116, level = 4, why = "mage-frost.s3.loop6.why" },
+            },
+            rarely = {
+              { spell = 118, level = 8, cond = "mage-frost.s3.rarely1.if", why = "mage-frost.s3.rarely1.why" },
             },
             between = {
               { spell = 168, level = 1, cond = "mage-frost.s3.between1.if", why = "mage-frost.s3.between1.why" },
@@ -176,9 +178,11 @@ ns.data = {
               { spell = 11426, level = 40, talent = 11426, cond = "mage-frost.s4.loop2.if", why = "mage-frost.s4.loop2.why" },
               { spell = 122, level = 10, cond = "mage-frost.s4.loop3.if", why = "mage-frost.s4.loop3.why" },
               { spell = 116, level = 4, talents = { 11170 }, cond = "mage-frost.s4.loop4.if", why = "mage-frost.s4.loop4.why" },
-              { spell = 120, level = 26, cond = "mage-frost.s4.loop5.if", why = "mage-frost.s4.loop5.why" },
-              { text = "mage-frost.s4.loop6.text", cond = "mage-frost.s4.loop6.if", why = "mage-frost.s4.loop6.why" },
-              { spell = 116, level = 4, why = "mage-frost.s4.loop7.why" },
+              { text = "mage-frost.s4.loop5.text", cond = "mage-frost.s4.loop5.if", why = "mage-frost.s4.loop5.why" },
+              { spell = 116, level = 4, why = "mage-frost.s4.loop6.why" },
+            },
+            rarely = {
+              { spell = 120, level = 26, cond = "mage-frost.s4.rarely1.if", why = "mage-frost.s4.rarely1.why" },
             },
             between = {
               { spell = 7302, level = 30, cond = "mage-frost.s4.between1.if", why = "mage-frost.s4.between1.why" },
@@ -496,11 +500,13 @@ ns.data = {
             loop = {
               { spell = 20271, level = 4, cond = "paladin-retribution.s3.loop1.if", why = "paladin-retribution.s3.loop1.why" },
               { spell = 879, level = 20, cond = "paladin-retribution.s3.loop2.if", why = "paladin-retribution.s3.loop2.why" },
-              { spell = 20164, level = 22, cond = "paladin-retribution.s3.loop3.if", why = "paladin-retribution.s3.loop3.why" },
-              { spell = 20375, level = 20, talent = 20375, cond = "paladin-retribution.s3.loop4.if", why = "paladin-retribution.s3.loop4.why" },
-              { spell = 20154, level = 1, cond = "paladin-retribution.s3.loop5.if", why = "paladin-retribution.s3.loop5.why" },
-              { spell = 853, level = 8, cond = "paladin-retribution.s3.loop6.if", why = "paladin-retribution.s3.loop6.why" },
-              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s3.loop7.why" },
+              { spell = 20375, level = 20, talent = 20375, cond = "paladin-retribution.s3.loop3.if", why = "paladin-retribution.s3.loop3.why" },
+              { spell = 20154, level = 1, cond = "paladin-retribution.s3.loop4.if", why = "paladin-retribution.s3.loop4.why" },
+              { spell = 853, level = 8, cond = "paladin-retribution.s3.loop5.if", why = "paladin-retribution.s3.loop5.why" },
+              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s3.loop6.why" },
+            },
+            rarely = {
+              { spell = 20164, level = 22, cond = "paladin-retribution.s3.rarely1.if", why = "paladin-retribution.s3.rarely1.why" },
             },
             between = {
               { spell = 19750, level = 20, cond = "paladin-retribution.s3.between1.if", why = "paladin-retribution.s3.between1.why" },
@@ -531,10 +537,12 @@ ns.data = {
               { spell = 20271, level = 4, cond = "paladin-retribution.s4.loop1.if", why = "paladin-retribution.s4.loop1.why" },
               { spell = 24275, level = 44, cond = "paladin-retribution.s4.loop2.if", why = "paladin-retribution.s4.loop2.why" },
               { spell = 879, level = 20, cond = "paladin-retribution.s4.loop3.if", why = "paladin-retribution.s4.loop3.why" },
-              { spell = 20066, level = 40, talent = 20066, cond = "paladin-retribution.s4.loop4.if", why = "paladin-retribution.s4.loop4.why" },
-              { spell = 20375, level = 20, talent = 20375, cond = "paladin-retribution.s4.loop5.if", why = "paladin-retribution.s4.loop5.why" },
-              { spell = 20154, level = 1, cond = "paladin-retribution.s4.loop6.if", why = "paladin-retribution.s4.loop6.why" },
-              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s4.loop7.why" },
+              { spell = 20375, level = 20, talent = 20375, cond = "paladin-retribution.s4.loop4.if", why = "paladin-retribution.s4.loop4.why" },
+              { spell = 20154, level = 1, cond = "paladin-retribution.s4.loop5.if", why = "paladin-retribution.s4.loop5.why" },
+              { spell = 6603, level = 1, common = true, icon = "Interface\\Icons\\Ability_MeleeDamage", why = "paladin-retribution.s4.loop6.why" },
+            },
+            rarely = {
+              { spell = 20066, level = 40, talent = 20066, cond = "paladin-retribution.s4.rarely1.if", why = "paladin-retribution.s4.rarely1.why" },
             },
             between = {
               { spell = 19750, level = 20, cond = "paladin-retribution.s4.between1.if", why = "paladin-retribution.s4.between1.why" },

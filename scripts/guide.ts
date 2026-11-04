@@ -50,9 +50,9 @@ const CHECK = process.argv.includes("--check");
 const STAMP = process.argv.includes("--stamp") ? process.argv.slice(process.argv.indexOf("--stamp") + 1) : null;
 const LOCK_FILE = process.env.PRIMER_LOCK ?? join(ROOT, "facts.lock.json"); // (the test points it at a copy)
 const BUDGET_LINE = 56; // a plan row's name and condition together, in characters (one line of the window)
-const BUDGET_WHY = 60; // a reason, which a tooltip or a tap shows
-const BUDGET_OPENING = 6; // a stage's opening, a chain of one or two lines
-const BUDGET_LOOP = 8; // a stage's loop, a numbered line each: the Level page holds about ten lines in all
+const BUDGET_WHY = 60; // a reason, printed under its step
+const BUDGET_OPENING = 5; // a stage's opening, a numbered step each with its reason under it
+const BUDGET_LOOP = 6; // a stage's loop, a numbered step each with its reason under it: the rest of the loop goes to `rarely`
 type Game = "classic" | "forever";
 const GAMES: Game[] = ["classic", "forever"];
 const FILE: Record<Game, string> = { classic: "Guide_Classic.lua", forever: "Guide_Forever.lua" };
@@ -64,7 +64,7 @@ const OVERVIEW = ["who", "good", "bad", "resource", "levelling", "ten"];
 // Spells every character has that no class book lists (the plan's "Attack"), by id and the game's name
 // (and the picture the game's action bar gives it: the client's own icon for the spell is a developer's photo)
 const COMMON_SPELLS: Record<number, [string, string]> = { 6603: ["Attack", "Interface\\Icons\\Ability_MeleeDamage"] };
-const PLAN_LISTS = ["opening", "loop", "between", "low"] as const;
+const PLAN_LISTS = ["opening", "loop", "rarely", "between", "low"] as const;
 const CLAUSE_WORDS = 14;
 const ROLES = ["damage", "tank", "heal"];
 const STANCES = ["battle", "defensive", "berserker"];
@@ -116,6 +116,7 @@ type PlanStep = { spell?: number; name?: string; text?: string; if?: string; say
 type Plan = {
   opening: PlanStep[];
   loop: PlanStep[];
+  rarely?: PlanStep[]; // the loop's lowest-priority lines, a quiet note under it
   between?: PlanStep[];
   low?: PlanStep[];
   big?: { spells: PlanStep[]; say: string };
@@ -399,7 +400,7 @@ function checkBuild(b: Build, f: Facts) {
         step(x, at);
         const last = name === "loop" && i === steps.length - 1;
         if (last && x.if) bad(`${at}: the last line of the loop is the one that applies when nothing above does, it has no condition`);
-        if (!last && (name === "loop" || name === "between" || name === "low") && !x.if) bad(`${at}: a line of the ${name} says when it applies`);
+        if (!last && (name === "loop" || name === "rarely" || name === "between" || name === "low") && !x.if) bad(`${at}: a line of the ${name} says when it applies`);
       });
     }
     if (plan.alt) {

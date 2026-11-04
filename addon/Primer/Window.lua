@@ -19,9 +19,10 @@ local G = ns.rules
 local TAB = { level = 1, talents = 2, class = 3 }
 ns.TAB = TAB
 
--- One idea a screen: about ten, never more than this many lines of text on the Level page (a looking note, the pick,
--- the opening with its conditions, the loop), headings and the title aside. A reason is never printed unasked.
-ns.BUDGET = { lines = 12, spine = 40 }
+-- One idea a screen, held in steps: a page has a pick, an opening of at most 5 steps and a loop of at most 6, each
+-- with its reason printed under it (the check holds the content to it, the lowest-priority lines of a loop go to a
+-- note, `rarely`). The page scrolls when they are longer than the window; nothing is cut.
+ns.BUDGET = { opening = 5, loop = 6, spine = 40 }
 
 local book, list, page
 local view = {} -- this session's: subjects (what each talent group's page is for), looking, putOff, changing, why
@@ -29,6 +30,7 @@ ns.view = view -- (for the tests)
 ns.screen = {} -- what the last draw put on screen, as tables (for the tests)
 local spine = {} -- the list's rows (a pool, made at the tab's load, for the tests)
 ns.spineRows = spine
+ns.stepRows = {} -- the page's rows (a pool, for the tests)
 
 -- ── words ────────────────────────────────────────────────────────────────────
 local function roleName(role)
@@ -99,16 +101,15 @@ end
 
 -- ── the parts of the page ────────────────────────────────────────────────────
 -- Rows of the page: a number, the spell's icon (its tooltip), the name and its clause on one line that wraps
--- rather than clips, and for the pick a "Why?" that opens the reason under it. Made once, set in place on every look.
+-- rather than clips, and under it the reason, always printed. Made once, set in place on every look.
 local rows = {}
--- (an icon's tooltip: the spell's, then the reason, and what it needs when it cannot be pressed yet)
+-- (an icon's tooltip: the spell's)
 local function slotTips(slot)
   slot:SetScript("OnEnter", function(self)
     if not GameTooltip then return end
     local ok, err = pcall(function()
       GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
       if self.spell then GameTooltip:SetSpellByID(self.spell) end
-      if self.reason then GameTooltip:AddLine(self.reason, T.accent[1], T.accent[2], T.accent[3], true) end
       GameTooltip:Show()
     end)
     if not ok then ns.fault("tooltip", err) end
@@ -116,6 +117,23 @@ local function slotTips(slot)
   slot:SetScript("OnLeave", function()
     if GameTooltip then GameTooltip:Hide() end
   end)
+end
+-- A row's text and, under it, its reason in the dimmer body text, both wrapped to the page; the row as tall as they
+-- are, with room under it. Returns its height. (narrow: room kept at the right)
+local ROW_PAD, ROW_GAP = 6, 12
+local function fillRow(r, line, why)
+  r.text:SetWidth(page.width - 56)
+  r.text:SetText(line)
+  local h = ROW_PAD + math.max(16, number(r.text:GetStringHeight()))
+  r.reason:SetWidth(page.width - 56)
+  r.reason:ClearAllPoints()
+  r.reason:SetPoint("TOPLEFT", r, "TOPLEFT", 52, -h)
+  r.reason:SetShown(why ~= nil)
+  r.reason:SetText(why or "")
+  if why then h = h + 2 + number(r.reason:GetStringHeight()) end
+  h = math.max(28, h) + ROW_GAP
+  r:SetHeight(h)
+  return h
 end
 local function row(i)
   local r = rows[i]
@@ -131,12 +149,13 @@ local function row(i)
   r.text:SetWidth(page.width - 56)
   r.text:SetWordWrap(true)
   r.text:SetSpacing(2)
-  r.reason = K.label(r, K.BODY_FONT, 11, T.soft)
+  r.reason = K.label(r, K.BODY_FONT, 12, T.soft)
   r.reason:SetWidth(page.width - 56)
   r.reason:SetWordWrap(true)
   r.reason:SetSpacing(2)
   slotTips(r.slot)
   rows[i] = r
+  ns.stepRows[i] = r
   return r
 end
 
@@ -159,16 +178,12 @@ local function setStep(r, snap, step, n, level, last)
   local stance = ready and stanceOf(step)
   if stance then clause = clause ~= "" and (clause .. ", " .. stance:lower()) or stance end
   local why = step.why and (capital(ns.say(step.why)) .. ".") or nil
-  r.slot.spell, r.slot.reason = step.spell, why
+  r.slot.spell = step.spell
   K.setSlot(r.slot, icon or K.QUESTION, nil, nil, not ready)
   r.num:SetText(n and tostring(n) or "")
   local line = K.hex(ready and T.text or T.soft) .. name .. "|r"
   if clause ~= "" then line = line .. "  " .. K.hex(ready and T.soft or T.gold) .. clause .. "|r" end
-  r.text:SetWidth(page.width - 56)
-  r.text:SetText(line)
-  r.reason:Hide()
-  local h = math.max(28, number(r.text:GetStringHeight()) + 10)
-  r:SetHeight(h)
+  local h = fillRow(r, line, why)
   return {
     h = h,
     n = n,
@@ -449,7 +464,7 @@ local function arrivals(snap, b, road)
   local seen = {}
   for _, stage in ipairs(b.stages) do
     local p = planOf(stage)
-    for _, part in ipairs({ p.opening, p.loop, p.between, p.low }) do
+    for _, part in ipairs({ p.opening, p.loop, p.rarely, p.between, p.low }) do
       for _, step in ipairs(part or {}) do
         if
           step.spell
@@ -519,16 +534,13 @@ local function drawSpine(snap, b, r, shown)
 end
 
 -- ── the level page ───────────────────────────────────────────────────────────
-local function addLines(n) ns.screen.lines = ns.screen.lines + n end
-local function linesOf(text, width) return math.max(1, math.ceil(#text / (width or 60))) end
-
 local function drawLevel(snap, class, r, choice)
   local screen = ns.screen
   local b = ns.data.builds[r.build]
   local own = snap.level
   local shown = view.looking or own
   if shown == own then view.looking = nil end
-  screen.level, screen.lines, screen.text = shown, 0, {}
+  screen.level, screen.text = shown, {}
   local sentence = sentenceFor(snap, r)
   local pick = r.mode ~= "own" and (shown == own and G.nextPick(snap, b, r.road) or G.pickAt(snap, b, r.road, shown))
     or nil
@@ -543,13 +555,12 @@ local function drawLevel(snap, class, r, choice)
   drawSpine(snap, b, r, shown)
   local q = questionFor(snap, class, r, choice)
   screen.question = q and { text = q.text, buttons = q.buttons, replaces = q.replaces } or nil
-  local function paragraph(text, color, lines)
+  local function paragraph(text, color)
     page:paragraph(text, color)
     table.insert(screen.text, text)
-    addLines(lines or linesOf(text))
   end
   if shown ~= own then
-    paragraph(L["Looking at level %d."]:format(shown), T.gold, 1)
+    paragraph(L["Looking at level %d."]:format(shown), T.gold)
     screen.back = function()
       view.looking = nil
       ns.page()
@@ -576,20 +587,26 @@ local function drawLevel(snap, class, r, choice)
   local idx, starts = G.stage(b, shown, r.phase)
   local stage = idx and b.stages[idx]
   if not stage then
-    paragraph(L["This build starts at level %d. Come back then."]:format(starts), T.text, 1)
+    paragraph(L["This build starts at level %d. Come back then."]:format(starts), T.text)
     return
   end
   screen.stage = { from = stage.from, to = stage.to }
+  screen.legacy = stage.plan == nil -- (a stage written as rows, the older form: no step budget yet)
   local plan = planOf(stage)
-  -- the pick, its reason on a tap
   local n = 0
   local function nextRow()
     n = n + 1
     local x = row(n)
     page:place(x, 0)
     x:Show()
+    x.slot:Show()
     return x
   end
+  local function section(title)
+    page.y = page.y + 8
+    page:section(title)
+  end
+  -- the pick, its reason under it
   screen.pick = nil
   if r.mode ~= "own" and (pick or shown < G.FIRST_POINT_LEVEL or (shown == own and not pick)) then
     local x = nextRow()
@@ -607,105 +624,44 @@ local function drawLevel(snap, class, r, choice)
     else
       text = L["Every point of this road is spent"]
     end
-    x.slot.spell, x.slot.reason = pick and pick.spell, why
+    x.slot.spell = pick and pick.spell
     K.setSlot(x.slot, pick and pick.info and pick.info.icon or ns.ICON)
     x.num:SetText("")
-    x.text:SetText(text)
-    x.text:SetWidth(page.width - 56 - (why and 64 or 0))
-    local open = why and view.why
-    x.reason:ClearAllPoints()
-    x.reason:SetPoint("TOPLEFT", x, "TOPLEFT", 52, -(8 + math.max(26, number(x.text:GetStringHeight()))))
-    x.reason:SetShown(open and true or false)
-    x.reason:SetText(open and why or "")
-    local h = math.max(28, number(x.text:GetStringHeight()) + 10)
-    if open then h = h + number(x.reason:GetStringHeight()) + 2 end
-    x:SetHeight(h)
-    page.y = page.y + h
-    local toggle
-    if why then
-      toggle = function()
-        view.why = not view.why or nil
-        ns.page()
-      end
-      x.ask = x.ask or K.button(x, L["Why?"], 60)
-      x.ask:ClearAllPoints()
-      x.ask:SetPoint("TOPRIGHT", x, "TOPRIGHT", 0, -3)
-      x.ask:SetScript("OnClick", toggle)
-      x.ask:Show()
-    elseif x.ask then
-      x.ask:Hide()
-    end
-    screen.pick = { text = text, why = why, open = open and true or false, toggle = toggle }
+    page.y = page.y + fillRow(x, K.hex(T.gold) .. text .. "|r", why)
+    screen.pick = { text = text, why = why }
     table.insert(screen.text, text)
-    addLines(linesOf(text))
-    -- (asked for, so not one of the lines the page is held to)
-    if open then table.insert(screen.text, why) end
+    if why then table.insert(screen.text, why) end
   end
-  -- the opening, a chain
-  if plan.opening and #plan.opening > 0 then
-    page:section(L["Opening"])
-    local names, plain = {}, {}
-    screen.opening = {}
-    local box = page:box()
-    box.slots = box.slots or {}
-    for _, sl in ipairs(box.slots) do
-      sl:Hide()
-    end
-    for i, step in ipairs(plan.opening) do
-      local name, icon
-      if step.spell then
-        name, icon = ns.reader.spell(step.spell)
-        name = name or L["Unknown spell"]
-        icon = step.icon or icon
-      else
-        name, icon = ns.say(step.text), STEP_ICON
-      end
-      local state, extra = stateAt(step, snap, shown)
-      local ready = state == "ready"
-      local clause = ready and whenOf(step) or needs(snap, state, extra)
-      local why = step.why and (capital(ns.say(step.why)) .. ".") or nil
-      table.insert(screen.opening, { name = name, state = state, clause = clause, why = why })
-      table.insert(plain, clause ~= "" and ("%s (%s)"):format(name, clause) or name)
-      table.insert(
-        names,
-        K.hex(ready and T.text or T.soft)
-          .. name
-          .. "|r"
-          .. (clause ~= "" and (K.hex(ready and T.soft or T.gold) .. " (" .. clause .. ")|r") or "")
-      )
-      local sl = box.slots[i]
-      if not sl then
-        sl = K.slot(box, 26)
-        slotTips(sl)
-        box.slots[i] = sl
-      end
-      sl:ClearAllPoints()
-      sl:SetPoint("TOPLEFT", box, "TOPLEFT", (i - 1) * 34, 0)
-      sl.spell, sl.reason = step.spell, why
-      K.setSlot(sl, icon or K.QUESTION, nil, nil, not ready)
-      sl:Show()
-    end
-    box:SetSize(page.width, 26)
-    page:place(box, 34)
-    local chain = table.concat(plain, " > ")
-    page:paragraph(table.concat(names, K.hex(T.soft) .. " > |r"))
-    table.insert(screen.text, chain)
-    addLines(linesOf(chain))
-  end
-  -- the loop, numbered
-  if plan.loop and #plan.loop > 0 then
-    page:section(L["Then repeat, top to bottom"])
-    screen.loop = {}
-    for i, step in ipairs(plan.loop) do
+  screen.rows = {}
+  local function steps(title, group, key, closing)
+    if not (group and #group > 0) then return end
+    section(title)
+    screen[key] = {}
+    for i, step in ipairs(group) do
       local x = nextRow()
-      x.slot:Show()
-      if x.ask then x.ask:Hide() end
-      local out = setStep(x, snap, step, i, shown, i == #plan.loop)
+      local out = setStep(x, snap, step, i, shown, closing and i == #group)
       page.y = page.y + out.h
-      table.insert(screen.loop, out)
+      table.insert(screen[key], out)
       table.insert(screen.text, out.line)
-      addLines(linesOf(out.line, 62))
+      if out.why then table.insert(screen.text, out.why) end
     end
+  end
+  steps(L["Opening"], plan.opening, "opening")
+  steps(L["Then repeat, top to bottom"], plan.loop, "loop", true)
+  if plan.rarely and #plan.rarely > 0 then
+    local parts = {}
+    for _, step in ipairs(plan.rarely) do
+      local name = step.spell and (ns.reader.spell(step.spell) or L["Unknown spell"]) or ns.say(step.text)
+      local state, extra = stateAt(step, snap, shown)
+      local clause = state == "ready" and whenOf(step) or needs(snap, state, extra)
+      local why = step.why and ns.say(step.why)
+      table.insert(parts, ("%s, %s%s."):format(name, (clause:gsub("^%u", string.lower)), why and (": " .. why) or ""))
+    end
+    local text = L["Rarely: %s"]:format(table.concat(parts, " "))
+    page.y = page.y + 4
+    page:paragraph(text, T.soft)
+    screen.rarely = text
+    table.insert(screen.text, text)
   end
   if #G.roles(class) > 1 and r.phase ~= "untalented" and not q then
     screen.change = function()
@@ -771,7 +727,7 @@ local function broken(title, text)
     hideRows()
     page:paragraph(say)
     page:finish()
-    ns.screen = { tab = TAB.level, broken = title or L["Something went wrong"], brokenText = say, text = {}, lines = 0 }
+    ns.screen = { tab = TAB.level, broken = title or L["Something went wrong"], brokenText = say, text = {} }
   end)
 end
 
@@ -818,7 +774,7 @@ local function draw()
     return
   end
   snap.className = snap.className or L["Unknown class"]
-  ns.screen = { tab = TAB.level, text = {}, lines = 0 }
+  ns.screen = { tab = TAB.level, text = {} }
   local kind, class = G.page(snap)
   if kind ~= "guide" then return empty(kind, snap) end
   local choice = ns.choice(snap.group)
@@ -920,7 +876,7 @@ function ns.window()
     -- (what the page was for is worked out again when the window is opened again, and a call that failed is tried again)
     f:HookScript("OnHide", function()
       ns.reader.reset()
-      view.subjects, view.changing, view.looking, view.why = nil, nil, nil, nil
+      view.subjects, view.changing, view.looking = nil, nil, nil
     end)
   end
   return f

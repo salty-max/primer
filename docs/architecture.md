@@ -86,12 +86,7 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   that say their name). The left list is the spine: the levels from the
   character's to 40 at which something arrives (a pick, or a spell the build's
   plans use), "You are here" at the character's own, the level shown picked
-  out. The page is the selected level's, with at most about ten lines of text
-  (`ns.BUDGET.lines`): the **pick** (next pick, or that level's, a "Why?" that opens
-  its reason), the **opening** as one chain of names, the **loop** as numbered
-  rows (`[n] icon name clause`, wrapping rather than clipping, the reason in the
-  icon's tooltip, a row the character cannot press yet grey in its place with what
-  it needs). The facts are the count beside the portrait (the build, the level and
+  out. The page is the selected level's: the **pick**, the **opening** (at most 5 steps), the **loop** (at most 6) and a quiet `rarely` note of the loop's rarest lines. Every step is a numbered row, its icon, its name and condition on one line and **its reason printed under it** in the dimmer body text, wrapped to the page, the row as tall as both, with room between rows and sections (`fillRow`). The page scrolls when they are longer than the window; nothing is cut. A row the character cannot press yet is grey in its place with what it needs. The facts are the count beside the portrait (the build, the level and
   the realm or the group: three at most) and the page's subtitle is how the road
   was chosen. Selecting a level is **looking**: "Looking at level 38." and "Back to
   my level", and nothing the page is for changes (`view.looking`); the level-10
@@ -100,7 +95,7 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   talent group) is frozen while the window is open. A role chosen sets its
   recommended build (`G.recommend`). **Nothing is cut with an ellipsis**: a line
   that does not fit is shortened in the content (the check holds every plan line
-  to 56 characters, a reason to 60, an opening to 6 steps and a loop to 8), rows
+  to 56 characters, a reason to 60, an opening to 5 steps and a loop to 6), rows
   wrap, and `/primer fit` (`ns.fit`) walks the open window and names any text the
   client cut (`IsTruncated`). The events are the same as before
   (`PLAYER_ENTERING_WORLD`, `PLAYER_LEVEL_UP`, `SPELLS_CHANGED`,

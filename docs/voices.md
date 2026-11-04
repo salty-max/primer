@@ -16,7 +16,7 @@ you to stop**. Never named, never "I" and never "we", always speaking to "you".
 - **The voice never changes the instruction.** The same spell, the same order,
   the same reason, in every voice. If a joke needs the instruction bent, the
   joke goes.
-- **Every line has its reason**, one toggle or tooltip away, and says when it
+- **Every line has its reason**, printed under it, wrapped and never truncated, and says when it
   stops being true. A line without a reason is cut.
 - **Dry and kind, not clever.** One dry remark per build at most. No praise
   and no blame: a pull that went wrong was a pull.
