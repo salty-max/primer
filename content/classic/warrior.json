@@ -11,6 +11,16 @@
    "soundsLike": "a sergeant who is not unkind. Short sentences, concrete nouns, little tolerance for waiting",
    "neverSays": "mana, cast, spell, channel, anything soft (gentle, flow)",
    "test": "could it be said in the time it takes to press the button?"
+  },
+  "roles": {
+   "damage": {
+    "build": "warrior-arms",
+    "reason": "The default levelling spec: a two-hander, Sweeping Strikes at 30, Mortal Strike at 40. Fury is the second choice."
+   },
+   "tank": {
+    "build": "warrior-protection",
+    "reason": "The only tanking build, for dungeons. Few guides level a warrior alone with it."
+   }
   }
  },
  "builds": [
@@ -20,9 +30,6 @@
    "name": "Arms",
    "role": "damage",
    "tree": 161,
-   "games": [
-    "classic"
-   ],
    "path": [
     {
      "points": [
@@ -555,9 +562,6 @@
    "name": "Fury",
    "role": "damage",
    "tree": 164,
-   "games": [
-    "classic"
-   ],
    "path": [
     {
      "points": [
@@ -984,9 +988,6 @@
    "name": "Protection",
    "role": "tank",
    "tree": 163,
-   "games": [
-    "classic"
-   ],
    "path": [
     {
      "points": [

@@ -8,10 +8,11 @@
     "ids": "bun scripts/root.ts --run addon-kit/ids.ts check",
     "kit:check": "bun scripts/root.ts --run addon-kit/sync.ts --check addon/Primer",
     "guide": "bun scripts/guide.ts",
+    "roads": "bun scripts/roads.ts",
     "locales": "bun scripts/locales.ts",
     "lint:lua": "stylua --check addon && selene addon/Primer",
     "format:lua": "stylua addon",
-    "check:ci": "bun scripts/locales.ts --check && bun run lint:lua && luajit addon/test/sim.lua && FOREVER=1 luajit addon/test/sim.lua && bun scripts/package.ts --check",
+    "check:ci": "bun scripts/locales.ts --check && bun test scripts && bun run lint:lua && luajit addon/test/sim.lua && FOREVER=1 luajit addon/test/sim.lua && bun scripts/package.ts --check",
     "check": "bun run kit:check && bun run ids && bun scripts/guide.ts --check && bun run check:ci",
     "package": "bun scripts/package.ts"
   }

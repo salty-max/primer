@@ -13,7 +13,10 @@
 --   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),
 --                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }
 --   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks), req (points in its tree it asks) }, every talent the builds name
+--   cells[n]       = { class, spell (rank 1), id, tab, row, col, max (ranks), req (points the tree asks), pre = { { id, rank } } }, every talent of the classes written:
+--                    the trees as the game draws them (Forever's rows, columns and prerequisites are inferred, docs/data.md)
 --   stances[key]   = the spell that is the form (its name is the game's, by id)
+--   roles on a class = { [role] = { build (id), why (word key) } }: the one build the page advises for the role
 local _, ns = ...
 ns.data = {
   game = "forever",
@@ -24,6 +27,9 @@ ns.data = {
   talents = {
   },
   advice = {
+  },
+  inferred = true,
+  cells = {
   },
   stances = {
   },

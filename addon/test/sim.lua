@@ -1794,6 +1794,41 @@ if not G.FOREVER then
   ns.reader.reset()
 end
 
+-- ── the data layout (M-A): roles and the trees' cells ───────────────────────
+if not G.FOREVER then
+  for classId, class in pairs(D.classes) do
+    local seen = {}
+    for _, id in ipairs(class.builds) do
+      seen[D.builds[id].role] = true
+    end
+    for role in pairs(seen) do
+      local r = class.roles and class.roles[role]
+      check(
+        r ~= nil and D.builds[r.build] and D.builds[r.build].role == role,
+        class.key .. ": one recommended build for the " .. role .. " role"
+      )
+      check(r ~= nil and ns.guideText[r.why] ~= nil, class.key .. ": the " .. role .. " recommendation says why")
+    end
+    local cells, trees = 0, {}
+    for _, c in ipairs(D.cells) do
+      if c.class == classId then
+        cells = cells + 1
+        trees[c.tab] = true
+        check(
+          c.row >= 0 and c.row <= 6 and c.col >= 0 and c.col <= 3 and c.max >= 1,
+          class.key .. ": a cell " .. c.spell .. " has a row, a column and ranks"
+        )
+      end
+    end
+    local n = 0
+    for _ in pairs(trees) do
+      n = n + 1
+    end
+    check(n == 3 and cells > 40, class.key .. ": three trees of cells (" .. cells .. ")")
+  end
+  check(D.inferred == nil, "Era's cells are the client's own, not inferred")
+end
+
 -- ── the minimap command ──────────────────────────────────────────────────────
 SlashCmdList.PRIMER("minimap")
 check(ns.option("minimapHidden") == true, "/primer minimap hides the button")

@@ -33,6 +33,20 @@
       "resource": "Mana. Seals, Judgement and heals spend it, and a swing costs none. When the bar is empty, keep swinging and sit down afterwards.",
       "levelling": "Seal on, Judgement when it is ready, swing the rest of the time. Heal when the fight is over and drink when the bar is low. Aura and blessing go on before the first pull and stay on.",
       "ten": "You get your first talent point. Pick damage, tank or heal and Primer shows the build and your first three picks. A respec costs gold, so choose what you will do most."
+    },
+    "roles": {
+      "damage": {
+        "build": "paladin-retribution",
+        "reason": "Most guides level a paladin as Retribution. It kills alone, and a seal does most of the work."
+      },
+      "heal": {
+        "build": "paladin-holy",
+        "reason": "The only healing build. Take it for groups, because it kills slowly alone."
+      },
+      "tank": {
+        "build": "paladin-protection",
+        "reason": "The only tanking build. Take it to hold monsters for a group."
+      }
     }
   },
   "builds": [
@@ -42,9 +56,6 @@
       "name": "Retribution",
       "role": "damage",
       "tree": 381,
-      "games": [
-        "classic"
-      ],
       "checked": "2026-11-04",
       "intro": "Retribution fights in melee with one big weapon and a seal that adds to every swing. It is the paladin that kills alone. The rest of the page is about which seal, and when to spend it with Judgement.",
       "pathNote": "(31 points or more in Retribution for Repentance. The rest are Holy, and Protection on the Holy-first road.)",
@@ -1077,9 +1088,6 @@
       "name": "Holy",
       "role": "heal",
       "tree": 382,
-      "games": [
-        "classic"
-      ],
       "checked": "2026-11-04",
       "intro": "Holy keeps people alive. The page cannot give a fixed order, because a healer's job is to answer whoever is losing health. It gives what each button is for, and when.",
       "pathNote": "(31 points in Holy for Holy Shock, then 20 in Protection).",
@@ -1596,9 +1604,6 @@
       "name": "Protection",
       "role": "tank",
       "tree": 383,
-      "games": [
-        "classic"
-      ],
       "checked": "2026-11-04",
       "intro": "Protection holds monsters on you and stays up. Threat is the list a monster keeps of who to hit next. The book has no taunt, so Righteous Fury, your seal and Holy Shield are what keep a monster looking at you.",
       "pathNote": "(31 points in Protection for Holy Shield, then 20 in Holy).",

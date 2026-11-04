@@ -18,6 +18,7 @@ ignore:
   - content
   - data
   - docs
+  - facts.lock.json
   - i18n
   - scripts
   - CLAUDE.md

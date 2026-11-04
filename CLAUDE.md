@@ -16,7 +16,7 @@ package, English only for now. Read the family's CLAUDE.md (`../CLAUDE.md`) firs
 | What | Where |
 |---|---|
 | The addon file by file: the package, Core, Window, Settings, Minimap, the tests, the languages | `docs/architecture.md` |
-| The guide's data, `content/<class>.json`, its shape and the facts check (`scripts/guide.ts`) | `docs/data.md` |
+| The guide's data, `content/<game>/<class>.json`, its shape and the facts check (`scripts/guide.ts`) | `docs/data.md` |
 | Which build a character is (feasibility, never the tree with most points) | `docs/inference.md` |
 | Where each build's facts were read, and what the research changed | `docs/sources.md` |
 | The voice's rules: the narrator, the class cards, what is the game's and what is ours | `docs/voices.md` |
@@ -29,6 +29,8 @@ package, English only for now. Read the family's CLAUDE.md (`../CLAUDE.md`) firs
 bun run check        # kit, saved ids, the guide's facts, languages, lint, the sim on both games, TOCs
 bun run check:ci     # what CI and the release gate run: no family folder (the kit, the saved ids and the guide's facts aside)
 bun run guide        # the Guide_*.lua and GuideText.lua again, after a content/ edit or wow-data's change (--check is in `check`)
+bun scripts/guide.ts --stamp <game> <build|all>   # after reading a moved fact (the facts lock, docs/data.md)
+bun run roads <game> <class> <tree> --from <research.md>   # a draft path from a research table (never writes over a file)
 bun run ids          # every table saved-ids.json lists keeps the ids it had at the fork point from origin/main
 bun scripts/root.ts --run addon-kit/q.ts check -- bun run check   # the same, quiet, stamping the tree for the push
 bun run package      # dist/Primer-<version>.zip for a test in the game

@@ -25,6 +25,12 @@
       "resource": "Mana, and it is the whole game. Every cast spends it, so you cast, wait and drink. The wand costs nothing and finishes a fight while the bar refills.",
       "levelling": "Frostbolt from as far as you can reach, Frost Nova when it gets close, step back and cast again. Drink between pulls. Pull one monster at a time until you are sure.",
       "ten": "You get your first talent point. Pick a build and Primer shows your first three picks. Frost is the safest way to level alone, and a respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "mage-frost",
+        "reason": "Frost slows and freezes, so a monster hits you less. The price: it hits a little softer than Fire."
+      }
     }
   },
   "builds": [
@@ -34,9 +40,6 @@
       "name": "Frost",
       "role": "damage",
       "tree": 61,
-      "games": [
-        "classic"
-      ],
       "checked": "2026-11-04",
       "intro": "Frost keeps the monster slow or frozen so it hits you less, and kills with Frostbolt. It is the mage that survives being alone.",
       "pathNote": "(34 points in Frost for Ice Barrier, then 17 in Arcane for mana.)",
@@ -992,9 +995,6 @@
       "name": "Fire",
       "role": "damage",
       "tree": 41,
-      "games": [
-        "classic"
-      ],
       "checked": "2026-11-04",
       "intro": "Fire hits hardest and sets the monster burning. It has no slow of its own, so the page gives you Frostbolt and Frost Nova for distance.",
       "pathNote": "(31 points in Fire for Combustion, then 20 in Frost).",
@@ -1579,9 +1579,6 @@
       "name": "Arcane",
       "role": "damage",
       "tree": 81,
-      "games": [
-        "classic"
-      ],
       "checked": "2026-11-04",
       "intro": "Arcane runs on mana and on spells that cost nothing. It is slow before 40 and good after, for a mage who would rather cast than flee.",
       "pathNote": "(31 points in Arcane for Arcane Power, then 20 in Fire).",

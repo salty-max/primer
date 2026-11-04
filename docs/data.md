@@ -1,11 +1,13 @@
 # Primer's data
 
 The guide's rules and words, and the facts check. Written by hand:
-`content/<class>.json` (one file a class). Generated, never edited:
+`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, and `content/forever/` for Forever, empty until M-E). Generated, never edited:
 `addon/Primer/Guide_Classic.lua`, `Guide_Forever.lua`, `GuideText.lua`
 (`bun scripts/guide.ts`, `--check` in `bun run check`).
 
-## content/<class>.json
+## content/<game>/<class>.json
+
+A game's own file: Era's advice and Forever's never share a line, so a build has no `games` list, the folder is the game. `class.roles` gives the one build the page advises for each role the class has (`{ "damage": { "build": "paladin-retribution", "reason": "..." } }`, a reason of 30 words at most, a role with several builds names the one, the others are "also works"). A build may carry `"lineBudget": true`: its plan lines hold to the budget (name and condition together at most 56 characters, a reason at most 60, what one line of the window holds). Until a build has had its pass the check only counts the lines over (a `note:` line), then the build is flagged and the check fails on the first one.
 
 ```
 class  = { id (ChrClasses), key, token, name, text (the class's page), card,
@@ -34,11 +36,10 @@ from play: the tables do not carry it.
 
 ## Adding a class (what a new class's content is)
 
-One file, `content/<key>.json` (lower-case class key: `paladin.json`, `mage.json`),
-the same shape as `content/warrior.json`, which is the model to copy. Nothing
-else is edited: the generator reads every file in `content/`, writes the class
-into `Guide_Classic.lua` (and `Guide_Forever.lua` for a build whose `games`
-names it), its words into `GuideText.lua`, and the window picks it up by the
+One file, `content/classic/<key>.json` (lower-case class key: `paladin.json`, `mage.json`),
+the same shape as `content/classic/warrior.json`, which is the model to copy. Nothing
+else is edited: the generator reads every file in `content/<game>/`, writes the class
+into `Guide_Classic.lua` or `Guide_Forever.lua`, whichever folder it is in, its words into `GuideText.lua`, and the window picks it up by the
 class token. No per-class code anywhere. In the file:
 
 - `class`: `id` (ChrClasses: Warrior 1, Paladin 2, Hunter 3, Rogue 4, Priest 5,
@@ -185,7 +186,33 @@ Against each game's own database (wow-data's `classic.db` / `forever.db`, the
 - every line is plain ASCII with no semicolon and no exclamation mark
 
 It fails the daily `game-data.yml` before its pull request when a patch moves
-a spell or a talent. A Forever talent's `node_id` is wow-data's inferred
+a spell or a talent.
+
+## The facts lock (facts.lock.json)
+
+Per game and build, every fact the build read: a spell's name, level and forms, a talent's
+cell (tree, row, column), ranks, points asked, first level and prerequisites, a tree's
+name. The run compares what it reads with the lock and **fails naming the build and the
+fact** ("classic mage-frost: spell 116 (Frostbolt) level: 6 became 4"), in `--check` and in
+the daily job's plain run alike. A build with no entry fails too. Only a person clears it:
+read the fact, then `bun scripts/guide.ts --stamp <game> <build key | all>`, which writes
+that build's entry again (with the day, and the client build it was read at), saying each fact it accepts and still failing on a build it does not stamp. Every class's whole trees are locked too (`cells:<class>`), since the Talents tab draws each cell. The Lua still carries the current pin's build and the content's `checked`, not the lock's stamp: showing the stamp in the Plan's footer is M-B. A lock that
+never fails would mean the check is wrong: `scripts/facts.test.ts` changes a fact and
+expects the red (`bun test scripts`, in `check:ci`).
+
+## The road importer (scripts/roads.ts)
+
+A draft maker, never a pipeline: `bun scripts/roads.ts classic paladin Retribution --from
+../ideas/class-guide-research/paladin-retribution.md [--table N] [--out draft.json]` reads one
+order table of a research file (Levels, Points, Talent) and prints a `path` with every `why`
+empty. Each name is resolved to one talent of the class in that game's data (no match, two
+matches, or an id beside it that is not that talent: listed, not guessed), and the order is
+walked as the generator walks a path (51 points in sequence, point N at level N + 9, ranks,
+the tree's gates, prerequisites, 31 in the build's tree). It never writes over a file (`--out`
+refuses an existing one) and never reads or writes authored content: a person reads the draft
+against the research once, fills the `why`s and pastes it in. Era's Retribution Icy Veins table
+comes out identical to the authored path. A table with no levels (Wowhead's tier-by-tier prose)
+is refused: that order is written by hand and marked `source: prose`. A Forever talent's `node_id` is wow-data's inferred
 mapping (its doc, "Where each source is weak"): not used until M6.
 
 ## What it found on the first run (3 November 2026)
@@ -197,6 +224,8 @@ in Arms when only 3 were spent. The second one was changed to Deflection 2/5
 was: a prose change for the writer to confirm.
 
 ## What the generator adds for the window
+
+`cells` in `Guide_<game>.lua`: every talent of the classes written, cell by cell (class, spell, id, tab, row 0 to 6 and col 0 to 3 as the game numbers them, max, req, pre), which the Talents tab draws the trees from. Forever's file says `inferred = true` (its rows, columns and prerequisites are inferred from the trait engine). `roles` on a class: the recommended build of each role (`build` id, `why` a word key).
 
 The stances are checked against the client's own `spell_info` (its shapeshift mask): a form the spell cannot be pressed in fails the check, and a spell the table limits to forms the writer left unsaid takes the table's (Hamstring, Sweeping Strikes). The writer may narrow a spell several forms allow, never widen it. A stance the writer gives a spell the table limits to no form is the writer's alone: the generator prints a `note:` line for it and keeps it (Death Wish says Berserker, the table says any form).
 

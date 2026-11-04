@@ -3,7 +3,7 @@
  * databases (../wow-data, its pinned sources), each game's own:
  *
  *   addon/Primer/Guide_Classic.lua, Guide_Forever.lua: the rules of every build
- *     written for that game (content/<class>.json: a build's `games`): its
+ *     written for that game (content/<game>/<class>.json, one file a class a game): its
  *     talent path (a step: the points, the level, the talent's id and the rank
  *     it reaches) and its stages (the level bracket, each priority row with the
  *     spell, the level it is learned at, its stance, its conditions and the
@@ -25,14 +25,21 @@
  * A patch that drops or moves a spell or a talent fails here, and so the daily
  * game-data job, before its pull request.
  *
- *   bun scripts/guide.ts           write them
- *   bun scripts/guide.ts --check   fail if one isn't up to date (the facts too)
+ * facts.lock.json holds, per game and build, every fact the build read (a spell's
+ * name, level and forms, a talent's cell, ranks and prerequisites, a tree's name).
+ * A fact that moved fails the run and names it. Only a person clears it, by reading
+ * the fact and stamping the build again (--stamp). A build with no entry fails too.
+ *
+ *   bun scripts/guide.ts                     write them
+ *   bun scripts/guide.ts --check             fail if one isn't up to date (the facts too)
+ *   bun scripts/guide.ts --stamp <game> <build key | all>   write the lock's entry again
  */
 import type { Database } from "bun:sqlite";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type * as WowDb from "../../wow-data/src/db";
 import { familyPath } from "./root";
+import { diffFacts, type Lock } from "./facts-lib";
 
 // through the family folder, from a worktree too (scripts/root.ts)
 const { openDb } = (await import(familyPath("wow-data", "src", "db.ts"))) as typeof WowDb;
@@ -40,6 +47,10 @@ const { openDb } = (await import(familyPath("wow-data", "src", "db.ts"))) as typ
 const ROOT = join(import.meta.dir, "..");
 const ADDON = join(ROOT, "addon", "Primer");
 const CHECK = process.argv.includes("--check");
+const STAMP = process.argv.includes("--stamp") ? process.argv.slice(process.argv.indexOf("--stamp") + 1) : null;
+const LOCK_FILE = process.env.PRIMER_LOCK ?? join(ROOT, "facts.lock.json"); // (the test points it at a copy)
+const BUDGET_LINE = 56; // a plan row's name and condition together, in characters (one line of the window)
+const BUDGET_WHY = 60; // a reason, which the tooltip and the toggle show
 type Game = "classic" | "forever";
 const GAMES: Game[] = ["classic", "forever"];
 const FILE: Record<Game, string> = { classic: "Guide_Classic.lua", forever: "Guide_Forever.lua" };
@@ -118,8 +129,8 @@ type Build = {
   name: string;
   role: string;
   tree: number;
-  games: Game[];
   checked: string;
+  lineBudget?: boolean; // the plan's lines hold to the line budget (docs/data.md): enforced once a build has had its pass, counted until then
   intro: string;
   line?: string; // one line for the class's overview (none: the first sentence of the intro)
   pathNote: string;
@@ -139,14 +150,31 @@ type Build = {
   stages: Stage[];
 };
 type Content = {
-  class: { id: number; key: string; token: string; name: string; text: string; card: Record<string, string>; advice?: { role: string; say?: string }[]; overview?: Record<string, string> };
+  class: {
+    id: number;
+    key: string;
+    token: string;
+    name: string;
+    text: string;
+    card: Record<string, string>;
+    advice?: { role: string; say?: string }[];
+    overview?: Record<string, string>;
+    roles?: Record<string, { build: string; reason: string }>; // the one build the page advises for a role, and why
+  };
   builds: Build[];
 };
 
-const content: Content[] = readdirSync(join(ROOT, "content"))
-  .filter((f) => f.endsWith(".json"))
-  .sort()
-  .map((f) => JSON.parse(readFileSync(join(ROOT, "content", f), "utf8")));
+// content/<game>/<class>.json: a game's own file for a class, never one game's line on the other
+const content: Record<Game, Content[]> = { classic: [], forever: [] };
+for (const g of GAMES) {
+  const dir = join(ROOT, "content", g);
+  if (!existsSync(dir)) continue;
+  content[g] = readdirSync(dir)
+    .filter((f) => f.endsWith(".json"))
+    .sort()
+    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")));
+}
+const budgetOver = new Map<string, [number, number]>(); // build key (game): plan lines over the budget, plan lines
 
 const filled = new Map<Row, string[]>(); // the stances the table gave a row, per run of a game (never written back to the content)
 const unchecked = new Set<string>(); // stances written that the table cannot confirm
@@ -170,9 +198,10 @@ function word(key: string, value: string | undefined) {
 }
 
 // ── the facts, a game at a time ──────────────────────────────────────────────
-type Tal = { id: number; tab_id: number; row: number; max_rank: number; spell_id: number; req_points: number; min_level: number };
+type Tal = { id: number; tab_id: number; row: number; col: number; max_rank: number; spell_id: number; req_points: number; min_level: number };
 class Facts {
   db: Database;
+  seen = new Map<string, string>(); // every fact read since the last reset, for the lock ("spell 116 name": "Frostbolt")
   tal = new Map<number, Tal>(); // by rank 1's spell
   prereq = new Map<number, { requires: number; rank: number }[]>(); // by talent id
   constructor(
@@ -180,7 +209,7 @@ class Facts {
     readonly classId: number,
   ) {
     this.db = openDb(game);
-    for (const t of this.db.query("SELECT id, tab_id, row, max_rank, spell_id, req_points, min_level FROM talent WHERE class_id = ?").all(classId) as Tal[]) this.tal.set(t.spell_id, t);
+    for (const t of this.db.query("SELECT id, tab_id, row, col, max_rank, spell_id, req_points, min_level FROM talent WHERE class_id = ?").all(classId) as Tal[]) this.tal.set(t.spell_id, t);
     for (const p of this.db.query("SELECT talent_id, requires_id, rank FROM talent_prereq").all() as { talent_id: number; requires_id: number; rank: number }[]) {
       if (!this.prereq.has(p.talent_id)) this.prereq.set(p.talent_id, []);
       this.prereq.get(p.talent_id)!.push({ requires: p.requires_id, rank: p.rank });
@@ -189,16 +218,19 @@ class Facts {
   /** A spell's name in the game's data (null: no such spell). */
   name(spell: number): string | null {
     const r = this.db.query("SELECT name FROM name WHERE kind = 'spell' AND id = ? AND locale = 'enUS'").get(spell) as { name: string } | null;
+    this.seen.set(`spell ${spell} name`, r ? r.name : "none");
     return r ? r.name : null;
   }
   /** The level a class learns a spell at: its book's (null: not in it, or no level). */
   level(spell: number): number | null | undefined {
     const r = this.db.query("SELECT level FROM class_spell WHERE class_id = ? AND spell_id = ?").get(this.classId, spell) as { level: number | null } | null;
+    this.seen.set(`spell ${spell} level`, r ? String(r.level) : "none");
     return r ? r.level : undefined;
   }
   /** The forms a spell can be pressed in, from the client's own table (SpellShapeshift): null when it asks for none. */
   stances(spell: number): string[] | null {
     const r = this.db.query("SELECT stance_mask, stance_exclude FROM spell_info WHERE spell_id = ?").get(spell) as { stance_mask: number | null; stance_exclude: number | null } | null;
+    this.seen.set(`spell ${spell} forms`, r?.stance_mask ? `${r.stance_mask}/${r.stance_exclude ?? 0}` : "none");
     if (!r || !r.stance_mask) return null;
     const mine = Object.entries(STANCE_FORMS).filter(([, bit]) => (r.stance_mask! & (1 << bit)) !== 0 && ((r.stance_exclude ?? 0) & (1 << bit)) === 0);
     return mine.length ? mine.map(([k]) => k) : null;
@@ -264,6 +296,7 @@ function checkBuild(b: Build, f: Facts) {
   const takens = [simulate(b.path, "path step").taken];
   for (const [i, road] of (b.roads ?? []).entries()) takens.push(simulate(road.path, `road ${i + 2} step`).taken);
   const tab = f.db.query("SELECT name FROM name WHERE kind = 'talent_tab' AND id = ? AND locale = 'enUS'").get(b.tree) as { name: string } | null;
+  f.seen.set(`tree ${b.tree} name`, tab ? tab.name : "none");
   if (!tab || tab.name !== b.name) bad(`${at}: the build is named ${b.name}, its tree ${b.tree} ${tab ? tab.name : "is no tree"}`);
   // the stages follow each other
   let next = b.stages[0]?.from ?? 1;
@@ -350,6 +383,10 @@ function checkBuild(b: Build, f: Facts) {
         }
       } else if (!x.text) bad(`${at}: neither a spell nor a text`);
       if (needWhy && !x.why) bad(`${at}: no reason`);
+      const over = (x.name ?? x.text ?? "").length + (x.if ? 1 + x.if.length : 0) > BUDGET_LINE || (x.why?.length ?? 0) > BUDGET_WHY;
+      const tally = budgetOver.get(`${b.key} (${f.game})`) ?? [0, 0];
+      budgetOver.set(`${b.key} (${f.game})`, [tally[0] + (over ? 1 : 0), tally[1] + 1]);
+      if (over && b.lineBudget) bad(`${at}: over the line budget (name and condition ${BUDGET_LINE} characters, reason ${BUDGET_WHY})`);
       clause(x.if, at, "its condition");
       clause(x.why, at, "its reason");
       clause(x.say, at, "its instruction");
@@ -425,15 +462,18 @@ function stepLua(x: PlanStep & { learned?: number }, key: string, bare = false):
   return `{ ${f.join(", ")} }`;
 }
 
+const lockNow: Lock = { classic: {}, forever: {} }; // what each build read this run, for the lock
+
 function luaFor(game: Game): { lua: string; builds: number } {
   const lines: string[] = [];
   const classes: string[] = [];
   const builds: string[] = [];
   const used = new Map<number, Tal>(); // the talents the builds name, by rank 1's spell
   const advice: string[] = []; // the level-10 advice a class's content adds, by class and role
+  const cells: string[] = []; // every talent of the classes written, cell by cell (the window draws the trees from them)
   let version = "";
-  for (const c of content) {
-    const mine = c.builds.filter((b) => b.games.includes(game));
+  for (const c of content[game]) {
+    const mine = c.builds;
     if (!mine.length) continue;
     const f = new Facts(game, c.class.id);
     version = f.pins();
@@ -453,11 +493,46 @@ function luaFor(game: Game): { lua: string; builds: number } {
       else mineAdvice.push(`${a.role} = { say = ${a.say ? q(word(`${c.class.key}.advice.${a.role}`, a.say)!) : "false"} }`);
     }
     if (mineAdvice.length) advice.push(`    [${c.class.id}] = { ${mineAdvice.join(", ")} },`);
+    // one recommended build a role, with its reason (the page never asks which: docs/data.md)
+    const roles: string[] = [];
+    for (const role of new Set(mine.map((b) => b.role))) {
+      const r = c.class.roles?.[role];
+      if (!r) {
+        bad(`${c.class.key} (${game}): the ${role} role has no recommended build (class.roles.${role})`);
+        continue;
+      }
+      const chosen = mine.find((b) => b.key === r.build);
+      if (!chosen || chosen.role !== role) bad(`${c.class.key} (${game}): roles.${role} names ${r.build}, no ${role} build of the class`);
+      if (!r.reason || r.reason.trim().split(/\s+/).length > 30) bad(`${c.class.key} (${game}): roles.${role} gives a reason of 30 words at most`);
+      else roles.push(`${role} = { build = ${chosen?.id ?? 0}, why = ${q(word(`${c.class.key}.role.${role}`, r.reason)!)} }`);
+    }
+    for (const role of Object.keys(c.class.roles ?? {})) if (!mine.some((b) => b.role === role)) bad(`${c.class.key} (${game}): roles.${role}, but no ${role} build is written for ${game}`);
+    if (roles.length) classes[classes.length - 1] = classes[classes.length - 1].replace(/ \},$/, `, roles = { ${roles.join(", ")} } },`);
+    const all = [...f.tal.values()].sort((a, b) => a.tab_id - b.tab_id || a.row - b.row || a.col - b.col);
+    // the class's whole trees are locked too: the Talents tab draws every cell, so one that moves must be read
+    const treeFacts: Record<string, string> = {};
+    for (const t of all) treeFacts[`cell ${t.spell_id}`] = `tree ${t.tab_id} row ${t.row} column ${t.col}, ${t.max_rank} ranks, ${t.req_points} points asked, needs ${(f.prereq.get(t.id) ?? []).map((p) => `${p.requires} at ${p.rank ?? 0}`).sort().join(", ") || "none"}`;
+    lockNow[game][`cells:${c.class.key}`] = { build: f.build(), facts: treeFacts };
+    for (const t of all) {
+      const pre = (f.prereq.get(t.id) ?? []).map((p) => `{ id = ${p.requires}, rank = ${p.rank ?? 0} }`);
+      cells.push(`    { class = ${c.class.id}, spell = ${t.spell_id}, id = ${t.id}, tab = ${t.tab_id}, row = ${t.row}, col = ${t.col}, max = ${t.max_rank}, req = ${t.req_points}${pre.length ? `, pre = { ${pre.join(", ")} }` : ""} },`);
+    }
     for (const b of mine) {
+      f.seen = new Map();
       checkBuild(b, f);
       const k = b.key;
       const names = [...[b.path, ...(b.roads ?? []).map((r) => r.path)].flat().flatMap((s) => s.any ?? (s.talent === undefined ? [] : [s.talent])), ...b.stages.flatMap((st) => stepsOf(st).flatMap((r) => [...(r.need?.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]))];
       for (const n of names) if (f.tal.has(n)) used.set(n, f.tal.get(n)!);
+      for (const n of new Set(names)) {
+        const t = f.tal.get(n);
+        if (!t) continue;
+        f.seen.set(`talent ${n} cell`, `tree ${t.tab_id} row ${t.row} column ${t.col}, id ${t.id}`);
+        f.seen.set(`talent ${n} ranks`, String(t.max_rank));
+        f.seen.set(`talent ${n} points asked`, String(t.req_points));
+        f.seen.set(`talent ${n} first level`, String(t.min_level));
+        f.seen.set(`talent ${n} needs`, (f.prereq.get(t.id) ?? []).map((p) => `${p.requires} at ${p.rank ?? 0}`).sort().join(", ") || "none");
+      }
+      lockNow[game][b.key] = { build: f.build(), facts: Object.fromEntries([...f.seen].sort(([a], [b]) => (a < b ? -1 : 1))) };
       const out: string[] = [];
       out.push(`    [${b.id}] = {`);
       out.push(`      key = ${q(k)}, class = ${c.class.id}, role = ${q(b.role)}, tree = ${b.tree}, name = ${q(b.name)},`);
@@ -562,7 +637,10 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "--   rows[n]     = { spell (rank 1), level (it is learned), talent (a talent's spell), talents (taken first),",
     "--                   stance (stances it is pressed in: the writer's, else what the client's table allows), when (a situation), say }",
     "--   talents[spell] = { id (the talent's, as the game's talent call gives it), tab (its tree), max (its ranks), req (points in its tree it asks) }, every talent the builds name",
+    "--   cells[n]       = { class, spell (rank 1), id, tab, row, col, max (ranks), req (points the tree asks), pre = { { id, rank } } }, every talent of the classes written:",
+    "--                    the trees as the game draws them" + (game === "forever" ? " (Forever's rows, columns and prerequisites are inferred, docs/data.md)" : ""),
     "--   stances[key]   = the spell that is the form (its name is the game's, by id)",
+    "--   roles on a class = { [role] = { build (id), why (word key) } }: the one build the page advises for the role",
     "local _, ns = ...",
     "ns.data = {",
     `  game = ${q(game)},`,
@@ -578,6 +656,10 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "  advice = {",
     ...advice,
     "  },",
+    ...(game === "forever" ? ["  inferred = true,"] : []),
+    "  cells = {",
+    ...cells,
+    "  },",
     "  stances = {",
     ...(builds.length ? Object.entries(STANCE_SPELLS).map(([k, [id]]) => `    ${k} = ${id},`) : []),
     "  },",
@@ -589,6 +671,44 @@ function luaFor(game: Game): { lua: string; builds: number } {
 for (const k of WHEN) word(`when.${k}`, WHEN_WORDS[k]);
 const outputs: [string, string][] = [];
 for (const g of GAMES) outputs.push([join(ADDON, FILE[g]), luaFor(g).lua]);
+
+// ── the lock: the facts each build read, as they were when a person last stamped it ──
+const lock: Lock = existsSync(LOCK_FILE) ? JSON.parse(readFileSync(LOCK_FILE, "utf8")) : { classic: {}, forever: {} };
+let lockOut: Lock | null = null;
+if (STAMP) {
+  const [game, which] = STAMP;
+  if (!GAMES.includes(game as Game) || !which) bad("--stamp <classic|forever> <build key | all>");
+  else if (which !== "all" && !lockNow[game as Game][which] && !lock[game as Game]?.[which]) bad(`--stamp: no build ${which} written for ${game}`);
+  else {
+    lockOut = structuredClone(lock);
+    for (const [key, entry] of Object.entries(lockNow[game as Game])) {
+      if (which === "all" || which === key) {
+        // what the stamp accepts, said out loud
+        for (const m of diffFacts(lock[game as Game]?.[key]?.facts ?? {}, entry.facts)) console.log(`stamping ${game} ${key}: ${m}`);
+        lockOut[game as Game][key] = { ...entry, stamped: new Date().toISOString().slice(0, 10) };
+      } else {
+        const was = lock[game as Game]?.[key];
+        if (!was) bad(`${game} ${key}: not in facts.lock.json, stamp it as well`);
+        else for (const m of diffFacts(was.facts, entry.facts)) bad(`${game} ${key}: ${m} (not stamped: this run stamps ${which})`);
+      }
+    }
+    for (const key of Object.keys(lockOut[game as Game])) {
+      if (lockNow[game as Game][key] || (which !== "all" && which !== key)) continue;
+      console.log(`stamping ${game} ${key}: dropped, no such build is written any more`);
+      delete lockOut[game as Game][key];
+    }
+  }
+} else {
+  for (const g of GAMES) {
+    for (const [key, now] of Object.entries(lockNow[g])) {
+      const was = lock[g]?.[key];
+      if (!was) bad(`${g} ${key}: not in facts.lock.json, read its facts then bun scripts/guide.ts --stamp ${g} ${key}`);
+      else for (const m of diffFacts(was.facts, now.facts)) bad(`${g} ${key}: ${m} (read it, then bun scripts/guide.ts --stamp ${g} ${key})`);
+    }
+    for (const key of Object.keys(lock[g] ?? {})) if (!lockNow[g][key]) bad(`${g} ${key}: in facts.lock.json, but no such build is written any more (bun scripts/guide.ts --stamp ${g} ${key} drops it)`);
+  }
+}
+for (const [k, [n, of]] of budgetOver) if (n) console.log(`note: ${k}: ${n} of ${of} plan lines over the line budget (docs/data.md)`);
 const sorted = Object.keys(text).sort();
 outputs.push([
   join(ADDON, "GuideText.lua"),
@@ -609,6 +729,7 @@ if (problems.length) {
   process.exit(1);
 }
 let stale = false;
+if (lockOut) writeFileSync(LOCK_FILE, JSON.stringify(lockOut, null, 1) + "\n");
 for (const [file, lua] of outputs) {
   const now = existsSync(file) ? readFileSync(file, "utf8") : "";
   if (now === lua) continue;
@@ -618,4 +739,4 @@ for (const [file, lua] of outputs) {
   } else writeFileSync(file, lua);
 }
 if (stale) process.exit(1);
-console.log(`✓ the guide: ${content.reduce((n, c) => n + c.builds.length, 0)} builds, ${sorted.length} words, the facts checked in ${GAMES.filter((g) => content.some((c) => c.builds.some((b) => b.games.includes(g)))).join(" and ")}`);
+console.log(`✓ the guide: ${GAMES.reduce((n, g) => n + content[g].reduce((m, c) => m + c.builds.length, 0), 0)} builds, ${sorted.length} words, the facts checked and locked in ${GAMES.filter((g) => content[g].length).join(" and ")}`);
