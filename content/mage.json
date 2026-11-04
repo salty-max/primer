@@ -348,7 +348,97 @@
               },
               "name": "Conjure Food"
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "once, before the pull",
+                "why": "it adds armour"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "once, before the first pull",
+                "why": "more Intellect means more mana to spend"
+              },
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "if": "as the opener, until Frostbolt comes at level 4",
+                "why": "it reaches the monster from far away"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far as you can reach, once you have it",
+                "why": "it is your main damage and it slows the monster"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "whenever you can cast",
+                "why": "it is your main damage and it slows the monster"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when the monster is on you or running",
+                "why": "it has no cast bar, so it fills the gap"
+              },
+              {
+                "spell": 5143,
+                "name": "Arcane Missiles",
+                "if": "when nothing can reach you while you cast",
+                "why": "you cannot move for any of it"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "when a second monster joins and you cannot kill it first",
+                "why": "a sheep does not attack"
+              },
+              {
+                "text": "Use your wand",
+                "why": "it costs no mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "when it has run out",
+                "why": "it adds armour"
+              },
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when you have no drink left",
+                "why": "sitting with one brings mana back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when you have no food left",
+                "why": "eating brings health back for no mana"
+              }
+            ],
+            "low": [
+              {
+                "text": "Use your wand",
+                "if": "when the bar is nearly empty",
+                "why": "it costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ]
+          }
         },
         {
           "from": 10,
@@ -412,7 +502,98 @@
               },
               "name": "Frost Armor"
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "once, before the pull",
+                "why": "it adds armour"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "once, before the first pull",
+                "why": "more Intellect means more mana to spend"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far as you can reach",
+                "why": "it is your main damage and it slows the monster"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "again, before it arrives",
+                "why": "it is your main damage and it slows the monster"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when the monster reaches you",
+                "why": "it freezes it, and the point is the distance"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when the monster is nearly dead or running",
+                "why": "it has no cast bar"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "when a second monster joins and you can deal with one first",
+                "why": "a sheep does not attack"
+              },
+              {
+                "spell": 1449,
+                "name": "Arcane Explosion",
+                "if": "when two or more are on you",
+                "why": "it hits everything around you"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it is your main damage and it slows the monster"
+              }
+            ],
+            "between": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "when it has run out",
+                "why": "it adds armour"
+              },
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when you have no drink left",
+                "why": "sitting with one brings mana back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when you have no food left",
+                "why": "eating brings health back for no mana"
+              }
+            ],
+            "low": [
+              {
+                "text": "Use your wand",
+                "if": "when the bar is nearly empty",
+                "why": "it costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ]
+          }
         },
         {
           "from": 20,
@@ -512,7 +693,128 @@
               "name": "Ice Block",
               "talentSpell": 11958
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "once, before the pull",
+                "why": "it adds armour"
+              },
+              {
+                "spell": 7302,
+                "name": "Ice Armor",
+                "if": "from level 30, instead of Frost Armor",
+                "why": "more armour and a slow on melee attackers"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "once, before the first pull",
+                "why": "more Intellect means more mana to spend"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far as you can reach",
+                "why": "it is your main damage and it slows the monster"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "again, before it arrives",
+                "why": "it is your main damage and it slows the monster"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster is casting a spell",
+                "why": "it stops the whole school for a while"
+              },
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when the monster reaches you",
+                "why": "it freezes it, and the point is the distance"
+              },
+              {
+                "spell": 120,
+                "name": "Cone of Cold",
+                "if": "when two or more are on you",
+                "why": "it hits everything in front of you and slows it"
+              },
+              {
+                "spell": 10,
+                "name": "Blizzard",
+                "if": "when a pack is coming and you can stand still",
+                "why": "it rains ice on the ground you chose"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it is your main damage and it slows the monster"
+              }
+            ],
+            "between": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "when it has run out",
+                "why": "it adds armour"
+              },
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when you have no drink left",
+                "why": "sitting with one brings mana back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when you have no food left",
+                "why": "eating brings health back for no mana"
+              }
+            ],
+            "low": [
+              {
+                "text": "Use your wand",
+                "if": "when the bar is nearly empty",
+                "why": "it costs no mana"
+              },
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when the fight is over and the bar is empty",
+                "why": "it brings mana back much faster"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 11958,
+                  "name": "Ice Block",
+                  "talentSpell": 11958
+                },
+                {
+                  "spell": 1463,
+                  "name": "Mana Shield"
+                },
+                {
+                  "spell": 1953,
+                  "name": "Blink"
+                }
+              ],
+              "say": "keep them for the fight that would otherwise kill you"
+            }
+          }
         },
         {
           "from": 40,
@@ -598,7 +900,132 @@
               },
               "name": "Evocation"
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 7302,
+                "name": "Ice Armor",
+                "if": "once, before the pull",
+                "why": "more armour and a slow on melee attackers"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "once, before the first pull",
+                "why": "more Intellect means more mana to spend"
+              },
+              {
+                "spell": 11426,
+                "name": "Ice Barrier",
+                "if": "just before a hard pull",
+                "why": "it shields you, and spells are not interrupted while it holds",
+                "talentSpell": 11426
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far as you can reach",
+                "why": "it is your main damage and it slows the monster"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster is casting a spell",
+                "why": "it stops the whole school for a while"
+              },
+              {
+                "spell": 11426,
+                "name": "Ice Barrier",
+                "if": "when it has gone and the monster is hitting you",
+                "why": "it shields you, and spells are not interrupted while it holds",
+                "talentSpell": 11426
+              },
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when the monster reaches you",
+                "why": "it freezes it, and the point is the distance"
+              },
+              {
+                "spell": 120,
+                "name": "Cone of Cold",
+                "if": "when two or more are on you",
+                "why": "it hits everything in front of you and slows it"
+              },
+              {
+                "spell": 10,
+                "name": "Blizzard",
+                "if": "when a pack is coming and you can stand still",
+                "why": "it rains ice on the ground you chose"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it is your main damage and it slows the monster"
+              }
+            ],
+            "between": [
+              {
+                "spell": 7302,
+                "name": "Ice Armor",
+                "if": "when it has run out",
+                "why": "more armour and a slow on melee attackers"
+              },
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when you have no drink left",
+                "why": "sitting with one brings mana back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when you have no food left",
+                "why": "eating brings health back for no mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6117,
+                "name": "Mage Armor",
+                "if": "when mana, not health, runs out first",
+                "why": "it keeps more of your mana regeneration while you cast"
+              },
+              {
+                "text": "Use your wand",
+                "if": "when the bar is nearly empty",
+                "why": "it costs no mana"
+              },
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when the fight is over and the bar is empty",
+                "why": "it brings mana back much faster"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 11958,
+                  "name": "Ice Block",
+                  "talentSpell": 11958
+                },
+                {
+                  "spell": 12051,
+                  "name": "Evocation"
+                }
+              ],
+              "say": "Ice Block for the fight that would kill you, Evocation for an empty bar"
+            }
+          }
         }
       ]
     },

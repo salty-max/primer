@@ -66,6 +66,20 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   and counts the points off the nearest build of the new role, and says a
   respec costs gold. Saved per talent group: `role`, `pickedBuild`,
   `freestyle`, `driftSeen`, `driftWay`, `notYet`.
+- **What the page is for (4 November 2026, after the first game test)**: a
+  header on every tab says it in one line ("Retribution Paladin. Damage. Level
+  12. A build you picked." and how it was chosen: a build you picked, following
+  your points, your own way, not chosen yet). What the page is for (the role
+  and build, `view.subject`) is fixed while the window is open and changes only
+  on the player's own click or when the window is opened: a point spent, a
+  level or a spell learned update the facts, the ticks and the notes in place,
+  never the build or role. A picked build is never swapped for the nearest one:
+  the drift is said and Follow is a button. A click on another build or role
+  only looks (`view.look`): the page says so loudly with Use this build and
+  Back, and nothing is chosen until Use. A refresh from an event keeps the
+  scroll and the talent in view; a tab or a click starts at the top.
+- **The rotation plan** (`drawPlan`, `G.stepState`): a stage's `plan` shown as
+  Opening, Loop, Between fights, Low mana and Big cooldowns (`docs/data.md`).
 - **Window.lua**: `K.gameWindow` ("PrimerFrame") or `K.dialog`, the kit's book
   geometry (`K.BOOK_W` x `K.BOOK_H`, the builds on the left, the page on the
   right, no search), `K.movable` (place in `PrimerSettings.places.window`,

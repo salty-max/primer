@@ -68,3 +68,15 @@ could it be said in the time it takes to press the button?
 A class is read cold by the `prose-reader` before the user reads it, and the
 user reads every class before it ships (the plan, section 4): the generator
 checks ids, not judgement.
+
+## A plan line
+
+A rotation plan's step (`docs/data.md`, "The rotation plan") is three clauses
+in one line: when it applies (`if`), what to do (`say`, only when the spell's
+name is not enough), why (`why`). Plain and imperative, the condition first and
+the reason last, each one short clause (at most 14 words, no full stop: the
+window adds it), no semicolons, no exclamation marks. "Whenever it is ready. It
+is most of your damage." is the model. The loop's last line has no condition:
+it is what you do when nothing above applies. A line never states a figure the
+game's tables cannot back, and never changes what the spell is for to make a
+joke. The voice is in the choice of words, never in a changed instruction.

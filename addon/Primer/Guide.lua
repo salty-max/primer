@@ -169,6 +169,21 @@ function G.rows(stage, snap)
   return out, unlearned
 end
 
+-- A plan step as the character stands: "ready" (shown plain), or why it is not
+-- yet: "level" (and the level it comes at), "talent" (and the talent spell it
+-- needs) or "book" (the level is reached and the spell is not learned). A line
+-- of text alone, and the spell every character has, are always ready.
+function G.stepState(step, snap)
+  if not step.spell or step.common then return "ready" end
+  if snap.level < step.level then return "level", step.level end
+  if step.talent and rankOf(snap, step.talent) == 0 then return "talent", step.talent end
+  for _, spell in ipairs(step.talents or {}) do
+    if rankOf(snap, spell) == 0 then return "talent", spell end
+  end
+  if not snap.knows(step.spell) then return "book" end
+  return "ready"
+end
+
 -- The build's talents in order, as the character stands: each step with its
 -- state ("done", "partly", "later"), the rank it has and the talents it names
 -- ({ spell, info (the game's: name, icon, rank, max) }), and the index of the
@@ -291,12 +306,15 @@ function G.split(snap)
 end
 
 -- What the character is on: its phase, role (the one it chose, else the points'),
--- the build the page follows and why ("picked": the build it picked, its points
--- still fit; "kept": it kept the pick the points left; "inferred": the nearest
--- build to the points; "default": nothing spent yet), a drift to say once
--- (kind "build" or "role", with the marker the player's dismissal is kept
--- by), the split trees. A freestyle character has no drift and no split.
--- choice is the group's own: role, pickedBuild, freestyle, driftSeen, driftWay.
+-- the build the page is for and why (mode "picked": the build it picked, kept
+-- whatever its points do, a pick is never swapped under it; "points": nothing
+-- picked, the nearest build to the points; "none": nothing spent yet; "own":
+-- their own way), a drift to say once (kind "build" or "role", with the marker
+-- the player's dismissal is kept by), the split trees. A freestyle character
+-- has no drift and no split. choice is the group's own: role, pickedBuild,
+-- freestyle, driftSeen. The window freezes the role and build it shows (it
+-- changes only on the player's own click), so a point spent updates the facts
+-- and never what the page is for.
 function G.resolve(snap, class, choice)
   local r = { phase = G.phase(snap), freestyle = choice.freestyle and true or false }
   r.roleChosen = false
@@ -308,19 +326,20 @@ function G.resolve(snap, class, choice)
   for _, id in ipairs(G.builds(class, r.role)) do
     if id == choice.pickedBuild then picked = id end
   end
-  if r.phase ~= "spent" then
-    r.build = picked or G.build(snap, class, r.role, nil)
-    r.followed = picked and "picked" or "default"
-    return r
+  local spent = r.phase == "spent"
+  local role, far
+  if spent then
+    role, far = G.nearest(snap, class, r.role)
   end
+  r.build = picked or role or G.build(snap, class, r.role, nil)
+  r.followed = picked and "picked" or spent and "points" or "default"
+  r.mode = r.freestyle and "own" or picked and "picked" or spent and "points" or "none"
+  if not spent then return r end
   local n = G.earned(snap)
-  local role, far = G.nearest(snap, class, r.role)
   local any, anyFar = G.nearest(snap, class, nil)
   r.nearest, r.far = role, far
-  if picked and G.differ(snap, data().builds[picked], n) <= G.TOLERANCE then
-    r.build, r.followed = picked, "picked"
-  else
-    r.build, r.followed = role, "inferred"
+  local fits = picked and G.differ(snap, data().builds[picked], n) <= G.TOLERANCE
+  if not fits then
     if far > G.TOLERANCE then r.splitTrees = { G.split(snap) } end
     local mark = role .. ":" .. r.role .. ":" .. (any or "")
     if anyFar <= G.TOLERANCE and far > G.TOLERANCE and data().builds[any].role ~= r.role then
@@ -328,12 +347,7 @@ function G.resolve(snap, class, choice)
     elseif picked and picked ~= role then
       r.drift = { kind = "build", from = picked, to = role, mark = mark }
     end
-    if r.drift and choice.driftSeen == r.drift.mark then
-      if r.drift.kind == "build" and choice.driftWay == "keep" then
-        r.build, r.followed = picked, "kept"
-      end
-      r.drift.seen = true
-    end
+    if r.drift and choice.driftSeen == r.drift.mark then r.drift.seen = true end
   end
   if r.freestyle then
     r.drift, r.splitTrees = nil, nil

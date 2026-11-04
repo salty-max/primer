@@ -174,26 +174,29 @@ if not G.FOREVER then
   )
   r = R.resolve(at(24, ARMS15), 1, {})
   check(
-    r.build == 1 and r.followed == "inferred" and r.far == 0 and not r.drift and not (r.splitTrees and r.splitTrees[1]),
-    "points on Arms: the page follows Arms, nothing to say"
+    r.build == 1
+      and r.followed == "points"
+      and r.mode == "points"
+      and r.far == 0
+      and not r.drift
+      and not (r.splitTrees and r.splitTrees[1]),
+    "points on Arms, nothing picked: the page follows the points, nothing to say"
   )
   r = R.resolve(at(24, ARMS15), 1, { pickedBuild = 1 })
   check(r.followed == "picked" and r.build == 1, "a picked build is followed while the points fit it")
   r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1 })
   check(
-    r.followed == "inferred"
-      and r.build == 2
+    r.followed == "picked"
+      and r.build == 1
       and r.drift
       and r.drift.kind == "build"
       and r.drift.from == 1
       and r.drift.to == 2,
-    "points on Fury, Arms picked: the page follows Fury and says so"
+    "points on Fury, Arms picked: the page stays on Arms and the drift is said"
   )
   local mark = r.drift.mark
-  r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1, driftSeen = mark, driftWay = "keep" })
-  check(r.followed == "kept" and r.build == 1 and r.drift.seen, "kept: the pick is followed, the note stays dismissed")
   r = R.resolve(at(24, FURY15), 1, { pickedBuild = 1, driftSeen = mark })
-  check(r.followed == "inferred" and r.build == 2 and r.drift.seen, "a note dismissed otherwise is not said again")
+  check(r.followed == "picked" and r.build == 1 and r.drift.seen, "kept: the pick stands, the note stays dismissed")
   r = R.resolve(at(24, PROT15), 1, { role = "damage", pickedBuild = 1, driftSeen = mark })
   check(
     r.drift and r.drift.kind == "role" and r.drift.role == "tank" and not r.drift.seen and r.role == "damage",
@@ -373,6 +376,28 @@ local function listTexts()
   end
   return table.concat(out, "\n")
 end
+local function press(text)
+  for _, b in ipairs(PrimerPage.buttonPool) do
+    if b.shown and b.text == text then
+      b:GetScript("OnClick")(b)
+      return
+    end
+  end
+  error("no button: " .. text, 2)
+end
+-- a plan step by its spell's name (the game's, here "Spell <id>" as the mock names it, or the text of a line)
+local function planStep(name)
+  for _, r in ipairs(ns.planRows) do
+    if r.shown and r.name.text:find(name, 1, true) then return r end
+  end
+end
+local function readySteps()
+  local n = 0
+  for _, r in ipairs(ns.planRows) do
+    if r.shown and r.state == "ready" then n = n + 1 end
+  end
+  return n
+end
 local function shownRows()
   local n = 0
   for _, r in ipairs(ns.playRows) do
@@ -416,7 +441,10 @@ else
     pageTexts():find("Checked on Classic Era 1.15.9.70576, 2026-11-03.", 1, true),
     "Play: the footer says which game and day it was checked against"
   )
-  check(PrimerFrame.count.text == "Warrior, level 12", "the window says who it is for")
+  check(
+    PrimerFrame.state.text == "Arms Warrior. Damage. Level 12. Not chosen yet.",
+    "every page says what it is for: the build, the class, the role, the level and how it was chosen"
+  )
   check(
     listTexts():find("Arms|Damage", 1, true)
       and listTexts():find("Fury|Damage", 1, true)
@@ -448,8 +476,30 @@ else
   end
   fury:GetScript("OnClick")(fury)
   check(
-    PrimerChar.groups[1].pickedBuild == 2 and PrimerPage.title.text == "Fury",
-    "choosing a build keeps it and shows it"
+    PrimerPage.title.text == "Fury" and PrimerChar.groups[1].pickedBuild == nil,
+    "a click on another build only looks: nothing is chosen"
+  )
+  check(
+    pageTexts():find("Looking at Fury, not your build.", 1, true)
+      and PrimerFrame.state.text == "Looking at Fury, not your build. Yours is Arms.",
+    "and says so loudly, and who yours is"
+  )
+  press("Back to Arms")
+  check(
+    PrimerPage.title.text == "Arms" and PrimerFrame.state.text:find("Arms Warrior", 1, true),
+    "back: the page is yours again"
+  )
+  fury = nil
+  for _, r in ipairs(PrimerList.rows) do
+    if r.shown and r.text.text == "Fury" then fury = r end
+  end
+  fury:GetScript("OnClick")(fury)
+  press("Use this build")
+  check(
+    PrimerChar.groups[1].pickedBuild == 2
+      and PrimerPage.title.text == "Fury"
+      and PrimerFrame.state.text == "Fury Warrior. Damage. Level 12. A build you picked.",
+    "using a build chooses it, the page and its header follow"
   )
 
   -- the Talents tab: names and pictures are the game's, what is taken is read
@@ -484,8 +534,13 @@ else
   end
   tank:GetScript("OnClick")(tank)
   check(
+    PrimerChar.groups[1].role == "damage" and pageTexts():find("Looking at Tank, not your role.", 1, true),
+    "Role: a click on another role only looks"
+  )
+  press("Use this role")
+  check(
     PrimerChar.groups[1].role == "tank" and PrimerChar.groups[1].pickedBuild == nil,
-    "Role: the switch is kept and the other role's build let go"
+    "Role: using it keeps the switch and lets the other role's build go"
   )
   check(PrimerPage.title.text == "Protection", "Role: the role's build shows")
   ns.open(ns.TAB.play)
@@ -501,6 +556,7 @@ else
   )
   s.level = 12
   PrimerChar.groups[1] = {}
+  PrimerFrame:Hide() -- (what the page is for is worked out when it is opened)
 
   -- the window keeps itself current
   for _, e in ipairs({
@@ -583,7 +639,13 @@ else
     if r.shown and r.text.text == "Protection" then prot = r end
   end
   check(prot, "the other group's build, from its own points")
-  prot:GetScript("OnClick")(prot)
+  check(
+    PrimerFrame.state.text:find("Talent group 2.", 1, true)
+      and PrimerFrame.state.text:find("Following your points.", 1, true),
+    "the header names the talent group and how the build was chosen"
+  )
+  prot:GetScript("OnClick")(prot) -- (it is the build the points follow: nothing to look at)
+  ns.choice(2).pickedBuild = 3
   check(
     PrimerChar.groups[2].pickedBuild == 3 and (PrimerChar.groups[1].pickedBuild == nil),
     "a build is chosen for the group looked at, the first group's untouched"
@@ -609,7 +671,10 @@ else
   check(PrimerFrame.count.text == "In combat. The guide waits.", "in combat the window says it waits")
   s.combat = false
   G.advance(2.1)
-  check(PrimerFrame.count.text == "Warrior, level 12", "and draws when the fight is over")
+  check(
+    PrimerFrame.state.text:find("Warrior", 1, true) and PrimerFrame.count.text == "",
+    "and draws when the fight is over"
+  )
 
   -- the season
   s.season = 2
@@ -741,7 +806,7 @@ if not G.FOREVER then
   G.advance(0.4)
   check(not ns.glowing, "and goes when a role is chosen")
 
-  -- points spent: the build follows them, drift is said once with three ways on
+  -- points spent: a picked build stays, drift is said once with three ways on
   fresh(24, ARMS15)
   PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
   PrimerFrame:Hide()
@@ -754,16 +819,19 @@ if not G.FOREVER then
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
   check(
-    PrimerPage.title.text == "Fury"
-      and pageTexts():find(
-        "Your points no longer match the build you chose. The page follows where they are now. These points follow Fury more than the Arms build you picked.",
-        1,
-        true
-      ),
-    "drift: said once, the page follows where the points are"
+    PrimerPage.title.text == "Arms" and PrimerFrame.state.text == "Arms Warrior. Damage. Level 24. A build you picked.",
+    "drift: a point spent never swaps the page, the build and the header stay the pick"
+  )
+  check(
+    pageTexts():find(
+      "Your points no longer match the build you chose. This page stays on it. These points follow Fury more than the Arms build you picked.",
+      1,
+      true
+    ),
+    "and the drift is said, once"
   )
   check(button("Keep Arms") and button("Follow Fury") and button("My own way"), "three ways on")
-  click("Keep Arms")
+  press("Keep Arms")
   check(
     PrimerPage.title.text == "Arms" and not pageTexts():find("no longer match", 1, true) and not button("Keep Arms"),
     "kept: the pick stands and the note is gone"
@@ -779,12 +847,13 @@ if not G.FOREVER then
   G.advance(0.4)
   check(
     pageTexts():find("These points look more like a tank than a damage build. Switch your role to Tank?", 1, true)
-      and PrimerChar.groups[1].role == "damage",
-    "drift toward another role: a switch offered, never made silently"
+      and PrimerChar.groups[1].role == "damage"
+      and PrimerPage.title.text == "Arms",
+    "drift toward another role: a switch offered, never made silently, the page unchanged"
   )
   check(button("Switch") and button("Stay on Damage"), "switch or stay")
-  click("Stay on Damage")
-  check(not pageTexts():find("Switch your role", 1, true), "stay: dismissed")
+  press("Stay on Damage")
+  check(not pageTexts():find("Switch your role", 1, true) and PrimerPage.title.text == "Arms", "stay: dismissed")
   PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(not pageTexts():find("Switch your role", 1, true), "and still dismissed when opened again")
@@ -795,21 +864,99 @@ if not G.FOREVER then
     pageTexts():find("These points follow Fury more than the Arms build you picked", 1, true),
     "the drift changed: said again"
   )
-  click("Follow Fury")
+  press("Follow Fury")
   check(
     PrimerChar.groups[1].pickedBuild == 2
       and PrimerPage.title.text == "Fury"
       and not pageTexts():find("no longer match", 1, true),
-    "follow: the build the points resemble is the pick now"
+    "follow: the build the points resemble is the pick now, by the player's click"
   )
   points(PROT15)
   G.fire("CHARACTER_POINTS_CHANGED")
   G.advance(0.4)
-  click("Switch")
+  press("Switch")
   check(
     PrimerChar.groups[1].role == "tank" and PrimerPage.title.text == "Protection",
     "switch: the role changes, the page follows"
   )
+
+  -- the page never changes under the player: every moment of the trace, a test
+  -- (a) no role chosen, points move to Holy: the page does not flip while the window is open
+  fresh(20, { [12282] = 3 })
+  PrimerChar.groups[1] = {}
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  local before = PrimerFrame.state.text
+  check(
+    before == "Arms Warrior. Damage. Level 20. Following your points.",
+    "no pick: the header says the points led here"
+  )
+  points({ [12298] = 5, [12297] = 5 })
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(
+    PrimerFrame.state.text == before and PrimerPage.title.text == "Arms",
+    "(a) points that move to another tree do not swap role or build under the player"
+  )
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(
+    PrimerFrame.state.text == "Protection Warrior. Tank. Level 20. Following your points.",
+    "and the next time it is opened the points are read again"
+  )
+  -- (b) a role chosen, two builds in it, points move between them: no flip
+  fresh(24, ARMS15)
+  PrimerChar.groups[1] = { role = "damage" }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(PrimerPage.title.text == "Arms", "(b) a role chosen, nothing picked: the nearest build to the points")
+  points(FURY15)
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(PrimerPage.title.text == "Arms", "(b) and it does not flip to Fury while the window is open")
+  -- (d) a refresh keeps the scroll, a click on a tab or a build starts at the top
+  PrimerPage.scrolled = nil
+  local scrolls = 0
+  local scrollTo = PrimerPage.ScrollTo
+  PrimerPage.ScrollTo = function(self, y)
+    scrolls = scrolls + 1
+    return scrollTo(self, y)
+  end
+  G.fire("SPELLS_CHANGED")
+  G.advance(0.4)
+  check(scrolls == 0, "(d) an event refreshes in place: the page is not sent back to the top")
+  ns.open(ns.TAB.talents)
+  check(scrolls == 1, "(d) a tab starts the page at the top")
+  PrimerPage.ScrollTo = scrollTo
+  -- (e) the talent in view stays when a point is spent
+  fresh(24, { [12282] = 3 })
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 1 }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.talents)
+  local shown = PrimerPage.title.text
+  check(shown == "Talent " .. ns.data.talents[12286].id, "(e) the next pick is in view when the tab opens")
+  points({ [12282] = 3, [12286] = 3 })
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(
+    PrimerPage.title.text == shown,
+    "(e) a point spent updates that talent in place, the page does not move on to the next"
+  )
+  -- (f) a click on a build or a role looks, and nothing is chosen until Use
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.role)
+  local each
+  for _, row in ipairs(PrimerList.rows) do
+    if row.shown and row.text.text == "Tank" then each = row end
+  end
+  each:GetScript("OnClick")(each)
+  check(
+    PrimerChar.groups[1].role == "damage"
+      and PrimerFrame.state.text:find("Looking at Tank, not your role. Yours is Damage.", 1, true),
+    "(f) a click on a role only looks"
+  )
+  press("Back to Damage")
+  check(PrimerFrame.state.text:find("Arms Warrior", 1, true), "(f) and back is one click")
 
   -- your own way
   fresh(24, FURY15)
@@ -836,6 +983,64 @@ if not G.FOREVER then
     "and the way back is one button"
   )
 
+  -- a build looked at from another role is used with its role (no click lost)
+  fresh(24, ARMS15)
+  PrimerChar.groups[1] = {}
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.role)
+  local other
+  for _, row in ipairs(PrimerList.rows) do
+    if row.shown and row.text.text == "Tank" then other = row end
+  end
+  other:GetScript("OnClick")(other)
+  local protection
+  for _, row in ipairs(PrimerList.rows) do
+    if row.shown and row.text.text == "Protection" then protection = row end
+  end
+  protection:GetScript("OnClick")(protection)
+  press("Use this build")
+  check(
+    PrimerChar.groups[1].pickedBuild == 3
+      and PrimerChar.groups[1].role == "tank"
+      and PrimerPage.title.text == "Protection",
+    "a build looked at from another role: using it takes the role with it, the click is not lost"
+  )
+  PrimerFrame:Hide()
+  points(ARMS15)
+  ns.open(ns.TAB.play)
+  check(
+    PrimerPage.title.text == "Protection",
+    "and the pick holds when the window is opened again, whatever the points say"
+  )
+  -- the header's word follows the character: a respec leaves no points to follow
+  fresh(24, ARMS15)
+  PrimerChar.groups[1] = {}
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  check(PrimerFrame.state.text:find("Following your points.", 1, true), "points to follow: the header says so")
+  points({})
+  G.fire("PLAYER_TALENT_UPDATE")
+  G.advance(0.4)
+  check(
+    PrimerPage.title.text == "Arms" and not PrimerFrame.state.text:find("Following your points.", 1, true),
+    "a respec to zero: the build stays, the header no longer says it follows points"
+  )
+  -- in your own way, looking at another build still says so
+  fresh(24, FURY15)
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 1, freestyle = true }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.talents)
+  local fury2
+  for _, row in ipairs(PrimerList.rows) do
+    if row.shown and row.text.text == "Fury" then fury2 = row end
+  end
+  fury2:GetScript("OnClick")(fury2)
+  check(
+    button("Use this build") and button("Back to Arms"),
+    "your own way: a look at another build has its banner and its buttons"
+  )
+  press("Back to Arms")
+
   -- a role change on the Role tab: counts, the cost, kept per group
   fresh(20, { [12282] = 3, [12286] = 3, [12295] = 5 })
   PrimerChar.groups[1] = { role = "damage" }
@@ -851,8 +1056,13 @@ if not G.FOREVER then
   end
   tank:GetScript("OnClick")(tank)
   check(
+    PrimerChar.groups[1].role == "damage" and pageTexts():find("Looking at Tank, not your role.", 1, true),
+    "Role: looking at it first"
+  )
+  press("Use this role")
+  check(
     PrimerChar.groups[1].role == "tank" and pageTexts():find("Tank it is.", 1, true),
-    "Role: the role changes at once"
+    "Role: using it changes the role at once"
   )
   check(
     pageTexts():find(
@@ -876,6 +1086,7 @@ if not G.FOREVER then
   )
   -- a split note names the build the page follows, not the tree with most points
   PrimerChar.groups[1] = { role = "tank" }
+  PrimerFrame:Hide()
   ns.open(ns.TAB.play)
   check(
     PrimerPage.title.text == "Protection"
@@ -1061,14 +1272,15 @@ if not G.FOREVER then
   s.spells = set(20154, 635, 465)
   ns.open(ns.TAB.play)
   check(
-    PrimerPage.title.text == "Retribution" and PrimerPage.sub.text == "Level 1 to 9" and shownRows() == 3,
-    "Paladin at 9: the untalented kit, the three spells in the book"
+    PrimerPage.title.text == "Retribution" and PrimerPage.sub.text == "Level 1 to 9",
+    "Paladin at 9: the untalented kit"
   )
   check(
-    pageTexts():find("Devotion Aura on, Blessing of Might, Seal of Righteousness", 1, true)
-      and pageTexts():find("6 spells for this stage are not in your book yet.", 1, true)
+    planStep("Spell 465").state == "ready"
+      and planStep("Spell 20154").state == "ready"
+      and planStep("Spell 19740").state == "book"
       and not pageTexts():find("What do you want to play?", 1, true),
-    "Paladin at 9: the opening, the spells to learn, and no question yet"
+    "Paladin at 9: the plan, the spells in the book plain, the ones to learn grey, and no question yet"
   )
   ns.open(ns.TAB.talents)
   check(
@@ -1090,9 +1302,69 @@ if not G.FOREVER then
     "Paladin at 10 or more, nothing spent: the question, with all three roles"
   )
   check(
-    shownRows() == 6 and PrimerPage.sub.text == "Level 10 to 19",
-    "Paladin at 12: the stage and the lines for the book"
+    PrimerPage.sub.text == "Level 10 to 19"
+      and planStep("Spell 20271").state == "ready"
+      and planStep("Spell 19742").state == "level",
+    "Paladin at 12: the stage, the plan, Blessing of Wisdom grey until its level"
   )
+  -- the rotation plan: its lists, its lines, its greying
+  local function stepsOf(name)
+    local out = {}
+    for _, r in ipairs(ns.planRows) do
+      if r.shown and r.name.text:find(name, 1, true) then out[#out + 1] = r end
+    end
+    return out
+  end
+  check(
+    pageTexts():find("Opening", 1, true)
+      and pageTexts():find("Loop", 1, true)
+      and pageTexts():find("Between fights", 1, true)
+      and pageTexts():find("Low mana", 1, true)
+      and pageTexts():find("Big cooldowns", 1, true),
+    "the plan: the opening, the loop, between fights, low mana and the big cooldowns"
+  )
+  local judgement = stepsOf("Spell 20271")
+  check(
+    judgement[1].name.text == "3. Spell 20271"
+      and judgement[1].say.text == "As soon as the monster is in range. It sets off the seal you wear."
+      and judgement[2].name.text == "1. Spell 20271"
+      and judgement[2].say.text == "Whenever it is ready. It is most of your damage.",
+    "a step: its number in its list, the game's name by id, when it applies and why, in that order"
+  )
+  local attack = stepsOf("Spell 6603")
+  check(
+    attack[1].state == "ready" and attack[2].say.text == "If nothing above applies. Swings are the rest of your damage.",
+    "the last line of the loop is the one that applies when nothing above does, and Attack is always ready"
+  )
+  check(
+    planStep("Keep swinging").state == "ready" and planStep("Keep swinging").slot.spell == nil,
+    "a line of text alone is always ready"
+  )
+  check(
+    planStep("Spell 19742").say.text:find("^Level 14%. When"),
+    "a step that comes at a later level says which, then the rest"
+  )
+  check(
+    planStep("Spell 633").state == "ready" or planStep("Spell 633").state == "book",
+    "the big cooldowns are listed with the spell"
+  )
+  s.level = 25
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+  local command = planStep("Spell 20375")
+  check(
+    command.state == "talent" and command.say.text:find("^Needs Talent " .. ns.data.talents[20375].id .. "%. "),
+    "a step that needs a talent not taken is grey and names it"
+  )
+  points({ [20375] = 1 })
+  s.spells[20375] = true
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(planStep("Spell 20375").state == "ready", "taken and learned: the step is plain, in place, with no reload")
+  s.ranks, s.level = {}, 12
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.play)
+
   click("Damage")
   check(
     PrimerPage.title.text == "Retribution"
@@ -1126,14 +1398,19 @@ if not G.FOREVER then
   s.spells = set(133, 168, 1459)
   ns.open(ns.TAB.play)
   check(
-    PrimerPage.title.text == "Frost" and PrimerPage.sub.text == "Level 1 to 9" and shownRows() == 3,
-    "Mage at 9: the untalented kit, the three spells in the book"
+    PrimerPage.title.text == "Frost"
+      and PrimerPage.sub.text == "Level 1 to 9"
+      and planStep("Spell 168").state == "ready"
+      and planStep("Spell 133").state == "ready"
+      and planStep("Spell 116").state == "book",
+    "Mage at 9: the untalented kit, the spells in the book plain, Frostbolt grey"
   )
   check(
-    pageTexts():find("Frost Armor on, Arcane Intellect, Frostbolt from range", 1, true)
+    pageTexts():find("Opening", 1, true)
+      and pageTexts():find("Read from the top and press the first line that applies, then start again.", 1, true)
       and listTexts():find("Fire|Damage", 1, true)
       and listTexts():find("Arcane|Damage", 1, true),
-    "Mage at 9: the opening, and the three damage builds offered"
+    "Mage at 9: the plan, and the three damage builds offered"
   )
   s.level, s.spells = 12, set(133, 168, 1459, 116, 5504, 2136, 587, 118, 5143, 122)
   PrimerFrame:Hide()

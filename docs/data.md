@@ -78,6 +78,59 @@ from). Each build opens with a stage 1 to 9 with `phase: "untalented"`, the
 class's kit, the same in its three builds. A wand's Shoot is no spell of the
 class's book, so no row carries it. The Mage has one `advice` line, for damage.
 
+## The rotation plan (a stage's `plan`)
+
+A stage shows either its priority `rows` (the first format, the Warrior's builds
+until they are re-authored) or a `plan`, which is what a player reads to know
+what to press and in which order. Retribution and Frost are written in it
+(4 November 2026, the user's call after the first game test: "what to do in each
+order, not just a list of spells and their explanation").
+
+```
+stage.plan = {
+  opening: [step],           -- numbered, in order, before the pull
+  loop:    [step],           -- numbered, read from the top: the first line that applies, then again
+  between: [step],           -- between fights
+  low:     [step],           -- when the resource runs low
+  big:     { spells: [{ spell, name }], say }   -- the big cooldowns, one line on when
+}
+step = { spell, name }  or  { text },   -- a spell (rank 1's id, its name checked) or a line of text alone
+       if,    -- when it applies, a clause ("whenever it is ready"): none on the last line of the loop
+       say,   -- what to do, only when the spell's name is not enough
+       why,   -- one short clause
+       need:  { level, talents, stance },  talentSpell    -- as a row's
+```
+
+What the window does with it: the lists in that order under "Opening", "Loop",
+"Between fights", "Low mana" and "Big cooldowns"; each step the game's own
+icon and name by id, then one line (`if`, `say`, `why`, each a clause, each
+with its full stop added). The last line of the loop reads "If nothing above
+applies". A step the character cannot press yet stays in its place, grey, and
+says why on its line: the level it comes at, the talent it needs, or that it is
+not in the book yet. So the plan grows as the character levels and never shows
+a step as ready that is not.
+
+What the check holds a plan to (`scripts/guide.ts`, `checkPlan`):
+
+- every spell is checked as a row's is (the game's name, the class's book or a
+  talent's rank 1 with `talentSpell`, the level the data gives and at or under
+  the stage's top, the form against the client's table, the talents on the path);
+  `Attack` (6603) is the one spell every character has that no book lists, its
+  picture the action bar's `Ability_MeleeDamage` (the client's own icon for it
+  is a developer's photo)
+- an `opening` and a `loop` exist, the last line of the loop has no `if` and every
+  other line of the loop, of `between` and of `low` has one, every step has a `why`
+- an `if`, a `say` or a `why` is a clause: no full stop at its end, at most 14 words
+- the words are plain ASCII with no semicolon and no exclamation mark
+- figures: a cost, a cooldown or a duration is written only where the data backs
+  it (the tables give a figure per spell, and a rank or a talent can change it:
+  the first two builds state none). A stance comes from the client's table.
+
+House voice for a plan line (`docs/voices.md` holds the rest): plain, imperative,
+the condition first and the reason last, one short clause each, no semicolons,
+digits for numbers, never lore, never a figure the tables cannot back. The
+instruction is the spell's name, so `say` is for what the name does not tell.
+
 ## The facts check (every run of scripts/guide.ts)
 
 Against each game's own database (wow-data's `classic.db` / `forever.db`, the

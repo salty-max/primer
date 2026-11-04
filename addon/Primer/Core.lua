@@ -14,7 +14,7 @@
 --                Forever two), each none: the default. role (damage, tank,
 --                heal), pickedBuild (an id of D.builds), freestyle (their own
 --                way), notYet (the level the question was put off at),
---                driftSeen and driftWay ("keep": the note dismissed, and how)
+--                driftSeen (the drift the player dismissed)
 --   PrimerSettings (SavedVariables): each character's settings, the kit's
 --     profiles (Settings.lua: the minimap button), and the window's place
 --

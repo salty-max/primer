@@ -371,7 +371,107 @@
               },
               "name": "Purify"
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 465,
+                "name": "Devotion Aura",
+                "if": "once, before anything",
+                "why": "every hit on you and your party hurts less"
+              },
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "before the first pull, and again when it ends",
+                "why": "it adds attack power for a long while"
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "just before the pull",
+                "why": "it adds Holy damage to every swing"
+              },
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "as soon as the monster is in range",
+                "why": "it sets off the seal you wear",
+                "need": {}
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are most of your damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "whenever it is ready",
+                "why": "it is most of your damage"
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "when the seal is gone, which it is after every Judgement",
+                "why": "swings add nothing without it"
+              },
+              {
+                "spell": 853,
+                "name": "Hammer of Justice",
+                "if": "if the monster runs, or you need a quiet moment to heal",
+                "why": "a stunned monster cannot hit you"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are the rest of your damage"
+              }
+            ],
+            "between": [
+              {
+                "spell": 635,
+                "name": "Holy Light",
+                "if": "when you are missing more than a third of your health",
+                "why": "the cast is slow and a hit would spoil it"
+              },
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "when it has run out",
+                "why": "it adds attack power for a long while"
+              },
+              {
+                "spell": 1152,
+                "name": "Purify",
+                "if": "when a poison or a disease is wearing you down",
+                "why": "it takes off one of each"
+              }
+            ],
+            "low": [
+              {
+                "text": "Keep swinging",
+                "if": "when the bar is nearly empty",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink, or eat",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 498,
+                  "name": "Divine Protection"
+                }
+              ],
+              "say": "keep it for the fight that would otherwise kill you"
+            }
+          }
         },
         {
           "from": 10,
@@ -456,7 +556,104 @@
               },
               "name": "Lay on Hands"
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "before the first pull, and again when it ends",
+                "why": "it adds attack power for a long while"
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "just before the pull",
+                "why": "it adds Holy damage to every swing"
+              },
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "as soon as the monster is in range",
+                "why": "it sets off the seal you wear"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are most of your damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "whenever it is ready",
+                "why": "it is most of your damage"
+              },
+              {
+                "spell": 20154,
+                "name": "Seal of Righteousness",
+                "if": "when the seal is gone, which it is after every Judgement",
+                "why": "swings add nothing without it"
+              },
+              {
+                "spell": 853,
+                "name": "Hammer of Justice",
+                "if": "if the monster runs, or you need a quiet moment to heal",
+                "why": "a stunned monster cannot hit you"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are the rest of your damage"
+              }
+            ],
+            "between": [
+              {
+                "spell": 635,
+                "name": "Holy Light",
+                "if": "when you are missing more than a third of your health",
+                "why": "the cast is slow and a hit would spoil it"
+              },
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "when it has run out",
+                "why": "it adds attack power for a long while"
+              }
+            ],
+            "low": [
+              {
+                "spell": 19742,
+                "name": "Blessing of Wisdom",
+                "if": "when you run out of mana before the monsters do",
+                "why": "it gives mana back while you fight"
+              },
+              {
+                "text": "Keep swinging",
+                "if": "when the bar is nearly empty",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink, or eat",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 633,
+                  "name": "Lay on Hands"
+                },
+                {
+                  "spell": 498,
+                  "name": "Divine Protection"
+                }
+              ],
+              "say": "keep both for the fight that would otherwise kill you"
+            }
+          }
         },
         {
           "from": 20,
@@ -555,7 +752,124 @@
               },
               "name": "Divine Shield"
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "before the first pull, and again when it ends",
+                "why": "it adds attack power for a long while"
+              },
+              {
+                "spell": 20375,
+                "name": "Seal of Command",
+                "if": "just before the pull",
+                "why": "each swing may add Holy damage",
+                "talentSpell": 20375
+              },
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "as soon as the monster is in range",
+                "why": "it sets off the seal you wear"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are most of your damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "whenever it is ready",
+                "why": "with this seal it is a bigger hit"
+              },
+              {
+                "spell": 879,
+                "name": "Exorcism",
+                "if": "when the monster is undead or a demon and it is ready",
+                "why": "an instant Holy hit that works on nothing else"
+              },
+              {
+                "spell": 20164,
+                "name": "Seal of Justice",
+                "if": "when the monster keeps running",
+                "why": "its Judgement stops it fleeing"
+              },
+              {
+                "spell": 20375,
+                "name": "Seal of Command",
+                "if": "when the seal is gone, which it is after every Judgement",
+                "why": "swings add nothing without it",
+                "talentSpell": 20375
+              },
+              {
+                "spell": 853,
+                "name": "Hammer of Justice",
+                "if": "when the monster runs, or you need to stop it",
+                "why": "a stunned monster hits nothing"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are the rest of your damage"
+              }
+            ],
+            "between": [
+              {
+                "spell": 19750,
+                "name": "Flash of Light",
+                "if": "when you are missing only a little health",
+                "why": "it is quicker and cheaper than Holy Light"
+              },
+              {
+                "spell": 635,
+                "name": "Holy Light",
+                "if": "when you are missing more than a third of your health",
+                "why": "the cast is slow and a hit would spoil it"
+              },
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "when it has run out",
+                "why": "it adds attack power for a long while"
+              }
+            ],
+            "low": [
+              {
+                "spell": 19742,
+                "name": "Blessing of Wisdom",
+                "if": "when mana, not health, is what you run out of",
+                "why": "it gives mana back while you fight"
+              },
+              {
+                "text": "Keep swinging",
+                "if": "when the bar is nearly empty",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink, or eat",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 498,
+                  "name": "Divine Protection"
+                },
+                {
+                  "spell": 642,
+                  "name": "Divine Shield"
+                }
+              ],
+              "say": "keep them for the fight that would otherwise kill you"
+            }
+          }
         },
         {
           "from": 40,
@@ -649,7 +963,138 @@
               },
               "name": "Divine Shield"
             }
-          ]
+          ],
+          "plan": {
+            "opening": [
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "before the first pull, and again when it ends",
+                "why": "it adds attack power for a long while"
+              },
+              {
+                "spell": 20375,
+                "name": "Seal of Command",
+                "if": "just before the pull",
+                "why": "each swing may add Holy damage",
+                "talentSpell": 20375
+              },
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "as soon as the monster is in range",
+                "why": "it sets off the seal you wear"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are most of your damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 20271,
+                "name": "Judgement",
+                "if": "whenever it is ready",
+                "why": "it is most of your damage"
+              },
+              {
+                "spell": 24275,
+                "name": "Hammer of Wrath",
+                "if": "when the monster is nearly dead",
+                "why": "it hits from range before melee ends the fight"
+              },
+              {
+                "spell": 879,
+                "name": "Exorcism",
+                "if": "when the monster is undead or a demon and it is ready",
+                "why": "an instant Holy hit that works on nothing else"
+              },
+              {
+                "spell": 26573,
+                "name": "Consecration",
+                "if": "when two or more monsters are on you",
+                "why": "it hits everything on the ground you stand on",
+                "talentSpell": 26573
+              },
+              {
+                "spell": 20066,
+                "name": "Repentance",
+                "if": "when a humanoid is healing itself",
+                "why": "it takes the healer out of the fight",
+                "talentSpell": 20066
+              },
+              {
+                "spell": 20375,
+                "name": "Seal of Command",
+                "if": "when the seal is gone, which it is after every Judgement",
+                "why": "swings add nothing without it",
+                "talentSpell": 20375
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings are the rest of your damage"
+              }
+            ],
+            "between": [
+              {
+                "spell": 19750,
+                "name": "Flash of Light",
+                "if": "when you are missing only a little health",
+                "why": "it is quicker and cheaper than Holy Light"
+              },
+              {
+                "spell": 635,
+                "name": "Holy Light",
+                "if": "when you are missing more than a third of your health",
+                "why": "the cast is slow and a hit would spoil it"
+              },
+              {
+                "spell": 19740,
+                "name": "Blessing of Might",
+                "if": "when it has run out",
+                "why": "it adds attack power for a long while"
+              },
+              {
+                "spell": 4987,
+                "name": "Cleanse",
+                "if": "when something on you is wearing you down",
+                "why": "it takes off one poison, disease and magic"
+              }
+            ],
+            "low": [
+              {
+                "spell": 19742,
+                "name": "Blessing of Wisdom",
+                "if": "when mana, not health, is what you run out of",
+                "why": "it gives mana back while you fight"
+              },
+              {
+                "text": "Keep swinging",
+                "if": "when the bar is nearly empty",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink, or eat",
+                "if": "between fights, when the bar is low",
+                "why": "a full bar buys the next pulls"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 642,
+                  "name": "Divine Shield"
+                },
+                {
+                  "spell": 633,
+                  "name": "Lay on Hands"
+                }
+              ],
+              "say": "keep both for the fight that would otherwise kill you"
+            }
+          }
         }
       ]
     },

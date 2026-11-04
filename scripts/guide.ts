@@ -45,6 +45,11 @@ const GAMES: Game[] = ["classic", "forever"];
 const FILE: Record<Game, string> = { classic: "Guide_Classic.lua", forever: "Guide_Forever.lua" };
 
 const PHASES = ["untalented", "choose", "spent"];
+// Spells every character has that no class book lists (the plan's "Attack"), by id and the game's name
+// (and the picture the game's action bar gives it: the client's own icon for the spell is a developer's photo)
+const COMMON_SPELLS: Record<number, [string, string]> = { 6603: ["Attack", "Interface\\Icons\\Ability_MeleeDamage"] };
+const PLAN_LISTS = ["opening", "loop", "between", "low"] as const;
+const CLAUSE_WORDS = 14;
 const ROLES = ["damage", "tank", "heal"];
 const STANCES = ["battle", "defensive", "berserker"];
 // What a row's `when` may say: a situation the player reads off the screen
@@ -88,7 +93,12 @@ type Row = {
   talentSpell?: number;
   need: { level?: number; stance?: string[]; talents?: number[]; when?: string[] };
 };
-type Stage = { from: number; to: number; phase?: string; about?: string; opening?: string; rows: Row[] };
+// A step of a rotation plan: a spell (its name checked against the game's, level and stance as a row's)
+// or a line of text alone, when it applies (`if`, a clause: none on the last line of the loop), what to do
+// (`say`, only when the spell's name is not enough) and why (one short clause).
+type PlanStep = { spell?: number; name?: string; text?: string; if?: string; say?: string; why: string; talentSpell?: number; need?: Row["need"] };
+type Plan = { opening: PlanStep[]; loop: PlanStep[]; between?: PlanStep[]; low?: PlanStep[]; big?: { spells: PlanStep[]; say: string } };
+type Stage = { from: number; to: number; phase?: string; about?: string; opening?: string; rows?: Row[]; plan?: Plan };
 type Step = { points: [number, number]; level: [number, number]; talent?: number; any?: number[]; rank: number; of?: number; why: string };
 type Build = {
   id: number;
@@ -235,9 +245,10 @@ function checkBuild(b: Build, f: Facts) {
   }
   if (next !== 61) bad(`${at}: the stages end at level ${next - 1}, not 60`);
   const stances = new Map<number, string>(); // a spell's stances, one list a build
-  b.stages.forEach((st, si) =>
-    st.rows.forEach((r, ri) => {
-      const where = `${at} stage ${st.from}-${st.to} row ${ri + 1} (${r.name})`;
+  // A row's or a plan step's spell: in the game's data and the class's book (or a talent's rank 1, or a spell
+  // every character has), its level the data's, its forms checked against the client's table, its talents on the path
+  const checkRow = (r: Row, where: string, st: Stage) => {
+    {
       const sn = f.name(r.spell);
       if (sn === null) return bad(`${where}: spell ${r.spell} is not in ${f.game}'s data`);
       if (sn !== r.name) bad(`${where}: spell ${r.spell} is ${sn} in the data, ${r.name} in the content`);
@@ -282,8 +293,58 @@ function checkBuild(b: Build, f: Facts) {
       if (had !== undefined && had !== want) bad(`${where}: stance ${want}, another row of the build says ${had}: one list for a spell`);
       stances.set(r.spell, want);
       (r as Row & { learned: number }).learned = level;
-    }),
-  );
+    }
+  };
+  // A rotation plan (the stage's opening, loop, between fights, low resource and big cooldowns): every
+  // spell checked as a row is, every line a clause with its reason, the loop's last line the one that applies
+  // when nothing above does (so it has no condition and every other line of the loop has one)
+  const checkPlan = (plan: Plan, where: string, st: Stage) => {
+    const clause = (text: string | undefined, at: string, what: string) => {
+      if (text === undefined) return;
+      if (/[.!?;:]$/.test(text.trim())) bad(`${at}: ${what} is a clause, with no full stop at its end`);
+      if (text.trim().split(/\s+/).length > CLAUSE_WORDS) bad(`${at}: ${what} is over ${CLAUSE_WORDS} words, a plan line is one short clause`);
+    };
+    const step = (x: PlanStep, at: string, needWhy = true) => {
+      if (x.spell !== undefined) {
+        if (!x.name) return bad(`${at}: a spell with no name`);
+        x.need ??= {};
+        if (COMMON_SPELLS[x.spell] !== undefined) {
+          if (COMMON_SPELLS[x.spell][0] !== x.name) bad(`${at}: spell ${x.spell} is ${COMMON_SPELLS[x.spell][0]}, ${x.name} in the content`);
+          const n = f.name(x.spell);
+          if (n !== x.name) bad(`${at}: spell ${x.spell} is ${n ?? "not in the data"} in ${f.game}'s data, ${x.name} in the content`);
+          (x as Row & { learned: number }).learned = 1;
+        } else {
+          checkRow(x as Row, at, st);
+        }
+      } else if (!x.text) bad(`${at}: neither a spell nor a text`);
+      if (needWhy && !x.why) bad(`${at}: no reason`);
+      clause(x.if, at, "its condition");
+      clause(x.why, at, "its reason");
+      clause(x.say, at, "its instruction");
+    };
+    for (const name of PLAN_LISTS) {
+      const steps = plan[name] ?? [];
+      if ((name === "opening" || name === "loop") && !steps.length) bad(`${where}: a plan has an ${name}`);
+      steps.forEach((x, i) => {
+        const at = `${where} plan ${name} ${i + 1}${x.name ? ` (${x.name})` : ""}`;
+        step(x, at);
+        const last = name === "loop" && i === steps.length - 1;
+        if (last && x.if) bad(`${at}: the last line of the loop is the one that applies when nothing above does, it has no condition`);
+        if (!last && (name === "loop" || name === "between" || name === "low") && !x.if) bad(`${at}: a line of the ${name} says when it applies`);
+      });
+    }
+    if (plan.big) {
+      if (!plan.big.say) bad(`${where} plan big: a line that says when`);
+      clause(plan.big.say, `${where} plan big`, "its line");
+      plan.big.spells.forEach((x, i) => step(x, `${where} plan big ${i + 1}${x.name ? ` (${x.name})` : ""}`, false));
+    }
+  };
+  b.stages.forEach((st) => {
+    const where = `${at} stage ${st.from}-${st.to}`;
+    if (!st.rows && !st.plan) bad(`${where}: neither rows nor a plan`);
+    (st.rows ?? []).forEach((r, ri) => checkRow(r, `${where} row ${ri + 1} (${r.name})`, st));
+    if (st.plan) checkPlan(st.plan, where, st);
+  });
 }
 
 // ── the Lua ──────────────────────────────────────────────────────────────────
@@ -298,6 +359,32 @@ function rowLua(r: Row & { learned: number }, key: string): string {
   if (stance?.length) f.push(`stance = ${list(stance.map(q))}`);
   if (r.need.when?.length) f.push(`when = ${list(r.need.when.map(q))}`);
   f.push(`say = ${q(key)}`);
+  return `{ ${f.join(", ")} }`;
+}
+
+// Every spell line of a stage, its priority rows and its plan's steps
+function stepsOf(st: Stage): (Row | PlanStep)[] {
+  const plan = st.plan ? [...PLAN_LISTS.flatMap((n) => st.plan![n] ?? []), ...(st.plan.big?.spells ?? [])] : [];
+  return [...(st.rows ?? []), ...plan];
+}
+
+// A plan step as Lua: its spell (or its text), the level it is learned at, its talents and forms, and the keys of
+// its words (cond: when it applies, say: what to do, why: the reason)
+function stepLua(x: PlanStep & { learned?: number }, key: string, bare = false): string {
+  const f: string[] = [];
+  if (x.spell !== undefined) {
+    f.push(`spell = ${x.spell}`, `level = ${x.learned}`);
+    if (COMMON_SPELLS[x.spell] !== undefined) f.push("common = true", `icon = ${q(COMMON_SPELLS[x.spell][1])}`);
+    if (x.talentSpell !== undefined) f.push(`talent = ${x.talentSpell}`);
+    if (x.need?.talents?.length) f.push(`talents = ${list(x.need.talents)}`);
+    const stance = x.need?.stance?.length ? x.need.stance : filled.get(x as unknown as Row);
+    if (stance?.length) f.push(`stance = ${list(stance.map(q))}`);
+  } else f.push(`text = ${q(word(`${key}.text`, x.text)!)}`);
+  if (!bare) {
+    if (x.if) f.push(`cond = ${q(word(`${key}.if`, x.if)!)}`);
+    if (x.say) f.push(`say = ${q(word(`${key}.say`, x.say)!)}`);
+    if (x.why) f.push(`why = ${q(word(`${key}.why`, x.why)!)}`);
+  }
   return `{ ${f.join(", ")} }`;
 }
 
@@ -329,7 +416,7 @@ function luaFor(game: Game): { lua: string; builds: number } {
     for (const b of mine) {
       checkBuild(b, f);
       const k = b.key;
-      const names = [...b.path.flatMap((s) => s.any ?? (s.talent === undefined ? [] : [s.talent])), ...b.stages.flatMap((st) => st.rows.flatMap((r) => [...(r.need.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]))];
+      const names = [...b.path.flatMap((s) => s.any ?? (s.talent === undefined ? [] : [s.talent])), ...b.stages.flatMap((st) => stepsOf(st).flatMap((r) => [...(r.need?.talents ?? []), ...(r.talentSpell !== undefined ? [r.talentSpell] : [])]))];
       for (const n of names) if (f.tal.has(n)) used.set(n, f.tal.get(n)!);
       const out: string[] = [];
       out.push(`    [${b.id}] = {`);
@@ -351,9 +438,28 @@ function luaFor(game: Game): { lua: string; builds: number } {
         const about = st.about ? `, about = ${q(word(`${k}.s${si + 1}`, st.about)!)}` : "";
         out.push(`        { from = ${st.from}, to = ${st.to}${phase}${about},`);
         if (st.opening) out.push(`          opening = ${q(word(`${k}.s${si + 1}.opening`, st.opening)!)},`);
-        out.push("          rows = {");
-        st.rows.forEach((r, ri) => out.push(`            ${rowLua(r as Row & { learned: number }, word(`${k}.s${si + 1}.r${ri + 1}`, r.say)!)},`));
-        out.push("          },");
+        if (st.rows?.length) {
+          out.push("          rows = {");
+          st.rows.forEach((r, ri) => out.push(`            ${rowLua(r as Row & { learned: number }, word(`${k}.s${si + 1}.r${ri + 1}`, r.say)!)},`));
+          out.push("          },");
+        }
+        if (st.plan) {
+          out.push("          plan = {");
+          for (const name of PLAN_LISTS) {
+            const steps = st.plan[name] ?? [];
+            if (!steps.length) continue;
+            out.push(`            ${name} = {`);
+            steps.forEach((x, i) => out.push(`              ${stepLua(x as PlanStep & { learned?: number }, `${k}.s${si + 1}.${name}${i + 1}`)},`));
+            out.push("            },");
+          }
+          if (st.plan.big) {
+            const big = st.plan.big;
+            out.push(`            big = { say = ${q(word(`${k}.s${si + 1}.big`, big.say)!)}, spells = {`);
+            big.spells.forEach((x, i) => out.push(`              ${stepLua(x as PlanStep & { learned?: number }, `${k}.s${si + 1}.big${i + 1}`, true)},`));
+            out.push("            } },");
+          }
+          out.push("          },");
+        }
         out.push("        },");
       });
       out.push("      },");
