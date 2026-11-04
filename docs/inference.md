@@ -55,6 +55,16 @@ tree".
    role kept: nothing is asked again, the advice shows.
 6. **Your own way** has no drift, no question and no note.
 
+## Roads: one recommended, the others recognised
+
+A build may have several roads (another order of the same points, same role, same
+tree). Which road a page advises is our decision, not the player's: the
+`recommended` one, or on a Hardcore realm the `hardcoreRoad` where the research
+gives one. The inference above is about builds and is untouched: reachability does
+not look at the road. Within a build, `G.pickRoad` keeps the recommended road
+unless the points clearly follow another road (nearest by path, not a tie): then
+the page advises along that one and says so quietly. No drift, no nag.
+
 ## What the header says
 
 "Following your pick." (a build chosen), "Following your points." (the points

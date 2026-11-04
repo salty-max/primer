@@ -140,12 +140,23 @@ instruction is the spell's name, so `say` is for what the name does not tell.
   without one shows its `text` and its builds. Each build adds `line`, one line
   for the overview (none: the first sentence of its `intro`).
 - `build.roads`: another order of the same points for the same build (the same
-  role and tree). `path` is the first road and `roadName` names it; `roads` holds
-  the others, each `{ name, path }` with its own whys. Each path is checked whole
+  role and tree). `path` is the first road (`roadId`; `roadName` and `roads[].name` are optional and shown nowhere yet); `roads` holds the
+  others, each `{ id, name, path }` with its own whys. Each path is checked whole
   (51 points, point N at level N + 9, the tree's rows, prerequisites, the own tree's
-  31). Neither road is a drift: the Talents tab names them, says which the points
-  follow (or that they fit every road), and the player may choose one. A row's
-  talents must be taken by every road by the stage's top.
+  31). A row's talents must be taken by every road by the stage's top. The player
+  never chooses a road: **we recommend one** (`recommended`, a road id), from the
+  research (`ideas/class-guide-research/`: which roads most guides prefer for the
+  current Era patch; where guides split about evenly, the safer or more reliable
+  one), and `roadReason` says why and the price of the other in one plain sentence
+  ("Most guides take this road. The other road trades X for Y."). `hardcoreRoad`
+  and `hardcoreReason` give the road for a Hardcore realm (`Enum.SeasonID.Hardcore`)
+  where the research gives one: used without asking and named in the header
+  ("Hardcore realm: this is the safer road."). The other roads (`alsoRecognised`, by
+  default every other road) stay in the data only to be recognised: when the points
+  clearly follow one, the page says quietly "These points follow the other way to
+  this build. It reaches the same place." and keeps advising along that road's path
+  from where the character is, with no drift and no nag. The road in view is fixed
+  while the window is open, like the build.
 - `stage.plan.alt = { name, say, opening?, loop, between?, low? }`: another way to
   play the same stage with its own lists, shown under its name ("A crowd of
   monsters"), `say` one clause on when it is for.

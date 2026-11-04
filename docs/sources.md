@@ -58,3 +58,38 @@ Era 1.15.x only; no Wrath, Cataclysm, retail or Season of Discovery page.
 - **The two styles of Frost**: the single-target road is a full path; the crowd
   style is a list of lines, not a path (its talents are known only as an end state
   and by decade), so it is for a pack rooted with Frost Nova (Blizzard from level 20), with no talent the single-target road skips.
+
+## Roads: what we recommend, and why (4 November 2026)
+
+Only the Retribution Paladin has more than one documented road in the data.
+
+| Build | Recommended | On a Hardcore realm | Why |
+|---|---|---|---|
+| paladin-retribution | Retribution first (Icy Veins' full order) | Holy first (Wowhead's Hardcore New Player build) | Icy Veins, Wowhead's general page and Wowhead's Hardcore Experienced build all go Retribution first, so most guides take it. Holy first is the same Hardcore guide's build for a first character: it trades damage in the first twenty levels for mana and heals a hit does not spoil, and a Hardcore realm asks for the safer one. Honest note: most Hardcore guides still go Retribution first (Wowhead's Hardcore Experienced build, Icy Veins' Hardcore page); only the New Player build is Holy first, so the Hardcore road is our safety call, and the page words it that way. |
+| mage-frost | its one road (Icy Veins' single-target order) | the same | Every ordered guide (Icy Veins, Wowhead, Wowhead Hardcore, NoobToBoss, Warcraft Tavern) is single target, and Hardcore guidance calls it the safest. The crowd style is a list of lines, not a road. |
+
+## Builds the research says are off (a content card to come)
+
+Warrior, Holy, Protection, Fire and Arcane were written before the research and
+each has one road in the data. Their research files say that road differs from
+what most guides take, so no recommendation line is shown for them yet (a
+recommendation would be a claim we cannot back):
+
+- **warrior-arms**: three roads in the guides (Arms straight through, Cruelty first
+  with a respec at 30 or 40, a Hardcore-safe Arms order); the path opens with
+  Improved Heroic Strike, which no guide takes, and lacks Deflection before 20.
+  Slam is in the plan ("when rage is high") and no guide supports it.
+- **warrior-fury**: dual wield is the only road, the guides default to a two-hander.
+- **warrior-protection**: Last Stand, Improved Bloodrage and One-Handed Weapon
+  Specialization are not in the path; two documented roads.
+- **paladin-holy**: Consecration is not in the path; the guides' tail is Retribution
+  and Protection points, not Primer's Protection tail.
+- **paladin-protection**: both guides start in Holy (Consecration at 20) and
+  Protection from 21; the path starts in Protection and takes Consecration at 51.
+- **mage-fire**: Elemental Precision first (three of three), and an Arcane tail in
+  every guide, not Frost.
+- **mage-arcane**: Arcane Power at 40 then Frost in every ordered guide; every
+  Hardcore guide warns against it.
+
+The Feral Druid is not in the data yet. The research files for these builds are in
+`ideas/class-guide-research/` (section 7 of each).

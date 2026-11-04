@@ -129,7 +129,13 @@ type Build = {
   dry?: string;
   path: Step[];
   roadName?: string; // the first road's plain name, when the build has several ("Retribution first")
-  roads?: { name: string; path: Step[] }[]; // the other roads of the same build: the same role and tree, another order of the points
+  roadId?: string; // and its id
+  roads?: { id: string; name?: string; path: Step[] }[]; // the other roads of the same build: the same role and tree, another order of the points
+  recommended?: string; // the road the page advises: ours, from the research (docs/sources.md), never the player's choice
+  alsoRecognised?: string[]; // roads kept only to be recognised: points that follow one are no drift, the page advises along it
+  hardcoreRoad?: string; // the road on a Hardcore realm, where the research gives one
+  roadReason?: string; // why the recommended road, and the price of the other, in plain words
+  hardcoreReason?: string; // the same for the Hardcore road
   stages: Stage[];
 };
 type Content = {
@@ -471,11 +477,25 @@ function luaFor(game: Game): { lua: string; builds: number } {
       out.push(...pathLua(b.path, k, "        "));
       out.push("      },");
       if (b.roads?.length) {
-        if (!b.roadName) bad(`${k}: a build with roads names its first road (roadName)`);
+        const ids = [b.roadId ?? "", ...b.roads.map((r) => r.id)];
+        if (ids.some((id) => !id) || new Set(ids).size !== ids.length) bad(`${k}: every road has its own id (roadId, roads[].id)`);
+        const at = (id: string | undefined, what: string) => {
+          const n = ids.indexOf(id ?? "");
+          if (n < 0) bad(`${k}: ${what} ${id} is no road of the build (${ids.join(", ")})`);
+          return n + 1;
+        };
+        const rec = at(b.recommended, "recommended");
+        for (const id of b.alsoRecognised ?? []) if (id === b.recommended) bad(`${k}: the recommended road is not also only recognised`);
+        const also = (b.alsoRecognised ?? ids.filter((id) => id !== b.recommended)).map((id) => at(id, "alsoRecognised"));
+        if (!b.roadReason) bad(`${k}: a recommendation says why, and the price of the other road (roadReason)`);
+        const hc = b.hardcoreRoad !== undefined ? at(b.hardcoreRoad, "hardcoreRoad") : undefined;
+        if (hc !== undefined && !b.hardcoreReason) bad(`${k}: a Hardcore road says why (hardcoreReason)`);
+        out.push(`      recommended = ${rec}, recognised = ${list(also)}${hc !== undefined ? `, hardcoreRoad = ${hc}` : ""},`);
+        out.push(`      roadWhy = ${q(word(`${k}.roadwhy`, b.roadReason ?? "")!)}${b.hardcoreReason ? `, hardcoreWhy = ${q(word(`${k}.hcwhy`, b.hardcoreReason)!)}` : ""},`);
         out.push("      roads = {");
-        out.push(`        { name = ${q(word(`${k}.road1`, b.roadName ?? "")!)} },`);
+        out.push(`        { ${b.roadName ? `name = ${q(word(`${k}.road1`, b.roadName)!)}` : ""} },`);
         b.roads.forEach((road, ri) => {
-          out.push(`        { name = ${q(word(`${k}.road${ri + 2}`, road.name)!)}, path = {`);
+          out.push(`        { ${road.name ? `name = ${q(word(`${k}.road${ri + 2}`, road.name)!)}, ` : ""}path = {`);
           out.push(...pathLua(road.path, `${k}.r${ri + 2}`, "          "));
           out.push("        } },");
         });
@@ -534,6 +554,7 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "--   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview),",
     "--                   intro, note, split, dry (word keys), path, stages }",
     "--   roads[n]    = { name (a word key), path (the others; the first is `path`) }: another order of the points for the same build",
+    "--   recommended (a road's number: ours, from the research), recognised (the numbers kept only to be recognised), hardcoreRoad (on a Hardcore realm), roadWhy and hardcoreWhy (word keys: why, and the price of the other)",
     "--   path[n]     = { points = { from, to }, level = { from, to }, talent (rank 1's spell) or any (a choice),",
     "--                   rank (it reaches), why }",
     "--   stages[n]   = { from, to (levels), phase (untalented, choose or spent: the character's phase it serves, none: any), about, opening, rows }",

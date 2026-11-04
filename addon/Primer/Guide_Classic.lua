@@ -5,6 +5,7 @@
 --   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview),
 --                   intro, note, split, dry (word keys), path, stages }
 --   roads[n]    = { name (a word key), path (the others; the first is `path`) }: another order of the points for the same build
+--   recommended (a road's number: ours, from the research), recognised (the numbers kept only to be recognised), hardcoreRoad (on a Hardcore realm), roadWhy and hardcoreWhy (word keys: why, and the price of the other)
 --   path[n]     = { points = { from, to }, level = { from, to }, talent (rank 1's spell) or any (a choice),
 --                   rank (it reaches), why }
 --   stages[n]   = { from, to (levels), phase (untalented, choose or spent: the character's phase it serves, none: any), about, opening, rows }
@@ -401,9 +402,11 @@ ns.data = {
         { points = { 46, 49 }, level = { 55, 58 }, talent = 20042, rank = 5, why = "paladin-retribution.p18" },
         { points = { 50, 51 }, level = { 59, 60 }, talent = 20234, rank = 2, why = "paladin-retribution.p19" },
       },
+      recommended = 1, recognised = { 2 }, hardcoreRoad = 2,
+      roadWhy = "paladin-retribution.roadwhy", hardcoreWhy = "paladin-retribution.hcwhy",
       roads = {
-        { name = "paladin-retribution.road1" },
-        { name = "paladin-retribution.road2", path = {
+        {  },
+        { path = {
           { points = { 1, 5 }, level = { 10, 14 }, talent = 20257, rank = 5, why = "paladin-retribution.r2.p1" },
           { points = { 6, 10 }, level = { 15, 19 }, talent = 20205, rank = 5, why = "paladin-retribution.r2.p2" },
           { points = { 11, 15 }, level = { 20, 24 }, talent = 20042, rank = 5, why = "paladin-retribution.r2.p3" },

@@ -267,6 +267,14 @@ if not G.FOREVER then
     R.reachable(at(29, along(1, 20)), D.builds[2]),
     "20 points in Arms: Fury (whose path has 32 in Fury) is still reachable"
   )
+  -- a road is recognised only while the build can be reached
+  local road, recognised = R.pickRoad(at(34, along(7, 25)), D.builds[6])
+  check(
+    road == 1 and recognised == false,
+    "25 points in Holy: Retribution cannot be reached, so no road of it is recognised"
+  )
+  road, recognised = R.pickRoad(at(19, along(7, 10)), D.builds[6])
+  check(road == 2 and recognised == true, "10 points in Holy at 19: reachable, the other road is recognised")
   -- a picked build whose points can no longer reach it: said once, the nearest open build offered
   r = R.resolve(at(34, along(7, 25)), 2, { role = "damage", pickedBuild = 6 })
   check(
@@ -1554,50 +1562,79 @@ if not G.FOREVER then
     "Paladin with 10 points: the next pick is Pursuit of Justice at 20, the taken ones counted"
   )
 
-  -- two roads of one build (Retribution first, or Holy first as Wowhead's Hardcore guide has it)
-  s.level, s.season = 19, 0
+  -- one recommended road per build (ours, from the research), the other recognised and never a drift
+  local REASON =
+    "Most guides take this road. The other road trades Seal of Command until level 30 and early damage for mana and heals a hit does not spoil."
+  s.level, s.season = 12, 0
   PrimerChar.groups = {}
+  points({})
+  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6 }
+  PrimerFrame:Hide()
+  ns.open(ns.TAB.talents)
+  check(
+    pageTexts():find(REASON, 1, true) and not listTexts():find("Road", 1, true),
+    "Retribution: one recommended road with the price of the other in a line, and no chooser"
+  )
+  check(
+    listTexts():find("0/5", 1, true) and pageTexts():find("Talent " .. ns.data.talents[20101].id, 1, true),
+    "the recommended road is the Retribution-first one: Benediction first"
+  )
+  s.level = 19
   points({ [20257] = 5, [20205] = 5 })
-  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6 }
   PrimerFrame:Hide()
   ns.open(ns.TAB.talents)
   check(
-    listTexts():find("Retribution first, the usual road", 1, true)
-      and listTexts():find("Holy first, the Hardcore road", 1, true)
-      and pageTexts():find("This build has more than one road for its first points, and none is wrong:", 1, true),
-    "Retribution: both roads are named on the Talents tab, neither is a drift"
-  )
-  check(
-    pageTexts():find("Your points follow Holy first, the Hardcore road.", 1, true)
+    pageTexts():find("These points follow the other way to this build. It reaches the same place.", 1, true)
+      and not pageTexts():find(REASON, 1, true)
       and not pageTexts():find("can no longer reach", 1, true)
-      and listTexts():find("5/5", 1, true),
-    "10 points in Holy at level 19 on a picked Retribution: the page says the points follow the Holy-first road, and it is no drift"
+      and not listTexts():find("Road", 1, true),
+    "10 points in Holy at level 19 on a picked Retribution: the points follow the other way, said quietly, no drift, no chooser"
   )
   check(
-    pageTexts():find("Level 10 to 14", 1, true) == nil or listTexts():find("Level 10 to 14", 1, true),
-    "(the first steps of the Holy-first road are listed)"
+    listTexts():find("5/5", 1, true),
+    "and the page advises along that road from where they are (Divine Intellect and Spiritual Focus taken)"
   )
-  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6, roads = { [6] = 1 } }
+  check(
+    pageTexts():find("Your next pick is Talent " .. ns.data.talents[20042].id, 1, true),
+    "the next pick on the other road is Improved Blessing of Might"
+  )
+  points({ [20101] = 5 })
+  s.level = 14
   PrimerFrame:Hide()
   ns.open(ns.TAB.talents)
-  check(listTexts():find("0/5", 1, true), "a road the player chose: its steps are listed, the other road's are not")
-  check(
-    pageTexts():find("Your points follow Holy first, the Hardcore road.", 1, true),
-    "and what the points follow is still said as it is, not as the player chose"
-  )
-  PrimerChar.groups[1] = { role = "damage", pickedBuild = 6 }
+  check(pageTexts():find(REASON, 1, true), "5 points in Benediction: the recommended road, no note about another")
+  -- what the points do while the window is open never changes the road in view
+  points({ [20257] = 5 })
+  G.fire("CHARACTER_POINTS_CHANGED")
+  G.advance(0.4)
+  check(pageTexts():find(REASON, 1, true), "the road in view does not change under the player")
+  -- a Hardcore realm uses the Hardcore road, and says so
+  s.season = 3
   points({})
   s.level = 12
   PrimerFrame:Hide()
   ns.open(ns.TAB.talents)
-  check(pageTexts():find("Your points follow", 1, true) == nil, "no points yet: no road is claimed")
+  check(
+    PrimerFrame.state.text:find("Hardcore realm: this is the safer road.", 1, true)
+      and pageTexts():find(
+        "On a Hardcore realm this is the safer road. The other road trades that safety for damage.",
+        1,
+        true
+      )
+      and pageTexts():find("Talent " .. ns.data.talents[20257].id, 1, true),
+    "Hardcore realm: the Holy-first road, said in the header and on the page, without asking"
+  )
   points({ [20101] = 5 })
+  s.level = 14
   PrimerFrame:Hide()
   ns.open(ns.TAB.talents)
   check(
-    pageTexts():find("Your points follow Retribution first, the usual road.", 1, true),
-    "5 points in Benediction: the Retribution-first road"
+    pageTexts():find("These points follow the other way to this build. It reaches the same place.", 1, true)
+      and not PrimerFrame.state.text:find("Hardcore realm: this is the safer road.", 1, true),
+    "Hardcore realm, points on the Retribution-first road: recognised quietly, advised along that road"
   )
+  s.season = 0
+  points({})
   s.level = 12
   -- Hardcore lines only on a Hardcore realm
   PrimerChar.groups[1] = { role = "damage", pickedBuild = 6 }

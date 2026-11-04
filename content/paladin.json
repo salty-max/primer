@@ -799,10 +799,8 @@
         }
       ],
       "line": "One big weapon, a seal and Judgement. It kills alone, and most players level this way.",
-      "roadName": "Retribution first, the usual road",
       "roads": [
         {
-          "name": "Holy first, the Hardcore road",
           "path": [
             {
               "points": [
@@ -1012,7 +1010,8 @@
               "rank": 1,
               "why": "The last point is yours to place. Repentance takes the tree's deepest talent."
             }
-          ]
+          ],
+          "id": "holy-first"
         }
       ],
       "hardcore": [
@@ -1062,7 +1061,15 @@
           "url": "https://us.forums.blizzard.com/en/wow/t/paladin-weapon-speed/315363",
           "read": "2026-11-04"
         }
-      ]
+      ],
+      "roadId": "ret-first",
+      "recommended": "ret-first",
+      "alsoRecognised": [
+        "holy-first"
+      ],
+      "hardcoreRoad": "holy-first",
+      "roadReason": "Most guides take this road. The other road trades Seal of Command until level 30 and early damage for mana and heals a hit does not spoil.",
+      "hardcoreReason": "On a Hardcore realm this is the safer road. The other road trades that safety for damage."
     },
     {
       "id": 7,

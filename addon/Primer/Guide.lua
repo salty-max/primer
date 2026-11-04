@@ -257,6 +257,28 @@ function G.roads(build)
   return out
 end
 
+-- The road a page advises, ours and from the research (never the player's choice):
+-- the recommended one, the Hardcore road on a Hardcore realm where the build has
+-- one, or, when the points clearly follow another road kept only to be
+-- recognised, that one (the second answer is true: said quietly, no drift).
+function G.pickRoad(snap, build)
+  local roads = G.roads(build)
+  if #roads < 2 then return 1, false end
+  local main = (snap.season == G.HARDCORE and build.hardcoreRoad) or build.recommended or 1
+  -- (recognised only while the build can still be reached: a road to a build out of reach is no road)
+  if G.phase(snap) == "spent" and G.reachable(snap, build) then
+    local near, tie = G.road(snap, build)
+    if near ~= main and not tie then
+      -- (any road of the build is known: the recommended one, and those kept only to be recognised)
+      if near == build.recommended then return near, true end
+      for _, n in ipairs(build.recognised or {}) do
+        if n == near then return near, true end
+      end
+    end
+  end
+  return main, false
+end
+
 -- The points a build would have in each tree (by place) after n points of a road
 -- of it (the first by default).
 function G.expected(snap, build, n, path)

@@ -5,6 +5,7 @@
 --   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview),
 --                   intro, note, split, dry (word keys), path, stages }
 --   roads[n]    = { name (a word key), path (the others; the first is `path`) }: another order of the points for the same build
+--   recommended (a road's number: ours, from the research), recognised (the numbers kept only to be recognised), hardcoreRoad (on a Hardcore realm), roadWhy and hardcoreWhy (word keys: why, and the price of the other)
 --   path[n]     = { points = { from, to }, level = { from, to }, talent (rank 1's spell) or any (a choice),
 --                   rank (it reaches), why }
 --   stages[n]   = { from, to (levels), phase (untalented, choose or spent: the character's phase it serves, none: any), about, opening, rows }

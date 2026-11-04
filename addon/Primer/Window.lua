@@ -625,21 +625,6 @@ local function drawTalents(snap, class, r, choice)
     return
   end
   local roads = G.roads(b)
-  if #roads > 1 then
-    -- (another order of the same points for the same build: neither is a drift)
-    list:gap(6)
-    list:add("section", L["Road"])
-    for i, road in ipairs(roads) do
-      local row = list:add("row", ns.say(road.name), i == r.road and L["yours"] or nil)
-      row:SetScript("OnClick", function()
-        choice.roads = choice.roads or {}
-        choice.roads[id] = i
-        view.step = nil
-        ns.refresh()
-      end)
-      if i == r.road then list:pick(row) end
-    end
-  end
   list:gap(6)
   list:add("section", L["Talents in order"])
   for i, s in ipairs(steps) do
@@ -672,19 +657,11 @@ local function drawTalents(snap, class, r, choice)
   )
   notes(snap, class, r, choice, TABS.talents)
   if #roads > 1 then
-    local names = {}
-    for i, road in ipairs(roads) do
-      names[i] = ns.say(road.name)
-    end
-    page:paragraph(
-      L["This build has more than one road for its first points, and none is wrong: %s."]:format(listNames(names)),
-      T.soft
-    )
-    if r.phase == "spent" then
-      page:paragraph(
-        r.fitBoth and L["Your points fit every road."] or L["Your points follow %s."]:format(ns.say(roads[r.fit].name)),
-        T.soft
-      )
+    if r.recognised then
+      -- (the points follow another documented way to this build: said quietly, no drift, no nag)
+      page:paragraph(L["These points follow the other way to this build. It reaches the same place."], T.soft)
+    else
+      page:paragraph(ns.say(r.hardcoreRoad and b.hardcoreWhy or b.roadWhy), T.soft)
     end
   end
   local unspent = G.unspent(snap)
@@ -855,13 +832,13 @@ end
 -- the facts, the ticks and the notes in place. A click on another build or role
 -- only LOOKS (view.look): the page is that build's, says so, and the player's
 -- own stays named until they press Use.
-local function model(snap, class, r, choice)
+local function model(snap, class, r)
   -- (one for each talent group: looking at the other group and back never works the first one out again)
   view.subjects = view.subjects or {}
   local sub = view.subjects[snap.group]
   if not (sub and ns.data.builds[sub.build] and ns.data.builds[sub.build].class == class) then
     sub = { role = r.role, build = r.build, mode = r.mode }
-    sub.road, sub.roadBoth = G.road(snap, ns.data.builds[r.build])
+    sub.road, sub.recognised = G.pickRoad(snap, ns.data.builds[r.build])
     view.subjects[snap.group] = sub
   end
   r.role, r.build, r.mode = sub.role, sub.build, sub.mode
@@ -875,17 +852,23 @@ local function model(snap, class, r, choice)
   else
     view.look = nil
   end
-  -- the road of the build shown (another order of the same points): the player's choice for it, else the one the points follow
-  local roads = G.roads(ns.data.builds[r.build])
-  local chosen = choice.roads and choice.roads[r.build]
+  -- the road of the build shown: the one we advise (the Hardcore road on a Hardcore realm), or the one the
+  -- points follow when it is another documented way to the same place (said quietly, never a drift). Frozen
+  -- with the subject for the player's own build, worked out for a build only looked at.
+  local shown = ns.data.builds[r.build]
   if r.build == r.mine then
-    r.road, r.roadBoth = sub.road, sub.roadBoth
+    r.road, r.recognised = sub.road, sub.recognised
   else
-    r.road, r.roadBoth = G.road(snap, ns.data.builds[r.build])
+    r.road, r.recognised = G.pickRoad(snap, shown)
   end
-  if chosen and roads[chosen] then r.road = chosen end
-  -- (what the points follow is worked out fresh each draw, apart from the road the page lists)
-  r.fit, r.fitBoth = G.road(snap, ns.data.builds[r.build])
+  -- (said only where the Hardcore road is the advice: not in your own way, not before the first point, not when the build is out of reach)
+  r.hardcoreRoad = snap.season == G.HARDCORE
+    and shown.hardcoreRoad == r.road
+    and not r.recognised
+    and r.mode ~= "own"
+    and r.phase ~= "untalented"
+    and not r.unreachable
+    and not (r.drift and r.build == r.mine)
   return r
 end
 
@@ -907,6 +890,7 @@ local function header(snap, r)
     or r.mode == "own" and L["Your own way."]
     or L["Not chosen yet."]
   table.insert(parts, mode)
+  if r.hardcoreRoad then table.insert(parts, L["Hardcore realm: this is the safer road."]) end
   return table.concat(parts, " ")
 end
 
@@ -943,7 +927,7 @@ local function draw()
     return empty(kind, snap)
   end
   local choice = ns.choice(snap.group)
-  local r = model(snap, class, G.resolve(snap, class, choice), choice)
+  local r = model(snap, class, G.resolve(snap, class, choice))
   frame.state:SetText(header(snap, r))
   -- (the minimap button glows while the level-10 question waits to be asked)
   if snap.group == snap.active then ns.setGlow(asking(snap, choice, class)) end

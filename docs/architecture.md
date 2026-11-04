@@ -83,9 +83,10 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   general in the narrator's voice, from the class's `overview` in the data, the
   builds in a line each with their roles, and what to do at level 10 (`drawOverview`).
   A click on a build there looks at it on the Role tab. **Roads** (`G.roads`,
-  `G.road`): a build may have several orders for its points; the Talents tab names
-  them, says which the points follow and lets the player choose (`choice.roads`),
-  and none is a drift. A stage's plan may carry `alt`, another way to play it
+  `G.pickRoad`): a build may have several orders for its points; the player never
+  chooses one: the page advises the recommended road (the Hardcore road on a
+  Hardcore realm), says why in a line, and recognises quietly a documented road
+  the points follow, with no drift (`docs/inference.md`). A stage's plan may carry `alt`, another way to play it
   (a crowd, against one monster), under its own heading. `build.hardcore` lines
   show only on a Hardcore realm (`G.HARDCORE`).
 - **The rotation plan** (`drawPlan`, `G.stepState`): a stage's `plan` shown as
