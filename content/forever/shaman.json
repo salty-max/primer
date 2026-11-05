@@ -1,0 +1,2305 @@
+{
+  "class": {
+    "id": 7,
+    "key": "shaman",
+    "token": "SHAMAN",
+    "name": "Shaman",
+    "text": "Totems, shocks and a weapon you imbue. Lightning Bolt and Healing Wave are yours from the start, Earth Shock comes at 4 and Lightning Shield at 8. At 10 a Fire totem and Flame Shock join, and Ghost Wolf follows at 20. Every line below says what to drop, what to press and when to stop and drink.",
+    "card": {
+      "caresAbout": "mana, which totems are down, the shock that is ready, and what is on your weapon",
+      "vocabulary": "drop, totem, shock, imbue, shield, bolt, strike, wolf, drink",
+      "soundsLike": "practical and a little dry, a trainer who points at the ground where the totem goes. A shaman line says what to drop or press, then what it buys",
+      "neverSays": "rage, holy, anything about gods, spirits or ancestors, and none of the class's lore",
+      "test": "could it be said while the totem is still in your hand?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Enhancement is the build this page advises, because it is the smoothest to level and its Stormstrike comes at 25. The price: you fight up close and your mana is thin until 30. Elemental stays at range with bolts and shocks, and it is slower alone because you drink more."
+      },
+      {
+        "role": "heal",
+        "say": "Restoration is the healer. It is the right pick for dungeons and for playing with a friend. Alone it is the slowest way to level, and a damage build with a good weapon is quicker."
+      }
+    ],
+    "overview": {
+      "who": "You drop totems, imbue your weapon, shock what stands in front of you and heal yourself when it hurts. The craft is mana: nearly everything you do costs it, and the rest of the class is ways to get it back.",
+      "good": "Doing a bit of everything. You can fight up close or from range, heal yourself or a friend, interrupt a cast with Earth Shock and cross the world as a wolf from 20.",
+      "bad": "Mana. A long fight runs you dry, a pack can overwhelm you, and your best talents come late. Totems cost mana too, so drop only what the fight needs.",
+      "resource": "Mana. It returns slowly after five seconds of not casting, so finish a nearly dead monster with the weapon. Mindfulness, Water Shield and Improved Stormstrike let it return while you fight.",
+      "levelling": "Imbue your weapon, drop the Fire totem and open with a shock. Keep Earth Shock for casters, heal after the fight and drink before the next. Enhancement is the quickest to level, and Elemental and Restoration are slower alone.",
+      "ten": "You get your first talent point and pick a spec. Enhancement is the smoothest to level, Elemental stays at range and Restoration heals a group. Your Fire totem quest is at 10 too, and a respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "shaman-enhancement",
+        "reason": "Most guides level Enhancement. Stormstrike comes at 25, Windfury Weapon at 30, and it needs less drinking than Elemental."
+      },
+      "heal": {
+        "build": "shaman-restoration",
+        "reason": "The healer for dungeons and for playing with a friend. Riptide and Chain Heal come at 40, and Water Shield at 20 carries your mana."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 18,
+      "key": "shaman-elemental",
+      "name": "Elemental",
+      "role": "damage",
+      "tree": 261,
+      "checked": "2026-11-05",
+      "intro": "Elemental opens with a shock and a bolt from a distance, and Lightning Overload and Lightning Mastery make the bolts hit twice and hit fast. It is slower to level than Enhancement because you stop to drink more often.",
+      "line": "Lightning Bolt, Chain Lightning and Flame Shock from range. Strong in a group, slow alone, and hungry for mana.",
+      "pathNote": "(31 points in Elemental, 11 in Restoration for mana, 9 in Enhancement.)",
+      "split": "how early to take the mana. Tiqqle's second order starts with Tidal Focus, Mindfulness and Water Shield and gives up damage until level 21. The order here is the first one, which waits for Water Shield until 43.",
+      "dry": "Your mana is the slowest part of the fight, so finish a nearly dead monster with the weapon.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 16039,
+          "rank": 5,
+          "of": 5,
+          "why": "Shocks, Lightning Bolt and Chain Lightning cost 2% less a point. Mana is what stops a caster, so it comes first."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 16578,
+          "rank": 3,
+          "of": 3,
+          "why": "Lightning Bolt and Chain Lightning cast faster. Lightning Overload needs it, and a faster cast is less time under a monster's claws."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 16035,
+          "rank": 2,
+          "of": 5,
+          "why": "More damage on Lightning Bolt, Chain Lightning and Earth Shock, the spells you cast most."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 16164,
+          "rank": 1,
+          "of": 1,
+          "why": "A damage spell can make your next one free. Spend the free cast on the dearest spell you have."
+        },
+        {
+          "points": [
+            12,
+            14
+          ],
+          "level": [
+            21,
+            23
+          ],
+          "talent": 16035,
+          "rank": 5,
+          "of": 5,
+          "why": "Concussion at full strength: more damage on Lightning Bolt, Chain Lightning and Earth Shock."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 16038,
+          "rank": 1,
+          "of": 3,
+          "why": "Your fire totems and Flame Shock hit harder, and Flame Shock lasts longer."
+        },
+        {
+          "points": [
+            16,
+            18
+          ],
+          "level": [
+            25,
+            27
+          ],
+          "talent": 29062,
+          "rank": 3,
+          "of": 3,
+          "why": "Being hit while you cast has a good chance of not slowing Lightning Bolt and Chain Lightning. Fewer ruined casts."
+        },
+        {
+          "points": [
+            19,
+            20
+          ],
+          "level": [
+            28,
+            29
+          ],
+          "talent": 16038,
+          "rank": 3,
+          "of": 3,
+          "why": "Flame Shock lasts longer and Searing Totem hurts more, so more of the work is done while you rest."
+        },
+        {
+          "points": [
+            21,
+            23
+          ],
+          "level": [
+            30,
+            32
+          ],
+          "talent": 408438,
+          "rank": 3,
+          "of": 3,
+          "why": "Lightning Bolt and Chain Lightning can cast a second time for free, at half damage. Elemental Fury needs it."
+        },
+        {
+          "points": [
+            24,
+            28
+          ],
+          "level": [
+            33,
+            37
+          ],
+          "talent": 16179,
+          "rank": 5,
+          "of": 5,
+          "why": "Spells hit 5% more often, which a caster wants too. These points open Mindfulness and Water Shield."
+        },
+        {
+          "points": [
+            29,
+            31
+          ],
+          "level": [
+            38,
+            40
+          ],
+          "talent": 1223033,
+          "rank": 3,
+          "of": 3,
+          "why": "Some of your mana regeneration keeps going while you cast. You drink less, and the fight does not stop for it."
+        },
+        {
+          "points": [
+            32,
+            33
+          ],
+          "level": [
+            41,
+            42
+          ],
+          "talent": 16173,
+          "rank": 2,
+          "of": 5,
+          "why": "Totems cost less mana. The points are on the way to Water Shield, which asks for ten in the tree."
+        },
+        {
+          "points": [
+            34,
+            34
+          ],
+          "level": [
+            43,
+            43
+          ],
+          "talent": 408510,
+          "rank": 1,
+          "of": 1,
+          "why": "Globes of water give back mana when you are hit or land a critical strike. You give up Lightning Shield for it, since only one shield holds."
+        },
+        {
+          "points": [
+            35,
+            35
+          ],
+          "level": [
+            44,
+            44
+          ],
+          "talent": 16120,
+          "rank": 1,
+          "of": 1,
+          "why": "Lightning Bolt and Chain Lightning get 5% more critical strike chance."
+        },
+        {
+          "points": [
+            36,
+            36
+          ],
+          "level": [
+            45,
+            45
+          ],
+          "talent": 1222988,
+          "rank": 1,
+          "of": 1,
+          "why": "Earthbind Totem roots nearby monsters for 5 seconds when you drop it. A pack stops and you keep casting."
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 16089,
+          "rank": 5,
+          "of": 5,
+          "why": "Critical hits from your fire, frost and nature spells do far more damage. It needs Lightning Overload."
+        },
+        {
+          "points": [
+            42,
+            42
+          ],
+          "level": [
+            51,
+            51
+          ],
+          "talent": 16166,
+          "rank": 1,
+          "of": 1,
+          "why": "Your burst: for 15 seconds Chain Lightning has no cooldown and Lightning Bolt casts faster. Press it on a hard pull."
+        },
+        {
+          "points": [
+            43,
+            47
+          ],
+          "level": [
+            52,
+            56
+          ],
+          "talent": 17485,
+          "rank": 5,
+          "of": 5,
+          "why": "Intellect: more mana, and more spell critical chance. Nothing left in the Elemental tree helps you more."
+        },
+        {
+          "points": [
+            48,
+            51
+          ],
+          "level": [
+            57,
+            60
+          ],
+          "talent": 16255,
+          "rank": 4,
+          "of": 5,
+          "why": "More critical strikes on every spell and attack. It is the best that is left."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 8017,
+                "name": "Rockbiter Weapon",
+                "if": "if it has worn off",
+                "why": "it adds attack power to every swing"
+              },
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "before the first pull",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "from as far away as it reaches",
+                "why": "the pull costs little and the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "whenever it is ready",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "if the monster is still far",
+                "why": "a bolt lands before the monster does"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Flame Shock and Searing Totem come at 10, Fire Nova at 12. Open with a shock, let the totem work, and finish a nearly dead monster with the weapon so your mana can start to return.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "before the first pull",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 8024,
+                "name": "Flametongue Weapon",
+                "if": "if it has worn off",
+                "why": "it adds fire damage to your swings"
+              },
+              {
+                "spell": 3599,
+                "name": "Searing Totem",
+                "if": "in advance, before the pull",
+                "why": "it hits the monster while you cast"
+              },
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "first, on the monster",
+                "why": "it burns while you cast something else"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "when it is not on the monster",
+                "why": "it burns while you cast something else"
+              },
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more",
+                "why": "it bursts out of your Fire totem"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "to stop a cast",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when the monster is nearly dead",
+                "why": "a swing costs no mana, and your mana starts to return"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "why": "the plain hit, and the cheapest of your damage"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2484,
+                "name": "Earthbind Totem",
+                "if": "to slow a monster that runs",
+                "why": "it keeps the monster at range"
+              },
+              {
+                "spell": 5730,
+                "name": "Stoneclaw Totem",
+                "if": "when too many monsters are on you",
+                "why": "they hit the totem and you get a moment to heal"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Elemental Focus at 20 and Lightning Overload at 30 make your bolts cheaper and doubled. Chain Lightning comes at 32. Mana Spring Totem and Lightning Shield are your mana now.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "before the first pull",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 8024,
+                "name": "Flametongue Weapon",
+                "if": "if it has worn off",
+                "why": "it adds fire damage to your swings"
+              },
+              {
+                "spell": 5675,
+                "name": "Mana Spring Totem",
+                "if": "before the pull, in one place",
+                "why": "it gives mana back to you and your party"
+              },
+              {
+                "spell": 3599,
+                "name": "Searing Totem",
+                "if": "in advance, before the pull",
+                "why": "it hits the monster while you cast"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "when it is not on the monster",
+                "why": "it burns while you cast something else"
+              },
+              {
+                "spell": 421,
+                "name": "Chain Lightning",
+                "if": "when Elemental Focus lights up",
+                "why": "the next spell is free, so cast the dear one",
+                "need": {
+                  "talents": [
+                    16164
+                  ]
+                }
+              },
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more",
+                "why": "it bursts out of your Fire totem"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "to stop a cast",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "why": "the plain hit, and the cheapest of your damage"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8190,
+                "name": "Magma Totem",
+                "if": "against three or more that will live",
+                "why": "it burns a pack, and it costs a lot of mana"
+              },
+              {
+                "spell": 2484,
+                "name": "Earthbind Totem",
+                "if": "when a pack closes in",
+                "why": "it slows the pack so you keep casting"
+              },
+              {
+                "spell": 8177,
+                "name": "Grounding Totem",
+                "if": "against a monster that casts",
+                "why": "it takes one spell for you"
+              },
+              {
+                "spell": 8143,
+                "name": "Tremor Totem",
+                "if": "when a fear is coming",
+                "why": "it breaks fear, charm and sleep"
+              },
+              {
+                "spell": 2645,
+                "name": "Ghost Wolf",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and you cannot cast in it"
+              }
+            ],
+            "between": [
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 36936,
+                "name": "Totemic Recall",
+                "if": "when you leave your totems behind",
+                "why": "it gives back part of their mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Lightning Mastery at 51 is your burst: Chain Lightning with no cooldown and a quicker bolt for 15 seconds. Elemental Fury makes every critical hit hurt. Keep Water Shield up.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 408510,
+                "name": "Water Shield",
+                "if": "if you took it, before each pull",
+                "why": "it gives back mana when you are hit or crit",
+                "talentSpell": 408510,
+                "need": {
+                  "talents": [
+                    408510
+                  ]
+                }
+              },
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "if you did not take Water Shield",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 8024,
+                "name": "Flametongue Weapon",
+                "if": "if it has worn off",
+                "why": "it adds fire damage to your swings"
+              },
+              {
+                "spell": 5675,
+                "name": "Mana Spring Totem",
+                "if": "before the pull, in one place",
+                "why": "it gives mana back to you and your party"
+              },
+              {
+                "spell": 3599,
+                "name": "Searing Totem",
+                "if": "in advance, before the pull",
+                "why": "it hits the monster while you cast"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "when it is not on the monster",
+                "why": "it burns while you cast something else"
+              },
+              {
+                "spell": 421,
+                "name": "Chain Lightning",
+                "if": "while Lightning Mastery lasts",
+                "why": "it has no cooldown for those 15 seconds",
+                "need": {
+                  "talents": [
+                    16166
+                  ]
+                }
+              },
+              {
+                "spell": 421,
+                "name": "Chain Lightning",
+                "if": "when Elemental Focus lights up",
+                "why": "the next spell is free, so cast the dear one",
+                "need": {
+                  "talents": [
+                    16164
+                  ]
+                }
+              },
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more",
+                "why": "it bursts out of your Fire totem"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "to stop a cast",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "why": "the plain hit, and the cheapest of your damage"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8190,
+                "name": "Magma Totem",
+                "if": "against three or more that will live",
+                "why": "it burns a pack, and it costs a lot of mana"
+              },
+              {
+                "spell": 2484,
+                "name": "Earthbind Totem",
+                "if": "when a pack closes in",
+                "why": "it roots the pack for 5 seconds so you keep casting",
+                "need": {
+                  "talents": [
+                    1222988
+                  ]
+                }
+              },
+              {
+                "spell": 8177,
+                "name": "Grounding Totem",
+                "if": "against a monster that casts",
+                "why": "it takes one spell for you"
+              },
+              {
+                "spell": 8143,
+                "name": "Tremor Totem",
+                "if": "when a fear is coming",
+                "why": "it breaks fear, charm and sleep"
+              },
+              {
+                "spell": 2645,
+                "name": "Ghost Wolf",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and you cannot cast in it"
+              }
+            ],
+            "between": [
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 36936,
+                "name": "Totemic Recall",
+                "if": "when you leave your totems behind",
+                "why": "it gives back part of their mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 16166,
+                  "name": "Lightning Mastery",
+                  "talentSpell": 16166
+                }
+              ],
+              "say": "on a hard pull or a pack, before you start casting"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Elemental Shaman levelling guide (Tiqqle, 5 November 2026, talents updated 3 November)",
+          "url": "https://mobalytics.gg/wow-forever/classes/elemental-shaman-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Elemental Shaman levelling (updated 2 November 2026, read 4 November)",
+          "url": "https://www.icy-veins.com/wow-forever/elemental-shaman-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Shaman levelling guide 1-60 (Nicktew, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/shaman-leveling-guide-nicktew",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Blizzard, Forever beta development notes (class changes of 3 November 2026, read 4 November)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/2360696",
+          "read": "2026-11-04"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "key": "shaman-enhancement",
+      "name": "Enhancement",
+      "role": "damage",
+      "tree": 263,
+      "checked": "2026-11-05",
+      "intro": "Enhancement fights up close with a weapon, shocks and Stormstrike. Most guides call it the smoothest Shaman to level. Mana is its trouble before 30, so the first talents are about mana and Stormstrike.",
+      "line": "Stormstrike, shocks and a weapon imbue, up close. The smoothest Shaman to level, once Stormstrike is yours at 25.",
+      "pathNote": "(34 points in Enhancement, 11 in Restoration for mana, 6 in Elemental.)",
+      "split": "mana against speed. Icy Veins would start in Restoration for Mindfulness and Water Shield and respec at 25. Nicktew calls that a mistake, because Stormstrike should come as early as it can. The order here is Nicktew's, with Mindfulness and Water Shield after Improved Stormstrike.",
+      "dry": "The weapon matters more than any talent, so keep a slow two-hander in your hand.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 16255,
+          "rank": 5,
+          "of": 5,
+          "why": "A point is 1% more critical strikes on every attack and spell. It is the only talent on that row that helps a fighter on every swing."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 415140,
+          "rank": 3,
+          "of": 3,
+          "why": "Turns your Intellect into attack power, and Intellect is also your mana. Gear with it pays twice. Flurry needs it."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 17485,
+          "rank": 2,
+          "of": 5,
+          "why": "Intellect is a bigger mana pool and now attack power too. These two points open the third row, and nothing on row 2 helps you more."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 1223030,
+          "rank": 1,
+          "of": 1,
+          "why": "Shocks and Lightning Shield cost 45% less mana. Mana is what stops you, and Earth Shock is a button you press all the time."
+        },
+        {
+          "points": [
+            12,
+            14
+          ],
+          "level": [
+            21,
+            23
+          ],
+          "talent": 16266,
+          "rank": 3,
+          "of": 3,
+          "why": "Your weapon imbues hit harder: Rockbiter and Windfury Weapon give more, Flametongue does more damage."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 16254,
+          "rank": 1,
+          "of": 3,
+          "why": "One point to open the next row, and a little dodge. Ancestral Knowledge works as well if you would sooner have mana."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 17364,
+          "rank": 1,
+          "of": 1,
+          "why": "Your main button. A weapon strike on a short cooldown that makes your next Lightning Bolt, Chain Lightning or Earth Shock hit harder."
+        },
+        {
+          "points": [
+            17,
+            18
+          ],
+          "level": [
+            26,
+            27
+          ],
+          "talent": 16262,
+          "rank": 2,
+          "of": 2,
+          "why": "Ghost Wolf becomes instant and works indoors. From level 20 it is how you cross the world."
+        },
+        {
+          "points": [
+            19,
+            20
+          ],
+          "level": [
+            28,
+            29
+          ],
+          "talent": 16256,
+          "rank": 2,
+          "of": 5,
+          "why": "More attack speed after a critical strike. It needs Mental Dexterity, and it opens the row that holds Improved Stormstrike."
+        },
+        {
+          "points": [
+            21,
+            22
+          ],
+          "level": [
+            30,
+            31
+          ],
+          "talent": 1223031,
+          "rank": 2,
+          "of": 2,
+          "why": "Stormstrike can give you mana regeneration while you cast, and a dodge or a parry can reset its cooldown. It keeps you fighting."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 16268,
+          "rank": 1,
+          "of": 1,
+          "why": "You can parry, and a parry can reset Stormstrike. It also makes less threat while Rockbiter Weapon is off, which a group likes."
+        },
+        {
+          "points": [
+            24,
+            28
+          ],
+          "level": [
+            33,
+            37
+          ],
+          "talent": 16179,
+          "rank": 5,
+          "of": 5,
+          "why": "Healing costs 5% less and you hit 5% more often. The hit helps a fighter too, and these points open Mindfulness and Water Shield."
+        },
+        {
+          "points": [
+            29,
+            31
+          ],
+          "level": [
+            38,
+            40
+          ],
+          "talent": 1223033,
+          "rank": 3,
+          "of": 3,
+          "why": "Some of your mana regeneration keeps going while you cast. Mana is what stops a shaman, so it is worth a detour out of your tree."
+        },
+        {
+          "points": [
+            32,
+            33
+          ],
+          "level": [
+            41,
+            42
+          ],
+          "talent": 16173,
+          "rank": 2,
+          "of": 5,
+          "why": "Totems cost less mana. It is the least bad pick on its row, and Water Shield asks for ten points in the tree."
+        },
+        {
+          "points": [
+            34,
+            34
+          ],
+          "level": [
+            43,
+            43
+          ],
+          "talent": 408510,
+          "rank": 1,
+          "of": 1,
+          "why": "Globes of water give back mana when you are hit or land a critical strike. You give up Lightning Shield for it, since only one shield holds."
+        },
+        {
+          "points": [
+            35,
+            35
+          ],
+          "level": [
+            44,
+            44
+          ],
+          "talent": 16256,
+          "rank": 3,
+          "of": 5,
+          "why": "A third point of attack speed after a critical strike."
+        },
+        {
+          "points": [
+            36,
+            37
+          ],
+          "level": [
+            45,
+            46
+          ],
+          "talent": 30812,
+          "rank": 2,
+          "of": 2,
+          "why": "Adds spell damage from your Intellect. It is small for you, but Rage of the Farseer asks for it."
+        },
+        {
+          "points": [
+            38,
+            42
+          ],
+          "level": [
+            47,
+            51
+          ],
+          "talent": 408498,
+          "rank": 5,
+          "of": 5,
+          "why": "Melee hits can stack a quicker, cheaper Lightning Bolt up to 5 times. Cast the bolt at 5 stacks."
+        },
+        {
+          "points": [
+            43,
+            43
+          ],
+          "level": [
+            52,
+            52
+          ],
+          "talent": 425336,
+          "rank": 1,
+          "of": 1,
+          "why": "Your own small bloodlust: 30% attack speed for 25 seconds, on a long cooldown. Press it on a hard pull."
+        },
+        {
+          "points": [
+            44,
+            45
+          ],
+          "level": [
+            53,
+            54
+          ],
+          "talent": 16256,
+          "rank": 5,
+          "of": 5,
+          "why": "Attack speed after a critical strike, at its full strength."
+        },
+        {
+          "points": [
+            46,
+            50
+          ],
+          "level": [
+            55,
+            59
+          ],
+          "talent": 16035,
+          "rank": 5,
+          "of": 5,
+          "why": "More damage on Lightning Bolt, Chain Lightning and Earth Shock. It is the only damage left that fits."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 30160,
+          "rank": 1,
+          "of": 3,
+          "why": "A critical spell hit raises your melee critical chance for a short while, so your bolts and shocks feed Flurry."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 8017,
+                "name": "Rockbiter Weapon",
+                "if": "if it has worn off",
+                "why": "it adds attack power to every swing"
+              },
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "before the first pull",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "from as far away as it reaches",
+                "why": "the pull costs little and the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "whenever it is ready",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "if the monster is still far",
+                "why": "a bolt lands before the monster does"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Flame Shock and Searing Totem come at 10, Fire Nova at 12. Keep Rockbiter Weapon on and drop the Searing Totem before you reach the monster. Your Fire totem quest is at 10 too.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "before the first pull",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 8017,
+                "name": "Rockbiter Weapon",
+                "if": "if it has worn off",
+                "why": "it adds attack power to every swing"
+              },
+              {
+                "spell": 3599,
+                "name": "Searing Totem",
+                "if": "before you reach the monster",
+                "why": "it hits the monster while you swing"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "to pull, from as far as it reaches",
+                "why": "the pull costs little and the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more",
+                "why": "it bursts out of your Fire totem"
+              },
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "when it is not on the monster",
+                "why": "it burns while you swing"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "whenever it is ready",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2484,
+                "name": "Earthbind Totem",
+                "if": "to slow a monster that runs",
+                "why": "it keeps the monster close"
+              },
+              {
+                "spell": 5730,
+                "name": "Stoneclaw Totem",
+                "if": "when too many monsters are on you",
+                "why": "they hit the totem and you get a moment to heal"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Ghost Wolf at 20 gets you about. Stormstrike comes at 25 and Windfury Weapon at 30, and those two are the jumps. From then on keep the weapon imbued and Stormstrike on its cooldown.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "before the first pull",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 8017,
+                "name": "Rockbiter Weapon",
+                "if": "until Windfury Weapon at 30",
+                "why": "it adds attack power to every swing",
+                "best": [
+                  8232,
+                  8017
+                ]
+              },
+              {
+                "spell": 3599,
+                "name": "Searing Totem",
+                "if": "before you reach the monster",
+                "why": "it hits the monster while you swing"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 17364,
+                "name": "Stormstrike",
+                "if": "whenever it is ready",
+                "why": "your hardest hit, and it can trigger Windfury",
+                "talentSpell": 17364,
+                "need": {
+                  "talents": [
+                    17364
+                  ]
+                }
+              },
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more",
+                "why": "it bursts out of your Fire totem"
+              },
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "when it is not on the monster",
+                "why": "it burns while you swing"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "whenever it is ready",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2645,
+                "name": "Ghost Wolf",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and you cannot attack in it"
+              },
+              {
+                "spell": 8056,
+                "name": "Frost Shock",
+                "if": "when a monster runs",
+                "why": "it slows a monster that runs"
+              },
+              {
+                "spell": 8512,
+                "name": "Windfury Totem",
+                "if": "in a group",
+                "why": "your party gets a chance at extra hits"
+              },
+              {
+                "spell": 8177,
+                "name": "Grounding Totem",
+                "if": "against a monster that casts",
+                "why": "it takes one spell for you"
+              },
+              {
+                "spell": 8190,
+                "name": "Magma Totem",
+                "if": "against three or more that will live",
+                "why": "it burns a pack, and it costs a lot of mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 36936,
+                "name": "Totemic Recall",
+                "if": "when you leave your totems behind",
+                "why": "it gives back part of their mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Maelstrom Weapon turns Lightning Bolt into part of your loop, and Rage of the Farseer is a burst on a long cooldown. Water Shield replaces Lightning Shield once you have it.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 408510,
+                "name": "Water Shield",
+                "if": "if you took it, before each pull",
+                "why": "it gives back mana when you are hit or crit",
+                "talentSpell": 408510,
+                "need": {
+                  "talents": [
+                    408510
+                  ]
+                }
+              },
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "if you did not take Water Shield",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 8232,
+                "name": "Windfury Weapon",
+                "if": "if it has worn off",
+                "why": "it gives your swings a chance at two more"
+              },
+              {
+                "spell": 3599,
+                "name": "Searing Totem",
+                "if": "before you reach the monster",
+                "why": "it hits the monster while you swing"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 17364,
+                "name": "Stormstrike",
+                "if": "whenever it is ready",
+                "why": "your hardest hit, and it can trigger Windfury",
+                "talentSpell": 17364,
+                "need": {
+                  "talents": [
+                    17364
+                  ]
+                }
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "at 5 stacks of Maelstrom Weapon",
+                "why": "five stacks make it cheap and quick",
+                "need": {
+                  "talents": [
+                    408498
+                  ]
+                }
+              },
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more",
+                "why": "it bursts out of your Fire totem"
+              },
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "when it is not on the monster",
+                "why": "it burns while you swing"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "whenever it is ready",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8056,
+                "name": "Frost Shock",
+                "if": "when a monster runs",
+                "why": "it slows a monster that runs"
+              },
+              {
+                "spell": 8512,
+                "name": "Windfury Totem",
+                "if": "in a group",
+                "why": "your party gets a chance at extra hits"
+              },
+              {
+                "spell": 8177,
+                "name": "Grounding Totem",
+                "if": "against a monster that casts",
+                "why": "it takes one spell for you"
+              },
+              {
+                "spell": 8190,
+                "name": "Magma Totem",
+                "if": "against three or more that will live",
+                "why": "it burns a pack, and it costs a lot of mana"
+              },
+              {
+                "spell": 2645,
+                "name": "Ghost Wolf",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and you cannot attack in it"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 36936,
+                "name": "Totemic Recall",
+                "if": "when you leave your totems behind",
+                "why": "it gives back part of their mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 425336,
+                  "name": "Rage of the Farseer",
+                  "talentSpell": 425336
+                }
+              ],
+              "say": "on a hard pull or an elite, it speeds your swings for 25 seconds"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Shaman levelling guide 1-60 (Nicktew, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/shaman-leveling-guide-nicktew",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Enhancement Shaman levelling (Wordup, updated 3 November 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/enhancement-shaman-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Method, Shaman levelling (3 November 2026, read 4 November)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-shaman-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Forever beta development notes (class changes of 3 November 2026, read 4 November)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/2360696",
+          "read": "2026-11-04"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "key": "shaman-restoration",
+      "name": "Restoration",
+      "role": "heal",
+      "tree": 262,
+      "checked": "2026-11-05",
+      "intro": "Restoration heals a group with Healing Wave, Riptide and Chain Heal, and fills the gaps with totems. It is for dungeons and for playing with a friend. Alone it is the slowest way to level.",
+      "line": "Healing Wave, Riptide and Chain Heal, with totems. A healer for a group, slow alone.",
+      "pathNote": "(46 points in Restoration, 5 in Enhancement for Intellect.)",
+      "split": "when to take the mana talents. Devil's order, the newest, takes Mindfulness at 15 and Water Shield at 20. Tiqqle and Nicktew take them later in their damage orders. The order here is Devil's.",
+      "dry": "A heal that lands early beats a bigger heal that lands late.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 16182,
+          "rank": 5,
+          "of": 5,
+          "why": "Healing Wave casts faster. It is the heal you cast most, and a quicker cast lands before the damage does."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 1223033,
+          "rank": 3,
+          "of": 3,
+          "why": "Some of your mana regeneration keeps going while you cast. A healer casts all the time, so this keeps you healing."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 16179,
+          "rank": 2,
+          "of": 5,
+          "why": "Healing costs 5% less at full ranks, and spells hit more often. These points lead to Water Shield."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 408510,
+          "rank": 1,
+          "of": 1,
+          "why": "Globes of water give back mana when you are hit or land a critical strike. Only one shield holds, so it replaces Lightning Shield."
+        },
+        {
+          "points": [
+            12,
+            14
+          ],
+          "level": [
+            21,
+            23
+          ],
+          "talent": 16179,
+          "rank": 5,
+          "of": 5,
+          "why": "Tidal Focus at full strength: healing costs 5% less and you hit more often with spells."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 16176,
+          "rank": 1,
+          "of": 3,
+          "why": "A critical heal gives your target more armour for a while. One point opens the way to Mana Tide Totem."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 16190,
+          "rank": 1,
+          "of": 1,
+          "why": "Mana Tide Totem gives your whole group mana back, on a long cooldown. Press it when the group runs low."
+        },
+        {
+          "points": [
+            17,
+            19
+          ],
+          "level": [
+            26,
+            28
+          ],
+          "talent": 16181,
+          "rank": 3,
+          "of": 3,
+          "why": "Being hit while you cast has a good chance of not slowing your heals. Fewer ruined casts."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 16176,
+          "rank": 2,
+          "of": 3,
+          "why": "A critical heal gives your target more armour for a while. It takes the points Nature's Swiftness asks for."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 16188,
+          "rank": 1,
+          "of": 1,
+          "why": "Your next Nature spell, Healing Wave among them, becomes instant. It is the emergency button."
+        },
+        {
+          "points": [
+            22,
+            24
+          ],
+          "level": [
+            31,
+            33
+          ],
+          "talent": 29206,
+          "rank": 3,
+          "of": 3,
+          "why": "Healing Wave heals for much more. It is the spell you cast most, and Riptide needs this talent."
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 16176,
+          "rank": 3,
+          "of": 3,
+          "why": "A critical heal gives your target more armour for a while. It is the last point of a row you had to pass."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 16178,
+          "rank": 5,
+          "of": 5,
+          "why": "Every healing spell heals 10% more. It is the biggest plain gain on the tree."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 408521,
+          "rank": 1,
+          "of": 1,
+          "why": "A heal over time that makes Chain Heal stronger on the same target. Put it on the hurt, then Chain Heal them."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 16194,
+          "rank": 5,
+          "of": 5,
+          "why": "Your healing spells crit more often, and a crit gives back mana through Water Shield."
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 16173,
+          "rank": 5,
+          "of": 5,
+          "why": "Totems cost less mana at full ranks. You drop several in a dungeon."
+        },
+        {
+          "points": [
+            42,
+            46
+          ],
+          "level": [
+            51,
+            55
+          ],
+          "talent": 16187,
+          "rank": 5,
+          "of": 5,
+          "why": "Mana Spring Totem and Healing Stream Totem work 5% better a point. It helps the whole group."
+        },
+        {
+          "points": [
+            47,
+            51
+          ],
+          "level": [
+            56,
+            60
+          ],
+          "talent": 17485,
+          "rank": 5,
+          "of": 5,
+          "why": "Intellect: more mana to heal with, and more spell critical chance. Nothing left in Restoration helps you more."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 8017,
+                "name": "Rockbiter Weapon",
+                "if": "if it has worn off",
+                "why": "it adds attack power to every swing"
+              },
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "before the first pull",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "from as far away as it reaches",
+                "why": "the pull costs little and the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "whenever it is ready",
+                "why": "it hits hard and stops a cast"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "if": "if the monster is still far",
+                "why": "a bolt lands before the monster does"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Healing Wave is your spell, and Improved Healing Wave makes it quicker. In a group, start it before the hit lands. Alone, keep the weapon and the totem working and heal between monsters.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "between pulls",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 8017,
+                "name": "Rockbiter Weapon",
+                "if": "if it has worn off",
+                "why": "it adds attack power to every swing"
+              },
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "on the tank, before the pull",
+                "why": "a heal that lands early beats a bigger one that lands late"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "on whoever is hurt worst",
+                "why": "it is your efficient heal"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "against a dangerous cast",
+                "why": "it stops the cast before you must heal it"
+              },
+              {
+                "spell": 8050,
+                "name": "Flame Shock",
+                "if": "when nobody needs a heal",
+                "why": "it adds damage for little mana"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "why": "damage from range while the group is healthy"
+              }
+            ],
+            "between": [
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals a lot for its mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana, and mana returns while you swing"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Water Shield at 20 and Mana Tide Totem at 25 are your mana. Lesser Healing Wave is the quick heal, and Nature's Swiftness at 30 is the emergency. Agree the drink breaks before a hard pull.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 408510,
+                "name": "Water Shield",
+                "if": "if you took it, before each pull",
+                "why": "it gives back mana when you are hit or crit",
+                "talentSpell": 408510,
+                "need": {
+                  "talents": [
+                    408510
+                  ]
+                }
+              },
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "if you did not take Water Shield",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 5675,
+                "name": "Mana Spring Totem",
+                "if": "when your group needs the mana",
+                "why": "it gives mana back to you and your party"
+              },
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "on the tank, before the pull",
+                "why": "a heal that lands early beats a bigger one that lands late"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8004,
+                "name": "Lesser Healing Wave",
+                "if": "when a big hit would land too late",
+                "why": "it is quicker than Healing Wave but heals less for its mana"
+              },
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "on whoever is hurt worst",
+                "why": "it is your efficient heal"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "against a dangerous cast",
+                "why": "it stops the cast before you must heal it"
+              },
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more, if nobody is hurt",
+                "why": "it adds damage for little mana"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "why": "damage from range while the group is healthy"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8143,
+                "name": "Tremor Totem",
+                "if": "when a fear is coming",
+                "why": "it breaks fear, charm and sleep"
+              },
+              {
+                "spell": 5394,
+                "name": "Healing Stream Totem",
+                "if": "for steady light damage",
+                "why": "it heals a little all the time"
+              },
+              {
+                "spell": 2645,
+                "name": "Ghost Wolf",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and you cannot cast in it"
+              }
+            ],
+            "between": [
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 36936,
+                "name": "Totemic Recall",
+                "if": "when you leave your totems behind",
+                "why": "it gives back part of their mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 16190,
+                "name": "Mana Tide Totem",
+                "if": "when the group is low on mana",
+                "why": "it gives the whole group mana back",
+                "talentSpell": 16190,
+                "need": {
+                  "talents": [
+                    16190
+                  ]
+                }
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 16188,
+                  "name": "Nature's Swiftness",
+                  "talentSpell": 16188
+                },
+                {
+                  "spell": 16190,
+                  "name": "Mana Tide Totem",
+                  "talentSpell": 16190
+                }
+              ],
+              "say": "Swiftness for an emergency heal, Mana Tide when the group runs low"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Riptide and Chain Heal at 40 are your group healing: put Riptide on the hurt, then Chain Heal that target. Healing Way and Purification make every heal count. Keep your group close so Chain Heal can jump.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 408510,
+                "name": "Water Shield",
+                "if": "if you took it, before each pull",
+                "why": "it gives back mana when you are hit or crit",
+                "talentSpell": 408510,
+                "need": {
+                  "talents": [
+                    408510
+                  ]
+                }
+              },
+              {
+                "spell": 324,
+                "name": "Lightning Shield",
+                "if": "if you did not take Water Shield",
+                "why": "its orbs hurt whatever hits you"
+              },
+              {
+                "spell": 5675,
+                "name": "Mana Spring Totem",
+                "if": "when your group needs the mana",
+                "why": "it gives mana back to you and your party"
+              },
+              {
+                "spell": 408521,
+                "name": "Riptide",
+                "if": "on the tank, before the pull",
+                "why": "it heals over time and powers up Chain Heal",
+                "talentSpell": 408521,
+                "need": {
+                  "talents": [
+                    408521
+                  ]
+                }
+              }
+            ],
+            "loop": [
+              {
+                "spell": 408521,
+                "name": "Riptide",
+                "if": "on a hurt ally who does not have it",
+                "why": "it heals over time and powers up Chain Heal",
+                "talentSpell": 408521,
+                "need": {
+                  "talents": [
+                    408521
+                  ]
+                }
+              },
+              {
+                "spell": 1064,
+                "name": "Chain Heal",
+                "if": "when two or more are hurt",
+                "why": "it jumps on, and hits harder on a Riptide target"
+              },
+              {
+                "spell": 8004,
+                "name": "Lesser Healing Wave",
+                "if": "when a big hit would land too late",
+                "why": "it is quicker than Healing Wave but heals less for its mana"
+              },
+              {
+                "spell": 331,
+                "name": "Healing Wave",
+                "if": "on whoever is hurt worst",
+                "why": "it is your efficient heal"
+              },
+              {
+                "spell": 8042,
+                "name": "Earth Shock",
+                "if": "against a dangerous cast",
+                "why": "it stops the cast before you must heal it"
+              },
+              {
+                "spell": 403,
+                "name": "Lightning Bolt",
+                "why": "damage from range while the group is healthy"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8143,
+                "name": "Tremor Totem",
+                "if": "when a fear is coming",
+                "why": "it breaks fear, charm and sleep"
+              },
+              {
+                "spell": 5394,
+                "name": "Healing Stream Totem",
+                "if": "for steady light damage",
+                "why": "it heals a little all the time"
+              },
+              {
+                "spell": 408341,
+                "name": "Fire Nova",
+                "if": "against three or more, if nobody is hurt",
+                "why": "it adds damage for little mana"
+              }
+            ],
+            "between": [
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 36936,
+                "name": "Totemic Recall",
+                "if": "when you leave your totems behind",
+                "why": "it gives back part of their mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 16190,
+                "name": "Mana Tide Totem",
+                "if": "when the group is low on mana",
+                "why": "it gives the whole group mana back",
+                "talentSpell": 16190,
+                "need": {
+                  "talents": [
+                    16190
+                  ]
+                }
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 16188,
+                  "name": "Nature's Swiftness",
+                  "talentSpell": 16188
+                },
+                {
+                  "spell": 16190,
+                  "name": "Mana Tide Totem",
+                  "talentSpell": 16190
+                }
+              ],
+              "say": "Swiftness for an emergency heal, Mana Tide when the group runs low"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Restoration Shaman guide (Devil, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/restoration-shaman-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Restoration Shaman levelling (Seksixeny, updated 4 November 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/restoration-shaman-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Shaman levelling guide 1-60 (Nicktew, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/shaman-leveling-guide-nicktew",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Blizzard, Forever beta development notes (class changes of 3 November 2026, read 4 November)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/2360696",
+          "read": "2026-11-04"
+        }
+      ]
+    }
+  ]
+}

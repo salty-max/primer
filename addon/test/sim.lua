@@ -62,7 +62,7 @@ for id, b in pairs(D.builds) do
 end
 if G.FOREVER then
   check(
-    builds == 12
+    builds == 15
       and D.builds[1].key == "warrior-arms"
       and D.builds[2].key == "warrior-fury"
       and D.builds[3].key == "warrior-protection"
@@ -74,8 +74,11 @@ if G.FOREVER then
       and D.builds[14].key == "rogue-subtlety"
       and D.builds[15].key == "warlock-affliction"
       and D.builds[16].key == "warlock-demonology"
-      and D.builds[17].key == "warlock-destruction",
-    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction"
+      and D.builds[17].key == "warlock-destruction"
+      and D.builds[18].key == "shaman-elemental"
+      and D.builds[19].key == "shaman-enhancement"
+      and D.builds[20].key == "shaman-restoration",
+    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration"
   )
   check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
   check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
@@ -85,6 +88,11 @@ if G.FOREVER then
   check(D.classes[4].roles.damage.build == 13, "Forever: the Rogue's one recommended build is Combat")
   check(D.classes[9].token == "WARLOCK" and #D.classes[9].builds == 3, "Forever: the Warlock's class")
   check(D.classes[9].roles.damage.build == 15, "Forever: the Warlock's one recommended build is Affliction")
+  check(D.classes[7].token == "SHAMAN" and #D.classes[7].builds == 3, "Forever: the Shaman's class")
+  check(
+    D.classes[7].roles.damage.build == 19 and D.classes[7].roles.heal.build == 20,
+    "Forever: the Shaman's recommended builds are Enhancement for damage and Restoration for healing"
+  )
 else
   check(
     builds == 9 and D.builds[1] and D.builds[2] and D.builds[3],
