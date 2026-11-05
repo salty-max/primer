@@ -27,7 +27,7 @@ you to stop**. Never named, never "I" and never "we", always speaking to "you".
   semicolons, no exclamation marks. Digits for levels, ranks and counts.
   Spell, talent and form names typed exactly as the game spells them (the
   generator checks the row's spell id against the game's name for it, and the
-  window shows the game's own name by id beside the line). No "OP", no "meta", no "pro tip", no "DPS" (say damage),
+  window shows the game's own name by id beside the line). No "OP", no "meta" (the whole list is in "Meta-agnostic" below), no "pro tip", no "DPS" (say damage),
   no "rotation" in a heading (say opening and priority).
 - **The family's used-up devices stay out:** "Not X. Y." fragments, "Here is",
   "plainly", announced confessions ("to be honest"), a trailing ", which ..."
@@ -40,6 +40,36 @@ you to stop**. Never named, never "I" and never "we", always speaking to "you".
 
 `scripts/guide.ts` refuses non-ASCII, a semicolon, an exclamation mark and the
 banned words in any line (it cannot judge the rest: the cold read does).
+
+## Meta-agnostic (5 November 2026, the user's call)
+
+The guide does not claim an optimum and does not lean on a community. What a player
+reads is two kinds of thing, and they are written differently.
+
+- **Stable**: what a spell or a talent does, the level it comes at, how the class's
+  resource works, what a pick buys and what it costs, how to play the class at a
+  level. This is where the voice lives, and a patch does not move it.
+- **Volatile**: the exact order of the talents and which road wins. It is "the
+  common choice" with its price, never "the best". A line says what the point
+  buys, and the other road's line says what that road gives up ("It buys X and
+  costs Y, and the other order gives up Z"). The "also works" roads stay, each
+  with its price. Nobody has levelled a Forever character to 60, so no order is
+  proven, and a line that says it is would be a guess.
+- **No named source, no authority.** A line never names a site or a writer ("the
+  guides say", "Mobalytics takes it first") and never counts heads ("most players",
+  "everyone"). Where orders differ, say "one order ... another ..." and keep the
+  facts. Where a number or a pick is ours, say "ours" as before. "Nobody has played
+  past 30" stays: it is the honest limit of what is known.
+- **Banned in a Forever build's words** (`scripts/meta-lib.ts`, the one list, with
+  the one allowed use and its reason): guide, best, optimal, meta, tier, strongest,
+  ideal, perfect, mandatory, required, essential, "a must", "the only way", "the
+  right way", "everyone takes", "most players", "always/never" before an order verb
+  (take, pick, skip, put, choose, level, spend, start), "wrong" for a road (a fight
+  that "goes wrong" is fine), safer, safest, recommend, and speed rankings (fastest, quickest, easiest, smoothest), community, top pick, go-to, "most Hunters", "players take", and the name of any site
+  or writer a build lists in its `sources`, in any case. Say "row" for a talent row, never "tier", "needs" and not "required" for a prerequisite, and "ordinary" for "standard" (all three words are banned, a false alarm is cheaper than a claim). Mechanics are free: "you must stand still
+  to use the wand" is a fact about the game. `scripts/guide.ts` fails the run
+  naming the key, and `scripts/meta.test.ts` reads the content files too.
+- Era's content (`content/classic/`) is frozen and not held to it.
 
 ## A class card
 

@@ -21,7 +21,8 @@
  *     ranks it buys, the point N is taken at level N + 9, the tree holds the
  *     points the talent asks (req_points) and its prerequisite is at full rank
  *   - the stages follow each other and end at level 60
- *   - the words: plain ASCII, no semicolon, no exclamation mark
+ *   - the words: plain ASCII, no semicolon, no exclamation mark, and for Forever no meta claim
+ *     (an optimum, a community's authority, a named source: scripts/meta-lib.ts)
  * A patch that drops or moves a spell or a talent fails here, and so the daily
  * game-data job, before its pull request.
  *
@@ -37,6 +38,7 @@
 import type { Database } from "bun:sqlite";
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { metaClaims, sourceNames } from "./meta-lib";
 import type * as WowDb from "../../wow-data/src/db";
 import { familyPath } from "./root";
 import { diffFacts, type Lock } from "./facts-lib";
@@ -183,6 +185,9 @@ for (const g of GAMES) {
     .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")));
 }
 
+// the sites and writers Forever's builds list as sources: none of them may be named in what a player reads (scripts/meta-lib.ts)
+const SOURCE_NAMES = [...new Set(content.forever.flatMap((c) => c.builds.flatMap((b) => sourceNames(b.sources))))];
+
 const filled = new Map<Row, string[]>(); // the stances the table gave a row, per run of a game (never written back to the content)
 const unchecked = new Set<string>(); // stances written that the table cannot confirm
 const problems: string[] = [];
@@ -205,6 +210,8 @@ function word(key: string, value: string | undefined) {
   if (value.includes("!")) bad(`${key}: an exclamation mark`);
   if (/\b(DPS|OP|meta|pro tip)\b/.test(value)) bad(`${key}: a word the voice never uses (docs/voices.md)`);
   if (!value.trim()) bad(`${key}: empty`);
+  // Forever's words claim no optimum and lean on no community (docs/voices.md, "Meta-agnostic"); Era is frozen and not held to it
+  if (KEYNS === "forever.") for (const claim of metaClaims(value, SOURCE_NAMES)) bad(`${key}: ${claim} (docs/voices.md, Meta-agnostic)`);
   return key;
 }
 

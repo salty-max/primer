@@ -58,6 +58,11 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
   roads are kept as "also works", and the Overview says the price of the
   other. A stage is a level bracket and a job and never an optimum, and **the
   voice never changes the instruction** (`docs/voices.md`).
+- **Meta-agnostic** (5 November 2026, the user's call): a Forever build's words
+  claim no optimum and name no source or community. The talent order is "the
+  common choice" with its price, never "the best". One list of banned words and
+  names in `scripts/meta-lib.ts`, checked by `scripts/guide.ts` and
+  `scripts/meta.test.ts` (`docs/voices.md`, Meta-agnostic). Era is frozen.
 - The game's facts come from wow-data's databases only (`scripts/guide.ts`
   through `scripts/root.ts`, the kit's copy). Names of spells and talents are
   the game's, by id, never typed. Generated files (`Guide_*.lua`,
