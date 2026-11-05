@@ -1,9 +1,14 @@
--- The strict game: the test game's functions and frame methods refuse what Blizzard's API documentation says
--- the client refuses (a missing argument, a string where a number goes), naming the function and the argument.
+-- addon-kit 5e9b2f0: a copy (kit:sync); edit the addon-kit repository's strict.lua instead
+-- The strict game (the kit's, kit:sync copies it beside an addon's test game): the test game's functions and
+-- frame methods refuse what Blizzard's API documentation says the client refuses (a missing argument, a string
+-- where a number goes), naming the function and the argument.
 -- Why: the mock accepts any call, so on Forever GameTooltip:SetTalent(talent, false, false, group) (Era's order)
--- passed the sim and raised "bad argument #3" in the player's game (5 November 2026).
+-- passed Primer's sim and raised "bad argument #3" in the player's game (5 November 2026).
+-- An addon's game.lua turns it on after its own world is built and before the addon loads:
+--   G.strict = dofile("addon/test/strict.lua"); G.strict.install(G, G.FOREVER and "forever" or "classic")
+-- (addon-kit/docs/battery.md has the whole shape)
 --
--- What it knows (docs/testing.md has the holes):
+-- What it knows (addon-kit/docs/battery.md has the holes):
 --   api_<game>.lua      generated from Blizzard_APIDocumentationGenerated: functions (C_Traits.GetNodeInfo...) and
 --                       widget methods (SetPoint, SetTexture...) with argument names, types, nilable, defaults
 --   evidence_<game>.lua generated: for a method no documentation lists (GameTooltip:SetTalent...), the argument
@@ -11,12 +16,14 @@
 --   ALLOW (below)       a method the source never calls and a person has seen work in the game, with the reason
 -- A refused call raises AND is kept in S.violations, so a pcall around it cannot hide it from the check.
 local S = { violations = {}, unchecked = {}, checked = 0, flagged = {} }
+package.loaded["addon-kit.strict"] = S -- (a test can reach it without the game: require("addon-kit.strict"))
 
--- (reviewed by a person in the game, "GameTooltip:Method" or "Method", with who saw it and when)
+-- (reviewed by a person in the game, "GameTooltip:Method" or "Method", with who saw it and when: an addon
+-- sets its own entries after the install, in its game.lua)
 S.ALLOW = {}
 
 -- The documentation lists only the longest form of a few methods the client takes shorter (SetPoint("TOP")):
--- their arguments from this one on may be left out. Each is a place the net is thinner, listed in docs/testing.md.
+-- their arguments from this one on may be left out. Each is a place the net is thinner, listed in addon-kit/docs/battery.md.
 S.OPTIONAL_FROM = { SetPoint = 2, SetAllPoints = 1, SetVertexColor = 4, SetBackdropColor = 4, SetTextColor = 4 }
 
 -- Forms the client takes that the documentation does not list (SetPoint("LEFT", 4, 0), the offset form)
@@ -200,7 +207,7 @@ end
 function S.install(G, game)
   local api = dofile("addon/test/api_" .. game .. ".lua")
   local evidence = dofile("addon/test/evidence_" .. game .. ".lua")
-  S.api, S.game = api, game
+  S.api, S.evidence, S.game = api, evidence, game
   isSecret = issecretvalue or isSecret
 
   -- (a function of the documentation: `name` as "C_Traits.GetNodeInfo", every argument checked)
@@ -320,21 +327,31 @@ function S.install(G, game)
     end
   end
 
+  S.method = function(name, self, ...) return checkMethod(name, self, ...) end
+
+  -- A game of an addon's own (not wowmock.lua: no G.methods) checks its methods itself, through S.method(name,
+  -- frame, ...) wherever its frames answer a method call (addon-kit/docs/battery.md, "A game of its own"): only the
+  -- documented functions are wrapped here.
+  local methods = G.methods
+  if not methods then methods = {} end
+
   -- every method the mock has, and every method it has not (it answers with a no-op, as a lenient mock does)
-  for name, fn in pairs(G.methods) do
+  for name, fn in pairs(methods) do
     if type(fn) == "function" and (api.methods[name] or evidence[name]) then
-      G.methods[name] = function(self, ...)
+      methods[name] = function(self, ...)
         checkMethod(name, self, ...)
         return fn(self, ...)
       end
     end
   end
-  setmetatable(G.methods, {
-    __index = function(_, name)
-      if type(name) ~= "string" or not name:match("^%u") then return nil end
-      return function(self, ...) checkMethod(name, self, ...) end
-    end,
-  })
+  if G.methods then
+    setmetatable(G.methods, {
+      __index = function(_, name)
+        if type(name) ~= "string" or not name:match("^%u") then return nil end
+        return function(self, ...) checkMethod(name, self, ...) end
+      end,
+    })
+  end
   -- (a tooltip's own methods, set on the object)
   local function wrapTooltip(t)
     for _, name in ipairs({ "SetOwner", "AddLine", "SetItemByID" }) do
@@ -347,12 +364,14 @@ function S.install(G, game)
       end
     end
   end
-  wrapTooltip(GameTooltip)
-  local create = CreateFrame
-  function CreateFrame(kind, ...)
-    local f = create(kind, ...)
-    if kind == "GameTooltip" then wrapTooltip(f) end
-    return f
+  if G.methods then
+    wrapTooltip(GameTooltip)
+    local create = CreateFrame
+    function CreateFrame(kind, ...)
+      local f = create(kind, ...)
+      if kind == "GameTooltip" then wrapTooltip(f) end
+      return f
+    end
   end
 
   -- every documented function the game has: the namespaces' and the globals'
