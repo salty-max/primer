@@ -33,8 +33,8 @@ K.theme({
 })
 
 ns.PREFIX = K.prefix("Primer")
--- (the game's own book, until the user has seen a logo of ours)
-ns.ICON = "Interface\\Icons\\INV_Misc_Book_09"
+-- (the logo: the TOCs' icon, the minimap button, the window's portrait, a spell's stand-in)
+ns.ICON = "Interface\\AddOns\\Primer\\Media\\Logo"
 
 local char
 function ns.book() return char end

@@ -81,8 +81,8 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
   kit:sync`. The addon's own globals for selene are `primer.yml`.
 - The minimap button's place is the kit's (`K.MINIMAP_ANGLES.Primer`, 90
   degrees), clear of the others and of Classic Era's zoom buttons.
-- Blizzard's UI only through `bun ../wow-data/bin/ui.ts`. The icon is the
-  game's own book until the user has seen a logo of ours.
+- Blizzard's UI only through `bun ../wow-data/bin/ui.ts`. The icon is our
+  logo, `Media/Logo.tga` (`ns.ICON`, 5 November 2026, the user's own).
 - No other addon's API, even optional. Stepping aside for a rival is fine.
 - Conventional Commits, lowercase subjects, no AI trailers. Commit locally;
   ask before any push, release or deploy. The pre-push hook wants a check

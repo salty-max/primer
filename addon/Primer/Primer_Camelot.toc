@@ -6,7 +6,7 @@
 ## Version: 0.1.0
 ## SavedVariablesPerCharacter: PrimerChar
 ## SavedVariables: PrimerSettings
-## IconTexture: Interface\Icons\INV_Misc_Book_09
+## IconTexture: Interface\AddOns\Primer\Media\Logo
 ## X-Website: https://github.com/salty-max/primer
 ## X-License: MIT
 
