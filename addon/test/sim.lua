@@ -1077,6 +1077,26 @@ if not G.FOREVER then
     end
   end
 
+  -- the game's talent tooltip is asked for on Era only: Forever's SetTalent takes other arguments and raised "bad
+  -- argument #3" from inside Blizzard's code, so there the spell's tooltip is the one shown
+  do
+    local was, tip, calls = ns.forever, _G.GameTooltip, 0
+    _G.GameTooltip = {
+      SetTalent = function()
+        calls = calls + 1
+        return true
+      end,
+    }
+    ns.forever = false
+    check(ns.talentTip({ talent = 7 }) == true and calls == 1, "on Era the game's own talent tooltip is asked for")
+    ns.forever = true
+    check(
+      not ns.talentTip({ talent = 7 }) and calls == 1,
+      "on Forever SetTalent is never called, the spell's tooltip is shown"
+    )
+    ns.forever, _G.GameTooltip = was, tip
+  end
+
   -- a greyed step of the opening says what it needs, and every step has its reason in a tooltip
   play("MAGE", "Mage", 8, { [61] = "Frost", [41] = "Fire", [81] = "Arcane" })
   s.level, s.spells = 2, set(168)

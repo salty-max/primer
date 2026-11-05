@@ -1140,9 +1140,7 @@ book:add(TAB.talents, {
       local ok, err = pcall(function()
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
         -- (the game's own talent tooltip, which knows the rank, as the trees' cells; the spell's when it is refused)
-        local shown = self.talent
-          and GameTooltip.SetTalent
-          and pcall(GameTooltip.SetTalent, GameTooltip, self.talent, false, false, self.group)
+        local shown = ns.talentTip(self)
         if not shown then GameTooltip:SetSpellByID(self.spell) end
         GameTooltip:Show()
       end)

@@ -5,7 +5,7 @@
 -- pick ringed, the row gates at the left, a straight line for a prerequisite.
 -- The numbers belong to the road and never move: a point spent changes a ring
 -- and a count. The tooltip is the game's own for the talent (SetTalent) and
--- one line of ours (SetTalent takes the talent's id: Era's own window calls it so). Drawn once, set in place on every look.
+-- one line of ours (Era's SetTalent takes the talent's id: its own window calls it so. Forever's takes other arguments, see ns.talentTip). Drawn once, set in place on every look.
 local _, ns = ...
 local K, L = ns.kit, ns.kit.L
 local T = K.T
@@ -47,15 +47,23 @@ local function cellsOf(class)
   return out, byId, tabs
 end
 
+-- The game's own talent tooltip, which knows the rank, for a cell or the footer's slot (Era only). Forever's
+-- GameTooltip:SetTalent is (talentID, isInspect, groupIndex): called in Era's order it raised "bad argument #3"
+-- from inside Blizzard's tooltip code, which pcall cannot hide, so there the spell's tooltip is the one shown.
+function ns.talentTip(slot)
+  if ns.forever then return false end
+  return slot.talent
+    and GameTooltip.SetTalent
+    and pcall(GameTooltip.SetTalent, GameTooltip, slot.talent, false, false, slot.group)
+end
+
 local function tooltip(self)
   if not GameTooltip then return end
   local ok, err = pcall(function()
     GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
     -- (the game's own talent tooltip, called as its own talent window calls it: by the talent's id; the spell's
     -- when the call is refused)
-    local shown = self.talent
-      and GameTooltip.SetTalent
-      and pcall(GameTooltip.SetTalent, GameTooltip, self.talent, false, false, self.group)
+    local shown = ns.talentTip(self)
     if not shown and self.spell then GameTooltip:SetSpellByID(self.spell) end
     if self.line then GameTooltip:AddLine(self.line, T.accent[1], T.accent[2], T.accent[3], true) end
     GameTooltip:Show()
