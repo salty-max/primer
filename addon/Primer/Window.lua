@@ -477,7 +477,13 @@ end
 -- The count beside the portrait: at most three facts (the build, the level, and the realm or the group when it matters).
 -- (the page is a build's once the player has a role, a pick or points: before that it is the class's)
 local function hasBuildOf(class, r)
-  return r.phase == "spent" or r.roleChosen or r.mode == "picked" or r.mode == "own" or #G.roles(class) == 1
+  -- (before level 10 there is no specialisation to have: a class with one role has its build advised, but nothing
+  -- is the player's until a role, a pick or a way of their own, so the header and the Class tab say the class)
+  return r.phase == "spent"
+    or r.roleChosen
+    or r.mode == "picked"
+    or r.mode == "own"
+    or (#G.roles(class) == 1 and r.phase ~= "untalented")
 end
 local function setFacts(snap, class, r)
   local b = ns.data.builds[r.build]

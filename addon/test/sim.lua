@@ -1110,6 +1110,28 @@ if not G.FOREVER then
     "a step not yet reachable is grey in the opening with the level it needs, and its reason"
   )
 
+  -- a Mage before level 10 has no specialisation: the header says the class, the page says it advises
+  play("MAGE", "Mage", 8, { [61] = "Frost", [41] = "Fire", [81] = "Arcane" })
+  s.level, s.spells = 2, set(168)
+  ns.open(TAB.level)
+  check(
+    ns.screen.facts[1] == "Mage" and ns.screen.facts[2] == "level 2",
+    "a level 2 Mage is not called Frost in the header"
+  )
+  PrimerChar.groups = {}
+  s.season = ns.rules.HARDCORE
+  ns.open(TAB.class)
+  local mineMage = false
+  for _, row in ipairs(ns.screen.roles) do
+    mineMage = mineMage or row.mine
+  end
+  check(
+    not mineMage and ns.screen.hardcore == nil,
+    "a level 2 Mage: the Class tab marks nothing yours and has no Hardcore lines for a default"
+  )
+  s.season = 0
+  PrimerFrame:Hide()
+
   -- the Frost Mage: one role, nothing to ask
   play("MAGE", "Mage", 8, { [61] = "Frost", [41] = "Fire", [81] = "Arcane" })
   s.level, s.spells = 24, set(168, 116, 122, 118)
