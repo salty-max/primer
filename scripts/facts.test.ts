@@ -46,4 +46,4 @@ test.skipIf(!have)("guide.ts fails on a lock whose fact moved, and on one whose 
   const cell = run(text.replace(/("cell \d+": "tree \d+ row )(\d)/, (_, a, b) => a + (Number(b) + 1)));
   expect(cell.exitCode).toBe(1);
   expect(cell.stderr.toString()).toContain("cell ");
-});
+}, 60000); // three runs of guide.ts: past bun's 5 second default once the guide held 33 builds

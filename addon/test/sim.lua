@@ -62,7 +62,7 @@ for id, b in pairs(D.builds) do
 end
 if G.FOREVER then
   check(
-    builds == 21
+    builds == 24
       and D.builds[1].key == "warrior-arms"
       and D.builds[2].key == "warrior-fury"
       and D.builds[3].key == "warrior-protection"
@@ -83,8 +83,11 @@ if G.FOREVER then
       and D.builds[23].key == "hunter-survival"
       and D.builds[24].key == "priest-shadow"
       and D.builds[25].key == "priest-discipline"
-      and D.builds[26].key == "priest-holy",
-    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration, the Hunter's Beast Mastery, Marksmanship and Survival, the Priest's Shadow, Discipline and Holy"
+      and D.builds[26].key == "priest-holy"
+      and D.builds[6].key == "paladin-retribution"
+      and D.builds[7].key == "paladin-holy"
+      and D.builds[8].key == "paladin-protection",
+    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration, the Hunter's Beast Mastery, Marksmanship and Survival, the Priest's Shadow, Discipline and Holy, the Paladin's Retribution, Holy and Protection"
   )
   check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
   check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
@@ -105,6 +108,11 @@ if G.FOREVER then
   check(
     D.classes[5].roles.damage.build == 24 and D.classes[5].roles.heal.build == 25,
     "Forever: the Priest's recommended builds are Shadow for damage and Discipline for healing"
+  )
+  check(D.classes[2].token == "PALADIN" and #D.classes[2].builds == 3, "Forever: the Paladin's class")
+  check(
+    D.classes[2].roles.damage.build == 6 and D.classes[2].roles.heal.build == 7 and D.classes[2].roles.tank.build == 8,
+    "Forever: the Paladin's recommended builds are Retribution for damage, Holy for healing and Protection for tanking"
   )
 else
   check(
