@@ -1837,6 +1837,234 @@ check(ns.option("minimapHidden") == true, "/primer minimap hides the button")
 SlashCmdList.PRIMER("minimap")
 check(ns.option("minimapHidden") == false, "and shows it again")
 
+-- ── the Options page, the welcome page, reset ───────────────────────────────
+do
+  local function slash(msg)
+    s.printed = {}
+    SlashCmdList.PRIMER(msg)
+  end
+  -- (every word of a frame and what it holds)
+  local function wordsOf(frame)
+    local out = {}
+    local function walk(f)
+      if type(f.text) == "string" then out[#out + 1] = f.text end
+      if type(f.titleText) == "string" then out[#out + 1] = f.titleText end
+      for _, r in ipairs(f.regions or {}) do
+        if type(r.text) == "string" then out[#out + 1] = r.text end
+      end
+      for _, kid in ipairs(f.kids or {}) do
+        walk(kid)
+      end
+    end
+    walk(frame)
+    return table.concat(out, "\n")
+  end
+  local realName = UnitName
+  ns.faults = {} -- (the scenarios before this one leave their own, on purpose)
+  local function newCharacter(name)
+    UnitName = function() return name end
+    ns.login()
+  end
+
+  -- the Options page: a box for the line at level 10, a box for the minimap button, another character's to take
+  local V = G.panel.settings
+  check(G.panel.name == "Primer" and G.panel.registered, "the Options page, registered under AddOns")
+  check(V.PRIMER_LEVELTENLINE and V.PRIMER_MINIMAPHIDDEN and V.PRIMER_COPYFROM, "… a box each and a copy")
+  check(V.PRIMER_LEVELTENLINE.default == true and V.PRIMER_MINIMAPHIDDEN.default == true, "… both on by default")
+  check(V.PRIMER_LEVELTENLINE.get() == true and V.PRIMER_MINIMAPHIDDEN.get() == true, "… both read from the settings")
+  V.PRIMER_LEVELTENLINE.set(false)
+  check(
+    ns.option("levelTenLine") == false and V.PRIMER_LEVELTENLINE.get() == false,
+    "… the line's box writes its setting"
+  )
+  V.PRIMER_LEVELTENLINE.set(true)
+  check(ns.option("levelTenLine") == true, "… and back")
+  V.PRIMER_MINIMAPHIDDEN.set(false)
+  check(
+    ns.option("minimapHidden") == true and PrimerMinimapButton:IsShown() == false,
+    "… the minimap box (ticked = shown) hides the button"
+  )
+  V.PRIMER_MINIMAPHIDDEN.set(true)
+  check(ns.option("minimapHidden") == false and PrimerMinimapButton:IsShown(), "… and shows it")
+  G.panel.opened = nil
+  slash("settings")
+  check(G.panel.opened == 42, "/primer settings opens the Options page")
+  G.panel.opened = nil
+  PrimerMinimapButton.scripts.OnClick(PrimerMinimapButton, "RightButton")
+  check(G.panel.opened == 42, "a right-click on the minimap button opens it too")
+  slash("options")
+  check(G.panel.opened == 42, "/primer options too")
+
+  -- the usage names the new words, and a typo prints it
+  for _, word in ipairs({
+    "/primer settings",
+    "/primer welcome",
+    "/primer export",
+    "/primer import CODE",
+    "/primer reset",
+  }) do
+    slash("setings")
+    check(said(word), "a typo prints the usage, which names " .. word)
+  end
+  slash("help")
+  check(said("/primer opens the guide"), "/primer help prints it too")
+
+  -- a code: this character's settings out and another's in
+  slash("import nonsense")
+  check(said("isn't a Primer settings code"), "a code that is not Primer's is refused")
+  slash("import PR1:h1:a200:l0")
+  check(said("Settings imported"), "a code taken")
+  check(
+    ns.option("minimapHidden") == true and ns.option("minimapAngle") == 200 and ns.option("levelTenLine") == false,
+    "… its choices this character's"
+  )
+  check(ns.profiles:import("PR1:h0:a90"), "an older code, without the line, is taken")
+  check(ns.option("levelTenLine") == false and ns.option("minimapHidden") == false, "… and leaves the line as it was")
+  check(ns.profiles:export() == "PR1:h0:a90:l0", "export: PR1:h0:a90:l0")
+  ns.setOption("levelTenLine", true)
+  check(ns.profiles:export() == "PR1:h0:a90:l1", "… the line, on")
+
+  -- the line at level 10 follows its switch
+  PrimerChar.groups, PrimerChar.welcomed = {}, nil
+  s.level, s.spells = 10, set(168, 100, 772, 78)
+  if G.FOREVER then s.traits.points = 1 end
+  ns.reader.reset()
+  ns.setOption("levelTenLine", false)
+  slash("")
+  PrimerFrame:Hide()
+  s.printed = {}
+  G.fire("PLAYER_LEVEL_UP")
+  G.advance(0.5)
+  check(not said("You have a talent point to spend."), "the line is not said with its switch off")
+  check(PrimerChar.welcomed == nil, "… and is still due")
+  ns.setOption("levelTenLine", true)
+  G.fire("PLAYER_LEVEL_UP")
+  G.advance(0.5)
+  check(said("You have a talent point to spend."), "… said once it is on")
+  if G.FOREVER then s.traits.points = 0 end
+
+  -- reset: it asks first, then forgets this character's spec or role and build
+  PrimerChar.groups = { { role = "damage", pickedBuild = ns.data.classes[1].builds[1] } }
+  slash("reset")
+  check(said("reset yes") and PrimerChar.groups[1].pickedBuild ~= nil, "/primer reset asks first and forgets nothing")
+  slash("reset yes")
+  check(next(PrimerChar.groups) == nil and said("Forgotten."), "/primer reset yes forgets the choices, and says so")
+  check(PrimerChar.guid == s.guid, "… the book is still this character's")
+  ns.open(TAB.level)
+  PrimerChar.groups = { { role = "damage", pickedBuild = ns.data.classes[1].builds[1] } }
+  slash("reset yes")
+  check(
+    next(PrimerChar.groups[1] or {}) == nil and PrimerFrame:IsShown() and next(ns.faults) == nil,
+    "… with the window open, it asks again and raises nothing"
+  )
+  PrimerFrame:Hide()
+  check(not ns.option("minimapHidden") and ns.option("levelTenLine"), "… and the settings are left alone")
+
+  -- the welcome page: a new character, a few seconds after its login, once
+  s.printed = {}
+  newCharacter("Pippa")
+  check(ns.option("welcomed") == false, "a new character has not been welcomed")
+  G.fire("PLAYER_ENTERING_WORLD", true, false)
+  check(not (ns.welcome.frame and ns.welcome.frame:IsShown()), "… not at once")
+  G.advance(5)
+  check(ns.welcome.frame and ns.welcome.frame:IsShown(), "… a few seconds after the login, the welcome page")
+  local page = wordsOf(ns.welcome.frame)
+  check(page:find("Welcome to Primer", 1, true), "… titled")
+  check(
+    page:find("which talents to pick", 1, true) and page:find("reason printed under every line", 1, true),
+    "… it says what Primer is"
+  )
+  check(page:find("/primer or the minimap button", 1, true), "… how to open it")
+  check(
+    page:find("only out of combat", 1, true) and page:find("sends nothing anywhere", 1, true),
+    "… that it reads out of combat and sends nothing"
+  )
+  check(
+    G.FOREVER == (page:find("which spec you want to play", 1, true) ~= nil)
+      and G.FOREVER == (page:find("which role", 1, true) == nil),
+    "… at level 10 it asks the spec on Forever and the role on Era"
+  )
+  check(
+    page:find("/primer settings", 1, true) and page:find("right-click on the minimap button", 1, true),
+    "… where the settings are"
+  )
+  check(not page:find("Share what you see", 1, true), "… and offers no sharing: Primer collects nothing")
+  check(SaltyMaxCollector == nil and PrimerSettings.share == nil, "… nothing is claimed or kept")
+  check(#ns.welcome.rows == 2, "… two choices: the button and the line")
+  check(not page:find("[;!]") and not page:find("%.%.%."), "… no semicolon, exclamation mark or ellipsis")
+  -- (the boxes act on this character's settings)
+  local minimapRow, lineRow = ns.welcome.rows[1], ns.welcome.rows[2]
+  -- (the mock's box keeps no tick: this one does, as the client's)
+  for _, row in ipairs({ minimapRow, lineRow }) do
+    local box = row.box
+    function box:GetChecked() return self.ticked end
+    function box:SetChecked(v) self.ticked = v end
+    box:SetChecked(row.get())
+  end
+  check(minimapRow.get() and lineRow.get(), "… both ticked to start")
+  minimapRow.scripts.OnClick(minimapRow)
+  check(ns.option("minimapHidden") == true, "… the first box hides the button")
+  minimapRow.scripts.OnClick(minimapRow)
+  check(ns.option("minimapHidden") == false, "… and shows it again")
+  lineRow.scripts.OnClick(lineRow)
+  check(ns.option("levelTenLine") == false, "… the second box turns the line off")
+  lineRow.scripts.OnClick(lineRow)
+  check(ns.option("levelTenLine") == true, "… and on")
+  ns.welcome.frame:Hide()
+  check(ns.option("welcomed") == true, "… closing it is enough to have seen it")
+  G.fire("PLAYER_ENTERING_WORLD", true, false)
+  G.advance(5)
+  check(not ns.welcome.frame:IsShown(), "… once only")
+  ns.login()
+  G.fire("PLAYER_ENTERING_WORLD", true, false)
+  G.advance(5)
+  check(not ns.welcome.frame:IsShown(), "… not again at the next login")
+  -- (a reload keeps it: /reload is PLAYER_ENTERING_WORLD with the second flag)
+  G.fire("PLAYER_ENTERING_WORLD", false, true)
+  G.advance(5)
+  check(not ns.welcome.frame:IsShown(), "… nor after a reload")
+  slash("welcome")
+  check(ns.welcome.frame:IsShown(), "/primer welcome shows it again")
+  ns.welcome.frame:Hide()
+  slash("export")
+  check(
+    ns.welcome.frame:IsShown() and ns.welcome.code.box:GetText() == ns.profiles:export(),
+    "/primer export shows this character's code"
+  )
+  ns.welcome.frame:Hide()
+
+  -- a character who logs in during a fight is welcomed when it ends, never in it
+  newCharacter("Quinn")
+  s.combat = true
+  G.fire("PLAYER_ENTERING_WORLD", true, false)
+  G.advance(5)
+  check(not ns.welcome.frame:IsShown(), "a login in a fight: no welcome page")
+  s.combat = false
+  G.fire("PLAYER_REGEN_ENABLED")
+  check(ns.welcome.frame:IsShown(), "… it comes when the fight ends")
+  ns.welcome.frame:Hide()
+
+  -- the family's welcomes take turns: another addon's is up, Primer's waits, then comes
+  newCharacter("Rowan")
+  local other = {}
+  SaltyMaxWelcomes.showing, SaltyMaxWelcomes.waiting = other, {} -- (the table the kit made: its hook keeps it)
+  G.fire("PLAYER_ENTERING_WORLD", true, false)
+  G.advance(5)
+  check(
+    not ns.welcome.frame:IsShown() and #SaltyMaxWelcomes.waiting == 1,
+    "another welcome is up: Primer's waits its turn"
+  )
+  SaltyMaxWelcomes.showing = nil
+  table.remove(SaltyMaxWelcomes.waiting, 1)()
+  check(ns.welcome.frame:IsShown() and SaltyMaxWelcomes.showing == ns.welcome, "… and comes when it is closed")
+  ns.welcome.frame:Hide()
+  check(SaltyMaxWelcomes.showing == nil, "… handing the turn back")
+
+  -- (the first character again)
+  UnitName = realName
+  ns.login()
+end
+
 if G.strict then
   check(#G.strict.violations == 0, "no call the documentation refuses: " .. table.concat(G.strict.violations, " | "))
   io.write(G.strict.report(), "\n")

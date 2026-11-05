@@ -17,7 +17,7 @@ and gets fixes only (`../ideas/class-guide.md`, "Forever first"). Read the famil
 
 | What | Where |
 |---|---|
-| The addon file by file: the package, Core, Window, Tree, Settings, Minimap, the tests, the languages | `docs/architecture.md` |
+| The addon file by file: the package, Core, Window, Tree, Settings, Minimap, Welcome, the tests, the languages | `docs/architecture.md` |
 | The guide's data, `content/<game>/<class>.json`, its shape and the facts check (`scripts/guide.ts`) | `docs/data.md` |
 | What every class needs: one build per spec and role, 28 a game, how many are written | `docs/data.md`, the table in `../ideas/class-guide-coverage.md` |
 | Which build a character is (feasibility, never the tree with most points) | `docs/inference.md` |
@@ -77,7 +77,9 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
   Keyring's (a call to `ns.toggle`, never a hook). One exception: the
   optional Era talent-window overlay (`hooksecurefunc` only, every step in
   `pcall`, off in combat, built last, failing silently, and never on Forever
-  until a probe has been read).
+  until a probe has been read). The other: the kit's welcome listens for
+  `PLAYER_REGEN_ENABLED` only when a character logs in during a fight, to open
+  its page when the fight ends (nothing is read).
 - English only for now (3 November 2026): French, German and Spanish are not
   worked on. Every word still goes through `L` (`i18n/words.json`) or `ns.say`
   (the guide), so a language can be added later. `HIDDEN_LOCALES` changes

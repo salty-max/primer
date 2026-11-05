@@ -25,3 +25,4 @@ Guide.lua
 Tree.lua
 Window.lua
 Minimap.lua
+Welcome.lua

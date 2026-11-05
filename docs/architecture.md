@@ -12,8 +12,8 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   (`Guide_Classic.lua`, `Guide_Forever.lua`). Loads that, `GuideText.lua` (the
   words by key), `Kit.lua` (the kit's copy, `bun run kit:sync`; never edit it),
   `Locale.lua`, `Text_[TextLocale].lua`, `Core.lua`, `Settings.lua`,
-  `Reader.lua`, `Guide.lua`, `Window.lua`, `Minimap.lua` (the test game loads
-  them from the TOC).
+  `Reader.lua`, `Guide.lua`, `Window.lua`, `Minimap.lua`, `Welcome.lua` (the test
+  game loads them from the TOC).
 
 ## The files
 
@@ -24,8 +24,30 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   usage). It listens to no combat event and asks no unit: **Primer reads
   nothing in combat** (the test checks the events it registers).
 - **Settings.lua**: the kit's profiles (a character's settings, takable by a
-  code "PR1:h0:a90"): the minimap button's place and whether it shows. No
-  Options page and no welcome yet.
+  code "PR1:h0:a90:l1": the minimap button's place and whether it shows, and
+  `levelTenLine`, the one chat line at level 10) and the page in the game's
+  Options, AddOns tab (`K.options`, 5 November 2026, copied from Yours Truly and
+  Goodwill): a box for the line at level 10, a box for the minimap button
+  (ticked when shown) and the kit's "Copy settings from" another character.
+  `/primer settings` (or `options`) and a right-click on the minimap button open it. There
+  is no box for the achievements (Primer has none), none to share what the game
+  tells (it collects nothing), none for the window's tab (no sibling remembers
+  one, the Level tab always comes first). No button on the page: the kit has none
+  and the family forgets things by a command that asks first, `/primer reset`,
+  then `/primer reset yes`, which clears the spec or role and the build this
+  character chose (`PrimerChar.groups`), the settings left alone.
+- **Welcome.lua**: the kit's welcome (`K.welcome`, `K.welcomeOnce`): once per
+  character (`welcomed` in its profile, not the `PrimerChar.welcomed` of the chat
+  line), four seconds after its first login, out of combat (a login in a fight
+  waits for `PLAYER_REGEN_ENABLED`, which only lets the page open: nothing is read),
+  in the family's turn (`SaltyMaxWelcomes`). On the left what Primer is, in three
+  short paragraphs (what it says, the question at level 10 as this game asks it,
+  how to open it and that it reads only out of combat and sends nothing); on the
+  right this character's two choices (the same two as the Options page), another
+  character's to take or a code, and the settings line. `/primer welcome` shows it
+  again and `/primer export` shows it with this character's code. It offers no
+  sharing: Primer collects nothing (no `K.collect`), so the kit's opt-in is not
+  on it.
 - **Reader.lua**: every call goes through `try()`: a function the client
   documents can still raise ("API unsupported", `GetNumSpecGroups` on Classic
   Era, found in the first game test, 4 November 2026), so an error is kept once
@@ -155,7 +177,7 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   `PLAYER_TALENT_UPDATE`, `TRAIT_CONFIG_UPDATED`, `ACTIVE_TALENT_GROUP_CHANGED`), each
   only asking for a look, a burst as one draw 0.3 seconds later. In a fight it
   reads nothing and says it waits. A draw is `pcall`-guarded (`broken`). One chat
-  line at level 10, once a character (`PrimerChar.welcomed`). What each draw left
+  line at level 10, once a character (`PrimerChar.welcomed`), unless its Options box is off (it is then still due). What each draw left
   is `ns.screen` (title, facts, spine, pick, opening, loop, question): the sim reads
   that and presses the buttons through it. `ns.toggle()`, `ns.open(tab)`. Between
   fights, low mana and the big cooldowns are not on the page yet (a later pass).

@@ -1131,7 +1131,7 @@ local function welcome()
   local snap = ns.reader.snapshot()
   if not snap or snap.group ~= snap.active then return end
   local _, class = G.page(snap)
-  if not class or PrimerChar.welcomed then return end
+  if not class or PrimerChar.welcomed or not ns.option("levelTenLine") then return end
   local choice = ns.choice(snap.group)
   G.migrate(snap, class, choice)
   if G.asking(snap, choice, class) then
@@ -1307,8 +1307,11 @@ end
 -- ellipsis). Nothing may be cut: a line that does not fit is shortened in the content.
 function ns.fit()
   local out = {}
+  -- (the window, and the welcome page when it is up)
   local f = book.frame
-  if not (f and f:IsShown()) then return out, false end
+  local w = ns.welcome and ns.welcome.frame
+  local open = (f and f:IsShown()) or (w and w:IsShown())
+  if not open then return out, false end
   local function walk(frame)
     if not frame:IsShown() then return end
     for _, region in ipairs({ frame:GetRegions() }) do
@@ -1326,6 +1329,7 @@ function ns.fit()
       walk(child)
     end
   end
-  walk(f)
+  if f then walk(f) end
+  if w then walk(w) end
   return out, true
 end

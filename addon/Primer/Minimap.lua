@@ -16,6 +16,7 @@ function ns.createMinimapButton()
     title = "Primer",
     lines = function() return { L["A class guide to read out of combat."] } end,
     click = function() ns.toggle() end,
+    rightClick = function() ns.openSettings() end,
     get = ns.option,
     set = ns.setOption,
   })

@@ -16,7 +16,7 @@
 --                way), notYet (the level the question was put off at),
 --                driftSeen (the drift the player dismissed)
 --   PrimerSettings (SavedVariables): each character's settings, the kit's
---     profiles (Settings.lua: the minimap button), and the window's place
+--     profiles (Settings.lua: the minimap button, the line at level 10), and the window's place
 --
 -- Every record by id: a build by its id (content/<class>.json, saved-ids.json).
 local _, ns = ...
@@ -72,6 +72,7 @@ function ns.login()
   char = PrimerChar
   ns.loadProfile()
   if ns.createMinimapButton then ns.createMinimapButton() end
+  if ns.createSettingsPanel then ns.createSettingsPanel() end
   ns.loggedIn = true
 end
 
@@ -112,8 +113,24 @@ K.commands({
   open = function()
     if ns.toggle then ns.toggle() end
   end,
-  usage = L["/primer opens the guide. /primer minimap shows or hides its button on the minimap. /primer debug says what went wrong, if anything did. /primer fit says what the window cut short."],
+  usage = L["/primer opens the guide and /primer settings its settings. /primer minimap shows or hides its button on the minimap. /primer welcome shows the welcome page again. /primer export gives this character's settings as a code, and /primer import CODE takes them. /primer reset forgets the spec or role and the build this character chose. /primer debug says what went wrong, if anything did. /primer fit says what the window cut short."],
+  settings = function() return ns.openSettings() end,
+  welcome = function(mode)
+    if ns.showWelcome then ns.showWelcome(mode) end
+  end,
   commands = {
+    reset = function()
+      print(
+        ns.PREFIX
+          .. L["This forgets the spec or role and the build this character chose. Type /primer reset yes to do it."]
+      )
+    end,
+    ["reset yes"] = function()
+      char.groups = {}
+      -- (an open window asks again at once: what its page is for was frozen on the choice just forgotten)
+      if ns.refresh then ns.refresh() end
+      print(ns.PREFIX .. L["Forgotten. The guide asks again when this character has a point to spend."])
+    end,
     fit = function()
       local cut, open = ns.fit()
       if not open then

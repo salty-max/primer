@@ -35,7 +35,12 @@ local CUT_OK = {
 local b = B.new({
   G = G,
   name = "Primer",
-  roots = function() return PrimerFrame and { PrimerFrame } or {} end,
+  roots = function()
+    local out = {}
+    if PrimerFrame then out[#out + 1] = PrimerFrame end
+    if ns.welcome and ns.welcome.frame then out[#out + 1] = ns.welcome.frame end
+    return out
+  end,
   cut = function() return ns.fit() end,
   cutOk = CUT_OK,
   faults = function()
@@ -47,7 +52,7 @@ local b = B.new({
   badPicture = function(r) return MODE ~= "secrets" and r.texture == ns.kit.QUESTION end,
   skip = function(f)
     return f.name and (f.name:find("^PrimerFrameTab%d") or f.name == "PrimerFrameCloseButton")
-      or f == PrimerFrame.CloseButton
+      or (PrimerFrame and f == PrimerFrame.CloseButton)
   end,
 })
 local failures, fail, try, audit, touch = b.failures, b.fail, b.try, b.audit, b.touch
@@ -205,6 +210,43 @@ local function matrix()
   end
 end
 
+-- ── the Options page's settings: every combination of its boxes, the window played under each
+local function options()
+  local V = G.panel.settings
+  local line, minimap = V.PRIMER_LEVELTENLINE, V.PRIMER_MINIMAPHIDDEN
+  for _, combo in ipairs({ { false, true }, { true, false }, { false, false } }) do
+    line.set(combo[1])
+    minimap.set(combo[2])
+    for _, c in ipairs(classes) do
+      play(c, 10, {})
+      -- (the line at level 10 follows the box: said once, or not at all)
+      local said = false
+      for _, text in ipairs(s.printed) do
+        if text:find("You have a talent point to spend", 1, true) then said = true end
+      end
+      if said and not combo[1] then fail(describe(c, 10, {}), "the line at level 10 was said with its box off") end
+    end
+  end
+  line.set(true)
+  minimap.set(true)
+end
+
+-- ── the welcome page: shown with another character's settings to take, with a code, closed and shown again
+local function welcomes()
+  PrimerSettings.profiles["Pippa - Realm"] = { minimapHidden = true, minimapAngle = 200, levelTenLine = false }
+  for _, mode in ipairs({ false, "export" }) do
+    local label = "the welcome page" .. (mode and (", " .. mode) or "")
+    if try(label, "show", ns.showWelcome, mode) then
+      G.advance(0.5)
+      audit(label)
+      touch(label)
+      audit(label .. " (after clicks)")
+      ns.welcome.frame:Hide()
+    end
+  end
+  PrimerSettings.profiles["Pippa - Realm"] = nil
+end
+
 -- ── secret values (Forever): each call Primer makes of the game, one at a time, answers with secrets
 local TALENT_CALLS = {
   ["C_ClassTalents.GetActiveConfigID"] = true,
@@ -282,6 +324,8 @@ if MODE == "secrets" then
   secrets()
 else
   matrix()
+  options()
+  welcomes()
 end
 UnitClass = realClass
 
