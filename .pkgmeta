@@ -15,6 +15,7 @@ manual-changelog:
 ignore:
   - addon/test
   - addon/CURSEFORGE.md
+  - assets
   - content
   - data
   - docs
