@@ -15,7 +15,7 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Frost is the build this page advises, because it keeps monsters off you. Arcane is the other road guides name, and Method says it out-damages Frost when you quest alone."
+        "say": "Frost is the build this page advises, because it keeps monsters off you. Arcane is the other road, and it may out-damage Frost when you quest alone. The price of Arcane: monsters get closer."
       }
     ],
     "overview": {
@@ -24,12 +24,12 @@
       "bad": "Being hit. You have little health and a cast that is interrupted is a turn lost. Two monsters at once is the usual way a mage dies.",
       "resource": "Mana, and it is the whole game. Every cast spends it, so you cast, wait and drink. The wand costs none, and you must stand still to use it.",
       "levelling": "Frostbolt from as far as you can reach, Frost Nova when it gets close, step back and cast again. Drink between pulls. Pull one monster at a time until you are sure.",
-      "ten": "You get your first talent point. Pick a build and Primer shows your first picks. Frost is the safest way to level alone, and a respec costs gold."
+      "ten": "You get your first talent point. Pick a build and Primer shows your first picks. Frost keeps monsters off you while you level alone, and a respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "mage-frost",
-        "reason": "Most guides level Frost. It slows and freezes what reaches you, and Ice Lance on a frozen monster hits hardest."
+        "reason": "Frost slows and freezes what reaches you, and Ice Lance on a frozen monster hits hardest."
       }
     }
   },
@@ -41,10 +41,10 @@
       "role": "damage",
       "tree": 61,
       "checked": "2026-11-05",
-      "intro": "Frost slows and freezes what reaches you, and hits a frozen monster hard with Ice Lance. Most guides level it, because a monster that cannot reach you cannot hurt you.",
-      "line": "Frostbolt, Frost Nova and Ice Lance on a frozen monster. The safest way to level alone.",
+      "intro": "Frost slows and freezes what reaches you, and hits a frozen monster hard with Ice Lance. It is the common choice for levelling, because a monster that cannot reach you cannot hurt you.",
+      "line": "Frostbolt, Frost Nova and Ice Lance on a frozen monster. It keeps monsters off you while you level alone.",
       "pathNote": "(39 points in Frost, then 12 in Arcane for mana.)",
-      "split": "the first points and the tail. Mobalytics takes Improved Frostbolt first, Conquest Capped would take Precision first for monsters above your level, and Icy Veins opens in Arcane for Missile Barrage. After 40 Mobalytics goes to Arcane for mana, Conquest Capped to Fire. The Arcane tail is Mobalytics'.",
+      "split": "the first points and the tail. One order takes Improved Frostbolt first, another takes Precision first for monsters above your level, and a third opens in Arcane for Missile Barrage. After 40 the tail goes to Arcane for mana, or to Fire. The Arcane tail is the one here.",
       "dry": "Frost Nova freezes a monster until something hurts it, so let that something be Ice Lance.",
       "path": [
         {
@@ -318,7 +318,7 @@
           ],
           "talent": 11213,
           "rank": 4,
-          "why": "Your damage spells sometimes make the next spell free. The best Arcane point for a build that wants to cast more."
+          "why": "Your damage spells sometimes make the next spell free. It is the Arcane point that suits a build that wants to cast more."
         }
       ],
       "stages": [
@@ -844,7 +844,7 @@
       "intro": "Fire is crits and burning. Fireball does the work, Ignite makes every crit burn, and Pyroblast is a long cast for a large hit. It has few defences, so it asks you to keep your distance.",
       "line": "Fireball, Ignite and Pyroblast. Hits hard from range, and is harder to solo than Frost.",
       "pathNote": "(31 points in Fire, 3 in Frost, then 17 in Arcane for mana.)",
-      "split": "one guide only. Mobalytics has the only full Fire order, and the others describe how it plays. Warcraft Tavern builds around Improved Scorch, which Mobalytics skips, and Conquest Capped treats Fire as a build for the first 20 levels. The order here is Mobalytics'.",
+      "split": "whether Fire is a whole build at all. Only one full Fire order has been written, and the others describe how it plays. One would build around Improved Scorch, which this order skips, and another treats Fire as a build for the first 20 levels. The order here is the full one.",
       "dry": "A Pyroblast on a monster that dies before it lands is mana you will want back.",
       "path": [
         {
@@ -871,7 +871,7 @@
           ],
           "talent": 29438,
           "rank": 3,
-          "why": "Fewer misses on every spell. It sits in Frost, and Mobalytics takes it before Ignite because a resisted Fireball is the dearest miss in the build."
+          "why": "Fewer misses on every spell. It sits in Frost, and it comes before Ignite because a resisted Fireball is the dearest miss in the build."
         },
         {
           "points": [
@@ -1644,7 +1644,7 @@
       "intro": "Arcane has become a build of stacks. Arcane Blast hits harder and costs more with each cast, Arcane Wrath hits hard between stacks, and Missile Barrage turns procs into free Arcane Missiles. It needs mana more than anything.",
       "line": "Arcane Blast stacks, Arcane Wrath and Arcane Missiles on Missile Barrage. Hits hard, and runs dry.",
       "pathNote": "(36 points in Arcane, 3 in Frost, then 12 in Fire.)",
-      "split": "how safe it is. Zockify makes Arcane the default and Method says it out-damages Frost when you quest alone, while most guides keep Frost as the safer way. Zockify would start with Wand Specialization, and Mobalytics starts with Improved Channeling. Mobalytics' order is followed here.",
+      "split": "how close monsters get. Arcane may out-damage Frost when you quest alone, and its price is that monsters reach you more often. One order starts with Wand Specialization and another with Improved Channeling. The order here is the second.",
       "dry": "Arcane Blast costs more every time you cast it. Stop when the bar says to stop.",
       "path": [
         {
@@ -2275,7 +2275,7 @@
                 "spell": 168,
                 "name": "Frost Armor",
                 "if": "before the first pull",
-                "why": "the best armour you know, Mage Armor most for mana",
+                "why": "the armour that helps most, Mage Armor most for mana",
                 "best": [
                   6117,
                   7302,

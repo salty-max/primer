@@ -15,7 +15,7 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Combat is the build this page advises, because it is the smoothest to level, with Riposte at 20 and Blade Flurry at 30. The price: it wants a sword, axe or mace more than a dagger. Assassination wants daggers and is slow until Mutilate at 42. Subtlety is sturdy and slow to kill."
+        "say": "Combat is the build this page advises, because it is smooth and wastes little, with Riposte at 20 and Blade Flurry at 30. The price: it wants a sword, axe or mace more than a dagger. Assassination wants daggers and is slow until Mutilate at 42. Subtlety is sturdy and slow to kill."
       }
     ],
     "overview": {
@@ -24,12 +24,12 @@
       "bad": "Being hit for long, and crowds. You wear leather and cannot heal, and you hurt one monster at a time. Bandages are your healing.",
       "resource": "Energy, which fills back by itself, and combo points, which stay on the monster you built them on. Spend Energy on strikes, spend points on a finisher, and do not sit at full Energy.",
       "levelling": "Strike to build points, finish with Eviscerate or Slice and Dice, bandage between pulls. Learn First Aid early, it heals faster than eating. Sneak past what you can.",
-      "ten": "You get your first talent point and pick a spec. Combat is the one most guides level. Assassination and Subtlety are the other two, and a respec costs gold."
+      "ten": "You get your first talent point and pick a spec. Combat is the common choice for levelling. Assassination and Subtlety are the other two, and a respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "rogue-combat",
-        "reason": "Most guides level Combat. Riposte hits hard from 20 and Blade Flurry takes two monsters at once from 30."
+        "reason": "Combat is smooth and wastes little. Riposte hits hard from 20 and Blade Flurry takes two monsters at once from 30."
       }
     }
   },
@@ -41,10 +41,10 @@
       "role": "damage",
       "tree": 182,
       "checked": "2026-11-05",
-      "intro": "Assassination lives on poisons and Mutilate, which comes at 42. Until then it plays like any rogue with a dagger. Guides call it a slow way to level, and guides want a dagger in each hand.",
+      "intro": "Assassination lives on poisons and Mutilate, which comes at 42. Until then it plays like any rogue with a dagger. It is a slow way to level, and it wants a dagger in each hand.",
       "line": "Poisons, Shank and Mutilate with daggers. Slow until 42, then the hardest single hits.",
       "pathNote": "(34 points in Assassination, then 12 in Combat and 5 in Subtlety.)",
-      "split": "the whole order. Mobalytics' Djexde gives the only full order and says to level Combat instead. Icy Veins names the same key talents (Remorseless Attacks, Ruthlessness, Relentless Strikes, Lethality, Cold Blood, Seal Fate, Venom) but its order sits in a slider that could not be read. Method, as read, prefers Assassination.",
+      "split": "the whole order. Only one full order has been written, and it says to level Combat instead. Other lists name the same key talents (Remorseless Attacks, Ruthlessness, Relentless Strikes, Lethality, Cold Blood, Seal Fate, Venom) without an order, and one of them prefers Assassination.",
       "dry": "A monster immune to poison takes Mutilate at its plain damage.",
       "path": [
         {
@@ -783,10 +783,10 @@
       "role": "damage",
       "tree": 181,
       "checked": "2026-11-05",
-      "intro": "Combat swings two weapons and leans on Riposte, Shank and Blade Flurry. It is the build most guides level, because it is smooth and wastes little. Take a sword, axe or mace, and a dagger only if you must.",
-      "line": "Sinister Strike, Riposte after a parry, Blade Flurry for two. The smoothest way to level a rogue.",
+      "intro": "Combat swings two weapons and leans on Riposte, Shank and Blade Flurry. It is smooth and wastes little, which makes it the common choice for levelling. Take a sword, axe or mace, and a dagger only if you must.",
+      "line": "Sinister Strike, Riposte after a parry, Blade Flurry for two. Smooth, and it wastes little.",
       "pathNote": "(35 points in Combat, then 16 in Assassination for critical hits and poisons.)",
-      "split": "the first points and the tail. DonTheCrown puts Precision at 2 first and reaches Riposte at 20 and Blade Flurry at 30, Djexde takes Remorseless Attacks first and reaches them at 22 and 32. This page follows DonTheCrown. Method would move points from Lightning Reflexes and Endurance into Puncturing Wounds for a dagger.",
+      "split": "the first points and the tail. One order puts Precision at 2 first and reaches Riposte at 20 and Blade Flurry at 30. Another takes Remorseless Attacks first and reaches them at 22 and 32. This page follows the first. A dagger build would move points from Lightning Reflexes and Endurance into Puncturing Wounds.",
       "dry": "Riposte only lights after a parry, so face the monster and let it swing.",
       "path": [
         {
@@ -1625,7 +1625,7 @@
       "intro": "Subtlety opens with Ambush and lives on Hemorrhage from 32. It is the sturdiest of the three at the start and the weakest on damage. The long way down the tree is the price.",
       "line": "An Ambush opener, Ghostly Strike, Hemorrhage, then Death Mark at 42. Sturdy, and slower to kill.",
       "pathNote": "(31 points in Subtlety, then 14 in Combat and 6 in Assassination.)",
-      "split": "the whole order. Mobalytics' Djexde gives a full order and advises Combat instead. Icy Veins agrees on the shape (Subtlety down to Hemorrhage, then Death Mark, then Combat, then Assassination) and its order sits in a slider that could not be read. Warcraft Tavern's Subtlety page and Kami Labs' simulation still use the talents removed before launch.",
+      "split": "the whole order. Only one full order has been written, and it advises Combat instead. Other lists agree on the shape (Subtlety down to Hemorrhage, then Death Mark, then Combat, then Assassination) without an order. Some pages still use talents removed before launch.",
       "dry": "Backstab does nothing from the front, so walk round or use Hemorrhage.",
       "path": [
         {

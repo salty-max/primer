@@ -19,7 +19,7 @@
       },
       {
         "role": "tank",
-        "say": "Protection is also the build most guides level alone with, from about level 16. The price: it kills more slowly than the damage builds, and it needs a shield."
+        "say": "Protection is also a common build to level alone with, from about level 16. The price: it kills more slowly than the damage builds, and it needs a shield."
       }
     ],
     "overview": {
@@ -27,7 +27,7 @@
       "good": "Tools that need no rest. Charge starts a fight with rage in hand, and from level 20 Victory Rush heals you after a kill.",
       "bad": "Reach. Charge works once a fight and a monster that runs needs Hamstring or Intercept. You have no healing of your own beyond Victory Rush and bandages.",
       "resource": "Rage. It builds when you hit and when you are hit, a critical hit gives more than a plain one, and it fades when the fight stops. Tactical Mastery from level 14 keeps some of it when you change stance.",
-      "levelling": "Charge, your hardest hit when it is ready, then Heroic Strike with the rage you would waste. Chain your kills so Victory Rush is always ready.",
+      "levelling": "Charge, your hardest hit when it is ready, then Heroic Strike with the rage you would waste. Chain your kills so Victory Rush is ready each time.",
       "ten": "You get your first talent point. Pick damage or tank and Primer shows the build and your first three picks. A respec costs gold, so choose what you will do most."
     },
     "roles": {
@@ -37,7 +37,7 @@
       },
       "tank": {
         "build": "warrior-protection",
-        "reason": "The only tanking build, and the one most guides level alone with from about level 16. It kills more slowly than the damage builds."
+        "reason": "The only tanking build, and a common one to level alone with from about level 16. It kills more slowly than the damage builds."
       }
     }
   },
@@ -52,7 +52,7 @@
       "intro": "Arms hits slowly and hard with one big weapon. If you carry a two-hander, this is your tree. Sweeping Strikes at 30 and Mortal Strike at 40 are what the first 40 points are for.",
       "line": "A two-hander, Sweeping Strikes and Mortal Strike. The build for groups and for chains of monsters.",
       "pathNote": "(31 points in Arms for Mortal Strike, then 20 in Fury and Arms.)",
-      "split": "the last 20 points and the order of Bloodthrill and Weaponmaster. Mobalytics takes Bloodthrill first, then all of Weaponmaster, then Fury. Warcraft Tavern would put Bloodthrill first and Weaponmaster as an equal pick. Enrage is the pick this page makes, and Mobalytics names Lingering Rage as the other.",
+      "split": "the last 20 points and the order of Bloodthrill and Weaponmaster. One order takes Bloodthrill first, then all of Weaponmaster, then Fury. Another puts Bloodthrill first and Weaponmaster as an equal pick. Enrage is the pick this page makes, and Lingering Rage is the other.",
       "dry": "Rage you put into Heroic Strike is rage your next Mortal Strike will not have.",
       "path": [
         {
@@ -79,7 +79,7 @@
           ],
           "talent": 16462,
           "rank": 2,
-          "why": "Each rank adds parry. One guide says a parry speeds up your next swing, which makes it a strong levelling stat."
+          "why": "Each rank adds parry. The table does not say whether a parry speeds up your next swing, so that part is unchecked. The price is the damage points you give up."
         },
         {
           "points": [
@@ -118,7 +118,7 @@
           ],
           "talent": 16462,
           "rank": 3,
-          "why": "Each rank adds parry. One guide says a parry speeds up your next swing, which makes it a strong levelling stat."
+          "why": "Each rank adds parry. The table does not say whether a parry speeds up your next swing, so that part is unchecked. The price is the damage points you give up."
         },
         {
           "points": [
@@ -144,7 +144,7 @@
           ],
           "talent": 16462,
           "rank": 5,
-          "why": "Each rank adds parry. One guide says a parry speeds up your next swing, which makes it a strong levelling stat."
+          "why": "Each rank adds parry. The table does not say whether a parry speeds up your next swing, so that part is unchecked. The price is the damage points you give up."
         },
         {
           "points": [
@@ -326,7 +326,7 @@
           ],
           "talent": 12317,
           "rank": 5,
-          "why": "Being hit can make you hit harder for a while. One guide says it is the better pick outdoors and in dungeons."
+          "why": "Being hit can make you hit harder for a while. It is the pick for outdoors and dungeons, and the price is a point that does not add to your own damage."
         },
         {
           "points": [
@@ -339,7 +339,7 @@
           ],
           "talent": 1329555,
           "rank": 1,
-          "why": "Your next 4 melee attacks give 5 more rage each. Check its tooltip for the cost, because the game's table and a guide disagree."
+          "why": "Your next 4 melee attacks give 5 more rage each. Check its tooltip for the cost, because the game's table and other sources disagree."
         },
         {
           "points": [
@@ -859,10 +859,10 @@
       "role": "damage",
       "tree": 164,
       "checked": "2026-11-05",
-      "intro": "Fury hits fast with a weapon in each hand and lives on critical hits and rage. It is weak until about level 36, strong after, and slower than Protection. Use your best weapon until you learn to dual wield at 20.",
+      "intro": "Fury hits fast with a weapon in each hand and lives on critical hits and rage. It is weak until about level 36, strong after, and slower than Protection. Use whichever weapon hits hardest until you learn to dual wield at 20.",
       "line": "Two weapons, critical hits and rage. Weak until about 36, then a fast grinder of single monsters.",
       "pathNote": "(31 points in Fury for Bloodthirst, then the rest in Fury, with 5 in Arms last.)",
-      "split": "the points between Enrage and Gore Drinker and the last 20. Icy Veins takes Unbridled Wrath at 15 and Lingering Rage later, Kargoz does the reverse and skips Unbridled Wrath. Warcraft Tavern leaves Lingering Rage as an option. This page follows Kargoz, whose order is the newest.",
+      "split": "the points between Enrage and Gore Drinker and the last 20. One order takes Unbridled Wrath at 15 and Lingering Rage later. The reverse skips Unbridled Wrath. Lingering Rage can also be left as an option. This page takes the reverse.",
       "dry": "A fight you win without Death Wish is a fight you did not need it for.",
       "path": [
         {
@@ -902,7 +902,7 @@
           ],
           "talent": 1323963,
           "rank": 3,
-          "why": "Your off-hand hits miss less. Guides rank it among the best points of the build."
+          "why": "Your off-hand hits miss less, and a dual wielder misses more to begin with."
         },
         {
           "points": [
@@ -1110,7 +1110,7 @@
           ],
           "talent": 1329555,
           "rank": 1,
-          "why": "Your next 4 melee attacks give 5 more rage each. Check its tooltip for the cost, because the game's table and a guide disagree."
+          "why": "Your next 4 melee attacks give 5 more rage each. Check its tooltip for the cost, because the game's table and other sources disagree."
         },
         {
           "points": [
@@ -1578,9 +1578,9 @@
       "tree": 163,
       "checked": "2026-11-05",
       "intro": "Protection holds monsters on you and stays up. It needs a shield, and Revenge from level 14 is what makes it kill. Before 14 use a two-hander.",
-      "line": "A shield, Revenge and Shield Slam. Holds monsters for a group, and the guides' pick for levelling alone.",
+      "line": "A shield, Revenge and Shield Slam. Holds monsters for a group, and levels alone too.",
       "pathNote": "(31 points in Protection for Shield Slam, then 15 in Fury and 5 in Protection.)",
-      "split": "the last 20 points. Icy Veins puts them in Fury, Kargoz takes more Protection, and this page does both: Fury's first three rows and then Protection's leftovers. Defiance is the point-sink Warcraft Tavern uses, and Improved Thunder Clap is the other if you do not run dungeons.",
+      "split": "the last 20 points. They can go into Fury or into more Protection, and this page does both: Fury's first three rows and then Protection's leftovers. Defiance is a point-sink, and Improved Thunder Clap is the other if you do not run dungeons.",
       "dry": "A monster still on you when the fight is over means the job is working.",
       "path": [
         {
@@ -1776,7 +1776,7 @@
           ],
           "talent": 23922,
           "rank": 1,
-          "why": "A shield hit with very high threat and your best attack from level 40. It needs Concussion Blow and 30 points in Protection."
+          "why": "A shield hit with very high threat and your hardest attack from level 40. It needs Concussion Blow and 30 points in Protection."
         },
         {
           "points": [
@@ -2127,7 +2127,7 @@
                 "spell": 23922,
                 "name": "Shield Slam",
                 "if": "the moment it is ready",
-                "why": "very high threat, and your best attack",
+                "why": "very high threat, and your hardest attack",
                 "talentSpell": 23922
               },
               {

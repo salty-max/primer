@@ -15,21 +15,21 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Beast Mastery is the build this page advises, because every guide calls it the easiest Hunter to level and Summon Hawk comes at 25. The price: much of your damage rides on the pet, so a dead pet costs you. Marksmanship shoots harder itself and Survival fights up close. Both are slower to level."
+        "say": "Beast Mastery is the build this page advises, because the pet does part of the killing and Summon Hawk comes at 25. The price: much of your damage rides on the pet, so a dead pet costs you. Marksmanship shoots harder itself and Survival fights up close. Both give up some of the pet's help."
       }
     ],
     "overview": {
       "who": "You shoot from far away and send a pet in front of you. The craft is distance: every pull starts at the edge of your range, and the pet keeps the monster from walking to you.",
-      "good": "Killing at range, one monster at a time. You can slow what runs at you, freeze one monster in a trap, and play dead when a pull goes wrong. Levelling is quick, and Beast Mastery is the quickest.",
+      "good": "Killing at range, one monster at a time. You can slow what runs at you, freeze one monster in a trap, and play dead when a pull goes wrong. Levelling is quick, and Beast Mastery gives the pet the biggest share of the work.",
       "bad": "Mana, and the pet. A long fight runs you dry. A dead pet leaves you in melee, where a Hunter is weak, and ranged shots cannot be used inside 8 yards.",
       "resource": "Mana. Auto Shot costs none, so keep it firing and spend mana on the shots that matter. It returns slowly while you rest, so drink between fights. Efficiency makes shots cheaper, and Rapid Recuperation and Resourcefulness keep your mana coming back while you fight.",
-      "levelling": "Mark the monster, send the pet in and shoot from range. Tame a boar at 10, mend it after a fight and feed it when it is unhappy. Beast Mastery is the quickest to level, Marksmanship is slower, and Survival comes online between 30 and 40.",
-      "ten": "You get your first talent point and pick a spec. Beast Mastery levels fastest, Marksmanship leans on your own shots and trusts the pet less, Survival fights up close. Your pet quest is at 10 too, and a respec costs gold."
+      "levelling": "Mark the monster, send the pet in and shoot from range. Tame a boar at 10, mend it after a fight and feed it when it is unhappy. Beast Mastery leans on the pet, Marksmanship leans on your own shots, and Survival comes online between 30 and 40.",
+      "ten": "You get your first talent point and pick a spec. Beast Mastery leans on the pet, Marksmanship leans on your own shots and trusts the pet less, Survival fights up close. Your pet quest is at 10 too, and a respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "hunter-beast-mastery",
-        "reason": "Every guide calls Beast Mastery the easiest and fastest to level. Summon Hawk comes at 25 and Bestial Wrath at 40."
+        "reason": "The pet does part of the killing while you level. Summon Hawk comes at 25 and Bestial Wrath at 40."
       }
     }
   },
@@ -41,10 +41,10 @@
       "role": "damage",
       "tree": 361,
       "checked": "2026-11-05",
-      "intro": "Beast Mastery makes the pet the other half of your damage. Deadly Aspects speeds your shots, Summon Hawk lets two hawks fight beside your pet from 25, and Bestial Wrath makes the pet hit much harder at 40. It is the easiest Hunter to level.",
-      "line": "Your pet and two hawks do much of the work. The easiest Hunter to level, and the pet carries the pulls.",
+      "intro": "Beast Mastery makes the pet the other half of your damage. Deadly Aspects speeds your shots, Summon Hawk lets two hawks fight beside your pet from 25, and Bestial Wrath makes the pet hit much harder at 40. It leans on the pet, which is why it is the common choice for levelling.",
+      "line": "Your pet and two hawks do much of the work. The pet carries the pulls.",
       "pathNote": "(31 points in Beast Mastery, then 20 in Marksmanship for critical hits and Mortal Shots.)",
-      "split": "how to fill the first ten points. Both full orders take Pathfinding before the tenth point, which row 2 does not allow, so its two points go to Improved Revive Pet and Endurance Training here. Vareion also takes Frenzy to five and no Spirit Bond. The last twenty are the Marksmanship tail, with a second Rapid Killing in place of Lone Wolf.",
+      "split": "how to fill the first ten points. Some orders take Pathfinding before the tenth point, which row 2 does not allow, so its two points go to Improved Revive Pet and Endurance Training here. Frenzy to five and no Spirit Bond is another order. The last twenty are the Marksmanship tail, with a second Rapid Killing in place of Lone Wolf.",
       "dry": "A dead pet leaves you alone with the monster, so keep it mended.",
       "sources": [
         {
@@ -166,7 +166,7 @@
           "talent": 19616,
           "rank": 4,
           "of": 5,
-          "why": "Your pets and hawks deal up to 20% more damage, and the hawks of Summon Hawk count. Kargoz and Vareion both take all five."
+          "why": "Your pets and hawks deal up to 20% more damage, and the hawks of Summon Hawk count. All five ranks are the common choice."
         },
         {
           "points": [
@@ -180,7 +180,7 @@
           "talent": 1293241,
           "rank": 1,
           "of": 1,
-          "why": "A hawk dives at the monster, hits at once and keeps attacking for 18 seconds. Two hawks can be out together. Kargoz calls it a huge power spike."
+          "why": "A hawk dives at the monster, hits at once and keeps attacking for 18 seconds. Two hawks can be out together. It is a big rise in your damage when you get it."
         },
         {
           "points": [
@@ -222,7 +222,7 @@
           "talent": 19577,
           "rank": 1,
           "of": 1,
-          "why": "Your pet stuns the monster for 3 seconds on its next hit, and that hit crits far more often. It is the way to Bestial Wrath."
+          "why": "Your pet stuns the monster for 3 seconds on its next hit, and that hit crits far more often. It leads to Bestial Wrath."
         },
         {
           "points": [
@@ -250,7 +250,7 @@
           "talent": 19590,
           "rank": 2,
           "of": 2,
-          "why": "Doubles your pet's Focus regeneration and lets half your mana regeneration go on while you cast. Kargoz takes it here, Vareion at 38."
+          "why": "Doubles your pet's Focus regeneration and lets half your mana regeneration go on while you cast. Another order takes it at 38."
         },
         {
           "points": [
@@ -264,7 +264,7 @@
           "talent": 19621,
           "rank": 4,
           "of": 5,
-          "why": "After a critical hit your pet sometimes attacks 30% faster for 8 seconds. Kargoz stops at four points, Vareion takes five."
+          "why": "After a critical hit your pet sometimes attacks 30% faster for 8 seconds. This build stops at four points, and a fifth is the other order."
         },
         {
           "points": [
@@ -278,7 +278,7 @@
           "talent": 19578,
           "rank": 1,
           "of": 2,
-          "why": "You and your pet regain 1% of your health every 5 seconds while the pet is out. Kargoz takes one point, Vareion none."
+          "why": "You and your pet regain 1% of your health every 5 seconds while the pet is out. One point here, and another order takes none."
         },
         {
           "points": [
@@ -929,7 +929,7 @@
       "intro": "Marksmanship puts the damage in your own shots. Lethal Attacks and Careful Aim come first, Trueshot Aura at 25, and Sniper Shot at 40 is a long, hard opener. Your pet holds threat less well than in Beast Mastery, so the build asks more of you.",
       "line": "Aimed Shot, Arcane Shot and a long Sniper Shot from range. It hits hard, and the pet holds threat less well.",
       "pathNote": "(42 points in Marksmanship, then 9 in Beast Mastery for Deadly Aspects, Focused Fire and Improved Revive Pet.)",
-      "split": "the last twenty points. This order is Vareion's, with nine in Beast Mastery. Icy Veins' picture at level 58 has 17 in Beast Mastery with Summon Hawk among them, and a variant of Vareion's swaps the last two points for Lone Wolf, which Warcraft Tavern would not take while levelling.",
+      "split": "the last twenty points. This order has nine in Beast Mastery. Another order has 17 in Beast Mastery with Summon Hawk among them, and a variant of this one swaps the last two points for Lone Wolf, which gives up a pet's help while levelling.",
       "dry": "Sniper Shot is a long cast, so cast it while the pet holds the monster.",
       "sources": [
         {
@@ -976,7 +976,7 @@
           "talent": 19426,
           "rank": 5,
           "of": 5,
-          "why": "1% more critical strike chance on all your attacks. Every full Marksmanship order starts here, and Careful Aim is next."
+          "why": "1% more critical strike chance on all your attacks. Careful Aim is next, and this is the first point toward it."
         },
         {
           "points": [
@@ -1032,7 +1032,7 @@
           "talent": 1299346,
           "rank": 1,
           "of": 1,
-          "why": "Party members within 45 yards gain 20 ranged attack power. Sniper Shot needs it, and Icy Veins' picture has it."
+          "why": "Party members within 45 yards gain 20 ranged attack power. Sniper Shot needs it."
         },
         {
           "points": [
@@ -1060,7 +1060,7 @@
           "talent": 1223987,
           "rank": 2,
           "of": 2,
-          "why": "A Serpent Sting lets half your mana regeneration go on while you cast. Icy Veins says it solves almost all your mana problems."
+          "why": "A Serpent Sting lets half your mana regeneration go on while you cast. It is the answer to the build's mana trouble."
         },
         {
           "points": [
@@ -1102,7 +1102,7 @@
           "talent": 1310687,
           "rank": 1,
           "of": 1,
-          "why": "A long cast that hits hard and lengthens your next three shots by 10 yards. Guides call it your biggest jump, and the opener."
+          "why": "A long cast that hits hard and lengthens your next three shots by 10 yards. It is the opener, and a big jump in your damage."
         },
         {
           "points": [
@@ -1186,7 +1186,7 @@
           "talent": 24443,
           "rank": 2,
           "of": 2,
-          "why": "Revive Pet casts 6 seconds faster and costs 40% less mana. Vareion ends here, and a variant swaps these for Lone Wolf."
+          "why": "Revive Pet casts 6 seconds faster and costs 40% less mana. The build ends here, and a variant swaps these for Lone Wolf."
         }
       ],
       "stages": [
@@ -1739,10 +1739,10 @@
       "role": "damage",
       "tree": 362,
       "checked": "2026-11-05",
-      "intro": "Survival is the Hunter who walks in. Savage Strikes and Predator's Edge make the melee strikes hit harder, Expose Prey lets your Hunter's Mark trigger Mongoose Bite, and Strider Kick gets you out again. It is the slowest Hunter to level and comes online between 30 and 40.",
-      "line": "Shoot, step in for Raptor Strike and Mongoose Bite, then back out. The slowest to level, and it comes online between 30 and 40.",
+      "intro": "Survival is the Hunter who walks in. Savage Strikes and Predator's Edge make the melee strikes hit harder, Expose Prey lets your Hunter's Mark trigger Mongoose Bite, and Strider Kick gets you out again. It comes online between 30 and 40.",
+      "line": "Shoot, step in for Raptor Strike and Mongoose Bite, then back out. It comes online between 30 and 40.",
       "pathNote": "(35 points in Survival, 11 in Marksmanship and 5 in Beast Mastery.)",
-      "split": "when to switch. Vareion levels it from 10 and says to wait until 30 for the core, Icy Veins goes through Marksmanship first and switches at the middle of the tree, Maxroll says it is not really playable until about 40. This order is Vareion's. Feor's end-game build leaves Deflection out and takes Improved Stings.",
+      "split": "when to switch. One order levels it from 10 and waits until 30 for the core. Another goes through Marksmanship first and switches at the middle of the tree. A third holds that it is not really playable until about 40. This order is the first. An end-game build leaves Deflection out and takes Improved Stings.",
       "dry": "Do not walk in before Auto Shot has fired.",
       "sources": [
         {
@@ -1878,7 +1878,7 @@
           "talent": 19306,
           "rank": 1,
           "of": 1,
-          "why": "A strike after a parry that cannot be blocked, dodged or parried and roots the monster for 5 seconds. Vareion calls it core."
+          "why": "A strike after a parry that cannot be blocked, dodged or parried and roots the monster for 5 seconds. It is the core of the build."
         },
         {
           "points": [
@@ -1948,7 +1948,7 @@
           "talent": 19295,
           "rank": 5,
           "of": 5,
-          "why": "The fifth point of Deflection. Feor leaves Deflection out of his end game, and here it is a point toward the 25 that Lightning Reflexes asks for."
+          "why": "The fifth point of Deflection. An end-game build leaves Deflection out, and here it is a point toward the 25 that Lightning Reflexes asks for."
         },
         {
           "points": [
@@ -1990,7 +1990,7 @@
           "talent": 19552,
           "rank": 5,
           "of": 5,
-          "why": "With Aspect of the Hawk on, Auto Shot sometimes speeds up your shooting by 30% for 12 seconds. Vareion takes it right after the tree."
+          "why": "With Aspect of the Hawk on, Auto Shot sometimes speeds up your shooting by 30% for 12 seconds. It is taken as soon as the tree's main points are done."
         },
         {
           "points": [
@@ -2046,7 +2046,7 @@
           "talent": 19239,
           "rank": 2,
           "of": 2,
-          "why": "Your Immolation and Explosive traps deal 30% more, and Freezing and Frost traps last 30% longer. Feor takes both points."
+          "why": "Your Immolation and Explosive traps deal 30% more, and Freezing and Frost traps last 30% longer. Both points go here."
         },
         {
           "points": [
@@ -2060,7 +2060,7 @@
           "talent": 1310661,
           "rank": 1,
           "of": 3,
-          "why": "Serpent Sting deals up to 20% more. This last point is ours: Vareion's Lone Wolf does nothing while you keep a pet."
+          "why": "Serpent Sting deals up to 20% more. This last point is ours: Lone Wolf does nothing while you keep a pet."
         }
       ],
       "stages": [

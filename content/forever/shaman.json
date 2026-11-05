@@ -15,25 +15,25 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Enhancement is the build this page advises, because it is the smoothest to level and its Stormstrike comes at 25. The price: you fight up close and your mana is thin until 30. Elemental stays at range with bolts and shocks, and it is slower alone because you drink more."
+        "say": "Enhancement is the build this page advises, because its Stormstrike comes at 25 and it needs less drinking than Elemental. The price: you fight up close and your mana is thin until 30. Elemental stays at range with bolts and shocks, and it is slower alone because you drink more."
       },
       {
         "role": "heal",
-        "say": "Restoration is the healer. It is the right pick for dungeons and for playing with a friend. Alone it is the slowest way to level, and a damage build with a good weapon is quicker."
+        "say": "Restoration is the healer. It is the pick for dungeons and for playing with a friend. Alone it kills slowly, and a damage build with a good weapon kills faster."
       }
     ],
     "overview": {
       "who": "You drop totems, imbue your weapon, shock what stands in front of you and heal yourself when it hurts. The craft is mana: nearly everything you do costs it, and the rest of the class is ways to get it back.",
       "good": "Doing a bit of everything. You can fight up close or from range, heal yourself or a friend, interrupt a cast with Earth Shock and cross the world as a wolf from 20.",
-      "bad": "Mana. A long fight runs you dry, a pack can overwhelm you, and your best talents come late. Totems cost mana too, so drop only what the fight needs.",
+      "bad": "Mana. A long fight runs you dry, a pack can overwhelm you, and your biggest talents come late. Totems cost mana too, so drop only what the fight needs.",
       "resource": "Mana. It returns slowly after five seconds of not casting, so finish a nearly dead monster with the weapon. Mindfulness, Water Shield and Improved Stormstrike let it return while you fight.",
-      "levelling": "Imbue your weapon, drop the Fire totem and open with a shock. Keep Earth Shock for casters, heal after the fight and drink before the next. Enhancement is the quickest to level, and Elemental and Restoration are slower alone.",
-      "ten": "You get your first talent point and pick a spec. Enhancement is the smoothest to level, Elemental stays at range and Restoration heals a group. Your Fire totem quest is at 10 too, and a respec costs gold."
+      "levelling": "Imbue your weapon, drop the Fire totem and open with a shock. Keep Earth Shock for casters, heal after the fight and drink before the next. Enhancement needs the least drinking, and Elemental and Restoration kill more slowly alone.",
+      "ten": "You get your first talent point and pick a spec. Enhancement needs the least drinking, Elemental stays at range and Restoration heals a group. Your Fire totem quest is at 10 too, and a respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "shaman-enhancement",
-        "reason": "Most guides level Enhancement. Stormstrike comes at 25, Windfury Weapon at 30, and it needs less drinking than Elemental."
+        "reason": "Enhancement is the common choice for levelling. Stormstrike comes at 25, Windfury Weapon at 30, and it needs less drinking than Elemental."
       },
       "heal": {
         "build": "shaman-restoration",
@@ -52,7 +52,7 @@
       "intro": "Elemental opens with a shock and a bolt from a distance, and Lightning Overload and Lightning Mastery make the bolts hit twice and hit fast. It is slower to level than Enhancement because you stop to drink more often.",
       "line": "Lightning Bolt, Chain Lightning and Flame Shock from range. Strong in a group, slow alone, and hungry for mana.",
       "pathNote": "(31 points in Elemental, 11 in Restoration for mana, 9 in Enhancement.)",
-      "split": "how early to take the mana. Tiqqle's second order starts with Tidal Focus, Mindfulness and Water Shield and gives up damage until level 21. The order here is the first one, which waits for Water Shield until 43.",
+      "split": "how early to take the mana. A second order starts with Tidal Focus, Mindfulness and Water Shield and gives up damage until level 21. The order here is the first one, which waits for Water Shield until 43.",
       "dry": "Your mana is the slowest part of the fight, so finish a nearly dead monster with the weapon.",
       "path": [
         {
@@ -319,7 +319,7 @@
           "talent": 16255,
           "rank": 4,
           "of": 5,
-          "why": "More critical strikes on every spell and attack. It is the best that is left."
+          "why": "More critical strikes on every spell and attack. The points have nothing better to go to."
         }
       ],
       "stages": [
@@ -803,10 +803,10 @@
       "role": "damage",
       "tree": 263,
       "checked": "2026-11-05",
-      "intro": "Enhancement fights up close with a weapon, shocks and Stormstrike. Most guides call it the smoothest Shaman to level. Mana is its trouble before 30, so the first talents are about mana and Stormstrike.",
-      "line": "Stormstrike, shocks and a weapon imbue, up close. The smoothest Shaman to level, once Stormstrike is yours at 25.",
+      "intro": "Enhancement fights up close with a weapon, shocks and Stormstrike. It needs the least drinking, which makes it the common choice for levelling. Mana is its trouble before 30, so the first talents are about mana and Stormstrike.",
+      "line": "Stormstrike, shocks and a weapon imbue, up close. Stormstrike is yours at 25.",
       "pathNote": "(34 points in Enhancement, 11 in Restoration for mana, 6 in Elemental.)",
-      "split": "mana against speed. Icy Veins would start in Restoration for Mindfulness and Water Shield and respec at 25. Nicktew calls that a mistake, because Stormstrike should come as early as it can. The order here is Nicktew's, with Mindfulness and Water Shield after Improved Stormstrike.",
+      "split": "mana against speed. One order starts in Restoration for Mindfulness and Water Shield and respecs at 25. The other holds that Stormstrike should come as early as it can. The order here is the second, with Mindfulness and Water Shield after Improved Stormstrike.",
       "dry": "The weapon matters more than any talent, so keep a slow two-hander in your hand.",
       "path": [
         {
@@ -1594,10 +1594,10 @@
       "role": "heal",
       "tree": 262,
       "checked": "2026-11-05",
-      "intro": "Restoration heals a group with Healing Wave, Riptide and Chain Heal, and fills the gaps with totems. It is for dungeons and for playing with a friend. Alone it is the slowest way to level.",
+      "intro": "Restoration heals a group with Healing Wave, Riptide and Chain Heal, and fills the gaps with totems. It is for dungeons and for playing with a friend. Alone it kills slowly.",
       "line": "Healing Wave, Riptide and Chain Heal, with totems. A healer for a group, slow alone.",
       "pathNote": "(46 points in Restoration, 5 in Enhancement for Intellect.)",
-      "split": "when to take the mana talents. Devil's order, the newest, takes Mindfulness at 15 and Water Shield at 20. Tiqqle and Nicktew take them later in their damage orders. The order here is Devil's.",
+      "split": "when to take the mana talents. A healer's order takes Mindfulness at 15 and Water Shield at 20. The damage orders take them later. The order here is the healer's.",
       "dry": "A heal that lands early beats a bigger heal that lands late.",
       "path": [
         {

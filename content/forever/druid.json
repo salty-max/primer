@@ -15,7 +15,7 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Feral as a cat is the damage build this page advises, because guides level Feral over every other spec and you fight as a bear until Cat Form at 20 with the same points. The price: a cat cannot cast or heal in form. Balance casts from range and levels slowly alone."
+        "say": "Feral as a cat is the damage build this page advises, because you fight as a bear until Cat Form at 20 with the same points, so one set of picks covers the whole climb. The price: a cat cannot cast or heal in form. Balance casts from range and levels slowly alone."
       },
       {
         "role": "tank",
@@ -23,7 +23,7 @@
       },
       {
         "role": "heal",
-        "say": "Restoration is the healer. Guides do not level it alone, so level as Feral and respec for dungeons. The price: a respec costs gold, and Restoration kills slowly by itself."
+        "say": "Restoration is the healer. It kills slowly by itself, so the common road is to level as Feral and respec for dungeons. The price of that road: a respec costs gold. The price of levelling in Restoration instead: speed."
       }
     ],
     "overview": {
@@ -32,12 +32,12 @@
       "bad": "Staying in one place. Every shift costs mana, you cannot cast or heal in a form, and the caster specs are slow alone.",
       "resource": "Mana to shift and to cast, Rage in Bear Form, and Energy and combo points in Cat Form. Entering a form takes a large part of your mana, so drink before you shift back.",
       "levelling": "Bear Form from 10 and Cat Form from 20. Until 20 you fight as a bear with Maul and Swipe. After that a cat takes single monsters and a bear takes packs, with a heal and a drink between fights. Check your form before each pull.",
-      "ten": "You get your first talent point and Bear Form. Pick the spec: Feral levels fastest and is a cat or a bear, Balance casts from range and Restoration heals. A respec costs gold."
+      "ten": "You get your first talent point and Bear Form. Pick the spec: Feral is the common road for levelling and is a cat or a bear, Balance casts from range and Restoration heals. A respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "druid-feral-cat",
-        "reason": "Guides level Feral over every other spec. You are a bear until Cat Form at 20, with the same points. Balance is the caster and slower alone."
+        "reason": "You are a bear until Cat Form at 20 with the same points, so one build covers the climb. Balance casts from range and kills more slowly alone."
       },
       "tank": {
         "build": "druid-feral-bear",
@@ -45,7 +45,7 @@
       },
       "heal": {
         "build": "druid-restoration",
-        "reason": "The only healing build. Guides do not level it alone, so level as Feral and respec for dungeons."
+        "reason": "The only healing build. It kills slowly alone, so the common road is to level as Feral and respec for dungeons."
       }
     }
   },
@@ -58,10 +58,10 @@
       "role": "damage",
       "tree": 281,
       "checked": "2026-11-05",
-      "intro": "Feral as a cat kills one monster at a time with Energy and combo points: Rake and Rip bleed, Claw and Shred build, Ferocious Bite finishes. Cat Form comes at 20, so levels 10 to 19 are spent in Bear Form with the same points. Guides level Feral over every other spec on Forever.",
-      "line": "Cat Form from 20, bleeds and a finisher. A bear until then, and the one every guide levels.",
+      "intro": "Feral as a cat kills one monster at a time with Energy and combo points: Rake and Rip bleed, Claw and Shred build, Ferocious Bite finishes. Cat Form comes at 20, so levels 10 to 19 are spent in Bear Form with the same points. Levelling in Feral is the common choice on Forever, because one set of points serves the bear and the cat.",
+      "line": "Cat Form from 20, bleeds and a finisher. A bear until then, with the same points all the way.",
       "pathNote": "(31 points in Feral Combat, 7 in Balance for Genesis and Nature's Majesty, 13 in Restoration for Heart of the Wild, Naturalist and Natural Shapeshifter.)",
-      "split": "the points after 40 and Shifting Power. Mobalytics ends with a Balance tail and the last 20 points here follow it, with Natural Shapeshifter in place of Nature's Reach, which helps spells only. Method takes Shifting Power and Mobalytics skips it. Nobody has played past 30.",
+      "split": "the points after 40 and Shifting Power. A common end is a Balance tail, which this build follows, with Natural Shapeshifter in place of Nature's Reach, which helps spells only. Shifting Power turns mana into Energy and costs a point the tail would use. Nobody has played past 30.",
       "dry": "Shred wants you behind the monster. Claw does not mind where you stand.",
       "sources": [
         {
@@ -113,7 +113,7 @@
           "talent": 16934,
           "rank": 5,
           "of": 5,
-          "why": "Maul, Swipe, Claw and Rake cost less Rage or Energy. You are a bear until 20, so it helps from the first fight, and Mobalytics and Method both put it first."
+          "why": "Maul, Swipe, Claw and Rake cost less Rage or Energy. You are a bear until 20, so it helps from the first fight, and that is why it goes first."
         },
         {
           "points": [
@@ -239,7 +239,7 @@
           "talent": 17007,
           "rank": 1,
           "of": 1,
-          "why": "Your party crits more often while you are in Cat Form. Method and Mobalytics both take it at 30."
+          "why": "Your party crits more often while you are in Cat Form. It is the common pick at 30, and the points it costs could go to your own damage."
         },
         {
           "points": [
@@ -253,7 +253,7 @@
           "talent": 1223242,
           "rank": 2,
           "of": 2,
-          "why": "Your melee crits hurt more. Mobalytics takes it straight after Leader of the Pack."
+          "why": "Your melee crits hurt more. It follows Leader of the Pack here because both lean on crits."
         },
         {
           "points": [
@@ -267,7 +267,7 @@
           "talent": 16966,
           "rank": 3,
           "of": 3,
-          "why": "Shred costs less Energy again, so you land it more often. Method and Maxroll open from behind and Shred."
+          "why": "Shred costs less Energy again, so you land it more often. It suits an opening from behind, which is the common one."
         },
         {
           "points": [
@@ -295,7 +295,7 @@
           "talent": 1322605,
           "rank": 1,
           "of": 1,
-          "why": "Turns mana into Energy on a cooldown. Method uses it when Energy runs low. Mobalytics skips it, so this is a split, and it costs mana."
+          "why": "Turns mana into Energy on a cooldown, for when Energy runs low. It is optional: it costs mana, and a build that skips it keeps the point for something else."
         },
         {
           "points": [
@@ -309,7 +309,7 @@
           "talent": 1223081,
           "rank": 5,
           "of": 5,
-          "why": "Bleeds and heals over time do a little more with each rank. Rake and Rip are both over time. Mobalytics starts its tail here."
+          "why": "Bleeds and heals over time do a little more with each rank. Rake and Rip are both over time. This is where the tail after the main points begins."
         },
         {
           "points": [
@@ -323,7 +323,7 @@
           "talent": 1223082,
           "rank": 2,
           "of": 2,
-          "why": "A little more crit chance with spells and melee attacks. Mobalytics pairs it with Nature's Reach, which only helps spells, so the build stops at two ranks."
+          "why": "A little more crit chance with spells and melee attacks. The build stops at two ranks and does not pair it with Nature's Reach, which only helps spells."
         },
         {
           "points": [
@@ -351,7 +351,7 @@
           "talent": 17069,
           "rank": 5,
           "of": 5,
-          "why": "All the damage you deal rises with each rank. Mobalytics takes it last, after Heart of the Wild."
+          "why": "All the damage you deal rises with each rank. It comes last, after Heart of the Wild."
         },
         {
           "points": [
@@ -614,7 +614,7 @@
                 "spell": 1079,
                 "name": "Rip",
                 "if": "with 4 or 5 combo points, on a monster that lives",
-                "why": "it is your best finisher"
+                "why": "it is your main finisher"
               },
               {
                 "spell": 1328618,
@@ -753,7 +753,7 @@
                 "spell": 1079,
                 "name": "Rip",
                 "if": "with 4 or 5 combo points, on a monster that lives",
-                "why": "it is your best finisher"
+                "why": "it is your main finisher"
               },
               {
                 "spell": 1328618,
@@ -864,7 +864,7 @@
       "intro": "Feral as a bear holds monsters while a group kills them. Bear Form comes at 10. Lacerate at 25 and Primal Bite at 40 make the threat, and Frenzied Regeneration and Barkskin keep you alive. It is the cat's tree with different points.",
       "line": "Bear Form from 10, Lacerate and Primal Bite for threat. It holds a pack for the group.",
       "pathNote": "(43 points in Feral Combat, 8 in Restoration for Heart of the Wild and Natural Shapeshifter.)",
-      "split": "Rend and Tear against Natural Reaction, and Lacerate. Method takes Rend and Tear for its dungeon tank, Mobalytics offers either, and Mobalytics skips Lacerate unless you tank. The points after 30 are ours from the row gates, and nobody has played past 30.",
+      "split": "Rend and Tear against Natural Reaction, and Lacerate. Rend and Tear suits a dungeon tank. Natural Reaction is the other pick, and Lacerate costs points that a tank who does not run dungeons can spend elsewhere. The points after 30 are ours from the row gates, and nobody has played past 30.",
       "dry": "A monster that is hitting you is not hitting anyone else, and that is the whole job.",
       "sources": [
         {
@@ -1000,7 +1000,7 @@
           "talent": 1328617,
           "rank": 1,
           "of": 1,
-          "why": "A bleed that stacks 5 times and makes a lot of threat. Mobalytics says to skip it unless you tank dungeons, and you do."
+          "why": "A bleed that stacks 5 times and makes a lot of threat. You tank dungeons, so you take it. A bear that only quests can spend the point elsewhere."
         },
         {
           "points": [
@@ -1070,7 +1070,7 @@
           "talent": 16929,
           "rank": 3,
           "of": 3,
-          "why": "More armour in Bear Form. Armour stops part of every hit, and a tank takes the most hits. Method's dungeon tank takes it."
+          "why": "More armour in Bear Form. Armour stops part of every hit, and a tank takes the most hits. It is the usual pick for a dungeon tank."
         },
         {
           "points": [
@@ -1098,7 +1098,7 @@
           "talent": 407995,
           "rank": 1,
           "of": 1,
-          "why": "A heavy bite that makes a lot of threat, on a short cooldown. Mobalytics calls it a must for tanking a pack."
+          "why": "A heavy bite that makes a lot of threat, on a short cooldown. It is the pick for tanking a pack, and a bear that only quests can do without it."
         },
         {
           "points": [
@@ -1712,10 +1712,10 @@
       "role": "damage",
       "tree": 283,
       "checked": "2026-11-05",
-      "intro": "Balance casts Wrath and Starfire from range, keeps Moonfire and Insect Swarm on the monster, and shifts into Moonkin Form at 40. Eclipse makes Wrath speed up the Starfires after it. It is slow before Hurricane at 40 and every kill costs mana, so guides level as Feral and come here later.",
+      "intro": "Balance casts Wrath and Starfire from range, keeps Moonfire and Insect Swarm on the monster, and shifts into Moonkin Form at 40. Eclipse makes Wrath speed up the Starfires after it. It is slow before Hurricane at 40 and every kill costs mana, so the common road is to level as Feral and come here later.",
       "line": "Wrath, Starfire, Moonfire and Insect Swarm from range. Slow alone, with Moonkin Form at 40.",
       "pathNote": "(41 points in Balance, 10 in Restoration for Heart of the Wild, Reflection and Naturalist.)",
-      "split": "whether to level it at all. Method calls Balance viable and best taken beyond 30, and Mobalytics uses it only as the tail of a Feral build. The first 11 points follow wow.gg's level 20 page, and the rest are ours from the row gates and Method's and Warcraft Tavern's named priorities. Nobody has written a full order.",
+      "split": "whether to level it at all. Balance is playable beyond 30 and its power comes late, so the common road is to level as Feral and come here later. The cost of levelling here is speed. The first 11 points follow a level 20 order, and the rest are ours from the row gates and the priorities named for the tree. Nobody has written a full order.",
       "dry": "A caster that is meleeing has already run out of mana.",
       "sources": [
         {
@@ -1767,7 +1767,7 @@
           "talent": 16814,
           "rank": 5,
           "of": 5,
-          "why": "Wrath casts faster and costs less mana. It is the spell you cast most until 20, and wow.gg puts it first."
+          "why": "Wrath casts faster and costs less mana. It is the spell you cast most until 20, so it goes first."
         },
         {
           "points": [
@@ -1823,7 +1823,7 @@
           "talent": 1223082,
           "rank": 2,
           "of": 2,
-          "why": "A little more crit chance with spells and melee attacks. Method names it, and it is the gate to Nature's Splendor."
+          "why": "A little more crit chance with spells and melee attacks. It is the gate to Nature's Splendor."
         },
         {
           "points": [
@@ -1851,7 +1851,7 @@
           "talent": 5570,
           "rank": 1,
           "of": 1,
-          "why": "A second damage over time that also lowers the monster's chance to hit you. Method and Warcraft Tavern both put it at 25."
+          "why": "A second damage over time that also lowers the monster's chance to hit you. It comes at 25 here, and the cost is the point it takes from the casts."
         },
         {
           "points": [
@@ -1865,7 +1865,7 @@
           "talent": 1223081,
           "rank": 4,
           "of": 5,
-          "why": "Your damage over time does more with each rank. Moonfire and Insect Swarm are both over time. Method wants all five."
+          "why": "Your damage over time does more with each rank. Moonfire and Insect Swarm are both over time, so it takes all five."
         },
         {
           "points": [
@@ -1893,7 +1893,7 @@
           "talent": 1223081,
           "rank": 5,
           "of": 5,
-          "why": "The fifth rank of Genesis, now that Eclipse is taken. Method wants all five."
+          "why": "The fifth rank of Genesis, now that Eclipse is taken."
         },
         {
           "points": [
@@ -1907,7 +1907,7 @@
           "talent": 16880,
           "rank": 1,
           "of": 1,
-          "why": "A spell crit makes your next casts faster for a short time. Warcraft Tavern lists it among the Balance talents."
+          "why": "A spell crit makes your next casts faster for a short time. It is one of the Balance talents that rewards crits."
         },
         {
           "points": [
@@ -1935,7 +1935,7 @@
           "talent": 24858,
           "rank": 1,
           "of": 1,
-          "why": "Raises your armour and your party's crit chance, but you cannot heal in it. Warcraft Tavern names it as the tree's milestone at 40."
+          "why": "Raises your armour and your party's crit chance, but you cannot heal in it. It is the tree's milestone at 40."
         },
         {
           "points": [
@@ -1963,7 +1963,7 @@
           "talent": 17003,
           "rank": 5,
           "of": 5,
-          "why": "More Intellect, which is more mana and more crit. It is the gate to Reflection and Naturalist, which Method names for casters."
+          "why": "More Intellect, which is more mana and more crit. It is the gate to Reflection and Naturalist, which suit casters."
         },
         {
           "points": [
@@ -2518,10 +2518,10 @@
       "role": "heal",
       "tree": 282,
       "checked": "2026-11-05",
-      "intro": "Restoration keeps a group alive with heals over time: Rejuvenation and Regrowth on the tank, Swiftmend when it drops, Wild Growth at 40. Guides do not level it alone, so this page is for dungeons and says what to do in between. You cannot heal in a form, so you step out of one to do it.",
-      "line": "Rejuvenation, Regrowth and Swiftmend on a group. Guides do not level it alone.",
+      "intro": "Restoration keeps a group alive with heals over time: Rejuvenation and Regrowth on the tank, Swiftmend when it drops, Wild Growth at 40. It kills slowly alone, so this page is for dungeons and says what to do in between. You cannot heal in a form, so you step out of one to do it.",
+      "line": "Rejuvenation, Regrowth and Swiftmend on a group. It kills slowly alone, so it is for dungeons.",
       "pathNote": "(51 points in Restoration, every talent of the tree.)",
-      "split": "whether to level in it at all. Warcraft Tavern says not to, Method gives it no build and Maxroll writes a healer's page for dungeons. The first 13 points follow wow.gg's healing page and Mobalytics' Reflection, and the order after that is ours from the row gates. Nobody has played past 30.",
+      "split": "whether to level in it at all. The common road is to level as Feral and respec for dungeons, which costs gold. Levelling in Restoration instead costs speed, because it kills slowly alone. The first 13 points are a healer's opening, and the order after that is ours from the row gates. Nobody has played past 30.",
       "dry": "A heal that lands after the tank has died heals no one.",
       "sources": [
         {
@@ -2573,7 +2573,7 @@
           "talent": 17063,
           "rank": 5,
           "of": 5,
-          "why": "A hit is less likely to delay your cast. A healer is hit while healing, so wow.gg's healing page takes it first."
+          "why": "A hit is less likely to delay your cast. A healer is hit while healing, so it goes first."
         },
         {
           "points": [
@@ -2587,7 +2587,7 @@
           "talent": 17069,
           "rank": 5,
           "of": 5,
-          "why": "Healing Touch casts faster, and all your damage rises. It is the gate to Nature's Swiftness at 30, and wow.gg takes it second."
+          "why": "Healing Touch casts faster, and all your damage rises. It is the gate to Nature's Swiftness at 30, so it goes second."
         },
         {
           "points": [
@@ -2601,7 +2601,7 @@
           "talent": 17106,
           "rank": 3,
           "of": 3,
-          "why": "Part of your mana regeneration keeps going while you cast. A healer casts all the time, and Mobalytics calls it great sustain."
+          "why": "Part of your mana regeneration keeps going while you cast. A healer casts all the time, so this pays back every fight."
         },
         {
           "points": [
@@ -2629,7 +2629,7 @@
           "talent": 18562,
           "rank": 1,
           "of": 1,
-          "why": "Heals at once a target that has your Rejuvenation or Regrowth on it. It is your emergency button, and the guides list it at 25."
+          "why": "Heals at once a target that has your Rejuvenation or Regrowth on it. It is your emergency button, and it comes at 25."
         },
         {
           "points": [
@@ -2727,7 +2727,7 @@
           "talent": 408120,
           "rank": 1,
           "of": 1,
-          "why": "A heal over time on a target and its party, with a long cast. Maxroll saves it for emergencies because it costs a lot of mana."
+          "why": "A heal over time on a target and its party, with a long cast. It costs a lot of mana, so save it for emergencies."
         },
         {
           "points": [
@@ -2769,7 +2769,7 @@
           "talent": 1328621,
           "rank": 1,
           "of": 1,
-          "why": "When Rejuvenation or Regrowth runs out, the target is healed for as much as your Spirit. No guide has played it, so this is what the talent says."
+          "why": "When Rejuvenation or Regrowth runs out, the target is healed for as much as your Spirit. Nobody has played it yet, so this is what the talent says."
         },
         {
           "points": [

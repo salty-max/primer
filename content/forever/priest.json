@@ -15,7 +15,7 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Shadow is the build this page advises, because guides call it the best Priest to level alone and Shadowform at 42 halves the mana of your Shadow spells. The price: you cannot heal in Shadowform, and mana is thin until Spirit Tap. Discipline levels the same way, and guides disagree on how fast."
+        "say": "Shadow is the build this page advises, because it kills alone with the wand and Shadowform at 42 halves the mana of your Shadow spells. The price: you cannot heal in Shadowform, and mana is thin until Spirit Tap. Discipline levels the same way, and how fast is not settled."
       },
       {
         "role": "heal",
@@ -24,16 +24,16 @@
     ],
     "overview": {
       "who": "You heal, shield and curse, with a wand in your hand when mana runs short. The craft is mana: a Priest wins a fight by what it does not cast.",
-      "good": "Staying alive. A shield, a heal over time and a scream cover most mistakes, and Shadow Word: Pain tags a monster from range. In a group you are the one everybody wants.",
+      "good": "Staying alive. A shield, a heal over time and a scream cover most mistakes, and Shadow Word: Pain tags a monster from range. In a group the others lean on you.",
       "bad": "Mana, and speed. You have little health and no escape but Psychic Scream and Fade, and a long fight runs you dry. Two monsters at once is the usual way a Priest dies.",
       "resource": "Mana. Your wand costs none and does not stop your mana coming back, so end fights with it. Spirit Tap returns mana after a kill, and Meditation lets half your regeneration run while you cast.",
-      "levelling": "Shield yourself, pull with Mind Blast, add Pain and finish with the wand. Shadow is the quickest, Discipline levels the same way and guides disagree on how fast, and Holy is slow alone and made for dungeons.",
-      "ten": "You get your first talent point and pick a spec. All three take Wand Specialization first. Shadow levels fastest, Discipline heals a tank and levels nearly as well, Holy is for dungeons, and a respec costs gold."
+      "levelling": "Shield yourself, pull with Mind Blast, add Pain and finish with the wand. Shadow kills alone with the wand, Discipline levels the same way and how fast is not settled, and Holy is slow alone and made for dungeons.",
+      "ten": "You get your first talent point and pick a spec. All three take Wand Specialization first. Shadow kills alone with the wand, Discipline heals a tank and levels the same way, Holy is for dungeons, and a respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "priest-shadow",
-        "reason": "Guides call Shadow the best Priest to level alone. Shadowform comes at 42 here and halves the mana of every Shadow spell."
+        "reason": "Shadow kills alone with the wand. Shadowform comes at 42 here and halves the mana of every Shadow spell."
       },
       "heal": {
         "build": "priest-discipline",
@@ -49,10 +49,10 @@
       "role": "damage",
       "tree": 203,
       "checked": "2026-11-05",
-      "intro": "Shadow wins with Pain, Plague and Mind Blast and ends fights with the wand. Spirit Tap returns your mana after kills, Mind Flay replaces Smite, and Shadowform at 42 makes every Shadow spell half price and harder hitting. Guides call it the best Priest to level alone.",
-      "line": "Pain, Plague and Mind Blast, then the wand. The best Priest to level alone, and no heals in Shadowform.",
+      "intro": "Shadow wins with Pain, Plague and Mind Blast and ends fights with the wand. Spirit Tap returns your mana after kills, Mind Flay replaces Smite, and Shadowform at 42 makes every Shadow spell half price and harder hitting. It is the common choice for levelling a Priest alone.",
+      "line": "Pain, Plague and Mind Blast, then the wand. It kills alone, and there are no heals in Shadowform.",
       "pathNote": "(37 points in Shadow, then 14 in Discipline: the wand first, and Twin Disciplines, Mental Strength and Meditation at the end.)",
-      "split": "when to take Shadowform and what follows it. Kargoz would respec at 40 to reach it at once, or skip Wand Specialization to have it at 40. Nescalz goes through Discipline to 30 and takes it at 54. The order here is wowforeverbuilds', which takes the wand first and Shadowform at 42, with Devouring Contagion and Early Demise in place of Blackout.",
+      "split": "when to take Shadowform and what follows it. One order respecs at 40 to reach it at once, or skips Wand Specialization to have it at 40. Another goes through Discipline to 30 and takes it at 54. The order here takes the wand first and Shadowform at 42, with Devouring Contagion and Early Demise in place of Blackout.",
       "dry": "The wand is your cheapest damage, so a full mana bar is a choice.",
       "sources": [
         {
@@ -861,10 +861,10 @@
       "role": "heal",
       "tree": 201,
       "checked": "2026-11-05",
-      "intro": "Discipline levels like Shadow, with Pain, Mind Blast and the wand, and keeps a shield in reserve. Penance at 35, then Renewed Hope and Divine Aegis, make it a tank healer. Guides disagree on how fast it levels alone and agree that it heals well.",
+      "intro": "Discipline levels like Shadow, with Pain, Mind Blast and the wand, and keeps a shield in reserve. Penance at 35, then Renewed Hope and Divine Aegis, make it a tank healer. How fast it levels alone is not settled, and it heals well.",
       "line": "Shields, Penance and a wand. Levels like Shadow, and heals a tank.",
       "pathNote": "(31 points in Discipline, 15 in Holy for Holy Specialization, Twilight Focus and Inspiration, 5 in Shadow for Spirit Tap.)",
-      "split": "whether to keep Spirit Tap and the wand. Feyo's 30 to 60 order, used here, keeps both. His level 60 build and Warcraft Tavern's drop them for 20 points in Holy, which costs a respec. Maxroll would delay Spirit Tap to reach Penance sooner.",
+      "split": "whether to keep Spirit Tap and the wand. The 30 to 60 order used here keeps both. A level 60 build drops them for 20 points in Holy, which costs a respec. Another order delays Spirit Tap to reach Penance sooner.",
       "dry": "A shield on the tank is a hit you do not have to heal.",
       "sources": [
         {
@@ -1631,7 +1631,7 @@
         {
           "from": 40,
           "to": 60,
-          "about": "Greater Heal comes at 40 and Power Infusion at 45. Alone, Penance on cooldown is your best attack. In a group, shield and Renew the tank before the pull and heal into the shield.",
+          "about": "Greater Heal comes at 40 and Power Infusion at 45. Alone, Penance on cooldown is your hardest attack. In a group, shield and Renew the tank before the pull and heal into the shield.",
           "plan": {
             "opening": [
               {
@@ -1664,7 +1664,7 @@
                 "spell": 402174,
                 "name": "Penance",
                 "if": "whenever it is ready",
-                "why": "it is your strongest attack",
+                "why": "it is your hardest attack",
                 "talentSpell": 402174,
                 "need": {
                   "talents": [
@@ -1880,7 +1880,7 @@
       "intro": "Holy heals with Renew, Heal and Prayer of Mending. Divine Fury makes Smite and Heal quicker, Holy Nova is the only area spell early, and Prayer of Mending at 47 is its signature. It is the dungeon healer, and it levels slowly alone.",
       "line": "Renew, Heal and Prayer of Mending. A dungeon healer, slow alone.",
       "pathNote": "(32 points in Holy, 14 in Discipline and 5 in Shadow for the wand and mana.)",
-      "split": "where to start. Feyo's order, used here, opens with the wand and Spirit Tap to level. Icy Veins and the Warcraft Tavern build skip them for Twilight Focus and Improved Renew, and the wowforeverbuilds healing plans do the same.",
+      "split": "where to start. The order used here opens with the wand and Spirit Tap to level. Other orders skip them for Twilight Focus and Improved Renew, and the healing plans for dungeons do the same.",
       "dry": "A heal that overheals is mana you drink again.",
       "sources": [
         {

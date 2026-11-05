@@ -15,15 +15,15 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Retribution is the build this page advises, because guides call it the Paladin to level alone and a seal does most of the work. The price: no taunt worth the name and no healing in a fight, so a dungeon wants a tank and a healer beside you."
+        "say": "Retribution is the build this page advises, because a seal does most of the work and it kills alone. The price: no taunt worth the name and no healing in a fight, so a dungeon wants a tank and a healer beside you."
       },
       {
         "role": "heal",
-        "say": "Holy is the healer. Guides send you through Retribution to level and into Holy for dungeons, and this page puts the healing points first. The price: Holy kills slowly alone, so levelling takes longer."
+        "say": "Holy is the healer. The common road is to level in Retribution and move into Holy for dungeons, and this page puts the healing points first instead. The price: Holy kills slowly alone, so levelling takes longer."
       },
       {
         "role": "tank",
-        "say": "Protection is the tank. Guides level it through Retribution up to 40, and this page spends its first 12 points there. The price: Holy Shield only comes at 42, and the spec is slow to quest alone."
+        "say": "Protection is the tank. The common road is to level in Retribution up to 40, and this page spends its first 12 points there. The price: Holy Shield only comes at 42, and the spec is slow to quest alone."
       }
     ],
     "overview": {
@@ -32,12 +32,12 @@
       "bad": "Speed and crowds. You kill one monster at a time and wait for mana between pulls, and until Consecration there is nothing for a pack.",
       "resource": "Mana. Seals, Judgement, Holy Strike and heals spend it, and a swing costs none. When the bar is empty, keep swinging and sit down afterwards.",
       "levelling": "Seal on, Judgement when it is ready, Holy Strike when it is ready, swing the rest of the time. Heal when the fight is over and drink when the bar is low. Aura and blessing go on before the first pull.",
-      "ten": "You get your first talent point and pick a spec. Retribution levels alone, Protection holds monsters for a group and Holy heals one. Most guides put the first points in Retribution, and the Holy page here does not. A respec costs gold."
+      "ten": "You get your first talent point and pick a spec. Retribution levels alone, Protection holds monsters for a group and Holy heals one. The first points usually go to Retribution, and the Holy page here does not. A respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "paladin-retribution",
-        "reason": "Guides call Retribution the Paladin to level alone. A seal and Judgement do most of the work."
+        "reason": "A seal and Judgement do most of the work, so Retribution kills alone."
       },
       "heal": {
         "build": "paladin-holy",
@@ -57,10 +57,10 @@
       "role": "damage",
       "tree": 381,
       "checked": "2026-11-05",
-      "intro": "Retribution fights in melee with one big weapon and a seal that adds to every swing. It is the Paladin that kills alone. Judgement no longer uses the seal up, and Holy Strike is a second button, so the page is about which seal and when to change it.",
-      "line": "One big weapon, a seal, Judgement and Holy Strike. It kills alone, and every guide levels here.",
+      "intro": "Retribution fights in melee with one big weapon and a seal that adds to every swing. It is the Paladin that kills alone, and the price is no taunt worth the name and no healing in a fight. Judgement no longer uses the seal up, and Holy Strike is a second button, so the page is about which seal and when to change it.",
+      "line": "One big weapon, a seal, Judgement and Holy Strike. It kills alone, and a seal does most of the work.",
       "pathNote": "(38 points in Retribution, 5 in Protection for Divine Intellect and 8 in Holy for Divine Strength and Improved Seals.)",
-      "split": "the first points. Deflection first, as Mobalytics' two pages have it, or Benediction first, as Method and Icy Veins have it, for mana. The last 13 points are ours: guides stop at 30 and name Divine Strength, Improved Seals, Holy Conduit and Divine Intellect for the end.",
+      "split": "the first points. Deflection first, or Benediction first for mana. The last 13 points are ours: the common orders stop at 30, and the end is ours, from Divine Strength, Improved Seals, Holy Conduit and Divine Intellect.",
       "dry": "Most of this page waits on Judgement. If it is not ready, hit the monster.",
       "path": [
         {
@@ -131,7 +131,7 @@
           "talent": 26022,
           "rank": 2,
           "of": 2,
-          "why": "You run and ride faster. Between pulls it saves more time than any other talent here, and guides call it the best stat for questing."
+          "why": "You run and ride faster. Between pulls it saves more time than any other talent here, which is the whole of its use."
         },
         {
           "points": [
@@ -938,7 +938,7 @@
       "intro": "Holy keeps people alive. It kills slowly alone, and a dungeon wants it. Holy Shock is both halves of the build, a heal on a friend and damage on an enemy, and Oath of Light and Light's Vigil are for the tank and the party.",
       "line": "Heals the group. It levels slowly alone, and a dungeon wants it.",
       "pathNote": "(33 points in Holy, 13 in Retribution for Benediction, Conviction, Sanctified Judgement and Pursuit of Justice, 5 in Protection for Divine Intellect.)",
-      "split": "when to leave Holy. Mobalytics' order, used here, puts the 31 healing points first. Icy Veins levels in Retribution (Benediction, Holy Conduit, Improved Judgement, Pursuit of Justice) and moves into Holy later, and Warcraft Tavern calls healing while levelling not recommended.",
+      "split": "when to leave Holy. This order puts the 31 healing points first. The other order levels in Retribution (Benediction, Holy Conduit, Improved Judgement, Pursuit of Justice) and moves into Holy later. Healing while levelling is slow, which is the price of this order.",
       "dry": "A heal on a full bar is mana you do not have for the next one.",
       "path": [
         {
@@ -1205,7 +1205,7 @@
           "talent": 26022,
           "rank": 2,
           "of": 2,
-          "why": "You run and ride faster. Between pulls it saves more time than any other talent here, and guides call it the best stat for questing."
+          "why": "You run and ride faster. Between pulls it saves more time than any other talent here, which is the whole of its use."
         },
         {
           "points": [
@@ -1745,7 +1745,7 @@
                 {
                   "spell": 635,
                   "name": "Holy Light",
-                  "why": "it is the big heal, slow to cast, best on the tank"
+                  "why": "it is the big heal, slow to cast, and it suits the tank"
                 }
               ],
               "rarely": [
@@ -2016,7 +2016,7 @@
                 {
                   "spell": 635,
                   "name": "Holy Light",
-                  "why": "it is the big heal, slow to cast, best on the tank"
+                  "why": "it is the big heal, slow to cast, and it suits the tank"
                 }
               ],
               "rarely": [
@@ -2117,7 +2117,7 @@
       "intro": "Protection holds monsters on you and stays up. Seal of Fury makes Judgement a taunt, Holy Shield makes a block threat, and Consecration holds a pack. It is a shield and a magic tank, and mana is its limit.",
       "line": "Holds the monsters on you with a shield. Slow to quest alone, strong in a group.",
       "pathNote": "(35 points in Protection, 16 in Retribution: 12 first for Pursuit of Justice, 4 last.)",
-      "split": "when to go back to Protection. Icy Veins takes Retribution first, then Protection with little room to choose, and has no Toughness, Sacred Duty, Shield Specialization or Iron Creed. Mobalytics' final build, used here, has all four. Anticipation can move to Toughness or Guardian's Favor.",
+      "split": "when to go back to Protection. The other order takes Retribution first, then Protection with little room to choose, and has no Toughness, Sacred Duty, Shield Specialization or Iron Creed. This order has all four. Anticipation can move to Toughness or Guardian's Favor.",
       "dry": "A monster still on you after 20 seconds means the job is working.",
       "path": [
         {
@@ -2174,7 +2174,7 @@
           "talent": 26022,
           "rank": 2,
           "of": 2,
-          "why": "You run and ride faster. Icy Veins goes through Retribution for this before it goes back to Protection."
+          "why": "You run and ride faster. This build spends the points on it in Retribution first and then goes back to Protection."
         },
         {
           "points": [
@@ -2328,7 +2328,7 @@
           "talent": 20096,
           "rank": 5,
           "of": 5,
-          "why": "More Defense, so you are hit and critically hit less. Guides say these points can move to Toughness or Guardian's Favor."
+          "why": "More Defense, so you are hit and critically hit less. These points can move to Toughness or Guardian's Favor."
         },
         {
           "points": [

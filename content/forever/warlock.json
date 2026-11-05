@@ -15,7 +15,7 @@
     "advice": [
       {
         "role": "damage",
-        "say": "Affliction is the build this page advises, because it is the one most guides level and it asks the least of your demon. Demonology is the sturdier one, with a demon that does much of the killing. Destruction is the slowest to level and the hungriest for mana."
+        "say": "Affliction is the build this page advises, because it puts damage over time on two monsters at once and asks the least of your demon. Demonology is the sturdier one, with a demon that does much of the killing. Destruction kills fast while the mana lasts, and it is the hungriest for mana."
       }
     ],
     "overview": {
@@ -24,12 +24,12 @@
       "bad": "Being caught. Your armour is thin, your casts are slow, and a demon that dies leaves you facing the monster alone. Shards run out if you forget them.",
       "resource": "Mana, and health you can spend as mana. Life Tap turns health into mana, and Drain Life gives it back. Shards live in your bag and pay for summons and stones: a kill under Drain Soul gives one.",
       "levelling": "Put your damage over time on, let the demon hold the monster, shoot it down with the wand. Pull a second monster when the first is half dead. Life Tap between pulls and keep a shard or two.",
-      "ten": "You get your first talent point and pick a spec. Affliction is the one most guides level and Demonology is the sturdy one. Your Voidwalker quest is at 10 too, and a respec costs gold."
+      "ten": "You get your first talent point and pick a spec. Affliction asks the least of your demon and Demonology is the sturdy one. Your Voidwalker quest is at 10 too, and a respec costs gold."
     },
     "roles": {
       "damage": {
         "build": "warlock-affliction",
-        "reason": "Most guides level Affliction. It puts damage over time on two monsters at once and heals with Drain Life, while a demon holds one."
+        "reason": "Affliction puts damage over time on two monsters at once and heals with Drain Life, while a demon holds one."
       }
     }
   },
@@ -41,10 +41,10 @@
       "role": "damage",
       "tree": 302,
       "checked": "2026-11-05",
-      "intro": "Affliction puts damage over time on a monster and heals you from the drain. A demon holds one monster while you work on the other. Most guides call it the fastest way to level a Warlock.",
-      "line": "Bane of Agony, Corruption and Drain Life, with a demon holding the monster. The fastest way to level, and busy.",
+      "intro": "Affliction puts damage over time on a monster and heals you from the drain. A demon holds one monster while you work on the other. It is the common choice for levelling a Warlock, because it asks the least of your demon.",
+      "line": "Bane of Agony, Corruption and Drain Life, with a demon holding the monster. The common choice for levelling, and busy.",
       "pathNote": "(41 points in Affliction, then 10 in Demonology for the demon.)",
-      "split": "the last points and the demon. Mobalytics' Crix, the newest, leaves Siphon Life and Wrack for the end. Kargoz and Icy Veins take Siphon Life at 30, and Wrack when it opens at 40. Kargoz also respecs at 22 into a build that drains. The order here is Crix's.",
+      "split": "the last points and the demon. One order leaves Siphon Life and Wrack for the end. Another takes Siphon Life at 30 and Wrack when it opens at 40, and respecs at 22 into a build that drains. The order here is the first.",
       "dry": "Drain Life is weak until your thirties, so keep the wand in your hand until then.",
       "path": [
         {
@@ -789,7 +789,7 @@
       "intro": "Demonology turns your demon into the other half of your damage, and Soul Link shares what hits you with it. It is the sturdy way to play a Warlock, with fewer spells to juggle.",
       "line": "A strong demon, Searing Pain to mark the monster, Soul Link to share the hits. The sturdy way to level.",
       "pathNote": "(31 points in Demonology, then 20 in Affliction for instant Corruption and the drain.)",
-      "split": "the Affliction points. Kargoz takes one point of Corruption at 10 and finishes it after 41, and he says a start in Affliction with a respec at 35 is also good. Warcraft Tavern would respec at 27. Crix's page has a Demonology tab that could not be read. The last point is ours.",
+      "split": "the Affliction points. One order takes one point of Corruption at 10 and finishes it after 41. Another starts in Affliction and respecs at 35, or at 27. The last point is ours.",
       "dry": "A demon that dies ends your Soul Link, so keep it alive.",
       "path": [
         {
@@ -1464,7 +1464,7 @@
         {
           "from": 40,
           "to": 60,
-          "about": "Demonic Pact at 41 keeps the Imp's bonus when you call another demon. Sacrifice the Imp, then call the Succubus or Voidwalker, never the Imp again. Corruption is instant from 45.",
+          "about": "Demonic Pact at 41 keeps the Imp's bonus when you call another demon. Sacrifice the Imp, then call the Succubus or Voidwalker and leave the Imp out. Corruption is instant from 45.",
           "plan": {
             "opening": [
               {
@@ -1685,10 +1685,10 @@
       "role": "damage",
       "tree": 301,
       "checked": "2026-11-05",
-      "intro": "Destruction casts big hits and finishes with instants. It kills fast when the mana lasts, and the mana does not last. Guides call it the slowest Warlock to level.",
+      "intro": "Destruction casts big hits and finishes with instants. It kills fast when the mana lasts, and the mana does not last. That is the price of the big hits.",
       "line": "Immolate, Conflagrate, Shadowburn and Incinerate. Hits hard, drinks mana, and is slow to level.",
       "pathNote": "(33 points in Destruction, then 14 in Affliction and 4 in Demonology.)",
-      "split": "almost everything. Icy Veins and Warcraft Tavern give the road to 40, and they agree on Bane, then Aftermath, Shadowburn at 20 and Conflagrate at 25. Method puts Conflagrate at 29. wowforeverbuilds' two lists open with Improved Shadow Bolt. The last 18 points are ours, built to the end state of Crix's level 60 Destruction page.",
+      "split": "almost everything. The road to 40 runs Bane, then Aftermath, Shadowburn at 20 and Conflagrate at 25, and Conflagrate at 29 is the other order. Opening with Improved Shadow Bolt is a third. The last 18 points are ours, built to the end state of a level 60 Destruction build.",
       "dry": "Until Shadow and Flame, Conflagrate eats the Immolate, so cast it late in the burn.",
       "path": [
         {
