@@ -19,6 +19,7 @@ and gets fixes only (`../ideas/class-guide.md`, "Forever first"). Read the famil
 |---|---|
 | The addon file by file: the package, Core, Window, Tree, Settings, Minimap, the tests, the languages | `docs/architecture.md` |
 | The guide's data, `content/<game>/<class>.json`, its shape and the facts check (`scripts/guide.ts`) | `docs/data.md` |
+| What every class needs: one build per spec and role, 28 a game, how many are written | `docs/data.md`, the table in `../ideas/class-guide-coverage.md` |
 | Which build a character is (feasibility, never the tree with most points) | `docs/inference.md` |
 | Where each build's facts were read, and what the research changed | `docs/sources.md` |
 | The voice's rules: the narrator, the class cards, what is the game's and what is ours | `docs/voices.md` |

@@ -37,6 +37,12 @@ it (`saved-ids.json`, `bun run ids` in the check).
 reads off the screen, shown as advice and never enforced. `stance` is written
 from play: the tables do not carry it.
 
+## What every class needs
+
+Every spec leads to a role, and each spec-and-role pair gets one recommended build, no more. A game has 28 builds: 27 specs, and the Feral Druid is the one spec with two (a cat for damage, a bear for tanking). The role is the one the character plays at the level cap. Levelling is advice inside the road, never a build of its own. On Forever the player picks the spec first and the role follows from it (`docs/inference.md`).
+
+Written so far: Forever has 28 of 28 as of 5 November 2026, Era has 9 of 28 and is frozen. The full table (class, spec, role, build key, state, research file) is `../ideas/class-guide-coverage.md`, also a section of the research page, https://claude.ai/artifact/BfNhHCPLKCWpRRLMSb23Ev. Both are written by `../ideas/class-guide-research/build/coverage.ts`, so a change goes in that script and not in either page.
+
 ## Adding a class (what a new class's content is)
 
 One file, `content/classic/<key>.json` (lower-case class key: `paladin.json`, `mage.json`),
