@@ -1331,6 +1331,120 @@ if not G.FOREVER then
   check(D.inferred == nil, "Era's cells are the client's own, not inferred")
 end
 
+-- ── Forever's talent reader (C_Traits, mocked in game.lua) ───────────────────
+if G.FOREVER then
+  local reader, T = ns.reader, s.traits
+  local function id(spell) return ns.data.talents[spell].id end
+  local function read(level)
+    s.level = level
+    reader.reset()
+    reader.probe = nil
+    return reader.snapshot().talents
+  end
+  local arms, fury = 12286, ns.data.builds[2].path[1].talent
+  check(ns.data.talents[arms].tab == 161 and ns.data.talents[fury].tab == 164, "Forever: Arms 161, Fury 164")
+
+  -- level 1, nothing taken, nothing to spend: read, not blind
+  s.ranks, T.points = {}, 0
+  local t = read(1)
+  check(t.total == 0 and t.points[1] == 0 and t.points[3] == 0, "Forever, level 1: no points, three trees")
+  check(not reader.blind(), "Forever, level 1: the page is not blind")
+  check(
+    reader.probe.config == 7 and reader.probe.nodes > 40 and reader.probe.ranked == 0,
+    "Forever: the probe counts nodes"
+  )
+  check(
+    reader.probe.matched == reader.probe.cells,
+    "Forever: every cell of the class is a node (the extra class spell is not)"
+  )
+
+  -- some points: by the talent's id, the tree's place, rank 0 listed
+  s.ranks = { [id(arms)] = 3, [id(16462)] = 2, [id(fury)] = 1 }
+  T.points = 4
+  t = read(20)
+  check(
+    t.byId[id(arms)].rank == 3
+      and t.byId[id(arms)].tab == 1
+      and t.names[1] == "Arms"
+      and t.names[2] == "Fury"
+      and t.names[3] == "Protection",
+    "Forever: a talent's rank, its tree's place (the builds' order) and the trees' names"
+  )
+  check(
+    t.byId[id(fury)].tab == 2 and t.points[1] == 5 and t.points[2] == 1 and t.total == 6,
+    "Forever: the points per tree"
+  )
+  check(reader.probe.ranked == 3 and reader.probe.spent == 6, "Forever: nodes with ranks")
+  check(t.byId[id(12294)] and t.byId[id(12294)].rank == 0, "Forever: a talent with no rank is listed at 0")
+  check(ns.rules.treeIndex({ talents = t }, 161) == 1, "the guide finds a tree's place")
+  local sn = reader.snapshot()
+  check(
+    ns.rules.unspent(sn) == 4 and ns.rules.earned(sn) == 10,
+    "Forever: the points to spend are the tree's currency, not a level's"
+  )
+  check(ns.rules.budget() == 51, "the budget is where the guide's longest path ends")
+
+  -- a node given free has a rank and costs no point
+  T.free = { [id(arms)] = true }
+  t = read(20)
+  check(t.byId[id(arms)].rank == 3 and t.points[1] == 2 and t.total == 3, "Forever: a free rank is not a point spent")
+  T.free = {}
+
+  -- a pick staged and not applied (currentRank above activeRank) is not a talent the character has
+  T.staged = { [id(arms)] = 1 }
+  t = read(20)
+  check(t.byId[id(arms)].rank == 2 and t.points[1] == 4, "Forever: a staged pick is not counted")
+  T.staged = nil
+
+  -- a node that raises or answers a secret is skipped, the rest is read
+  local before = 0
+  for _ in pairs(ns.faults) do
+    before = before + 1
+  end
+  T.raise[10000 + id(arms)] = true
+  T.secret[10000 + id(fury)] = true
+  t = read(20)
+  check(
+    t.byId[id(arms)] == nil and t.byId[id(fury)] == nil and t.byId[id(16462)].rank == 2,
+    "Forever: a failing node is left out, not an error"
+  )
+  check(
+    ns.faults["C_Traits.GetNodeInfo"] ~= nil and not reader.blind(),
+    "Forever: the failure is kept for /primer debug, the page still reads"
+  )
+  T.raise, T.secret = {}, {}
+
+  -- no currency: the level says, as on Era
+  T.points = nil
+  sn = reader.snapshot()
+  check(ns.rules.unspent(sn) == 5, "Forever: no currency falls back on the level (11 earned at 20, 6 spent)")
+
+  -- no config: blind from level 10, not before
+  T.config = nil
+  read(1)
+  check(not reader.blind() and reader.probe.why == "config", "Forever, level 1, no config: nothing to read, not blind")
+  read(40)
+  check(reader.blind(), "Forever, level 40, no config: the page says it cannot read")
+  T.config = 7
+  T.points = 0
+
+  -- combat: nothing is asked
+  s.combat = true
+  s.reads = 0
+  check(reader.snapshot() == nil and s.reads == 0, "Forever: nothing is read in combat")
+  SlashCmdList.PRIMER("debug")
+  check(s.reads == 0, "Forever: /primer debug reads nothing in combat")
+  s.combat = false
+
+  -- /primer debug says what the client answered
+  s.ranks, s.level = { [id(arms)] = 3 }, 20
+  reader.reset()
+  s.printed = {}
+  SlashCmdList.PRIMER("debug")
+  check(said("config 7, tree 700, nodes"), "/primer debug on Forever: the config and the node counts")
+  s.ranks = {}
+end
+
 -- ── the minimap command ──────────────────────────────────────────────────────
 SlashCmdList.PRIMER("minimap")
 check(ns.option("minimapHidden") == true, "/primer minimap hides the button")

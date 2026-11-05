@@ -40,6 +40,26 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   (`C_SpecializationInfo.GetTalentInfo` over each tree's cells, found by the
   talent's id from the data: its spell is 0 at rank 0). `snapshot()` answers
   nil in combat. No old global (`GetTalentInfo`, `IsSpellKnown`) is used.
+- **Forever's talents (5 November 2026, `R.foreverTalents`)**: Forever has no
+  per-tab `GetTalentInfo`, its talents are `C_Traits` nodes, read the way
+  Blizzard's own frame does (`bun ../wow-data/bin/ui.ts find GetTreeNodes`):
+  `C_ClassTalents.GetActiveConfigID`, `C_Traits.GetConfigInfo(config).treeIDs[1]`,
+  `GetTreeNodes`, `GetNodeInfo` (`currentRank`, `ranksPurchased`,
+  `activeEntry.entryID`), `GetEntryInfo` then `GetDefinitionInfo`, whose
+  `spellID` is matched to the data's `cells` (rank 1's spell, the cell's id), so
+  the rest of the guide sees the same `byId`, `points` and `total` as on Era.
+  A tree's place is its order by id among the class's three. The points to
+  spend are the tree currency's `quantity` (`C_Traits.GetTreeCurrencyInfo`),
+  not the level's, so the cap does not matter; `G.budget()` (where the longest
+  path ends) replaces Era's 51. Nothing in the documentation flags these
+  returns secret, yet every value is checked and a node that raises is skipped
+  (`safe`), so a page shows less and never an error. **Not tried in the game**:
+  that `GetActiveConfigID` answers on a class with no specialisation, that a
+  definition's spell is the cell's, that `treeIDs[1]` holds the three trees.
+  No config at level 10 or more makes the reader blind (the page says it
+  cannot read); below it the character just has nothing. `/primer debug` reads
+  again and prints the config, the tree, the nodes, those with ranks, those
+  matched to the guide, the points spent and to spend (`R.probe`).
 - **Guide.lua**: the rules, no frame and no game call, played over a snapshot:
   `page` (season, game, class or guide), `role` and `build` (the player's
   choice if the class has it, else the tree with the most points, else the
@@ -115,7 +135,7 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   left, straight prerequisite lines (the two diagonal ones are left out), the
   game's own tooltip (`GameTooltip:SetTalent(talentID, false, false, group)`,
   as Era's own talent window calls it) plus one line of ours. Forever has no
-  tree yet (F2 of the plan, the Forever-first order in `../ideas/class-guide.md`).
+  tree window yet (F2 of the plan, the Forever-first order in `../ideas/class-guide.md`).
 - **Minimap.lua**: the kit's `K.minimapButton`, named `PrimerMinimapButton`
   (Keyring finds the family's buttons by name), at `K.MINIMAP_ANGLES.Primer`
   (90 degrees, the top: at least 25 from every other place and clear of Classic

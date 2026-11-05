@@ -142,6 +142,73 @@ C_SpecializationInfo = {
   end,
 }
 
+-- ── Forever's talents: a trait tree (C_Traits), the way the client's own frame reads it. Every cell of the
+-- data is a node (id 10000 + the cell's id) with one entry (20000 +) and a definition (30000 +) whose spell
+-- is the cell's; one node more is a class spell no cell has. state.ranks (by the cell's id) are the ranks,
+-- state.traits the rest of what the client answers.
+if G.FOREVER then
+  state.traits = { config = 7, tree = 700, points = 0, secret = {}, raise = {}, free = {} }
+  state.secrets = {}
+  function issecretvalue(v) return state.secrets[v] == true end
+  local EXTRA = 99999
+  C_ClassTalents = {
+    GetActiveConfigID = function()
+      read()
+      return state.traits.config
+    end,
+  }
+  C_Traits = {
+    GetConfigInfo = function(id)
+      read()
+      if id ~= state.traits.config then return nil end
+      return { ID = id, treeIDs = { state.traits.tree } }
+    end,
+    GetTreeNodes = function(tree)
+      read()
+      local out = {}
+      for _, c in ipairs(G.ns.data.cells) do
+        if c.class == 1 then out[#out + 1] = 10000 + c.id end
+      end
+      out[#out + 1] = EXTRA
+      table.sort(out)
+      return out
+    end,
+    GetTreeCurrencyInfo = function()
+      read()
+      return state.traits.points and { { traitCurrencyID = 1, quantity = state.traits.points, spent = 0 } } or nil
+    end,
+    GetNodeInfo = function(config, node)
+      read()
+      if state.traits.raise[node] then error("secret") end
+      local id = node - 10000
+      local rank = state.ranks[id] or 0
+      local info = {
+        ID = node,
+        currentRank = rank,
+        activeRank = rank - (state.traits.staged and state.traits.staged[id] or 0),
+        ranksPurchased = state.traits.free[id] and 0 or rank,
+        maxRanks = 5,
+        entryIDs = { 20000 + id },
+        activeEntry = rank > 0 and { entryID = 20000 + id, rank = rank } or nil,
+      }
+      if state.traits.secret[node] then state.secrets[info] = true end
+      return info
+    end,
+    GetEntryInfo = function(config, entry)
+      read()
+      return { definitionID = entry + 10000, maxRanks = 5 }
+    end,
+    GetDefinitionInfo = function(def)
+      read()
+      local id = def - 30000
+      if id == EXTRA - 10000 then return { spellID = 1 } end
+      for _, c in ipairs(G.ns.data.cells) do
+        if c.id == id then return { spellID = c.spell } end
+      end
+    end,
+  }
+end
+
 -- ── the addon ────────────────────────────────────────────────────────────────
 G.load("Primer")
 return G

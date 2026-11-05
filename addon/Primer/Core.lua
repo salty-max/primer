@@ -125,11 +125,42 @@ K.commands({
     end,
     debug = function()
       local any = false
+      if ns.data and ns.data.game == "forever" and not InCombatLockdown() then
+        ns.reader.reset()
+        ns.reader.foreverTalents()
+      end
       for what, err in pairs(ns.faults) do
         any = true
         print(ns.PREFIX .. what .. ": " .. err)
       end
       if not any then print(ns.PREFIX .. L["Nothing has gone wrong."]) end
+      -- (Forever: what the trait tree answered, so one run in the game says what the client returns)
+      local p = ns.reader.probe
+      if p then
+        print(
+          ns.PREFIX
+            .. L["Forever talents: config %s, tree %s, nodes %d, with ranks %d, matched to the guide %d of %d, points spent %d, to spend %s"]:format(
+              tostring(p.config),
+              tostring(p.tree),
+              p.nodes,
+              p.ranked,
+              p.matched,
+              p.cells or 0,
+              p.spent,
+              tostring(p.unspent)
+            )
+        )
+        if p.why then
+          local why = {
+            class = L["The class is not in the guide's data."],
+            config = L["The client has no active talent config."],
+            tree = L["The talent config names no tree."],
+            nodes = L["The talent tree answered no nodes."],
+            matched = L["No talent node matched the guide's data."],
+          }
+          print(ns.PREFIX .. (why[p.why] or p.why))
+        end
+      end
     end,
   },
   -- (looked up when used: Settings.lua makes them, after this file)

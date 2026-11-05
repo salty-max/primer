@@ -10,6 +10,10 @@ globals:
     any: true
   C_SpellBook:
     any: true
+  C_ClassTalents:
+    any: true
+  C_Traits:
+    any: true
   GetNumSpecGroups:
     any: true
   GetNumTalents:

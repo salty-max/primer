@@ -298,6 +298,8 @@ end
 -- The points the character can spend now: one a level from 10, less what it
 -- has put in.
 function G.unspent(snap)
+  -- (Forever: the trait tree's own currency says it, whatever the level cap is)
+  if type(snap.talents.unspent) == "number" then return math.max(0, snap.talents.unspent) end
   local earned = math.max(0, math.min(snap.level, G.MAX_LEVEL) - G.FIRST_POINT_LEVEL + 1)
   return math.max(0, math.min(earned, G.POINTS) - snap.talents.total)
 end
@@ -328,6 +330,7 @@ end
 -- The points the character is held to: what its level has earned, or what it
 -- has spent if that is more.
 function G.earned(snap)
+  if type(snap.talents.unspent) == "number" then return snap.talents.total + math.max(0, snap.talents.unspent) end
   local earned = math.max(0, math.min(snap.level, G.MAX_LEVEL) - G.FIRST_POINT_LEVEL + 1)
   return math.max(math.min(earned, G.POINTS), snap.talents.total)
 end
@@ -468,10 +471,21 @@ function G.required(build)
   end
   return need > 0 and need or 31
 end
+-- The points a full character spends: where the longest path of the game's
+-- builds ends (51 on Era, whatever the guide covers on Forever), not a number
+-- typed for Era.
+function G.budget()
+  local most = 0
+  for _, b in pairs(data().builds) do
+    local last = b.path[#b.path]
+    if last then most = math.max(most, last.points[2]) end
+  end
+  return most > 0 and most or G.POINTS
+end
 function G.reachable(snap, build)
   local tree = G.treeIndex(snap, build.tree)
   local off = snap.talents.total - (tree and snap.talents.points[tree] or 0)
-  return off <= G.POINTS - G.required(build)
+  return off <= G.budget() - G.required(build)
 end
 
 -- The class's builds (of a role, or all) the points still leave open, in the
