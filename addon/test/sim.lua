@@ -3,7 +3,7 @@
 -- text), the rules over a character (the page for the game, the class and the
 -- season, the role, the build, the stage, the rows true now, the talents
 -- taken), the three pages as the window draws them, and nothing asked of
--- combat. FOREVER=1: Forever's client (no build is written for it yet).
+-- combat. FOREVER=1: Forever's client (the Warrior's three builds are written for it).
 local G = dofile("addon/test/game.lua")
 local s, ns = G.state, G.ns
 local count = 0
@@ -61,7 +61,15 @@ for id, b in pairs(D.builds) do
   check(ns.say(b.intro) == text[b.intro], "ns.say gives a word by its key")
 end
 if G.FOREVER then
-  check(builds == 0, "Forever: no build written yet")
+  check(
+    builds == 3
+      and D.builds[1].key == "warrior-arms"
+      and D.builds[2].key == "warrior-fury"
+      and D.builds[3].key == "warrior-protection",
+    "Forever: the Warrior's Arms, Fury and Protection"
+  )
+  check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
+  check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
 else
   check(
     builds == 9 and D.builds[1] and D.builds[2] and D.builds[3],
@@ -136,7 +144,9 @@ end
 -- the page: the season, the game, the class
 check(R.page(snap({ season = 2 })) == "season", "Season of Discovery: the guide is quiet")
 if G.FOREVER then
-  check(R.page(snap()) == "game", "Forever: no guide for the game yet, never Era's")
+  local kind, class = R.page(snap())
+  check(kind == "guide" and class == 1, "Forever: a warrior has a guide, its own")
+  check(R.page(snap({ token = "DRUID" })) == "class", "Forever: a druid has none written yet, never Era's")
   check(R.page(snap({ season = 2 })) == "season", "the season first, on Forever too")
 else
   check(R.page(snap({ season = 3 })) == "guide", "Hardcore is Era: the guide stays on")
@@ -1238,10 +1248,7 @@ do
   ns.faults = {}
   opens("a Hunter with every call raising")
   ns.open(ns.TAB.level)
-  check(
-    pageTitle() == (G.FOREVER and "No guide for Forever yet" or "No guide for Hunter yet"),
-    "a Hunter: the page says no guide, never a blank"
-  )
+  check(pageTitle() == "No guide for Hunter yet", "a Hunter: the page says no guide, never a blank")
   check(shownRows() == 0 and ns.screen.empty ~= nil, "(no lines, an empty page that says why)")
   for i, call in ipairs(calls) do
     call[1][call[2]] = all[i]

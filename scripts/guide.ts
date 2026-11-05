@@ -191,8 +191,12 @@ const bad = (msg: string) => problems.push(msg);
 // Every string the player may read, by key. The keys are the data's (the Lua
 // rules name them), the words the writer's.
 const text: Record<string, string> = {};
+// One GuideText.lua serves both games, so a game's own words are keyed under its name (Forever's advice never
+// shares a key with Era's): "" for Classic, so its keys stay byte for byte as they were.
+let KEYNS = "";
 function word(key: string, value: string | undefined) {
   if (value === undefined) return undefined;
+  if (!key.startsWith("when.")) key = KEYNS + key;
   if (key in text && text[key] !== value) bad(`${key}: written twice, differently`);
   text[key] = value;
   if (/[^\x20-\x7e]/.test(value)) bad(`${key}: plain ASCII only`);
@@ -311,7 +315,7 @@ function checkBuild(b: Build, f: Facts) {
         for (const p of f.prereq.get(o.id) ?? []) {
           if ((rank.get(p.requires) ?? 0) < p.rank) bad(`${where}: ${f.name(o.spell_id)} needs talent ${p.requires} at rank ${p.rank} first`);
         }
-        taken.set(o.spell_id, s.level[0]);
+        if (!taken.has(o.spell_id)) taken.set(o.spell_id, s.level[0]); // the first point in it is the level it works from
       }
       rank.set(t.id, s.rank);
       spent.set(t.tab_id, before + n);
@@ -521,6 +525,7 @@ const noSpell = new Map<string, string[]>(); // build (game): the plan lines tha
 const lockNow: Lock = { classic: {}, forever: {} }; // what each build read this run, for the lock
 
 function luaFor(game: Game): { lua: string; builds: number } {
+  KEYNS = game === "forever" ? "forever." : "";
   const lines: string[] = [];
   const classes: string[] = [];
   const builds: string[] = [];

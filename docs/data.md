@@ -1,7 +1,7 @@
 # Primer's data
 
 The guide's rules and words, and the facts check. Written by hand:
-`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, and `content/forever/` for Forever, empty and the next work: F0 to F3 of `../ideas/class-guide.md`). Generated, never edited:
+`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, and `content/forever/warrior.json`, Forever's first, written 5 November 2026: F0 to F3 of `../ideas/class-guide.md`). Generated, never edited:
 `addon/Primer/Guide_Classic.lua`, `Guide_Forever.lua`, `GuideText.lua`
 (`bun scripts/guide.ts`, `--check` in `bun run check`).
 
@@ -25,9 +25,10 @@ row    = { spell (rank 1), name, talentSpell (the row is a talent),
 ```
 
 A build's `games` says where it is written: a Forever build is its own text,
-checked against Forever's tables (the plan: never inherited from Era). Only
-`classic` is written so far: the Warrior's, Paladin's and Mage's nine builds (Warrior
-Arms 1, Fury 2, Protection 3). A build id never changes and is never reused: a character keeps
+checked against Forever's tables (the plan: never inherited from Era). Classic is written for
+the Warrior, Paladin and Mage (nine builds, Warrior Arms 1, Fury 2, Protection 3), Forever for the
+Warrior alone (the same three ids and keys in its own file, so a character keeps its pick across the
+two games' separate guides). A build id never changes and is never reused: a character keeps
 it (`saved-ids.json`, `bun run ids` in the check).
 
 `when` is a closed list (`WHEN` in `scripts/guide.ts`): a situation the player
@@ -187,6 +188,10 @@ Against each game's own database (wow-data's `classic.db` / `forever.db`, the
 
 It fails the daily `game-data.yml` before its pull request when a patch moves
 a spell or a talent.
+
+Both games share one `GuideText.lua`, so Forever's words are keyed under `forever.` (`KEYNS` in
+`scripts/guide.ts`: `forever.warrior-arms.p1`), Classic's keys unchanged. The path check reads a talent taken
+in several steps (Deflection, Improved Slam) as taken at its first point.
 
 ## The facts lock (facts.lock.json)
 

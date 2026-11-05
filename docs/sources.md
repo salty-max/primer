@@ -93,3 +93,15 @@ recommendation would be a claim we cannot back):
 
 The Feral Druid is not in the data yet. The research files for these builds are in
 `ideas/class-guide-research/` (section 7 of each).
+
+## Forever: warrior-arms, warrior-fury, warrior-protection (5 November 2026)
+
+Each build's `sources` lists the pages; the research is `../ideas/class-guide-research/forever/warrior-*.md`
+(redone against build 1.60.1.70790, the launch build, with every tree cell checked against `card.ts talents Warrior --game forever`).
+Every guide read is for the beta (level 30 cap) or written before launch, so levels 31 to 60 are paper.
+
+- **Arms** follows Mobalytics' 4 November levelling order (Ahlaundoh), the newest, with the 70790 ranks (Bloodthrill 2, Improved Tactical Mastery 3 so not taken). Where Mobalytics' last points went to Fury it keeps them, and the Enrage pick is ours from its other guide's note. No second road yet: the Bloodthrill or Weaponmaster first split is in `split`.
+- **Fury** follows Kargoz (2 November). Written for the 70755 tree, so three places changed: Raging Blows is now Improved Whirlwind (same spell id, other effect), Flurry stops at 3, Gore Drinker needs Blood Craze 3 (taken at 33). The 13 points after level 40 that Kargoz put in Arms (Improved Tactical Mastery 5, Anger Management, Deep Wounds) cannot be taken, so the tail is ours: Improved Whirlwind 2, Unbridled Wrath (Icy Veins, Warcraft Tavern), Reckless Swings, Improved Execute and Piercing Howl (Warcraft Tavern), and Kargoz's Deflection and Improved Rend. A guess, not a guide's order.
+- **Protection** follows Icy Veins' order (21 October) to level 40 with Mobalytics' (Kargoz, 14 October) final picks. After 40 the sources disagree (Icy Veins: Fury 20, Kargoz: 40 Protection). The tail is ours: Icy Veins' Cruelty, Lingering Rage and Unbridled Wrath, then Improved Bloodrage (Kargoz, Method) and Anticipation.
+- **Plans** (the rotation stages) are written from the spells' own text in `forever.db` and the guides' rotation sections (Kargoz, Maxroll, Mobalytics Arms, Icy Veins). Not sourced: stance of each line (taken from the client's table), when Execute is worth it (Mobalytics calls it often a trap), Whirlwind's rage floor in the Arms crowd plan (Mobalytics' end-game page).
+- **Not verifiable without the game:** Reckless Swings' cost, Flurry's real percentages, Improved Whirlwind's per-rank effect, trainer levels (a copy of Classic's), and anything after 30.

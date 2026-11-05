@@ -1,0 +1,2259 @@
+{
+  "class": {
+    "id": 1,
+    "key": "warrior",
+    "token": "WARRIOR",
+    "name": "Warrior",
+    "text": "Stances change what you can press. Battle Stance is yours at level 1, Defensive Stance at 10 and Berserker Stance at 30, both from quests. Rage comes from hitting and from being hit, a critical hit gives more of it, and it drains when you stop. Every line below presses a button.",
+    "card": {
+      "caresAbout": "rage, stance, the next swing, who the monster is hitting",
+      "vocabulary": "rage, stance, swing, pull, hold, hit, spend",
+      "soundsLike": "a sergeant who is not unkind. Short sentences, concrete nouns, little tolerance for waiting",
+      "neverSays": "mana, cast, spell, channel, anything soft (gentle, flow)",
+      "test": "could it be said in the time it takes to press the button?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Arms is the build this page advises, for groups and for chains of monsters. The price: it needs a two-hander. Fury is the other damage build and grinds single monsters well, but it is weak until about level 36."
+      },
+      {
+        "role": "tank",
+        "say": "Protection is also the build most guides level alone with, from about level 16. The price: it kills more slowly than the damage builds, and it needs a shield."
+      }
+    ],
+    "overview": {
+      "who": "You fight in melee, in whichever stance the job wants. The rage you spend comes from hitting and from being hit.",
+      "good": "Tools that need no rest. Charge starts a fight with rage in hand, and from level 20 Victory Rush heals you after a kill.",
+      "bad": "Reach. Charge works once a fight and a monster that runs needs Hamstring or Intercept. You have no healing of your own beyond Victory Rush and bandages.",
+      "resource": "Rage. It builds when you hit and when you are hit, a critical hit gives more than a plain one, and it fades when the fight stops. Tactical Mastery from level 14 keeps some of it when you change stance.",
+      "levelling": "Charge, your hardest hit when it is ready, then Heroic Strike with the rage you would waste. Chain your kills so Victory Rush is always ready.",
+      "ten": "You get your first talent point. Pick damage or tank and Primer shows the build and your first three picks. A respec costs gold, so choose what you will do most."
+    },
+    "roles": {
+      "damage": {
+        "build": "warrior-arms",
+        "reason": "Arms takes groups with Sweeping Strikes and a two-hander, and Mortal Strike comes at 40. Fury grinds single monsters well but is weak until about level 36."
+      },
+      "tank": {
+        "build": "warrior-protection",
+        "reason": "The only tanking build, and the one most guides level alone with from about level 16. It kills more slowly than the damage builds."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 1,
+      "key": "warrior-arms",
+      "name": "Arms",
+      "role": "damage",
+      "tree": 161,
+      "checked": "2026-11-05",
+      "intro": "Arms hits slowly and hard with one big weapon. If you carry a two-hander, this is your tree. Sweeping Strikes at 30 and Mortal Strike at 40 are what the first 40 points are for.",
+      "line": "A two-hander, Sweeping Strikes and Mortal Strike. The build for groups and for chains of monsters.",
+      "pathNote": "(31 points in Arms for Mortal Strike, then 20 in Fury and Arms.)",
+      "split": "the last 20 points and the order of Bloodthrill and Weaponmaster. Mobalytics takes Bloodthrill first, then all of Weaponmaster, then Fury. Warcraft Tavern would put Bloodthrill first and Weaponmaster as an equal pick. Enrage is the pick this page makes, and Mobalytics names Lingering Rage as the other.",
+      "dry": "Rage you put into Heroic Strike is rage your next Mortal Strike will not have.",
+      "path": [
+        {
+          "points": [
+            1,
+            3
+          ],
+          "level": [
+            10,
+            12
+          ],
+          "talent": 12286,
+          "rank": 3,
+          "why": "Rend bleeds for more, and Deep Wounds needs this at full rank. It is also the Rend that Bloodthrill looks for later."
+        },
+        {
+          "points": [
+            4,
+            5
+          ],
+          "level": [
+            13,
+            14
+          ],
+          "talent": 16462,
+          "rank": 2,
+          "why": "Each rank adds parry. One guide says a parry speeds up your next swing, which makes it a strong levelling stat."
+        },
+        {
+          "points": [
+            6,
+            7
+          ],
+          "level": [
+            15,
+            16
+          ],
+          "talent": 12290,
+          "rank": 2,
+          "why": "Overpower crits far more often, and it cannot be dodged, blocked or parried. It is your answer to a monster that dodges."
+        },
+        {
+          "points": [
+            8,
+            9
+          ],
+          "level": [
+            17,
+            18
+          ],
+          "talent": 12285,
+          "rank": 2,
+          "why": "Charge gives more rage, so the first hit of every fight starts with something to spend."
+        },
+        {
+          "points": [
+            10,
+            10
+          ],
+          "level": [
+            19,
+            19
+          ],
+          "talent": 16462,
+          "rank": 3,
+          "why": "Each rank adds parry. One guide says a parry speeds up your next swing, which makes it a strong levelling stat."
+        },
+        {
+          "points": [
+            11,
+            13
+          ],
+          "level": [
+            20,
+            22
+          ],
+          "talent": 12834,
+          "rank": 3,
+          "why": "A critical hit makes the monster bleed on top of the damage. It needs Improved Rend at full rank, and Impale needs this."
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 16462,
+          "rank": 5,
+          "why": "Each rank adds parry. One guide says a parry speeds up your next swing, which makes it a strong levelling stat."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 1310222,
+          "rank": 1,
+          "why": "An extra attack that hits Giants, Dragonkin and mounted targets much harder, and knocks riders off. Skip it if you never meet them."
+        },
+        {
+          "points": [
+            17,
+            19
+          ],
+          "level": [
+            26,
+            28
+          ],
+          "talent": 12163,
+          "rank": 3,
+          "why": "Each rank adds damage to every hit with a two-hander. It is small, but it is on every swing you make."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 16493,
+          "rank": 1,
+          "why": "Your critical hits do more damage. It needs Deep Wounds at full rank."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 12292,
+          "rank": 1,
+          "why": "Your next 5 melee attacks hit a second monster nearby. This is why Arms is the group build, and Mortal Strike needs it."
+        },
+        {
+          "points": [
+            22,
+            23
+          ],
+          "level": [
+            31,
+            32
+          ],
+          "talent": 1289682,
+          "rank": 2,
+          "why": "Your main-hand hits on a monster with your Rend on it can give a free Overpower. Keep Rend on the monster to use it."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 16493,
+          "rank": 2,
+          "why": "Your critical hits do more damage. It needs Deep Wounds at full rank."
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 1290261,
+          "rank": 1,
+          "why": "A bonus for the weapon you hold: critical chance for an axe or polearm, armour ignored for a mace or staff, an extra attack now and then for a sword."
+        },
+        {
+          "points": [
+            26,
+            26
+          ],
+          "level": [
+            35,
+            35
+          ],
+          "talent": 12862,
+          "rank": 1,
+          "why": "Slam stops stalling your swing, and comes back sooner. Do not press Slam without it."
+        },
+        {
+          "points": [
+            27,
+            30
+          ],
+          "level": [
+            36,
+            39
+          ],
+          "talent": 1290261,
+          "rank": 5,
+          "why": "A bonus for the weapon you hold: critical chance for an axe or polearm, armour ignored for a mace or staff, an extra attack now and then for a sword."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 12294,
+          "rank": 1,
+          "why": "Your hardest hit, and it halves the healing the monster gets. It needs Sweeping Strikes and 30 points in Arms, so level 40 exactly."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 12862,
+          "rank": 2,
+          "why": "Slam stops stalling your swing, and comes back sooner. Do not press Slam without it."
+        },
+        {
+          "points": [
+            33,
+            37
+          ],
+          "level": [
+            42,
+            46
+          ],
+          "talent": 12320,
+          "rank": 5,
+          "why": "Melee critical hits come more often, and a critical hit gives you extra rage. The last points go to Fury."
+        },
+        {
+          "points": [
+            38,
+            42
+          ],
+          "level": [
+            47,
+            51
+          ],
+          "talent": 12322,
+          "rank": 5,
+          "why": "A hit may give you 1 more rage. It is small, but it is rage on every swing you make."
+        },
+        {
+          "points": [
+            43,
+            47
+          ],
+          "level": [
+            52,
+            56
+          ],
+          "talent": 12317,
+          "rank": 5,
+          "why": "Being hit can make you hit harder for a while. One guide says it is the better pick outdoors and in dungeons."
+        },
+        {
+          "points": [
+            48,
+            48
+          ],
+          "level": [
+            57,
+            57
+          ],
+          "talent": 1329555,
+          "rank": 1,
+          "why": "Your next 4 melee attacks give 5 more rage each. Check its tooltip for the cost, because the game's table and a guide disagree."
+        },
+        {
+          "points": [
+            49,
+            49
+          ],
+          "level": [
+            58,
+            58
+          ],
+          "talent": 12323,
+          "rank": 1,
+          "why": "Slows every monster close to you, so a chase ends your way. Take it for the pull that goes wrong."
+        },
+        {
+          "points": [
+            50,
+            51
+          ],
+          "level": [
+            59,
+            60
+          ],
+          "talent": 1323964,
+          "rank": 2,
+          "why": "Your rage decays later once the fight is over, so the next pull starts with some."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "from level 4, as the first move",
+                "why": "it starts the fight and gives you rage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when the fight will last a while",
+                "why": "it bleeds the monster while you swing"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 1715,
+                "name": "Hamstring",
+                "if": "when a monster runs away",
+                "why": "it slows the monster so you can finish it"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Your first talent points. Overpower and Rend do the work.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when the monster will live a while",
+                "why": "it bleeds while you swing"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 7384,
+                "name": "Overpower",
+                "if": "right after the monster dodges",
+                "why": "it cannot be dodged, blocked or parried"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when it ends, in a long fight",
+                "why": "it bleeds while you swing"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 1160,
+                "name": "Demoralizing Shout",
+                "if": "when a hard hitter is on you",
+                "why": "it lowers the damage of their swings"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 7386,
+                "name": "Sunder Armor",
+                "if": "in a long fight with one monster",
+                "why": "less armour means every hit lands harder"
+              },
+              {
+                "spell": 1715,
+                "name": "Hamstring",
+                "if": "when a monster runs away",
+                "why": "it slows the monster so you can finish it"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Slam, Victory Rush and Sweeping Strikes arrive. Berserker Stance is for a few buttons only.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 12292,
+                "name": "Sweeping Strikes",
+                "if": "before a pull of two or more",
+                "why": "your next 5 hits strike a second monster",
+                "talentSpell": 12292
+              }
+            ],
+            "loop": [
+              {
+                "spell": 402927,
+                "name": "Victory Rush",
+                "if": "just after a kill, before it fades",
+                "why": "it hits for free and heals you"
+              },
+              {
+                "spell": 7384,
+                "name": "Overpower",
+                "if": "right after the monster dodges",
+                "why": "it cannot be dodged, blocked or parried"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when it ends, in a long fight",
+                "why": "it bleeds, and Bloodthrill looks for it",
+                "need": {
+                  "talents": [
+                    1289682
+                  ]
+                }
+              },
+              {
+                "spell": 5308,
+                "name": "Execute",
+                "if": "when it is nearly dead, with rage",
+                "why": "spare rage becomes damage"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1240193,
+                "name": "Slam",
+                "if": "when your rage is high",
+                "why": "it hits hard and no longer stalls your swing",
+                "need": {
+                  "talents": [
+                    12862
+                  ]
+                }
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 845,
+                "name": "Cleave",
+                "if": "on two monsters, with rage to spare",
+                "why": "it hits a second monster"
+              },
+              {
+                "spell": 1310222,
+                "name": "Spearing Strike",
+                "if": "against a Giant, a Dragonkin or a rider",
+                "why": "it hits them much harder",
+                "talentSpell": 1310222
+              },
+              {
+                "spell": 6552,
+                "name": "Pummel",
+                "if": "when a monster is casting",
+                "why": "it stops the cast"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              },
+              {
+                "spell": 18499,
+                "name": "Berserker Rage",
+                "if": "when the monster hits you hard",
+                "why": "it turns the damage you take into rage"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Dungeons, hard monsters and a long run of them. Mortal Strike leads.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 12292,
+                "name": "Sweeping Strikes",
+                "if": "before a pull of two or more",
+                "why": "your next 5 hits strike a second monster",
+                "talentSpell": 12292
+              }
+            ],
+            "loop": [
+              {
+                "spell": 12294,
+                "name": "Mortal Strike",
+                "if": "the moment it is ready",
+                "why": "your hardest hit, and it halves their healing",
+                "talentSpell": 12294
+              },
+              {
+                "spell": 402927,
+                "name": "Victory Rush",
+                "if": "just after a kill, before it fades",
+                "why": "it hits for free and heals you"
+              },
+              {
+                "spell": 7384,
+                "name": "Overpower",
+                "if": "right after the monster dodges",
+                "why": "it cannot be dodged, blocked or parried"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when it ends, in a long fight",
+                "why": "it bleeds, and Bloodthrill looks for it"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with 60 rage or more",
+                "why": "spare rage goes here, not on a swing you lose"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5308,
+                "name": "Execute",
+                "if": "when it is nearly dead, with rage",
+                "why": "spare rage becomes damage"
+              },
+              {
+                "spell": 1240193,
+                "name": "Slam",
+                "if": "when your rage is high",
+                "why": "it hits hard and no longer stalls your swing"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 845,
+                "name": "Cleave",
+                "if": "on two monsters, with rage to spare",
+                "why": "it hits a second monster"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 1719,
+                  "name": "Recklessness"
+                }
+              ],
+              "say": "keep it for the pull that would otherwise beat you"
+            },
+            "alt": {
+              "name": "A crowd of monsters",
+              "say": "three or more at once",
+              "opening": [
+                {
+                  "spell": 6673,
+                  "name": "Battle Shout",
+                  "if": "before you pull",
+                  "why": "it adds attack power to every swing you make"
+                },
+                {
+                  "spell": 100,
+                  "name": "Charge",
+                  "if": "as the first move",
+                  "why": "it starts the fight and gives you rage"
+                },
+                {
+                  "spell": 12292,
+                  "name": "Sweeping Strikes",
+                  "if": "whenever it is ready",
+                  "why": "your next 5 hits strike a second monster",
+                  "talentSpell": 12292
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 12292,
+                  "name": "Sweeping Strikes",
+                  "if": "whenever it is ready",
+                  "why": "your next 5 hits strike a second monster",
+                  "talentSpell": 12292
+                },
+                {
+                  "spell": 12294,
+                  "name": "Mortal Strike",
+                  "if": "on the monster you want dead first",
+                  "why": "your hardest hit, and it halves their healing",
+                  "talentSpell": 12294
+                },
+                {
+                  "spell": 6343,
+                  "name": "Thunder Clap",
+                  "if": "when it ends",
+                  "why": "it slows every monster's swing"
+                },
+                {
+                  "spell": 1680,
+                  "name": "Whirlwind",
+                  "if": "in Berserker Stance, with 25 rage or more",
+                  "why": "it hits up to 4 at once"
+                },
+                {
+                  "spell": 845,
+                  "name": "Cleave",
+                  "if": "with rage to spare",
+                  "why": "it hits a second monster"
+                },
+                {
+                  "spell": 6603,
+                  "name": "Attack",
+                  "why": "swings and hits taken are where rage comes from"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Warrior levelling guide, Arms tab (Ahlaundoh, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/warrior-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Arms Warrior guide (Ahlaundoh, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/arms-warrior-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Arms Warrior levelling (21 October 2026, beta)",
+          "url": "https://www.icy-veins.com/wow-forever/arms-warrior-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Warrior levelling (beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/warrior-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Warrior guide (beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/warrior/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Method, Warrior levelling guide and talents (Babyhoof, 9 October 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-warrior-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Warrior levelling guide (Soda, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/warrior-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Blizzard's warrior design notes (Luxrah, 1 October 2026)",
+          "url": "https://www.warcrafttavern.com/forever/news/rage-will-benefit-from-crit-priest-warrior-deep-dive-for-wow-forever/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026, launch)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "key": "warrior-fury",
+      "name": "Fury",
+      "role": "damage",
+      "tree": 164,
+      "checked": "2026-11-05",
+      "intro": "Fury hits fast with a weapon in each hand and lives on critical hits and rage. It is weak until about level 36, strong after, and slower than Protection. Use your best weapon until you learn to dual wield at 20.",
+      "line": "Two weapons, critical hits and rage. Weak until about 36, then a fast grinder of single monsters.",
+      "pathNote": "(31 points in Fury for Bloodthirst, then the rest in Fury, with 5 in Arms last.)",
+      "split": "the points between Enrage and Gore Drinker and the last 20. Icy Veins takes Unbridled Wrath at 15 and Lingering Rage later, Kargoz does the reverse and skips Unbridled Wrath. Warcraft Tavern leaves Lingering Rage as an option. This page follows Kargoz, whose order is the newest.",
+      "dry": "A fight you win without Death Wish is a fight you did not need it for.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 12320,
+          "rank": 5,
+          "why": "Melee critical hits come more often, and a critical hit gives you extra rage. Every Fury order starts here."
+        },
+        {
+          "points": [
+            6,
+            10
+          ],
+          "level": [
+            15,
+            19
+          ],
+          "talent": 1323964,
+          "rank": 5,
+          "why": "Your rage decays later once the fight is over, so a chain of pulls keeps its rage."
+        },
+        {
+          "points": [
+            11,
+            13
+          ],
+          "level": [
+            20,
+            22
+          ],
+          "talent": 1323963,
+          "rank": 3,
+          "why": "Your off-hand hits miss less. Guides rank it among the best points of the build."
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 16487,
+          "rank": 2,
+          "why": "A big hit on you, or a critical, heals you over a few seconds. Gore Drinker needs it at full rank."
+        },
+        {
+          "points": [
+            16,
+            20
+          ],
+          "level": [
+            25,
+            29
+          ],
+          "talent": 12317,
+          "rank": 5,
+          "why": "Being hit can make you hit harder for a while. Five points by level 30 is where Fury starts to feel strong."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 12328,
+          "rank": 1,
+          "why": "More physical damage for a while, and you cannot be feared. You take more damage while it runs, so use it on a fight you can win."
+        },
+        {
+          "points": [
+            22,
+            23
+          ],
+          "level": [
+            31,
+            32
+          ],
+          "talent": 20500,
+          "rank": 2,
+          "why": "Berserker Rage gives 10 rage on the spot and frees you from slows. It is also a button for Gore Drinker."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 16487,
+          "rank": 3,
+          "why": "A big hit on you, or a critical, heals you over a few seconds. Gore Drinker needs it at full rank."
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 23584,
+          "rank": 1,
+          "why": "Your off-hand hits for more and gives more rage."
+        },
+        {
+          "points": [
+            26,
+            26
+          ],
+          "level": [
+            35,
+            35
+          ],
+          "talent": 1323967,
+          "rank": 1,
+          "why": "Enrage, Berserker Rage, Bloodrage, Death Wish and Bloodthirst make your next 3 hits heal you. Long grinds need that."
+        },
+        {
+          "points": [
+            27,
+            27
+          ],
+          "level": [
+            36,
+            36
+          ],
+          "talent": 1310315,
+          "rank": 1,
+          "why": "Whirlwind comes back sooner and hits the closest monster harder."
+        },
+        {
+          "points": [
+            28,
+            28
+          ],
+          "level": [
+            37,
+            37
+          ],
+          "talent": 1323967,
+          "rank": 2,
+          "why": "Enrage, Berserker Rage, Bloodrage, Death Wish and Bloodthirst make your next 3 hits heal you. Long grinds need that."
+        },
+        {
+          "points": [
+            29,
+            30
+          ],
+          "level": [
+            38,
+            39
+          ],
+          "talent": 12319,
+          "rank": 2,
+          "why": "A critical hit speeds up your next few swings. It has 3 ranks."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 23881,
+          "rank": 1,
+          "why": "Your main attack from here: a hard hit that also makes you run faster for a while. It needs 30 points in Fury, so level 40 exactly."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 12319,
+          "rank": 3,
+          "why": "A critical hit speeds up your next few swings. It has 3 ranks."
+        },
+        {
+          "points": [
+            33,
+            36
+          ],
+          "level": [
+            42,
+            45
+          ],
+          "talent": 23584,
+          "rank": 5,
+          "why": "Your off-hand hits for more and gives more rage."
+        },
+        {
+          "points": [
+            37,
+            37
+          ],
+          "level": [
+            46,
+            46
+          ],
+          "talent": 1310315,
+          "rank": 2,
+          "why": "Whirlwind comes back sooner and hits the closest monster harder."
+        },
+        {
+          "points": [
+            38,
+            42
+          ],
+          "level": [
+            47,
+            51
+          ],
+          "talent": 12322,
+          "rank": 5,
+          "why": "A hit may give you 1 more rage. It is small, but it is rage on every swing you make."
+        },
+        {
+          "points": [
+            43,
+            43
+          ],
+          "level": [
+            52,
+            52
+          ],
+          "talent": 1329555,
+          "rank": 1,
+          "why": "Your next 4 melee attacks give 5 more rage each. Check its tooltip for the cost, because the game's table and a guide disagree."
+        },
+        {
+          "points": [
+            44,
+            45
+          ],
+          "level": [
+            53,
+            54
+          ],
+          "talent": 20502,
+          "rank": 2,
+          "why": "Execute costs less rage, so you can finish a monster sooner."
+        },
+        {
+          "points": [
+            46,
+            46
+          ],
+          "level": [
+            55,
+            55
+          ],
+          "talent": 12323,
+          "rank": 1,
+          "why": "Slows every monster close to you, so a chase ends your way. Take it for the pull that goes wrong."
+        },
+        {
+          "points": [
+            47,
+            48
+          ],
+          "level": [
+            56,
+            57
+          ],
+          "talent": 16462,
+          "rank": 2,
+          "why": "Spare points. Each rank adds a little parry."
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 12286,
+          "rank": 3,
+          "why": "Rend bleeds for more. It has nothing before it in Arms, so it is a cheap place for the last points."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "from level 4, as the first move",
+                "why": "it starts the fight and gives you rage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when the fight will last a while",
+                "why": "it bleeds the monster while you swing"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 1715,
+                "name": "Hamstring",
+                "if": "when a monster runs away",
+                "why": "it slows the monster so you can finish it"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Your first talent points. A weak stretch for Fury, so hit what you can reach.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when the monster will live a while",
+                "why": "it bleeds while you swing"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 7384,
+                "name": "Overpower",
+                "if": "right after the monster dodges",
+                "why": "it cannot be dodged, blocked or parried"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when it ends, in a long fight",
+                "why": "it bleeds while you swing"
+              },
+              {
+                "spell": 1160,
+                "name": "Demoralizing Shout",
+                "if": "when a hard hitter is on you",
+                "why": "it lowers the damage of their swings"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 7386,
+                "name": "Sunder Armor",
+                "if": "once or twice in a long fight",
+                "why": "less armour means every hit lands harder"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Dual wield, Victory Rush and Berserker Stance. Fury starts to pay at 36 with Whirlwind.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "from Battle Stance, as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 18499,
+                "name": "Berserker Rage",
+                "if": "after Charge, when rage is under 10",
+                "why": "it gives 10 rage and frees you from slows",
+                "need": {
+                  "talents": [
+                    20500
+                  ]
+                }
+              }
+            ],
+            "loop": [
+              {
+                "spell": 402927,
+                "name": "Victory Rush",
+                "if": "just after a kill, before it fades",
+                "why": "it hits for free and heals you"
+              },
+              {
+                "spell": 1680,
+                "name": "Whirlwind",
+                "if": "in Berserker Stance, when it is ready",
+                "why": "it hits with both weapons"
+              },
+              {
+                "spell": 5308,
+                "name": "Execute",
+                "if": "when it is nearly dead, with rage",
+                "why": "spare rage becomes damage"
+              },
+              {
+                "spell": 7384,
+                "name": "Overpower",
+                "if": "after a dodge, if a swap wastes no rage",
+                "why": "it cannot be dodged, blocked or parried"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when the fight will last a while",
+                "why": "it bleeds while you swing"
+              },
+              {
+                "spell": 20252,
+                "name": "Intercept",
+                "if": "to close on a monster that runs",
+                "why": "it stuns and closes the gap in Berserker Stance"
+              },
+              {
+                "spell": 6552,
+                "name": "Pummel",
+                "if": "when a monster is casting",
+                "why": "it stops the cast"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              },
+              {
+                "spell": 18499,
+                "name": "Berserker Rage",
+                "if": "whenever it is ready",
+                "why": "it turns the damage you take into rage"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 12328,
+                  "name": "Death Wish",
+                  "talentSpell": 12328
+                }
+              ],
+              "say": "for a fight you can win, since you take more damage"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Bloodthirst leads. Berserker Stance is home, Battle Stance only for Charge.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "from Battle Stance, as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 18499,
+                "name": "Berserker Rage",
+                "if": "after Charge, when rage is under 10",
+                "why": "it gives 10 rage and frees you from slows",
+                "need": {
+                  "talents": [
+                    20500
+                  ]
+                }
+              }
+            ],
+            "loop": [
+              {
+                "spell": 23881,
+                "name": "Bloodthirst",
+                "if": "the moment it is ready",
+                "why": "your hardest hit, and it speeds you up",
+                "talentSpell": 23881
+              },
+              {
+                "spell": 402927,
+                "name": "Victory Rush",
+                "if": "just after a kill, before it fades",
+                "why": "it hits for free and heals you"
+              },
+              {
+                "spell": 1680,
+                "name": "Whirlwind",
+                "if": "in Berserker Stance, when it is ready",
+                "why": "it hits with both weapons"
+              },
+              {
+                "spell": 7384,
+                "name": "Overpower",
+                "if": "after a dodge, if a swap wastes no rage",
+                "why": "it cannot be dodged, blocked or parried"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5308,
+                "name": "Execute",
+                "if": "when it is nearly dead, with rage",
+                "why": "spare rage becomes damage"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "in a long fight",
+                "why": "it bleeds while you swing"
+              },
+              {
+                "spell": 7386,
+                "name": "Sunder Armor",
+                "if": "in a long fight",
+                "why": "less armour means every hit lands harder"
+              },
+              {
+                "spell": 845,
+                "name": "Cleave",
+                "if": "on two monsters, with rage to spare",
+                "why": "it hits a second monster"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              },
+              {
+                "spell": 18499,
+                "name": "Berserker Rage",
+                "if": "whenever it is ready",
+                "why": "it turns the damage you take into rage"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 12328,
+                  "name": "Death Wish",
+                  "talentSpell": 12328
+                },
+                {
+                  "spell": 1719,
+                  "name": "Recklessness"
+                }
+              ],
+              "say": "for a fight you can win, since you take more damage"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, 1-60 Fury Warrior levelling (Kargoz, 2 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/1-60-fury-warrior-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Fury Warrior levelling (21 October 2026, beta)",
+          "url": "https://www.icy-veins.com/wow-forever/fury-warrior-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Warrior guide (beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/warrior/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Warrior levelling guide (Soda, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/warrior-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Blizzard's warrior design notes (Luxrah, 1 October 2026)",
+          "url": "https://www.warcrafttavern.com/forever/news/rage-will-benefit-from-crit-priest-warrior-deep-dive-for-wow-forever/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026, launch)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "key": "warrior-protection",
+      "name": "Protection",
+      "role": "tank",
+      "tree": 163,
+      "checked": "2026-11-05",
+      "intro": "Protection holds monsters on you and stays up. It needs a shield, and Revenge from level 14 is what makes it kill. Before 14 use a two-hander.",
+      "line": "A shield, Revenge and Shield Slam. Holds monsters for a group, and the guides' pick for levelling alone.",
+      "pathNote": "(31 points in Protection for Shield Slam, then 15 in Fury and 5 in Protection.)",
+      "split": "the last 20 points. Icy Veins puts them in Fury, Kargoz takes more Protection, and this page does both: Fury's first three rows and then Protection's leftovers. Defiance is the point-sink Warcraft Tavern uses, and Improved Thunder Clap is the other if you do not run dungeons.",
+      "dry": "A monster still on you when the fight is over means the job is working.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 12298,
+          "rank": 5,
+          "why": "More block, and each block gives you 5 rage. Shield Block pays for itself in two blocks."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 12797,
+          "rank": 3,
+          "why": "Revenge hits much harder, and it is your main attack after a block, a dodge or a parry."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 12287,
+          "rank": 2,
+          "why": "Thunder Clap costs less rage, so you can keep a pack slowed."
+        },
+        {
+          "points": [
+            11,
+            12
+          ],
+          "level": [
+            20,
+            21
+          ],
+          "talent": 1310316,
+          "rank": 2,
+          "why": "A dodge or a parry with a shield can give you 5 rage. It needs Shield Specialization at full rank."
+        },
+        {
+          "points": [
+            13,
+            13
+          ],
+          "level": [
+            22,
+            22
+          ],
+          "talent": 12287,
+          "rank": 3,
+          "why": "Thunder Clap costs less rage, so you can keep a pack slowed."
+        },
+        {
+          "points": [
+            14,
+            14
+          ],
+          "level": [
+            23,
+            23
+          ],
+          "talent": 12975,
+          "rank": 1,
+          "why": "An emergency button: more health for a while, lost again after. Press it before you drop, not after."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 12792,
+          "rank": 1,
+          "why": "More threat in Defensive Stance while you hold a shield, so monsters stay on you."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 1310317,
+          "rank": 1,
+          "why": "Charge works in Defensive Stance, so you open a fight without changing stance."
+        },
+        {
+          "points": [
+            17,
+            19
+          ],
+          "level": [
+            26,
+            28
+          ],
+          "talent": 12308,
+          "rank": 3,
+          "why": "Sunder Armor costs less rage, and a tank wants it stacked on a long fight."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 12792,
+          "rank": 2,
+          "why": "More threat in Defensive Stance while you hold a shield, so monsters stay on you."
+        },
+        {
+          "points": [
+            21,
+            23
+          ],
+          "level": [
+            30,
+            32
+          ],
+          "talent": 29787,
+          "rank": 3,
+          "why": "Every offensive ability costs less rage, so you can press more of them."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 12809,
+          "rank": 1,
+          "why": "A stun, and Shield Slam needs it."
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 12792,
+          "rank": 3,
+          "why": "More threat in Defensive Stance while you hold a shield, so monsters stay on you."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 16538,
+          "rank": 5,
+          "why": "More damage while you hold a shield, so the build kills faster."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 23922,
+          "rank": 1,
+          "why": "A shield hit with very high threat and your best attack from level 40. It needs Concussion Blow and 30 points in Protection."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 12320,
+          "rank": 5,
+          "why": "Melee critical hits come more often, and a critical hit gives you extra rage."
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 1323964,
+          "rank": 5,
+          "why": "Your rage decays later once the fight is over, so a chain of pulls keeps its rage."
+        },
+        {
+          "points": [
+            42,
+            46
+          ],
+          "level": [
+            51,
+            55
+          ],
+          "talent": 12322,
+          "rank": 5,
+          "why": "A hit may give you 1 more rage. It is small, but it is rage on every swing you make."
+        },
+        {
+          "points": [
+            47,
+            48
+          ],
+          "level": [
+            56,
+            57
+          ],
+          "talent": 12301,
+          "rank": 2,
+          "why": "Bloodrage gives more rage for the same health."
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 12297,
+          "rank": 3,
+          "why": "More Defense skill, so you are harder to hit and to crit. Spare points are well spent here."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "from level 4, as the first move",
+                "why": "it starts the fight and gives you rage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when the fight will last a while",
+                "why": "it bleeds the monster while you swing"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 1715,
+                "name": "Hamstring",
+                "if": "when a monster runs away",
+                "why": "it slows the monster so you can finish it"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Defensive Stance comes at 10, Revenge at 14 and Shield Block at 16. Weak before 14.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 71,
+                "name": "Defensive Stance",
+                "if": "once you have it",
+                "why": "it cuts the damage you take and keeps monsters on you"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "as the first move",
+                "why": "it starts the fight and gives you rage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 6572,
+                "name": "Revenge",
+                "if": "right after you block, dodge or parry",
+                "why": "it hits hard for little rage"
+              },
+              {
+                "spell": 2565,
+                "name": "Shield Block",
+                "if": "when a hard hitter swings at you",
+                "why": "each block gives rage with Shield Specialization"
+              },
+              {
+                "spell": 772,
+                "name": "Rend",
+                "if": "when it ends, in a long fight",
+                "why": "it bleeds while you swing"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1160,
+                "name": "Demoralizing Shout",
+                "if": "against a pack or a hard hitter",
+                "why": "it lowers the damage of their swings"
+              },
+              {
+                "spell": 7386,
+                "name": "Sunder Armor",
+                "if": "in a long fight",
+                "why": "it adds threat and lowers armour"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Victory Rush, Last Stand and Shield Wall. Chain your kills and keep Revenge going.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "on a pack, before the first swing",
+                "why": "it slows how fast they hit you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 6572,
+                "name": "Revenge",
+                "if": "right after you block, dodge or parry",
+                "why": "it hits hard for little rage"
+              },
+              {
+                "spell": 2565,
+                "name": "Shield Block",
+                "if": "when a hard hitter swings at you",
+                "why": "each block gives rage with Shield Specialization"
+              },
+              {
+                "spell": 402927,
+                "name": "Victory Rush",
+                "if": "just after a kill, before it fades",
+                "why": "it hits for free and heals you"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 7386,
+                "name": "Sunder Armor",
+                "if": "in a long fight",
+                "why": "it adds threat and lowers armour"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 845,
+                "name": "Cleave",
+                "if": "on two monsters, with rage to spare",
+                "why": "it hits a second monster"
+              },
+              {
+                "spell": 12809,
+                "name": "Concussion Blow",
+                "if": "when a monster hits too hard",
+                "why": "a stun gives you a free breath",
+                "talentSpell": 12809
+              },
+              {
+                "spell": 355,
+                "name": "Taunt",
+                "if": "when a monster turns to someone else",
+                "why": "it brings the monster back to you"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 12975,
+                  "name": "Last Stand",
+                  "talentSpell": 12975
+                },
+                {
+                  "spell": 871,
+                  "name": "Shield Wall"
+                }
+              ],
+              "say": "keep both for the fight that would otherwise kill you"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Shield Slam leads. Dungeons, packs and the first raid.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 6673,
+                "name": "Battle Shout",
+                "if": "before you pull",
+                "why": "it adds attack power to every swing you make"
+              },
+              {
+                "spell": 100,
+                "name": "Charge",
+                "if": "as the first move",
+                "why": "it starts the fight and gives you rage"
+              },
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "on a pack, before the first swing",
+                "why": "it slows how fast they hit you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 23922,
+                "name": "Shield Slam",
+                "if": "the moment it is ready",
+                "why": "very high threat, and your best attack",
+                "talentSpell": 23922
+              },
+              {
+                "spell": 6572,
+                "name": "Revenge",
+                "if": "right after you block, dodge or parry",
+                "why": "it hits hard for little rage"
+              },
+              {
+                "spell": 2565,
+                "name": "Shield Block",
+                "if": "when a hard hitter swings at you",
+                "why": "each block gives rage with Shield Specialization"
+              },
+              {
+                "spell": 402927,
+                "name": "Victory Rush",
+                "if": "just after a kill, before it fades",
+                "why": "it hits for free and heals you"
+              },
+              {
+                "spell": 7386,
+                "name": "Sunder Armor",
+                "if": "in a long fight",
+                "why": "it adds threat and lowers armour"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings and hits taken are where rage comes from"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 6343,
+                "name": "Thunder Clap",
+                "if": "against two or more monsters",
+                "why": "it slows how fast they hit you"
+              },
+              {
+                "spell": 1160,
+                "name": "Demoralizing Shout",
+                "if": "against a pack or a hard hitter",
+                "why": "it lowers the damage of their swings"
+              },
+              {
+                "spell": 78,
+                "name": "Heroic Strike",
+                "if": "with rage to spare",
+                "why": "it replaces a swing, so it pays only with spare rage"
+              },
+              {
+                "spell": 845,
+                "name": "Cleave",
+                "if": "on two monsters, with rage to spare",
+                "why": "it hits a second monster"
+              },
+              {
+                "spell": 355,
+                "name": "Taunt",
+                "if": "when a monster turns to someone else",
+                "why": "it brings the monster back to you"
+              }
+            ],
+            "low": [
+              {
+                "spell": 2687,
+                "name": "Bloodrage",
+                "if": "when you pull with no rage",
+                "why": "it gives rage for some of your health"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 12975,
+                  "name": "Last Stand",
+                  "talentSpell": 12975
+                },
+                {
+                  "spell": 871,
+                  "name": "Shield Wall"
+                }
+              ],
+              "say": "keep both for the fight that would otherwise kill you"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Icy Veins, Protection Warrior levelling (21 October 2026, beta)",
+          "url": "https://www.icy-veins.com/wow-forever/protection-warrior-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Protection Warrior levelling (Kargoz, 14 October 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/kargoz/classes/1-60-protection-warrior-leveling-guide-weapons-talents-rotation-macros",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Method, Warrior levelling guide and talents (Babyhoof, 9 October 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-warrior-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Warrior guide (beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/warrior/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Warrior levelling guide (Soda, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/warrior-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Blizzard's warrior design notes (Luxrah, 1 October 2026)",
+          "url": "https://www.warcrafttavern.com/forever/news/rage-will-benefit-from-crit-priest-warrior-deep-dive-for-wow-forever/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026, launch)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        }
+      ]
+    }
+  ]
+}
