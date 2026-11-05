@@ -1,0 +1,2625 @@
+{
+  "class": {
+    "id": 3,
+    "key": "hunter",
+    "token": "HUNTER",
+    "name": "Hunter",
+    "text": "A bow or a gun, a pet, and a lot of distance. Auto Shot, Raptor Strike and Track Beasts are yours from the start, Serpent Sting and Aspect of the Monkey come at 4, Hunter's Mark and Arcane Shot at 6. At 10 a class quest gives you a pet, and Aspect of the Hawk comes with it. Every line below says where to stand, what to shoot and when to send the pet.",
+    "card": {
+      "caresAbout": "range, the pet, mana, and what is still between you and the monster",
+      "vocabulary": "range, pull, send, kite, sting, shot, trap, aspect, mend, feed",
+      "soundsLike": "patient and a little dry, a trainer who tells you where to stand before what to shoot. A hunter line gives the distance, then the shot, then what the pet does",
+      "neverSays": "rage, holy, anything about gods, spirits or the class's lore",
+      "test": "could it be said before the monster closes the gap?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Beast Mastery is the build this page advises, because every guide calls it the easiest Hunter to level and Summon Hawk comes at 25. The price: much of your damage rides on the pet, so a dead pet costs you. Marksmanship shoots harder itself and Survival fights up close. Both are slower to level."
+      }
+    ],
+    "overview": {
+      "who": "You shoot from far away and send a pet in front of you. The craft is distance: every pull starts at the edge of your range, and the pet keeps the monster from walking to you.",
+      "good": "Killing at range, one monster at a time. You can slow what runs at you, freeze one monster in a trap, and play dead when a pull goes wrong. Levelling is quick, and Beast Mastery is the quickest.",
+      "bad": "Mana, and the pet. A long fight runs you dry. A dead pet leaves you in melee, where a Hunter is weak, and ranged shots cannot be used inside 8 yards.",
+      "resource": "Mana. Auto Shot costs none, so keep it firing and spend mana on the shots that matter. It returns slowly while you rest, so drink between fights. Efficiency makes shots cheaper, and Rapid Recuperation and Resourcefulness keep your mana coming back while you fight.",
+      "levelling": "Mark the monster, send the pet in and shoot from range. Tame a boar at 10, mend it after a fight and feed it when it is unhappy. Beast Mastery is the quickest to level, Marksmanship is slower, and Survival comes online between 30 and 40.",
+      "ten": "You get your first talent point and pick a spec. Beast Mastery levels fastest, Marksmanship leans on your own shots and trusts the pet less, Survival fights up close. Your pet quest is at 10 too, and a respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "hunter-beast-mastery",
+        "reason": "Every guide calls Beast Mastery the easiest and fastest to level. Summon Hawk comes at 25 and Bestial Wrath at 40."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 21,
+      "key": "hunter-beast-mastery",
+      "name": "Beast Mastery",
+      "role": "damage",
+      "tree": 361,
+      "checked": "2026-11-05",
+      "intro": "Beast Mastery makes the pet the other half of your damage. Deadly Aspects speeds your shots, Summon Hawk lets two hawks fight beside your pet from 25, and Bestial Wrath makes the pet hit much harder at 40. It is the easiest Hunter to level.",
+      "line": "Your pet and two hawks do much of the work. The easiest Hunter to level, and the pet carries the pulls.",
+      "pathNote": "(31 points in Beast Mastery, then 20 in Marksmanship for critical hits and Mortal Shots.)",
+      "split": "how to fill the first ten points. Both full orders take Pathfinding before the tenth point, which row 2 does not allow, so its two points go to Improved Revive Pet and Endurance Training here. Vareion also takes Frenzy to five and no Spirit Bond. The last twenty are the Marksmanship tail, with a second Rapid Killing in place of Lone Wolf.",
+      "dry": "A dead pet leaves you alone with the monster, so keep it mended.",
+      "sources": [
+        {
+          "label": "Mobalytics, Beast Mastery Hunter levelling (Kargoz, 22 October 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/1-60-beast-mastery-hunter-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Hunter levelling 1-60 (Vareion, 23 October 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/hunter-leveling-1-60-vareion",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Beast Mastery Hunter levelling (17 October 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/beast-mastery-hunter-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Hunter levelling (30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/hunter-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Hunter levelling (Forever beta, 2026)",
+          "url": "https://www.warcrafttavern.com/forever/guides/hunter-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Blizzard's hunter design notes (30 September 2026)",
+          "url": "https://www.warcrafttavern.com/forever/news/powershifting-is-back-sort-of-hunter-druid-deep-dive-for-wow-forever/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 19552,
+          "rank": 5,
+          "of": 5,
+          "why": "With Aspect of the Hawk on, Auto Shot sometimes speeds up your shooting by 30% for 12 seconds. The full orders start here."
+        },
+        {
+          "points": [
+            6,
+            7
+          ],
+          "level": [
+            15,
+            16
+          ],
+          "talent": 1223755,
+          "rank": 2,
+          "of": 2,
+          "why": "2% more damage for you and your pet while the pet is out. It is the one talent on this row that adds damage."
+        },
+        {
+          "points": [
+            8,
+            9
+          ],
+          "level": [
+            17,
+            18
+          ],
+          "talent": 24443,
+          "rank": 2,
+          "of": 2,
+          "why": "Revive Pet casts 6 seconds faster and costs 40% less mana. These two points help reach the ten that row 2 asks for. Pathfinding cannot come before ten points."
+        },
+        {
+          "points": [
+            10,
+            10
+          ],
+          "level": [
+            19,
+            19
+          ],
+          "talent": 19583,
+          "rank": 1,
+          "of": 5,
+          "why": "15% more health and armour for your pet. This point is the tenth, which opens row 2, and a tougher pet holds a pull longer."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 19596,
+          "rank": 1,
+          "of": 1,
+          "why": "Your pet moves 30% faster. Intimidation needs it, and Bestial Wrath needs Intimidation."
+        },
+        {
+          "points": [
+            12,
+            15
+          ],
+          "level": [
+            21,
+            24
+          ],
+          "talent": 19616,
+          "rank": 4,
+          "of": 5,
+          "why": "Your pets and hawks deal up to 20% more damage, and the hawks of Summon Hawk count. Kargoz and Vareion both take all five."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 1293241,
+          "rank": 1,
+          "of": 1,
+          "why": "A hawk dives at the monster, hits at once and keeps attacking for 18 seconds. Two hawks can be out together. Kargoz calls it a huge power spike."
+        },
+        {
+          "points": [
+            17,
+            17
+          ],
+          "level": [
+            26,
+            26
+          ],
+          "talent": 19616,
+          "rank": 5,
+          "of": 5,
+          "why": "Your pets and hawks deal the full 20% more damage once this point is in."
+        },
+        {
+          "points": [
+            18,
+            20
+          ],
+          "level": [
+            27,
+            29
+          ],
+          "talent": 19598,
+          "rank": 3,
+          "of": 5,
+          "why": "Your pet and hawks crit up to 16% more often. Frenzy needs all five points, so these come first."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 19577,
+          "rank": 1,
+          "of": 1,
+          "why": "Your pet stuns the monster for 3 seconds on its next hit, and that hit crits far more often. It is the way to Bestial Wrath."
+        },
+        {
+          "points": [
+            22,
+            23
+          ],
+          "level": [
+            31,
+            32
+          ],
+          "talent": 19598,
+          "rank": 5,
+          "of": 5,
+          "why": "Ferocity is full, which opens Frenzy."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 19590,
+          "rank": 2,
+          "of": 2,
+          "why": "Doubles your pet's Focus regeneration and lets half your mana regeneration go on while you cast. Kargoz takes it here, Vareion at 38."
+        },
+        {
+          "points": [
+            26,
+            29
+          ],
+          "level": [
+            35,
+            38
+          ],
+          "talent": 19621,
+          "rank": 4,
+          "of": 5,
+          "why": "After a critical hit your pet sometimes attacks 30% faster for 8 seconds. Kargoz stops at four points, Vareion takes five."
+        },
+        {
+          "points": [
+            30,
+            30
+          ],
+          "level": [
+            39,
+            39
+          ],
+          "talent": 19578,
+          "rank": 1,
+          "of": 2,
+          "why": "You and your pet regain 1% of your health every 5 seconds while the pet is out. Kargoz takes one point, Vareion none."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 19574,
+          "rank": 1,
+          "of": 1,
+          "why": "Your pet deals 50% more damage for 18 seconds. It is the end of the tree, and every point before it was spent to reach it."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 19426,
+          "rank": 5,
+          "of": 5,
+          "why": "1% more critical strike chance on all your attacks. The Marksmanship points start here in both full orders."
+        },
+        {
+          "points": [
+            37,
+            39
+          ],
+          "level": [
+            46,
+            48
+          ],
+          "talent": 19498,
+          "rank": 3,
+          "of": 3,
+          "why": "6 yards more range on your ranged weapons. More range is more time before the monster reaches you."
+        },
+        {
+          "points": [
+            40,
+            44
+          ],
+          "level": [
+            49,
+            53
+          ],
+          "talent": 1223984,
+          "rank": 5,
+          "of": 5,
+          "why": "Your attack power rises by your Intellect, so gear with Intellect pays twice, in mana and in damage."
+        },
+        {
+          "points": [
+            45,
+            46
+          ],
+          "level": [
+            54,
+            55
+          ],
+          "talent": 415405,
+          "rank": 2,
+          "of": 2,
+          "why": "Rapid Fire comes back 2 minutes sooner, and a kill under your Serpent Sting makes your next shot hit 20% harder."
+        },
+        {
+          "points": [
+            47,
+            51
+          ],
+          "level": [
+            56,
+            60
+          ],
+          "talent": 19485,
+          "rank": 5,
+          "of": 5,
+          "why": "Critical hits with ranged abilities deal 30% more. It needs Careful Aim, so it comes last."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point and before your pet. The same kit in every build. Pull from as far as you can reach and back away from what gets close.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13163,
+                "name": "Aspect of the Monkey",
+                "if": "before the first pull",
+                "why": "it raises your chance to dodge"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "from as far away as it reaches",
+                "say": "stand still so it fires",
+                "why": "the pull is free and the monster walks to you"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "whenever it is ready",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 5116,
+                "name": "Concussive Shot",
+                "if": "when the monster gets close",
+                "why": "it slows the monster so you can back away"
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "when it reaches you",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "between": [
+              {
+                "text": "Check your ammunition",
+                "if": "before you leave town",
+                "why": "Auto Shot and Volley need it"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Your pet quest is at 10: tame a boar, call it out and keep it fed. Mark the monster, send the pet in and shoot from range. Aspect of the Hawk replaces the Monkey once a pet holds the monster.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a single monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "whenever it is ready",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 1495,
+                "name": "Mongoose Bite",
+                "if": "right after you dodge",
+                "why": "it only works after a dodge"
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "when it reaches you",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5116,
+                "name": "Concussive Shot",
+                "if": "if a monster runs at you",
+                "why": "it slows the monster so you can back away"
+              },
+              {
+                "spell": 2974,
+                "name": "Wing Clip",
+                "if": "when the monster is on you",
+                "why": "it slows the monster so you can step away"
+              },
+              {
+                "spell": 982,
+                "name": "Revive Pet",
+                "if": "when your pet has died",
+                "why": "it comes back with a little health"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1515,
+                "name": "Tame Beast",
+                "if": "once the class quest teaches it",
+                "why": "a boar holds threat, takes hits and eats anything"
+              },
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Aimed Shot and Freezing Trap come at 20, Rapid Fire at 26, Feign Death at 30. Summon Hawk at 25 changes the pull: the hawks hit while your pet holds the monster. Intimidation at 30 stuns what the pet hits.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 19434,
+                "name": "Aimed Shot",
+                "if": "to open, once the pet has the monster",
+                "why": "it hits hard while the pet holds the monster"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a single monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1293241,
+                "name": "Summon Hawk",
+                "if": "whenever it is ready",
+                "why": "two hawks can bite at once",
+                "talentSpell": 1293241
+              },
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "when two hawks are already out",
+                "why": "it shares a cooldown with Summon Hawk"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 19434,
+                "name": "Aimed Shot",
+                "if": "against one monster that will live",
+                "why": "it shares a cooldown with Multi-Shot"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "if it is not on a single monster",
+                "why": "it burns while you shoot"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 19577,
+                "name": "Intimidation",
+                "if": "when the pet must take the hits",
+                "why": "it stuns the monster and the pet gets the threat",
+                "talentSpell": 19577
+              },
+              {
+                "spell": 1499,
+                "name": "Freezing Trap",
+                "if": "to hold one monster out of the fight",
+                "why": "it freezes the first monster that walks in"
+              },
+              {
+                "spell": 13809,
+                "name": "Frost Trap",
+                "if": "when a pack runs at you",
+                "why": "it slows every monster in the area"
+              },
+              {
+                "spell": 781,
+                "name": "Disengage",
+                "if": "when a monster has turned on you",
+                "why": "it drops your threat"
+              },
+              {
+                "spell": 5384,
+                "name": "Feign Death",
+                "if": "when the pull goes wrong",
+                "why": "it may make the monsters ignore you"
+              },
+              {
+                "spell": 982,
+                "name": "Revive Pet",
+                "if": "when your pet has died",
+                "why": "it comes back with a little health"
+              }
+            ],
+            "between": [
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "spell": 5118,
+                "name": "Aspect of the Cheetah",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and a hit dazes you"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 3045,
+                  "name": "Rapid Fire"
+                }
+              ],
+              "say": "on a hard pull or an elite, it makes you shoot much faster"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Bestial Wrath at 40 is a burst for your pet. Volley comes at 40 for packs and Explosive Trap at 34 for groups. Mortal Shots at 60 completes the Marksmanship points.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 19434,
+                "name": "Aimed Shot",
+                "if": "to open, once the pet has the monster",
+                "why": "it hits hard while the pet holds the monster"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a single monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1293241,
+                "name": "Summon Hawk",
+                "if": "whenever it is ready",
+                "why": "two hawks can bite at once",
+                "talentSpell": 1293241
+              },
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "when two hawks are already out",
+                "why": "it shares a cooldown with Summon Hawk"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 19434,
+                "name": "Aimed Shot",
+                "if": "against one monster that will live",
+                "why": "it shares a cooldown with Multi-Shot"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "if it is not on a single monster",
+                "why": "it burns while you shoot"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 13813,
+                "name": "Explosive Trap",
+                "if": "against a pack, before it reaches you",
+                "why": "it burns everything around it"
+              },
+              {
+                "spell": 1510,
+                "name": "Volley",
+                "if": "against a pack, when mana is plentiful",
+                "why": "it hits everything in the area, and it costs a lot"
+              },
+              {
+                "spell": 19577,
+                "name": "Intimidation",
+                "if": "when the pet must take the hits",
+                "why": "it stuns the monster and the pet gets the threat",
+                "talentSpell": 19577
+              },
+              {
+                "spell": 1499,
+                "name": "Freezing Trap",
+                "if": "to hold one monster out of the fight",
+                "why": "it freezes the first monster that walks in"
+              },
+              {
+                "spell": 781,
+                "name": "Disengage",
+                "if": "when a monster has turned on you",
+                "why": "it drops your threat"
+              },
+              {
+                "spell": 5384,
+                "name": "Feign Death",
+                "if": "when the pull goes wrong",
+                "why": "it may make the monsters ignore you"
+              }
+            ],
+            "between": [
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "spell": 5118,
+                "name": "Aspect of the Cheetah",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and a hit dazes you"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 19574,
+                  "name": "Bestial Wrath",
+                  "talentSpell": 19574
+                },
+                {
+                  "spell": 3045,
+                  "name": "Rapid Fire"
+                }
+              ],
+              "say": "on a hard pull or an elite, both of you hit harder"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "key": "hunter-marksmanship",
+      "name": "Marksmanship",
+      "role": "damage",
+      "tree": 363,
+      "checked": "2026-11-05",
+      "intro": "Marksmanship puts the damage in your own shots. Lethal Attacks and Careful Aim come first, Trueshot Aura at 25, and Sniper Shot at 40 is a long, hard opener. Your pet holds threat less well than in Beast Mastery, so the build asks more of you.",
+      "line": "Aimed Shot, Arcane Shot and a long Sniper Shot from range. It hits hard, and the pet holds threat less well.",
+      "pathNote": "(42 points in Marksmanship, then 9 in Beast Mastery for Deadly Aspects, Focused Fire and Improved Revive Pet.)",
+      "split": "the last twenty points. This order is Vareion's, with nine in Beast Mastery. Icy Veins' picture at level 58 has 17 in Beast Mastery with Summon Hawk among them, and a variant of Vareion's swaps the last two points for Lone Wolf, which Warcraft Tavern would not take while levelling.",
+      "dry": "Sniper Shot is a long cast, so cast it while the pet holds the monster.",
+      "sources": [
+        {
+          "label": "Mobalytics, Hunter levelling 1-60 (Vareion, 23 October 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/hunter-leveling-1-60-vareion",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Marksmanship Hunter levelling (17 October 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/marksmanship-hunter-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Hunter levelling (Forever beta, 2026)",
+          "url": "https://www.warcrafttavern.com/forever/guides/hunter-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Blizzard's hunter design notes (30 September 2026)",
+          "url": "https://www.warcrafttavern.com/forever/news/powershifting-is-back-sort-of-hunter-druid-deep-dive-for-wow-forever/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Hunter levelling (30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/hunter-leveling-guide",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 19426,
+          "rank": 5,
+          "of": 5,
+          "why": "1% more critical strike chance on all your attacks. Every full Marksmanship order starts here, and Careful Aim is next."
+        },
+        {
+          "points": [
+            6,
+            10
+          ],
+          "level": [
+            15,
+            19
+          ],
+          "talent": 1223984,
+          "rank": 5,
+          "of": 5,
+          "why": "Your attack power rises by your Intellect, so gear with Intellect pays twice, in mana and in damage. Mortal Shots needs all five points."
+        },
+        {
+          "points": [
+            11,
+            13
+          ],
+          "level": [
+            20,
+            22
+          ],
+          "talent": 19498,
+          "rank": 3,
+          "of": 3,
+          "why": "6 yards more range on your ranged weapons. More range is more time before the monster reaches you."
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 415405,
+          "rank": 2,
+          "of": 2,
+          "why": "Rapid Fire comes back 2 minutes sooner, and a kill under your Serpent Sting makes your next shot hit 20% harder. Rapid Recuperation needs it."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 1299346,
+          "rank": 1,
+          "of": 1,
+          "why": "Party members within 45 yards gain 20 ranged attack power. Sniper Shot needs it, and Icy Veins' picture has it."
+        },
+        {
+          "points": [
+            17,
+            21
+          ],
+          "level": [
+            26,
+            30
+          ],
+          "talent": 19485,
+          "rank": 5,
+          "of": 5,
+          "why": "Critical hits with ranged abilities deal 30% more. It needs Careful Aim."
+        },
+        {
+          "points": [
+            22,
+            23
+          ],
+          "level": [
+            31,
+            32
+          ],
+          "talent": 1223987,
+          "rank": 2,
+          "of": 2,
+          "why": "A Serpent Sting lets half your mana regeneration go on while you cast. Icy Veins says it solves almost all your mana problems."
+        },
+        {
+          "points": [
+            24,
+            26
+          ],
+          "level": [
+            33,
+            35
+          ],
+          "talent": 19461,
+          "rank": 3,
+          "of": 3,
+          "why": "Multi-Shot, Aimed Shot and Volley deal 15% more damage."
+        },
+        {
+          "points": [
+            27,
+            30
+          ],
+          "level": [
+            36,
+            39
+          ],
+          "talent": 19507,
+          "rank": 4,
+          "of": 5,
+          "why": "5% more damage with ranged weapons. Sniper Shot asks for thirty points in the tree, and these are four of them."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 1310687,
+          "rank": 1,
+          "of": 1,
+          "why": "A long cast that hits hard and lengthens your next three shots by 10 yards. Guides call it your biggest jump, and the opener."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 19507,
+          "rank": 5,
+          "of": 5,
+          "why": "The last point of 5% more damage with ranged weapons, taken once Sniper Shot is in."
+        },
+        {
+          "points": [
+            33,
+            37
+          ],
+          "level": [
+            42,
+            46
+          ],
+          "talent": 19416,
+          "rank": 5,
+          "of": 5,
+          "why": "Your shots, stings and melee strikes cost 15% less mana. Every long fight is cheaper."
+        },
+        {
+          "points": [
+            38,
+            42
+          ],
+          "level": [
+            47,
+            51
+          ],
+          "talent": 19552,
+          "rank": 5,
+          "of": 5,
+          "why": "With Aspect of the Hawk on, Auto Shot sometimes speeds up your shooting by 30% for 12 seconds. The Beast Mastery tail starts here."
+        },
+        {
+          "points": [
+            43,
+            44
+          ],
+          "level": [
+            52,
+            53
+          ],
+          "talent": 1223755,
+          "rank": 2,
+          "of": 2,
+          "why": "2% more damage for you and your pet while the pet is out."
+        },
+        {
+          "points": [
+            45,
+            49
+          ],
+          "level": [
+            54,
+            58
+          ],
+          "talent": 19454,
+          "rank": 5,
+          "of": 5,
+          "why": "Arcane Shot comes back 1.5 seconds sooner."
+        },
+        {
+          "points": [
+            50,
+            51
+          ],
+          "level": [
+            59,
+            60
+          ],
+          "talent": 24443,
+          "rank": 2,
+          "of": 2,
+          "why": "Revive Pet casts 6 seconds faster and costs 40% less mana. Vareion ends here, and a variant swaps these for Lone Wolf."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point and before your pet. The same kit in every build. Pull from as far as you can reach and back away from what gets close.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13163,
+                "name": "Aspect of the Monkey",
+                "if": "before the first pull",
+                "why": "it raises your chance to dodge"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "from as far away as it reaches",
+                "say": "stand still so it fires",
+                "why": "the pull is free and the monster walks to you"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "whenever it is ready",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 5116,
+                "name": "Concussive Shot",
+                "if": "when the monster gets close",
+                "why": "it slows the monster so you can back away"
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "when it reaches you",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "between": [
+              {
+                "text": "Check your ammunition",
+                "if": "before you leave town",
+                "why": "Auto Shot and Volley need it"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Your pet quest is at 10: tame a boar, call it out and keep it fed. Marksmanship puts the damage in your own shots, so stay at range and let the pet hold the monster. Aspect of the Hawk replaces the Monkey once it does.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a single monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "whenever it is ready",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 1495,
+                "name": "Mongoose Bite",
+                "if": "right after you dodge",
+                "why": "it only works after a dodge"
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "when it reaches you",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5116,
+                "name": "Concussive Shot",
+                "if": "if a monster runs at you",
+                "why": "it slows the monster so you can back away"
+              },
+              {
+                "spell": 2974,
+                "name": "Wing Clip",
+                "if": "when the monster is on you",
+                "why": "it slows the monster so you can step away"
+              },
+              {
+                "spell": 982,
+                "name": "Revive Pet",
+                "if": "when your pet has died",
+                "why": "it comes back with a little health"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1515,
+                "name": "Tame Beast",
+                "if": "once the class quest teaches it",
+                "why": "a boar holds threat, takes hits and eats anything"
+              },
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Aimed Shot comes at 20 and Rapid Fire at 26. Trueshot Aura is yours at 25, so keep it on. Your pet holds threat less well than in Beast Mastery, so open from far away and let it get there first.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 19434,
+                "name": "Aimed Shot",
+                "if": "to open, once the pet has the monster",
+                "why": "it hits hard while the pet holds the monster"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a single monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 19434,
+                "name": "Aimed Shot",
+                "if": "whenever it is ready",
+                "why": "it hits hard, and Barrage adds to it later"
+              },
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "while Aimed Shot is on its cooldown",
+                "why": "it has a cooldown of its own"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "if it is not on a single monster",
+                "why": "it burns while you shoot"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1499,
+                "name": "Freezing Trap",
+                "if": "to hold one monster out of the fight",
+                "why": "it freezes the first monster that walks in"
+              },
+              {
+                "spell": 13809,
+                "name": "Frost Trap",
+                "if": "when a pack runs at you",
+                "why": "it slows every monster in the area"
+              },
+              {
+                "spell": 781,
+                "name": "Disengage",
+                "if": "when a monster has turned on you",
+                "why": "it drops your threat"
+              },
+              {
+                "spell": 5384,
+                "name": "Feign Death",
+                "if": "when the pull goes wrong",
+                "why": "it may make the monsters ignore you"
+              },
+              {
+                "spell": 5116,
+                "name": "Concussive Shot",
+                "if": "if a monster runs at you",
+                "why": "it slows the monster so you can back away"
+              },
+              {
+                "spell": 982,
+                "name": "Revive Pet",
+                "if": "when your pet has died",
+                "why": "it comes back with a little health"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1299346,
+                "name": "Trueshot Aura",
+                "if": "if it is not on",
+                "why": "it adds ranged attack power for you and your party",
+                "talentSpell": 1299346
+              },
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "spell": 5118,
+                "name": "Aspect of the Cheetah",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and a hit dazes you"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 3045,
+                  "name": "Rapid Fire"
+                }
+              ],
+              "say": "on a hard pull or an elite, it makes you shoot much faster"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Sniper Shot at 40 is the opener: cast it first, with the pet already on the monster. Volley comes at 40 and Explosive Trap at 34 for packs. Efficiency and Rapid Recuperation keep your mana up.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 1310687,
+                "name": "Sniper Shot",
+                "if": "first, with the pet on the monster",
+                "say": "stand still for the cast",
+                "why": "the long cast is safe while the pet holds it",
+                "talentSpell": 1310687
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a single monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 19434,
+                "name": "Aimed Shot",
+                "if": "whenever it is ready",
+                "why": "it hits hard, and Barrage adds to it later"
+              },
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "while Aimed Shot is on its cooldown",
+                "why": "it has a cooldown of its own"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "if it is not on a single monster",
+                "why": "it burns while you shoot"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 13813,
+                "name": "Explosive Trap",
+                "if": "against a pack, before it reaches you",
+                "why": "it burns everything around it"
+              },
+              {
+                "spell": 1510,
+                "name": "Volley",
+                "if": "against a pack, when mana is plentiful",
+                "why": "it hits everything in the area, and it costs a lot"
+              },
+              {
+                "spell": 1499,
+                "name": "Freezing Trap",
+                "if": "to hold one monster out of the fight",
+                "why": "it freezes the first monster that walks in"
+              },
+              {
+                "spell": 781,
+                "name": "Disengage",
+                "if": "when a monster has turned on you",
+                "why": "it drops your threat"
+              },
+              {
+                "spell": 5384,
+                "name": "Feign Death",
+                "if": "when the pull goes wrong",
+                "why": "it may make the monsters ignore you"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1299346,
+                "name": "Trueshot Aura",
+                "if": "if it is not on",
+                "why": "it adds ranged attack power for you and your party",
+                "talentSpell": 1299346
+              },
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "spell": 5118,
+                "name": "Aspect of the Cheetah",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and a hit dazes you"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 3045,
+                  "name": "Rapid Fire"
+                }
+              ],
+              "say": "on a hard pull or an elite, it makes you shoot much faster"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "key": "hunter-survival",
+      "name": "Survival",
+      "role": "damage",
+      "tree": 362,
+      "checked": "2026-11-05",
+      "intro": "Survival is the Hunter who walks in. Savage Strikes and Predator's Edge make the melee strikes hit harder, Expose Prey lets your Hunter's Mark trigger Mongoose Bite, and Strider Kick gets you out again. It is the slowest Hunter to level and comes online between 30 and 40.",
+      "line": "Shoot, step in for Raptor Strike and Mongoose Bite, then back out. The slowest to level, and it comes online between 30 and 40.",
+      "pathNote": "(35 points in Survival, 11 in Marksmanship and 5 in Beast Mastery.)",
+      "split": "when to switch. Vareion levels it from 10 and says to wait until 30 for the core, Icy Veins goes through Marksmanship first and switches at the middle of the tree, Maxroll says it is not really playable until about 40. This order is Vareion's. Feor's end-game build leaves Deflection out and takes Improved Stings.",
+      "dry": "Do not walk in before Auto Shot has fired.",
+      "sources": [
+        {
+          "label": "Mobalytics, Hunter levelling 1-60 (Vareion, 23 October 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/hunter-leveling-1-60-vareion",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Survival Hunter end game (Feor, 2 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/survival-hunter-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Survival Hunter levelling (21 October 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/survival-hunter-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Hunter levelling (30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/hunter-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Hunter levelling (Forever beta, 2026)",
+          "url": "https://www.warcrafttavern.com/forever/guides/hunter-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Blizzard's hunter design notes (30 September 2026)",
+          "url": "https://www.warcrafttavern.com/forever/news/powershifting-is-back-sort-of-hunter-druid-deep-dive-for-wow-forever/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 24293,
+          "rank": 5,
+          "of": 5,
+          "why": "5% more damage to the kind of creature you are tracking. Track what you are fighting, or these points do nothing."
+        },
+        {
+          "points": [
+            6,
+            7
+          ],
+          "level": [
+            15,
+            16
+          ],
+          "talent": 19159,
+          "rank": 2,
+          "of": 2,
+          "why": "20% more critical strike chance on all your melee abilities, which is what Raptor Strike and Mongoose Bite need."
+        },
+        {
+          "points": [
+            8,
+            10
+          ],
+          "level": [
+            17,
+            19
+          ],
+          "talent": 19295,
+          "rank": 3,
+          "of": 5,
+          "why": "5% more parry chance. A parry is what lets Counterattack work."
+        },
+        {
+          "points": [
+            11,
+            13
+          ],
+          "level": [
+            20,
+            22
+          ],
+          "talent": 19290,
+          "rank": 3,
+          "of": 3,
+          "why": "3% more hit chance, and movement slows on you last 30% less. Both help a hunter who walks in and out."
+        },
+        {
+          "points": [
+            14,
+            14
+          ],
+          "level": [
+            23,
+            23
+          ],
+          "talent": 19263,
+          "rank": 1,
+          "of": 1,
+          "why": "Deterrence raises your dodge and parry by 25% for 10 seconds. It opens Counterattack."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 19295,
+          "rank": 4,
+          "of": 5,
+          "why": "A fourth point of Deflection, more parries."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 19306,
+          "rank": 1,
+          "of": 1,
+          "why": "A strike after a parry that cannot be blocked, dodged or parried and roots the monster for 5 seconds. Vareion calls it core."
+        },
+        {
+          "points": [
+            17,
+            20
+          ],
+          "level": [
+            26,
+            29
+          ],
+          "talent": 1310627,
+          "rank": 4,
+          "of": 5,
+          "why": "Your melee abilities crit for 30% more and your off hand hits 50% harder,. Expose Prey is the next row."
+        },
+        {
+          "points": [
+            21,
+            22
+          ],
+          "level": [
+            30,
+            31
+          ],
+          "talent": 1310532,
+          "rank": 2,
+          "of": 2,
+          "why": "Attacks on a monster with your Hunter's Mark have a 10% chance to let you use Mongoose Bite. Lacerating Strikes needs both points."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 1310627,
+          "rank": 5,
+          "of": 5,
+          "why": "The last point of the 30% more critical damage on your melee abilities."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 1317257,
+          "rank": 1,
+          "of": 1,
+          "why": "A kick for full weapon damage that makes you move 30% faster for 3 seconds. It is how you step out of melee."
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 19295,
+          "rank": 5,
+          "of": 5,
+          "why": "The fifth point of Deflection. Feor leaves Deflection out of his end game, and here it is a point toward the 25 that Lightning Reflexes asks for."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 19168,
+          "rank": 5,
+          "of": 5,
+          "why": "15% more Agility, which is attack power and crit for a hunter."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 1310533,
+          "rank": 1,
+          "of": 1,
+          "why": "Mongoose Bite also leaves a bleed for 40% of its damage over 21 seconds. It is the end of the tree."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 19552,
+          "rank": 5,
+          "of": 5,
+          "why": "With Aspect of the Hawk on, Auto Shot sometimes speeds up your shooting by 30% for 12 seconds. Vareion takes it right after the tree."
+        },
+        {
+          "points": [
+            37,
+            38
+          ],
+          "level": [
+            46,
+            47
+          ],
+          "talent": 440529,
+          "rank": 2,
+          "of": 2,
+          "why": "Your traps and melee strikes cost 60% less mana, and critical hits let half your mana regeneration go on while you cast."
+        },
+        {
+          "points": [
+            39,
+            43
+          ],
+          "level": [
+            48,
+            52
+          ],
+          "talent": 19426,
+          "rank": 5,
+          "of": 5,
+          "why": "1% more critical strike chance on all your attacks. The Marksmanship points start here."
+        },
+        {
+          "points": [
+            44,
+            48
+          ],
+          "level": [
+            53,
+            57
+          ],
+          "talent": 1223984,
+          "rank": 5,
+          "of": 5,
+          "why": "Your attack power rises by your Intellect, so gear with Intellect pays twice, in mana and in damage."
+        },
+        {
+          "points": [
+            49,
+            50
+          ],
+          "level": [
+            58,
+            59
+          ],
+          "talent": 19239,
+          "rank": 2,
+          "of": 2,
+          "why": "Your Immolation and Explosive traps deal 30% more, and Freezing and Frost traps last 30% longer. Feor takes both points."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 1310661,
+          "rank": 1,
+          "of": 3,
+          "why": "Serpent Sting deals up to 20% more. This last point is ours: Vareion's Lone Wolf does nothing while you keep a pet."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point and before your pet. The same kit in every build. Pull from as far as you can reach and back away from what gets close.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 13163,
+                "name": "Aspect of the Monkey",
+                "if": "before the first pull",
+                "why": "it raises your chance to dodge"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "from as far away as it reaches",
+                "say": "stand still so it fires",
+                "why": "the pull is free and the monster walks to you"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "whenever it is ready",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 5116,
+                "name": "Concussive Shot",
+                "if": "when the monster gets close",
+                "why": "it slows the monster so you can back away"
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "when it reaches you",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "between": [
+              {
+                "text": "Check your ammunition",
+                "if": "before you leave town",
+                "why": "Auto Shot and Volley need it"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Your pet quest is at 10: tame a boar, call it out and keep it fed. Until the middle of the tree you shoot like any other Hunter. Savage Strikes at 15 makes your melee strikes crit, so use them when a monster reaches you.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Track the monster's kind",
+                "if": "before the pull",
+                "why": "Improved Tracking adds damage against it"
+              },
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 1978,
+                "name": "Serpent Sting",
+                "if": "on a single monster that will live a while",
+                "why": "it burns while you shoot"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "whenever it is ready",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 1495,
+                "name": "Mongoose Bite",
+                "if": "right after you dodge",
+                "why": "it only works after a dodge"
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "when it reaches you",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5116,
+                "name": "Concussive Shot",
+                "if": "if a monster runs at you",
+                "why": "it slows the monster so you can back away"
+              },
+              {
+                "spell": 2974,
+                "name": "Wing Clip",
+                "if": "when the monster is on you",
+                "why": "it slows the monster so you can step away"
+              },
+              {
+                "spell": 982,
+                "name": "Revive Pet",
+                "if": "when your pet has died",
+                "why": "it comes back with a little health"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1515,
+                "name": "Tame Beast",
+                "if": "once the class quest teaches it",
+                "why": "a boar holds threat, takes hits and eats anything"
+              },
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Counterattack at 25, Expose Prey at 30 and Strider Kick at 33 are the core of the build, and until you have them you shoot like any Hunter. Aspect of the Beast comes at 30 for the time you spend in melee.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Track the monster's kind",
+                "if": "before the pull",
+                "why": "Improved Tracking adds damage against it"
+              },
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 13795,
+                "name": "Immolation Trap",
+                "if": "on one monster, before it arrives",
+                "why": "it burns while you strike"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 19306,
+                "name": "Counterattack",
+                "if": "right after you parry",
+                "why": "it cannot be dodged, and it roots the monster",
+                "talentSpell": 19306
+              },
+              {
+                "spell": 1495,
+                "name": "Mongoose Bite",
+                "if": "after a dodge or an Expose Prey proc",
+                "why": "it turns a dodge or a proc into a strike"
+              },
+              {
+                "spell": 1317257,
+                "name": "Strider Kick",
+                "if": "whenever it is ready, in melee",
+                "why": "it hits, and then you move faster for a moment",
+                "talentSpell": 1317257
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "whenever it is ready, in melee",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "while the monster closes in",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 13161,
+                "name": "Aspect of the Beast",
+                "if": "when you stay in melee",
+                "why": "it adds melee attack power"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 13813,
+                "name": "Explosive Trap",
+                "if": "against a pack, before it reaches you",
+                "why": "it burns everything around it"
+              },
+              {
+                "spell": 1499,
+                "name": "Freezing Trap",
+                "if": "to hold one monster out of the fight",
+                "why": "it freezes the first monster that walks in"
+              },
+              {
+                "spell": 781,
+                "name": "Disengage",
+                "if": "when a monster has turned on you",
+                "why": "it drops your threat"
+              },
+              {
+                "spell": 5384,
+                "name": "Feign Death",
+                "if": "when the pull goes wrong",
+                "why": "it may make the monsters ignore you"
+              }
+            ],
+            "between": [
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "spell": 5118,
+                "name": "Aspect of the Cheetah",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and a hit dazes you"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 3045,
+                  "name": "Rapid Fire"
+                }
+              ],
+              "say": "on a hard pull or an elite, it makes you shoot much faster"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Lacerating Strikes at 40 puts a bleed on every Mongoose Bite. Shoot from range, walk in for the strikes, and kick out again.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Track the monster's kind",
+                "if": "before the pull",
+                "why": "Improved Tracking adds damage against it"
+              },
+              {
+                "spell": 13165,
+                "name": "Aspect of the Hawk",
+                "if": "if it is not on",
+                "why": "it adds attack power to every shot"
+              },
+              {
+                "spell": 1130,
+                "name": "Hunter's Mark",
+                "if": "on a monster that will live a while",
+                "why": "your shots gain ranged attack power against it"
+              },
+              {
+                "text": "Send your pet in",
+                "if": "as soon as the monster is marked",
+                "why": "it takes the first hits"
+              },
+              {
+                "spell": 13795,
+                "name": "Immolation Trap",
+                "if": "on one monster, before it arrives",
+                "why": "it burns while you strike"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 19306,
+                "name": "Counterattack",
+                "if": "right after you parry",
+                "why": "it cannot be dodged, and it roots the monster",
+                "talentSpell": 19306
+              },
+              {
+                "spell": 1495,
+                "name": "Mongoose Bite",
+                "if": "after a dodge or an Expose Prey proc",
+                "why": "it leaves a bleed behind it"
+              },
+              {
+                "spell": 1317257,
+                "name": "Strider Kick",
+                "if": "whenever it is ready, in melee",
+                "why": "it hits, and then you move faster for a moment",
+                "talentSpell": 1317257
+              },
+              {
+                "spell": 2973,
+                "name": "Raptor Strike",
+                "if": "whenever it is ready, in melee",
+                "why": "it hits hard in melee"
+              },
+              {
+                "spell": 3044,
+                "name": "Arcane Shot",
+                "if": "while the monster closes in",
+                "why": "it is instant, so you can step back after it"
+              },
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "why": "it costs no mana"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 13161,
+                "name": "Aspect of the Beast",
+                "if": "when you stay in melee",
+                "why": "it adds melee attack power"
+              },
+              {
+                "spell": 2643,
+                "name": "Multi-Shot",
+                "if": "against two or more monsters",
+                "why": "it hits up to three"
+              },
+              {
+                "spell": 13813,
+                "name": "Explosive Trap",
+                "if": "against a pack, before it reaches you",
+                "why": "it burns everything around it"
+              },
+              {
+                "spell": 1510,
+                "name": "Volley",
+                "if": "against a pack, when mana is plentiful",
+                "why": "it hits everything in the area, and it costs a lot"
+              },
+              {
+                "spell": 1499,
+                "name": "Freezing Trap",
+                "if": "to hold one monster out of the fight",
+                "why": "it freezes the first monster that walks in"
+              },
+              {
+                "spell": 781,
+                "name": "Disengage",
+                "if": "when a monster has turned on you",
+                "why": "it drops your threat"
+              },
+              {
+                "spell": 5384,
+                "name": "Feign Death",
+                "if": "when the pull goes wrong",
+                "why": "it may make the monsters ignore you"
+              }
+            ],
+            "between": [
+              {
+                "spell": 136,
+                "name": "Mend Pet",
+                "if": "after a fight, if the pet is hurt",
+                "why": "it heals your pet while you focus"
+              },
+              {
+                "spell": 6991,
+                "name": "Feed Pet",
+                "if": "when your pet is unhappy",
+                "why": "feeding it raises its happiness"
+              },
+              {
+                "spell": 883,
+                "name": "Call Pet",
+                "if": "if your pet is not out",
+                "why": "it holds the monster while you shoot"
+              },
+              {
+                "spell": 5118,
+                "name": "Aspect of the Cheetah",
+                "if": "to travel, out of a fight",
+                "why": "it is faster than walking, and a hit dazes you"
+              },
+              {
+                "spell": 5149,
+                "name": "Beast Training",
+                "if": "when you learn a new rank",
+                "why": "your pet learns it from you"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 75,
+                "name": "Auto Shot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 3045,
+                  "name": "Rapid Fire"
+                }
+              ],
+              "say": "on a hard pull or an elite, it makes you shoot much faster"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

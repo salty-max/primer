@@ -62,7 +62,7 @@ for id, b in pairs(D.builds) do
 end
 if G.FOREVER then
   check(
-    builds == 15
+    builds == 18
       and D.builds[1].key == "warrior-arms"
       and D.builds[2].key == "warrior-fury"
       and D.builds[3].key == "warrior-protection"
@@ -77,8 +77,11 @@ if G.FOREVER then
       and D.builds[17].key == "warlock-destruction"
       and D.builds[18].key == "shaman-elemental"
       and D.builds[19].key == "shaman-enhancement"
-      and D.builds[20].key == "shaman-restoration",
-    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration"
+      and D.builds[20].key == "shaman-restoration"
+      and D.builds[21].key == "hunter-beast-mastery"
+      and D.builds[22].key == "hunter-marksmanship"
+      and D.builds[23].key == "hunter-survival",
+    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration, the Hunter's Beast Mastery, Marksmanship and Survival"
   )
   check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
   check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
@@ -93,6 +96,8 @@ if G.FOREVER then
     D.classes[7].roles.damage.build == 19 and D.classes[7].roles.heal.build == 20,
     "Forever: the Shaman's recommended builds are Enhancement for damage and Restoration for healing"
   )
+  check(D.classes[3].token == "HUNTER" and #D.classes[3].builds == 3, "Forever: the Hunter's class")
+  check(D.classes[3].roles.damage.build == 21, "Forever: the Hunter's one recommended build is Beast Mastery")
 else
   check(
     builds == 9 and D.builds[1] and D.builds[2] and D.builds[3],
@@ -1301,19 +1306,32 @@ do
     s.level = 12
   end
 
-  -- a Hunter, no guide written, every call raising: the class page, never a blank
+  -- a class with no guide written (the first of these that this game's data lacks), every call raising: the class page, never a blank
+  local bare
+  for _, c in ipairs({
+    { 3, "Hunter", "HUNTER" },
+    { 5, "Priest", "PRIEST" },
+    { 2, "Paladin", "PALADIN" },
+    { 11, "Druid", "DRUID" },
+  }) do
+    if not D.classes[c[1]] then
+      bare = c
+      break
+    end
+  end
+  assert(bare, "every class has a guide: this test needs a class without one")
   local all = {}
   for _, call in ipairs(calls) do
     all[#all + 1] = call[1][call[2]]
     if call[2] ~= "UnitClass" then call[1][call[2]] = unsupported end
   end
   local unitClass = UnitClass
-  UnitClass = function() return "Hunter", "HUNTER", 3 end
+  UnitClass = function() return bare[2], bare[3], bare[1] end
   ns.reader.reset()
   ns.faults = {}
-  opens("a Hunter with every call raising")
+  opens("a " .. bare[2] .. " with every call raising")
   ns.open(ns.TAB.level)
-  check(pageTitle() == "No guide for Hunter yet", "a Hunter: the page says no guide, never a blank")
+  check(pageTitle() == "No guide for " .. bare[2] .. " yet", "a class with no guide: the page says so, never a blank")
   check(shownRows() == 0 and ns.screen.empty ~= nil, "(no lines, an empty page that says why)")
   for i, call in ipairs(calls) do
     call[1][call[2]] = all[i]
