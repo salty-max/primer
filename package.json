@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "kit:sync": "bun scripts/root.ts --run addon-kit/sync.ts addon/Primer",
-    "apidocs": "bun scripts/root.ts --run primer/scripts/apidocs.ts",
-    "apidocs:check": "bun scripts/root.ts --run primer/scripts/apidocs.ts --check",
+    "apidocs": "bun scripts/root.ts --run addon-kit/apidocs.ts",
+    "apidocs:check": "bun scripts/root.ts --run addon-kit/apidocs.ts --check",
     "battery": "bun scripts/battery.ts",
     "ids": "bun scripts/root.ts --run addon-kit/ids.ts check",
     "kit:check": "bun scripts/root.ts --run addon-kit/sync.ts --check addon/Primer",

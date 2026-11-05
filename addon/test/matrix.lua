@@ -10,13 +10,11 @@
 --                                          answers with secret values (whole, then field by field), and the page
 --                                          must show nothing of it rather than raise (docs/testing.md)
 local MODE = arg and arg[1] or "matrix"
-local rawtype = type
-local kinds = setmetatable({}, { __mode = "k" })
+
+local X = dofile("addon/test/secrets.lua")
 if MODE == "secrets" then
   -- (a secret value keeps its type for type() and refuses everything else, as the client's do)
-  PRIMER_BEFORE_LOAD = function()
-    function type(v) return kinds[v] or rawtype(v) end
-  end
+  PRIMER_BEFORE_LOAD = function() X.patchType() end
 end
 local G = dofile("addon/test/game.lua")
 local s, ns = G.state, G.ns
@@ -24,231 +22,35 @@ local D, TAB = ns.data, ns.TAB
 local T = s.traits -- (Forever's trait tree, nil on Era)
 local started = os.clock()
 
--- ── the walk: a window's frames, their texts and pictures (the mock keeps kids and regions)
-local createTexture = G.methods.CreateTexture
-G.methods.CreateTexture = function(self, ...)
-  local o = createTexture(self, ...)
-  o.parent = self
-  self.regions = self.regions or {}
-  table.insert(self.regions, o)
-  return o
-end
+-- ── the kit's battery: the walk of what is shown, the audits, the hover and the click, the failure list
+local B = dofile("addon/test/battery.lua")
+B.trackTextures(G)
+B.shownByDefault()
 
--- (a frame the client makes is shown until something hides it: the mock's frames start hidden, so here they
--- start shown, and the walk sees a page as the player's game draws it)
-local createFrame = CreateFrame
-function CreateFrame(kind, ...)
-  local f = createFrame(kind, ...)
-  f.shown = true
-  return f
-end
-
-local function shownFrames()
-  local out = {}
-  -- (inside a scroll frame a page is as tall as it needs: only what the screen shows is held to its size)
-  local function walk(f, scrolled)
-    if not f.shown then return end
-    out[#out + 1] = f
-    f.scrolled = scrolled
-    for _, kid in ipairs(f.kids or {}) do
-      walk(kid, scrolled or f.kind == "ScrollFrame")
-    end
-    if f.scrollChild and f.scrollChild.parent ~= f then walk(f.scrollChild, true) end
-  end
-  if PrimerFrame then walk(PrimerFrame, false) end
-  return out
-end
-
-local function plain(text)
-  return (tostring(text):gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|T.-|t", ""):gsub("|n", " "))
-end
-
--- every word on the page and in a tooltip just shown
-local function words(extra)
-  local out = {}
-  for _, f in ipairs(shownFrames()) do
-    if type(f.text) == "string" then out[#out + 1] = f.text end
-    if type(f.titleText) == "string" then out[#out + 1] = f.titleText end
-    for _, r in ipairs(f.regions or {}) do
-      if r.shown and type(r.text) == "string" then out[#out + 1] = r.text end
-    end
-  end
-  for _, line in ipairs(GameTooltip.lines or {}) do
-    out[#out + 1] = tostring(line)
-  end
-  for _, line in ipairs(s.printed) do
-    out[#out + 1] = line
-  end
-  for _, x in ipairs(extra or {}) do
-    out[#out + 1] = x
-  end
-  return out
-end
-
-local SCREEN_W, SCREEN_H = UIParent.w, UIParent.h
-local FRACTION = {
-  LEFT = 0,
-  RIGHT = 1,
-  TOP = 1,
-  BOTTOM = 0,
-  CENTER = 0.5,
-}
-local function fractions(point)
-  local h = point:find("LEFT") and 0 or point:find("RIGHT") and 1 or 0.5
-  local v = point:find("TOP") and 1 or point:find("BOTTOM") and 0 or 0.5
-  return h, v
-end
-
-local hovers, clicks, texts = 0, 0, 0
 -- Text the mock's width estimate (0.55 of the size a character) calls cut that a person has to judge in the game:
 -- each with why. Anything that is a reason, or that wraps, never goes here.
 local CUT_OK = {
   ["The guide cannot read your character"] = "the heading of the page that says the game hid the talents: 36 characters at size 24 in 440, estimated 475. Look at it in the game (docs/testing.md checklist)",
 }
-local failures = {}
-local function fail(case, what) failures[#failures + 1] = case .. ": " .. what end
-
--- (the page as it stands: what the case demands of it)
-local function tipWords(case)
-  for _, line in ipairs(GameTooltip.lines or {}) do
-    local t = plain(line)
-    texts = texts + 1
-    if t:find("[;!]") then fail(case, "a semicolon or exclamation mark in a tooltip: " .. t:sub(1, 60)) end
-    if t:find("[\128-\255]") then fail(case, "not plain ASCII in a tooltip: " .. t:sub(1, 60)) end
-  end
-  if G.strict and #G.strict.violations > 0 then
-    for _, v in ipairs(G.strict.violations) do
-      fail(case, "the strict game refused: " .. v)
-    end
-    G.strict.violations = {}
-  end
-  if next(ns.faults) then
-    for what, err in pairs(ns.faults) do
-      fail(case, "Primer kept a fault: " .. what .. ": " .. tostring(err):sub(1, 120))
-    end
+local b = B.new({
+  G = G,
+  name = "Primer",
+  roots = function() return PrimerFrame and { PrimerFrame } or {} end,
+  cut = function() return ns.fit() end,
+  cutOk = CUT_OK,
+  faults = function()
+    local faults = ns.faults
     ns.faults = {}
-  end
-end
-
-local function audit(case)
-  local sc = ns.screen
-  -- sizes and places: the mock does not lay frames out, so a frame bigger than the screen, or a window
-  -- anchored so that it leaves it, is what can be seen here
-  local scale = PrimerFrame:GetScale()
-  if PrimerFrame.w * scale > SCREEN_W or PrimerFrame.h * scale > SCREEN_H then
-    fail(
-      case,
-      ("the window is %dx%d on a %dx%d screen"):format(PrimerFrame.w * scale, PrimerFrame.h * scale, SCREEN_W, SCREEN_H)
-    )
-  end
-  local p = PrimerFrame.point
-  if p and p[2] == UIParent and type(p[4]) == "number" then
-    local ph, pv = fractions(p[1])
-    local rh, rv = fractions(p[3] or p[1])
-    local x, y = p[4], p[5] or 0
-    local left = rh * SCREEN_W + x - ph * PrimerFrame.w * scale
-    local bottom = rv * SCREEN_H + y - pv * PrimerFrame.h * scale
-    if
-      left < 0
-      or bottom < 0
-      or left + PrimerFrame.w * scale > SCREEN_W
-      or bottom + PrimerFrame.h * scale > SCREEN_H
-    then
-      fail(case, ("the window is anchored off the screen (left %d, bottom %d)"):format(left, bottom))
-    end
-  end
-  for _, f in ipairs(shownFrames()) do
-    if not f.scrolled and (f.w > SCREEN_W or f.h > SCREEN_H) then
-      fail(case, ("a frame is %dx%d, bigger than the screen (%s)"):format(f.w, f.h, f.name or f.kind))
-    end
-  end
-  -- text cut short, where a reason is printed
-  local cut = ns.fit()
-  for i = #cut, 1, -1 do
-    if CUT_OK[plain(cut[i])] then table.remove(cut, i) end
-  end
-  if #cut > 0 then
-    local where = ""
-    for _, f in ipairs(shownFrames()) do
-      for _, r in ipairs(f.regions or {}) do
-        if r.kind == "FontString" and r.shown and r.IsTruncated and r:IsTruncated() then
-          where = (" [%d wide, size %d, in %s]"):format(r.w, r.font, f.name or f.kind)
-        end
-      end
-    end
-    fail(case, "text cut short: " .. plain(cut[1]):sub(1, 60) .. where)
-  end
-  -- the words
-  for _, w in ipairs(words()) do
-    texts = texts + 1
-    local t = plain(w)
-    if t:find("[;!]") then fail(case, "a semicolon or exclamation mark: " .. t:sub(1, 60)) end
-    if t:find("[\128-\255]") then fail(case, "not plain ASCII: " .. t:sub(1, 60)) end
-  end
-  -- the pictures: a spell or talent icon that did not resolve shows the question mark
-  for _, f in ipairs(shownFrames()) do
-    for _, r in ipairs(f.regions or {}) do
-      if MODE ~= "secrets" and r.kind == "Texture" and r.shown and r.texture == ns.kit.QUESTION then
-        fail(case, "an icon left as the question mark")
-        break
-      end
-    end
-  end
-  if next(ns.faults) then
-    for what, err in pairs(ns.faults) do
-      fail(case, "Primer kept a fault: " .. what .. ": " .. tostring(err):sub(1, 120))
-    end
-    ns.faults = {}
-  end
-  if G.strict and #G.strict.violations > 0 then
-    for _, v in ipairs(G.strict.violations) do
-      fail(case, "the strict game refused: " .. v)
-    end
-    G.strict.violations = {}
-  end
-end
-
-local function skipped(f)
-  return f.name and (f.name:find("^PrimerFrameTab%d") or f.name == "PrimerFrameCloseButton")
-    or f == PrimerFrame.CloseButton
-end
-
--- hover and click everything on the page that answers to it
-local function touch(case)
-  local list = shownFrames()
-  for _, f in ipairs(list) do
-    if not skipped(f) then
-      for _, script in ipairs({ "OnEnter", "OnLeave" }) do
-        local fn = f.scripts[script]
-        if fn then
-          hovers = hovers + 1
-          local ok, err = xpcall(fn, debug.traceback, f)
-          if not ok then fail(case, ("%s on %s: %s"):format(script, f.name or f.kind, tostring(err):sub(1, 200))) end
-          if script == "OnEnter" then tipWords(case .. " (tooltip)") end
-        end
-      end
-    end
-  end
-  for _, f in ipairs(list) do
-    if not skipped(f) then
-      for _, script in ipairs({ "OnClick", "OnMouseUp" }) do
-        local fn = f.scripts[script]
-        if fn then
-          clicks = clicks + 1
-          local ok, err = xpcall(fn, debug.traceback, f, "LeftButton")
-          if not ok then fail(case, ("%s on %s: %s"):format(script, f.name or f.kind, tostring(err):sub(1, 200))) end
-        end
-      end
-    end
-  end
-  G.advance(0.5)
-end
-
-local function try(case, what, fn, ...)
-  local ok, err = xpcall(fn, debug.traceback, ...)
-  if not ok then fail(case, what .. ": " .. tostring(err):sub(1, 300)) end
-  return ok
-end
+    return faults
+  end,
+  -- (an icon that did not resolve shows the question mark; in secrets mode that is the fallback)
+  badPicture = function(r) return MODE ~= "secrets" and r.texture == ns.kit.QUESTION end,
+  skip = function(f)
+    return f.name and (f.name:find("^PrimerFrameTab%d") or f.name == "PrimerFrameCloseButton")
+      or f == PrimerFrame.CloseButton
+  end,
+})
+local failures, fail, try, audit, touch = b.failures, b.fail, b.try, b.audit, b.touch
 
 -- ── the characters
 local LEVELS = { 1, 2, 9, 10, 11, 20, 40, 60 }
@@ -404,62 +206,6 @@ local function matrix()
 end
 
 -- ── secret values (Forever): each call Primer makes of the game, one at a time, answers with secrets
-local boom = {}
-for _, m in ipairs({
-  "__index",
-  "__newindex",
-  "__len",
-  "__call",
-  "__concat",
-  "__add",
-  "__sub",
-  "__mul",
-  "__div",
-  "__mod",
-  "__pow",
-  "__unm",
-  "__lt",
-  "__le",
-  "__tostring",
-}) do
-  boom[m] = function() error("attempt to use a secret value", 2) end
-end
-local function secret(kind)
-  -- (a userdata: LuaJIT ignores __len on a table and pairs and ipairs read it raw, so only this raises on all of them)
-  local v = newproxy(true)
-  local mt = getmetatable(v)
-  for k, f in pairs(boom) do
-    mt[k] = f
-  end
-  kinds[v] = kind
-  s.secrets[v] = true
-  return v
-end
--- whole: every value comes back secret. fields: a table comes back plain, every value inside it secret
-local function secretize(v, whole)
-  local t = rawtype(v)
-  if v == nil then return nil end
-  if t == "table" and not kinds[v] then -- (a secret is a userdata, never a table here)
-    if whole then return secret("table") end
-    local out = {}
-    for k, x in pairs(v) do
-      out[k] = secretize(x, false)
-    end
-    return out
-  end
-  return kinds[v] and v or secret(t)
-end
-local function pack(...) return { n = select("#", ...), ... } end
-local function secretized(fn, whole)
-  return function(...)
-    local r = pack(fn(...))
-    for i = 1, r.n do
-      r[i] = secretize(r[i], whole)
-    end
-    return unpack(r, 1, r.n)
-  end
-end
-
 local TALENT_CALLS = {
   ["C_ClassTalents.GetActiveConfigID"] = true,
   ["C_Traits.GetConfigInfo"] = true,
@@ -474,35 +220,24 @@ local function secrets()
     io.write("✓ secrets: Classic Era has no secret values, nothing to run\n")
     return
   end
-  local targets = {}
-  for name, value in pairs(_G) do
-    if rawtype(value) == "table" and name:find("^C_") and name ~= "C_Timer" then
-      for fname, fn in pairs(value) do
-        if rawtype(fn) == "function" then targets[#targets + 1] = { name .. "." .. fname, value, fname } end
-      end
-    end
-  end
-  for _, name in ipairs({ "UnitClass", "UnitName", "UnitGUID", "UnitRace", "UnitSex", "UnitLevel", "UnitFactionGroup" }) do
-    targets[#targets + 1] = { name, _G, name }
-  end
-  table.sort(targets, function(a, b) return a[1] < b[1] end)
-  local flagged = G.strict and G.strict.flagged or {}
   local warrior, mage
   for _, c in ipairs(classes) do
     if c.token == "WARRIOR" then warrior = c end
     if c.token == "MAGE" then mage = c end
   end
   local ran = 0
-  for _, target in ipairs(targets) do
-    local name, tbl, key = target[1], target[2], target[3]
-    local original = tbl[key]
-    secretUnitClass = name == "UnitClass"
-    if secretUnitClass then original = function(...) return playing(...) end end
-    for _, whole in ipairs({ true, false }) do
-      tbl[key] = secretized(original, whole)
+  local done = X.drive(G, {
+    globals = { "UnitClass", "UnitName", "UnitGUID", "UnitRace", "UnitSex", "UnitLevel", "UnitFactionGroup" },
+    -- (UnitClass answers as the class being played)
+    original = function(name)
+      if name == "UnitClass" then
+        return function(...) return playing(...) end
+      end
+    end,
+    each = function(label, name)
+      secretUnitClass = name == "UnitClass"
       local before = #failures
       -- (a Warrior with forty points down Fury, a Mage at the first point)
-      local label = ("%s answering %s"):format(name, whole and "secret" or "with secret fields")
       for _, sc in ipairs({ { warrior, 40, { build = warrior.class.builds[2] } }, { mage, 10, {} } }) do
         local case = label .. " (" .. describe(sc[1], sc[2], sc[3]) .. ")"
         play(sc[1], sc[2], sc[3])
@@ -536,16 +271,11 @@ local function secrets()
           fail(case, ("%d points read from secret values"):format(t.total))
         end
       end
-    end
-    tbl[key] = original
-  end
-  local n = 0
-  for _ in pairs(flagged) do
-    n = n + 1
-  end
+    end,
+  })
   secretsRan = ran
-  secretsTargets = #targets
-  secretsFlagged = n
+  secretsTargets = done.targets
+  secretsFlagged = done.flagged
 end
 
 if MODE == "secrets" then
@@ -555,41 +285,24 @@ else
 end
 UnitClass = realClass
 
-if #failures > 0 then
-  -- (the first of each kind, so one cause is not a thousand lines)
-  local seen, out = {}, {}
-  for _, f in ipairs(failures) do
-    local kind = f:gsub("^.-: ", ""):gsub("%d+", "#"):sub(1, 70)
-    if not seen[kind] then
-      seen[kind] = 0
-      out[#out + 1] = f
-    end
-    seen[kind] = seen[kind] + 1
-  end
-  io.stderr:write(("✗ matrix: %d failures in %d kinds\n"):format(#failures, #out))
-  for _, f in ipairs(out) do
-    io.stderr:write("  ", f, "\n")
-  end
-  os.exit(1)
-end
 if MODE == "secrets" then
-  io.write(
-    ("✓ secrets: %d functions answered with secret values, whole and field by field, %d pages played, %d of them flagged by the documentation (%.1fs)\n"):format(
+  b.finish(
+    ("✓ secrets: %d functions answered with secret values, whole and field by field, %d pages played, %d of them flagged by the documentation (%.1fs)"):format(
       secretsTargets or 0,
       secretsRan or 0,
       secretsFlagged or 0,
       os.clock() - started
-    )
+    ),
+    "matrix"
   )
-  os.exit(0)
 end
-io.write(
-  ("✓ matrix: %d cases, %d tab draws, %d hovers, %d clicks, %d words, %s, %.1fs (%s)\n"):format(
+b.finish(
+  ("✓ matrix: %d cases, %d tab draws, %d hovers, %d clicks, %d words, %s, %.1fs (%s)"):format(
     cases,
     draws,
-    hovers,
-    clicks,
-    texts,
+    b.hovers,
+    b.clicks,
+    b.texts,
     G.strict and G.strict.report():match("^%d+ calls") or "lenient",
     os.clock() - started,
     G.FOREVER and "Forever" or "Classic Era"

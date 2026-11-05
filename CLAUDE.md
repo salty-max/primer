@@ -78,8 +78,8 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
   nothing here (`docs/architecture.md`, Languages).
 - Text in plain ASCII, British English, no semicolons, no exclamation marks.
 - `Kit.lua`, `Media/Ring.tga`, `scripts/root.ts`, `scripts/locales-lib.ts`,
-  `scripts/package-lib.ts`, `i18n/kit/`, `wow.yml`, `stylua.toml` and
-  `addon/test/wowmock.lua` are the kit's copies: edit addon-kit, then `bun run
+  `scripts/package-lib.ts`, `scripts/battery-lib.ts`, `i18n/kit/`, `wow.yml`, `stylua.toml` and
+  `addon/test/wowmock.lua`, `strict.lua`, `secrets.lua`, `battery.lua`, `strict_test.lua` are the kit's copies: edit addon-kit, then `bun run
   kit:sync`. The addon's own globals for selene are `primer.yml`.
 - The minimap button's place is the kit's (`K.MINIMAP_ANGLES.Primer`, 90
   degrees), clear of the others and of Classic Era's zoom buttons.

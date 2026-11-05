@@ -20,37 +20,9 @@ G.methods.RegisterEvent = function(self, event, ...)
 end
 
 -- (the walk /primer fit makes: a frame's texts and children, a text that does not wrap and is wider than its
--- frame cut short, as the client's IsTruncated tells)
-local createText = G.methods.CreateFontString
-G.methods.CreateFontString = function(self, ...)
-  local o = createText(self, ...)
-  o.parent = self
-  self.regions = self.regions or {}
-  table.insert(self.regions, o)
-  return o
-end
-local createFrame = CreateFrame
-function CreateFrame(kind, name, parent, template)
-  local f = createFrame(kind, name, parent, template)
-  if parent then
-    parent.kids = parent.kids or {}
-    table.insert(parent.kids, f)
-  end
-  return f
-end
-G.methods.SetDesaturated = function(self, on) self.desat = on and true or false end
-G.methods.GetRegions = function(self) return unpack(self.regions or {}) end
-G.methods.GetChildren = function(self) return unpack(self.kids or {}) end
-G.methods.GetObjectType = function(self) return self.kind end
-G.methods.SetWordWrap = function(self, on) self.nowrap = on == false end
-G.methods.IsTruncated = function(self)
-  if not self.nowrap or self.w <= 0 then return false end
-  local plain = (self.text or ""):gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "")
-  return #plain * self.font * 0.55 > self.w
-end
-
--- (a texture remembers its picture, so a test can say which)
-G.methods.SetTexture = function(self, path) self.texture = path end
+-- frame cut short, as the client's IsTruncated tells, a texture's picture: the kit's battery.lua)
+local B = dofile("addon/test/battery.lua")
+B.track(G)
 
 -- ── what the guide reads
 state.spells, state.ranks, state.season = {}, {}, 0
@@ -157,7 +129,7 @@ C_SpecializationInfo = {
 if G.FOREVER then
   state.traits = { config = 7, tree = 700, points = 0, secret = {}, raise = {}, free = {} }
   state.secrets = {}
-  function issecretvalue(v) return state.secrets[v] == true end
+  dofile("addon/test/secrets.lua").install(G, state.secrets)
   local EXTRA = 99999
   C_ClassTalents = {
     GetActiveConfigID = function()
