@@ -1,0 +1,2461 @@
+{
+  "class": {
+    "id": 8,
+    "key": "mage",
+    "token": "MAGE",
+    "name": "Mage",
+    "text": "Mana is the whole class. Every cast spends it, and a cast that is resisted still spent it. Frostbolt is yours at 4, Frost Nova at 10, Blink and Evocation at 20. Every line below is a cast or a move, and most of them start with distance.",
+    "card": {
+      "caresAbout": "mana left, the cast bar, distance, and what is slowed or frozen",
+      "vocabulary": "cast, bolt, mana, range, slow, freeze, sheep, cooldown",
+      "soundsLike": "dry and numerate, quick to give a count and short on adjectives. A mage line says when to stand still and when to move",
+      "neverSays": "rage, swing as the main action, anything mystical (\"the weave\", \"arcane secrets\", \"power of\")",
+      "test": "could it be read between two casts?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Frost is the build this page advises, because it keeps monsters off you. Arcane is the other road guides name, and Method says it out-damages Frost when you quest alone."
+      }
+    ],
+    "overview": {
+      "who": "You hurt things from a distance with a cast bar and a mana bar. The craft is what to cast and when to stand still, and a monster that reaches you has won a round.",
+      "good": "Damage at range, and keeping monsters away with slows, freezes and a sheep. You make your own food and water, and you can carry a group's.",
+      "bad": "Being hit. You have little health and a cast that is interrupted is a turn lost. Two monsters at once is the usual way a mage dies.",
+      "resource": "Mana, and it is the whole game. Every cast spends it, so you cast, wait and drink. The wand costs none, and you must stand still to use it.",
+      "levelling": "Frostbolt from as far as you can reach, Frost Nova when it gets close, step back and cast again. Drink between pulls. Pull one monster at a time until you are sure.",
+      "ten": "You get your first talent point. Pick a build and Primer shows your first picks. Frost is the safest way to level alone, and a respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "mage-frost",
+        "reason": "Most guides level Frost. It slows and freezes what reaches you, and Ice Lance on a frozen monster hits hardest."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 9,
+      "key": "mage-frost",
+      "name": "Frost",
+      "role": "damage",
+      "tree": 61,
+      "checked": "2026-11-05",
+      "intro": "Frost slows and freezes what reaches you, and hits a frozen monster hard with Ice Lance. Most guides level it, because a monster that cannot reach you cannot hurt you.",
+      "line": "Frostbolt, Frost Nova and Ice Lance on a frozen monster. The safest way to level alone.",
+      "pathNote": "(39 points in Frost, then 12 in Arcane for mana.)",
+      "split": "the first points and the tail. Mobalytics takes Improved Frostbolt first, Conquest Capped would take Precision first for monsters above your level, and Icy Veins opens in Arcane for Missile Barrage. After 40 Mobalytics goes to Arcane for mana, Conquest Capped to Fire. The Arcane tail is Mobalytics'.",
+      "dry": "Frost Nova freezes a monster until something hurts it, so let that something be Ice Lance.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 11070,
+          "rank": 5,
+          "why": "Frostbolt is most of what you cast, and each rank shortens the cast, so more of them land before the monster reaches you."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 29438,
+          "rank": 3,
+          "why": "Fewer misses on every spell. A resisted Frostbolt is mana spent and a monster closer, so it is worth taking early."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 11071,
+          "rank": 2,
+          "why": "Your chills can freeze the target. A frozen monster is the one Ice Lance hits hardest, so this is where that hit starts."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 1312002,
+          "rank": 1,
+          "why": "Your hardest single hit, instant, and far harder on a frozen monster. It sits in the third row, so it waits for ten points in Frost."
+        },
+        {
+          "points": [
+            12,
+            15
+          ],
+          "level": [
+            21,
+            24
+          ],
+          "talent": 11207,
+          "rank": 4,
+          "why": "Frost critical hits do more damage. Frostbolt is nearly every cast you make, so this lifts the whole build."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 11958,
+          "rank": 1,
+          "why": "Makes you immune for a few seconds. It is the answer to the pull that went wrong, and you cannot act while inside it."
+        },
+        {
+          "points": [
+            17,
+            19
+          ],
+          "level": [
+            26,
+            28
+          ],
+          "talent": 11170,
+          "rank": 3,
+          "why": "Your spells crit more often against a frozen target. That is the target Ice Lance is aimed at."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 11207,
+          "rank": 5,
+          "why": "The last rank of the critical damage bonus."
+        },
+        {
+          "points": [
+            21,
+            22
+          ],
+          "level": [
+            30,
+            31
+          ],
+          "talent": 400647,
+          "rank": 2,
+          "why": "Your chills can make the next 2 spells hit as if the target were frozen. It needs Ice Lance, and it gives you Ice Lances on monsters that never froze."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 12472,
+          "rank": 1,
+          "why": "Resets your Frost cooldowns, Frost Nova above all. It is also the gate to Ice Barrier, so it is here for what comes after."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 11190,
+          "rank": 2,
+          "why": "Cone of Cold hits harder. It is what you cast on a monster at your feet when Frost Nova is not ready."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 11180,
+          "rank": 5,
+          "why": "Frostbolt, and the Ice Lance from Fingers of Frost, make your next Cone of Cold hit harder, and it stacks. Cone of Cold is where it pays."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 11426,
+          "rank": 1,
+          "why": "A shield that raises your Frost damage, and while it holds a hit does not slow your casts. Keep it up before every pull. It needs Cold Snap."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 11190,
+          "rank": 3,
+          "why": "The last rank, taken with the points left after Ice Barrier."
+        },
+        {
+          "points": [
+            33,
+            33
+          ],
+          "level": [
+            42,
+            42
+          ],
+          "talent": 11071,
+          "rank": 3,
+          "why": "Chills freeze more often, which feeds Ice Lance and Shatter."
+        },
+        {
+          "points": [
+            34,
+            36
+          ],
+          "level": [
+            43,
+            45
+          ],
+          "talent": 11160,
+          "rank": 3,
+          "why": "Frost spells cost less mana and cause less threat. Mana is the limit of the class, and this is the plainest way to cast more."
+        },
+        {
+          "points": [
+            37,
+            39
+          ],
+          "level": [
+            46,
+            48
+          ],
+          "talent": 11185,
+          "rank": 3,
+          "why": "Blizzard slows what it hits. Take it if you pull groups or run dungeons, and spend the points elsewhere if you do neither."
+        },
+        {
+          "points": [
+            40,
+            44
+          ],
+          "level": [
+            49,
+            53
+          ],
+          "talent": 11237,
+          "rank": 5,
+          "why": "The first Arcane points, for mana. Five points open Arcane's second row, and your Arcane casts sometimes lose less time when you are hit."
+        },
+        {
+          "points": [
+            45,
+            45
+          ],
+          "level": [
+            54,
+            54
+          ],
+          "talent": 400588,
+          "rank": 1,
+          "why": "Frostbolt now sometimes makes your next Arcane Missiles shorter and free. Cast the Missiles when it lights up."
+        },
+        {
+          "points": [
+            46,
+            47
+          ],
+          "level": [
+            55,
+            56
+          ],
+          "talent": 11210,
+          "rank": 2,
+          "why": "Your spells are resisted less. A small gain, taken because the points after it are for mana."
+        },
+        {
+          "points": [
+            48,
+            51
+          ],
+          "level": [
+            57,
+            60
+          ],
+          "talent": 11213,
+          "rank": 4,
+          "why": "Your damage spells sometimes make the next spell free. The best Arcane point for a build that wants to cast more."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "if": "until you learn Frostbolt at 4",
+                "why": "it is the attack you start with"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it hurts, and it slows what it hits"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Frost Nova arrives at 10. Cast from range, freeze what reaches you, step back and cast again.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it hurts, and it slows what it hits"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 1449,
+                "name": "Arcane Explosion",
+                "if": "with three or more on you",
+                "why": "it hits all of them, and you cannot outrun them"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Ice Lance at 20 is the build. Freeze the monster, then hit it. Blink and Evocation come now too. Fingers of Frost, at 30, lets Ice Lance hit monsters that never froze.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you",
+                "best": [
+                  7302,
+                  168
+                ]
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1312002,
+                "name": "Ice Lance",
+                "if": "on a frozen monster",
+                "why": "it hits far harder on a frozen monster",
+                "talentSpell": 1312002
+              },
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 120,
+                "name": "Cone of Cold",
+                "if": "when Frost Nova is not ready",
+                "why": "it hurts and slows a monster at your feet"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "while you move, or to finish",
+                "why": "it shares a cooldown with Ice Lance, so it comes second"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "old ranks rarely trigger Frostbite",
+                "say": "use your highest rank"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1953,
+                "name": "Blink",
+                "if": "after Frost Nova, to gain distance",
+                "why": "distance is another round of casts"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 1449,
+                "name": "Arcane Explosion",
+                "if": "with three or more on you",
+                "why": "it hits all of them, and you cannot outrun them"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when mana is gone and nothing hits you",
+                "why": "you channel, and your mana comes back fast"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 11958,
+                  "name": "Ice Block",
+                  "talentSpell": 11958
+                },
+                {
+                  "spell": 12472,
+                  "name": "Cold Snap",
+                  "talentSpell": 12472
+                }
+              ],
+              "say": "Ice Block when a fight turns, then Cold Snap to have it back"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Keep Ice Barrier up. The loop is the same, with Arcane Missiles added once Missile Barrage is yours.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 11426,
+                "name": "Ice Barrier",
+                "if": "when it has run out",
+                "why": "it shields you and raises your Frost damage",
+                "talentSpell": 11426
+              },
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you",
+                "best": [
+                  7302,
+                  168
+                ]
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 11426,
+                "name": "Ice Barrier",
+                "if": "when it has run out",
+                "why": "it shields you and raises your Frost damage",
+                "talentSpell": 11426
+              },
+              {
+                "spell": 1312002,
+                "name": "Ice Lance",
+                "if": "on a frozen monster or with Fingers of Frost",
+                "why": "it hits far harder on a frozen monster",
+                "talentSpell": 1312002
+              },
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 5143,
+                "name": "Arcane Missiles",
+                "if": "when Missile Barrage lights up",
+                "why": "the proc makes it shorter and free",
+                "need": {
+                  "talents": [
+                    400588
+                  ]
+                }
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "while you move, or to finish",
+                "why": "it shares a cooldown with Ice Lance, so it comes second"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "old ranks rarely trigger Frostbite",
+                "say": "use your highest rank"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 120,
+                "name": "Cone of Cold",
+                "if": "with Winter's Chill stacked",
+                "why": "it hits harder for each stack",
+                "need": {
+                  "talents": [
+                    11180
+                  ]
+                }
+              },
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1953,
+                "name": "Blink",
+                "if": "after Frost Nova, to gain distance",
+                "why": "distance is another round of casts"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when mana is gone and nothing hits you",
+                "why": "you channel, and your mana comes back fast"
+              },
+              {
+                "spell": 6117,
+                "name": "Mage Armor",
+                "if": "when mana is the limit",
+                "why": "half your mana regeneration continues while casting"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 11958,
+                  "name": "Ice Block",
+                  "talentSpell": 11958
+                },
+                {
+                  "spell": 12472,
+                  "name": "Cold Snap",
+                  "talentSpell": 12472
+                }
+              ],
+              "say": "Ice Block when a fight turns, then Cold Snap to have it back"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Mage levelling guide, Frost tab (Asuna_qt, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/mage-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Conquest Capped, Mage levelling (Kir, 2 November 2026)",
+          "url": "https://conquestcapped.com/guides/wow-forever/wow-forever-mage-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Frost Mage levelling (Teloril, 16 October 2026, beta)",
+          "url": "https://www.icy-veins.com/wow-forever/frost-mage-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Mage levelling (Nevermore, 13 October 2026, beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/mage-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Mage levelling (Gub, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/mage-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Method, Mage levelling guide and talents (Celz, 3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-mage-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Beta Development Notes updated 2 November, through patchbot.io",
+          "url": "https://patchbot.io/games/world-of-warcraft-forever/articles/2053-wow-forever-beta-development-notes-november-2",
+          "read": "2026-11-04"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "key": "mage-fire",
+      "name": "Fire",
+      "role": "damage",
+      "tree": 41,
+      "checked": "2026-11-05",
+      "intro": "Fire is crits and burning. Fireball does the work, Ignite makes every crit burn, and Pyroblast is a long cast for a large hit. It has few defences, so it asks you to keep your distance.",
+      "line": "Fireball, Ignite and Pyroblast. Hits hard from range, and is harder to solo than Frost.",
+      "pathNote": "(31 points in Fire, 3 in Frost, then 17 in Arcane for mana.)",
+      "split": "one guide only. Mobalytics has the only full Fire order, and the others describe how it plays. Warcraft Tavern builds around Improved Scorch, which Mobalytics skips, and Conquest Capped treats Fire as a build for the first 20 levels. The order here is Mobalytics'.",
+      "dry": "A Pyroblast on a monster that dies before it lands is mana you will want back.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 11069,
+          "rank": 5,
+          "why": "Fireball casts faster. Fireball is the Fire build's main spell, and a shorter cast means fewer hits taken while you cast it."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 29438,
+          "rank": 3,
+          "why": "Fewer misses on every spell. It sits in Frost, and Mobalytics takes it before Ignite because a resisted Fireball is the dearest miss in the build."
+        },
+        {
+          "points": [
+            9,
+            13
+          ],
+          "level": [
+            18,
+            22
+          ],
+          "talent": 11119,
+          "rank": 5,
+          "why": "Your Fire crits set the target burning for extra damage over a few seconds. Fire lives on crits, and this is what a crit is worth."
+        },
+        {
+          "points": [
+            14,
+            14
+          ],
+          "level": [
+            23,
+            23
+          ],
+          "talent": 11366,
+          "rank": 1,
+          "why": "A huge, slow Fire cast. Cast it to open a fight from range, or when Heating Up has made it short. It needs ten points in Fire."
+        },
+        {
+          "points": [
+            15,
+            17
+          ],
+          "level": [
+            24,
+            26
+          ],
+          "talent": 11083,
+          "rank": 3,
+          "why": "Your Fire spells often keep casting when you are hit, and they cause less threat. Questing in Fire without this means being interrupted all the time."
+        },
+        {
+          "points": [
+            18,
+            18
+          ],
+          "level": [
+            27,
+            27
+          ],
+          "talent": 11078,
+          "rank": 1,
+          "why": "Fire Blast comes back sooner and reaches farther, which means more Heating Up stacks."
+        },
+        {
+          "points": [
+            19,
+            19
+          ],
+          "level": [
+            28,
+            28
+          ],
+          "talent": 400624,
+          "rank": 1,
+          "why": "Crits from Fireball, Fire Blast, Frostfire Bolt and Scorch shorten your next Pyroblast, up to 3 stacks, and Fire Blast adds a stack on every hit."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 11078,
+          "rank": 2,
+          "why": "The second rank of Improved Fire Blast."
+        },
+        {
+          "points": [
+            21,
+            23
+          ],
+          "level": [
+            30,
+            32
+          ],
+          "talent": 29074,
+          "rank": 3,
+          "why": "Your Fire and Frost crits give mana back. Fire crits often, so this is the mana talent of the build."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 11113,
+          "rank": 1,
+          "why": "Burns everything around you and slows it. Cast it when a pack closes in, then step away."
+        },
+        {
+          "points": [
+            25,
+            27
+          ],
+          "level": [
+            34,
+            36
+          ],
+          "talent": 11115,
+          "rank": 3,
+          "why": "Fire spells crit more often. Combustion needs all three ranks."
+        },
+        {
+          "points": [
+            28,
+            28
+          ],
+          "level": [
+            37,
+            37
+          ],
+          "talent": 11100,
+          "rank": 1,
+          "why": "Fire spells reach farther. One point, taken to bring the next row closer."
+        },
+        {
+          "points": [
+            29,
+            31
+          ],
+          "level": [
+            38,
+            40
+          ],
+          "talent": 11124,
+          "rank": 3,
+          "why": "Your Fire damage rises for each Fire effect on the target, up to a cap. Ignite's burn and Pyroblast's fire both count."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 11100,
+          "rank": 2,
+          "why": "The second rank of the extra reach."
+        },
+        {
+          "points": [
+            33,
+            33
+          ],
+          "level": [
+            42,
+            42
+          ],
+          "talent": 18459,
+          "rank": 1,
+          "why": "Fire Blast, Ice Lance, Arcane Blast and Scorch crit more often. The Arcane Blast you take at 58 is on that list."
+        },
+        {
+          "points": [
+            34,
+            34
+          ],
+          "level": [
+            43,
+            43
+          ],
+          "talent": 11129,
+          "rank": 1,
+          "why": "For a short while each Fire hit raises your Fire crit chance, until you have landed 3 crits. It needs Critical Mass at full."
+        },
+        {
+          "points": [
+            35,
+            39
+          ],
+          "level": [
+            44,
+            48
+          ],
+          "talent": 11237,
+          "rank": 5,
+          "why": "Arcane tail, for mana. Five points open Arcane's second row, and your Arcane casts sometimes lose less time when you are hit."
+        },
+        {
+          "points": [
+            40,
+            40
+          ],
+          "level": [
+            49,
+            49
+          ],
+          "talent": 400588,
+          "rank": 1,
+          "why": "Fireball sometimes makes your next Arcane Missiles shorter and free. Cast the Missiles when it lights up."
+        },
+        {
+          "points": [
+            41,
+            45
+          ],
+          "level": [
+            50,
+            54
+          ],
+          "talent": 11213,
+          "rank": 5,
+          "why": "Your damage spells sometimes make the next spell free. Full ranks are needed before Arcane Meditation."
+        },
+        {
+          "points": [
+            46,
+            46
+          ],
+          "level": [
+            55,
+            55
+          ],
+          "talent": 400588,
+          "rank": 2,
+          "why": "The second rank of Missile Barrage."
+        },
+        {
+          "points": [
+            47,
+            48
+          ],
+          "level": [
+            56,
+            57
+          ],
+          "talent": 11210,
+          "rank": 2,
+          "why": "Your spells are resisted less. A small gain, taken because the points after it are for mana."
+        },
+        {
+          "points": [
+            49,
+            49
+          ],
+          "level": [
+            58,
+            58
+          ],
+          "talent": 400574,
+          "rank": 1,
+          "why": "A hard-hitting spell with Incineration's crit bonus behind it. Cast it a few times, not until the bar is gone."
+        },
+        {
+          "points": [
+            50,
+            51
+          ],
+          "level": [
+            59,
+            60
+          ],
+          "talent": 18462,
+          "rank": 2,
+          "why": "Part of your mana regeneration continues while you cast. The last points, and the build's answer to running dry."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "if": "until you learn Frostbolt at 4",
+                "why": "it is the attack you start with"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it hurts, and it slows what it hits"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Fireball is the build. Accelerant makes it quicker, and Frost Nova keeps monsters off you while you cast.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "why": "it is your main spell, so it is most of your casts"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2120,
+                "name": "Flamestrike",
+                "if": "on a pack, before it reaches you",
+                "why": "it burns them where they stand, and keeps burning"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 1449,
+                "name": "Arcane Explosion",
+                "if": "with three or more on you",
+                "why": "it hits all of them, and you cannot outrun them"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Pyroblast at 23, then Heating Up at 28 to make it quick. Blast Wave at 33 is for packs.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you",
+                "best": [
+                  7302,
+                  168
+                ]
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 11366,
+                "name": "Pyroblast",
+                "if": "as the first cast, from range",
+                "why": "its long cast is free damage while it walks to you",
+                "talentSpell": 11366
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 11366,
+                "name": "Pyroblast",
+                "if": "at 3 Heating Up stacks",
+                "why": "each stack makes it shorter",
+                "talentSpell": 11366,
+                "need": {
+                  "talents": [
+                    400624
+                  ]
+                }
+              },
+              {
+                "spell": 11113,
+                "name": "Blast Wave",
+                "if": "when monsters are on you",
+                "why": "it burns and slows all of them",
+                "talentSpell": 11113
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "while you move, or to finish",
+                "why": "it is instant, and it feeds Heating Up once you have it"
+              },
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "why": "it is your main spell, so it is most of your casts"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2120,
+                "name": "Flamestrike",
+                "if": "on a pack, before it reaches you",
+                "why": "it burns them where they stand, and keeps burning"
+              },
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1953,
+                "name": "Blink",
+                "if": "after Frost Nova, to gain distance",
+                "why": "distance is another round of casts"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when mana is gone and nothing hits you",
+                "why": "you channel, and your mana comes back fast"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Combustion at 43. Missile Barrage from 49 gives free Arcane Missiles from your Fireballs.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you",
+                "best": [
+                  7302,
+                  168
+                ]
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 11366,
+                "name": "Pyroblast",
+                "if": "as the first cast, from range",
+                "why": "its long cast is free damage while it walks to you",
+                "talentSpell": 11366
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 11366,
+                "name": "Pyroblast",
+                "if": "at 3 Heating Up stacks",
+                "why": "each stack makes it shorter",
+                "talentSpell": 11366,
+                "need": {
+                  "talents": [
+                    400624
+                  ]
+                }
+              },
+              {
+                "spell": 5143,
+                "name": "Arcane Missiles",
+                "if": "when Missile Barrage lights up",
+                "why": "the proc makes it shorter and free",
+                "need": {
+                  "talents": [
+                    400588
+                  ]
+                }
+              },
+              {
+                "spell": 11113,
+                "name": "Blast Wave",
+                "if": "when monsters are on you",
+                "why": "it burns and slows all of them",
+                "talentSpell": 11113
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "to trigger Heating Up, or to finish",
+                "why": "it adds a Heating Up stack every time it hits"
+              },
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "why": "it is your main spell, so it is most of your casts"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2120,
+                "name": "Flamestrike",
+                "if": "on a pack, before it reaches you",
+                "why": "it burns them where they stand, and keeps burning"
+              },
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1953,
+                "name": "Blink",
+                "if": "after Frost Nova, to gain distance",
+                "why": "distance is another round of casts"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when mana is gone and nothing hits you",
+                "why": "you channel, and your mana comes back fast"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 11129,
+                  "name": "Combustion",
+                  "talentSpell": 11129
+                }
+              ],
+              "say": "on a monster that will live through 3 crits"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Mage levelling guide, Fire tab (Asuna_qt, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/mage-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Conquest Capped, Mage levelling (Kir, 2 November 2026)",
+          "url": "https://conquestcapped.com/guides/wow-forever/wow-forever-mage-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Mage levelling (Nevermore, 13 October 2026, beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/mage-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Mage levelling (Gub, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/mage-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Method, Mage levelling guide and talents (Celz, 3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-mage-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Beta Development Notes updated 2 November, through patchbot.io",
+          "url": "https://patchbot.io/games/world-of-warcraft-forever/articles/2053-wow-forever-beta-development-notes-november-2",
+          "read": "2026-11-04"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "key": "mage-arcane",
+      "name": "Arcane",
+      "role": "damage",
+      "tree": 81,
+      "checked": "2026-11-05",
+      "intro": "Arcane has become a build of stacks. Arcane Blast hits harder and costs more with each cast, Arcane Wrath hits hard between stacks, and Missile Barrage turns procs into free Arcane Missiles. It needs mana more than anything.",
+      "line": "Arcane Blast stacks, Arcane Wrath and Arcane Missiles on Missile Barrage. Hits hard, and runs dry.",
+      "pathNote": "(36 points in Arcane, 3 in Frost, then 12 in Fire.)",
+      "split": "how safe it is. Zockify makes Arcane the default and Method says it out-damages Frost when you quest alone, while most guides keep Frost as the safer way. Zockify would start with Wand Specialization, and Mobalytics starts with Improved Channeling. Mobalytics' order is followed here.",
+      "dry": "Arcane Blast costs more every time you cast it. Stop when the bar says to stop.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 11237,
+          "rank": 5,
+          "why": "Your Arcane Missiles, Arcane Blast and Arcane Wrath sometimes keep casting when you are hit. Five points here also open the tree's second row."
+        },
+        {
+          "points": [
+            6,
+            7
+          ],
+          "level": [
+            15,
+            16
+          ],
+          "talent": 400588,
+          "rank": 2,
+          "why": "Arcane Blast and Frostbolt sometimes make your next Arcane Missiles shorter and free. Cast the Missiles when it lights up."
+        },
+        {
+          "points": [
+            8,
+            9
+          ],
+          "level": [
+            17,
+            18
+          ],
+          "talent": 11210,
+          "rank": 2,
+          "why": "Your spells are resisted less, and your Arcane casts pull less attention. Two small points while the better ones are out of reach."
+        },
+        {
+          "points": [
+            10,
+            10
+          ],
+          "level": [
+            19,
+            19
+          ],
+          "talent": 11213,
+          "rank": 1,
+          "why": "Your damage spells sometimes make the next spell free. It starts here and fills out at 24."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 400574,
+          "rank": 1,
+          "why": "The build's main spell. Each cast adds spell damage and makes the next one cost more, up to 4 stacks, and the stacks fall after a while."
+        },
+        {
+          "points": [
+            12,
+            14
+          ],
+          "level": [
+            21,
+            23
+          ],
+          "talent": 29438,
+          "rank": 3,
+          "why": "Fewer misses on every spell. It sits in Frost, and a resisted Arcane Blast is the dearest miss you have."
+        },
+        {
+          "points": [
+            15,
+            18
+          ],
+          "level": [
+            24,
+            27
+          ],
+          "talent": 11213,
+          "rank": 5,
+          "why": "More chances at a free spell. It has to be full before Arcane Meditation can be taken."
+        },
+        {
+          "points": [
+            19,
+            19
+          ],
+          "level": [
+            28,
+            28
+          ],
+          "talent": 1326079,
+          "rank": 1,
+          "why": "A slow, hard hit that grows with your mana bar. It needs Arcane Blast, and it is cast at full stacks."
+        },
+        {
+          "points": [
+            20,
+            22
+          ],
+          "level": [
+            29,
+            31
+          ],
+          "talent": 18462,
+          "rank": 3,
+          "why": "Part of your mana regeneration continues while you cast. It needs Arcane Concentration at full, and it is how this build keeps casting."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 11242,
+          "rank": 1,
+          "why": "Arcane spells crit more often, and Arcane Mind makes those crits count."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 12043,
+          "rank": 1,
+          "why": "Makes your next spell instant. Use it for an Arcane Wrath you cannot stand still for, and it is the gate to Arcane Power."
+        },
+        {
+          "points": [
+            25,
+            28
+          ],
+          "level": [
+            34,
+            37
+          ],
+          "talent": 11232,
+          "rank": 4,
+          "why": "More intellect, so more mana and more damage, and Arcane crits do extra damage."
+        },
+        {
+          "points": [
+            29,
+            31
+          ],
+          "level": [
+            38,
+            40
+          ],
+          "talent": 15058,
+          "rank": 3,
+          "why": "Your spells do more damage and crit more often, whatever they are."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 11232,
+          "rank": 5,
+          "why": "The fifth and last rank of Arcane Mind."
+        },
+        {
+          "points": [
+            33,
+            33
+          ],
+          "level": [
+            42,
+            42
+          ],
+          "talent": 11242,
+          "rank": 2,
+          "why": "Arcane crits come more often, and Arcane Mind makes each one count."
+        },
+        {
+          "points": [
+            34,
+            34
+          ],
+          "level": [
+            43,
+            43
+          ],
+          "talent": 12042,
+          "rank": 1,
+          "why": "For a short while your spells do more damage and cost more mana. Press it with a full bar on a monster worth it."
+        },
+        {
+          "points": [
+            35,
+            35
+          ],
+          "level": [
+            44,
+            44
+          ],
+          "talent": 11242,
+          "rank": 3,
+          "why": "The last rank of the crit chance."
+        },
+        {
+          "points": [
+            36,
+            40
+          ],
+          "level": [
+            45,
+            49
+          ],
+          "talent": 18459,
+          "rank": 5,
+          "why": "Fire tail. Fire Blast, Ice Lance, Arcane Blast and Scorch crit more often, and Arcane Blast is on that list. It also opens Fire's second row."
+        },
+        {
+          "points": [
+            41,
+            45
+          ],
+          "level": [
+            50,
+            54
+          ],
+          "talent": 11069,
+          "rank": 5,
+          "why": "Shortens Fireball, Frostfire Bolt and Arcane Wrath, so Arcane Wrath casts faster."
+        },
+        {
+          "points": [
+            46,
+            47
+          ],
+          "level": [
+            55,
+            56
+          ],
+          "talent": 11078,
+          "rank": 2,
+          "why": "Fire Blast comes back sooner and reaches farther. A finisher you can cast while you move."
+        },
+        {
+          "points": [
+            48,
+            49
+          ],
+          "level": [
+            57,
+            58
+          ],
+          "talent": 11247,
+          "rank": 2,
+          "why": "Arcane spells reach farther, which means more casts before a monster arrives."
+        },
+        {
+          "points": [
+            50,
+            51
+          ],
+          "level": [
+            59,
+            60
+          ],
+          "talent": 29441,
+          "rank": 2,
+          "why": "A little resistance, and a fully resisted spell gives some mana back. These are the last points, and nothing better is left."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 133,
+                "name": "Fireball",
+                "if": "until you learn Frostbolt at 4",
+                "why": "it is the attack you start with"
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it hurts, and it slows what it hits"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Frost Nova arrives at 10, Arcane Explosion at 14. Missile Barrage turns your casts into free Arcane Missiles.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you"
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 5143,
+                "name": "Arcane Missiles",
+                "if": "when Missile Barrage lights up",
+                "why": "the proc makes it shorter and free",
+                "need": {
+                  "talents": [
+                    400588
+                  ]
+                }
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it hurts, and it slows what it hits"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 1449,
+                "name": "Arcane Explosion",
+                "if": "with three or more on you",
+                "why": "it hits all of them, and you cannot outrun them"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Arcane Blast at 20 changes the loop. Build the stacks, spend them, and let the stacks fall before you start again.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "melee attackers are slowed when they strike you",
+                "best": [
+                  7302,
+                  168
+                ]
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 1326079,
+                "name": "Arcane Wrath",
+                "if": "as the first cast, from range",
+                "why": "its long cast lands while it walks to you",
+                "talentSpell": 1326079
+              },
+              {
+                "spell": 400574,
+                "name": "Arcane Blast",
+                "if": "until you have 4 stacks",
+                "why": "each stack hits harder but costs more mana",
+                "talentSpell": 400574
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 5143,
+                "name": "Arcane Missiles",
+                "if": "when Missile Barrage lights up",
+                "why": "the proc makes it shorter and free",
+                "need": {
+                  "talents": [
+                    400588
+                  ]
+                }
+              },
+              {
+                "spell": 1326079,
+                "name": "Arcane Wrath",
+                "if": "at 3 or 4 Arcane Blast stacks",
+                "why": "it hits harder with the stacks behind it",
+                "talentSpell": 1326079
+              },
+              {
+                "spell": 400574,
+                "name": "Arcane Blast",
+                "if": "until you have 4 stacks",
+                "why": "each stack hits harder but costs more mana",
+                "talentSpell": 400574
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it is cheap, and it can light up Missile Barrage"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1953,
+                "name": "Blink",
+                "if": "after Frost Nova, to gain distance",
+                "why": "distance is another round of casts"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 1449,
+                "name": "Arcane Explosion",
+                "if": "with three or more on you",
+                "why": "it hits all of them, and you cannot outrun them"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when mana is gone and nothing hits you",
+                "why": "you channel, and your mana comes back fast"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 12043,
+                  "name": "Presence of Mind",
+                  "talentSpell": 12043
+                }
+              ],
+              "say": "for a cast you cannot stand still for"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Arcane Power joins the loop. Mage Armor keeps part of your mana coming back while you cast.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 168,
+                "name": "Frost Armor",
+                "if": "before the first pull",
+                "why": "the best armour you know, Mage Armor most for mana",
+                "best": [
+                  6117,
+                  7302,
+                  168
+                ]
+              },
+              {
+                "spell": 1459,
+                "name": "Arcane Intellect",
+                "if": "before the first pull",
+                "why": "it raises your intellect, and with it your mana"
+              },
+              {
+                "spell": 1326079,
+                "name": "Arcane Wrath",
+                "if": "as the first cast, from range",
+                "why": "its long cast lands while it walks to you",
+                "talentSpell": 1326079
+              },
+              {
+                "spell": 400574,
+                "name": "Arcane Blast",
+                "if": "until you have 4 stacks",
+                "why": "each stack hits harder but costs more mana",
+                "talentSpell": 400574
+              }
+            ],
+            "loop": [
+              {
+                "spell": 122,
+                "name": "Frost Nova",
+                "if": "when a monster reaches you",
+                "why": "it freezes it so you can step back and cast"
+              },
+              {
+                "spell": 5143,
+                "name": "Arcane Missiles",
+                "if": "when Missile Barrage lights up",
+                "why": "the proc makes it shorter and free",
+                "need": {
+                  "talents": [
+                    400588
+                  ]
+                }
+              },
+              {
+                "spell": 1326079,
+                "name": "Arcane Wrath",
+                "if": "at 3 or 4 Arcane Blast stacks",
+                "why": "it hits harder with the stacks behind it",
+                "talentSpell": 1326079
+              },
+              {
+                "spell": 400574,
+                "name": "Arcane Blast",
+                "if": "until you have 4 stacks",
+                "why": "each stack hits harder but costs more mana",
+                "talentSpell": 400574
+              },
+              {
+                "spell": 2136,
+                "name": "Fire Blast",
+                "if": "when you must move, or to finish",
+                "why": "it is instant, so it works while you walk"
+              },
+              {
+                "spell": 116,
+                "name": "Frostbolt",
+                "why": "it is cheap, and it can light up Missile Barrage"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2139,
+                "name": "Counterspell",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1953,
+                "name": "Blink",
+                "if": "after Frost Nova, to gain distance",
+                "why": "distance is another round of casts"
+              },
+              {
+                "spell": 118,
+                "name": "Polymorph",
+                "if": "on a second monster that joins",
+                "why": "a sheep does not attack until it is damaged"
+              },
+              {
+                "spell": 1449,
+                "name": "Arcane Explosion",
+                "if": "with three or more on you",
+                "why": "it hits all of them, and you cannot outrun them"
+              }
+            ],
+            "between": [
+              {
+                "spell": 5504,
+                "name": "Conjure Water",
+                "if": "when your bags have none",
+                "why": "drinking is how your mana comes back"
+              },
+              {
+                "spell": 587,
+                "name": "Conjure Food",
+                "if": "when your bags have none",
+                "why": "eating is how your health comes back"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 12051,
+                "name": "Evocation",
+                "if": "when mana is gone and nothing hits you",
+                "why": "you channel, and your mana comes back fast"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, but you must stand still"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 12043,
+                  "name": "Presence of Mind",
+                  "talentSpell": 12043
+                },
+                {
+                  "spell": 12042,
+                  "name": "Arcane Power",
+                  "talentSpell": 12042
+                }
+              ],
+              "say": "Arcane Power with full stacks and a full bar"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Mage levelling guide, Arcane tab (Asuna_qt, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/mage-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Zockify, Mage levelling (2 November 2026)",
+          "url": "https://www.zockify.com/forever/mage/leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Method, Mage levelling guide and talents (Celz, 3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-mage-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Mage levelling (Nevermore, 13 October 2026, beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/mage-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Mage levelling (Gub, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/mage-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Beta Development Notes updated 2 November, through patchbot.io",
+          "url": "https://patchbot.io/games/world-of-warcraft-forever/articles/2053-wow-forever-beta-development-notes-november-2",
+          "read": "2026-11-04"
+        }
+      ]
+    }
+  ]
+}

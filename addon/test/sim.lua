@@ -62,14 +62,19 @@ for id, b in pairs(D.builds) do
 end
 if G.FOREVER then
   check(
-    builds == 3
+    builds == 6
       and D.builds[1].key == "warrior-arms"
       and D.builds[2].key == "warrior-fury"
-      and D.builds[3].key == "warrior-protection",
-    "Forever: the Warrior's Arms, Fury and Protection"
+      and D.builds[3].key == "warrior-protection"
+      and D.builds[9].key == "mage-frost"
+      and D.builds[10].key == "mage-fire"
+      and D.builds[11].key == "mage-arcane",
+    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane"
   )
   check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
   check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
+  check(D.classes[8].token == "MAGE" and #D.classes[8].builds == 3, "Forever: the Mage's class")
+  check(D.classes[8].roles.damage.build == 9, "Forever: the Mage's one recommended build is Frost")
 else
   check(
     builds == 9 and D.builds[1] and D.builds[2] and D.builds[3],
