@@ -1,7 +1,7 @@
 # Primer's data
 
 The guide's rules and words, and the facts check. Written by hand:
-`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, `content/forever/warrior.json`, Forever's first, written 5 November 2026: F0 to F3 of `../ideas/class-guide.md`, and `content/forever/mage.json`, its second, F4). Generated, never edited:
+`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, `content/forever/warrior.json`, Forever's first, written 5 November 2026: F0 to F3 of `../ideas/class-guide.md`, `content/forever/mage.json`, its second, F4, and `content/forever/rogue.json`, its third). Generated, never edited:
 `addon/Primer/Guide_Classic.lua`, `Guide_Forever.lua`, `GuideText.lua`
 (`bun scripts/guide.ts`, `--check` in `bun run check`).
 
@@ -27,7 +27,7 @@ row    = { spell (rank 1), name, talentSpell (the row is a talent),
 A build's `games` says where it is written: a Forever build is its own text,
 checked against Forever's tables (the plan: never inherited from Era). Classic is written for
 the Warrior, Paladin and Mage (nine builds, Warrior Arms 1, Fury 2, Protection 3), Forever for the
-Warrior and the Mage (the same ids and keys in their own files, so a character keeps its pick across the
+Warrior, the Mage and the Rogue (Era has no Rogue file: the Warrior's and Mage's ids and keys are the same in their own files, so a character keeps its pick across the
 two games' separate guides). A build id never changes and is never reused: a character keeps
 it (`saved-ids.json`, `bun run ids` in the check).
 

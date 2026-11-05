@@ -1,0 +1,2467 @@
+{
+  "class": {
+    "id": 4,
+    "key": "rogue",
+    "token": "ROGUE",
+    "name": "Rogue",
+    "text": "Energy is the whole class, and combo points are what you spend it on. Sinister Strike, Eviscerate and Stealth are yours from the start, Sprint, Slice and Dice and Sap come at 10, Shank at 24. Every line below is a strike, a finisher or a way out.",
+    "card": {
+      "caresAbout": "Energy, combo points, which way the monster faces, and what is ready",
+      "vocabulary": "strike, open, finish, points, Energy, behind, Stealth, slip away",
+      "soundsLike": "quiet and exact, a trainer who counts out loud. A rogue line says where to stand before it says what to press",
+      "neverSays": "mana, rage, cast, anything mystical (\"shadows\", \"deadly\", \"silent\"), and boasting about backstabs",
+      "test": "could it be said in one breath before the pull?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Combat is the build this page advises, because it is the smoothest to level, with Riposte at 20 and Blade Flurry at 30. The price: it wants a sword, axe or mace more than a dagger. Assassination wants daggers and is slow until Mutilate at 42. Subtlety is sturdy and slow to kill."
+      }
+    ],
+    "overview": {
+      "who": "You open on a monster before it knows you are there, build combo points with strikes and spend them on a finisher. The craft is picking the fight, and knowing when to leave it.",
+      "good": "Damage on one monster at a time, stuns and a sap to hold a fight still, and ways out: Vanish, Sprint, Evasion. You also skip fights by sneaking past what you do not want.",
+      "bad": "Being hit for long, and crowds. You wear leather and cannot heal, and you hurt one monster at a time. Bandages are your healing.",
+      "resource": "Energy, which fills back by itself, and combo points, which stay on the monster you built them on. Spend Energy on strikes, spend points on a finisher, and do not sit at full Energy.",
+      "levelling": "Strike to build points, finish with Eviscerate or Slice and Dice, bandage between pulls. Learn First Aid early, it heals faster than eating. Sneak past what you can.",
+      "ten": "You get your first talent point and pick a spec. Combat is the one most guides level. Assassination and Subtlety are the other two, and a respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "rogue-combat",
+        "reason": "Most guides level Combat. Riposte hits hard from 20 and Blade Flurry takes two monsters at once from 30."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 12,
+      "key": "rogue-assassination",
+      "name": "Assassination",
+      "role": "damage",
+      "tree": 182,
+      "checked": "2026-11-05",
+      "intro": "Assassination lives on poisons and Mutilate, which comes at 42. Until then it plays like any rogue with a dagger. Guides call it a slow way to level, and guides want a dagger in each hand.",
+      "line": "Poisons, Shank and Mutilate with daggers. Slow until 42, then the hardest single hits.",
+      "pathNote": "(34 points in Assassination, then 12 in Combat and 5 in Subtlety.)",
+      "split": "the whole order. Mobalytics' Djexde gives the only full order and says to level Combat instead. Icy Veins names the same key talents (Remorseless Attacks, Ruthlessness, Relentless Strikes, Lethality, Cold Blood, Seal Fate, Venom) but its order sits in a slider that could not be read. Method, as read, prefers Assassination.",
+      "dry": "A monster immune to poison takes Mutilate at its plain damage.",
+      "path": [
+        {
+          "points": [
+            1,
+            2
+          ],
+          "level": [
+            10,
+            11
+          ],
+          "talent": 14144,
+          "rank": 2,
+          "why": "After a kill, your next strike is more likely to crit for a short time. Go straight to the next monster and it pays."
+        },
+        {
+          "points": [
+            3,
+            4
+          ],
+          "level": [
+            12,
+            13
+          ],
+          "talent": 13732,
+          "rank": 2,
+          "why": "Sinister Strike costs less Energy, and you press it until Mutilate. A cheap strike lets you press more of them."
+        },
+        {
+          "points": [
+            5,
+            7
+          ],
+          "level": [
+            14,
+            16
+          ],
+          "talent": 14138,
+          "rank": 3,
+          "why": "More critical strikes with every attack and poison. Critical hits are where a rogue's damage comes from."
+        },
+        {
+          "points": [
+            8,
+            10
+          ],
+          "level": [
+            17,
+            19
+          ],
+          "talent": 14165,
+          "rank": 3,
+          "why": "Slice and Dice lasts longer, so you refresh it less and strike more."
+        },
+        {
+          "points": [
+            11,
+            12
+          ],
+          "level": [
+            20,
+            21
+          ],
+          "talent": 14138,
+          "rank": 5,
+          "why": "More critical strikes with every attack and poison. Critical hits are where a rogue's damage comes from."
+        },
+        {
+          "points": [
+            13,
+            14
+          ],
+          "level": [
+            22,
+            23
+          ],
+          "talent": 14983,
+          "rank": 2,
+          "why": "A bigger Energy bar. You can spend more before you have to wait."
+        },
+        {
+          "points": [
+            15,
+            17
+          ],
+          "level": [
+            24,
+            26
+          ],
+          "talent": 14156,
+          "rank": 3,
+          "why": "Your finishers sometimes add a combo point to the monster, so the next finisher comes sooner."
+        },
+        {
+          "points": [
+            18,
+            18
+          ],
+          "level": [
+            27,
+            27
+          ],
+          "talent": 14177,
+          "rank": 1,
+          "why": "Your next strike or Eviscerate is a certain critical hit. Keep it for the hit that matters, and press it again when it is ready."
+        },
+        {
+          "points": [
+            19,
+            22
+          ],
+          "level": [
+            28,
+            31
+          ],
+          "talent": 14113,
+          "rank": 4,
+          "why": "Poisons land more often and sometimes spend no charge, so you coat your weapons less."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 1329328,
+          "rank": 1,
+          "why": "Shank also raises your poison damage and how often poisons land for a few seconds. Mutilate needs it, so it comes before Mutilate."
+        },
+        {
+          "points": [
+            24,
+            27
+          ],
+          "level": [
+            33,
+            36
+          ],
+          "talent": 14179,
+          "rank": 4,
+          "why": "Finishers sometimes give back 25 Energy, more often the more points they spend. More Energy means more strikes."
+        },
+        {
+          "points": [
+            28,
+            30
+          ],
+          "level": [
+            37,
+            39
+          ],
+          "talent": 14186,
+          "rank": 3,
+          "why": "A critical hit from a strike sometimes adds another combo point, so finishers come sooner."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 14179,
+          "rank": 5,
+          "why": "Finishers sometimes give back 25 Energy, more often the more points they spend. More Energy means more strikes."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 14113,
+          "rank": 5,
+          "why": "Poisons land more often and sometimes spend no charge, so you coat your weapons less."
+        },
+        {
+          "points": [
+            33,
+            33
+          ],
+          "level": [
+            42,
+            42
+          ],
+          "talent": 399956,
+          "rank": 1,
+          "why": "Hits with both weapons, harder on a poisoned monster, and gives 2 combo points. It replaces Sinister Strike and needs a dagger."
+        },
+        {
+          "points": [
+            34,
+            36
+          ],
+          "level": [
+            43,
+            45
+          ],
+          "talent": 14162,
+          "rank": 3,
+          "why": "Eviscerate hits harder. It ends most fights, so this pays on every kill."
+        },
+        {
+          "points": [
+            37,
+            39
+          ],
+          "level": [
+            46,
+            48
+          ],
+          "talent": 13713,
+          "rank": 3,
+          "why": "You parry more often, and a parry is what lights Riposte. Some hits simply stop landing."
+        },
+        {
+          "points": [
+            40,
+            41
+          ],
+          "level": [
+            49,
+            50
+          ],
+          "talent": 13705,
+          "rank": 2,
+          "why": "Fewer misses. A strike that misses is Energy spent for nothing, and a rogue has little to spare."
+        },
+        {
+          "points": [
+            42,
+            42
+          ],
+          "level": [
+            51,
+            51
+          ],
+          "talent": 14251,
+          "rank": 1,
+          "why": "After a parry, Riposte hits harder than a strike for little Energy and disarms the monster. Press it whenever it lights."
+        },
+        {
+          "points": [
+            43,
+            43
+          ],
+          "level": [
+            52,
+            52
+          ],
+          "talent": 13705,
+          "rank": 3,
+          "why": "Fewer misses. A strike that misses is Energy spent for nothing, and a rogue has little to spare."
+        },
+        {
+          "points": [
+            44,
+            48
+          ],
+          "level": [
+            53,
+            57
+          ],
+          "talent": 14057,
+          "rank": 5,
+          "why": "Backstab, Garrote, Ambush and Mutilate hit harder. Mutilate is your main strike, so most of it lands there."
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 16513,
+          "rank": 3,
+          "why": "Your poisons do more damage. A modest gain, taken last because the points have nowhere better to go."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 53,
+                "name": "Backstab",
+                "if": "from behind with a dagger",
+                "why": "it hits hard and gives you a combo point"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "when the monster is about to die",
+                "why": "left-over points are wasted when it dies"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it hits and builds the points Eviscerate spends"
+              }
+            ],
+            "between": [
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Slice and Dice, Sprint and Sap arrive at 10, Ambush and Poised at 18. A dagger in the main hand now, for Backstab and Ambush.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 8676,
+                "name": "Ambush",
+                "if": "with a dagger, or Garrote on a long fight",
+                "why": "it is the hardest hit you have for a first strike"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 4 or 5 combo points",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 53,
+                "name": "Backstab",
+                "if": "when you are behind with a dagger",
+                "why": "it hits hard and gives you a combo point"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it builds the points when Backstab cannot"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 6770,
+                "name": "Sap",
+                "if": "on one of two humanoids, before the pull",
+                "why": "it sleeps until something hurts it"
+              },
+              {
+                "spell": 8647,
+                "name": "Expose Armor",
+                "if": "on a monster that will last a long time",
+                "why": "it lowers its armour so you hit harder"
+              },
+              {
+                "spell": 2983,
+                "name": "Sprint",
+                "if": "to close in or to leave",
+                "why": "you move much faster for a moment"
+              }
+            ],
+            "between": [
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Poisons at 20, Shank at 24, Cheap Shot at 26. Venom at 32 makes Shank also strengthen your poisons. Your damage is still plain until Mutilate.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 703,
+                "name": "Garrote",
+                "if": "from behind, or Cheap Shot if it hits hard",
+                "why": "it bleeds while you build points"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1329283,
+                "name": "Shank",
+                "if": "when it is ready and Energy is not full",
+                "why": "it gives back more Energy than it costs"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 4 or 5 combo points",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 53,
+                "name": "Backstab",
+                "if": "when you are behind with a dagger",
+                "why": "it hits hard and gives you a combo point"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it builds the points when Backstab cannot"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1856,
+                "name": "Vanish",
+                "if": "when a fight goes wrong",
+                "why": "the monster loses you and you can bandage"
+              },
+              {
+                "spell": 408,
+                "name": "Kidney Shot",
+                "if": "on a monster you cannot beat in the open",
+                "why": "each point is a second of stun"
+              },
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 2094,
+                "name": "Blind",
+                "if": "to get away from a monster you cannot beat",
+                "why": "it wanders off blind while you leave"
+              }
+            ],
+            "between": [
+              {
+                "text": "Coat both weapons in poison",
+                "if": "when the coating is gone",
+                "why": "each hit may poison, and it costs no Energy"
+              },
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 14177,
+                  "name": "Cold Blood",
+                  "talentSpell": 14177
+                }
+              ],
+              "say": "before the Eviscerate that matters most"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Mutilate at 42 is the build. Daggers, a poison on each, Shank on cooldown. Slice and Dice gets stronger at 42.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 703,
+                "name": "Garrote",
+                "if": "from behind, or Cheap Shot if it hits hard",
+                "why": "it bleeds while you build points"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1329283,
+                "name": "Shank",
+                "if": "when it is ready and Energy is not full",
+                "why": "it gives back more Energy than it costs"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 5 combo points",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 399956,
+                "name": "Mutilate",
+                "if": "with a dagger equipped",
+                "why": "it hits twice and builds 2 points",
+                "talentSpell": 399956
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it builds the points without a dagger"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1856,
+                "name": "Vanish",
+                "if": "when a fight goes wrong",
+                "why": "the monster loses you and you can bandage"
+              },
+              {
+                "spell": 408,
+                "name": "Kidney Shot",
+                "if": "on a monster you cannot beat in the open",
+                "why": "each point is a second of stun"
+              },
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 2094,
+                "name": "Blind",
+                "if": "to get away from a monster you cannot beat",
+                "why": "it wanders off blind while you leave"
+              }
+            ],
+            "between": [
+              {
+                "text": "Coat both weapons in poison",
+                "if": "when the coating is gone",
+                "why": "each hit may poison, and it costs no Energy"
+              },
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 14177,
+                  "name": "Cold Blood",
+                  "talentSpell": 14177
+                }
+              ],
+              "say": "before the Eviscerate or Mutilate that matters most"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Assassination Rogue guide (Djexde, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/assassination-rogue-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Assassination Rogue levelling (Sellin, updated 3 November 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/assassination-rogue-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Method, Rogue levelling (3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-rogue-leveling-guide-and-talents",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Maxroll, Rogue levelling (Verb, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/rogue-leveling-guide",
+          "read": "2026-11-05"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "key": "rogue-combat",
+      "name": "Combat",
+      "role": "damage",
+      "tree": 181,
+      "checked": "2026-11-05",
+      "intro": "Combat swings two weapons and leans on Riposte, Shank and Blade Flurry. It is the build most guides level, because it is smooth and wastes little. Take a sword, axe or mace, and a dagger only if you must.",
+      "line": "Sinister Strike, Riposte after a parry, Blade Flurry for two. The smoothest way to level a rogue.",
+      "pathNote": "(35 points in Combat, then 16 in Assassination for critical hits and poisons.)",
+      "split": "the first points and the tail. DonTheCrown puts Precision at 2 first and reaches Riposte at 20 and Blade Flurry at 30, Djexde takes Remorseless Attacks first and reaches them at 22 and 32. This page follows DonTheCrown. Method would move points from Lightning Reflexes and Endurance into Puncturing Wounds for a dagger.",
+      "dry": "Riposte only lights after a parry, so face the monster and let it swing.",
+      "path": [
+        {
+          "points": [
+            1,
+            2
+          ],
+          "level": [
+            10,
+            11
+          ],
+          "talent": 13732,
+          "rank": 2,
+          "why": "Sinister Strike costs less Energy, and it is the strike you press most. More of them land before the monster is dead."
+        },
+        {
+          "points": [
+            3,
+            5
+          ],
+          "level": [
+            12,
+            14
+          ],
+          "talent": 14162,
+          "rank": 3,
+          "why": "Eviscerate hits harder. It ends most fights, so this pays on every kill."
+        },
+        {
+          "points": [
+            6,
+            7
+          ],
+          "level": [
+            15,
+            16
+          ],
+          "talent": 13705,
+          "rank": 2,
+          "why": "Fewer misses. A strike that misses is Energy spent for nothing, and a rogue has little to spare."
+        },
+        {
+          "points": [
+            8,
+            10
+          ],
+          "level": [
+            17,
+            19
+          ],
+          "talent": 13713,
+          "rank": 3,
+          "why": "You parry more often, and a parry is what lights Riposte. Some hits simply stop landing."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 14251,
+          "rank": 1,
+          "why": "After a parry, Riposte hits harder than Sinister Strike for little Energy and disarms the monster. Press it whenever it lights."
+        },
+        {
+          "points": [
+            12,
+            12
+          ],
+          "level": [
+            21,
+            21
+          ],
+          "talent": 13705,
+          "rank": 3,
+          "why": "Fewer misses. A strike that misses is Energy spent for nothing, and a rogue has little to spare."
+        },
+        {
+          "points": [
+            13,
+            14
+          ],
+          "level": [
+            22,
+            23
+          ],
+          "talent": 13742,
+          "rank": 2,
+          "why": "Sprint and Evasion come back sooner. A rogue's way out is its cooldowns, so shorter ones mean more fights you can leave."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 13743,
+          "rank": 1,
+          "why": "Sprint breaks slows and roots as you press it. A monster that slows you can no longer hold you in the fight."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 1310711,
+          "rank": 1,
+          "why": "Eviscerate costs less Energy, so you finish sooner and start the next strike sooner."
+        },
+        {
+          "points": [
+            17,
+            18
+          ],
+          "level": [
+            26,
+            27
+          ],
+          "talent": 30919,
+          "rank": 2,
+          "why": "Fewer of your strikes are dodged or parried. Monsters in front of you do both often, so every point wastes less."
+        },
+        {
+          "points": [
+            19,
+            20
+          ],
+          "level": [
+            28,
+            29
+          ],
+          "talent": 18427,
+          "rank": 2,
+          "why": "Sinister Strike and Eviscerate hit a little harder, and they are most of your damage."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 13877,
+          "rank": 1,
+          "why": "Your swings come faster and each hit also strikes a second monster nearby. This is how a rogue takes two at once. Press it with Evasion."
+        },
+        {
+          "points": [
+            22,
+            23
+          ],
+          "level": [
+            31,
+            32
+          ],
+          "talent": 13715,
+          "rank": 2,
+          "why": "Your off-hand hits harder. You swing two weapons all fight, so it pays on every swing."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 13960,
+          "rank": 2,
+          "why": "Swords and axes sometimes swing again for free, daggers and fists add critical chance, maces ignore armour. Carry the weapon that fits it."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 1329284,
+          "rank": 5,
+          "why": "Shank gives back more Energy and comes round sooner. The more you press it, the less you wait."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 13750,
+          "rank": 1,
+          "why": "A burst of Energy for a hard fight. Press it with Blade Flurry when your Energy is nearly empty."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 14138,
+          "rank": 5,
+          "why": "More critical strikes with every attack and poison. Critical hits are where a rogue's damage comes from."
+        },
+        {
+          "points": [
+            37,
+            39
+          ],
+          "level": [
+            46,
+            48
+          ],
+          "talent": 14156,
+          "rank": 3,
+          "why": "Your finishers sometimes add a combo point to the monster, so the next finisher comes sooner."
+        },
+        {
+          "points": [
+            40,
+            41
+          ],
+          "level": [
+            49,
+            50
+          ],
+          "talent": 14165,
+          "rank": 2,
+          "why": "Slice and Dice lasts longer, so you refresh it less and strike more."
+        },
+        {
+          "points": [
+            42,
+            43
+          ],
+          "level": [
+            51,
+            52
+          ],
+          "talent": 14128,
+          "rank": 2,
+          "why": "Critical hits from your strikes hurt more. It needs Malice at full, and Malice is worth having anyway."
+        },
+        {
+          "points": [
+            44,
+            46
+          ],
+          "level": [
+            53,
+            55
+          ],
+          "talent": 13960,
+          "rank": 5,
+          "why": "Swords and axes sometimes swing again for free, daggers and fists add critical chance, maces ignore armour. Carry the weapon that fits it."
+        },
+        {
+          "points": [
+            47,
+            47
+          ],
+          "level": [
+            56,
+            56
+          ],
+          "talent": 18427,
+          "rank": 3,
+          "why": "Sinister Strike and Eviscerate hit a little harder, and they are most of your damage."
+        },
+        {
+          "points": [
+            48,
+            48
+          ],
+          "level": [
+            57,
+            57
+          ],
+          "talent": 14165,
+          "rank": 3,
+          "why": "Slice and Dice lasts longer, so you refresh it less and strike more."
+        },
+        {
+          "points": [
+            49,
+            50
+          ],
+          "level": [
+            58,
+            59
+          ],
+          "talent": 14168,
+          "rank": 2,
+          "why": "Expose Armor costs less Energy and gives points back when cast at 5. Take it for the hard monsters."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 14113,
+          "rank": 1,
+          "why": "Poisons land more often and sometimes spend no charge, so you coat your weapons less."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 53,
+                "name": "Backstab",
+                "if": "from behind with a dagger",
+                "why": "it hits hard and gives you a combo point"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "when the monster is about to die",
+                "why": "left-over points are wasted when it dies"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it hits and builds the points Eviscerate spends"
+              }
+            ],
+            "between": [
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Slice and Dice, Sprint and Sap arrive at 10, Ambush at 18. Sinister Strike is the strike you press.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 703,
+                "name": "Garrote",
+                "if": "from behind, or Ambush with a dagger",
+                "why": "it bleeds while you build points"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 4 or 5 combo points",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it hits and builds the points your finishers spend"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 6770,
+                "name": "Sap",
+                "if": "on one of two humanoids, before the pull",
+                "why": "it sleeps until something hurts it"
+              },
+              {
+                "spell": 8647,
+                "name": "Expose Armor",
+                "if": "on a monster that will last a long time",
+                "why": "it lowers its armour so you hit harder"
+              },
+              {
+                "spell": 1966,
+                "name": "Feint",
+                "if": "in a group, when you have its attention",
+                "why": "it lowers the threat you make"
+              },
+              {
+                "spell": 2983,
+                "name": "Sprint",
+                "if": "to close in or to leave",
+                "why": "you move much faster for a moment"
+              }
+            ],
+            "between": [
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Riposte at 20 is the first big gain, Shank at 24 pays for itself in Energy. Blade Flurry at 30 takes two monsters at once.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 1833,
+                "name": "Cheap Shot",
+                "if": "on a monster that hits hard",
+                "why": "a stunned monster hits nothing while you start"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "right after the opener",
+                "why": "your swings come faster for the whole fight"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 14251,
+                "name": "Riposte",
+                "if": "after you have parried",
+                "why": "it costs little and hits harder than Sinister Strike",
+                "talentSpell": 14251
+              },
+              {
+                "spell": 1329283,
+                "name": "Shank",
+                "if": "when it is ready and Energy is not full",
+                "why": "it gives back more Energy than it costs"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 5 combo points",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it hits and builds the points your finishers spend"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 13877,
+                "name": "Blade Flurry",
+                "if": "with two or more monsters on you",
+                "why": "every hit also strikes a second monster",
+                "talentSpell": 13877
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "with two or more monsters on you",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1856,
+                "name": "Vanish",
+                "if": "when a fight goes wrong",
+                "why": "the monster loses you and you can bandage"
+              },
+              {
+                "spell": 408,
+                "name": "Kidney Shot",
+                "if": "on a monster you cannot beat in the open",
+                "why": "each point is a second of stun"
+              },
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second joins and Blade Flurry is down",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 8647,
+                "name": "Expose Armor",
+                "if": "on a monster that will last a long time",
+                "why": "it lowers its armour so you hit harder"
+              },
+              {
+                "spell": 2094,
+                "name": "Blind",
+                "if": "to get away from a monster you cannot beat",
+                "why": "it wanders off blind while you leave"
+              }
+            ],
+            "between": [
+              {
+                "text": "Coat both weapons in poison",
+                "if": "when the coating is gone",
+                "why": "each hit may poison, and it costs no Energy"
+              },
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 13877,
+                  "name": "Blade Flurry",
+                  "talentSpell": 13877
+                },
+                {
+                  "spell": 5277,
+                  "name": "Evasion"
+                }
+              ],
+              "say": "together, when two to four monsters are on you"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Adrenaline Rush at 40, and a stronger Slice and Dice at 42. The loop is the same, with Shank giving back more.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 1833,
+                "name": "Cheap Shot",
+                "if": "on a monster that hits hard",
+                "why": "a stunned monster hits nothing while you start"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "right after the opener",
+                "why": "your swings come faster for the whole fight"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 14251,
+                "name": "Riposte",
+                "if": "after you have parried",
+                "why": "it costs little and hits harder than Sinister Strike",
+                "talentSpell": 14251
+              },
+              {
+                "spell": 1329283,
+                "name": "Shank",
+                "if": "when it is ready and Energy is not full",
+                "why": "it gives back more Energy than it costs"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 5 combo points",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it hits and builds the points your finishers spend"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 13877,
+                "name": "Blade Flurry",
+                "if": "with two or more monsters on you",
+                "why": "every hit also strikes a second monster",
+                "talentSpell": 13877
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "with two or more monsters on you",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1856,
+                "name": "Vanish",
+                "if": "when a fight goes wrong",
+                "why": "the monster loses you and you can bandage"
+              },
+              {
+                "spell": 408,
+                "name": "Kidney Shot",
+                "if": "on a monster you cannot beat in the open",
+                "why": "each point is a second of stun"
+              },
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second joins and Blade Flurry is down",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 8647,
+                "name": "Expose Armor",
+                "if": "on a monster that will last a long time",
+                "why": "it lowers its armour so you hit harder"
+              },
+              {
+                "spell": 2094,
+                "name": "Blind",
+                "if": "to get away from a monster you cannot beat",
+                "why": "it wanders off blind while you leave"
+              }
+            ],
+            "between": [
+              {
+                "text": "Coat both weapons in poison",
+                "if": "when the coating is gone",
+                "why": "each hit may poison, and it costs no Energy"
+              },
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 13750,
+                  "name": "Adrenaline Rush",
+                  "talentSpell": 13750
+                },
+                {
+                  "spell": 13877,
+                  "name": "Blade Flurry",
+                  "talentSpell": 13877
+                }
+              ],
+              "say": "when Energy is nearly empty and the fight is hard"
+            }
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Rogue levelling, Combat (DonTheCrown, 4 and 5 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/rogue-leveling-donthecrown",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Combat Rogue guide (Djexde, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/combat-rogue-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Combat Rogue levelling (Sellin, updated 3 November 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/combat-rogue-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Method, Rogue levelling (3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-rogue-leveling-guide-and-talents",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Maxroll, Rogue levelling (Verb, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/rogue-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Conquest Capped, Rogue levelling (Kir, 24 October 2026)",
+          "url": "https://conquestcapped.com/guides/wow-forever/wow-forever-rogue-leveling/",
+          "read": "2026-11-05"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "key": "rogue-subtlety",
+      "name": "Subtlety",
+      "role": "damage",
+      "tree": 183,
+      "checked": "2026-11-05",
+      "intro": "Subtlety opens with Ambush and lives on Hemorrhage from 32. It is the sturdiest of the three at the start and the weakest on damage. The long way down the tree is the price.",
+      "line": "An Ambush opener, Ghostly Strike, Hemorrhage, then Death Mark at 42. Sturdy, and slower to kill.",
+      "pathNote": "(31 points in Subtlety, then 14 in Combat and 6 in Assassination.)",
+      "split": "the whole order. Mobalytics' Djexde gives a full order and advises Combat instead. Icy Veins agrees on the shape (Subtlety down to Hemorrhage, then Death Mark, then Combat, then Assassination) and its order sits in a slider that could not be read. Warcraft Tavern's Subtlety page and Kami Labs' simulation still use the talents removed before launch.",
+      "dry": "Backstab does nothing from the front, so walk round or use Hemorrhage.",
+      "path": [
+        {
+          "points": [
+            1,
+            2
+          ],
+          "level": [
+            10,
+            11
+          ],
+          "talent": 14144,
+          "rank": 2,
+          "why": "After a kill, your next opener or strike is more likely to crit for a short time. It keeps you hitting hard between monsters."
+        },
+        {
+          "points": [
+            3,
+            5
+          ],
+          "level": [
+            12,
+            14
+          ],
+          "talent": 13983,
+          "rank": 3,
+          "why": "You sometimes gain a combo point after a dodge. A small gain, taken because it opens the way down the tree."
+        },
+        {
+          "points": [
+            6,
+            7
+          ],
+          "level": [
+            15,
+            16
+          ],
+          "talent": 14057,
+          "rank": 2,
+          "why": "Backstab, Garrote and Ambush hit harder. They are your openers, so every point counts."
+        },
+        {
+          "points": [
+            8,
+            9
+          ],
+          "level": [
+            17,
+            18
+          ],
+          "talent": 14082,
+          "rank": 2,
+          "why": "Cheap Shot and Garrote cost less Energy, and Garrote no longer needs you behind the monster."
+        },
+        {
+          "points": [
+            10,
+            12
+          ],
+          "level": [
+            19,
+            21
+          ],
+          "talent": 14057,
+          "rank": 5,
+          "why": "Backstab, Garrote and Ambush hit harder. They are your openers, so every point counts."
+        },
+        {
+          "points": [
+            13,
+            15
+          ],
+          "level": [
+            22,
+            24
+          ],
+          "talent": 14171,
+          "rank": 3,
+          "why": "Your attacks ignore some armour and Rupture hits harder. It also leads to Hemorrhage."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 14183,
+          "rank": 1,
+          "why": "Starts a fight with 2 combo points before the first strike. Press it just before Ambush or Garrote."
+        },
+        {
+          "points": [
+            17,
+            17
+          ],
+          "level": [
+            26,
+            26
+          ],
+          "talent": 13976,
+          "rank": 1,
+          "why": "Ambush, Garrote and Cheap Shot each add a combo point more. The opener becomes the first finisher."
+        },
+        {
+          "points": [
+            18,
+            18
+          ],
+          "level": [
+            27,
+            27
+          ],
+          "talent": 14278,
+          "rank": 1,
+          "why": "A strike that raises your dodge for a few seconds and lets Garrote or Ambush go without Stealth. Press it on cooldown."
+        },
+        {
+          "points": [
+            19,
+            20
+          ],
+          "level": [
+            28,
+            29
+          ],
+          "talent": 13976,
+          "rank": 3,
+          "why": "Ambush, Garrote and Cheap Shot each add a combo point more. The opener becomes the first finisher."
+        },
+        {
+          "points": [
+            21,
+            22
+          ],
+          "level": [
+            30,
+            31
+          ],
+          "talent": 13981,
+          "rank": 2,
+          "why": "Vanish and Blind come back much sooner. Your way out is ready for the next fight."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 16511,
+          "rank": 1,
+          "why": "The build's main strike. It builds combo points with any weapon, from the front or behind, and makes your Rupture and Garrote hit harder."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 14185,
+          "rank": 1,
+          "why": "Resets your cooldowns when a fight goes wrong, Evasion and Vanish with them. You hope not to press it, and Death Mark needs it."
+        },
+        {
+          "points": [
+            25,
+            26
+          ],
+          "level": [
+            34,
+            35
+          ],
+          "talent": 30894,
+          "rank": 2,
+          "why": "A little less chance to be hit by spells and ranged attacks, and you spot hidden things sooner. Small, and it keeps the way down open."
+        },
+        {
+          "points": [
+            27,
+            27
+          ],
+          "level": [
+            36,
+            36
+          ],
+          "talent": 13975,
+          "rank": 1,
+          "why": "You move faster in Stealth and Stealth is ready again sooner. Sneaking past monsters is how you skip fights."
+        },
+        {
+          "points": [
+            28,
+            32
+          ],
+          "level": [
+            37,
+            41
+          ],
+          "talent": 1329286,
+          "rank": 5,
+          "why": "Shank adds combo points to the monster every time. Press it on cooldown and your finishers come much sooner."
+        },
+        {
+          "points": [
+            33,
+            33
+          ],
+          "level": [
+            42,
+            42
+          ],
+          "talent": 1316709,
+          "rank": 1,
+          "why": "A finisher that stores your damage for a few seconds and then deals it. Use it on a long fight, with Garrote and Rupture bleeding."
+        },
+        {
+          "points": [
+            34,
+            35
+          ],
+          "level": [
+            43,
+            44
+          ],
+          "talent": 13732,
+          "rank": 2,
+          "why": "Sinister Strike and Hemorrhage cost less Energy. Hemorrhage is your main strike, so this is the Energy you save most."
+        },
+        {
+          "points": [
+            36,
+            38
+          ],
+          "level": [
+            45,
+            47
+          ],
+          "talent": 14162,
+          "rank": 3,
+          "why": "Eviscerate and Death Mark hit harder. Both end fights, so this pays on every kill."
+        },
+        {
+          "points": [
+            39,
+            41
+          ],
+          "level": [
+            48,
+            50
+          ],
+          "talent": 13713,
+          "rank": 3,
+          "why": "You parry more often, and a parry is what lights Riposte. Some hits simply stop landing."
+        },
+        {
+          "points": [
+            42,
+            43
+          ],
+          "level": [
+            51,
+            52
+          ],
+          "talent": 13705,
+          "rank": 2,
+          "why": "Fewer misses. A strike that misses is Energy spent for nothing, and a rogue has little to spare."
+        },
+        {
+          "points": [
+            44,
+            44
+          ],
+          "level": [
+            53,
+            53
+          ],
+          "talent": 14251,
+          "rank": 1,
+          "why": "After a parry, Riposte hits harder than a strike for little Energy and disarms the monster. Press it whenever it lights."
+        },
+        {
+          "points": [
+            45,
+            45
+          ],
+          "level": [
+            54,
+            54
+          ],
+          "talent": 13705,
+          "rank": 3,
+          "why": "Fewer misses. A strike that misses is Energy spent for nothing, and a rogue has little to spare."
+        },
+        {
+          "points": [
+            46,
+            47
+          ],
+          "level": [
+            55,
+            56
+          ],
+          "talent": 1329265,
+          "rank": 2,
+          "why": "Poised takes more Energy off your first ability after you rest. A small gain for the opener."
+        },
+        {
+          "points": [
+            48,
+            50
+          ],
+          "level": [
+            57,
+            59
+          ],
+          "talent": 14138,
+          "rank": 3,
+          "why": "More critical strikes with every attack and poison. Critical hits are where a rogue's damage comes from."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 14165,
+          "rank": 1,
+          "why": "Slice and Dice lasts longer, so you refresh it less and strike more."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 53,
+                "name": "Backstab",
+                "if": "from behind with a dagger",
+                "why": "it hits hard and gives you a combo point"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "when the monster is about to die",
+                "why": "left-over points are wasted when it dies"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it hits and builds the points Eviscerate spends"
+              }
+            ],
+            "between": [
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Slice and Dice, Sprint and Sap arrive at 10, Ambush at 18. Keep a dagger in the main hand: Ambush needs it and Hemorrhage hits harder with it.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 8676,
+                "name": "Ambush",
+                "if": "with a dagger, or Garrote on a long fight",
+                "why": "it is the hardest hit you have for a first strike"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 4 or 5 combo points",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 53,
+                "name": "Backstab",
+                "if": "when you are behind with a dagger",
+                "why": "it hits hard and gives you a combo point"
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it builds the points when Backstab cannot"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 6770,
+                "name": "Sap",
+                "if": "on one of two humanoids, before the pull",
+                "why": "it sleeps until something hurts it"
+              },
+              {
+                "spell": 8647,
+                "name": "Expose Armor",
+                "if": "on a monster that will last a long time",
+                "why": "it lowers its armour so you hit harder"
+              },
+              {
+                "spell": 2983,
+                "name": "Sprint",
+                "if": "to close in or to leave",
+                "why": "you move much faster for a moment"
+              }
+            ],
+            "between": [
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Poisons at 20, Premeditation at 25 and Ghostly Strike at 27 give you the opener. Hemorrhage at 32 is the strike you press from then on.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 14183,
+                "name": "Premeditation",
+                "if": "just before the opener",
+                "why": "you start the fight with 2 combo points",
+                "talentSpell": 14183
+              },
+              {
+                "spell": 8676,
+                "name": "Ambush",
+                "if": "with a dagger, or Garrote on a long fight",
+                "why": "it is the hardest hit you have for a first strike"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 14278,
+                "name": "Ghostly Strike",
+                "if": "when it is ready",
+                "why": "you dodge more, and Garrote needs no Stealth",
+                "talentSpell": 14278
+              },
+              {
+                "spell": 1329283,
+                "name": "Shank",
+                "if": "when it is ready and Energy is not full",
+                "why": "it gives back more Energy than it costs"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 5 combo points, near the end of the fight",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 16511,
+                "name": "Hemorrhage",
+                "if": "once you have it",
+                "why": "it builds points with any weapon, from any side",
+                "talentSpell": 16511
+              },
+              {
+                "spell": 1752,
+                "name": "Sinister Strike",
+                "why": "it builds the points until Hemorrhage is yours"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 53,
+                "name": "Backstab",
+                "if": "when you are behind with a dagger",
+                "why": "it hits hard and gives you a combo point"
+              },
+              {
+                "spell": 1943,
+                "name": "Rupture",
+                "if": "at 5 points, on a monster that will last",
+                "why": "it keeps hurting while you strike"
+              },
+              {
+                "spell": 14185,
+                "name": "Preparation",
+                "if": "when a fight has gone wrong",
+                "why": "it readies Evasion and Vanish again",
+                "talentSpell": 14185
+              },
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1856,
+                "name": "Vanish",
+                "if": "when a fight goes wrong",
+                "why": "the monster loses you and you can bandage"
+              },
+              {
+                "spell": 408,
+                "name": "Kidney Shot",
+                "if": "on a monster you cannot beat in the open",
+                "why": "each point is a second of stun"
+              },
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 6770,
+                "name": "Sap",
+                "if": "on one of two humanoids, before the pull",
+                "why": "it sleeps until something hurts it"
+              },
+              {
+                "spell": 2094,
+                "name": "Blind",
+                "if": "to get away from a monster you cannot beat",
+                "why": "it wanders off blind while you leave"
+              }
+            ],
+            "between": [
+              {
+                "text": "Coat both weapons in poison",
+                "if": "when the coating is gone",
+                "why": "each hit may poison, and it costs no Energy"
+              },
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Death Mark at 42 stores your damage and deals it at once. Shank adds combo points through Boot Knife. Slice and Dice gets stronger at 42.",
+          "plan": {
+            "opening": [
+              {
+                "text": "Open at full Energy",
+                "if": "before the pull, out of combat",
+                "why": "Poised takes Energy off your first ability"
+              },
+              {
+                "spell": 1784,
+                "name": "Stealth",
+                "if": "before the pull, if you can reach it unseen",
+                "why": "you strike first and it has not seen you"
+              },
+              {
+                "spell": 14183,
+                "name": "Premeditation",
+                "if": "just before the opener",
+                "why": "you start the fight with 2 combo points",
+                "talentSpell": 14183
+              },
+              {
+                "spell": 8676,
+                "name": "Ambush",
+                "if": "with a dagger, or Garrote on a long fight",
+                "why": "it is the hardest hit you have for a first strike"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 14278,
+                "name": "Ghostly Strike",
+                "if": "when it is ready",
+                "why": "you dodge more, and Garrote needs no Stealth",
+                "talentSpell": 14278
+              },
+              {
+                "spell": 1329283,
+                "name": "Shank",
+                "if": "when it is ready and Energy is not full",
+                "why": "it gives back more Energy than it costs"
+              },
+              {
+                "spell": 5171,
+                "name": "Slice and Dice",
+                "if": "when it has run out",
+                "why": "your swings come faster for the whole fight"
+              },
+              {
+                "spell": 1316709,
+                "name": "Death Mark",
+                "if": "at 4 or 5 points, on a long fight",
+                "why": "it deals the damage it stored a moment later",
+                "talentSpell": 1316709
+              },
+              {
+                "spell": 2098,
+                "name": "Eviscerate",
+                "if": "at 5 combo points, near the end of the fight",
+                "why": "it spends the points on one big hit"
+              },
+              {
+                "spell": 16511,
+                "name": "Hemorrhage",
+                "why": "it builds points with any weapon, from any side",
+                "talentSpell": 16511
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1943,
+                "name": "Rupture",
+                "if": "at 5 points, on a monster that will last",
+                "why": "it keeps hurting while you strike"
+              },
+              {
+                "spell": 14185,
+                "name": "Preparation",
+                "if": "when a fight has gone wrong",
+                "why": "it readies Evasion and Vanish again",
+                "talentSpell": 14185
+              },
+              {
+                "spell": 1766,
+                "name": "Kick",
+                "if": "when a monster starts a spell",
+                "why": "it stops the cast"
+              },
+              {
+                "spell": 1856,
+                "name": "Vanish",
+                "if": "when a fight goes wrong",
+                "why": "the monster loses you and you can bandage"
+              },
+              {
+                "spell": 408,
+                "name": "Kidney Shot",
+                "if": "on a monster you cannot beat in the open",
+                "why": "each point is a second of stun"
+              },
+              {
+                "spell": 1776,
+                "name": "Gouge",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you kill the other"
+              },
+              {
+                "spell": 5277,
+                "name": "Evasion",
+                "if": "when a monster hits hard",
+                "why": "you dodge more while it lasts"
+              },
+              {
+                "spell": 6770,
+                "name": "Sap",
+                "if": "on one of two humanoids, before the pull",
+                "why": "it sleeps until something hurts it"
+              },
+              {
+                "spell": 2094,
+                "name": "Blind",
+                "if": "to get away from a monster you cannot beat",
+                "why": "it wanders off blind while you leave"
+              }
+            ],
+            "between": [
+              {
+                "text": "Coat both weapons in poison",
+                "if": "when the coating is gone",
+                "why": "each hit may poison, and it costs no Energy"
+              },
+              {
+                "text": "Bandage or eat",
+                "if": "after a fight, before the next pull",
+                "why": "Energy comes back by itself, health does not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Energy is empty",
+                "why": "swings still land while Energy comes back"
+              }
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Subtlety Rogue guide (Djexde, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/subtlety-rogue-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Subtlety Rogue levelling (Seliathan, updated 4 November 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/subtlety-rogue-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Method, Rogue levelling (3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-rogue-leveling-guide-and-talents",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Kami Labs, Subtlety Rogue build (dated 14 September 2026, cites 2 and 4 November)",
+          "url": "https://kami-labs.fr/en/wow-forever/build-voleur-finesse-wow-forever/",
+          "read": "2026-11-05"
+        }
+      ]
+    }
+  ]
+}
