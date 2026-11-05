@@ -206,6 +206,9 @@ French, German or Spanish work. What that does to the family's lists:
 
 ## The tests
 
+`docs/testing.md` is the current account (the strict game, the matrix, the secret values, what
+they cannot cover). What follows is the older sim.
+
 `addon/test/game.lua` is the kit's game (`wowmock.lua`, a copy) plus the
 registered events and what the guide reads (a spell book, the talent call as
 the Era probe answered it, the season, names and pictures by id); `sim.lua`

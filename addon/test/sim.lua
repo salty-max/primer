@@ -1699,4 +1699,8 @@ check(ns.option("minimapHidden") == true, "/primer minimap hides the button")
 SlashCmdList.PRIMER("minimap")
 check(ns.option("minimapHidden") == false, "and shows it again")
 
+if G.strict then
+  check(#G.strict.violations == 0, "no call the documentation refuses: " .. table.concat(G.strict.violations, " | "))
+  io.write(G.strict.report(), "\n")
+end
 io.write(("✓ Primer: %d checks (%s)"):format(count, G.FOREVER and "Forever" or "Classic Era"), "\n")

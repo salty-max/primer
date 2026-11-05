@@ -22,13 +22,15 @@ and gets fixes only (`../ideas/class-guide.md`, "Forever first"). Read the famil
 | Which build a character is (feasibility, never the tree with most points) | `docs/inference.md` |
 | Where each build's facts were read, and what the research changed | `docs/sources.md` |
 | The voice's rules: the narrator, the class cards, what is the game's and what is ours | `docs/voices.md` |
+| The tests: the strict game, the matrix, the secret values, what they cannot see, the checklist for the game | `docs/testing.md` |
 | The plan, the milestones, what is open | `../ideas/class-guide.md`, `../ideas/class-guide-warrior.md` |
 | The game's tables the facts come from | `../wow-data/docs/class-guide.md` |
 
 ## Commands
 
 ```bash
-bun run check        # kit, saved ids, the guide's facts, languages, lint, the sim on both games, TOCs
+bun run check        # kit, saved ids, the guide's facts, the API tables, languages, lint, the battery on both games (sim, strict game, matrix, secret values), TOCs
+bun run battery      # only the battery (about 20 seconds), docs/testing.md
 bun run check:ci     # what CI and the release gate run: no family folder (the kit, the saved ids and the guide's facts aside)
 bun run guide        # the Guide_*.lua and GuideText.lua again, after a content/ edit or wow-data's change (--check is in `check`)
 bun scripts/guide.ts --stamp <game> <build|all>   # after reading a moved fact (the facts lock, docs/data.md)

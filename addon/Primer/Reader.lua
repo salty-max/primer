@@ -50,6 +50,13 @@ local function try(what, fn, ...)
   return pass(what, pcall(fn, ...))
 end
 
+-- A value the game may hide from addons (a secret value keeps its type and
+-- raises on a compare, a concatenation or an index) is used only after this
+-- says it is not hidden: the page shows nothing of it rather than raise.
+local secret = issecretvalue or function() return false end
+local function num(v) return type(v) == "number" and not secret(v) and v or nil end
+local function tbl(v) return type(v) == "table" and not secret(v) and v or nil end
+
 -- Whether the game would not tell the guide what a page cannot do without
 -- (the talents taken, the spells in the book): the page then says so, and
 -- shows no advice drawn from defaults. Call after the page has read them.
@@ -79,7 +86,10 @@ end
 -- A spell's name and picture, the game's, by id (nothing typed here).
 function R.spell(id)
   local info = try("C_Spell.GetSpellInfo", C_Spell and C_Spell.GetSpellInfo, id)
-  if type(info) == "table" then return info.name, info.iconID end
+  if tbl(info) then
+    local name, icon = info.name, info.iconID
+    return not secret(name) and name or nil, not secret(icon) and icon or nil
+  end
   return nil, try("GetSpellTexture", GetSpellTexture, id)
 end
 
@@ -88,12 +98,12 @@ end
 function R.groups()
   -- (a global in both clients' own code, the count of groups: false, not inspecting)
   local n = try("GetNumSpecGroups", GetNumSpecGroups, false)
-  return type(n) == "number" and n >= 1 and n or 1
+  return num(n) and n >= 1 and n or 1
 end
 function R.activeGroup()
   local g =
     try("C_SpecializationInfo.GetActiveSpecGroup", C_SpecializationInfo and C_SpecializationInfo.GetActiveSpecGroup)
-  return type(g) == "number" and g >= 1 and g or 1
+  return num(g) and g >= 1 and g or 1
 end
 
 -- ── Forever: the talents are a trait tree ────────────────────────────────────
@@ -114,9 +124,6 @@ end
 -- GetActiveConfigID answers on a class with no specialisations, that a
 -- definition's spell is the cell's rank 1 spell, and that treeIDs[1] holds all
 -- three trees. `/primer debug` prints what the client answered.
-local secret = issecretvalue or function() return false end
-local function num(v) return type(v) == "number" and not secret(v) and v or nil end
-local function tbl(v) return type(v) == "table" and not secret(v) and v or nil end
 
 -- A call that may raise, outside try(): the first error is kept, nothing is
 -- turned off (one odd node must not blind the rest).
@@ -135,6 +142,7 @@ function R.foreverTalents()
   R.probe = probe
   local data = ns.data
   local _, token = try("UnitClass", UnitClass, "player")
+  if secret(token) then token = nil end
   local classId
   for id, c in pairs(data.classes) do
     if c.token == token then classId = id end
@@ -151,7 +159,7 @@ function R.foreverTalents()
     place[tab] = #ids
     t.names[#ids] = name
   end
-  for _, b in ipairs(data.classes[classId].builds) do
+  for _, b in ipairs(classId and data.classes[classId].builds or {}) do
     local build = data.builds[b]
     if build then addTree(build.tree, build.name) end
   end
@@ -171,7 +179,7 @@ function R.foreverTalents()
   for _ in pairs(bySpell) do
     probe.cells = probe.cells + 1
   end
-  local level = try("UnitLevel", UnitLevel, "player") or 1
+  local level = num(try("UnitLevel", UnitLevel, "player")) or 1
   local function blind(why)
     probe.why = why
     -- (a character before its first point has nothing to read)
@@ -291,11 +299,13 @@ end
 function R.snapshot(group)
   if InCombatLockdown() then return nil end
   local name, token = try("UnitClass", UnitClass, "player")
+  if secret(name) then name = nil end
+  if secret(token) then token = nil end
   local active = R.activeGroup()
   local groups = R.groups()
   if not group or group > groups then group = active end
   local snap = {
-    level = try("UnitLevel", UnitLevel, "player") or 1,
+    level = num(try("UnitLevel", UnitLevel, "player")) or 1,
     token = token,
     className = name,
     season = R.season(),

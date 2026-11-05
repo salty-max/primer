@@ -74,6 +74,14 @@ C_Spell = {
     read()
     return { name = "Spell " .. id, iconID = 100000 + id }
   end,
+  GetSpellTexture = function(id)
+    read()
+    return id and 100000 + id or nil
+  end,
+  GetSpellName = function(id)
+    read()
+    return id and "Spell " .. id or nil
+  end,
 }
 C_Seasons = {
   GetActiveSeason = function()
@@ -215,6 +223,16 @@ if G.FOREVER then
   }
 end
 
+-- ── the strict game: what Blizzard's documentation says the client refuses, refused here too
+-- (STRICT=0 plays the lenient game, to compare)
+if os.getenv("STRICT") ~= "0" then
+  G.strict = dofile("addon/test/strict.lua")
+  G.strict.install(G, G.FOREVER and "forever" or "classic")
+end
+
 -- ── the addon ────────────────────────────────────────────────────────────────
+-- (a test that needs the game changed before the addon loads, and so before the addon keeps a copy of a
+-- global: matrix.lua secrets replaces `type` so a secret value reports the type it stands for)
+if PRIMER_BEFORE_LOAD then PRIMER_BEFORE_LOAD(G) end
 G.load("Primer")
 return G

@@ -65,7 +65,10 @@ end
 
 function ns.login()
   local guid = UnitGUID("player")
-  if type(PrimerChar) ~= "table" or PrimerChar.guid ~= guid then PrimerChar = newBook(guid) end
+  -- (a hidden GUID says nothing about whose book this is: the one kept stays, a new one only when there is none)
+  local hidden = issecretvalue and issecretvalue(guid)
+  if hidden then guid = nil end
+  if type(PrimerChar) ~= "table" or (not hidden and PrimerChar.guid ~= guid) then PrimerChar = newBook(guid) end
   char = PrimerChar
   ns.loadProfile()
   if ns.createMinimapButton then ns.createMinimapButton() end
