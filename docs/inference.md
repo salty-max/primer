@@ -82,3 +82,15 @@ that stays with harmless early points, a picked build unreachable with another
 role open (a switch offered) and with the same role open (Follow offered), a
 dismissal kept, a respec to zero, your own way, and the window's own pages for
 the Paladin and the Mage.
+
+## Forever: the spec is the choice (5 November 2026)
+
+On Forever every spec is viable, so what the player is asked at level 10 is the
+spec, and the role follows from it (`docs/architecture.md`, "Forever asks the
+spec"). A spec is a build, so everything above holds with the question changed:
+"A role first" is "a spec first" (a spec chosen is a pick, which has a role),
+and the open-builds question asks for the spec's role only on Era. Once points
+are spent the build follows the points as above. When several specs stay open
+and nothing was picked, the page still shows the one we advise, named in the
+header because points are spent. A role stored before this (`PrimerChar`) is
+mapped once to that role's recommended spec (`G.migrate`) and stays stored.

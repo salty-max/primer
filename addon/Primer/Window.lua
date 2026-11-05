@@ -245,6 +245,8 @@ local function pickBuild(id, group)
   ns.refresh()
 end
 
+function ns.pickSpec(id, group) pickBuild(id, group) end
+
 local function pickRole(class, role, group)
   local choice = ns.choice(group)
   choice.role, choice.pickedBuild, choice.freestyle, choice.driftSeen, choice.notYet =
@@ -260,17 +262,41 @@ local function roleLike(role)
   return L["a damage build"]
 end
 
+local function roleWord(role)
+  if role == "tank" then return L["tank"] end
+  if role == "heal" then return L["heal"] end
+  return L["damage"]
+end
+-- Forever: a spec is a build, shown with its role beside it and the content's own line about it.
+local function specLine(snap, id)
+  local b = ns.data.builds[id]
+  return ("%s, %s. %s"):format(G.name(snap, b), roleWord(b.role), ns.stop(ns.say(b.line)))
+end
+local function specButtons(class, snap, except)
+  local buttons = {}
+  for _, id in ipairs(G.builds(class)) do
+    if id ~= except then
+      table.insert(buttons, { G.name(snap, ns.data.builds[id]), function() pickBuild(id, snap.group) end })
+    end
+  end
+  return buttons
+end
+
 -- (the question is asked once in a session: "not yet" holds until the game is reloaded, and for the level)
 local function asking(snap, choice, class) return not view.putOff and G.asking(snap, choice, class) end
 
 -- What needs the player now, the first that applies: { text, buttons, replaces } (replaces: it is the page,
 -- one idea; else a note above the plan), or nil. Roles, if the question is which one.
 local function questionFor(snap, class, r, choice)
-  if view.changing and #G.roles(class) > 1 then
+  if view.changing and (G.specFirst() and #G.builds(class) or #G.roles(class)) > 1 then
     local buttons = {}
-    for _, role in ipairs(G.roles(class)) do
-      if role ~= r.role then
-        table.insert(buttons, { roleName(role), function() pickRole(class, role, snap.group) end })
+    if G.specFirst() then
+      buttons = specButtons(class, snap, r.build)
+    else
+      for _, role in ipairs(G.roles(class)) do
+        if role ~= r.role then
+          table.insert(buttons, { roleName(role), function() pickRole(class, role, snap.group) end })
+        end
       end
     end
     table.insert(buttons, {
@@ -281,7 +307,8 @@ local function questionFor(snap, class, r, choice)
       end,
     })
     return {
-      text = ns.forever and L["Pick the role you want to play."]
+      text = G.specFirst() and L["Pick the spec you want to play."]
+        or ns.forever and L["Pick the role you want to play."]
         or L["Pick the role you want to play. A respec costs gold."],
       buttons = buttons,
       replaces = true,
@@ -309,6 +336,13 @@ local function questionFor(snap, class, r, choice)
         table.insert(buttons, { roleName(role), function() pickBuild(reach[1], snap.group) end })
       end
     end
+    if G.specFirst() and #buttons > 1 then
+      -- (Forever: the question is the spec, the role beside each)
+      buttons = {}
+      for _, id in ipairs(r.open) do
+        table.insert(buttons, { G.name(snap, ns.data.builds[id]), function() pickBuild(id, snap.group) end })
+      end
+    end
     if #buttons > 1 then
       table.insert(buttons, {
         L["Not yet"],
@@ -318,9 +352,11 @@ local function questionFor(snap, class, r, choice)
         end,
       })
       return {
-        text = L["Your points leave more than one role open. What do you want to play?"],
+        text = G.specFirst() and L["Your points leave more than one spec open. Which spec do you want to play?"]
+          or L["Your points leave more than one role open. What do you want to play?"],
         buttons = buttons,
         replaces = true,
+        specs = G.specFirst() and r.open or nil,
       }
     end
   end
@@ -340,8 +376,12 @@ local function questionFor(snap, class, r, choice)
   end
   if asking(snap, choice, class) then
     local buttons = {}
-    for _, role in ipairs(G.roles(class)) do
-      table.insert(buttons, { roleName(role), function() pickRole(class, role, snap.group) end })
+    if G.specFirst() then
+      buttons = specButtons(class, snap)
+    else
+      for _, role in ipairs(G.roles(class)) do
+        table.insert(buttons, { roleName(role), function() pickRole(class, role, snap.group) end })
+      end
     end
     table.insert(buttons, {
       L["Not yet"],
@@ -352,11 +392,13 @@ local function questionFor(snap, class, r, choice)
       end,
     })
     return {
-      text = ns.forever and L["You have a talent point to spend. What do you want to play?"]
+      text = G.specFirst() and L["You have a talent point to spend. Which spec do you want to play?"]
+        or ns.forever and L["You have a talent point to spend. What do you want to play?"]
         or L["You have a talent point to spend. What do you want to play? A respec costs gold, so pick what you will do most."],
       buttons = buttons,
       replaces = true,
-      roles = true,
+      roles = not G.specFirst(),
+      specs = G.specFirst(),
     }
   end
   if r.phase == "spent" then
@@ -483,7 +525,7 @@ local function hasBuildOf(class, r)
     or r.roleChosen
     or r.mode == "picked"
     or r.mode == "own"
-    or (#G.roles(class) == 1 and r.phase ~= "untalented")
+    or (not G.specFirst() and #G.roles(class) == 1 and r.phase ~= "untalented")
 end
 local function setFacts(snap, class, r)
   local b = ns.data.builds[r.build]
@@ -633,6 +675,14 @@ local function drawLevel(snap, class, r, choice)
         paragraph(line, T.text)
       end
     end
+    if q.specs then
+      screen.specs = {}
+      for _, id in ipairs(type(q.specs) == "table" and q.specs or G.builds(class)) do
+        local line = specLine(snap, id)
+        table.insert(screen.specs, { build = id, role = ns.data.builds[id].role, line = line })
+        paragraph(line, T.text)
+      end
+    end
     page:buttons(q.buttons)
     if q.replaces then return end
   end
@@ -702,12 +752,12 @@ local function drawLevel(snap, class, r, choice)
   steps(L["Opening"], plan.opening, "opening")
   steps(L["Then repeat, top to bottom"], plan.loop, "loop", true)
   steps(L["Rarely"], plan.rarely, "rarely")
-  if #G.roles(class) > 1 and r.phase ~= "untalented" and not q then
+  if (G.specFirst() and #G.builds(class) or #G.roles(class)) > 1 and r.phase ~= "untalented" and not q then
     screen.change = function()
       view.changing = true
       ns.page()
     end
-    page:buttons({ { L["Change role"], screen.change } })
+    page:buttons({ { G.specFirst() and L["Change spec"] or L["Change role"], screen.change } })
   end
 end
 
@@ -893,8 +943,35 @@ local function drawClass(snap, class, r)
     block(L["Levelling"], ov.levelling)
   end
   -- a row a role: the build advised for it, why, and what also works in dim text
-  classPage:section(L["Builds"])
-  for _, role in ipairs(G.roles(class)) do
+  if G.specFirst() then
+    -- Forever: the specs are the choices, each with its role beside it and the content's line, (yours) on the chosen one
+    classPage:section(L["Specs"])
+    screen.specs = {}
+    for _, id in ipairs(G.builds(class)) do
+      local sb = ns.data.builds[id]
+      local mine = id == r.build and hasBuild and r.mode ~= "open"
+      local value = ("%s%s. %s"):format(roleName(sb.role), mine and L[" (yours)"] or "", ns.stop(ns.say(sb.line)))
+      classPage:row(G.name(snap, sb), value)
+      table.insert(screen.specs, { build = id, role = sb.role, mine = mine, line = value })
+      table.insert(screen.text, value)
+    end
+    -- (a way to change it, from level 10 when a spec can be had: a button a spec that is not the chosen one)
+    screen.choose = {}
+    if r.phase ~= "untalented" then
+      local buttons = {}
+      for _, id in ipairs(G.builds(class)) do
+        if not (id == r.build and hasBuild and r.mode ~= "open") then
+          local name = G.name(snap, ns.data.builds[id])
+          local press = function() ns.pickSpec(id, snap.group) end
+          table.insert(buttons, { L["Play %s"]:format(name), press })
+          screen.choose[id] = press
+        end
+      end
+      if #buttons > 0 then classPage:buttons(buttons) end
+    end
+  end
+  if not G.specFirst() then classPage:section(L["Builds"]) end
+  for _, role in ipairs(not G.specFirst() and G.roles(class) or {}) do
     local id = G.recommend(class, role)
     local rb = ns.data.builds[id]
     local cr = c.roles and c.roles[role]
@@ -1011,6 +1088,7 @@ local function draw()
     return (tab == TAB.talents and emptyTalents or tab == TAB.class and emptyClass or empty)(kind, snap)
   end
   local choice = ns.choice(snap.group)
+  G.migrate(snap, class, choice)
   local r = model(snap, class, G.resolve(snap, class, choice))
   ns.draws = (ns.draws or 0) + 1 -- (for the tests: one draw for a burst of events)
   setFacts(snap, class, r)
@@ -1054,7 +1132,9 @@ local function welcome()
   if not snap or snap.group ~= snap.active then return end
   local _, class = G.page(snap)
   if not class or PrimerChar.welcomed then return end
-  if G.asking(snap, ns.choice(snap.group), class) then
+  local choice = ns.choice(snap.group)
+  G.migrate(snap, class, choice)
+  if G.asking(snap, choice, class) then
     PrimerChar.welcomed = true
     print(ns.PREFIX .. L["You have a talent point to spend. /primer says what to pick."])
   end

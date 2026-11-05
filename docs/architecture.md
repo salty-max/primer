@@ -84,6 +84,41 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
   has no picks and no notes. Change role, at the foot of the page, offers the other
   roles and says a respec costs gold. Saved per talent group: `role`, `pickedBuild`,
   `freestyle`, `driftSeen`, `driftWay`, `notYet`.
+- **Forever asks the spec (5 November 2026, the user's call)**: on Forever Blizzard
+  says every spec is viable, so the choice at level 10 is the spec, and the role
+  follows from it (Paladin: Holy heals, Protection tanks, Retribution deals damage;
+  the Mage's three specs all deal damage). Specs and roles are different things, so
+  the role is shown beside each spec and is never a second question. Era is frozen
+  and asks the role exactly as before. On Forever a spec is a build (one build a
+  tree), so nothing is renamed in the content and no build id moves.
+  - *The question* (`G.specFirst()`, true when the data's game is Forever): with
+    points to spend, none spent, no spec chosen and more than one build in the
+    class, the Level page asks once "Which spec do you want to play?", one line a
+    spec (its name, its role, and the build's own `line` from the content, never
+    invented here) and a Not yet button, said once in chat like the role question
+    (no pop-up, no glow). A spec chosen is `pickBuild`: it stores the build and its
+    role, so the page follows it. A class with one build has nothing to ask.
+  - *Once points are spent* the build follows the points (feasibility,
+    `docs/inference.md`), a pick is kept, a drift is said. When the open specs
+    span two roles and none was picked, the spec is asked (never the role), and
+    "(yours)" is not put on a spec nobody chose.
+  - *The Class tab* lists the specs as the choices, a row each (the spec's name,
+    then its role, "(yours)" on the chosen one, and the build's line), and under
+    them a button "Play <spec>" for each other spec once level 10 is reached, so
+    the choice can be changed. The "Also works" roads stay a build's own and are
+    not on this tab.
+  - *The header and the Class tab* say the class until a spec is chosen or points
+    are spent, then the spec (`hasBuildOf`: the one-role clause is Era's, as the
+    Mage's three damage specs are three guides, not one).
+  - *Change role* becomes *Change spec* on Forever, listing the other specs.
+  - *A stored role* (`PrimerChar` from before): on Forever, a group with a stored
+    `role` and no valid `pickedBuild` takes that role's recommended spec once
+    (`G.migrate`, run when the page draws and when the welcome is asked, only
+    before points are spent: after that the points decide, as for any role); the
+    stored role is kept, never cleared, and no build id is touched.
+  - *Not built*: a spec that can serve two roles (a Feral Druid) asks the role
+    after the spec. A build has one `role` in the content today and Forever has no
+    such class written, so the shape is left for the day a class needs it.
 - **What the page is for (4 November 2026, after the first game test)**: the role
   and build (`view.subjects`) are fixed while the window is open and change only
   on the player's own click or when the window is opened: a point spent, a level or

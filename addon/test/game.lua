@@ -166,8 +166,14 @@ if G.FOREVER then
     GetTreeNodes = function(tree)
       read()
       local out = {}
+      -- (the class the test plays: the Warrior unless UnitClass says another)
+      local _, token = UnitClass("player")
+      local class = 1
+      for id, c in pairs(G.ns.data.classes) do
+        if c.token == token then class = id end
+      end
       for _, c in ipairs(G.ns.data.cells) do
-        if c.class == 1 then out[#out + 1] = 10000 + c.id end
+        if c.class == class then out[#out + 1] = 10000 + c.id end
       end
       out[#out + 1] = EXTRA
       table.sort(out)

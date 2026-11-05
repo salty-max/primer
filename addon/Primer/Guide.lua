@@ -39,6 +39,9 @@ function G.page(snap)
   return "guide", class
 end
 
+-- Forever asks the spec (every spec is viable there, the role follows from it); Era is frozen and asks the role.
+function G.specFirst() return data().game == "forever" end
+
 -- The class's builds in the data's order, or only a role's.
 function G.builds(class, role)
   local out = {}
@@ -66,6 +69,27 @@ function G.recommend(class, role)
   local r = c.roles and c.roles[role]
   if r and data().builds[r.build] then return r.build end
   return G.builds(class, role)[1]
+end
+
+-- The build a group picked, if it is still one of the class's.
+function G.pickedOf(class, choice)
+  for _, id in ipairs(G.builds(class)) do
+    if id == choice.pickedBuild then return id end
+  end
+end
+
+-- Forever: a role stored before the spec was the question (PrimerChar from an earlier version) becomes that role's
+-- recommended spec, once (before points are spent). The role stays stored and no build id is touched. Returns whether it changed anything.
+-- Only before points are spent: after that the stored role already limits the candidates and the points decide the build.
+function G.migrate(snap, class, choice)
+  if not G.specFirst() or G.phase(snap) == "spent" or G.pickedOf(class, choice) then return false end
+  for _, role in ipairs(G.roles(class)) do
+    if role == choice.role then
+      choice.pickedBuild = G.recommend(class, role)
+      return choice.pickedBuild ~= nil
+    end
+  end
+  return false
 end
 
 -- The talent a spell (rank 1's) is, as the character has it: { rank, max,
@@ -617,7 +641,12 @@ function G.asking(snap, choice, class)
     if role == choice.role then return false end
   end
   if G.phase(snap) ~= "choose" then return false end
-  -- (a class with one role has nothing to ask: its page is that role's)
-  if #G.roles(class) < 2 then return false end
+  -- (a class with one role has nothing to ask: its page is that role's. On Forever the question is the spec, so a class
+  -- with one build has nothing to ask, and a class with three damage specs asks)
+  if G.specFirst() then
+    if #G.builds(class) < 2 or G.pickedOf(class, choice) then return false end
+  elseif #G.roles(class) < 2 then
+    return false
+  end
   return choice.notYet == nil or snap.level > choice.notYet
 end

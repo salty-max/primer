@@ -1492,6 +1492,207 @@ if G.FOREVER then
   s.ranks = {}
 end
 
+-- ── Forever asks the spec (the pages, the rules, a stored role from before) ──────────────────────────────────
+if G.FOREVER then
+  local T = s.traits
+  local WARRIOR = UnitClass
+  local function id(spell) return ns.data.talents[spell].id end
+  local function fresh(token, name, classId, level, map, unspent)
+    UnitClass = token == "WARRIOR" and WARRIOR or function() return name, token, classId end
+    PrimerChar.groups, PrimerChar.welcomed = {}, nil
+    ns.view.putOff = nil
+    PrimerFrame:Hide()
+    s.level, s.spells, s.ranks, T.points = level, set(168, 100, 772, 78), {}, unspent or 0
+    for spell, rank in pairs(map or {}) do
+      s.ranks[id(spell)] = rank
+    end
+    ns.reader.reset()
+    s.printed = {}
+  end
+  local function buttonNames()
+    local out = {}
+    for _, b in ipairs(ns.screen.question.buttons) do
+      out[#out + 1] = b[1]
+    end
+    return table.concat(out, ",")
+  end
+
+  -- a Mage at level 10, nothing spent: the spec is the question, the role beside each, no role question
+  fresh("MAGE", "Mage", 8, 10, {}, 1)
+  ns.open(TAB.level)
+  local sc = ns.screen
+  check(
+    sc.question and sc.question.replaces and sc.roles == nil,
+    "Forever, Mage at 10: one question, not a role question"
+  )
+  check(
+    sc.question.text == "You have a talent point to spend. Which spec do you want to play?",
+    "and it asks which spec"
+  )
+  check(sc.specs and #sc.specs == 3, "a line for each of the Mage's three specs")
+  for i, spec in ipairs(sc.specs) do
+    check(
+      spec.role == "damage" and spec.line:find("^%a+, damage%. ") and spec.build == ns.data.classes[8].builds[i],
+      "a spec's line: its name, its role, then the content's line: " .. spec.line
+    )
+    check(
+      spec.line:find(ns.stop(ns.say(ns.data.builds[spec.build].line)), 1, true),
+      "and the line is the content's own"
+    )
+  end
+  check(buttonNames() == "Frost,Fire,Arcane,Not yet", "a button a spec, and Not yet")
+  check(sc.facts[1] == "Mage" and sc.facts[2] == "level 10", "the header says the class until a spec is chosen")
+  s.printed = {}
+  G.fire("PLAYER_LEVEL_UP")
+  G.advance(0.5)
+  check(said("You have a talent point to spend."), "said once in chat")
+  s.printed = {}
+  G.fire("PLAYER_LEVEL_UP")
+  G.advance(0.5)
+  check(not said("You have a talent point to spend."), "and not twice")
+  check(not pageTexts():find("[;!]"), "no semicolon and no exclamation mark on the question")
+
+  -- the Class tab before a spec is chosen: the specs as the choices, none yours, a button each
+  ns.open(TAB.class)
+  sc = ns.screen
+  check(
+    #sc.specs == 3 and not sc.specs[1].mine and not sc.specs[2].mine and not sc.specs[3].mine,
+    "the Class tab: three specs, none yours"
+  )
+  check(sc.title == "Mage" and sc.facts[1] == "Mage", "and the class in the header")
+  check(sc.choose[9] and sc.choose[10] and sc.choose[11], "and a way to choose each")
+
+  -- a spec chosen: its build and its role, the header says the spec, the Class tab marks it
+  ns.open(TAB.level)
+  press("Fire")
+  check(ns.screen.question == nil and ns.screen.facts[1] == "Fire", "Fire chosen: no question, the header says Fire")
+  check(
+    ns.view.subjects[1].build == 10 and ns.choice(1).pickedBuild == 10 and ns.choice(1).role == "damage",
+    "its build and its role are stored"
+  )
+  check(ns.screen.change, "and a way to change it")
+  ns.open(TAB.class)
+  sc = ns.screen
+  check(not sc.specs[1].mine and sc.specs[2].mine and not sc.specs[3].mine, "the Class tab marks Fire (yours)")
+  check(sc.specs[2].line:find("^Damage %(yours%)%. "), "in the row")
+  check(sc.choose[10] == nil and sc.choose[9] and sc.choose[11], "and offers the other two")
+  sc.choose[11]()
+  check(ns.choice(1).pickedBuild == 11 and ns.screen.facts[1] == "Arcane", "Play Arcane: changed from the Class tab")
+  ns.open(TAB.level)
+  ns.screen.change()
+  check(buttonNames() == "Frost,Fire,Cancel", "Change spec: the other specs and Cancel")
+  press("Frost")
+  check(ns.choice(1).pickedBuild == 9 and ns.screen.facts[1] == "Frost", "and Frost is chosen")
+
+  -- Not yet: the plan is drawn, the header still says the class
+  fresh("MAGE", "Mage", 8, 10, {}, 1)
+  ns.open(TAB.level)
+  press("Not yet")
+  check(ns.screen.question == nil and shownRows() > 0, "Forever, Not yet: the plan is drawn")
+  check(
+    ns.screen.facts[1] == "Mage" and ns.choice(1).pickedBuild == nil,
+    "and nothing is stored, the header says the class"
+  )
+
+  -- before level 10 nothing is asked and nothing is chosen
+  fresh("MAGE", "Mage", 8, 2, {}, 0)
+  ns.open(TAB.level)
+  check(ns.screen.question == nil and ns.screen.facts[1] == "Mage", "Forever, Mage at 2: no question, the class")
+  ns.open(TAB.class)
+  check(not ns.screen.specs[1].mine and next(ns.screen.choose) == nil, "and the Class tab offers nothing to choose yet")
+
+  -- points spent in Fire: the build follows the points, the header says the spec
+  local fire = ns.data.builds[10]
+  fresh("MAGE", "Mage", 8, 49, ns.rules.ranksAt(fire, 1, 49), 0)
+  ns.open(TAB.level)
+  check(
+    ns.screen.question == nil and ns.screen.facts[1] == "Fire",
+    "Forever, 40 points, most of them in Fire: the points say Fire, the header says Fire"
+  )
+  ns.open(TAB.class)
+  check(ns.screen.specs[2].mine, "and the Class tab marks Fire")
+  -- a few points leave every spec open: not asked (points are spent), the advised spec is named
+  fresh("MAGE", "Mage", 8, 14, ns.rules.ranksAt(fire, 1, 14), 0)
+  ns.open(TAB.level)
+  check(
+    ns.screen.question == nil and ns.rules.phase(ns.reader.snapshot()) == "spent",
+    "Forever, 5 points: spent, not asked"
+  )
+
+  -- a Warrior at 10: three specs, two roles, the role beside each, a spec chosen takes its role
+  fresh("WARRIOR", "Warrior", 1, 10, {}, 1)
+  ns.open(TAB.level)
+  sc = ns.screen
+  check(sc.specs and #sc.specs == 3 and sc.roles == nil, "Forever, Warrior at 10: three specs")
+  check(
+    sc.specs[1].role == "damage" and sc.specs[2].role == "damage" and sc.specs[3].role == "tank",
+    "Arms and Fury deal damage, Protection tanks"
+  )
+  check(sc.specs[3].line:find("^Protection, tank%. "), "and the line says so")
+  press("Protection")
+  check(
+    ns.choice(1).role == "tank" and ns.choice(1).pickedBuild == 3 and ns.screen.facts[1] == "Protection",
+    "Protection chosen: its role comes with it"
+  )
+
+  -- a role stored before the spec was the question: its recommended spec, once, the role kept
+  fresh("WARRIOR", "Warrior", 1, 10, {}, 1)
+  PrimerChar.groups[1] = { role = "tank" }
+  ns.open(TAB.level)
+  check(ns.screen.question == nil and ns.screen.facts[1] == "Protection", "a stored tank role: Protection, no question")
+  check(ns.choice(1).role == "tank" and ns.choice(1).pickedBuild == 3, "the role is kept, the spec stored once")
+  ns.choice(1).pickedBuild = 2 -- (a later pick is never mapped over)
+  ns.rules.migrate(ns.reader.snapshot(), 1, ns.choice(1))
+  check(ns.choice(1).pickedBuild == 2, "and a pick is never overwritten")
+  fresh("WARRIOR", "Warrior", 1, 10, {}, 1)
+  PrimerChar.groups[1] = { role = "damage" }
+  ns.open(TAB.level)
+  check(
+    ns.choice(1).pickedBuild == ns.data.classes[1].roles.damage.build and ns.screen.question == nil,
+    "a stored damage role: the damage spec we advise"
+  )
+  fresh("WARRIOR", "Warrior", 1, 10, {}, 1)
+  PrimerChar.groups[1] = { role = "heal" } -- (a role the class has no build for is no role)
+  ns.open(TAB.level)
+  check(
+    ns.screen.question ~= nil and ns.choice(1).pickedBuild == nil,
+    "a stored role the class lacks: asked, nothing mapped"
+  )
+
+  -- a stored role with points already spent is not turned into a pick: the points decide
+  local fury = ns.data.builds[2]
+  fresh("WARRIOR", "Warrior", 1, 49, ns.rules.ranksAt(fury, 1, 49), 0)
+  PrimerChar.groups[1] = { role = "tank" }
+  ns.open(TAB.level)
+  check(ns.choice(1).pickedBuild == nil, "a stored role with points spent: nothing mapped, the points decide")
+
+  -- a Warrior who put it off and spent a few points: the open specs span two roles, so the spec is asked, not the role
+  fresh("WARRIOR", "Warrior", 1, 10, {}, 1)
+  ns.open(TAB.level)
+  press("Not yet")
+  s.level, T.points = 12, 0
+  s.ranks[id(ns.data.builds[2].path[1].talent)] = 3
+  ns.reader.reset()
+  ns.view.putOff = nil
+  PrimerFrame:Hide()
+  ns.open(TAB.level)
+  check(
+    ns.screen.question
+      and ns.screen.question.text:find("which spec", 1, true) == nil
+      and ns.screen.question.text:find("Which spec", 1, true)
+      and ns.screen.specs
+      and #ns.screen.specs == 3,
+    "Forever, open specs of two roles: the spec is asked, a line each"
+  )
+  check(buttonNames() == "Arms,Fury,Protection,Not yet", "with the specs as the buttons")
+  press("Protection")
+  check(ns.choice(1).role == "tank" and ns.choice(1).pickedBuild == 3, "and the choice takes its role")
+
+  check(ns.rules.specFirst(), "the rules know it is Forever")
+  UnitClass, s.ranks, T.points = WARRIOR, {}, 0
+  PrimerFrame:Hide()
+end
+
 -- ── the minimap command ──────────────────────────────────────────────────────
 SlashCmdList.PRIMER("minimap")
 check(ns.option("minimapHidden") == true, "/primer minimap hides the button")
