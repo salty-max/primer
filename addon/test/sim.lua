@@ -62,7 +62,7 @@ for id, b in pairs(D.builds) do
 end
 if G.FOREVER then
   check(
-    builds == 9
+    builds == 12
       and D.builds[1].key == "warrior-arms"
       and D.builds[2].key == "warrior-fury"
       and D.builds[3].key == "warrior-protection"
@@ -71,8 +71,11 @@ if G.FOREVER then
       and D.builds[11].key == "mage-arcane"
       and D.builds[12].key == "rogue-assassination"
       and D.builds[13].key == "rogue-combat"
-      and D.builds[14].key == "rogue-subtlety",
-    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety"
+      and D.builds[14].key == "rogue-subtlety"
+      and D.builds[15].key == "warlock-affliction"
+      and D.builds[16].key == "warlock-demonology"
+      and D.builds[17].key == "warlock-destruction",
+    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction"
   )
   check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
   check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
@@ -80,6 +83,8 @@ if G.FOREVER then
   check(D.classes[8].roles.damage.build == 9, "Forever: the Mage's one recommended build is Frost")
   check(D.classes[4].token == "ROGUE" and #D.classes[4].builds == 3, "Forever: the Rogue's class")
   check(D.classes[4].roles.damage.build == 13, "Forever: the Rogue's one recommended build is Combat")
+  check(D.classes[9].token == "WARLOCK" and #D.classes[9].builds == 3, "Forever: the Warlock's class")
+  check(D.classes[9].roles.damage.build == 15, "Forever: the Warlock's one recommended build is Affliction")
 else
   check(
     builds == 9 and D.builds[1] and D.builds[2] and D.builds[3],

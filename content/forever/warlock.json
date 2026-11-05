@@ -1,0 +1,2480 @@
+{
+  "class": {
+    "id": 9,
+    "key": "warlock",
+    "token": "WARLOCK",
+    "name": "Warlock",
+    "text": "Mana and health are both your money. Life Tap turns one into the other, and Drain Life turns a monster's health into yours. Shadow Bolt and Immolate are yours from the start, Corruption comes at 4, Bane of Agony and Fear at 8. A demon from a class quest fights beside you, and every line below says what it should be doing.",
+    "card": {
+      "caresAbout": "mana and health as one purse, what is ticking on the monster, shards in the bag, and what your demon is hitting",
+      "vocabulary": "cast, tick, drain, tap, shard, demon, wand, Bane, Curse",
+      "soundsLike": "patient and a little grim, a trainer who tells you the cost before the cast. A warlock line says what it costs, then what it buys",
+      "neverSays": "rage, swing as the main action, holy, anything fiendish (\"dark powers\", \"the damned\", \"pact with\")",
+      "test": "could it be read while the Bane ticks?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Affliction is the build this page advises, because it is the one most guides level and it asks the least of your demon. Demonology is the sturdier one, with a demon that does much of the killing. Destruction is the slowest to level and the hungriest for mana."
+      }
+    ],
+    "overview": {
+      "who": "You stand back and let damage over time do the work while a demon holds the monster. The craft is knowing what to put on a monster, and when to stop spending and shoot it down with the wand.",
+      "good": "Damage on two monsters at once, a demon that fights for you, and not stopping. You turn health into mana and drain it back from the monster, and Fear sends a second one away.",
+      "bad": "Being caught. Your armour is thin, your casts are slow, and a demon that dies leaves you facing the monster alone. Shards run out if you forget them.",
+      "resource": "Mana, and health you can spend as mana. Life Tap turns health into mana, and Drain Life gives it back. Shards live in your bag and pay for summons and stones: a kill under Drain Soul gives one.",
+      "levelling": "Put your damage over time on, let the demon hold the monster, shoot it down with the wand. Pull a second monster when the first is half dead. Life Tap between pulls and keep a shard or two.",
+      "ten": "You get your first talent point and pick a spec. Affliction is the one most guides level and Demonology is the sturdy one. Your Voidwalker quest is at 10 too, and a respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "warlock-affliction",
+        "reason": "Most guides level Affliction. It puts damage over time on two monsters at once and heals with Drain Life, while a demon holds one."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 15,
+      "key": "warlock-affliction",
+      "name": "Affliction",
+      "role": "damage",
+      "tree": 302,
+      "checked": "2026-11-05",
+      "intro": "Affliction puts damage over time on a monster and heals you from the drain. A demon holds one monster while you work on the other. Most guides call it the fastest way to level a Warlock.",
+      "line": "Bane of Agony, Corruption and Drain Life, with a demon holding the monster. The fastest way to level, and busy.",
+      "pathNote": "(41 points in Affliction, then 10 in Demonology for the demon.)",
+      "split": "the last points and the demon. Mobalytics' Crix, the newest, leaves Siphon Life and Wrack for the end. Kargoz and Icy Veins take Siphon Life at 30, and Wrack when it opens at 40. Kargoz also respecs at 22 into a build that drains. The order here is Crix's.",
+      "dry": "Drain Life is weak until your thirties, so keep the wand in your hand until then.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 17810,
+          "rank": 5,
+          "why": "Corruption becomes instant at full ranks, so you cast it as you walk and put it on a second monster. It is the spell you cast most."
+        },
+        {
+          "points": [
+            6,
+            10
+          ],
+          "level": [
+            15,
+            19
+          ],
+          "talent": 18174,
+          "rank": 5,
+          "why": "Fewer missed spells and less threat on you. A missed damage over time spell is mana gone for nothing, so this comes before the damage talents."
+        },
+        {
+          "points": [
+            11,
+            12
+          ],
+          "level": [
+            20,
+            21
+          ],
+          "talent": 18218,
+          "rank": 2,
+          "why": "Your Affliction spells reach further, so you open from farther away and your demon has time to take the monster first."
+        },
+        {
+          "points": [
+            13,
+            15
+          ],
+          "level": [
+            22,
+            24
+          ],
+          "talent": 403511,
+          "rank": 3,
+          "why": "Drain Life hurts and heals more. The build leans on it: the monster hits you, and you take the health back."
+        },
+        {
+          "points": [
+            16,
+            17
+          ],
+          "level": [
+            25,
+            26
+          ],
+          "talent": 18094,
+          "rank": 2,
+          "why": "Corruption and Drain Life ticks can make your next Shadow Bolt instant. Spend it at once, on the monster with the most health left."
+        },
+        {
+          "points": [
+            18,
+            20
+          ],
+          "level": [
+            27,
+            29
+          ],
+          "talent": 17783,
+          "rank": 3,
+          "why": "A hit mostly no longer pushes back your Drain Life. Without it a monster in melee ruins the drain you took it for."
+        },
+        {
+          "points": [
+            21,
+            23
+          ],
+          "level": [
+            30,
+            32
+          ],
+          "talent": 17804,
+          "rank": 3,
+          "why": "Your drains hit and heal harder for every other Affliction effect on the target. Put Bane of Agony and Corruption on first, then drain."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 427712,
+          "rank": 2,
+          "why": "When your damage over time spells and drains crit, they crit much harder. It pays most with Malevolence and Shadow Mastery behind it."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 18271,
+          "rank": 5,
+          "why": "All your Shadow damage and drained life rises. Nearly everything you cast is Shadow, so it counts on every pull."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 427712,
+          "rank": 3,
+          "why": "The last rank of the bigger crits. Corruption and Bane of Agony crit often enough that you feel it."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 18769,
+          "rank": 5,
+          "why": "Your demon hits harder. A Warlock fights two monsters at once by letting the demon do the work on one of them."
+        },
+        {
+          "points": [
+            37,
+            38
+          ],
+          "level": [
+            46,
+            47
+          ],
+          "talent": 1225214,
+          "rank": 2,
+          "why": "Your demon heals from the damage you deal and gets mana back when you Life Tap. It stays alive and keeps fighting."
+        },
+        {
+          "points": [
+            39,
+            43
+          ],
+          "level": [
+            48,
+            52
+          ],
+          "talent": 1310949,
+          "rank": 5,
+          "why": "More crits on your Shadow spells. Pandemic makes each crit hit much harder, so the two work as a pair."
+        },
+        {
+          "points": [
+            44,
+            46
+          ],
+          "level": [
+            53,
+            55
+          ],
+          "talent": 18731,
+          "rank": 3,
+          "why": "More health and mana for your demon, and more mana for you. The demon lives longer, and you have more mana to spend."
+        },
+        {
+          "points": [
+            47,
+            48
+          ],
+          "level": [
+            56,
+            57
+          ],
+          "talent": 18827,
+          "rank": 2,
+          "why": "Bane of Agony hurts a little more. You cast it on every monster, so a small rise adds up."
+        },
+        {
+          "points": [
+            49,
+            50
+          ],
+          "level": [
+            58,
+            59
+          ],
+          "talent": 437032,
+          "rank": 2,
+          "why": "A monster that dies while you drain its soul brings your mana back faster for a short while. Finish a kill with Drain Soul."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 18265,
+          "rank": 1,
+          "why": "A damage over time spell that heals you. It pays on a monster that lives for a few ticks, and not on one about to die."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 688,
+                "name": "Summon Imp",
+                "if": "when it is not out",
+                "why": "it fights for you while you cast"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "it raises your armour and health regeneration"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "from as far away as it reaches",
+                "why": "it burns while the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "on a monster that will live a while",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "when it is not on the monster",
+                "why": "it burns while you do something else"
+              },
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 686,
+                "name": "Shadow Bolt",
+                "why": "the plain hit, for when nothing else is worth the mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Your Voidwalker quest is at 10. Corruption is instant at 14. Bane of Agony first, so the demon takes the monster, then Corruption, Immolate, and the wand.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "it raises your armour and health regeneration"
+              },
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "first, on the monster your demon holds",
+                "why": "it starts slowly, so your demon takes the monster first"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "if the monster will live to burn",
+                "why": "it needs time to pay back its mana"
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "if": "when you need health",
+                "why": "it takes the monster's health into yours"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "text": "Torment",
+                "if": "when a monster turns on you",
+                "why": "your Voidwalker takes it back"
+              },
+              {
+                "text": "Sacrifice",
+                "if": "when your health is low",
+                "why": "the Voidwalker dies and shields you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "The Succubus at 20 hits harder than the Voidwalker. Let your demon go in, put your damage over time on, and drain the monster when it reaches you. Fel Concentration by 29 keeps the drain going.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 712,
+                "name": "Summon Succubus",
+                "if": "when it is not out",
+                "why": "it hits harder than your other demons"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "Demon Armor replaces it at 20 and is stronger",
+                "best": [
+                  706,
+                  687
+                ]
+              },
+              {
+                "spell": 440892,
+                "name": "Curse of the Elements",
+                "if": "on a monster that lives a while",
+                "why": "it raises the magic damage the monster takes"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "when it is not on the monster",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "if the monster will live to burn",
+                "why": "it needs time to pay back its mana"
+              },
+              {
+                "spell": 686,
+                "name": "Shadow Bolt",
+                "if": "when Nightfall lights up",
+                "why": "the next Shadow Bolt is instant",
+                "need": {
+                  "talents": [
+                    18094
+                  ]
+                }
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "if": "when it reaches you or you need health",
+                "why": "it hurts the monster and heals you"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 691,
+                "name": "Summon Felhunter",
+                "if": "against a monster that casts",
+                "why": "Devour Magic takes a spell effect off you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Shadow Mastery and Pandemic make every tick hit harder. Death Coil at 42 heals you. Drain Life is your main cast now, and Siphon Life comes with your last point.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 712,
+                "name": "Summon Succubus",
+                "if": "when it is not out",
+                "why": "it hits harder than your other demons"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "Demon Armor replaces it at 20 and is stronger",
+                "best": [
+                  706,
+                  687
+                ]
+              },
+              {
+                "spell": 440892,
+                "name": "Curse of the Elements",
+                "if": "on a monster that lives a while",
+                "why": "it raises the magic damage the monster takes"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "when it is not on the monster",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "if the monster will live to burn",
+                "why": "it needs time to pay back its mana"
+              },
+              {
+                "spell": 686,
+                "name": "Shadow Bolt",
+                "if": "when Nightfall lights up",
+                "why": "the next Shadow Bolt is instant",
+                "need": {
+                  "talents": [
+                    18094
+                  ]
+                }
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "why": "it hurts the monster and heals you"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 18265,
+                "name": "Siphon Life",
+                "if": "on a monster that will live a while",
+                "why": "it heals you each tick",
+                "need": {
+                  "talents": [
+                    18265
+                  ]
+                },
+                "talentSpell": 18265
+              },
+              {
+                "spell": 6789,
+                "name": "Death Coil",
+                "if": "when a fight goes wrong",
+                "why": "the monster runs and you heal"
+              },
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 691,
+                "name": "Summon Felhunter",
+                "if": "against a monster that casts",
+                "why": "Devour Magic takes a spell effect off you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Warlock levelling guide (Crix, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/warlock-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Affliction Warlock levelling (Kargoz, 14 October 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/kargoz/classes/1-60-affliction-warlock-leveling-guide-wands-talents-rotation-macros-tips",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Affliction Warlock levelling (updated 3 November 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/affliction-warlock-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Method, Warlock levelling (3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-warlock-leveling-guide-and-talents",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Warcraft Tavern, Warlock levelling (beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/warlock-leveling/",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "wowforeverbuilds, Warlock levelling (updated 2 November 2026)",
+          "url": "https://wowforeverbuilds.com/leveling/warlock",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Maxroll, Warlock levelling (30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/warlock-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Blizzard, Forever beta development notes (class changes of 3 November 2026)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/2360696",
+          "read": "2026-11-05"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "key": "warlock-demonology",
+      "name": "Demonology",
+      "role": "damage",
+      "tree": 303,
+      "checked": "2026-11-05",
+      "intro": "Demonology turns your demon into the other half of your damage, and Soul Link shares what hits you with it. It is the sturdy way to play a Warlock, with fewer spells to juggle.",
+      "line": "A strong demon, Searing Pain to mark the monster, Soul Link to share the hits. The sturdy way to level.",
+      "pathNote": "(31 points in Demonology, then 20 in Affliction for instant Corruption and the drain.)",
+      "split": "the Affliction points. Kargoz takes one point of Corruption at 10 and finishes it after 41, and he says a start in Affliction with a respec at 35 is also good. Warcraft Tavern would respec at 27. Crix's page has a Demonology tab that could not be read. The last point is ours.",
+      "dry": "A demon that dies ends your Soul Link, so keep it alive.",
+      "path": [
+        {
+          "points": [
+            1,
+            1
+          ],
+          "level": [
+            10,
+            10
+          ],
+          "talent": 17810,
+          "rank": 1,
+          "why": "Corruption casts faster, and you start using it now. More ranks come later and make it instant."
+        },
+        {
+          "points": [
+            2,
+            6
+          ],
+          "level": [
+            11,
+            15
+          ],
+          "talent": 18769,
+          "rank": 5,
+          "why": "Every demon you have hits harder. In this build the demon does much of the killing, so it comes first."
+        },
+        {
+          "points": [
+            7,
+            8
+          ],
+          "level": [
+            16,
+            17
+          ],
+          "talent": 1225214,
+          "rank": 2,
+          "why": "Your demon heals from the damage you deal and gets mana back when you Life Tap. It tanks for longer without you stopping to heal it."
+        },
+        {
+          "points": [
+            9,
+            11
+          ],
+          "level": [
+            18,
+            20
+          ],
+          "talent": 18705,
+          "rank": 3,
+          "why": "The Voidwalker's taunt, shield and heal work better. It is the demon that holds one monster while you work on another."
+        },
+        {
+          "points": [
+            12,
+            13
+          ],
+          "level": [
+            21,
+            22
+          ],
+          "talent": 18709,
+          "rank": 2,
+          "why": "Summoning a demon is faster and costs less mana. Swapping demons for the job is part of this build, so it should not cost a pull."
+        },
+        {
+          "points": [
+            14,
+            16
+          ],
+          "level": [
+            23,
+            25
+          ],
+          "talent": 18754,
+          "rank": 3,
+          "why": "Succubus and Incubus hit and charm better. Worth it when the Succubus is your demon for single monsters."
+        },
+        {
+          "points": [
+            17,
+            19
+          ],
+          "level": [
+            26,
+            28
+          ],
+          "talent": 1293695,
+          "rank": 3,
+          "why": "Searing Pain marks a monster, and your demon's next three hits on it hurt more. Mark whatever your demon is fighting."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 18708,
+          "rank": 1,
+          "why": "Your next summon is much faster and costs half the mana. Use it to swap demons in the middle of a fight."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 18788,
+          "rank": 1,
+          "why": "Gives up your demon for a bonus that lasts. You will not use it until Demonic Pact lets you keep the bonus and call another demon."
+        },
+        {
+          "points": [
+            22,
+            22
+          ],
+          "level": [
+            31,
+            31
+          ],
+          "talent": 19028,
+          "rank": 1,
+          "why": "A share of the damage you take goes to your demon, and you both hit harder. It is why the build is sturdy, so keep the demon alive."
+        },
+        {
+          "points": [
+            23,
+            25
+          ],
+          "level": [
+            32,
+            34
+          ],
+          "talent": 412732,
+          "rank": 3,
+          "why": "You and your demon gain spell damage that grows with your level while a demon is out. Keep one out at all times."
+        },
+        {
+          "points": [
+            26,
+            26
+          ],
+          "level": [
+            35,
+            35
+          ],
+          "talent": 18731,
+          "rank": 1,
+          "why": "More health and mana for your demon, and more mana for you. It is a spare point that opens the way to Master Demonologist."
+        },
+        {
+          "points": [
+            27,
+            31
+          ],
+          "level": [
+            36,
+            40
+          ],
+          "talent": 23785,
+          "rank": 5,
+          "why": "You and the demon you have out gain a bonus that depends on which demon it is. Read which one yours gives before you swap."
+        },
+        {
+          "points": [
+            32,
+            32
+          ],
+          "level": [
+            41,
+            41
+          ],
+          "talent": 425464,
+          "rank": 1,
+          "why": "Your Demonic Sacrifice stays on when you summon a different demon. Sacrifice the Imp, then use the Voidwalker or the Succubus."
+        },
+        {
+          "points": [
+            33,
+            36
+          ],
+          "level": [
+            42,
+            45
+          ],
+          "talent": 17810,
+          "rank": 5,
+          "why": "Corruption is now instant, so you cast it as you walk and put it on a second monster."
+        },
+        {
+          "points": [
+            37,
+            38
+          ],
+          "level": [
+            46,
+            47
+          ],
+          "talent": 18218,
+          "rank": 2,
+          "why": "Your Affliction spells reach further, so you open from farther away while your demon runs in."
+        },
+        {
+          "points": [
+            39,
+            41
+          ],
+          "level": [
+            48,
+            50
+          ],
+          "talent": 18174,
+          "rank": 3,
+          "why": "Fewer missed spells and less threat on you. A miss is mana spent for nothing."
+        },
+        {
+          "points": [
+            42,
+            44
+          ],
+          "level": [
+            51,
+            53
+          ],
+          "talent": 17783,
+          "rank": 3,
+          "why": "A hit mostly no longer pushes back your Drain Life, so the drain works when a monster reaches you."
+        },
+        {
+          "points": [
+            45,
+            45
+          ],
+          "level": [
+            54,
+            54
+          ],
+          "talent": 18288,
+          "rank": 1,
+          "why": "Your next Bane of Agony or Curse of Weakness is stronger, and so is your next Curse of Exhaustion. Cast it just before the Bane."
+        },
+        {
+          "points": [
+            46,
+            46
+          ],
+          "level": [
+            55,
+            55
+          ],
+          "talent": 18827,
+          "rank": 1,
+          "why": "Bane of Agony hurts a little more. You cast it on every monster, so a small rise adds up."
+        },
+        {
+          "points": [
+            47,
+            47
+          ],
+          "level": [
+            56,
+            56
+          ],
+          "talent": 18223,
+          "rank": 1,
+          "why": "A slow for a monster that is running off, or one you are running from. Only one Curse per Warlock can be on a monster."
+        },
+        {
+          "points": [
+            48,
+            49
+          ],
+          "level": [
+            57,
+            58
+          ],
+          "talent": 18094,
+          "rank": 2,
+          "why": "Corruption and Drain Life ticks can make your next Shadow Bolt instant. Spend it at once."
+        },
+        {
+          "points": [
+            50,
+            50
+          ],
+          "level": [
+            59,
+            59
+          ],
+          "talent": 18827,
+          "rank": 2,
+          "why": "Bane of Agony hurts a little more. You cast it on every monster, so a small rise adds up."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 18174,
+          "rank": 4,
+          "why": "The last point is a free choice. A fourth rank of Suppression means fewer misses and less threat on you."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 688,
+                "name": "Summon Imp",
+                "if": "when it is not out",
+                "why": "it fights for you while you cast"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "it raises your armour and health regeneration"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "from as far away as it reaches",
+                "why": "it burns while the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "on a monster that will live a while",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "when it is not on the monster",
+                "why": "it burns while you do something else"
+              },
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 686,
+                "name": "Shadow Bolt",
+                "why": "the plain hit, for when nothing else is worth the mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Your Voidwalker quest is at 10. It holds the monster while you cast, and Unholy Power makes it hit harder. Corruption casts faster with its first point.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "it raises your armour and health regeneration"
+              },
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "first, on the monster your demon holds",
+                "why": "it starts slowly, so your demon takes the monster first"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "if the monster will live to burn",
+                "why": "it needs time to pay back its mana"
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "if": "when you need health",
+                "why": "it takes the monster's health into yours"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "text": "Torment",
+                "if": "when a monster turns on you",
+                "why": "your Voidwalker takes it back"
+              },
+              {
+                "text": "Sacrifice",
+                "if": "when your health is low",
+                "why": "the Voidwalker dies and shields you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Searing Pain marks a monster for your demon from 28. Fel Domination swaps a demon fast. Soul Link at 31 shares your damage with the demon, so keep it alive. Do not Sacrifice a demon yet.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "Demon Armor replaces it at 20 and is stronger",
+                "best": [
+                  706,
+                  687
+                ]
+              },
+              {
+                "spell": 19028,
+                "name": "Soul Link",
+                "if": "when you summon a demon",
+                "why": "some of the damage you take goes to it",
+                "need": {
+                  "talents": [
+                    19028
+                  ]
+                },
+                "talentSpell": 19028
+              },
+              {
+                "spell": 440892,
+                "name": "Curse of the Elements",
+                "if": "on a monster that lives a while",
+                "why": "it raises the magic damage the monster takes"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 5676,
+                "name": "Searing Pain",
+                "if": "to mark the monster your demon fights",
+                "why": "its next three hits hurt more",
+                "need": {
+                  "talents": [
+                    1293695
+                  ]
+                }
+              },
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "when it is not on the monster",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "if the monster will live to burn",
+                "why": "it needs time to pay back its mana"
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "if": "when you need health",
+                "why": "it takes the monster's health into yours"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 712,
+                "name": "Summon Succubus",
+                "if": "when it is not out",
+                "why": "it hits harder than your other demons"
+              },
+              {
+                "spell": 691,
+                "name": "Summon Felhunter",
+                "if": "against a monster that casts",
+                "why": "Devour Magic takes a spell effect off you"
+              },
+              {
+                "spell": 18708,
+                "name": "Fel Domination",
+                "if": "to swap demons in a fight",
+                "why": "your next summon is fast and cheap",
+                "need": {
+                  "talents": [
+                    18708
+                  ]
+                },
+                "talentSpell": 18708
+              },
+              {
+                "text": "Torment",
+                "if": "when a monster turns on you",
+                "why": "your Voidwalker takes it back"
+              },
+              {
+                "text": "Sacrifice",
+                "if": "when your health is low",
+                "why": "the Voidwalker dies and shields you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Demonic Pact at 41 keeps the Imp's bonus when you call another demon. Sacrifice the Imp, then call the Succubus or Voidwalker, never the Imp again. Corruption is instant from 45.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 688,
+                "name": "Summon Imp",
+                "if": "once, to sacrifice it",
+                "why": "Demonic Sacrifice needs a demon to give up",
+                "need": {
+                  "talents": [
+                    425464
+                  ]
+                }
+              },
+              {
+                "spell": 18788,
+                "name": "Demonic Sacrifice",
+                "if": "with the Imp out, once",
+                "why": "you keep a Shadow damage bonus for a long while",
+                "need": {
+                  "talents": [
+                    425464
+                  ]
+                },
+                "talentSpell": 18788
+              },
+              {
+                "spell": 712,
+                "name": "Summon Succubus",
+                "if": "after the sacrifice, or when it is gone",
+                "why": "Demonic Pact keeps the bonus on",
+                "need": {
+                  "talents": [
+                    425464
+                  ]
+                }
+              },
+              {
+                "spell": 19028,
+                "name": "Soul Link",
+                "if": "when you summon a demon",
+                "why": "some of the damage you take goes to it",
+                "need": {
+                  "talents": [
+                    19028
+                  ]
+                },
+                "talentSpell": 19028
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "Demon Armor replaces it at 20 and is stronger",
+                "best": [
+                  706,
+                  687
+                ]
+              }
+            ],
+            "loop": [
+              {
+                "spell": 5676,
+                "name": "Searing Pain",
+                "if": "to mark the monster your demon fights",
+                "why": "its next three hits hurt more",
+                "need": {
+                  "talents": [
+                    1293695
+                  ]
+                }
+              },
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "when it is not on the monster",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "if the monster will live to burn",
+                "why": "it needs time to pay back its mana"
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "if": "when you need health",
+                "why": "it takes the monster's health into yours"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 6789,
+                "name": "Death Coil",
+                "if": "when a fight goes wrong",
+                "why": "the monster runs and you heal"
+              },
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 691,
+                "name": "Summon Felhunter",
+                "if": "against a monster that casts",
+                "why": "Devour Magic takes a spell effect off you"
+              },
+              {
+                "spell": 440892,
+                "name": "Curse of the Elements",
+                "if": "on a monster that lives a while",
+                "why": "it raises the magic damage the monster takes"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mobalytics, Demonology Warlock levelling (Kargoz, 5 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/kargoz/classes/1-60-demonology-warlock-leveling-guide-talents-rotation-wands-tips-and-tricks",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Warlock levelling guide (Crix, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/warlock-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Demonology Warlock levelling (updated 21 October 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/demonology-warlock-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Warcraft Tavern, Warlock levelling (beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/warlock-leveling/",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "wowforeverbuilds, Warlock levelling (updated 2 November 2026)",
+          "url": "https://wowforeverbuilds.com/leveling/warlock",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Maxroll, Warlock levelling (30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/warlock-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Blizzard, Forever beta development notes (class changes of 3 November 2026)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/2360696",
+          "read": "2026-11-05"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "key": "warlock-destruction",
+      "name": "Destruction",
+      "role": "damage",
+      "tree": 301,
+      "checked": "2026-11-05",
+      "intro": "Destruction casts big hits and finishes with instants. It kills fast when the mana lasts, and the mana does not last. Guides call it the slowest Warlock to level.",
+      "line": "Immolate, Conflagrate, Shadowburn and Incinerate. Hits hard, drinks mana, and is slow to level.",
+      "pathNote": "(33 points in Destruction, then 14 in Affliction and 4 in Demonology.)",
+      "split": "almost everything. Icy Veins and Warcraft Tavern give the road to 40, and they agree on Bane, then Aftermath, Shadowburn at 20 and Conflagrate at 25. Method puts Conflagrate at 29. wowforeverbuilds' two lists open with Improved Shadow Bolt. The last 18 points are ours, built to the end state of Crix's level 60 Destruction page.",
+      "dry": "Until Shadow and Flame, Conflagrate eats the Immolate, so cast it late in the burn.",
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 17788,
+          "rank": 5,
+          "why": "Shadow Bolt and Immolate cast faster, and Incinerate will too. Everything you do in this build is a cast, so it comes first."
+        },
+        {
+          "points": [
+            6,
+            10
+          ],
+          "level": [
+            15,
+            19
+          ],
+          "talent": 18119,
+          "rank": 5,
+          "why": "Immolate hits harder when you cast it, and Conflagrate later slows the monster. Immolate opens every pull."
+        },
+        {
+          "points": [
+            11,
+            11
+          ],
+          "level": [
+            20,
+            20
+          ],
+          "talent": 17877,
+          "rank": 1,
+          "why": "An instant blast that gives a shard back if the monster dies soon after. Use it to finish a monster that would take one more cast."
+        },
+        {
+          "points": [
+            12,
+            14
+          ],
+          "level": [
+            21,
+            23
+          ],
+          "talent": 17778,
+          "rank": 3,
+          "why": "Your Destruction spells cost less mana. This build casts almost everything and runs short of mana, so it matters."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 17959,
+          "rank": 1,
+          "why": "Critical hits from your Destruction spells hit much harder. A crit becomes a large part of your damage."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 1293817,
+          "rank": 1,
+          "why": "An instant hit on a monster burning from Immolate, and it uses the Immolate up until Shadow and Flame. Cast it late so little is lost."
+        },
+        {
+          "points": [
+            17,
+            20
+          ],
+          "level": [
+            26,
+            29
+          ],
+          "talent": 17959,
+          "rank": 5,
+          "why": "Critical hits from your Destruction spells hit much harder. A crit becomes a large part of your damage."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 1225228,
+          "rank": 1,
+          "why": "Part of the damage you do to other monsters also hits the one carrying it. Put it on a second monster and the first one's damage reaches it."
+        },
+        {
+          "points": [
+            22,
+            24
+          ],
+          "level": [
+            31,
+            33
+          ],
+          "talent": 412751,
+          "rank": 3,
+          "why": "Conflagrate crits far more often, and it is the instant you press whenever it is ready."
+        },
+        {
+          "points": [
+            25,
+            27
+          ],
+          "level": [
+            34,
+            36
+          ],
+          "talent": 17927,
+          "rank": 3,
+          "why": "Every Destruction spell hits a little harder, and Searing Pain crits more often. It lifts everything you cast."
+        },
+        {
+          "points": [
+            28,
+            30
+          ],
+          "level": [
+            37,
+            39
+          ],
+          "talent": 426316,
+          "rank": 3,
+          "why": "Conflagrate makes your Shadow damage stronger for a while, and Shadowburn does the same for Fire. Keep both ready and you hit harder all fight."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 412758,
+          "rank": 1,
+          "why": "Your filler from now on: a Fire hit that does more on a monster burning from Immolate. It takes over from Shadow Bolt as the cast you press most."
+        },
+        {
+          "points": [
+            32,
+            33
+          ],
+          "level": [
+            41,
+            42
+          ],
+          "talent": 426316,
+          "rank": 5,
+          "why": "Conflagrate makes your Shadow damage stronger for a while, and Shadowburn does the same for Fire. Keep both ready and you hit harder all fight."
+        },
+        {
+          "points": [
+            34,
+            38
+          ],
+          "level": [
+            43,
+            47
+          ],
+          "talent": 18174,
+          "rank": 5,
+          "why": "Fewer missed spells and less threat on you. A missed Incinerate is a whole cast wasted."
+        },
+        {
+          "points": [
+            39,
+            40
+          ],
+          "level": [
+            48,
+            49
+          ],
+          "talent": 18182,
+          "rank": 2,
+          "why": "Life Tap gives more mana. This build runs short of mana, so more per tap means fewer stops to drink."
+        },
+        {
+          "points": [
+            41,
+            43
+          ],
+          "level": [
+            50,
+            52
+          ],
+          "talent": 17810,
+          "rank": 3,
+          "why": "Corruption casts faster. It is the damage over time spell you keep on every monster beside Immolate and Bane of Agony."
+        },
+        {
+          "points": [
+            44,
+            44
+          ],
+          "level": [
+            53,
+            53
+          ],
+          "talent": 18288,
+          "rank": 1,
+          "why": "Your next Bane of Agony is stronger. It is a spare point once the rest is taken."
+        },
+        {
+          "points": [
+            45,
+            47
+          ],
+          "level": [
+            54,
+            56
+          ],
+          "talent": 427712,
+          "rank": 3,
+          "why": "Crits from Corruption and Bane of Agony hit much harder. The build keeps both on a monster, so you feel it."
+        },
+        {
+          "points": [
+            48,
+            51
+          ],
+          "level": [
+            57,
+            60
+          ],
+          "talent": 18769,
+          "rank": 4,
+          "why": "Your demon hits harder. The last spare points go to the demon, since it fights on while you cast."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 688,
+                "name": "Summon Imp",
+                "if": "when it is not out",
+                "why": "it fights for you while you cast"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "it raises your armour and health regeneration"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "from as far away as it reaches",
+                "why": "it burns while the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "on a monster that will live a while",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "when it is not on the monster",
+                "why": "it burns while you do something else"
+              },
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 686,
+                "name": "Shadow Bolt",
+                "why": "the plain hit, for when nothing else is worth the mana"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Bane makes Shadow Bolt and Immolate cast faster, and Aftermath makes Immolate open harder. Your Voidwalker holds the monster while you stand and cast.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "it raises your armour and health regeneration"
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "from as far away as it reaches",
+                "why": "it burns while the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "when it is not on the monster",
+                "why": "it burns while you do something else"
+              },
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "on a monster that will live a while",
+                "why": "it starts slowly, so your demon takes the monster first"
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "if": "when you need health",
+                "why": "it takes the monster's health into yours"
+              },
+              {
+                "spell": 686,
+                "name": "Shadow Bolt",
+                "why": "it is your hardest hit, and the Bane talent speeds it"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "text": "Torment",
+                "if": "when a monster turns on you",
+                "why": "your Voidwalker takes it back"
+              },
+              {
+                "text": "Sacrifice",
+                "if": "when your health is low",
+                "why": "the Voidwalker dies and shields you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Shadowburn at 20 and Conflagrate at 25 are instants, so they work on the move and to finish. Conflagrate uses the Immolate up, so hit it late.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 712,
+                "name": "Summon Succubus",
+                "if": "when it is not out",
+                "why": "it hits harder than your other demons"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "Demon Armor replaces it at 20 and is stronger",
+                "best": [
+                  706,
+                  687
+                ]
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "from as far away as it reaches",
+                "why": "it burns while the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1293817,
+                "name": "Conflagrate",
+                "if": "on a monster burning from Immolate",
+                "why": "it is an instant hit, and it uses the Immolate up",
+                "need": {
+                  "talents": [
+                    1293817
+                  ]
+                },
+                "talentSpell": 1293817
+              },
+              {
+                "spell": 17877,
+                "name": "Shadowburn",
+                "if": "to finish a monster that is nearly dead",
+                "why": "it is instant, and a kill gives the shard back",
+                "need": {
+                  "talents": [
+                    17877
+                  ]
+                },
+                "talentSpell": 17877
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "when it is not on the monster",
+                "why": "it burns while you do something else"
+              },
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "on a monster that will live a while",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 686,
+                "name": "Shadow Bolt",
+                "why": "it is your hardest hit, and the Bane talent speeds it"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 697,
+                "name": "Summon Voidwalker",
+                "if": "when it is not out",
+                "why": "it holds a monster while you cast"
+              },
+              {
+                "spell": 691,
+                "name": "Summon Felhunter",
+                "if": "against a monster that casts",
+                "why": "Devour Magic takes a spell effect off you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              },
+              {
+                "spell": 689,
+                "name": "Drain Life",
+                "if": "when you need health",
+                "why": "it takes the monster's health into yours"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Incinerate at 40 is your filler. Keep Conflagrate and Shadowburn ready and Shadow and Flame keeps your damage up.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 712,
+                "name": "Summon Succubus",
+                "if": "when it is not out",
+                "why": "it hits harder than your other demons"
+              },
+              {
+                "spell": 687,
+                "name": "Demon Skin",
+                "if": "before the first pull",
+                "why": "Demon Armor replaces it at 20 and is stronger",
+                "best": [
+                  706,
+                  687
+                ]
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "from as far away as it reaches",
+                "why": "it burns while the monster walks to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1293817,
+                "name": "Conflagrate",
+                "if": "whenever it is ready, on a burning monster",
+                "why": "it is instant, and Shadow and Flame keeps the Immolate",
+                "need": {
+                  "talents": [
+                    1293817
+                  ]
+                },
+                "talentSpell": 1293817
+              },
+              {
+                "spell": 17877,
+                "name": "Shadowburn",
+                "if": "to finish a monster that is nearly dead",
+                "why": "it is instant, and a kill gives the shard back",
+                "need": {
+                  "talents": [
+                    17877
+                  ]
+                },
+                "talentSpell": 17877
+              },
+              {
+                "spell": 348,
+                "name": "Immolate",
+                "if": "when it is not on the monster",
+                "why": "it burns while you do something else"
+              },
+              {
+                "spell": 980,
+                "name": "Bane of Agony",
+                "if": "on a monster that will live a while",
+                "why": "it hurts most at the end, so cast it early"
+              },
+              {
+                "spell": 172,
+                "name": "Corruption",
+                "if": "when it is not on the monster",
+                "why": "it ticks while you do something else"
+              },
+              {
+                "spell": 412758,
+                "name": "Incinerate",
+                "why": "it hits harder on a monster burning from Immolate",
+                "need": {
+                  "talents": [
+                    412758
+                  ]
+                },
+                "talentSpell": 412758
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1225228,
+                "name": "Bane of Havoc",
+                "if": "on a second monster",
+                "why": "your damage on the first also hits it",
+                "need": {
+                  "talents": [
+                    1225228
+                  ]
+                },
+                "talentSpell": 1225228
+              },
+              {
+                "spell": 6789,
+                "name": "Death Coil",
+                "if": "when a fight goes wrong",
+                "why": "the monster runs and you heal"
+              },
+              {
+                "spell": 5782,
+                "name": "Fear",
+                "if": "when a second monster joins",
+                "why": "it runs off and stops hitting you"
+              },
+              {
+                "spell": 691,
+                "name": "Summon Felhunter",
+                "if": "against a monster that casts",
+                "why": "Devour Magic takes a spell effect off you"
+              },
+              {
+                "spell": 1120,
+                "name": "Drain Soul",
+                "if": "to finish a monster, if you need a shard",
+                "why": "a monster killed under it always gives a shard"
+              },
+              {
+                "spell": 440892,
+                "name": "Curse of the Elements",
+                "if": "on a monster that lives a while",
+                "why": "it raises the magic damage the monster takes"
+              }
+            ],
+            "between": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "after a fight, if your health is high",
+                "why": "it turns spare health into the mana you need"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              },
+              {
+                "spell": 6201,
+                "name": "Create Healthstone",
+                "if": "when you have none",
+                "why": "it heals you, in a fight too, and costs a shard"
+              }
+            ],
+            "low": [
+              {
+                "spell": 1454,
+                "name": "Life Tap",
+                "if": "when mana is low and health is high",
+                "why": "it turns health into mana, and a drain gives it back"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "the wand costs no mana, and your damage keeps ticking"
+              }
+            ]
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "Icy Veins, Destruction Warlock levelling (updated 21 October 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/destruction-warlock-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Warcraft Tavern, Warlock levelling (beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/warlock-leveling/",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Method, Warlock levelling (3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-warlock-leveling-guide-and-talents",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "wowforeverbuilds, Warlock levelling (updated 2 November 2026)",
+          "url": "https://wowforeverbuilds.com/leveling/warlock",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Destruction Warlock guide (Crix, 2 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/destruction-warlock-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Warlock levelling guide (Crix, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/warlock-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Blizzard, Forever beta development notes (class changes of 3 November 2026)",
+          "url": "https://us.forums.blizzard.com/en/wow/t/2360696",
+          "read": "2026-11-05"
+        }
+      ]
+    }
+  ]
+}
