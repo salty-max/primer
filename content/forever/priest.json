@@ -1,0 +1,2876 @@
+{
+  "class": {
+    "id": 5,
+    "key": "priest",
+    "token": "PRIEST",
+    "name": "Priest",
+    "text": "Cloth, mana and a wand. Smite and Lesser Heal are yours from the start, Shadow Word: Pain comes at 4, Power Word: Shield at 6, Renew and Fade at 8. At 10 you get Mind Blast and your first talent point. Every line below says what to put on first, what to cast and when to let the wand work.",
+    "card": {
+      "caresAbout": "mana, the wand, which pain is on the monster, and who is shielded",
+      "vocabulary": "shield, pain, blast, wand, renew, heal, drink, cast, fade",
+      "soundsLike": "calm and a little dry, a trainer who asks whether the shield is up before asking what you will cast. A priest line says what to put on first, then what to cast",
+      "neverSays": "faith, gods, prayer as a belief, anything about the Light, and none of the class's lore",
+      "test": "could it be read while the cast bar fills?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Shadow is the build this page advises, because guides call it the best Priest to level alone and Shadowform at 42 halves the mana of your Shadow spells. The price: you cannot heal in Shadowform, and mana is thin until Spirit Tap. Discipline levels the same way, and guides disagree on how fast."
+      },
+      {
+        "role": "heal",
+        "say": "Discipline is the healer this page advises, because it levels with the same wand and Pain as Shadow and heals a tank with shields and Penance. The price: you have no cheap area heal until Prayer of Healing at 30. Holy heals a group with Prayer of Mending, and it levels slowly alone."
+      }
+    ],
+    "overview": {
+      "who": "You heal, shield and curse, with a wand in your hand when mana runs short. The craft is mana: a Priest wins a fight by what it does not cast.",
+      "good": "Staying alive. A shield, a heal over time and a scream cover most mistakes, and Shadow Word: Pain tags a monster from range. In a group you are the one everybody wants.",
+      "bad": "Mana, and speed. You have little health and no escape but Psychic Scream and Fade, and a long fight runs you dry. Two monsters at once is the usual way a Priest dies.",
+      "resource": "Mana. Your wand costs none and does not stop your mana coming back, so end fights with it. Spirit Tap returns mana after a kill, and Meditation lets half your regeneration run while you cast.",
+      "levelling": "Shield yourself, pull with Mind Blast, add Pain and finish with the wand. Shadow is the quickest, Discipline levels the same way and guides disagree on how fast, and Holy is slow alone and made for dungeons.",
+      "ten": "You get your first talent point and pick a spec. All three take Wand Specialization first. Shadow levels fastest, Discipline heals a tank and levels nearly as well, Holy is for dungeons, and a respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "priest-shadow",
+        "reason": "Guides call Shadow the best Priest to level alone. Shadowform comes at 42 here and halves the mana of every Shadow spell."
+      },
+      "heal": {
+        "build": "priest-discipline",
+        "reason": "Discipline levels with the same wand and Pain as Shadow and heals a tank with shields and Penance. Holy is the other healer, for dungeons."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 24,
+      "key": "priest-shadow",
+      "name": "Shadow",
+      "role": "damage",
+      "tree": 203,
+      "checked": "2026-11-05",
+      "intro": "Shadow wins with Pain, Plague and Mind Blast and ends fights with the wand. Spirit Tap returns your mana after kills, Mind Flay replaces Smite, and Shadowform at 42 makes every Shadow spell half price and harder hitting. Guides call it the best Priest to level alone.",
+      "line": "Pain, Plague and Mind Blast, then the wand. The best Priest to level alone, and no heals in Shadowform.",
+      "pathNote": "(37 points in Shadow, then 14 in Discipline: the wand first, and Twin Disciplines, Mental Strength and Meditation at the end.)",
+      "split": "when to take Shadowform and what follows it. Kargoz would respec at 40 to reach it at once, or skip Wand Specialization to have it at 40. Nescalz goes through Discipline to 30 and takes it at 54. The order here is wowforeverbuilds', which takes the wand first and Shadowform at 42, with Devouring Contagion and Early Demise in place of Blackout.",
+      "dry": "The wand is your cheapest damage, so a full mana bar is a choice.",
+      "sources": [
+        {
+          "label": "Mobalytics, Shadow Priest levelling 1-60 (Kargoz, 17 October 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/kargoz/classes/1-60-shadow-priest-leveling-guide-wands-talents-rotation-tips-and-tricks",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Shadow Priest guide (Nescalz, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/shadow-priest-guide-progress",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "wowforeverbuilds, Shadow Priest levelling (updated 2 November 2026)",
+          "url": "https://wowforeverbuilds.com/guide/shadow-priest-leveling",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Shadow Priest levelling (2 November 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/shadow-priest-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Priest levelling (4 November 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/priest-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Method, Priest levelling (2 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-priest-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            2
+          ],
+          "level": [
+            10,
+            11
+          ],
+          "talent": 14524,
+          "rank": 2,
+          "of": 2,
+          "why": "Your wand does 25% more damage. It costs no mana, so most early kills end with it."
+        },
+        {
+          "points": [
+            3,
+            7
+          ],
+          "level": [
+            12,
+            16
+          ],
+          "talent": 15270,
+          "rank": 5,
+          "of": 5,
+          "why": "Kills sometimes double your Spirit for 15 seconds, and half your mana regeneration continues while you cast for that time. It is why you drink so little."
+        },
+        {
+          "points": [
+            8,
+            9
+          ],
+          "level": [
+            17,
+            18
+          ],
+          "talent": 15275,
+          "rank": 2,
+          "of": 2,
+          "why": "Shadow Word: Pain lasts 6 seconds longer. More damage for the same mana, on a monster you leave to the wand."
+        },
+        {
+          "points": [
+            10,
+            12
+          ],
+          "level": [
+            19,
+            21
+          ],
+          "talent": 15260,
+          "rank": 3,
+          "of": 5,
+          "why": "Your Shadow spells miss less. A miss costs the same mana as a hit, so this pays you back at once."
+        },
+        {
+          "points": [
+            13,
+            13
+          ],
+          "level": [
+            22,
+            22
+          ],
+          "talent": 15407,
+          "rank": 1,
+          "of": 1,
+          "why": "A channelled spell that slows the monster by half. It replaces Smite as the spell you cast between Mind Blasts."
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 1225139,
+          "rank": 2,
+          "of": 2,
+          "why": "Each tick of Mind Flay hits harder than the one before it, so a full channel is worth waiting for."
+        },
+        {
+          "points": [
+            16,
+            17
+          ],
+          "level": [
+            25,
+            26
+          ],
+          "talent": 15273,
+          "rank": 2,
+          "of": 5,
+          "why": "Mind Blast comes back sooner. It is your hardest hit, so a shorter wait is more damage."
+        },
+        {
+          "points": [
+            18,
+            18
+          ],
+          "level": [
+            27,
+            27
+          ],
+          "talent": 15286,
+          "rank": 1,
+          "of": 1,
+          "why": "You and your party heal for part of the Shadow damage you do. It is also the way down to Shadowform."
+        },
+        {
+          "points": [
+            19,
+            21
+          ],
+          "level": [
+            28,
+            30
+          ],
+          "talent": 15257,
+          "rank": 3,
+          "of": 3,
+          "why": "Each Shadow spell makes the monster take more Shadow damage from you, up to 5 times. The longer the fight, the more it pays."
+        },
+        {
+          "points": [
+            22,
+            22
+          ],
+          "level": [
+            31,
+            31
+          ],
+          "talent": 15273,
+          "rank": 3,
+          "of": 5,
+          "why": "Mind Blast comes back sooner. It is your hardest hit, so a shorter wait is more damage."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 15487,
+          "rank": 1,
+          "of": 1,
+          "why": "Silences a caster for 5 seconds and cuts its cast short. It is your one interrupt, so keep it for the spell that hurts."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 15273,
+          "rank": 5,
+          "of": 5,
+          "why": "Mind Blast comes back sooner. At full ranks it is ready 2.5 seconds earlier than it was."
+        },
+        {
+          "points": [
+            26,
+            27
+          ],
+          "level": [
+            35,
+            36
+          ],
+          "talent": 17322,
+          "rank": 2,
+          "of": 2,
+          "why": "Your Shadow spells reach 20% further. More range is more free casts before the monster arrives."
+        },
+        {
+          "points": [
+            28,
+            32
+          ],
+          "level": [
+            37,
+            41
+          ],
+          "talent": 15259,
+          "rank": 5,
+          "of": 5,
+          "why": "10% more Shadow damage at full ranks. It is the biggest plain damage gain in the tree, and it sits just before Shadowform."
+        },
+        {
+          "points": [
+            33,
+            33
+          ],
+          "level": [
+            42,
+            42
+          ],
+          "talent": 15473,
+          "rank": 1,
+          "of": 1,
+          "why": "Shadow damage up 10%, Shadow spells cost half, critical hits hit harder and physical damage falls by 15%. You cannot cast heals in it."
+        },
+        {
+          "points": [
+            34,
+            35
+          ],
+          "level": [
+            43,
+            44
+          ],
+          "talent": 15260,
+          "rank": 5,
+          "of": 5,
+          "why": "Your Shadow spells miss less. By now every cast is a Shadow spell, so a miss costs you more than anywhere else."
+        },
+        {
+          "points": [
+            36,
+            37
+          ],
+          "level": [
+            45,
+            46
+          ],
+          "talent": 1309950,
+          "rank": 2,
+          "of": 2,
+          "why": "Devouring Plague costs half, and when its target dies the plague jumps to 2 monsters nearby. Plague the one that will die first."
+        },
+        {
+          "points": [
+            38,
+            42
+          ],
+          "level": [
+            47,
+            51
+          ],
+          "talent": 1225132,
+          "rank": 5,
+          "of": 5,
+          "why": "Your instant spells hit harder. Pain, Plague and Death are all instant, so most of your damage over time grows."
+        },
+        {
+          "points": [
+            43,
+            45
+          ],
+          "level": [
+            52,
+            54
+          ],
+          "talent": 18551,
+          "rank": 3,
+          "of": 5,
+          "why": "More Intellect, which is more mana and a little more critical chance."
+        },
+        {
+          "points": [
+            46,
+            48
+          ],
+          "level": [
+            55,
+            57
+          ],
+          "talent": 14521,
+          "rank": 3,
+          "of": 3,
+          "why": "Half your mana regeneration keeps going while you cast. Spirit then works in a fight and not only between them."
+        },
+        {
+          "points": [
+            49,
+            50
+          ],
+          "level": [
+            58,
+            59
+          ],
+          "talent": 1310076,
+          "rank": 2,
+          "of": 2,
+          "why": "Shadow Word: Death crits more often on a monster at 20% health or less. It is your finisher, so it should kill."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 18551,
+          "rank": 4,
+          "of": 5,
+          "why": "More Intellect, which is more mana and a little more critical chance."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build. Get a wand as soon as you can, because from 5 it does most of your killing.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1243,
+                "name": "Power Word: Fortitude",
+                "if": "before the first pull",
+                "why": "a little more health for the whole fight"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull, from 6",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2050,
+                "name": "Lesser Heal",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you wand"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "until you have a wand",
+                "why": "it is the attack you start with"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and it is not interrupted by hits"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Mind Blast comes at 10 and Inner Fire at 12. Shield yourself, pull with Mind Blast, add Pain and let the wand finish. Spirit Tap gives the mana back after kills.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1243,
+                "name": "Power Word: Fortitude",
+                "if": "before the first pull",
+                "why": "a little more health for the whole fight"
+              },
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "to pull, from as far as it reaches",
+                "why": "it is your hardest hit, and it lands first"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2054,
+                "name": "Heal",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 2050,
+                "name": "Lesser Heal",
+                "if": "when low, until you learn Heal at 16",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you wand"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and it is not interrupted by hits"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              },
+              {
+                "spell": 586,
+                "name": "Fade",
+                "if": "in a group, when a monster turns on you",
+                "why": "it makes monsters forget you for 10 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Devouring Plague arrives at 20, and Mind Flay, which replaces Smite, at 22. Open with Mind Blast, keep Pain and Plague up and channel Mind Flay. Shadow Word: Death at 32 finishes.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "to pull, from as far as it reaches",
+                "why": "it is your hardest hit, and it lands first"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "right after it",
+                "why": "it hurts the monster on its way to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 1309595,
+                "name": "Shadow Word: Death",
+                "if": "when it will die from the hit",
+                "why": "if it lives, the backlash is 30% of your health"
+              },
+              {
+                "spell": 2944,
+                "name": "Devouring Plague",
+                "if": "on a monster that will live a while",
+                "why": "it hurts it and heals you"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "when it is not on the monster",
+                "why": "it is your cheapest damage over time"
+              },
+              {
+                "spell": 15407,
+                "name": "Mind Flay",
+                "if": "while your mana lasts",
+                "why": "it hurts, and it slows the monster by half",
+                "talentSpell": 15407,
+                "need": {
+                  "talents": [
+                    15407
+                  ]
+                }
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana and does not stop regeneration"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 15286,
+                "name": "Vampiric Embrace",
+                "if": "on a hard monster or an elite",
+                "why": "it heals you for part of the damage you do",
+                "talentSpell": 15286,
+                "need": {
+                  "talents": [
+                    15286
+                  ]
+                }
+              },
+              {
+                "spell": 15487,
+                "name": "Silence",
+                "if": "when a caster starts a spell",
+                "why": "it cuts the cast short",
+                "talentSpell": 15487,
+                "need": {
+                  "talents": [
+                    15487
+                  ]
+                }
+              },
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              },
+              {
+                "spell": 586,
+                "name": "Fade",
+                "if": "in a group, when a monster turns on you",
+                "why": "it makes monsters forget you for 10 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Shadowform is the big step: stay in it, because it halves the mana of every Shadow spell. Keep Pain and Plague on, Mind Blast on cooldown, Mind Flay between them and the wand when mana runs low.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 15473,
+                "name": "Shadowform",
+                "if": "once, and stay in it",
+                "why": "it adds damage and halves Shadow mana costs",
+                "talentSpell": 15473,
+                "need": {
+                  "talents": [
+                    15473
+                  ]
+                }
+              },
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "to pull, from as far as it reaches",
+                "why": "it is your hardest hit, and it lands first"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "right after it",
+                "why": "it hurts the monster on its way to you"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 1309595,
+                "name": "Shadow Word: Death",
+                "if": "when it will die from the hit",
+                "why": "if it lives, the backlash is 30% of your health"
+              },
+              {
+                "spell": 2944,
+                "name": "Devouring Plague",
+                "if": "on a monster that will live a while",
+                "why": "it hurts it and heals you"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "when it is not on the monster",
+                "why": "it is your cheapest damage over time"
+              },
+              {
+                "spell": 15407,
+                "name": "Mind Flay",
+                "if": "between the others",
+                "why": "it is your main filler, and it slows the monster",
+                "talentSpell": 15407,
+                "need": {
+                  "talents": [
+                    15407
+                  ]
+                }
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana and does not stop regeneration"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 15286,
+                "name": "Vampiric Embrace",
+                "if": "on a hard monster or an elite",
+                "why": "it heals you for part of the damage you do",
+                "talentSpell": 15286,
+                "need": {
+                  "talents": [
+                    15286
+                  ]
+                }
+              },
+              {
+                "spell": 15487,
+                "name": "Silence",
+                "if": "when a caster starts a spell",
+                "why": "it cuts the cast short",
+                "talentSpell": 15487,
+                "need": {
+                  "talents": [
+                    15487
+                  ]
+                }
+              },
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              },
+              {
+                "spell": 586,
+                "name": "Fade",
+                "if": "in a group, when a monster turns on you",
+                "why": "it makes monsters forget you for 10 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "key": "priest-discipline",
+      "name": "Discipline",
+      "role": "heal",
+      "tree": 201,
+      "checked": "2026-11-05",
+      "intro": "Discipline levels like Shadow, with Pain, Mind Blast and the wand, and keeps a shield in reserve. Penance at 35, then Renewed Hope and Divine Aegis, make it a tank healer. Guides disagree on how fast it levels alone and agree that it heals well.",
+      "line": "Shields, Penance and a wand. Levels like Shadow, and heals a tank.",
+      "pathNote": "(31 points in Discipline, 15 in Holy for Holy Specialization, Twilight Focus and Inspiration, 5 in Shadow for Spirit Tap.)",
+      "split": "whether to keep Spirit Tap and the wand. Feyo's 30 to 60 order, used here, keeps both. His level 60 build and Warcraft Tavern's drop them for 20 points in Holy, which costs a respec. Maxroll would delay Spirit Tap to reach Penance sooner.",
+      "dry": "A shield on the tank is a hit you do not have to heal.",
+      "sources": [
+        {
+          "label": "Mobalytics, Discipline Priest guide (Feyo, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/discipline-priest-guide-progress",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Mobalytics, Discipline Priest beta guide (2 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/discipline-priest-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Maxroll, Priest levelling (4 November 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/priest-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Warcraft Tavern, Discipline Priest (Forever, 15 October build)",
+          "url": "https://www.warcrafttavern.com/forever/guides/discipline-priest/",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Warcraft Tavern, Priest levelling (Forever beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/priest-leveling/",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Discipline Priest levelling (16 October 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/discipline-priest-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Method, Priest levelling (2 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-priest-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            2
+          ],
+          "level": [
+            10,
+            11
+          ],
+          "talent": 14524,
+          "rank": 2,
+          "of": 2,
+          "why": "Your wand does 25% more damage. It costs no mana, so most early kills end with it."
+        },
+        {
+          "points": [
+            3,
+            7
+          ],
+          "level": [
+            12,
+            16
+          ],
+          "talent": 15270,
+          "rank": 5,
+          "of": 5,
+          "why": "Kills sometimes double your Spirit for 15 seconds, and half your mana regeneration continues while you cast for that time. It is why you drink so little."
+        },
+        {
+          "points": [
+            8,
+            12
+          ],
+          "level": [
+            17,
+            21
+          ],
+          "talent": 1225132,
+          "rank": 5,
+          "of": 5,
+          "why": "Your instant spells deal and heal more. Renew, Pain and Plague are instant, so it helps both halves of the build."
+        },
+        {
+          "points": [
+            13,
+            15
+          ],
+          "level": [
+            22,
+            24
+          ],
+          "talent": 18551,
+          "rank": 3,
+          "of": 5,
+          "why": "More Intellect, which is more mana and a little more critical chance."
+        },
+        {
+          "points": [
+            16,
+            18
+          ],
+          "level": [
+            25,
+            27
+          ],
+          "talent": 14521,
+          "rank": 3,
+          "of": 3,
+          "why": "Half your mana regeneration keeps going while you cast. A healer casts all the time, so this is the mana talent that matters most."
+        },
+        {
+          "points": [
+            19,
+            19
+          ],
+          "level": [
+            28,
+            28
+          ],
+          "talent": 14751,
+          "rank": 1,
+          "of": 1,
+          "why": "Your next spell costs nothing and crits more often. Put it on Greater Heal or Prayer of Healing when the big hit comes."
+        },
+        {
+          "points": [
+            20,
+            22
+          ],
+          "level": [
+            29,
+            31
+          ],
+          "talent": 14748,
+          "rank": 3,
+          "of": 3,
+          "why": "Your Power Word: Shield absorbs 20% more. The shield is the first thing you cast on the tank, so this works on every pull."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 402000,
+          "rank": 1,
+          "of": 1,
+          "why": "Power Word: Shield costs 15% less and comes back 4 seconds sooner. A shield you can recast often is the point of this tree."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 14520,
+          "rank": 2,
+          "of": 3,
+          "why": "Smite, Holy Fire and instant spells cost less. Shield and Renew are instant, so your healing costs less too."
+        },
+        {
+          "points": [
+            26,
+            26
+          ],
+          "level": [
+            35,
+            35
+          ],
+          "talent": 402174,
+          "rank": 1,
+          "of": 1,
+          "why": "A volley that hurts an enemy or heals an ally, three times in 2 seconds. Cast it whenever it is ready, on a tank or on a monster."
+        },
+        {
+          "points": [
+            27,
+            30
+          ],
+          "level": [
+            36,
+            39
+          ],
+          "talent": 425280,
+          "rank": 4,
+          "of": 5,
+          "why": "Your single-target heals crit more on a target wearing Weakened Soul, and shorten it. Shield the tank, then heal into the shield."
+        },
+        {
+          "points": [
+            31,
+            33
+          ],
+          "level": [
+            40,
+            42
+          ],
+          "talent": 431622,
+          "rank": 3,
+          "of": 3,
+          "why": "A critical heal puts a shield on the target for 12 seconds. Renewed Hope makes your crits more common, so it fires often."
+        },
+        {
+          "points": [
+            34,
+            34
+          ],
+          "level": [
+            43,
+            43
+          ],
+          "talent": 425280,
+          "rank": 5,
+          "of": 5,
+          "why": "Your single-target heals crit more on a target wearing Weakened Soul, and shorten it. Shield the tank, then heal into the shield."
+        },
+        {
+          "points": [
+            35,
+            35
+          ],
+          "level": [
+            44,
+            44
+          ],
+          "talent": 14520,
+          "rank": 3,
+          "of": 3,
+          "why": "Smite, Holy Fire and instant spells cost 10% less. Shield and Renew are instant, so your healing costs less too."
+        },
+        {
+          "points": [
+            36,
+            36
+          ],
+          "level": [
+            45,
+            45
+          ],
+          "talent": 10060,
+          "rank": 1,
+          "of": 1,
+          "why": "Raises a target's spell damage and healing by 20% for 15 seconds. Cast it on a caster, or on yourself before a hard stretch."
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 14889,
+          "rank": 5,
+          "of": 5,
+          "why": "Your Holy spells crit more often. It is a gate to the lower Holy talents, and Penance, Renewed Hope and your heals all use it."
+        },
+        {
+          "points": [
+            42,
+            44
+          ],
+          "level": [
+            51,
+            53
+          ],
+          "talent": 14913,
+          "rank": 3,
+          "of": 3,
+          "why": "Your spells keep their cast time when you are hit, most of the time. Pushback ends more heals than any monster does."
+        },
+        {
+          "points": [
+            45,
+            46
+          ],
+          "level": [
+            54,
+            55
+          ],
+          "talent": 14908,
+          "rank": 2,
+          "of": 3,
+          "why": "Renew heals more. It is the heal you put on the tank before the pull, so it gains from every rank you add."
+        },
+        {
+          "points": [
+            47,
+            47
+          ],
+          "level": [
+            56,
+            56
+          ],
+          "talent": 15237,
+          "rank": 1,
+          "of": 1,
+          "why": "Hurts every monster within 10 yards and heals your party. It is the only area damage spell you have, and it is in Holy."
+        },
+        {
+          "points": [
+            48,
+            50
+          ],
+          "level": [
+            57,
+            59
+          ],
+          "talent": 14892,
+          "rank": 3,
+          "of": 3,
+          "why": "A critical heal raises the target's armour for 15 seconds. Renewed Hope makes your crits more common, so the tank is often harder to hit."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 14908,
+          "rank": 3,
+          "of": 3,
+          "why": "Renew heals more. It is the heal you put on the tank before the pull, so it gains from every rank you add."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build. Get a wand as soon as you can, because from 5 it does most of your killing.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1243,
+                "name": "Power Word: Fortitude",
+                "if": "before the first pull",
+                "why": "a little more health for the whole fight"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull, from 6",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2050,
+                "name": "Lesser Heal",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you wand"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "until you have a wand",
+                "why": "it is the attack you start with"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and it is not interrupted by hits"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Alone you level as a wand Priest: shield, Mind Blast, Pain and the wand. In a group, shield and Renew the tank and heal the rest. Penance does not come until 35.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1243,
+                "name": "Power Word: Fortitude",
+                "if": "before the first pull",
+                "why": "a little more health for the whole fight"
+              },
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "to pull, from as far as it reaches",
+                "why": "it is your hardest hit, and it lands first"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2054,
+                "name": "Heal",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 2050,
+                "name": "Lesser Heal",
+                "if": "when low, until you learn Heal at 16",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you wand"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and it is not interrupted by hits"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ],
+            "alt": {
+              "name": "In a group",
+              "say": "when you heal a party instead of fighting",
+              "opening": [
+                {
+                  "spell": 1243,
+                  "name": "Power Word: Fortitude",
+                  "if": "on each party member",
+                  "why": "more health for everyone"
+                },
+                {
+                  "spell": 17,
+                  "name": "Power Word: Shield",
+                  "if": "on yourself, before the pull",
+                  "why": "damage then cannot stop your heals"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on the tank, before the pull",
+                  "why": "it heals over time while you aim the next heal"
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 527,
+                  "name": "Dispel Magic",
+                  "if": "when a friend has a harmful spell",
+                  "why": "it costs less than healing through it"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on a hurt friend who has none",
+                  "why": "it covers steady damage"
+                },
+                {
+                  "spell": 2054,
+                  "name": "Heal",
+                  "if": "on whoever is hurt worst",
+                  "why": "it is your efficient heal"
+                },
+                {
+                  "spell": 2050,
+                  "name": "Lesser Heal",
+                  "if": "until you learn Heal at 16",
+                  "why": "it is the heal you have before then"
+                },
+                {
+                  "spell": 5019,
+                  "name": "Shoot",
+                  "why": "the wand adds damage and costs no mana"
+                }
+              ],
+              "between": [
+                {
+                  "text": "Sit and drink",
+                  "if": "after a fight, before the next pull",
+                  "why": "mana from drinking is cheap, and a pull on empty is not"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Holy Fire and Flash Heal come at 20, Prayer of Healing at 30 and Shadow Word: Death at 32. Penance at 35 is the reason you chose this tree: cast it on a monster or on the tank, whenever it is ready.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 14914,
+                "name": "Holy Fire",
+                "if": "to pull a monster that is not coming",
+                "why": "it hurts for 10 seconds while it walks to you"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "right after it",
+                "why": "it is your hardest hit"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 402174,
+                "name": "Penance",
+                "if": "whenever it is ready",
+                "why": "it hits hard, and it heals if you need it",
+                "talentSpell": 402174,
+                "need": {
+                  "talents": [
+                    402174
+                  ]
+                }
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 1309595,
+                "name": "Shadow Word: Death",
+                "if": "when it will die from the hit",
+                "why": "if it lives, the backlash is 30% of your health"
+              },
+              {
+                "spell": 2944,
+                "name": "Devouring Plague",
+                "if": "on a monster that will live a while",
+                "why": "it hurts it and heals you"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "when it is not on the monster",
+                "why": "it is your cheapest damage over time"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana and does not stop regeneration"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              },
+              {
+                "spell": 586,
+                "name": "Fade",
+                "if": "in a group, when a monster turns on you",
+                "why": "it makes monsters forget you for 10 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ],
+            "alt": {
+              "name": "In a group",
+              "say": "when you heal a party instead of fighting",
+              "opening": [
+                {
+                  "spell": 17,
+                  "name": "Power Word: Shield",
+                  "if": "on the tank, before the pull",
+                  "why": "it soaks the first hit"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on the tank, before the pull",
+                  "why": "it heals over time while you aim the next heal"
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 2061,
+                  "name": "Flash Heal",
+                  "if": "in an emergency",
+                  "why": "it is quick, and it costs a lot"
+                },
+                {
+                  "spell": 596,
+                  "name": "Prayer of Healing",
+                  "if": "when four or more are hurt",
+                  "why": "it heals one whole party at once"
+                },
+                {
+                  "spell": 402174,
+                  "name": "Penance",
+                  "if": "on the tank, whenever it is ready",
+                  "why": "it heals a lot and sets up Divine Aegis",
+                  "talentSpell": 402174,
+                  "need": {
+                    "talents": [
+                      402174
+                    ]
+                  }
+                },
+                {
+                  "spell": 2054,
+                  "name": "Heal",
+                  "if": "for a big hit, in a low rank if it overheals",
+                  "why": "a lower rank costs less mana"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on a hurt friend who has none",
+                  "why": "it covers steady damage"
+                },
+                {
+                  "spell": 5019,
+                  "name": "Shoot",
+                  "why": "the wand adds damage and costs no mana"
+                }
+              ],
+              "rarely": [
+                {
+                  "spell": 527,
+                  "name": "Dispel Magic",
+                  "if": "when a friend has a harmful spell",
+                  "why": "it costs less than healing through it"
+                },
+                {
+                  "spell": 552,
+                  "name": "Abolish Disease",
+                  "if": "when a friend has a disease",
+                  "why": "it cures it, and again every 5 seconds"
+                },
+                {
+                  "spell": 586,
+                  "name": "Fade",
+                  "if": "when the monsters turn on you",
+                  "why": "it makes them forget you for 10 seconds"
+                }
+              ],
+              "between": [
+                {
+                  "text": "Sit and drink",
+                  "if": "after a fight, before the next pull",
+                  "why": "mana from drinking is cheap, and a pull on empty is not"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Greater Heal comes at 40 and Power Infusion at 45. Alone, Penance on cooldown is your best attack. In a group, shield and Renew the tank before the pull and heal into the shield.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 402174,
+                "name": "Penance",
+                "if": "to pull, from as far as it reaches",
+                "why": "it hits hard from the start",
+                "talentSpell": 402174,
+                "need": {
+                  "talents": [
+                    402174
+                  ]
+                }
+              }
+            ],
+            "loop": [
+              {
+                "spell": 402174,
+                "name": "Penance",
+                "if": "whenever it is ready",
+                "why": "it is your strongest attack",
+                "talentSpell": 402174,
+                "need": {
+                  "talents": [
+                    402174
+                  ]
+                }
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit after Penance"
+              },
+              {
+                "spell": 1309595,
+                "name": "Shadow Word: Death",
+                "if": "when it will die from the hit",
+                "why": "if it lives, the backlash is 30% of your health"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "when it is not on the monster",
+                "why": "it is your cheapest damage over time"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "when you have mana to spare",
+                "why": "at full mana it can beat the wand"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana and does not stop regeneration"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 2944,
+                "name": "Devouring Plague",
+                "if": "on a monster you are not wanding",
+                "why": "it hurts it and heals you"
+              },
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              },
+              {
+                "spell": 586,
+                "name": "Fade",
+                "if": "in a group, when a monster turns on you",
+                "why": "it makes monsters forget you for 10 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 10060,
+                  "name": "Power Infusion",
+                  "talentSpell": 10060
+                },
+                {
+                  "spell": 14751,
+                  "name": "Inner Focus",
+                  "talentSpell": 14751
+                }
+              ],
+              "say": "Power Infusion on a caster or on yourself, Inner Focus before a big heal"
+            },
+            "alt": {
+              "name": "In a group",
+              "say": "when you heal a party instead of fighting",
+              "opening": [
+                {
+                  "spell": 17,
+                  "name": "Power Word: Shield",
+                  "if": "on the tank, before the pull",
+                  "why": "it soaks the first hit and lets Renewed Hope work"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on the tank, before the pull",
+                  "why": "it heals over time while you aim the next heal"
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 2061,
+                  "name": "Flash Heal",
+                  "if": "in an emergency",
+                  "why": "it is quick, and it costs a lot"
+                },
+                {
+                  "spell": 596,
+                  "name": "Prayer of Healing",
+                  "if": "when four or more are hurt",
+                  "why": "it heals one whole party at once"
+                },
+                {
+                  "spell": 402174,
+                  "name": "Penance",
+                  "if": "on the tank, whenever it is ready",
+                  "why": "it keeps Divine Aegis up",
+                  "talentSpell": 402174,
+                  "need": {
+                    "talents": [
+                      402174
+                    ]
+                  }
+                },
+                {
+                  "spell": 2060,
+                  "name": "Greater Heal",
+                  "if": "for a big hit, a low rank if it overheals",
+                  "why": "a lower rank costs less mana"
+                },
+                {
+                  "spell": 17,
+                  "name": "Power Word: Shield",
+                  "if": "on the tank when it has none",
+                  "why": "Weakened Soul makes your next heals crit more"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "why": "it covers steady damage"
+                }
+              ],
+              "rarely": [
+                {
+                  "spell": 527,
+                  "name": "Dispel Magic",
+                  "if": "when a friend has a harmful spell",
+                  "why": "it costs less than healing through it"
+                },
+                {
+                  "spell": 552,
+                  "name": "Abolish Disease",
+                  "if": "when a friend has a disease",
+                  "why": "it cures it, and again every 5 seconds"
+                },
+                {
+                  "spell": 586,
+                  "name": "Fade",
+                  "if": "when the monsters turn on you",
+                  "why": "it makes them forget you for 10 seconds"
+                },
+                {
+                  "spell": 2006,
+                  "name": "Resurrection",
+                  "if": "when someone has died",
+                  "why": "a dead friend heals nobody"
+                }
+              ],
+              "between": [
+                {
+                  "text": "Sit and drink",
+                  "if": "after a fight, before the next pull",
+                  "why": "mana from drinking is cheap, and a pull on empty is not"
+                }
+              ],
+              "low": [
+                {
+                  "spell": 14751,
+                  "name": "Inner Focus",
+                  "if": "when you must cast a big heal",
+                  "why": "the heal costs nothing",
+                  "talentSpell": 14751,
+                  "need": {
+                    "talents": [
+                      14751
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "key": "priest-holy",
+      "name": "Holy",
+      "role": "heal",
+      "tree": 202,
+      "checked": "2026-11-05",
+      "intro": "Holy heals with Renew, Heal and Prayer of Mending. Divine Fury makes Smite and Heal quicker, Holy Nova is the only area spell early, and Prayer of Mending at 47 is its signature. It is the dungeon healer, and it levels slowly alone.",
+      "line": "Renew, Heal and Prayer of Mending. A dungeon healer, slow alone.",
+      "pathNote": "(32 points in Holy, 14 in Discipline and 5 in Shadow for the wand and mana.)",
+      "split": "where to start. Feyo's order, used here, opens with the wand and Spirit Tap to level. Icy Veins and the Warcraft Tavern build skip them for Twilight Focus and Improved Renew, and the wowforeverbuilds healing plans do the same.",
+      "dry": "A heal that overheals is mana you drink again.",
+      "sources": [
+        {
+          "label": "Mobalytics, Holy Priest guide (Feyo, 4 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/classes/holy-priest-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Maxroll, Priest levelling (4 November 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/priest-leveling-guide",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Warcraft Tavern, Holy Priest (Forever, 15 October build)",
+          "url": "https://www.warcrafttavern.com/forever/guides/holy-priest/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Priest levelling (Forever beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/priest-leveling/",
+          "read": "2026-11-05"
+        },
+        {
+          "label": "Icy Veins, Holy Priest levelling (16 October 2026)",
+          "url": "https://www.icy-veins.com/wow-forever/holy-priest-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            2
+          ],
+          "level": [
+            10,
+            11
+          ],
+          "talent": 14524,
+          "rank": 2,
+          "of": 2,
+          "why": "Your wand does 25% more damage. It costs no mana, so most early kills end with it."
+        },
+        {
+          "points": [
+            3,
+            7
+          ],
+          "level": [
+            12,
+            16
+          ],
+          "talent": 15270,
+          "rank": 5,
+          "of": 5,
+          "why": "Kills sometimes double your Spirit for 15 seconds, and half your mana regeneration continues while you cast for that time. It is why you drink so little."
+        },
+        {
+          "points": [
+            8,
+            10
+          ],
+          "level": [
+            17,
+            19
+          ],
+          "talent": 14913,
+          "rank": 3,
+          "of": 3,
+          "why": "Your spells keep their cast time when you are hit, most of the time. Pushback ends more heals than any monster does."
+        },
+        {
+          "points": [
+            11,
+            12
+          ],
+          "level": [
+            20,
+            21
+          ],
+          "talent": 14908,
+          "rank": 2,
+          "of": 3,
+          "why": "Renew heals more. It is the heal you put on the tank before the pull, so it gains from every rank you add."
+        },
+        {
+          "points": [
+            13,
+            17
+          ],
+          "level": [
+            22,
+            26
+          ],
+          "talent": 18530,
+          "rank": 5,
+          "of": 5,
+          "why": "Smite, Holy Fire, Heal and Greater Heal cast half a second faster. That is a big part of a Heal's cast time, and the heal lands sooner."
+        },
+        {
+          "points": [
+            18,
+            18
+          ],
+          "level": [
+            27,
+            27
+          ],
+          "talent": 15237,
+          "rank": 1,
+          "of": 1,
+          "why": "Hurts every monster within 10 yards and heals your party. It is the only area damage spell a levelling Priest has."
+        },
+        {
+          "points": [
+            19,
+            19
+          ],
+          "level": [
+            28,
+            28
+          ],
+          "talent": 14908,
+          "rank": 3,
+          "of": 3,
+          "why": "Renew heals more. It is the heal you put on the tank before the pull, so it gains from every rank you add."
+        },
+        {
+          "points": [
+            20,
+            22
+          ],
+          "level": [
+            29,
+            31
+          ],
+          "talent": 14892,
+          "rank": 3,
+          "of": 3,
+          "why": "A critical heal raises the target's armour for 15 seconds. It helps the tank, and it costs you nothing."
+        },
+        {
+          "points": [
+            23,
+            23
+          ],
+          "level": [
+            32,
+            32
+          ],
+          "talent": 1328569,
+          "rank": 1,
+          "of": 1,
+          "why": "Flash Heal on someone else also heals you for half as much, and makes no threat. Healing the tank keeps you up too."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 27789,
+          "rank": 2,
+          "of": 2,
+          "why": "Smite, Holy Fire, Holy Nova and Prayer of Healing reach 10% further. A cheap point on the way to the lower talents."
+        },
+        {
+          "points": [
+            26,
+            27
+          ],
+          "level": [
+            35,
+            36
+          ],
+          "talent": 14912,
+          "rank": 2,
+          "of": 3,
+          "why": "Lesser Heal, Heal, Greater Heal, Penance and Prayer of Mending cost less mana. Your big heals are your mana bill, so this is the saving."
+        },
+        {
+          "points": [
+            28,
+            32
+          ],
+          "level": [
+            37,
+            41
+          ],
+          "talent": 14901,
+          "rank": 5,
+          "of": 5,
+          "why": "Part of your Spirit becomes healing and damage. You already stack Spirit for mana, so it works twice."
+        },
+        {
+          "points": [
+            33,
+            35
+          ],
+          "level": [
+            42,
+            44
+          ],
+          "talent": 14898,
+          "rank": 3,
+          "of": 3,
+          "why": "All your healing is a little stronger. Nothing clever, and it counts on every heal you cast."
+        },
+        {
+          "points": [
+            36,
+            36
+          ],
+          "level": [
+            45,
+            45
+          ],
+          "talent": 20711,
+          "rank": 1,
+          "of": 1,
+          "why": "If you die you heal for 15 seconds at no mana cost. It also opens the way to Prayer of Mending."
+        },
+        {
+          "points": [
+            37,
+            37
+          ],
+          "level": [
+            46,
+            46
+          ],
+          "talent": 1317006,
+          "rank": 1,
+          "of": 2,
+          "why": "You regain mana when a heal differs from your last one. Alternate Renew, Flash Heal and Heal and the mana comes back."
+        },
+        {
+          "points": [
+            38,
+            38
+          ],
+          "level": [
+            47,
+            47
+          ],
+          "talent": 401859,
+          "rank": 1,
+          "of": 1,
+          "why": "Heals the target the next time it takes damage, then jumps to another party member, up to 5 times. Cast it on the tank whenever it is ready."
+        },
+        {
+          "points": [
+            39,
+            39
+          ],
+          "level": [
+            48,
+            48
+          ],
+          "talent": 1317006,
+          "rank": 2,
+          "of": 2,
+          "why": "You regain mana when a heal differs from your last one. Alternate Renew, Flash Heal and Heal and the mana comes back."
+        },
+        {
+          "points": [
+            40,
+            44
+          ],
+          "level": [
+            49,
+            53
+          ],
+          "talent": 1225132,
+          "rank": 5,
+          "of": 5,
+          "why": "Your instant spells deal and heal more. Renew is instant, so it helps the heal you cast the most."
+        },
+        {
+          "points": [
+            45,
+            47
+          ],
+          "level": [
+            54,
+            56
+          ],
+          "talent": 18551,
+          "rank": 3,
+          "of": 5,
+          "why": "More Intellect, which is more mana and a little more critical chance."
+        },
+        {
+          "points": [
+            48,
+            50
+          ],
+          "level": [
+            57,
+            59
+          ],
+          "talent": 14521,
+          "rank": 3,
+          "of": 3,
+          "why": "Half your mana regeneration keeps going while you cast. A healer casts all the time, so this is the mana talent that matters most."
+        },
+        {
+          "points": [
+            51,
+            51
+          ],
+          "level": [
+            60,
+            60
+          ],
+          "talent": 14751,
+          "rank": 1,
+          "of": 1,
+          "why": "Your next spell costs nothing and crits more often. Put it on Greater Heal or Prayer of Healing when the big hit comes."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build. Get a wand as soon as you can, because from 5 it does most of your killing.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1243,
+                "name": "Power Word: Fortitude",
+                "if": "before the first pull",
+                "why": "a little more health for the whole fight"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull, from 6",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "from as far away as it reaches",
+                "why": "the monster spends its walk taking damage"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2050,
+                "name": "Lesser Heal",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you wand"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "until you have a wand",
+                "why": "it is the attack you start with"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and it is not interrupted by hits"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Alone, Holy levels slowly: use the wand and Pain as a Shadow Priest would and heal after. In a dungeon, Renew the tank and heal from the first pull.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1243,
+                "name": "Power Word: Fortitude",
+                "if": "before the first pull",
+                "why": "a little more health for the whole fight"
+              },
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "to pull, from as far as it reaches",
+                "why": "it is your hardest hit, and it lands first"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 2054,
+                "name": "Heal",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 2050,
+                "name": "Lesser Heal",
+                "if": "when low, until you learn Heal at 16",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you wand"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "while the monster walks to you",
+                "why": "it hurts on the walk in"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana, and it is not interrupted by hits"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ],
+            "alt": {
+              "name": "In a group",
+              "say": "when you heal a party instead of fighting",
+              "opening": [
+                {
+                  "spell": 1243,
+                  "name": "Power Word: Fortitude",
+                  "if": "on each party member",
+                  "why": "more health for everyone"
+                },
+                {
+                  "spell": 17,
+                  "name": "Power Word: Shield",
+                  "if": "on yourself, before the pull",
+                  "why": "damage then cannot stop your heals"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on the tank, before the pull",
+                  "why": "it heals over time while you aim the next heal"
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 527,
+                  "name": "Dispel Magic",
+                  "if": "when a friend has a harmful spell",
+                  "why": "it costs less than healing through it"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on a hurt friend who has none",
+                  "why": "it covers steady damage"
+                },
+                {
+                  "spell": 2054,
+                  "name": "Heal",
+                  "if": "on whoever is hurt worst",
+                  "why": "it is your efficient heal"
+                },
+                {
+                  "spell": 2050,
+                  "name": "Lesser Heal",
+                  "if": "until you learn Heal at 16",
+                  "why": "it is the heal you have before then"
+                },
+                {
+                  "spell": 5019,
+                  "name": "Shoot",
+                  "why": "the wand adds damage and costs no mana"
+                }
+              ],
+              "between": [
+                {
+                  "text": "Sit and drink",
+                  "if": "after a fight, before the next pull",
+                  "why": "mana from drinking is cheap, and a pull on empty is not"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Holy Fire and Flash Heal come at 20 and Holy Nova, your area spell, at 27. Prayer of Healing at 30 heals a party. Alone you still kill with Pain and the wand, and Smite is quicker with Divine Fury.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 14914,
+                "name": "Holy Fire",
+                "if": "to pull a monster that is not coming",
+                "why": "it hurts for 10 seconds while it walks to you"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "while it walks to you",
+                "why": "it hurts on the walk in, quicker with Divine Fury"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 15237,
+                "name": "Holy Nova",
+                "if": "against three or more",
+                "why": "it hurts them all and heals your party",
+                "talentSpell": 15237,
+                "need": {
+                  "talents": [
+                    15237
+                  ]
+                }
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "when it is not on the monster",
+                "why": "it is your cheapest damage over time"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "when you have mana to spare",
+                "why": "it is quicker with Divine Fury"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana and does not stop regeneration"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              },
+              {
+                "spell": 586,
+                "name": "Fade",
+                "if": "in a group, when a monster turns on you",
+                "why": "it makes monsters forget you for 10 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ],
+            "alt": {
+              "name": "In a group",
+              "say": "when you heal a party instead of fighting",
+              "opening": [
+                {
+                  "spell": 17,
+                  "name": "Power Word: Shield",
+                  "if": "on the tank, before the pull",
+                  "why": "it soaks the first hit"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on the tank, before the pull",
+                  "why": "it heals over time while you aim the next heal"
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 2061,
+                  "name": "Flash Heal",
+                  "if": "in an emergency",
+                  "why": "it is quick, and it costs a lot"
+                },
+                {
+                  "spell": 596,
+                  "name": "Prayer of Healing",
+                  "if": "when four or more are hurt",
+                  "why": "it heals one whole party at once"
+                },
+                {
+                  "spell": 2054,
+                  "name": "Heal",
+                  "if": "for a big hit, in a low rank if it overheals",
+                  "why": "a lower rank costs less mana"
+                },
+                {
+                  "spell": 15237,
+                  "name": "Holy Nova",
+                  "if": "when monsters are on the group and it is hurt",
+                  "why": "it hurts them and heals the party",
+                  "talentSpell": 15237,
+                  "need": {
+                    "talents": [
+                      15237
+                    ]
+                  }
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on a hurt friend who has none",
+                  "why": "it covers steady damage"
+                },
+                {
+                  "spell": 5019,
+                  "name": "Shoot",
+                  "why": "the wand adds damage and costs no mana"
+                }
+              ],
+              "rarely": [
+                {
+                  "spell": 527,
+                  "name": "Dispel Magic",
+                  "if": "when a friend has a harmful spell",
+                  "why": "it costs less than healing through it"
+                },
+                {
+                  "spell": 552,
+                  "name": "Abolish Disease",
+                  "if": "when a friend has a disease",
+                  "why": "it cures it, and again every 5 seconds"
+                },
+                {
+                  "spell": 586,
+                  "name": "Fade",
+                  "if": "when the monsters turn on you",
+                  "why": "it makes them forget you for 10 seconds"
+                }
+              ],
+              "between": [
+                {
+                  "text": "Sit and drink",
+                  "if": "after a fight, before the next pull",
+                  "why": "mana from drinking is cheap, and a pull on empty is not"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Greater Heal comes at 40 and Prayer of Mending at 47, which you cast on the tank whenever it is ready. Alternate your heals, because Litany of Light pays you mana for it. Alone, kill with Pain, Smite and the wand.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 588,
+                "name": "Inner Fire",
+                "if": "before the first pull",
+                "why": "it raises your armour while it has charges"
+              },
+              {
+                "spell": 17,
+                "name": "Power Word: Shield",
+                "if": "before each pull",
+                "why": "it soaks a hit and damage cannot stop your cast"
+              },
+              {
+                "spell": 14914,
+                "name": "Holy Fire",
+                "if": "to pull a monster that is not coming",
+                "why": "it hurts for 10 seconds while it walks to you"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "while it walks to you",
+                "why": "it hurts on the walk in, quicker with Divine Fury"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 15237,
+                "name": "Holy Nova",
+                "if": "against three or more",
+                "why": "it hurts them all and heals your party",
+                "talentSpell": 15237,
+                "need": {
+                  "talents": [
+                    15237
+                  ]
+                }
+              },
+              {
+                "spell": 8092,
+                "name": "Mind Blast",
+                "if": "whenever it is ready",
+                "why": "it is your hardest hit"
+              },
+              {
+                "spell": 589,
+                "name": "Shadow Word: Pain",
+                "if": "when it is not on the monster",
+                "why": "it is your cheapest damage over time"
+              },
+              {
+                "spell": 585,
+                "name": "Smite",
+                "if": "when you have mana to spare",
+                "why": "it is quicker with Divine Fury"
+              },
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "why": "the wand costs no mana and does not stop regeneration"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8122,
+                "name": "Psychic Scream",
+                "if": "when you have pulled too many",
+                "why": "it sends two of them running for 8 seconds"
+              },
+              {
+                "spell": 586,
+                "name": "Fade",
+                "if": "in a group, when a monster turns on you",
+                "why": "it makes monsters forget you for 10 seconds"
+              }
+            ],
+            "between": [
+              {
+                "spell": 139,
+                "name": "Renew",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 5019,
+                "name": "Shoot",
+                "if": "when your mana is nearly gone",
+                "why": "it costs no mana and does not stop regeneration"
+              }
+            ],
+            "alt": {
+              "name": "In a group",
+              "say": "when you heal a party instead of fighting",
+              "opening": [
+                {
+                  "spell": 17,
+                  "name": "Power Word: Shield",
+                  "if": "on the tank, before the pull",
+                  "why": "it soaks the first hit"
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "if": "on the tank, before the pull",
+                  "why": "it heals over time while you aim the next heal"
+                },
+                {
+                  "spell": 401859,
+                  "name": "Prayer of Mending",
+                  "if": "on the tank, before the pull",
+                  "why": "it heals the first hit and then jumps on",
+                  "talentSpell": 401859,
+                  "need": {
+                    "talents": [
+                      401859
+                    ]
+                  }
+                }
+              ],
+              "loop": [
+                {
+                  "spell": 2061,
+                  "name": "Flash Heal",
+                  "if": "in an emergency",
+                  "why": "it is quick, and it costs a lot"
+                },
+                {
+                  "spell": 596,
+                  "name": "Prayer of Healing",
+                  "if": "when four or more are hurt",
+                  "why": "it heals one whole party at once"
+                },
+                {
+                  "spell": 401859,
+                  "name": "Prayer of Mending",
+                  "if": "on the tank, whenever it is ready",
+                  "why": "it heals, then jumps up to 5 times",
+                  "talentSpell": 401859,
+                  "need": {
+                    "talents": [
+                      401859
+                    ]
+                  }
+                },
+                {
+                  "spell": 2060,
+                  "name": "Greater Heal",
+                  "if": "for a big hit, a low rank if it overheals",
+                  "why": "a lower rank costs less mana"
+                },
+                {
+                  "spell": 15237,
+                  "name": "Holy Nova",
+                  "if": "when monsters are on the group and it is hurt",
+                  "why": "it hurts them and heals the party",
+                  "talentSpell": 15237,
+                  "need": {
+                    "talents": [
+                      15237
+                    ]
+                  }
+                },
+                {
+                  "spell": 139,
+                  "name": "Renew",
+                  "why": "it covers steady damage"
+                }
+              ],
+              "rarely": [
+                {
+                  "spell": 527,
+                  "name": "Dispel Magic",
+                  "if": "when a friend has a harmful spell",
+                  "why": "it costs less than healing through it"
+                },
+                {
+                  "spell": 552,
+                  "name": "Abolish Disease",
+                  "if": "when a friend has a disease",
+                  "why": "it cures it, and again every 5 seconds"
+                },
+                {
+                  "spell": 586,
+                  "name": "Fade",
+                  "if": "when the monsters turn on you",
+                  "why": "it makes them forget you for 10 seconds"
+                },
+                {
+                  "spell": 2006,
+                  "name": "Resurrection",
+                  "if": "when someone has died",
+                  "why": "a dead friend heals nobody"
+                }
+              ],
+              "between": [
+                {
+                  "text": "Sit and drink",
+                  "if": "after a fight, before the next pull",
+                  "why": "mana from drinking is cheap, and a pull on empty is not"
+                }
+              ],
+              "low": [
+                {
+                  "spell": 14751,
+                  "name": "Inner Focus",
+                  "if": "when you must cast a big heal",
+                  "why": "the heal costs nothing",
+                  "talentSpell": 14751,
+                  "need": {
+                    "talents": [
+                      14751
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

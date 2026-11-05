@@ -1,7 +1,7 @@
 # Primer's data
 
 The guide's rules and words, and the facts check. Written by hand:
-`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, `content/forever/warrior.json`, Forever's first, written 5 November 2026: F0 to F3 of `../ideas/class-guide.md`, `content/forever/mage.json`, its second, F4, `content/forever/rogue.json`, its third, `content/forever/warlock.json`, its fourth, ids 15 to 17, and `content/forever/shaman.json`, its fifth, ids 18 to 20, and `content/forever/hunter.json`, its sixth, ids 21 to 23). Generated, never edited:
+`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, `content/forever/warrior.json`, Forever's first, written 5 November 2026: F0 to F3 of `../ideas/class-guide.md`, `content/forever/mage.json`, its second, F4, `content/forever/rogue.json`, its third, `content/forever/warlock.json`, its fourth, ids 15 to 17, and `content/forever/shaman.json`, its fifth, ids 18 to 20, and `content/forever/hunter.json`, its sixth, ids 21 to 23, and `content/forever/priest.json`, its seventh, ids 24 to 26). Generated, never edited:
 `addon/Primer/Guide_Classic.lua`, `Guide_Forever.lua`, `GuideText.lua`
 (`bun scripts/guide.ts`, `--check` in `bun run check`).
 
@@ -27,7 +27,7 @@ row    = { spell (rank 1), name, talentSpell (the row is a talent),
 A build's `games` says where it is written: a Forever build is its own text,
 checked against Forever's tables (the plan: never inherited from Era). Classic is written for
 the Warrior, Paladin and Mage (nine builds, Warrior Arms 1, Fury 2, Protection 3), Forever for the
-Warrior, the Mage, the Rogue, the Warlock, the Shaman and the Hunter (Era has no Rogue, Warlock, Shaman or Hunter file: the Warrior's and Mage's ids and keys are the same in their own files, so a character keeps its pick across the
+Warrior, the Mage, the Rogue, the Warlock, the Shaman, the Hunter and the Priest (Era has no Rogue, Warlock, Shaman, Hunter or Priest file: the Warrior's and Mage's ids and keys are the same in their own files, so a character keeps its pick across the
 two games' separate guides). A build id never changes and is never reused: a character keeps
 it (`saved-ids.json`, `bun run ids` in the check).
 

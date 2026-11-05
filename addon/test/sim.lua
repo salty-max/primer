@@ -62,7 +62,7 @@ for id, b in pairs(D.builds) do
 end
 if G.FOREVER then
   check(
-    builds == 18
+    builds == 21
       and D.builds[1].key == "warrior-arms"
       and D.builds[2].key == "warrior-fury"
       and D.builds[3].key == "warrior-protection"
@@ -80,8 +80,11 @@ if G.FOREVER then
       and D.builds[20].key == "shaman-restoration"
       and D.builds[21].key == "hunter-beast-mastery"
       and D.builds[22].key == "hunter-marksmanship"
-      and D.builds[23].key == "hunter-survival",
-    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration, the Hunter's Beast Mastery, Marksmanship and Survival"
+      and D.builds[23].key == "hunter-survival"
+      and D.builds[24].key == "priest-shadow"
+      and D.builds[25].key == "priest-discipline"
+      and D.builds[26].key == "priest-holy",
+    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration, the Hunter's Beast Mastery, Marksmanship and Survival, the Priest's Shadow, Discipline and Holy"
   )
   check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
   check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
@@ -98,6 +101,11 @@ if G.FOREVER then
   )
   check(D.classes[3].token == "HUNTER" and #D.classes[3].builds == 3, "Forever: the Hunter's class")
   check(D.classes[3].roles.damage.build == 21, "Forever: the Hunter's one recommended build is Beast Mastery")
+  check(D.classes[5].token == "PRIEST" and #D.classes[5].builds == 3, "Forever: the Priest's class")
+  check(
+    D.classes[5].roles.damage.build == 24 and D.classes[5].roles.heal.build == 25,
+    "Forever: the Priest's recommended builds are Shadow for damage and Discipline for healing"
+  )
 else
   check(
     builds == 9 and D.builds[1] and D.builds[2] and D.builds[3],
