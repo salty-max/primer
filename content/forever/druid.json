@@ -1,0 +1,3366 @@
+{
+  "class": {
+    "id": 11,
+    "key": "druid",
+    "token": "DRUID",
+    "name": "Druid",
+    "text": "Leather, three forms and a mana bar that does not work in two of them. Wrath, Healing Touch and Mark of the Wild are yours from the start, Moonfire and Rejuvenation come at 4, Thorns at 6 and Entangling Roots at 8. At 10 you get Bear Form, Maul and your first talent point, and Cat Form follows at 20. Every line below says which form to be in before it says what to press.",
+    "card": {
+      "caresAbout": "the form you are in, the bar that form runs on (mana, Rage or Energy), what is bleeding and whether you can afford another shift",
+      "vocabulary": "form, shift, Rage, Energy, combo points, bleed, root, heal over time, mana",
+      "soundsLike": "patient and practical, a trainer who asks which form you are in before asking what you will press. A druid line names the form first",
+      "neverSays": "the wild, the dream, any god or grove, nature as a faith (spells carry those words and the line uses them as names only)",
+      "test": "could it be followed by someone who forgot which form they were in?"
+    },
+    "advice": [
+      {
+        "role": "damage",
+        "say": "Feral as a cat is the damage build this page advises, because guides level Feral over every other spec and you fight as a bear until Cat Form at 20 with the same points. The price: a cat cannot cast or heal in form. Balance casts from range and levels slowly alone."
+      },
+      {
+        "role": "tank",
+        "say": "Feral as a bear is the tank. Bear Form comes at 10, Lacerate at 25 and Primal Bite at 40 for threat. The price: it is the cat's tree, so the points that tank and the points that kill are not the same, and a respec between them costs gold."
+      },
+      {
+        "role": "heal",
+        "say": "Restoration is the healer. Guides do not level it alone, so level as Feral and respec for dungeons. The price: a respec costs gold, and Restoration kills slowly by itself."
+      }
+    ],
+    "overview": {
+      "who": "You are three classes in one and you choose which at the pull. With no form on you cast, in Bear Form you tank, in Cat Form you stab. A form costs mana to enter and then runs on Rage or Energy.",
+      "good": "Doing the job in front of you. A Druid levels well as a bear or a cat, heals a group between pulls and brings a dead player back with Rebirth.",
+      "bad": "Staying in one place. Every shift costs mana, you cannot cast or heal in a form, and the caster specs are slow alone.",
+      "resource": "Mana to shift and to cast, Rage in Bear Form, and Energy and combo points in Cat Form. Entering a form takes a large part of your mana, so drink before you shift back.",
+      "levelling": "Bear Form from 10 and Cat Form from 20. Until 20 you fight as a bear with Maul and Swipe. After that a cat takes single monsters and a bear takes packs, with a heal and a drink between fights. Check your form before each pull.",
+      "ten": "You get your first talent point and Bear Form. Pick the spec: Feral levels fastest and is a cat or a bear, Balance casts from range and Restoration heals. A respec costs gold."
+    },
+    "roles": {
+      "damage": {
+        "build": "druid-feral-cat",
+        "reason": "Guides level Feral over every other spec. You are a bear until Cat Form at 20, with the same points. Balance is the caster and slower alone."
+      },
+      "tank": {
+        "build": "druid-feral-bear",
+        "reason": "The only tanking build. Bear Form comes at 10, Lacerate at 25 and Primal Bite at 40 for threat."
+      },
+      "heal": {
+        "build": "druid-restoration",
+        "reason": "The only healing build. Guides do not level it alone, so level as Feral and respec for dungeons."
+      }
+    }
+  },
+  "builds": [
+    {
+      "id": 27,
+      "key": "druid-feral-cat",
+      "name": "Feral Combat",
+      "variant": "cat",
+      "role": "damage",
+      "tree": 281,
+      "checked": "2026-11-05",
+      "intro": "Feral as a cat kills one monster at a time with Energy and combo points: Rake and Rip bleed, Claw and Shred build, Ferocious Bite finishes. Cat Form comes at 20, so levels 10 to 19 are spent in Bear Form with the same points. Guides level Feral over every other spec on Forever.",
+      "line": "Cat Form from 20, bleeds and a finisher. A bear until then, and the one every guide levels.",
+      "pathNote": "(31 points in Feral Combat, 7 in Balance for Genesis and Nature's Majesty, 13 in Restoration for Heart of the Wild, Naturalist and Natural Shapeshifter.)",
+      "split": "the points after 40 and Shifting Power. Mobalytics ends with a Balance tail and the last 20 points here follow it, with Natural Shapeshifter in place of Nature's Reach, which helps spells only. Method takes Shifting Power and Mobalytics skips it. Nobody has played past 30.",
+      "dry": "Shred wants you behind the monster. Claw does not mind where you stand.",
+      "sources": [
+        {
+          "label": "Method, Druid levelling guide and talents (BirraGzeeZ, 3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-druid-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Feral Druid levelling 1 to 60 (DoubleZug, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/doublezug/classes/feral-druid-leveling-guide-level-1-60",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Druid levelling guide (Rycn, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/druid-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Druid levelling (Luxrah, beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/druid-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Feral Druid levelling (Meyra, 18 October 2026, beta)",
+          "url": "https://www.icy-veins.com/wow-forever/feral-druid-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Beta Development Notes of 2 November 2026 (via patchbot.io)",
+          "url": "https://patchbot.io/games/world-of-warcraft-forever/articles/2053-wow-forever-beta-development-notes-november-2",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 16934,
+          "rank": 5,
+          "of": 5,
+          "why": "Maul, Swipe, Claw and Rake cost less Rage or Energy. You are a bear until 20, so it helps from the first fight, and Mobalytics and Method both put it first."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 16947,
+          "rank": 3,
+          "of": 3,
+          "why": "Swipe hits harder, and monsters notice you less while you Prowl. Swipe is your attack against a pack, and you are a bear until 20."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 17002,
+          "rank": 2,
+          "of": 2,
+          "why": "More movement speed in Cat Form and a better chance to dodge. Taking it now means it is full when Cat Form comes at 20."
+        },
+        {
+          "points": [
+            11,
+            12
+          ],
+          "level": [
+            20,
+            21
+          ],
+          "talent": 16942,
+          "rank": 2,
+          "of": 2,
+          "why": "You crit more often in Cat Form and Bear Form, so every attack you make gains from it."
+        },
+        {
+          "points": [
+            13,
+            13
+          ],
+          "level": [
+            22,
+            22
+          ],
+          "talent": 1238122,
+          "rank": 1,
+          "of": 1,
+          "why": "In Cat Form it leaps you behind the monster, so Shred works after it. In Bear Form it holds the monster and cuts off a spell."
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 16998,
+          "rank": 2,
+          "of": 2,
+          "why": "Claw, Rake, Shred, Maul and Swipe hit harder. These are the attacks you use all fight."
+        },
+        {
+          "points": [
+            16,
+            18
+          ],
+          "level": [
+            25,
+            27
+          ],
+          "talent": 16972,
+          "rank": 3,
+          "of": 3,
+          "why": "More attack power in Cat Form and Bear Form, scaled to your level. It is also the gate to Rend and Tear."
+        },
+        {
+          "points": [
+            19,
+            19
+          ],
+          "level": [
+            28,
+            28
+          ],
+          "talent": 1328613,
+          "rank": 1,
+          "of": 1,
+          "why": "It changes how Ferocious Bite spends spare Energy, and it is the gate to Shifting Power at 40."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 16966,
+          "rank": 1,
+          "of": 3,
+          "why": "Shred costs less Energy. Shred is your hardest hit while you are behind the monster, so it earns each rank when you can get there."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 17007,
+          "rank": 1,
+          "of": 1,
+          "why": "Your party crits more often while you are in Cat Form. Method and Mobalytics both take it at 30."
+        },
+        {
+          "points": [
+            22,
+            23
+          ],
+          "level": [
+            31,
+            32
+          ],
+          "talent": 1223242,
+          "rank": 2,
+          "of": 2,
+          "why": "Your melee crits hurt more. Mobalytics takes it straight after Leader of the Pack."
+        },
+        {
+          "points": [
+            24,
+            25
+          ],
+          "level": [
+            33,
+            34
+          ],
+          "talent": 16966,
+          "rank": 3,
+          "of": 3,
+          "why": "Shred costs less Energy again, so you land it more often. Method and Maxroll open from behind and Shred."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 1223246,
+          "rank": 5,
+          "of": 5,
+          "why": "Your melee attacks do more to a bleeding monster. Rake and Rip keep one bleeding, so most of your fight is spent in this bonus."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 1322605,
+          "rank": 1,
+          "of": 1,
+          "why": "Turns mana into Energy on a cooldown. Method uses it when Energy runs low. Mobalytics skips it, so this is a split, and it costs mana."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 1223081,
+          "rank": 5,
+          "of": 5,
+          "why": "Bleeds and heals over time do a little more with each rank. Rake and Rip are both over time. Mobalytics starts its tail here."
+        },
+        {
+          "points": [
+            37,
+            38
+          ],
+          "level": [
+            46,
+            47
+          ],
+          "talent": 1223082,
+          "rank": 2,
+          "of": 2,
+          "why": "A little more crit chance with spells and melee attacks. Mobalytics pairs it with Nature's Reach, which only helps spells, so the build stops at two ranks."
+        },
+        {
+          "points": [
+            39,
+            43
+          ],
+          "level": [
+            48,
+            52
+          ],
+          "talent": 17003,
+          "rank": 5,
+          "of": 5,
+          "why": "More Intellect, more Stamina in Bear Form and more Strength in Cat Form. It is the gate to Naturalist."
+        },
+        {
+          "points": [
+            44,
+            48
+          ],
+          "level": [
+            53,
+            57
+          ],
+          "talent": 17069,
+          "rank": 5,
+          "of": 5,
+          "why": "All the damage you deal rises with each rank. Mobalytics takes it last, after Heart of the Wild."
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 16833,
+          "rank": 3,
+          "of": 3,
+          "why": "Shifting costs less mana, Shifting Power included. A cat that turns bear for a pack shifts a lot."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build. Wrath and Moonfire from range do the killing, Healing Touch and Rejuvenation keep you up, and Bear Form and your first talent point come at 10.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull, from 6",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "to pull, from as far as it reaches",
+                "why": "the monster spends its walk taking damage"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "right after it, from 4",
+                "why": "it burns at once and keeps burning"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 5185,
+                "name": "Healing Touch",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you cast Wrath"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "while you have mana",
+                "why": "it is your main attack"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana, so use it when the mana is gone"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "when a second monster joins, from 8",
+                "why": "it holds one still while you finish the first"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt, from 4",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Cat Form is ten levels away, so you fight as a bear. Maul and Swipe are your damage, Enrage gives you Rage to start, and Demoralizing Roar softens a pack. Claw, Rip and Shred come at 20, and your first points go to Ferocity.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5487,
+                "name": "Bear Form",
+                "if": "before you pull",
+                "why": "Maul and Swipe need it, and it is hard to kill"
+              },
+              {
+                "spell": 5229,
+                "name": "Enrage",
+                "if": "as the monster comes, from 12",
+                "why": "it gives you Rage to spend at once"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 99,
+                "name": "Demoralizing Roar",
+                "if": "when two or more monsters hit you",
+                "why": "it lowers how hard they hit"
+              },
+              {
+                "spell": 779,
+                "name": "Swipe",
+                "if": "against two or more monsters, from 16",
+                "why": "it hits up to three of them"
+              },
+              {
+                "spell": 770,
+                "name": "Faerie Fire",
+                "if": "on a monster that will live a while, from 18",
+                "why": "its armour drops, so every hit lands harder"
+              },
+              {
+                "spell": 6807,
+                "name": "Maul",
+                "if": "when you have Rage to spare",
+                "why": "it adds damage to your next swing"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings build the Rage that Maul spends"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5211,
+                "name": "Bash",
+                "if": "to stop a monster that runs or casts, from 14",
+                "why": "a stunned monster does nothing"
+              },
+              {
+                "spell": 6795,
+                "name": "Growl",
+                "if": "in a group, when a monster goes for someone else",
+                "why": "it turns the monster on you"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before you shift back",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "low": [
+              {
+                "text": "Sit and drink",
+                "if": "before you shift into a form again",
+                "why": "each shift costs a large part of your mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Cat Form comes at 20 with Claw, Rip and Shred, Rake and Ferocious Bite at 24, Ravage at 32 and Pounce at 36. Prowl first and open from behind. Bear Form stays for a pack, and a monster you would rather not fight as a cat.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 768,
+                "name": "Cat Form",
+                "if": "before you pull",
+                "why": "every cat attack needs it"
+              },
+              {
+                "spell": 5215,
+                "name": "Prowl",
+                "if": "when the monster has not seen you",
+                "why": "Ravage and Pounce can only be used from it"
+              },
+              {
+                "spell": 6785,
+                "name": "Ravage",
+                "if": "from behind, from 32",
+                "why": "it is your hardest opener"
+              },
+              {
+                "spell": 5221,
+                "name": "Shred",
+                "if": "from behind, until you have Ravage",
+                "why": "it is the hardest hit you have there"
+              },
+              {
+                "spell": 770,
+                "name": "Faerie Fire",
+                "if": "when you are seen",
+                "why": "its armour drops, so every hit lands harder"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1079,
+                "name": "Rip",
+                "if": "with 4 or 5 combo points, on a monster that lives",
+                "why": "it is your best finisher"
+              },
+              {
+                "spell": 1328618,
+                "name": "Ferocious Bite",
+                "if": "at 5 combo points, when it will die",
+                "why": "it finishes at once"
+              },
+              {
+                "spell": 1822,
+                "name": "Rake",
+                "if": "when it is not bleeding, from 24",
+                "why": "it bleeds for you and gives a combo point"
+              },
+              {
+                "spell": 5221,
+                "name": "Shred",
+                "if": "when you are behind it",
+                "why": "it hits hard and gives a combo point"
+              },
+              {
+                "spell": 1082,
+                "name": "Claw",
+                "why": "it works from any side and gives a combo point"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 1238122,
+                "name": "Feral Charge",
+                "talentSpell": 1238122,
+                "if": "when you need to get behind a monster",
+                "why": "it leaps you behind it, so Shred works",
+                "need": {
+                  "talents": [
+                    1238122
+                  ]
+                }
+              },
+              {
+                "spell": 5487,
+                "name": "Bear Form",
+                "if": "against three or more monsters",
+                "why": "Swipe hits them all, and a bear is hard to kill"
+              },
+              {
+                "spell": 8998,
+                "name": "Cower",
+                "if": "in a group, when a monster turns on you, from 28",
+                "why": "it lowers your threat"
+              },
+              {
+                "spell": 1850,
+                "name": "Dash",
+                "if": "to reach a monster or to run, from 26",
+                "why": "it makes you faster without breaking Prowl"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before you shift back",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "low": [
+              {
+                "text": "Let your Energy fill",
+                "if": "when you cannot afford an attack",
+                "why": "it comes back on its own, so waiting costs nothing"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "before you shift into a form again",
+                "why": "each shift costs a large part of your mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Dire Bear Form and Innervate come at 40, Barkskin at 44, and Shifting Power with your thirty-first point. Open from Prowl, keep Rake and Rip on the monster, and let Shifting Power refill the Energy when it runs dry.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 768,
+                "name": "Cat Form",
+                "if": "before you pull",
+                "why": "every cat attack needs it"
+              },
+              {
+                "spell": 5215,
+                "name": "Prowl",
+                "if": "when the monster has not seen you",
+                "why": "Ravage and Pounce can only be used from it"
+              },
+              {
+                "spell": 6785,
+                "name": "Ravage",
+                "if": "from behind",
+                "why": "it is your hardest opener"
+              },
+              {
+                "spell": 770,
+                "name": "Faerie Fire",
+                "if": "when you are seen",
+                "why": "its armour drops, so every hit lands harder"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 1322605,
+                "name": "Shifting Power",
+                "talentSpell": 1322605,
+                "if": "when your Energy is nearly gone",
+                "why": "it turns mana into Energy at once",
+                "need": {
+                  "talents": [
+                    1322605
+                  ]
+                }
+              },
+              {
+                "spell": 1079,
+                "name": "Rip",
+                "if": "with 4 or 5 combo points, on a monster that lives",
+                "why": "it is your best finisher"
+              },
+              {
+                "spell": 1328618,
+                "name": "Ferocious Bite",
+                "if": "at 5 combo points, when it will die",
+                "why": "it finishes at once"
+              },
+              {
+                "spell": 1822,
+                "name": "Rake",
+                "if": "when it is not bleeding",
+                "why": "it bleeds for you and gives a combo point"
+              },
+              {
+                "spell": 5221,
+                "name": "Shred",
+                "if": "when you are behind it",
+                "why": "it hits hard and gives a combo point"
+              },
+              {
+                "spell": 1082,
+                "name": "Claw",
+                "why": "it works from any side and gives a combo point"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 9005,
+                "name": "Pounce",
+                "if": "from Prowl, when you want a stun",
+                "why": "it stuns and bleeds the monster"
+              },
+              {
+                "spell": 9634,
+                "name": "Dire Bear Form",
+                "if": "against three or more monsters",
+                "why": "Swipe hits them all, and a bear is hard to kill"
+              },
+              {
+                "spell": 8998,
+                "name": "Cower",
+                "if": "in a group, when a monster turns on you",
+                "why": "it lowers your threat"
+              },
+              {
+                "spell": 1850,
+                "name": "Dash",
+                "if": "to reach a monster or to run",
+                "why": "it makes you faster without breaking Prowl"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before you shift back",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "low": [
+              {
+                "text": "Let your Energy fill",
+                "if": "when you cannot afford an attack",
+                "why": "it comes back on its own, so waiting costs nothing"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "before you shift into a form again",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 29166,
+                  "name": "Innervate"
+                },
+                {
+                  "spell": 22812,
+                  "name": "Barkskin"
+                }
+              ],
+              "say": "Innervate on yourself when your mana runs low, Barkskin when a fight goes wrong"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "key": "druid-feral-bear",
+      "name": "Feral Combat",
+      "variant": "bear",
+      "role": "tank",
+      "tree": 281,
+      "checked": "2026-11-05",
+      "intro": "Feral as a bear holds monsters while a group kills them. Bear Form comes at 10. Lacerate at 25 and Primal Bite at 40 make the threat, and Frenzied Regeneration and Barkskin keep you alive. It is the cat's tree with different points.",
+      "line": "Bear Form from 10, Lacerate and Primal Bite for threat. It holds a pack for the group.",
+      "pathNote": "(43 points in Feral Combat, 8 in Restoration for Heart of the Wild and Natural Shapeshifter.)",
+      "split": "Rend and Tear against Natural Reaction, and Lacerate. Method takes Rend and Tear for its dungeon tank, Mobalytics offers either, and Mobalytics skips Lacerate unless you tank. The points after 30 are ours from the row gates, and nobody has played past 30.",
+      "dry": "A monster that is hitting you is not hitting anyone else, and that is the whole job.",
+      "sources": [
+        {
+          "label": "Method, Druid levelling guide and talents (BirraGzeeZ, 3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-druid-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Feral Druid levelling 1 to 60 (DoubleZug, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/doublezug/classes/feral-druid-leveling-guide-level-1-60",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Druid levelling guide (Rycn, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/druid-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Druid levelling (Luxrah, beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/druid-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Icy Veins, Feral Druid levelling (Meyra, 18 October 2026, beta)",
+          "url": "https://www.icy-veins.com/wow-forever/feral-druid-leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "wowforeverbuilds, levelling (1 November 2026)",
+          "url": "https://wowforeverbuilds.com/leveling",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Beta Development Notes of 2 November 2026 (via patchbot.io)",
+          "url": "https://patchbot.io/games/world-of-warcraft-forever/articles/2053-wow-forever-beta-development-notes-november-2",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 16934,
+          "rank": 5,
+          "of": 5,
+          "why": "Maul, Swipe and Primal Bite cost less Rage, so you spend it on more attacks. Rage is the only thing a bear runs on."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 16947,
+          "rank": 3,
+          "of": 3,
+          "why": "Swipe hits harder. Swipe is your attack against two or three monsters, and most of your threat until Lacerate."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 16940,
+          "rank": 2,
+          "of": 2,
+          "why": "Bash stuns longer and comes back sooner. A stun that is ready more often is a monster that does nothing more often."
+        },
+        {
+          "points": [
+            11,
+            12
+          ],
+          "level": [
+            20,
+            21
+          ],
+          "talent": 16998,
+          "rank": 2,
+          "of": 2,
+          "why": "Maul and Swipe hit harder. It is also the gate to Lacerate at 25, so these two points have to come first."
+        },
+        {
+          "points": [
+            13,
+            13
+          ],
+          "level": [
+            22,
+            22
+          ],
+          "talent": 1238122,
+          "rank": 1,
+          "of": 1,
+          "why": "In Bear Form it holds a monster and cuts off a spell. It gets you to the monster that is running at your healer."
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 16942,
+          "rank": 2,
+          "of": 2,
+          "why": "You crit more often in Cat Form and Bear Form. It is also the gate to Blood Frenzy."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 1328617,
+          "rank": 1,
+          "of": 1,
+          "why": "A bleed that stacks 5 times and makes a lot of threat. Mobalytics says to skip it unless you tank dungeons, and you do."
+        },
+        {
+          "points": [
+            17,
+            19
+          ],
+          "level": [
+            26,
+            28
+          ],
+          "talent": 16972,
+          "rank": 3,
+          "of": 3,
+          "why": "More attack power in Bear Form, scaled to your level, so your swings make more threat. It is the gate to Rend and Tear."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 16958,
+          "rank": 1,
+          "of": 2,
+          "why": "A critical strike gives you extra Rage. More Rage is more Maul and Swipe, so a crit helps your threat twice."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 17007,
+          "rank": 1,
+          "of": 1,
+          "why": "Your party crits more often while you are in Bear Form. The group gets it for free, and Primal Bite at 40 needs it."
+        },
+        {
+          "points": [
+            22,
+            22
+          ],
+          "level": [
+            31,
+            31
+          ],
+          "talent": 16958,
+          "rank": 2,
+          "of": 2,
+          "why": "A critical strike gives you extra Rage. More Rage is more Maul and Swipe, so a crit helps your threat twice."
+        },
+        {
+          "points": [
+            23,
+            25
+          ],
+          "level": [
+            32,
+            34
+          ],
+          "talent": 16929,
+          "rank": 3,
+          "of": 3,
+          "why": "More armour in Bear Form. Armour stops part of every hit, and a tank takes the most hits. Method's dungeon tank takes it."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 1223246,
+          "rank": 5,
+          "of": 5,
+          "why": "Your melee attacks do more to a bleeding monster. Lacerate keeps one bleeding, so Maul and Swipe gain from it on every pull."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 407995,
+          "rank": 1,
+          "of": 1,
+          "why": "A heavy bite that makes a lot of threat, on a short cooldown. Mobalytics calls it a must for tanking a pack."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 417051,
+          "rank": 5,
+          "of": 5,
+          "why": "You dodge more, and a dodge can give you Rage. A tank that is hit less needs less healing, and the Rage pays for Maul."
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 17056,
+          "rank": 5,
+          "of": 5,
+          "why": "Shifting into Bear Form can give you Rage at once, so you open a pull with Rage to spend."
+        },
+        {
+          "points": [
+            42,
+            43
+          ],
+          "level": [
+            51,
+            52
+          ],
+          "talent": 1223242,
+          "rank": 2,
+          "of": 2,
+          "why": "Your melee crits hurt more. Lacerate and Maul crit more with Sharpened Claws, so it adds threat."
+        },
+        {
+          "points": [
+            44,
+            48
+          ],
+          "level": [
+            53,
+            57
+          ],
+          "talent": 17003,
+          "rank": 5,
+          "of": 5,
+          "why": "More Stamina in Bear Form, which is more health to be hit with, and more Intellect for the heals between pulls."
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 16833,
+          "rank": 3,
+          "of": 3,
+          "why": "Shifting costs less mana. You shift to heal between pulls and shift back, and each shift costs a large part of your mana."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build. Wrath and Moonfire from range do the killing, Healing Touch and Rejuvenation keep you up, and Bear Form and your first talent point come at 10.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull, from 6",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "to pull, from as far as it reaches",
+                "why": "the monster spends its walk taking damage"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "right after it, from 4",
+                "why": "it burns at once and keeps burning"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 5185,
+                "name": "Healing Touch",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you cast Wrath"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "while you have mana",
+                "why": "it is your main attack"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana, so use it when the mana is gone"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "when a second monster joins, from 8",
+                "why": "it holds one still while you finish the first"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt, from 4",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Bear Form comes at 10 and you hold monsters from the first dungeon. Growl pulls a monster off your healer, Swipe takes a pack, and Demoralizing Roar makes them hit softer. Your first points go to Ferocity and Feral Instinct.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5487,
+                "name": "Bear Form",
+                "if": "before you pull",
+                "why": "Maul and Swipe need it, and it is hard to kill"
+              },
+              {
+                "spell": 5229,
+                "name": "Enrage",
+                "if": "as the monster comes, from 12",
+                "why": "it gives you Rage to spend at once"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 6795,
+                "name": "Growl",
+                "if": "when a monster is on someone else",
+                "why": "it turns the monster on you"
+              },
+              {
+                "spell": 99,
+                "name": "Demoralizing Roar",
+                "if": "when two or more monsters hit you",
+                "why": "it lowers how hard they hit"
+              },
+              {
+                "spell": 779,
+                "name": "Swipe",
+                "if": "against two or more monsters, from 16",
+                "why": "it hits up to three of them"
+              },
+              {
+                "spell": 770,
+                "name": "Faerie Fire",
+                "if": "on a monster that will live a while, from 18",
+                "why": "its armour drops, so every hit lands harder"
+              },
+              {
+                "spell": 6807,
+                "name": "Maul",
+                "if": "when you have Rage to spare",
+                "why": "it adds damage to your next swing"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings build the Rage that Maul spends"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5211,
+                "name": "Bash",
+                "if": "to stop a monster that runs or casts, from 14",
+                "why": "a stunned monster does nothing"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before you shift back",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Rage is nearly gone",
+                "why": "swings and hits both give you Rage"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "before you shift into a form again",
+                "why": "each shift costs a large part of your mana"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Lacerate comes with your sixteenth point, at 25, and it is the threat button. Challenging Roar comes at 28 and Frenzied Regeneration at 36. Stack Lacerate on the monster that matters, Swipe the rest, and keep Growl for the one on your healer.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5487,
+                "name": "Bear Form",
+                "if": "before you pull",
+                "why": "every bear attack needs it"
+              },
+              {
+                "spell": 1238122,
+                "name": "Feral Charge",
+                "talentSpell": 1238122,
+                "if": "to pull a monster at range",
+                "why": "it holds it and cuts off a spell",
+                "need": {
+                  "talents": [
+                    1238122
+                  ]
+                }
+              },
+              {
+                "spell": 5229,
+                "name": "Enrage",
+                "if": "as the monster comes, from 12",
+                "why": "it gives you Rage to spend at once"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 6795,
+                "name": "Growl",
+                "if": "when a monster is on someone else",
+                "why": "it turns the monster on you"
+              },
+              {
+                "spell": 1328617,
+                "name": "Lacerate",
+                "talentSpell": 1328617,
+                "if": "while the stack is under 5, from 25",
+                "why": "each stack adds bleed damage and threat",
+                "need": {
+                  "talents": [
+                    1328617
+                  ]
+                }
+              },
+              {
+                "spell": 779,
+                "name": "Swipe",
+                "if": "against two or more monsters",
+                "why": "it hits up to three of them"
+              },
+              {
+                "spell": 99,
+                "name": "Demoralizing Roar",
+                "if": "when two or more monsters hit you",
+                "why": "it lowers how hard they hit"
+              },
+              {
+                "spell": 6807,
+                "name": "Maul",
+                "if": "when you have Rage to spare",
+                "why": "it adds damage to your next swing"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings build the Rage that Maul spends"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 770,
+                "name": "Faerie Fire",
+                "if": "on a monster that will live a while",
+                "why": "its armour drops, so every hit lands harder"
+              },
+              {
+                "spell": 5211,
+                "name": "Bash",
+                "if": "to stop a monster that runs or casts",
+                "why": "a stunned monster does nothing"
+              },
+              {
+                "spell": 5209,
+                "name": "Challenging Roar",
+                "if": "when the pack goes for your healer",
+                "why": "it makes them all attack you"
+              },
+              {
+                "spell": 22842,
+                "name": "Frenzied Regeneration",
+                "if": "when health is low, with Rage",
+                "why": "it turns Rage into health"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before you shift back",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Rage is nearly gone",
+                "why": "swings and hits both give you Rage"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "before you shift into a form again",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 22842,
+                  "name": "Frenzied Regeneration"
+                },
+                {
+                  "spell": 5209,
+                  "name": "Challenging Roar"
+                }
+              ],
+              "say": "Frenzied Regeneration when health is low, Challenging Roar when a pack turns"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Dire Bear Form comes at 40 and replaces Bear Form, with more health and armour. Primal Bite is your thirty-first point, a heavy bite on a short cooldown, and Barkskin comes at 44. Lacerate stays up, Primal Bite goes on cooldown, and Swipe takes the rest.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 9634,
+                "name": "Dire Bear Form",
+                "if": "before you pull",
+                "why": "it has more health and armour than Bear Form"
+              },
+              {
+                "spell": 770,
+                "name": "Faerie Fire",
+                "if": "as the monster comes",
+                "why": "its armour drops, so every hit lands harder"
+              },
+              {
+                "spell": 407995,
+                "name": "Primal Bite",
+                "talentSpell": 407995,
+                "if": "to pull, once it is ready",
+                "why": "it hits hard and makes a lot of threat",
+                "need": {
+                  "talents": [
+                    407995
+                  ]
+                }
+              },
+              {
+                "spell": 99,
+                "name": "Demoralizing Roar",
+                "if": "when two or more monsters hit you",
+                "why": "it lowers how hard they hit"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 6795,
+                "name": "Growl",
+                "if": "when a monster is on someone else",
+                "why": "it turns the monster on you"
+              },
+              {
+                "spell": 407995,
+                "name": "Primal Bite",
+                "talentSpell": 407995,
+                "if": "whenever it is ready",
+                "why": "it is your hardest threat button",
+                "need": {
+                  "talents": [
+                    407995
+                  ]
+                }
+              },
+              {
+                "spell": 1328617,
+                "name": "Lacerate",
+                "talentSpell": 1328617,
+                "if": "while the stack is under 5",
+                "why": "each stack adds bleed damage and threat",
+                "need": {
+                  "talents": [
+                    1328617
+                  ]
+                }
+              },
+              {
+                "spell": 779,
+                "name": "Swipe",
+                "if": "against two or more monsters",
+                "why": "it hits up to three of them"
+              },
+              {
+                "spell": 6807,
+                "name": "Maul",
+                "if": "when you have Rage to spare",
+                "why": "it adds damage to your next swing"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "swings build the Rage that Maul spends"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 5211,
+                "name": "Bash",
+                "if": "to stop a monster that runs or casts",
+                "why": "a stunned monster does nothing"
+              },
+              {
+                "spell": 5209,
+                "name": "Challenging Roar",
+                "if": "when the pack goes for your healer",
+                "why": "it makes them all attack you"
+              },
+              {
+                "spell": 22842,
+                "name": "Frenzied Regeneration",
+                "if": "when health is low, with Rage",
+                "why": "it turns Rage into health"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before you shift back",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your Rage is nearly gone",
+                "why": "swings and hits both give you Rage"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "before you shift into a form again",
+                "why": "each shift costs a large part of your mana"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 22812,
+                  "name": "Barkskin"
+                },
+                {
+                  "spell": 22842,
+                  "name": "Frenzied Regeneration"
+                },
+                {
+                  "spell": 29166,
+                  "name": "Innervate"
+                }
+              ],
+              "say": "Barkskin and Frenzied Regeneration when a fight goes wrong, Innervate for mana"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "key": "druid-balance",
+      "name": "Balance",
+      "role": "damage",
+      "tree": 283,
+      "checked": "2026-11-05",
+      "intro": "Balance casts Wrath and Starfire from range, keeps Moonfire and Insect Swarm on the monster, and shifts into Moonkin Form at 40. Eclipse makes Wrath speed up the Starfires after it. It is slow before Hurricane at 40 and every kill costs mana, so guides level as Feral and come here later.",
+      "line": "Wrath, Starfire, Moonfire and Insect Swarm from range. Slow alone, with Moonkin Form at 40.",
+      "pathNote": "(41 points in Balance, 10 in Restoration for Heart of the Wild, Reflection and Naturalist.)",
+      "split": "whether to level it at all. Method calls Balance viable and best taken beyond 30, and Mobalytics uses it only as the tail of a Feral build. The first 11 points follow wow.gg's level 20 page, and the rest are ours from the row gates and Method's and Warcraft Tavern's named priorities. Nobody has written a full order.",
+      "dry": "A caster that is meleeing has already run out of mana.",
+      "sources": [
+        {
+          "label": "Method, Druid levelling guide and talents (BirraGzeeZ, 3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-druid-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "wow.gg, Balance Druid beta (Fouren, 1 October 2026)",
+          "url": "https://wow.gg/guides/wow-forever-balance-druid-beta",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Druid levelling guide (Rycn, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/druid-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Druid levelling (Luxrah, beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/druid-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Feral Druid levelling 1 to 60 (DoubleZug, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/doublezug/classes/feral-druid-leveling-guide-level-1-60",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Beta Development Notes of 2 November 2026 (via patchbot.io)",
+          "url": "https://patchbot.io/games/world-of-warcraft-forever/articles/2053-wow-forever-beta-development-notes-november-2",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 16814,
+          "rank": 5,
+          "of": 5,
+          "why": "Wrath casts faster and costs less mana. It is the spell you cast most until 20, and wow.gg puts it first."
+        },
+        {
+          "points": [
+            6,
+            8
+          ],
+          "level": [
+            15,
+            17
+          ],
+          "talent": 16845,
+          "rank": 3,
+          "of": 3,
+          "why": "Your damage spells cost less mana. Every kill costs mana, and this is the cheapest way to make it last."
+        },
+        {
+          "points": [
+            9,
+            10
+          ],
+          "level": [
+            18,
+            19
+          ],
+          "talent": 16819,
+          "rank": 2,
+          "of": 2,
+          "why": "Your Balance spells reach further and miss less. A longer reach means you cast for longer before the monster arrives."
+        },
+        {
+          "points": [
+            11,
+            12
+          ],
+          "level": [
+            20,
+            21
+          ],
+          "talent": 16821,
+          "rank": 2,
+          "of": 2,
+          "why": "Moonfire hits harder and crits more. You put it on every monster, and it is the gate to Vengeance."
+        },
+        {
+          "points": [
+            13,
+            14
+          ],
+          "level": [
+            22,
+            23
+          ],
+          "talent": 1223082,
+          "rank": 2,
+          "of": 2,
+          "why": "A little more crit chance with spells and melee attacks. Method names it, and it is the gate to Nature's Splendor."
+        },
+        {
+          "points": [
+            15,
+            15
+          ],
+          "level": [
+            24,
+            24
+          ],
+          "talent": 1223083,
+          "rank": 1,
+          "of": 1,
+          "why": "Moonfire lasts longer, and so do Rejuvenation, Regrowth and Insect Swarm. A longer Moonfire is damage you pay for once."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 5570,
+          "rank": 1,
+          "of": 1,
+          "why": "A second damage over time that also lowers the monster's chance to hit you. Method and Warcraft Tavern both put it at 25."
+        },
+        {
+          "points": [
+            17,
+            20
+          ],
+          "level": [
+            26,
+            29
+          ],
+          "talent": 1223081,
+          "rank": 4,
+          "of": 5,
+          "why": "Your damage over time does more with each rank. Moonfire and Insect Swarm are both over time. Method wants all five."
+        },
+        {
+          "points": [
+            21,
+            23
+          ],
+          "level": [
+            30,
+            32
+          ],
+          "talent": 408248,
+          "rank": 3,
+          "of": 3,
+          "why": "Wrath makes your next Starfires cast faster. Cast Wrath, then Starfire, and the pair is quicker than either alone."
+        },
+        {
+          "points": [
+            24,
+            24
+          ],
+          "level": [
+            33,
+            33
+          ],
+          "talent": 1223081,
+          "rank": 5,
+          "of": 5,
+          "why": "The fifth rank of Genesis, now that Eclipse is taken. Method wants all five."
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 16880,
+          "rank": 1,
+          "of": 1,
+          "why": "A spell crit makes your next casts faster for a short time. Warcraft Tavern lists it among the Balance talents."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 16896,
+          "rank": 5,
+          "of": 5,
+          "why": "Arcane and Nature spells hit harder. Wrath, Starfire and Moonfire all count."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 24858,
+          "rank": 1,
+          "of": 1,
+          "why": "Raises your armour and your party's crit chance, but you cannot heal in it. Warcraft Tavern names it as the tree's milestone at 40."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 16850,
+          "rank": 5,
+          "of": 5,
+          "why": "Starfire casts faster and can stun the monster. Eclipse speeds it up again, so this is the second half of that pair."
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 17003,
+          "rank": 5,
+          "of": 5,
+          "why": "More Intellect, which is more mana and more crit. It is the gate to Reflection and Naturalist, which Method names for casters."
+        },
+        {
+          "points": [
+            42,
+            44
+          ],
+          "level": [
+            51,
+            53
+          ],
+          "talent": 17106,
+          "rank": 3,
+          "of": 3,
+          "why": "Part of your mana regeneration keeps going while you cast. A caster runs out of mana before monsters, and this is the fix."
+        },
+        {
+          "points": [
+            45,
+            49
+          ],
+          "level": [
+            54,
+            58
+          ],
+          "talent": 16909,
+          "rank": 5,
+          "of": 5,
+          "why": "Your Arcane and Nature spells crit for more. Crits are where Starfire's damage is."
+        },
+        {
+          "points": [
+            50,
+            51
+          ],
+          "level": [
+            59,
+            60
+          ],
+          "talent": 17069,
+          "rank": 2,
+          "of": 5,
+          "why": "All the damage you deal rises with each rank, and Healing Touch casts faster. Two ranks are what the last points allow."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build. Wrath and Moonfire from range do the killing, Healing Touch and Rejuvenation keep you up, and Bear Form and your first talent point come at 10.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull, from 6",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "to pull, from as far as it reaches",
+                "why": "the monster spends its walk taking damage"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "right after it, from 4",
+                "why": "it burns at once and keeps burning"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 5185,
+                "name": "Healing Touch",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you cast Wrath"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "while you have mana",
+                "why": "it is your main attack"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana, so use it when the mana is gone"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "when a second monster joins, from 8",
+                "why": "it holds one still while you finish the first"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt, from 4",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Wrath and Moonfire from range for the whole fight, and a drink after each one. Moonglow and Improved Wrath make the mana last. Bear Form is there for a monster that reaches you with the bar empty.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "to pull, from as far as it reaches",
+                "why": "the monster spends its walk taking damage"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "right after it",
+                "why": "it burns at once and keeps burning"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8936,
+                "name": "Regrowth",
+                "if": "when your health is low, from 12",
+                "why": "it heals now and keeps healing"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "when it is not on the monster",
+                "why": "it keeps hurting it while you cast Wrath"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "while you have mana",
+                "why": "it is your main attack"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana, so use it when the mana is gone"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you finish the first"
+              },
+              {
+                "spell": 16689,
+                "name": "Nature's Grasp",
+                "if": "when a monster reaches you",
+                "why": "its next hit on you roots it"
+              },
+              {
+                "spell": 5487,
+                "name": "Bear Form",
+                "if": "when a monster reaches you, mana out",
+                "why": "you hit harder and take less than in no form"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Starfire comes at 20 and Insect Swarm with your sixteenth point, at 25. Eclipse at 30 lets a Wrath set up two quicker Starfires. Keep Moonfire and Insect Swarm on the monster and let them work while you cast.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 2912,
+                "name": "Starfire",
+                "if": "to pull, from as far as it reaches",
+                "why": "it is the biggest hit you have from range"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "right after it",
+                "why": "it burns at once and keeps burning"
+              },
+              {
+                "spell": 5570,
+                "name": "Insect Swarm",
+                "talentSpell": 5570,
+                "if": "right after that, from 25",
+                "why": "it hurts the monster and makes it miss",
+                "need": {
+                  "talents": [
+                    5570
+                  ]
+                }
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8936,
+                "name": "Regrowth",
+                "if": "when your health is low",
+                "why": "it heals now and keeps healing"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "when it is not on the monster",
+                "why": "it keeps hurting it while you cast"
+              },
+              {
+                "spell": 5570,
+                "name": "Insect Swarm",
+                "talentSpell": 5570,
+                "if": "when it is not on the monster",
+                "why": "it hurts the monster and makes it miss",
+                "need": {
+                  "talents": [
+                    5570
+                  ]
+                }
+              },
+              {
+                "spell": 2912,
+                "name": "Starfire",
+                "if": "right after a Wrath, once you have Eclipse",
+                "why": "Wrath cuts its cast time",
+                "need": {
+                  "talents": [
+                    408248
+                  ]
+                }
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "why": "it is quick and cheap, and it sets up the next Starfire"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you finish the first"
+              },
+              {
+                "spell": 16689,
+                "name": "Nature's Grasp",
+                "if": "when a monster reaches you",
+                "why": "its next hit on you roots it"
+              },
+              {
+                "spell": 5487,
+                "name": "Bear Form",
+                "if": "when a monster reaches you, mana out",
+                "why": "you hit harder and take less than in no form"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ]
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Moonkin Form comes at 40 with your thirty-first point, Hurricane for a crowd and Innervate for your mana. Wrath still starts Eclipse, and Improved Starfire makes the Starfires after it faster. You cannot heal in Moonkin Form, so shift out to do it.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 24858,
+                "name": "Moonkin Form",
+                "talentSpell": 24858,
+                "if": "before you pull",
+                "why": "it raises your armour and your party's crit",
+                "need": {
+                  "talents": [
+                    24858
+                  ]
+                }
+              },
+              {
+                "spell": 2912,
+                "name": "Starfire",
+                "if": "to pull, from as far as it reaches",
+                "why": "it is the biggest hit you have from range"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "right after it",
+                "why": "it burns at once and keeps burning"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 16914,
+                "name": "Hurricane",
+                "if": "against three or more monsters",
+                "why": "it hits all of them while you channel"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "when it is not on the monster",
+                "why": "it keeps hurting it while you cast"
+              },
+              {
+                "spell": 5570,
+                "name": "Insect Swarm",
+                "talentSpell": 5570,
+                "if": "when it is not on the monster",
+                "why": "it hurts the monster and makes it miss",
+                "need": {
+                  "talents": [
+                    5570
+                  ]
+                }
+              },
+              {
+                "spell": 2912,
+                "name": "Starfire",
+                "if": "right after a Wrath, once you have Eclipse",
+                "why": "Wrath cuts its cast time",
+                "need": {
+                  "talents": [
+                    408248
+                  ]
+                }
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "why": "it is quick and cheap, and it sets up the next Starfire"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "when a second monster joins",
+                "why": "it holds one still while you finish the first"
+              },
+              {
+                "spell": 16689,
+                "name": "Nature's Grasp",
+                "if": "when a monster reaches you",
+                "why": "its next hit on you roots it"
+              },
+              {
+                "spell": 9634,
+                "name": "Dire Bear Form",
+                "if": "when a monster reaches you, mana out",
+                "why": "you hit harder and take less than in no form"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "out of Moonkin Form, after a fight",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 29166,
+                  "name": "Innervate"
+                },
+                {
+                  "spell": 22812,
+                  "name": "Barkskin"
+                }
+              ],
+              "say": "Innervate on yourself when your mana runs low, Barkskin when a fight goes wrong"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "key": "druid-restoration",
+      "name": "Restoration",
+      "role": "heal",
+      "tree": 282,
+      "checked": "2026-11-05",
+      "intro": "Restoration keeps a group alive with heals over time: Rejuvenation and Regrowth on the tank, Swiftmend when it drops, Wild Growth at 40. Guides do not level it alone, so this page is for dungeons and says what to do in between. You cannot heal in a form, so you step out of one to do it.",
+      "line": "Rejuvenation, Regrowth and Swiftmend on a group. Guides do not level it alone.",
+      "pathNote": "(51 points in Restoration, every talent of the tree.)",
+      "split": "whether to level in it at all. Warcraft Tavern says not to, Method gives it no build and Maxroll writes a healer's page for dungeons. The first 13 points follow wow.gg's healing page and Mobalytics' Reflection, and the order after that is ours from the row gates. Nobody has played past 30.",
+      "dry": "A heal that lands after the tank has died heals no one.",
+      "sources": [
+        {
+          "label": "wow.gg, Restoration Druid beta (Fouren, 1 October 2026)",
+          "url": "https://wow.gg/de/guides/wow-forever-restoration-druid-beta",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Method, Druid levelling guide and talents (BirraGzeeZ, 3 November 2026)",
+          "url": "https://www.method.gg/wow-forever/wow-forever-druid-leveling-guide-and-talents",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Mobalytics, Feral Druid levelling 1 to 60 (DoubleZug, 3 November 2026)",
+          "url": "https://mobalytics.gg/wow-forever/profile/doublezug/classes/feral-druid-leveling-guide-level-1-60",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Maxroll, Druid levelling guide (Rycn, 30 October 2026)",
+          "url": "https://maxroll.gg/wow-forever/class-guides/druid-leveling-guide",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Warcraft Tavern, Druid levelling (Luxrah, beta)",
+          "url": "https://www.warcrafttavern.com/forever/guides/druid-leveling/",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "timesaver.gg, every class's talents (3 November 2026)",
+          "url": "https://timesaver.gg/blog/wow-forever-talents-every-class",
+          "read": "2026-11-04"
+        },
+        {
+          "label": "Blizzard, Beta Development Notes of 2 November 2026 (via patchbot.io)",
+          "url": "https://patchbot.io/games/world-of-warcraft-forever/articles/2053-wow-forever-beta-development-notes-november-2",
+          "read": "2026-11-04"
+        }
+      ],
+      "path": [
+        {
+          "points": [
+            1,
+            5
+          ],
+          "level": [
+            10,
+            14
+          ],
+          "talent": 17063,
+          "rank": 5,
+          "of": 5,
+          "why": "A hit is less likely to delay your cast. A healer is hit while healing, so wow.gg's healing page takes it first."
+        },
+        {
+          "points": [
+            6,
+            10
+          ],
+          "level": [
+            15,
+            19
+          ],
+          "talent": 17069,
+          "rank": 5,
+          "of": 5,
+          "why": "Healing Touch casts faster, and all your damage rises. It is the gate to Nature's Swiftness at 30, and wow.gg takes it second."
+        },
+        {
+          "points": [
+            11,
+            13
+          ],
+          "level": [
+            20,
+            22
+          ],
+          "talent": 17106,
+          "rank": 3,
+          "of": 3,
+          "why": "Part of your mana regeneration keeps going while you cast. A healer casts all the time, and Mobalytics calls it great sustain."
+        },
+        {
+          "points": [
+            14,
+            15
+          ],
+          "level": [
+            23,
+            24
+          ],
+          "talent": 17104,
+          "rank": 2,
+          "of": 5,
+          "why": "Every healing spell you cast heals a little more with each rank."
+        },
+        {
+          "points": [
+            16,
+            16
+          ],
+          "level": [
+            25,
+            25
+          ],
+          "talent": 18562,
+          "rank": 1,
+          "of": 1,
+          "why": "Heals at once a target that has your Rejuvenation or Regrowth on it. It is your emergency button, and the guides list it at 25."
+        },
+        {
+          "points": [
+            17,
+            19
+          ],
+          "level": [
+            26,
+            28
+          ],
+          "talent": 17111,
+          "rank": 3,
+          "of": 3,
+          "why": "Rejuvenation heals more, and it is the gate to Improved Regrowth. Rejuvenation is the heal you keep on the tank."
+        },
+        {
+          "points": [
+            20,
+            20
+          ],
+          "level": [
+            29,
+            29
+          ],
+          "talent": 17104,
+          "rank": 3,
+          "of": 5,
+          "why": "Every healing spell you cast heals a little more with each rank."
+        },
+        {
+          "points": [
+            21,
+            21
+          ],
+          "level": [
+            30,
+            30
+          ],
+          "talent": 17116,
+          "rank": 1,
+          "of": 1,
+          "why": "Your next Nature spell is instant. Use it on Healing Touch when the tank is about to die."
+        },
+        {
+          "points": [
+            22,
+            24
+          ],
+          "level": [
+            31,
+            33
+          ],
+          "talent": 1309631,
+          "rank": 3,
+          "of": 3,
+          "why": "More Spirit, so more mana regeneration. It is the gate to Wild Growth at 40."
+        },
+        {
+          "points": [
+            25,
+            25
+          ],
+          "level": [
+            34,
+            34
+          ],
+          "talent": 17104,
+          "rank": 4,
+          "of": 5,
+          "why": "Every healing spell you cast heals a little more with each rank."
+        },
+        {
+          "points": [
+            26,
+            30
+          ],
+          "level": [
+            35,
+            39
+          ],
+          "talent": 17074,
+          "rank": 5,
+          "of": 5,
+          "why": "Regrowth crits more often. Regrowth is the heal for a tank who is falling behind."
+        },
+        {
+          "points": [
+            31,
+            31
+          ],
+          "level": [
+            40,
+            40
+          ],
+          "talent": 408120,
+          "rank": 1,
+          "of": 1,
+          "why": "A heal over time on a target and its party, with a long cast. Maxroll saves it for emergencies because it costs a lot of mana."
+        },
+        {
+          "points": [
+            32,
+            36
+          ],
+          "level": [
+            41,
+            45
+          ],
+          "talent": 17003,
+          "rank": 5,
+          "of": 5,
+          "why": "More Intellect, which is more mana, and more Stamina in Bear Form for the times you shift."
+        },
+        {
+          "points": [
+            37,
+            41
+          ],
+          "level": [
+            46,
+            50
+          ],
+          "talent": 24968,
+          "rank": 5,
+          "of": 5,
+          "why": "Healing Touch and Tranquility cost less mana. You cast Healing Touch a lot, and mana is what ends a dungeon."
+        },
+        {
+          "points": [
+            42,
+            42
+          ],
+          "level": [
+            51,
+            51
+          ],
+          "talent": 1328621,
+          "rank": 1,
+          "of": 1,
+          "why": "When Rejuvenation or Regrowth runs out, the target is healed for as much as your Spirit. No guide has played it, so this is what the talent says."
+        },
+        {
+          "points": [
+            43,
+            43
+          ],
+          "level": [
+            52,
+            52
+          ],
+          "talent": 17104,
+          "rank": 5,
+          "of": 5,
+          "why": "Every healing spell you cast heals a little more with each rank."
+        },
+        {
+          "points": [
+            44,
+            45
+          ],
+          "level": [
+            53,
+            54
+          ],
+          "talent": 17123,
+          "rank": 2,
+          "of": 2,
+          "why": "Tranquility makes no threat and comes back sooner. It is a party heal you can use more than once in a hard fight."
+        },
+        {
+          "points": [
+            46,
+            48
+          ],
+          "level": [
+            55,
+            57
+          ],
+          "talent": 17118,
+          "rank": 3,
+          "of": 3,
+          "why": "Your Nature and Arcane spells make less threat. A heal that pulls the monster onto you is a heal that goes wrong."
+        },
+        {
+          "points": [
+            49,
+            51
+          ],
+          "level": [
+            58,
+            60
+          ],
+          "talent": 16833,
+          "rank": 3,
+          "of": 3,
+          "why": "Shifting costs less mana. You shift to travel or to fight alone, then back to heal."
+        }
+      ],
+      "stages": [
+        {
+          "from": 1,
+          "to": 9,
+          "phase": "untalented",
+          "about": "Before your first talent point. The same kit in every build. Wrath and Moonfire from range do the killing, Healing Touch and Rejuvenation keep you up, and Bear Form and your first talent point come at 10.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "before each pull, from 6",
+                "why": "it hurts every monster that hits you"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "to pull, from as far as it reaches",
+                "why": "the monster spends its walk taking damage"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "right after it, from 4",
+                "why": "it burns at once and keeps burning"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 5185,
+                "name": "Healing Touch",
+                "if": "when your health is low",
+                "why": "a heal costs less than a death"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "on a monster that will live a while",
+                "why": "it keeps hurting it while you cast Wrath"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "if": "while you have mana",
+                "why": "it is your main attack"
+              },
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "why": "a swing costs no mana, so use it when the mana is gone"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "when a second monster joins, from 8",
+                "why": "it holds one still while you finish the first"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt, from 4",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "spell": 6603,
+                "name": "Attack",
+                "if": "when your mana is nearly gone",
+                "why": "a swing costs no mana"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ]
+          }
+        },
+        {
+          "from": 10,
+          "to": 19,
+          "about": "Alone, Wrath and Moonfire still do the killing and Rejuvenation keeps you up. In a group, Rejuvenation on the tank before the pull, Regrowth when it falls behind, Healing Touch for a big hit. Regrowth and Revive come at 12 and Cure Poison at 14.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "on the tank, before each pull",
+                "why": "it hurts every monster that hits them"
+              },
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "on the tank, before the pull",
+                "why": "it heals before the first hit lands"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "alone, to pull",
+                "why": "it burns at once and keeps burning"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 8936,
+                "name": "Regrowth",
+                "if": "when the tank is falling behind, from 12",
+                "why": "it heals now and keeps healing"
+              },
+              {
+                "spell": 5185,
+                "name": "Healing Touch",
+                "if": "for a big hit",
+                "why": "it is the biggest heal you have"
+              },
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "when it has run out on the tank",
+                "why": "it is the cheapest heal you have"
+              },
+              {
+                "spell": 8921,
+                "name": "Moonfire",
+                "if": "alone, or with spare mana",
+                "why": "it keeps hurting while you cast"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "why": "spare mana is better spent on damage than lost"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 8946,
+                "name": "Cure Poison",
+                "if": "when a poison is on someone, from 14",
+                "why": "it takes the poison off"
+              },
+              {
+                "spell": 437138,
+                "name": "Revive",
+                "if": "out of a fight, on a dead player, from 12",
+                "why": "it brings them back before you move on"
+              },
+              {
+                "spell": 339,
+                "name": "Entangling Roots",
+                "if": "alone, when a second monster joins",
+                "why": "it holds one still while you finish the first"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "text": "Heal only the tank",
+                "if": "when your mana is nearly gone",
+                "why": "one heal that lands beats three you cannot afford"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ]
+          }
+        },
+        {
+          "from": 20,
+          "to": 39,
+          "about": "Rebirth comes at 20, Swiftmend with your sixteenth point at 25, and Nature's Swiftness and Tranquility at 30. Keep Rejuvenation on the tank, Swiftmend a target that is dropping, and spend Regrowth and Healing Touch on what Rejuvenation cannot hold.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "on the tank, before each pull",
+                "why": "it hurts every monster that hits them"
+              },
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "on the tank, before the pull",
+                "why": "it heals before the first hit lands"
+              },
+              {
+                "spell": 8936,
+                "name": "Regrowth",
+                "if": "on the tank, if the pull is hard",
+                "why": "it heals now and keeps healing"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 17116,
+                "name": "Nature's Swiftness",
+                "talentSpell": 17116,
+                "if": "when someone is about to die",
+                "say": "then cast Healing Touch",
+                "why": "your next heal is instant",
+                "need": {
+                  "talents": [
+                    17116
+                  ]
+                }
+              },
+              {
+                "spell": 18562,
+                "name": "Swiftmend",
+                "talentSpell": 18562,
+                "if": "when a target with your heal on it is dropping",
+                "why": "it heals at once, from the heal already there",
+                "need": {
+                  "talents": [
+                    18562
+                  ]
+                }
+              },
+              {
+                "spell": 8936,
+                "name": "Regrowth",
+                "if": "when the tank is falling behind",
+                "why": "it heals now and keeps healing"
+              },
+              {
+                "spell": 5185,
+                "name": "Healing Touch",
+                "if": "for a big hit",
+                "why": "it is the biggest heal you have"
+              },
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "when it has run out on the tank",
+                "why": "it is the cheapest heal you have"
+              },
+              {
+                "spell": 5176,
+                "name": "Wrath",
+                "why": "spare mana is better spent on damage than lost"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 740,
+                "name": "Tranquility",
+                "if": "when the whole party is hurt, from 30",
+                "why": "it heals all of them over a few seconds"
+              },
+              {
+                "spell": 20484,
+                "name": "Rebirth",
+                "if": "to bring back a dead player in a fight",
+                "why": "it raises them at once, with a long wait after"
+              },
+              {
+                "spell": 8946,
+                "name": "Cure Poison",
+                "if": "when a poison is on someone",
+                "why": "it takes the poison off"
+              },
+              {
+                "spell": 2782,
+                "name": "Remove Curse",
+                "if": "when a curse is on someone, from 24",
+                "why": "it takes the curse off"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 437138,
+                "name": "Revive",
+                "if": "out of a fight, on a dead player",
+                "why": "it brings them back before you move on"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "text": "Heal only the tank",
+                "if": "when your mana is nearly gone",
+                "why": "one heal that lands beats three you cannot afford"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 17116,
+                  "name": "Nature's Swiftness",
+                  "talentSpell": 17116
+                },
+                {
+                  "spell": 740,
+                  "name": "Tranquility"
+                }
+              ],
+              "say": "Nature's Swiftness when someone is about to die, Tranquility when all are hurt"
+            }
+          }
+        },
+        {
+          "from": 40,
+          "to": 60,
+          "about": "Wild Growth comes at 40 with your thirty-first point, Innervate too, and Barkskin at 44. Rejuvenation on the tank and Swiftmend for the emergency do most of the work, and Wild Growth is for a party that is all hurt, because it costs a lot.",
+          "plan": {
+            "opening": [
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "before the first pull",
+                "why": "it raises your armour for an hour"
+              },
+              {
+                "spell": 467,
+                "name": "Thorns",
+                "if": "on the tank, before each pull",
+                "why": "it hurts every monster that hits them"
+              },
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "on the tank, before the pull",
+                "why": "it heals before the first hit lands"
+              },
+              {
+                "spell": 8936,
+                "name": "Regrowth",
+                "if": "on the tank, if the pull is hard",
+                "why": "it heals now and keeps healing"
+              }
+            ],
+            "loop": [
+              {
+                "spell": 18562,
+                "name": "Swiftmend",
+                "talentSpell": 18562,
+                "if": "when a target with your heal on it is dropping",
+                "why": "it heals at once, from the heal already there",
+                "need": {
+                  "talents": [
+                    18562
+                  ]
+                }
+              },
+              {
+                "spell": 408120,
+                "name": "Wild Growth",
+                "talentSpell": 408120,
+                "if": "when several in the party are hurt",
+                "why": "it heals the target and the whole party",
+                "need": {
+                  "talents": [
+                    408120
+                  ]
+                }
+              },
+              {
+                "spell": 8936,
+                "name": "Regrowth",
+                "if": "when the tank is falling behind",
+                "why": "it heals now and keeps healing"
+              },
+              {
+                "spell": 5185,
+                "name": "Healing Touch",
+                "if": "for a big hit",
+                "why": "it is the biggest heal you have"
+              },
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "why": "it is the cheapest heal you have, so keep it on the tank"
+              }
+            ],
+            "rarely": [
+              {
+                "spell": 740,
+                "name": "Tranquility",
+                "if": "when the whole party is hurt",
+                "why": "it heals all of them over a few seconds"
+              },
+              {
+                "spell": 20484,
+                "name": "Rebirth",
+                "if": "to bring back a dead player in a fight",
+                "why": "it raises them at once, with a long wait after"
+              },
+              {
+                "spell": 2893,
+                "name": "Abolish Poison",
+                "if": "when a poison is on someone",
+                "why": "it cures a poison, and another every few seconds"
+              },
+              {
+                "spell": 21849,
+                "name": "Gift of the Wild",
+                "if": "before the first pull, from 50",
+                "why": "it buffs the whole party at once"
+              }
+            ],
+            "between": [
+              {
+                "spell": 774,
+                "name": "Rejuvenation",
+                "if": "after a fight, if you are hurt",
+                "why": "it heals while you drink"
+              },
+              {
+                "spell": 437138,
+                "name": "Revive",
+                "if": "out of a fight, on a dead player",
+                "why": "it brings them back before you move on"
+              },
+              {
+                "spell": 1126,
+                "name": "Mark of the Wild",
+                "if": "when it has run out",
+                "why": "armour for an hour is cheap"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "low": [
+              {
+                "text": "Heal only the tank",
+                "if": "when your mana is nearly gone",
+                "why": "one heal that lands beats three you cannot afford"
+              },
+              {
+                "text": "Sit and drink",
+                "if": "after a fight, before the next pull",
+                "why": "mana from drinking is cheap, and a pull on empty is not"
+              }
+            ],
+            "big": {
+              "spells": [
+                {
+                  "spell": 29166,
+                  "name": "Innervate"
+                },
+                {
+                  "spell": 17116,
+                  "name": "Nature's Swiftness",
+                  "talentSpell": 17116
+                },
+                {
+                  "spell": 740,
+                  "name": "Tranquility"
+                }
+              ],
+              "say": "Innervate when your mana runs low, Nature's Swiftness when someone is about to die"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

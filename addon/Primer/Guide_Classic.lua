@@ -2,7 +2,7 @@
 -- edit those, never this file. The words are GuideText.lua's, by key.
 --   classes[id] = { token, key, text, builds (ids), card (the voice's vocabulary: not shown) }
 --   classes[id].overview = { who, good, bad, resource, levelling, ten (word keys): the class in general, optional }
---   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview),
+--   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview), variant (a word after the tree name, when two builds share it),
 --                   intro, note, split, dry (word keys), path, stages }
 --   roads[n]    = { name (a word key), path (the others; the first is `path`) }: another order of the points for the same build
 --   recommended (a road's number: ours, from the research), recognised (the numbers kept only to be recognised), hardcoreRoad (on a Hardcore realm), roadWhy and hardcoreWhy (word keys: why, and the price of the other)

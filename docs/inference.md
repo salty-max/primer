@@ -94,3 +94,7 @@ are spent the build follows the points as above. When several specs stay open
 and nothing was picked, the page still shows the one we advise, named in the
 header because points are spent. A role stored before this (`PrimerChar`) is
 mapped once to that role's recommended spec (`G.migrate`) and stays stored.
+
+## Two builds on one tree (the Feral Druid, Forever, 5 November 2026)
+
+A cat and a bear are two builds of the one Feral tree, so they are reachable by the same points. Nothing in the rules above changes: with no pick and points only in Feral both are open, they span two roles, and the spec is asked (never guessed, never the role). A pick is a pick: the bear stays the page with its own 31 points spent. The sim has the cases (a Druid at 10, a bear picked, the Class tab, the bear's 31 points, the cat and the bear both open, a stored role).

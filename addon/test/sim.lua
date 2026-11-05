@@ -62,7 +62,7 @@ for id, b in pairs(D.builds) do
 end
 if G.FOREVER then
   check(
-    builds == 24
+    builds == 28
       and D.builds[1].key == "warrior-arms"
       and D.builds[2].key == "warrior-fury"
       and D.builds[3].key == "warrior-protection"
@@ -86,8 +86,12 @@ if G.FOREVER then
       and D.builds[26].key == "priest-holy"
       and D.builds[6].key == "paladin-retribution"
       and D.builds[7].key == "paladin-holy"
-      and D.builds[8].key == "paladin-protection",
-    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration, the Hunter's Beast Mastery, Marksmanship and Survival, the Priest's Shadow, Discipline and Holy, the Paladin's Retribution, Holy and Protection"
+      and D.builds[8].key == "paladin-protection"
+      and D.builds[27].key == "druid-feral-cat"
+      and D.builds[28].key == "druid-feral-bear"
+      and D.builds[29].key == "druid-balance"
+      and D.builds[30].key == "druid-restoration",
+    "Forever: the Warrior's Arms, Fury and Protection, the Mage's Frost, Fire and Arcane, the Rogue's Assassination, Combat and Subtlety, the Warlock's Affliction, Demonology and Destruction, the Shaman's Elemental, Enhancement and Restoration, the Hunter's Beast Mastery, Marksmanship and Survival, the Priest's Shadow, Discipline and Holy, the Paladin's Retribution, Holy and Protection, the Druid's Feral as a cat and as a bear, Balance and Restoration"
   )
   check(D.classes[1].token == "WARRIOR" and #D.classes[1].builds == 3, "Forever: the Warrior's class")
   check(D.classes[1].roles.damage.build == 1 and D.classes[1].roles.tank.build == 3, "Forever: one build a role")
@@ -113,6 +117,19 @@ if G.FOREVER then
   check(
     D.classes[2].roles.damage.build == 6 and D.classes[2].roles.heal.build == 7 and D.classes[2].roles.tank.build == 8,
     "Forever: the Paladin's recommended builds are Retribution for damage, Holy for healing and Protection for tanking"
+  )
+  check(D.classes[11].token == "DRUID" and #D.classes[11].builds == 4, "Forever: the Druid's class")
+  check(
+    D.classes[11].roles.damage.build == 27
+      and D.classes[11].roles.tank.build == 28
+      and D.classes[11].roles.heal.build == 30,
+    "Forever: the Druid's recommended builds are the cat for damage, the bear for tanking and Restoration for healing"
+  )
+  check(
+    D.builds[27].tree == D.builds[28].tree
+      and ns.say(D.builds[27].variant) == "cat"
+      and ns.say(D.builds[28].variant) == "bear",
+    "Forever: the cat and the bear are two builds on the one Feral tree, told apart by a variant"
   )
 else
   check(
@@ -190,7 +207,8 @@ check(R.page(snap({ season = 2 })) == "season", "Season of Discovery: the guide 
 if G.FOREVER then
   local kind, class = R.page(snap())
   check(kind == "guide" and class == 1, "Forever: a warrior has a guide, its own")
-  check(R.page(snap({ token = "DRUID" })) == "class", "Forever: a druid has none written yet, never Era's")
+  local druidKind, druidClass = R.page(snap({ token = "DRUID" }))
+  check(druidKind == "guide" and druidClass == 11, "Forever: a druid has a guide, its own and never Era's")
   check(R.page(snap({ season = 2 })) == "season", "the season first, on Forever too")
 else
   check(R.page(snap({ season = 3 })) == "guide", "Hardcore is Era: the guide stays on")
@@ -1329,6 +1347,7 @@ do
     { 5, "Priest", "PRIEST" },
     { 2, "Paladin", "PALADIN" },
     { 11, "Druid", "DRUID" },
+    { 6, "Death Knight", "DEATHKNIGHT" }, -- (neither game has one: the last class this test can use once all nine have a guide)
   }) do
     if not D.classes[c[1]] then
       bare = c
@@ -1739,6 +1758,73 @@ if G.FOREVER then
   check(buttonNames() == "Arms,Fury,Protection,Not yet", "with the specs as the buttons")
   press("Protection")
   check(ns.choice(1).role == "tank" and ns.choice(1).pickedBuild == 3, "and the choice takes its role")
+
+  -- a Druid at 10: Feral is one tree and two builds (a cat and a bear), so the spec is asked with a name each
+  fresh("DRUID", "Druid", 11, 10, {}, 1)
+  ns.open(TAB.level)
+  sc = ns.screen
+  check(sc.specs and #sc.specs == 4 and sc.roles == nil, "Forever, Druid at 10: four specs")
+  check(
+    buttonNames() == "Feral Combat (cat),Feral Combat (bear),Balance,Restoration,Not yet",
+    "the two Feral builds have names of their own: " .. buttonNames()
+  )
+  check(
+    sc.specs[1].role == "damage"
+      and sc.specs[2].role == "tank"
+      and sc.specs[3].role == "damage"
+      and sc.specs[4].role == "heal",
+    "and the role beside each: the cat deals damage, the bear tanks"
+  )
+  check(sc.specs[2].line:find("^Feral Combat %(bear%), tank%. "), "the bear's line: " .. sc.specs[2].line)
+  press("Feral Combat (bear)")
+  check(
+    ns.choice(1).role == "tank" and ns.choice(1).pickedBuild == 28 and ns.screen.facts[1] == "Feral Combat (bear)",
+    "the bear chosen: its role comes with it, the header says which Feral"
+  )
+  ns.open(TAB.class)
+  check(
+    not ns.screen.specs[1].mine and ns.screen.specs[2].mine and not ns.screen.specs[3].mine,
+    "the Class tab marks the bear and not the cat that shares its tree"
+  )
+  check(ns.screen.specs[2].line:find("^Tank %(yours%)%. "), "in the row")
+  check(
+    ns.screen.choose[27] and ns.screen.choose[28] == nil and ns.screen.choose[29] and ns.screen.choose[30],
+    "and a way to play each of the others, the cat among them"
+  )
+  ns.open(TAB.level)
+  -- the same pick across a reload and with the bear's own points spent: the bear stays the page
+  s.level, T.points = 40, 0
+  for spell, rank in pairs(ns.rules.ranksAt(ns.data.builds[28], 1, 40)) do
+    s.ranks[id(spell)] = rank
+  end
+  ns.reader.reset()
+  PrimerFrame:Hide()
+  ns.open(TAB.level)
+  check(
+    ns.choice(1).pickedBuild == 28 and ns.screen.facts[1] == "Feral Combat (bear)",
+    "31 Feral points: still the bear"
+  )
+  -- a Druid who put it off and spent the bear's points: the cat and the bear are both open, two roles, so the spec is asked
+  fresh("DRUID", "Druid", 11, 40, ns.rules.ranksAt(ns.data.builds[28], 1, 40), 0)
+  ns.open(TAB.level)
+  check(
+    ns.screen.question
+      and ns.screen.question.text:find("Which spec", 1, true)
+      and buttonNames() == "Feral Combat (cat),Feral Combat (bear),Not yet",
+    "Feral points leave the cat and the bear open: the spec is asked, a name each: " .. buttonNames()
+  )
+  press("Feral Combat (cat)")
+  check(ns.choice(1).role == "damage" and ns.choice(1).pickedBuild == 27, "and the cat takes the damage role")
+  -- a stored role: damage is the cat, tank the bear, heal Restoration
+  for role, want in pairs({ damage = 27, tank = 28, heal = 30 }) do
+    fresh("DRUID", "Druid", 11, 10, {}, 1)
+    PrimerChar.groups[1] = { role = role }
+    ns.open(TAB.level)
+    check(
+      ns.choice(1).pickedBuild == want and ns.screen.question == nil,
+      "a stored " .. role .. " role: build " .. want
+    )
+  end
 
   check(ns.rules.specFirst(), "the rules know it is Forever")
   UnitClass, s.ranks, T.points = WARRIOR, {}, 0

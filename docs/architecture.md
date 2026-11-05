@@ -116,9 +116,7 @@ Warrior's rules in data. M3 (4 November 2026): the window, Classic Era first.
     (`G.migrate`, run when the page draws and when the welcome is asked, only
     before points are spent: after that the points decide, as for any role); the
     stored role is kept, never cleared, and no build id is touched.
-  - *Not built*: a spec that can serve two roles (a Feral Druid) asks the role
-    after the spec. A build has one `role` in the content today and Forever has no
-    such class written, so the shape is left for the day a class needs it.
+  - *Two roles on one spec* (built 5 November 2026, the Feral Druid): the role at the level cap decides a build, so a spec that can serve two roles is two builds on its one tree, each with its own `role` and a `variant` ("cat", "bear") that `G.name` puts after the tree's name, so the spec question, the Class tab and the header read "Feral Combat (cat)" and "Feral Combat (bear)". The player picks the spec and the role follows, never a second question. The points cannot tell the two apart, so a Feral Druid with no pick has both open, they span two roles and the spec is asked. Nothing else changed: reachability is per tree and the pick is kept.
 - **What the page is for (4 November 2026, after the first game test)**: the role
   and build (`view.subjects`) are fixed while the window is open and change only
   on the player's own click or when the window is opened: a point spent, a level or

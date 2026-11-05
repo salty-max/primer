@@ -140,6 +140,7 @@ type Build = {
   checked: string;
   intro: string;
   line?: string; // one line for the class's overview (none: the first sentence of the intro)
+  variant?: string; // when two builds share a tree (a Feral Druid as a cat or a bear): the word after the tree's name, "cat"
   pathNote: string;
   hardcore?: string[]; // lines for a Hardcore realm, after the plan (the season check in the window)
   sources?: { label: string; url: string; read: string }[]; // where the facts of the build were read (docs/sources.md): never shown
@@ -602,6 +603,7 @@ function luaFor(game: Game): { lua: string; builds: number } {
       out.push(`      line = ${q(word(`${k}.line`, b.line ?? b.intro.split(/(?<=\.)\s/)[0])!)},`);
       if (b.hardcore?.length) out.push(`      hardcore = ${list(b.hardcore.map((t, i) => q(word(`${k}.hc${i + 1}`, t)!)))},`);
       for (const src of b.sources ?? []) if (!src.label || !/^https?:\/\//.test(src.url) || !/^\d{4}-\d{2}-\d{2}$/.test(src.read)) bad(`${k}: a source is a label, a url and the day it was read (YYYY-MM-DD)`);
+      if (b.variant) out.push(`      variant = ${q(word(`${k}.variant`, b.variant)!)},`);
       if (b.split) out.push(`      split = ${q(word(`${k}.split`, b.split)!)},`);
       if (b.dry) out.push(`      dry = ${q(word(`${k}.dry`, b.dry)!)},`);
       const pathLua = (steps: Step[], key: string, pad: string) =>
@@ -687,7 +689,7 @@ function luaFor(game: Game): { lua: string; builds: number } {
     "-- edit those, never this file. The words are GuideText.lua's, by key.",
     "--   classes[id] = { token, key, text, builds (ids), card (the voice's vocabulary: not shown) }",
     "--   classes[id].overview = { who, good, bad, resource, levelling, ten (word keys): the class in general, optional }",
-    "--   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview),",
+    "--   builds[id]  = { key, class, role, tree (a talent tab), name, checked, build (the client), line (one line for the overview), variant (a word after the tree name, when two builds share it),",
     "--                   intro, note, split, dry (word keys), path, stages }",
     "--   roads[n]    = { name (a word key), path (the others; the first is `path`) }: another order of the points for the same build",
     "--   recommended (a road's number: ours, from the research), recognised (the numbers kept only to be recognised), hardcoreRoad (on a Hardcore realm), roadWhy and hardcoreWhy (word keys: why, and the price of the other)",

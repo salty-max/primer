@@ -117,13 +117,20 @@ function G.points(snap, build)
 end
 
 -- A build's name: its tree's, the game's, as the character's window lists it
--- (the data's own, English, where the game does not say).
+-- (the data's own, English, where the game does not say), with the variant after it
+-- when two builds share a tree.
 function G.name(snap, build)
+  local name = build.name
   for _, t in pairs(data().talents) do
     local info = t.tab == build.tree and snap.talents.byId[t.id]
-    if info then return snap.talents.names[info.tab] or build.name end
+    if info then
+      name = snap.talents.names[info.tab] or build.name
+      break
+    end
   end
-  return build.name
+  -- (two builds on one tree, a Feral Druid as a cat or a bear: the content's variant tells them apart)
+  if build.variant then return ("%s (%s)"):format(name, ns.say(build.variant)) end
+  return name
 end
 
 -- The role: the one the player set, if the class has a build for it, else the

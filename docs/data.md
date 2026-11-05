@@ -1,18 +1,20 @@
 # Primer's data
 
 The guide's rules and words, and the facts check. Written by hand:
-`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, `content/forever/warrior.json`, Forever's first, written 5 November 2026: F0 to F3 of `../ideas/class-guide.md`, `content/forever/mage.json`, its second, F4, `content/forever/rogue.json`, its third, `content/forever/warlock.json`, its fourth, ids 15 to 17, and `content/forever/shaman.json`, its fifth, ids 18 to 20, and `content/forever/hunter.json`, its sixth, ids 21 to 23, and `content/forever/priest.json`, its seventh, ids 24 to 26, and `content/forever/paladin.json`, its eighth, ids 6 to 8, the same as Era's Paladin so a character keeps its pick). Generated, never edited:
+`content/<game>/<class>.json` (one file a class a game: `content/classic/paladin.json`, `content/forever/warrior.json`, Forever's first, written 5 November 2026: F0 to F3 of `../ideas/class-guide.md`, `content/forever/mage.json`, its second, F4, `content/forever/rogue.json`, its third, `content/forever/warlock.json`, its fourth, ids 15 to 17, and `content/forever/shaman.json`, its fifth, ids 18 to 20, and `content/forever/hunter.json`, its sixth, ids 21 to 23, and `content/forever/priest.json`, its seventh, ids 24 to 26, and `content/forever/paladin.json`, its eighth, ids 6 to 8, the same as Era's Paladin so a character keeps its pick, and `content/forever/druid.json`, its ninth and last class, ids 27 to 30: Feral as a cat, Feral as a bear, Balance and Restoration, 5 November 2026). Generated, never edited:
 `addon/Primer/Guide_Classic.lua`, `Guide_Forever.lua`, `GuideText.lua`
 (`bun scripts/guide.ts`, `--check` in `bun run check`).
 
 ## content/<game>/<class>.json
+
+`variant` is for two builds on one tree (a Feral Druid as a cat or as a bear, Forever 5 November 2026): both are named as the game names the tree, so the one word after it ("cat", "bear") tells them apart wherever a build is named (`G.name`: "Feral Combat (cat)"). A class with one build a tree has none.
 
 A game's own file: Era's advice and Forever's never share a line, so a build has no `games` list, the folder is the game. `class.roles` gives the one build the page advises for each role the class has (`{ "damage": { "build": "paladin-retribution", "reason": "..." } }`, a reason of 30 words at most, a role with several builds names the one, the others are "also works"). Every plan line holds to the line budget (4 November 2026 rework, enforced for every build): name and condition together at most 56 characters, a reason at most 60, what one line of the window holds and the client never cuts. A stage's opening has at most 5 steps and its loop at most 6, each printed with its reason under it; the loop's rarest lines go to `plan.rarely` (steps like a loop's, each with a condition, drawn as a Rarely section, rows like the loop's).
 
 ```
 class  = { id (ChrClasses), key, token, name, text (the class's page), card,
            advice (optional) = [ { role, say } ] }
-build  = { id, key, name, role (damage, tank, heal), tree (a TalentTab id),
+build  = { id, key, name, variant (optional), role (damage, tank, heal), tree (a TalentTab id),
            games (["classic"]), checked (a date), intro, pathNote, split, dry,
            path = [step], stages = [stage] }
 step   = { points [from, to], level [from, to], talent (rank 1's spell) or
