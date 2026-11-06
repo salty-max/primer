@@ -25,3 +25,15 @@ end
 function ns.updateMinimapButton()
   if M then M:update() end
 end
+
+-- The key binding (the kit's K.binding, Bindings.xml): one key or pad button opens and closes the window as the
+-- minimap button's click does.
+-- Not in a fight: the guide reads nothing in combat, so a press then says so and opens nothing.
+ns.kit.binding({
+  key = "PRIMER",
+  name = "Primer",
+  global = "PrimerBinding",
+  toggle = function() ns.toggle() end,
+  outOfCombat = true,
+  prefix = ns.PREFIX,
+})

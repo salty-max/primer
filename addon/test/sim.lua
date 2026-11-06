@@ -2069,4 +2069,25 @@ if G.strict then
   check(#G.strict.violations == 0, "no call the documentation refuses: " .. table.concat(G.strict.violations, " | "))
   io.write(G.strict.report(), "\n")
 end
+-- the key binding (Bindings.xml calls this global): the window opens and closes as ns.toggle does, but in a
+-- fight it opens nothing and says one line (Primer reads nothing in combat)
+do
+  check(type(PrimerBinding) == "function", "the key binding's function is there")
+  s.combat = true
+  local was = PrimerFrame and PrimerFrame:IsShown() or false
+  local lines = #s.printed
+  PrimerBinding()
+  PrimerBinding()
+  check((PrimerFrame and PrimerFrame:IsShown() or false) == was, "in a fight the key binding opens nothing")
+  check(
+    #s.printed == lines + 1 and said("Primer opens once the fight is over."),
+    "… and says so once, not at every press"
+  )
+  s.combat = false
+  PrimerBinding()
+  check(PrimerFrame and PrimerFrame:IsShown() == not was, "out of a fight the key binding opens the window")
+  PrimerBinding()
+  check(PrimerFrame:IsShown() == was, "… and a second press closes it")
+end
+
 io.write(("✓ Primer: %d checks (%s)"):format(count, G.FOREVER and "Forever" or "Classic Era"), "\n")

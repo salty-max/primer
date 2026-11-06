@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="PRIMER_OPEN" category="BINDING_HEADER_PRIMER">
+		PrimerBinding();
+	</Binding>
+</Bindings>

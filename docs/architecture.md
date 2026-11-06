@@ -238,3 +238,7 @@ role, build, steps, the per-game and season pages) and the three pages as the
 window draws them, on Classic Era and with `FOREVER=1`. A game test (`wow-game-test`) shows what these cannot: the
 look of the window, the portrait, the tabs under the frame, the button on the
 real minimap.
+
+## The key binding
+
+For a controller player (no keyboard for the slash command, a cursor to steer to the minimap button). `addon/Primer/Bindings.xml` and `ns.kit.binding(...)` at the end of `Minimap.lua`: one key or pad button, chosen in the game's Key Bindings under the addon's own heading ("Open <the addon>"), opens and closes the window through `ns.toggle`, as the minimap button's click does. Out of combat only: Primer reads nothing in combat, so in a fight a press opens nothing and says one line ("Primer opens once the fight is over.", at most every five seconds). The binding does nothing until the player puts a key on it. The kit's `K.binding`, the file, what the game does in each game and what is not verified: `addon-kit/docs/controller.md`, "Opening by a pad button". `bun run bindings` (part of `check`) checks the file, the function and the package.

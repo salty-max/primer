@@ -73,8 +73,9 @@ scripts/release.sh --version X.Y.Z [--hold] NOTES.md   # check, tag, push; Actio
   (`saved-ids.json`, `bun run ids` in the check). An id leaves only with the
   user's go, under `removed`.
 - **Nothing in combat.** No combat event, no unit query in combat, no hook on a Blizzard
-  frame. The window is our own, opened by `/primer`, the minimap button or
-  Keyring's (a call to `ns.toggle`, never a hook). One exception: the
+  frame. The window is our own, opened by `/primer`, the minimap button,
+  Keyring's or its key binding (a call to `ns.toggle`, never a hook; the binding
+  opens nothing in a fight and says so). One exception: the
   optional Era talent-window overlay (`hooksecurefunc` only, every step in
   `pcall`, off in combat, built last, failing silently, and never on Forever
   until a probe has been read). The other: the kit's welcome listens for

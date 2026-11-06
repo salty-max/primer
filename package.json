@@ -16,7 +16,8 @@
     "lint:lua": "stylua --check addon && selene addon/Primer",
     "format:lua": "stylua addon",
     "check:ci": "bun scripts/locales.ts --check && bun test scripts && bun run lint:lua && bun scripts/battery.ts && bun scripts/package.ts --check",
-    "check": "bun run kit:check && bun run ids && bun scripts/guide.ts --check && bun run apidocs:check && bun run check:ci",
+    "bindings": "bun scripts/root.ts --run addon-kit/bindings.ts check addon/Primer",
+    "check": "bun run bindings && bun run kit:check && bun run ids && bun scripts/guide.ts --check && bun run apidocs:check && bun run check:ci",
     "package": "bun scripts/package.ts"
   }
 }
