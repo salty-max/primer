@@ -1,4 +1,4 @@
--- addon-kit 5e9b2f0: a copy (kit:sync); edit the addon-kit repository's secrets.lua instead
+-- addon-kit 4bfc9b6: a copy (kit:sync); edit the addon-kit repository's secrets.lua instead
 -- Secret values for an addon's tests (the kit's copy, kit:sync: edit addon-kit's secrets.lua). Forever hides
 -- some of the game's answers from addons (issecretvalue, SecretReturns and SecretWhen* in Blizzard's
 -- documentation): a secret value keeps its type for type() and raises on indexing, #, pairs, ipairs,
