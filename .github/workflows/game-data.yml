@@ -27,7 +27,11 @@ jobs:
       kit: true
       generate: |
         bun scripts/guide.ts
+        # (Blizzard's API tables follow the UI source's pin, which moves by hand: 12 November 2026, 70862 left them stale)
+        bun scripts/root.ts --run addon-kit/apidocs.ts
         bun scripts/locales.ts
       paths: |
         i18n
         addon/Primer
+        addon/test/api_*.lua
+        addon/test/evidence_*.lua
