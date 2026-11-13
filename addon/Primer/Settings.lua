@@ -40,6 +40,9 @@ local P = K.profiles({
   changed = function(key)
     if key == "minimapHidden" or key == "minimapAngle" then
       if ns.updateMinimapButton then ns.updateMinimapButton() end
+    elseif key == "bookSize" and K and K.resize then
+      -- (a size copied or imported applies at once, as the options' own choice does)
+      K.resize(ns.option("bookSize"))
     end
   end,
 })

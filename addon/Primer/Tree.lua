@@ -84,7 +84,9 @@ local function cell(tree, row, col)
   s.edge:SetSize(CELL * 1.8, CELL * 1.8)
   s.mark = K.label(s, K.BODY_FONT, 10, GOLD)
   s.mark:SetPoint("TOPLEFT", 2, -2)
-  s.rankText = K.label(s, K.BODY_FONT, 10, T.text)
+  -- (a count over the icon's art: a fixed light ink, whatever the look; the paper's ink would sink into the art)
+  s.rankText = K.label(s, K.BODY_FONT, 10, { 1, 1, 1 })
+  s.rankText:SetShadowOffset(1, -1)
   s.rankText:SetPoint("BOTTOMRIGHT", -2, 2)
   s:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", MARGIN + col * HP, -(HEAD + row * VP))
   s:SetScript("OnEnter", tooltip)
@@ -274,7 +276,7 @@ function Tree.draw(t, snap, class, build, road, level, quiet)
                 l:SetPoint("TOPLEFT", tree.frame, "TOPLEFT", MARGIN + left * HP + CELL - GAP, -(y + CELL / 2 - 2))
               end
               local taken = not level and snap.talents.byId[p.id] and snap.talents.byId[p.id].rank > 0
-              local c1 = taken and GOLD or T.rule
+              local c1 = taken and (K.paper and T.accent or GOLD) or T.rule
               l:SetColorTexture(c1[1], c1[2], c1[3], taken and 0.8 or 0.9)
               l:Show()
             end

@@ -249,7 +249,7 @@ For a controller player (no keyboard for the slash command, a cursor to steer to
 character and carried by a settings code as `z` and `p`.) Book size scales the whole window (`K.movable`, the
 kit's `K.resize` at once, never past the screen); the paper look is dark ink on the game's quest paper and
 takes effect after a reload. Every colour is read from `K.T` when a piece is built, never kept at load; the
-chat keeps the game's link yellow and the dark look's name (chat is dark whatever the look). Nothing in the window is hand-coloured: it reads the kit's theme everywhere.
+chat keeps the game's link yellow and the dark look's name (chat is dark whatever the look). The window reads the kit's theme everywhere, with three fixed exceptions: the game's gold for a talent's mark and edges (and, in the dark look, the line to a taken talent), and a light ink for the rank counts drawn over the icons' art.
 `PAPER=1 luajit addon/test/sim.lua` plays a character on the paper at the largest size (in the check);
 `RENDER=dir [PAPER=1] luajit addon/test/sim.lua` writes the book as HTML with the real colours
 (`addon-kit/render.lua`, Chrome's fonts: the game has the last word).
