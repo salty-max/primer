@@ -11,7 +11,7 @@ slice on paper in `../ideas/class-guide-warrior.md`. Set up 3 November 2026
 the first push), not released. Classic Era (11509) and Forever (16001), one
 package, English only for now. **Forever first, Classic Era frozen** (5 November
 2026, the user's call): new work is Forever's, Era keeps its three built guides
-and gets fixes only (`../ideas/class-guide.md`, "Forever first"). Read the family's CLAUDE.md (`../CLAUDE.md`) first.
+and gets fixes only (`../ideas/class-guide.md`, "Forever first"). **Parked** on 8 November 2026 (the user's call, WoWLocker first): no new work unless the user says so. Read the family's CLAUDE.md (`../CLAUDE.md`) first.
 
 ## Where things are
 
