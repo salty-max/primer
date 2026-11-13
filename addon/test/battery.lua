@@ -1,4 +1,4 @@
--- addon-kit 4bfc9b6: a copy (kit:sync); edit the addon-kit repository's battery.lua instead
+-- addon-kit 726a8e9: a copy (kit:sync); edit the addon-kit repository's battery.lua instead
 -- The battery's harness for an addon's tests (the kit's copy, kit:sync: edit addon-kit's battery.lua). The test game
 -- (wowmock.lua) plus the strict game (strict.lua) plus secret values (secrets.lua) plus this: what every addon's
 -- matrix is made of. The matrix itself is the addon's (its windows, its tabs, its states, its events): this holds
