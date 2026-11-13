@@ -143,6 +143,10 @@ end
 check(ns.say("no such key") == "no such key", "a missing word shows as itself")
 
 -- ── a first login ────────────────────────────────────────────────────────────
+-- (PAPER=1: a character who chose the paper look and the largest book)
+if os.getenv("PAPER") == "1" then
+  PrimerSettings = { profiles = { [UnitName("player") .. " - " .. GetRealmName()] = { paper = true, bookSize = 4 } } }
+end
 check(not PrimerFrame, "no window before it is asked for")
 G.login()
 check(PrimerChar and PrimerChar.guid == s.guid, "the guide is this character's")
@@ -1920,9 +1924,10 @@ do
   )
   check(ns.profiles:import("PR1:h0:a90"), "an older code, without the line, is taken")
   check(ns.option("levelTenLine") == false and ns.option("minimapHidden") == false, "… and leaves the line as it was")
-  check(ns.profiles:export() == "PR1:h0:a90:l0", "export: PR1:h0:a90:l0")
+  local look = (":z%d:p%d"):format(ns.option("bookSize"), ns.option("paper") and 1 or 0) -- (the look: dark at Normal, or the paper at Largest)
+  check(ns.profiles:export() == "PR1:h0:a90:l0" .. look, "export: PR1:h0:a90:l0" .. look)
   ns.setOption("levelTenLine", true)
-  check(ns.profiles:export() == "PR1:h0:a90:l1", "… the line, on")
+  check(ns.profiles:export() == "PR1:h0:a90:l1" .. look, "… the line, on")
 
   -- the line at level 10 follows its switch
   PrimerChar.groups, PrimerChar.welcomed = {}, nil
@@ -2088,6 +2093,62 @@ do
   check(PrimerFrame and PrimerFrame:IsShown() == not was, "out of a fight the key binding opens the window")
   PrimerBinding()
   check(PrimerFrame:IsShown() == was, "… and a second press closes it")
+end
+
+-- ── the book's size and the paper look ───────────────────────────────────────
+do
+  local K = ns.kit
+  local PAPER = os.getenv("PAPER") == "1"
+  check(
+    K.paper == PAPER and ns.option("paper") == PAPER,
+    "the look: the character's choice is the kit's (" .. (PAPER and "paper" or "dark") .. ")"
+  )
+  check(ns.option("bookSize") == (PAPER and 4 or 1), "the book size is the character's choice, Normal by default")
+  check(K.lookGet and K.lookGet("bookSize") == ns.option("bookSize"), "the kit reads the look from the options")
+  UIParent.w, UIParent.h = 1920, 1080 -- (a screen that holds the largest book)
+  if not PrimerFrame then ns.toggle() end
+  local sizes = { 1, 1.15, 1.3, 1.5 }
+  for step = 1, 4 do
+    ns.setOption("bookSize", step)
+    K.resize(step) -- (what the Book size choice calls)
+    check(
+      math.abs(PrimerFrame:GetScale() - sizes[step]) < 1e-9
+        and math.abs(PrimerFrame:GetScale() - K.scaleFor(step, K.BOOK_W, K.BOOK_H)) < 1e-9,
+      "size " .. step .. " scales the open window at once to " .. sizes[step]
+    )
+  end
+  ns.setOption("bookSize", PAPER and 4 or 1)
+  K.resize(PAPER and 4 or 1)
+  ns.setOption("paper", PAPER)
+  local code = ns.profiles:export()
+  check(code:find(":z%d") and code:find(":p%d"), "the profile's code carries the size and the paper")
+end
+
+-- RENDER=dir [PAPER=1] luajit addon/test/sim.lua: the book as HTML (addon-kit/render.lua), for a look
+-- at size 1 and 4 and on paper before a build (Chrome's fonts: the game has the last word)
+if os.getenv("RENDER") then
+  local render = dofile("../addon-kit/render.lua")
+  local K = ns.kit
+  local rows = { { "Warrior", "section" } }
+  for i = 1, 3 do
+    local b = D.builds[i]
+    table.insert(rows, { b.name, "row", picked = i == 1, count = b.role })
+  end
+  table.insert(rows, { "Mage", "section" })
+  table.insert(rows, { D.builds[9].name, "row", count = D.builds[9].role })
+  local b = D.builds[1]
+  local blocks = { { "para", ns.say(b.intro) }, { "para", ns.say(b.line), colour = K.T.soft } }
+  for _, st in ipairs(b.stages or {}) do
+    table.insert(blocks, { "card", ("Levels %d to %d"):format(st.from, st.to), ns.say(st.about) })
+  end
+  render(K, os.getenv("RENDER"), {
+    scene = "book",
+    title = "Primer",
+    tabs = { "Choice", "Build", "Plan" },
+    count = "level 12",
+    rows = rows,
+    page = { heading = b.name, sub = "Warrior, " .. b.role, blocks = blocks },
+  })
 end
 
 io.write(("✓ Primer: %d checks (%s)"):format(count, G.FOREVER and "Forever" or "Classic Era"), "\n")

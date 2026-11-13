@@ -18,6 +18,10 @@ for (const forever of [false, true]) {
   jobs.push({ name: "strict", forever, args: ["addon/test/strict_test.lua"] });
   jobs.push({ name: "matrix", forever, args: ["addon/test/matrix.lua"] });
 }
+// (a player on the paper look and the largest book: its sim, the option wiring and the code)
+for (const forever of [false, true]) {
+  jobs.push({ name: "sim paper", forever, args: ["addon/test/sim.lua"], env: { PAPER: "1" } });
+}
 jobs.push({ name: "matrix secrets", forever: true, args: ["addon/test/matrix.lua", "secrets"] });
 
 await runBattery(jobs);

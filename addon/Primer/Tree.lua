@@ -65,7 +65,8 @@ local function tooltip(self)
     -- when the call is refused)
     local shown = ns.talentTip(self)
     if not shown and self.spell then GameTooltip:SetSpellByID(self.spell) end
-    if self.line then GameTooltip:AddLine(self.line, T.accent[1], T.accent[2], T.accent[3], true) end
+    -- (the tooltip is the game's, dark whatever the look)
+    if self.line then GameTooltip:AddLine(self.line, K.TIP_NEW[1], K.TIP_NEW[2], K.TIP_NEW[3], true) end
     GameTooltip:Show()
   end)
   if not ok then ns.fault("tooltip", err) end

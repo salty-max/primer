@@ -7,7 +7,7 @@
 -- beside them (Window.lua).
 --
 --   PrimerSettings.profiles["Name - Realm"] = { minimapHidden, minimapAngle,
---     levelTenLine, welcomed }
+--     levelTenLine, bookSize, paper, welcomed }
 --   PrimerSettings.places.window = { point, x, y }
 local _, ns = ...
 local K = ns.kit
@@ -21,11 +21,13 @@ local DEFAULTS = {
   minimapHidden = false,
   minimapAngle = K.MINIMAP_ANGLES.Primer,
   levelTenLine = true,
+  bookSize = 1,
+  paper = false,
   welcomed = false,
 }
-local SHARED = { "minimapHidden", "minimapAngle", "levelTenLine" }
+local SHARED = { "minimapHidden", "minimapAngle", "levelTenLine", "bookSize", "paper" }
 
--- The profiles: a code "PR1:h0:a90:l1".
+-- The profiles: a code "PR1:h0:a90:l1:z1:p0" (z: the book size 1 to 4, p: the paper look 0 or 1).
 local P = K.profiles({
   saved = function()
     if type(PrimerSettings) ~= "table" then PrimerSettings = {} end
@@ -33,7 +35,7 @@ local P = K.profiles({
   end,
   defaults = DEFAULTS,
   shared = SHARED,
-  letters = { minimapHidden = "h", minimapAngle = "a", levelTenLine = "l" },
+  letters = { minimapHidden = "h", minimapAngle = "a", levelTenLine = "l", bookSize = "z", paper = "p" },
   tag = "PR1",
   changed = function(key)
     if key == "minimapHidden" or key == "minimapAngle" then
@@ -68,6 +70,7 @@ function ns.createSettingsPanel()
     L["A line in chat when a talent point waits"],
     L["Say once in chat when this character has a talent point to spend."]
   )
+  O:look()
   O:copy()
   O:done()
 end
