@@ -1,4 +1,4 @@
-// addon-kit 9b545d6: a copy (kit:sync); edit the addon-kit repository's battery-lib.ts instead
+// addon-kit 053ea47: a copy (kit:sync); edit the addon-kit repository's battery-lib.ts instead
 /**
  * The battery's runner (the kit's copy, kit:sync: edit addon-kit's battery-lib.ts): an addon's test jobs run at
  * once, one verdict line each, the failures' last lines under a red one. The jobs are the addon's, in its
