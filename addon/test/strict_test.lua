@@ -1,4 +1,4 @@
--- addon-kit 053ea47: a copy (kit:sync); edit the addon-kit repository's strict_test.lua instead
+-- addon-kit 94502c6: a copy (kit:sync); edit the addon-kit repository's strict_test.lua instead
 -- The strict game's own test (the kit's copy, kit:sync: edit addon-kit's strict_test.lua): each bad call below is
 -- a call that raised, or would have, in the player's game, and the strict game must refuse it, naming the argument.
 -- If one of these passes, the net has a hole. What the kit asserts here is true of every addon that calls the

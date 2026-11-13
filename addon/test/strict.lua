@@ -1,4 +1,4 @@
--- addon-kit 053ea47: a copy (kit:sync); edit the addon-kit repository's strict.lua instead
+-- addon-kit 94502c6: a copy (kit:sync); edit the addon-kit repository's strict.lua instead
 -- The strict game (the kit's, kit:sync copies it beside an addon's test game): the test game's functions and
 -- frame methods refuse what Blizzard's API documentation says the client refuses (a missing argument, a string
 -- where a number goes), naming the function and the argument.
